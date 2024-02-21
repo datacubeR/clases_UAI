@@ -1,0 +1,40 @@
+[
+  {
+    "objectID": "tics411.html",
+    "href": "tics411.html",
+    "title": "Diapositivas",
+    "section": "",
+    "text": "Clase 0\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 4\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "TICS 411 - Minería de Datos"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "tics411/clase-0.html#hola",
+    "href": "tics411/clase-0.html#hola",
+    "title": "Minería de Datos",
+    "section": "Hola",
+    "text": "Hola\n\nTurn off alarm\nGet out of bed"
+  },
+  {
+    "objectID": "tics411/clase-0.html#slide-backgrounds",
+    "href": "tics411/clase-0.html#slide-backgrounds",
+    "title": "Minería de Datos",
+    "section": "Slide Backgrounds",
+    "text": "Slide Backgrounds\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\n1theta = 2 * np.pi * r\n2fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n1\n\nHola\n\n2\n\nChao\n\n\n\n\n\n\n\n\nNote\n\n\nHola cómo estás"
+  },
+  {
+    "objectID": "tics411/clase-0.html#slide-backgrounds-1",
+    "href": "tics411/clase-0.html#slide-backgrounds-1",
+    "title": "Minería de Datos",
+    "section": "Slide Backgrounds",
+    "text": "Slide Backgrounds\nSet the background attribute on a slide to change the background color (all CSS color formats are supported).\nDifferent background transitions are available via the background-transition option.\n\nLearn more: Slide Backgrounds\n\n\n\n\nhttps://datacuber.cl"
+  }
+]
