@@ -5,7 +5,7 @@
   image: tics411/img/clase-0.png
   path: tics411/clase-0.qmd
   categories:
-   - revealjs
+   - slides
   
 
 - title: "Clase 1"
@@ -15,7 +15,7 @@
   image: tics411/img/404.png
   path: tics411/clase-1.qmd
   categories:
-   - revealjs
+   - slides
 
 
 - title: "Clase 2"
@@ -25,7 +25,7 @@
   image: tics411/img/404.png
   path: tics411/clase-2.qmd
   categories:
-   - revealjs
+   - slides
 
 - title: "Clase 3"
   subtitle: "Introducción"
@@ -34,7 +34,7 @@
   image: tics411/img/404.png
   path: tics411/clase-3.qmd
   categories:
-   - revealjs
+   - slides
 
 - title: "Clase 4"
   subtitle: "Introducción"
@@ -43,4 +43,4 @@
   image: tics411/img/404.png
   path: tics411/clase-4.qmd
   categories:
-   - revealjs
+   - slides

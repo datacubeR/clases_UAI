@@ -2,15 +2,20 @@ project:
   type: website
 
 website:
-  title: "Material de Clases"
-  page-footer: "Copyright 2024, Alfonso Tobar-Arancibia" 
+  title: "Clases UAI"
+  repo-url: https://github.com/datacubeR/clases_UAI
+  repo-actions: [issue]
+  page-navigation: true
+  back-to-top-navigation: true
+  page-footer: 
+    left: "Copyright 2024, [Alfonso Tobar-Arancibia](https://datacuber.cl)" 
   navbar:
     logo: logo.jpg
-    background: dark
+    background: "#000000"
     search: true
     right:
-      - href: about.qmd
-        text: Profesor
+      - href: index.qmd
+        text: Acerca de Mí
       - sidebar:slides
   sidebar: 
     - id: slides
@@ -21,6 +26,5 @@ website:
 
 format:
   html:
-    theme: minty
+    theme: default
     css: styles.css
-    toc: true

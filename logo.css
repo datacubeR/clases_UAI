@@ -1,0 +1,14 @@
+.reveal .slide-logo {
+    height: 60px !important;
+    width: 180px !important;
+    max-width: unset !important;
+    max-height: unset !important;
+}
+
+.center h1 {
+    text-align: center;
+}
+
+.reveal code {
+    color: #ff5555;
+}
