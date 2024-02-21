@@ -1,0 +1,7 @@
+---
+title: Clase no Disponible
+---
+
+Esta clase aún no se encuentra disponible.
+
+![](404.jpg){fig-align="center"}

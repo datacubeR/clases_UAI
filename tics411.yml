@@ -1,0 +1,46 @@
+- title: "Clase 0"
+  subtitle: "Introducción"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-03-05
+  image: tics411/img/clase-0.png
+  path: tics411/clase-0.qmd
+  categories:
+   - revealjs
+  
+
+- title: "Clase 1"
+  subtitle: "Introducción"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-03-05
+  image: tics411/img/404.png
+  path: tics411/clase-1.qmd
+  categories:
+   - revealjs
+
+
+- title: "Clase 2"
+  subtitle: "Introducción"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-03-05
+  image: tics411/img/404.png
+  path: tics411/clase-2.qmd
+  categories:
+   - revealjs
+
+- title: "Clase 3"
+  subtitle: "Introducción"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-03-05
+  image: tics411/img/404.png
+  path: tics411/clase-3.qmd
+  categories:
+   - revealjs
+
+- title: "Clase 4"
+  subtitle: "Introducción"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-03-05
+  image: tics411/img/404.png
+  path: tics411/clase-4.qmd
+  categories:
+   - revealjs

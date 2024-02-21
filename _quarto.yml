@@ -1,0 +1,26 @@
+project:
+  type: website
+
+website:
+  title: "Material de Clases"
+  page-footer: "Copyright 2024, Alfonso Tobar-Arancibia" 
+  navbar:
+    logo: logo.jpg
+    background: dark
+    search: true
+    right:
+      - href: about.qmd
+        text: Profesor
+      - sidebar:slides
+  sidebar: 
+    - id: slides
+      title: Cursos
+      contents: 
+        - text: TICS 411 - Minería de Datos
+          href: tics411.qmd
+
+format:
+  html:
+    theme: minty
+    css: styles.css
+    toc: true

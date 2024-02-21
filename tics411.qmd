@@ -1,0 +1,20 @@
+---
+title: "Diapositivas"
+description: |
+  Acá se pueden encontrar las slides correspondientes al curso de Minería de Datos.
+  
+listing:
+  contents:
+    - "tics411.yml"
+  type: grid
+  sort: "date asc"
+  image-height: 100%
+  #categories: unnumbered
+page-layout: full
+execute: 
+  freeze: false
+  warning: false
+  echo: false
+
+title-block-banner: false
+---

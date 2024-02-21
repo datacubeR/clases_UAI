@@ -1,0 +1,66 @@
+---
+title: Minería de Datos
+subtitle: "Clase 0: Introducción"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs: 
+    width: 1366
+    height: 768
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    code-copy: true
+    highlight-style: dracula
+    footer: <https://datacuber.cl>
+---
+
+## Hola 
+
+- Turn off alarm
+- Get out of bed
+
+---
+
+- Get in bed
+- Count sheep
+
+---
+
+## Slide Backgrounds { .scrollable}
+
+```{.python code-line-numbers="6-8|9"}
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r    # <1>
+fig, ax = plt.subplots(subplot_kw={'projection': 'polar'}) #<2>
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+1. Hola
+2. Chao
+
+
+:::::: {.callout-note}
+Hola cómo estás
+:::
+
+
+## Slide Backgrounds {background="#43464B"}
+
+Set the `background` attribute on a slide to change the background color (all CSS color formats are supported).
+
+Different background transitions are available via the `background-transition` option.
+
+::: footer
+Learn more: [Slide Backgrounds](https://quarto.org/docs/presentations/revealjs/#color-backgrounds)
+:::
