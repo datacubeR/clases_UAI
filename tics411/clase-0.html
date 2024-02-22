@@ -7,11 +7,14 @@
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Alfonso Tobar-Arancibia">
-  <title>Material de Clases - Minería de Datos</title>
+  <title>Clases UAI - Minería de Datos</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -96,6 +99,7 @@
     code span.wa { color: #ff5555; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="../logo.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -408,22 +412,264 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="hola" class="slide level2">
-<h2>Hola</h2>
+<section id="quién-soy" class="slide level2">
+<h2>¿Quién soy?</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="../me.jpg"></p>
+</div><div class="column" style="width:60%;">
+<div class="smaller">
 <ul>
-<li>Turn off alarm</li>
-<li>Get out of bed</li>
+<li class="fragment">Alfonso Tobar-Arancibia, estudié Ing. Civil pero llevo 9 años trabajando como Científico de Datos.</li>
+<li class="fragment">Terminando mi Msc. y empezando mi PhD en la UAI.</li>
+<li class="fragment">He ganado 2 competencias de Machine Learning.</li>
+<li class="fragment">Publiqué mi primer <a href="https://ieeexplore.ieee.org/abstract/document/10315748">paper</a>.</li>
+<li class="fragment">Juego Tenis de Mesa y hago Agility con mi perrita Kira y escribo en mi Blog.</li>
 </ul>
+</div>
+</div>
+</div>
 </section>
-<section class="slide level2">
+<section>
+<section id="sobre-el-curso" class="title-slide slide level1 center">
+<h1>Sobre el Curso</h1>
 
-<ul>
-<li>Get in bed</li>
-<li>Count sheep</li>
-</ul>
 </section>
-<section id="slide-backgrounds" class="slide level2 scrollable">
+<section id="objetivos-del-curso" class="slide level2">
+<h2>Objetivos del Curso</h2>
+<div class="columns">
+<div class="column" style="width:20%;">
+<p><img data-src="img/objetivos.jpg"></p>
+</div><div class="column" style="width:80%;">
+<div>
+<ul>
+<li class="fragment">Identificar Elementos Claves del Machine Learning (Terminología, Nomenclatura, Intuición).</li>
+<li class="fragment">Entender como interactúan los algoritmos más importantes.</li>
+<li class="fragment">Aprender a seleccionar el mejor Algoritmo para el Problema.</li>
+<li class="fragment">Ejecutar y aplicar algoritmos clásicos de Machine Learning.</li>
+<li class="fragment">Evaluar el desempeño esperado del Modelo.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="tópicos" class="slide level2">
+<h2>Tópicos</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 id="modelos-no-supervisados">Modelos no Supervisados</h4>
+<ul>
+<li>K-Means</li>
+<li>DBScan</li>
+<li>Hierarchical Clustering</li>
+<li>Gaussian Mixture Model</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h4 id="modelos-supervisados">Modelos Supervisados</h4>
+<ul>
+<li>KNN</li>
+<li>Regresión Logística</li>
+<li>Naive Bayes</li>
+<li>Árboles de Decisión</li>
+<li>Support Vector Machine</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>No vamos a ver modelos Ensamblados ni Redes Neuronales.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="material-complementario" class="slide level2">
+<h2>Material Complementario</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><a href="img/data_mining.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/data_mining.jpg"></a></p>
+</div><div class="column" style="width:30%;">
+<p><a href="img/sk-keras.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/sk-keras.jpg"></a></p>
+</div><div class="column" style="width:40%;">
+<p><a href="https://www.youtube.com/watch?v=d79mzijMAw0&amp;list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM">Youtube Playlist</a> <a href="img/andreas_mueller.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/andreas_mueller.png"></a></p>
+</div>
+</div>
+</section>
+<section id="evaluación" class="slide level2">
+<h2>Evaluación</h2>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Dos Evaluaciones Escritas (P1, P2) coordinadas.</p>
+<ul>
+<li>P1 a mitad de Semestre =&gt; Modelos no Supervisados</li>
+<li>P2 a fin de Semestre =&gt; Modelos Supervisados</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Dos tareas prácticas (T1, T2)</p>
+<ul>
+<li>T1 a mitad de Semestre =&gt; Modelos no Supervisados</li>
+<li>T2 a fin de Semestre =&gt; Modelos Supervisados</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[NF = 0.2 \cdot T1 + 0.2 \cdot T2 + 0.3 \cdot P1 + 0.3 \cdot P2\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>No hay Exámen</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ayudantías" class="slide level2">
+<h2>Ayudantías</h2>
+<h3 id="ayudante-tbd">Ayudante: TBD</h3>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>No habrán ayudantías todas las semanas.</li>
+<li>Estarán enfocadas en la parte Práctica</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="introducción" class="title-slide slide level1 center">
+<h1>Introducción</h1>
+
+</section>
+<section id="revolución-de-los-datos" class="slide level2">
+<h2>Revolución de los Datos</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/internet_2023.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/internet_2023.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="revolución-de-los-datos-1" class="slide level2">
+<h2>Revolución de los Datos</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/data_science.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/data_science.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="cómo-aprovechar-la-información-que-tenemos" class="slide level2">
+<h2>¿Cómo aprovechar la información que tenemos?</h2>
+<div class="fragment">
+<dl>
+<dt>Data Mining</dt>
+<dd>
+<blockquote>
+<p>“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data”<strong>(Fayyad, Piatetsky-Shapiro &amp; Smith 1996)</strong></p>
+</blockquote>
+</dd>
+</dl>
+</div>
+<div class="fragment">
+<dl>
+<dt>Machine Learning</dt>
+<dd>
+<blockquote>
+<p>“A computer program is said to learn from experience <code>E</code> with respect to some class of tasks <code>T</code> and performance measure <code>P</code>, if its performance at tasks in <code>T</code>, as measured by <code>P</code>, improves with experience E.” <strong>(Mitchell, 2006)</strong></p>
+</blockquote>
+</dd>
+</dl>
+</div>
+</section>
+<section id="tipos-de-datos-datos-estructurados" class="slide level2">
+<h2>Tipos de Datos: Datos Estructurados</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/tab_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/tab_data.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Filas: Observaciones, instancias.</li>
+<li>Columnas: Variables, Atributos, Features.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Probablemente el tipo de datos más amigable.</li>
+<li>Requiere conocimiento de negocio (<strong>Domain Knowledge</strong>)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Es un % bajísimo del total de datos existentes en el Mundo.</li>
+<li>Distintos tipos, por lo que normalmente requiere de algún tipo de <strong>preprocesamiento</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="tipos-de-datos-series-de-tiempo" class="slide level2">
+<h2>Tipos de Datos: Series de Tiempo</h2>
+</section>
+<section id="tipos-de-datos-datos-no-estructurados" class="slide level2">
+<h2>Tipos de Datos: Datos no Estructurados</h2>
+</section>
+<section id="slide-backgrounds" class="slide level2">
 <h2>Slide Backgrounds</h2>
+<p>Set the <code>background</code> attribute on a slide to change the background color (all CSS color formats are supported).</p>
+<p>Different background transitions are available via the <code>background-transition</code> option.</p>
+<div class="footer">
+<p>Learn more: <a href="https://quarto.org/docs/presentations/revealjs/#color-backgrounds">Slide Backgrounds</a></p>
+</div>
 <div class="sourceCode" id="annotated-cell-1" data-code-line-numbers="6-8|9"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a></span>
@@ -444,34 +690,24 @@ Alfonso Tobar-Arancibia
 <span data-code-cell="annotated-cell-1" data-code-lines="6" data-code-annotation="2">Chao</span>
 </dd>
 </dl>
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
-<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
 <p>Hola cómo estás</p>
 </div>
 </div>
 </div>
-</section>
-<section id="slide-backgrounds-1" class="slide level2" data-background="#43464B">
-<h2>Slide Backgrounds</h2>
-<p>Set the <code>background</code> attribute on a slide to change the background color (all CSS color formats are supported).</p>
-<p>Different background transitions are available via the <code>background-transition</code> option.</p>
-<div class="footer">
-<p>Learn more: <a href="https://quarto.org/docs/presentations/revealjs/#color-backgrounds">Slide Backgrounds</a></p>
-</div>
 
 <div class="quarto-auto-generated-content">
+<p><img src="../logo.jpg" class="slide-logo"></p>
 <div class="footer footer-default">
-<p><a href="https://datacuber.cl" class="uri">https://datacuber.cl</a></p>
+
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -838,6 +1074,31 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
+    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom"});
+    window.onload = () => {
+      lightboxQuarto.on('slide_before_load', (data) => {
+        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+        const href = trigger.getAttribute('href');
+        if (href !== null) {
+          const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+          if (imgEl !== null) {
+            const srcAttr = imgEl.getAttribute("src");
+            if (srcAttr && srcAttr.startsWith("data:")) {
+              slideConfig.href = srcAttr;
+            }
+          }
+        } 
+      });
+
+      lightboxQuarto.on('slide_after_load', (data) => {
+        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(slideNode);
+        }
+      });
+
+    };
+              </script>
     
 
 </body></html>

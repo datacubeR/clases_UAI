@@ -4,7 +4,7 @@
     "href": "tics411.html",
     "title": "Diapositivas",
     "section": "",
-    "text": "Clase 0\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 4\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\nNo matching items",
+    "text": "Introducción\n\n\n\nrevealjs\n\n\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIntroducción\n\n\n\nrevealjs\n\n\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIntroducción\n\n\n\nrevealjs\n\n\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIntroducción\n\n\n\nrevealjs\n\n\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIntroducción\n\n\n\nrevealjs\n\n\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
     "crumbs": [
       "TICS 411 - Minería de Datos"
     ]
@@ -12,29 +12,113 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "About",
+    "title": "Alfonso Tobar",
     "section": "",
-    "text": "About this site"
+    "text": "LinkedIn\n  \n  \n    \n     Github\n  \n  \n    \n     datacuber.cl\n  \n\n      \nSoy Alfonso y he trabajado como Científico de Datos por los últimos 9 años. Además me gusta el Machine Learning Competitivo y actualmente he ganado 2 competencias.\nActualmente me encuentro a punto de terminar mi Msc. y actualmente cursando mi PhD. en Data Science. Actualmente mis intereses de investigación tienen que ver con Machine Learning y Deep Learning enfocándome principalmente en la aplicación de Transformers.\nEn mi tiempo libre practico Tenis de Mesa y escribo sobre Machine Learning en mi blog: datacuber.cl.\n\n\nUniversidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026\nUniversidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023\nUniversidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013\n\n\n\nGobLab | Data Engineer | 2023\nX-Analytics | Senior Data Scientist | 2022\nJooycar | Head Data Scientist | 2021\nCencosud Scotiabank | Senior Data Scientist | 2019 - 2020\nEvalueserve Chile | Senior Business Analyst | 2015 - 2019"
   },
   {
-    "objectID": "tics411/clase-0.html#hola",
-    "href": "tics411/clase-0.html#hola",
+    "objectID": "index.html#educación",
+    "href": "index.html#educación",
+    "title": "Alfonso Tobar",
+    "section": "",
+    "text": "Universidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026\nUniversidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023\nUniversidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013"
+  },
+  {
+    "objectID": "index.html#experiencia",
+    "href": "index.html#experiencia",
+    "title": "Alfonso Tobar",
+    "section": "",
+    "text": "GobLab | Data Engineer | 2023\nX-Analytics | Senior Data Scientist | 2022\nJooycar | Head Data Scientist | 2021\nCencosud Scotiabank | Senior Data Scientist | 2019 - 2020\nEvalueserve Chile | Senior Business Analyst | 2015 - 2019"
+  },
+  {
+    "objectID": "tics411/clase-0.html#quién-soy",
+    "href": "tics411/clase-0.html#quién-soy",
     "title": "Minería de Datos",
-    "section": "Hola",
-    "text": "Hola\n\nTurn off alarm\nGet out of bed"
+    "section": "¿Quién soy?",
+    "text": "¿Quién soy?\n\n\n\n\n\n\nAlfonso Tobar-Arancibia, estudié Ing. Civil pero llevo 9 años trabajando como Científico de Datos.\nTerminando mi Msc. y empezando mi PhD en la UAI.\nHe ganado 2 competencias de Machine Learning.\nPubliqué mi primer paper.\nJuego Tenis de Mesa y hago Agility con mi perrita Kira y escribo en mi Blog."
+  },
+  {
+    "objectID": "tics411/clase-0.html#objetivos-del-curso",
+    "href": "tics411/clase-0.html#objetivos-del-curso",
+    "title": "Minería de Datos",
+    "section": "Objetivos del Curso",
+    "text": "Objetivos del Curso\n\n\n\n\n\n\nIdentificar Elementos Claves del Machine Learning (Terminología, Nomenclatura, Intuición).\nEntender como interactúan los algoritmos más importantes.\nAprender a seleccionar el mejor Algoritmo para el Problema.\nEjecutar y aplicar algoritmos clásicos de Machine Learning.\nEvaluar el desempeño esperado del Modelo."
+  },
+  {
+    "objectID": "tics411/clase-0.html#tópicos",
+    "href": "tics411/clase-0.html#tópicos",
+    "title": "Minería de Datos",
+    "section": "Tópicos",
+    "text": "Tópicos\n\n\nModelos no Supervisados\n\nK-Means\nDBScan\nHierarchical Clustering\nGaussian Mixture Model\n\n\nModelos Supervisados\n\nKNN\nRegresión Logística\nNaive Bayes\nÁrboles de Decisión\nSupport Vector Machine\n\n\n\n\n\n\n\n\n\nNo vamos a ver modelos Ensamblados ni Redes Neuronales."
+  },
+  {
+    "objectID": "tics411/clase-0.html#material-complementario",
+    "href": "tics411/clase-0.html#material-complementario",
+    "title": "Minería de Datos",
+    "section": "Material Complementario",
+    "text": "Material Complementario\n\n\n\n\n\n\nYoutube Playlist"
+  },
+  {
+    "objectID": "tics411/clase-0.html#evaluación",
+    "href": "tics411/clase-0.html#evaluación",
+    "title": "Minería de Datos",
+    "section": "Evaluación",
+    "text": "Evaluación\n\n\n\n\n\n\nDos Evaluaciones Escritas (P1, P2) coordinadas.\n\nP1 a mitad de Semestre =&gt; Modelos no Supervisados\nP2 a fin de Semestre =&gt; Modelos Supervisados\n\n\n\n\n\n\n\n\n\n\nDos tareas prácticas (T1, T2)\n\nT1 a mitad de Semestre =&gt; Modelos no Supervisados\nT2 a fin de Semestre =&gt; Modelos Supervisados\n\n\n\n\n\n\n\n\n\n\n\\[NF = 0.2 \\cdot T1 + 0.2 \\cdot T2 + 0.3 \\cdot P1 + 0.3 \\cdot P2\\]\n\n\n\n\n\n\n\n\n\nNo hay Exámen"
+  },
+  {
+    "objectID": "tics411/clase-0.html#ayudantías",
+    "href": "tics411/clase-0.html#ayudantías",
+    "title": "Minería de Datos",
+    "section": "Ayudantías",
+    "text": "Ayudantías\nAyudante: TBD\n\n\n\n\n\n\n\nNo habrán ayudantías todas las semanas.\nEstarán enfocadas en la parte Práctica"
+  },
+  {
+    "objectID": "tics411/clase-0.html#revolución-de-los-datos",
+    "href": "tics411/clase-0.html#revolución-de-los-datos",
+    "title": "Minería de Datos",
+    "section": "Revolución de los Datos",
+    "text": "Revolución de los Datos"
+  },
+  {
+    "objectID": "tics411/clase-0.html#revolución-de-los-datos-1",
+    "href": "tics411/clase-0.html#revolución-de-los-datos-1",
+    "title": "Minería de Datos",
+    "section": "Revolución de los Datos",
+    "text": "Revolución de los Datos"
+  },
+  {
+    "objectID": "tics411/clase-0.html#cómo-aprovechar-la-información-que-tenemos",
+    "href": "tics411/clase-0.html#cómo-aprovechar-la-información-que-tenemos",
+    "title": "Minería de Datos",
+    "section": "¿Cómo aprovechar la información que tenemos?",
+    "text": "¿Cómo aprovechar la información que tenemos?\n\n\nData Mining\n\n\n“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data”(Fayyad, Piatetsky-Shapiro & Smith 1996)\n\n\n\n\n\n\nMachine Learning\n\n\n“A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.” (Mitchell, 2006)"
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-datos-datos-estructurados",
+    "href": "tics411/clase-0.html#tipos-de-datos-datos-estructurados",
+    "title": "Minería de Datos",
+    "section": "Tipos de Datos: Datos Estructurados",
+    "text": "Tipos de Datos: Datos Estructurados\n\n\n\n\n\n\n\n\n\n\n\n\nFilas: Observaciones, instancias.\nColumnas: Variables, Atributos, Features.\n\n\n\n\n\n\n\n\n\n\n\nProbablemente el tipo de datos más amigable.\nRequiere conocimiento de negocio (Domain Knowledge)\n\n\n\n\n\n\n\n\n\n\n\nEs un % bajísimo del total de datos existentes en el Mundo.\nDistintos tipos, por lo que normalmente requiere de algún tipo de preprocesamiento."
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-datos-series-de-tiempo",
+    "href": "tics411/clase-0.html#tipos-de-datos-series-de-tiempo",
+    "title": "Minería de Datos",
+    "section": "Tipos de Datos: Series de Tiempo",
+    "text": "Tipos de Datos: Series de Tiempo"
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-datos-datos-no-estructurados",
+    "href": "tics411/clase-0.html#tipos-de-datos-datos-no-estructurados",
+    "title": "Minería de Datos",
+    "section": "Tipos de Datos: Datos no Estructurados",
+    "text": "Tipos de Datos: Datos no Estructurados"
   },
   {
     "objectID": "tics411/clase-0.html#slide-backgrounds",
     "href": "tics411/clase-0.html#slide-backgrounds",
     "title": "Minería de Datos",
     "section": "Slide Backgrounds",
-    "text": "Slide Backgrounds\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\n1theta = 2 * np.pi * r\n2fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n1\n\nHola\n\n2\n\nChao\n\n\n\n\n\n\n\n\nNote\n\n\nHola cómo estás"
-  },
-  {
-    "objectID": "tics411/clase-0.html#slide-backgrounds-1",
-    "href": "tics411/clase-0.html#slide-backgrounds-1",
-    "title": "Minería de Datos",
-    "section": "Slide Backgrounds",
-    "text": "Slide Backgrounds\nSet the background attribute on a slide to change the background color (all CSS color formats are supported).\nDifferent background transitions are available via the background-transition option.\n\nLearn more: Slide Backgrounds\n\n\n\n\nhttps://datacuber.cl"
+    "text": "Slide Backgrounds\nSet the background attribute on a slide to change the background color (all CSS color formats are supported).\nDifferent background transitions are available via the background-transition option.\n\nLearn more: Slide Backgrounds\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\n1theta = 2 * np.pi * r\n2fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\n\n1\n\nHola\n\n2\n\nChao\n\n\n\n\n\n\n\n\nHola cómo estás"
   }
 ]
