@@ -14,7 +14,7 @@
     "href": "index.html",
     "title": "Alfonso Tobar",
     "section": "",
-    "text": "LinkedIn\n  \n  \n    \n     Github\n  \n  \n    \n     datacuber.cl\n  \n\n      \nSoy Alfonso y he trabajado como Científico de Datos por los últimos 9 años. Además me gusta el Machine Learning Competitivo y actualmente he ganado 2 competencias.\nActualmente me encuentro a punto de terminar mi Msc. y actualmente cursando mi PhD. en Data Science. Actualmente mis intereses de investigación tienen que ver con Machine Learning y Deep Learning enfocándome principalmente en la aplicación de Transformers.\nEn mi tiempo libre practico Tenis de Mesa y escribo sobre Machine Learning en mi blog: datacuber.cl.\n\n\nUniversidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026\nUniversidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023\nUniversidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013\n\n\n\nGobLab | Data Engineer | 2023\nX-Analytics | Senior Data Scientist | 2022\nJooycar | Head Data Scientist | 2021\nCencosud Scotiabank | Senior Data Scientist | 2019 - 2020\nEvalueserve Chile | Senior Business Analyst | 2015 - 2019"
+    "text": "LinkedIn\n  \n  \n    \n     Github\n  \n  \n    \n     datacuber.cl\n  \n\n      \nSoy Alfonso y he trabajado como Científico de Datos por los últimos 9 años. Además me gusta el Machine Learning Competitivo y hasta el momento he ganado 2 competencias.\nActualmente me encuentro a punto de terminar mi Msc. y además comencé a cursar mi PhD. en Data Science. Mis intereses de investigación tienen que ver con Machine Learning y Deep Learning enfocándome principalmente en la aplicación de Transformers.\nEn mi tiempo libre practico Tenis de Mesa y escribo sobre Machine Learning en mi blog: datacuber.cl.\n\n\nUniversidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026\nUniversidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023\nUniversidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013\n\n\n\nGobLab | Data Engineer | 2023\nX-Analytics | Senior Data Scientist | 2022\nJooycar | Head Data Scientist | 2021\nCencosud Scotiabank | Senior Data Scientist | 2019 - 2020\nEvalueserve Chile | Senior Business Analyst | 2015 - 2019"
   },
   {
     "objectID": "index.html#educación",
@@ -52,6 +52,20 @@
     "text": "Tópicos\n\n\nModelos no Supervisados\n\nK-Means\nDBScan\nHierarchical Clustering\nGaussian Mixture Model\n\n\nModelos Supervisados\n\nKNN\nRegresión Logística\nNaive Bayes\nÁrboles de Decisión\nSupport Vector Machine\n\n\n\n\n\n\n\n\n\nNo vamos a ver modelos Ensamblados ni Redes Neuronales."
   },
   {
+    "objectID": "tics411/clase-0.html#sobre-las-clases",
+    "href": "tics411/clase-0.html#sobre-las-clases",
+    "title": "Minería de Datos",
+    "section": "Sobre las clases",
+    "text": "Sobre las clases\nClase gringa, asistencia voluntaria, presencial. Horario Código es copiable\nMaterial de Clases\n\nDiapositivas\nPrácticos"
+  },
+  {
+    "objectID": "tics411/clase-0.html#sobre-los-prácticos",
+    "href": "tics411/clase-0.html#sobre-los-prácticos",
+    "title": "Minería de Datos",
+    "section": "Sobre los Prácticos",
+    "text": "Sobre los Prácticos\nColab, Python, Scikit-Learn"
+  },
+  {
     "objectID": "tics411/clase-0.html#material-complementario",
     "href": "tics411/clase-0.html#material-complementario",
     "title": "Minería de Datos",
@@ -59,18 +73,18 @@
     "text": "Material Complementario\n\n\n\n\n\n\nYoutube Playlist"
   },
   {
-    "objectID": "tics411/clase-0.html#evaluación",
-    "href": "tics411/clase-0.html#evaluación",
+    "objectID": "tics411/clase-0.html#evaluación-todo",
+    "href": "tics411/clase-0.html#evaluación-todo",
     "title": "Minería de Datos",
-    "section": "Evaluación",
-    "text": "Evaluación\n\n\n\n\n\n\nDos Evaluaciones Escritas (P1, P2) coordinadas.\n\nP1 a mitad de Semestre =&gt; Modelos no Supervisados\nP2 a fin de Semestre =&gt; Modelos Supervisados\n\n\n\n\n\n\n\n\n\n\nDos tareas prácticas (T1, T2)\n\nT1 a mitad de Semestre =&gt; Modelos no Supervisados\nT2 a fin de Semestre =&gt; Modelos Supervisados\n\n\n\n\n\n\n\n\n\n\n\\[NF = 0.2 \\cdot T1 + 0.2 \\cdot T2 + 0.3 \\cdot P1 + 0.3 \\cdot P2\\]\n\n\n\n\n\n\n\n\n\nNo hay Exámen"
+    "section": "Evaluación TODO",
+    "text": "Evaluación TODO\n\n\n\n\n\n\nDos Evaluaciones Escritas (P1, P2) coordinadas.\n\nP1 a mitad de Semestre =&gt; Modelos no Supervisados\nP2 a fin de Semestre =&gt; Modelos Supervisados\n\n\n\n\n\n\n\n\n\n\nDos tareas prácticas (T1, T2)\n\nT1 a mitad de Semestre =&gt; Modelos no Supervisados\nT2 a fin de Semestre =&gt; Modelos Supervisados\n\n\n\n\n\n\n\n\n\n\n\\[NF = 0.2 \\cdot T1 + 0.2 \\cdot T2 + 0.3 \\cdot P1 + 0.3 \\cdot P2\\]\n\n\n\n\n\n\n\n\n\nNo hay Exámen"
   },
   {
     "objectID": "tics411/clase-0.html#ayudantías",
     "href": "tics411/clase-0.html#ayudantías",
     "title": "Minería de Datos",
     "section": "Ayudantías",
-    "text": "Ayudantías\nAyudante: TBD\n\n\n\n\n\n\n\nNo habrán ayudantías todas las semanas.\nEstarán enfocadas en la parte Práctica"
+    "text": "Ayudantías\nAyudante: TBD\nemail: TBD\n\n\n\n\n\n\n\nNo habrán ayudantías todas las semanas.\nEstarán enfocadas en la parte Práctica"
   },
   {
     "objectID": "tics411/clase-0.html#revolución-de-los-datos",
