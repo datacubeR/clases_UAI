@@ -33,112 +33,189 @@
   {
     "objectID": "tics411/clase-0.html#quién-soy",
     "href": "tics411/clase-0.html#quién-soy",
-    "title": "Minería de Datos",
+    "title": "TICS-411 Minería de Datos",
     "section": "¿Quién soy?",
-    "text": "¿Quién soy?\n\n\n\n\n\n\nAlfonso Tobar-Arancibia, estudié Ing. Civil pero llevo 9 años trabajando como Científico de Datos.\nTerminando mi Msc. y empezando mi PhD en la UAI.\nHe ganado 2 competencias de Machine Learning.\nPubliqué mi primer paper.\nJuego Tenis de Mesa y hago Agility con mi perrita Kira y escribo en mi Blog."
+    "text": "¿Quién soy?\n\n\n\n\n\n\nAlfonso Tobar-Arancibia, estudié Ing. Civil pero llevo 9 años trabajando como Científico de Datos.\nTerminando mi Msc. y empezando mi PhD en la UAI.\nHe ganado 2 competencias de Machine Learning.\nPubliqué mi primer paper.\nJuego Tenis de Mesa, hago Agility con mi perrita Kira y escribo en mi Blog."
   },
   {
     "objectID": "tics411/clase-0.html#objetivos-del-curso",
     "href": "tics411/clase-0.html#objetivos-del-curso",
-    "title": "Minería de Datos",
+    "title": "TICS-411 Minería de Datos",
     "section": "Objetivos del Curso",
     "text": "Objetivos del Curso\n\n\n\n\n\n\nIdentificar Elementos Claves del Machine Learning (Terminología, Nomenclatura, Intuición).\nEntender como interactúan los algoritmos más importantes.\nAprender a seleccionar el mejor Algoritmo para el Problema.\nEjecutar y aplicar algoritmos clásicos de Machine Learning.\nEvaluar el desempeño esperado del Modelo."
   },
   {
     "objectID": "tics411/clase-0.html#tópicos",
     "href": "tics411/clase-0.html#tópicos",
-    "title": "Minería de Datos",
+    "title": "TICS-411 Minería de Datos",
     "section": "Tópicos",
-    "text": "Tópicos\n\n\nModelos no Supervisados\n\nK-Means\nDBScan\nHierarchical Clustering\nGaussian Mixture Model\n\n\nModelos Supervisados\n\nKNN\nRegresión Logística\nNaive Bayes\nÁrboles de Decisión\nSupport Vector Machine\n\n\n\n\n\n\n\n\n\nNo vamos a ver modelos Ensamblados ni Redes Neuronales."
+    "text": "Tópicos\n\n\n\n\n\n\n\nIntroducción a la Minería de Datos\nAnálisis Exploratorio de Datos (EDA)\nModelos No Supervisados/Descriptivos\nModelos Supervisados/Predictivos\n\n\n\n\n\n\nModelos no Supervisados\n\nK-Means\nHierarchical Clustering\nDBScan\nA priori\n\n\nModelos Supervisados\n\nKNN\nÁrboles de Decisión\nNaive Bayes\nRegresión Logística"
   },
   {
     "objectID": "tics411/clase-0.html#sobre-las-clases",
     "href": "tics411/clase-0.html#sobre-las-clases",
-    "title": "Minería de Datos",
+    "title": "TICS-411 Minería de Datos",
     "section": "Sobre las clases",
-    "text": "Sobre las clases\nClase gringa, asistencia voluntaria, presencial. Horario Código es copiable\nMaterial de Clases\n\nDiapositivas\nPrácticos"
+    "text": "Sobre las clases\n\n\nClases presenciales, con participación activa de los estudiantes.\nMucha terminología será en Inglés.\nHorario: Jueves.\n\n15:30 a 16:40 (Cátedra)\n17:00 a 18:10 (Práctico)\n\nAsistencia es voluntaria, pero altamente recomendada."
   },
   {
-    "objectID": "tics411/clase-0.html#sobre-los-prácticos",
-    "href": "tics411/clase-0.html#sobre-los-prácticos",
-    "title": "Minería de Datos",
-    "section": "Sobre los Prácticos",
-    "text": "Sobre los Prácticos\nColab, Python, Scikit-Learn"
+    "objectID": "tics411/clase-0.html#materiales-de-clases",
+    "href": "tics411/clase-0.html#materiales-de-clases",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Materiales de Clases",
+    "text": "Materiales de Clases\n\nDiapositivas\nPrácticos\n\n\n\n\n\n\n\n\nSlides interactivas\nTodo el código se puede copiar directamente.\nSe puede buscar contenido en las diapositivas mediante un buscador.\n\n\n\n\n\n\n\n\n\n\nSe espera que los estudiantes dominen las siguientes tecnologías:\n\nPython\nGoogle Colab\nPandas\nScikit-Learn (Se enseñará a lo largo del curso)."
   },
   {
     "objectID": "tics411/clase-0.html#material-complementario",
     "href": "tics411/clase-0.html#material-complementario",
-    "title": "Minería de Datos",
+    "title": "TICS-411 Minería de Datos",
     "section": "Material Complementario",
-    "text": "Material Complementario\n\n\n\n\n\n\nYoutube Playlist"
+    "text": "Material Complementario\n\n\n\n\n\n\nCurso de Scikit-Learn \n\nTutorial Colab\nAgregar Datos Externos a Colab"
   },
   {
-    "objectID": "tics411/clase-0.html#evaluación-todo",
-    "href": "tics411/clase-0.html#evaluación-todo",
-    "title": "Minería de Datos",
-    "section": "Evaluación TODO",
-    "text": "Evaluación TODO\n\n\n\n\n\n\nDos Evaluaciones Escritas (P1, P2) coordinadas.\n\nP1 a mitad de Semestre =&gt; Modelos no Supervisados\nP2 a fin de Semestre =&gt; Modelos Supervisados\n\n\n\n\n\n\n\n\n\n\nDos tareas prácticas (T1, T2)\n\nT1 a mitad de Semestre =&gt; Modelos no Supervisados\nT2 a fin de Semestre =&gt; Modelos Supervisados\n\n\n\n\n\n\n\n\n\n\n\\[NF = 0.2 \\cdot T1 + 0.2 \\cdot T2 + 0.3 \\cdot P1 + 0.3 \\cdot P2\\]\n\n\n\n\n\n\n\n\n\nNo hay Exámen"
+    "objectID": "tics411/clase-0.html#evaluación",
+    "href": "tics411/clase-0.html#evaluación",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Evaluación",
+    "text": "Evaluación\n\n\n\n\n\n\n\nDos Evaluaciones Escritas (P1, P2) coordinadas y cuatro tareas prácticas (T1, T2, T3, T4) \\[NP = 0.35 \\cdot P1 + 0.35 \\cdot P2 + 0.3 \\cdot \\bar{T}\\] \\[ \\bar{T} = (T1 + T2 + T3 + T4)/4 \\]\n\n\n\n\n\n\n\n\n\n\nSi NP &gt; 5\n\n\n\\[NF = NP\\]\n\n\n\n\n\n\n\n\n\nEn caso contrario:\n\n\n\\[NF = 0.7 \\cdot NP + 0.3 \\cdot E\\]"
   },
   {
     "objectID": "tics411/clase-0.html#ayudantías",
     "href": "tics411/clase-0.html#ayudantías",
-    "title": "Minería de Datos",
+    "title": "TICS-411 Minería de Datos",
     "section": "Ayudantías",
-    "text": "Ayudantías\nAyudante: TBD\nemail: TBD\n\n\n\n\n\n\n\nNo habrán ayudantías todas las semanas.\nEstarán enfocadas en la parte Práctica"
+    "text": "Ayudantías\nAyudante: TBD\nemail: TBD\n\n\n\n\n\n\n\nNo habrán ayudantías todas las semanas.\nEstarán enfocadas principalmente en aplicaciones y código."
   },
   {
     "objectID": "tics411/clase-0.html#revolución-de-los-datos",
     "href": "tics411/clase-0.html#revolución-de-los-datos",
-    "title": "Minería de Datos",
+    "title": "TICS-411 Minería de Datos",
     "section": "Revolución de los Datos",
-    "text": "Revolución de los Datos"
+    "text": "Revolución de los Datos\n\n\n\n\n\n\n\nHablar de los distintos tipos de Datos.\nTodo es datos, y está lleno de ellos en Internet y el mundo."
   },
   {
-    "objectID": "tics411/clase-0.html#revolución-de-los-datos-1",
-    "href": "tics411/clase-0.html#revolución-de-los-datos-1",
-    "title": "Minería de Datos",
-    "section": "Revolución de los Datos",
-    "text": "Revolución de los Datos"
+    "objectID": "tics411/clase-0.html#nace-el-data-science-ciencia-de-datos",
+    "href": "tics411/clase-0.html#nace-el-data-science-ciencia-de-datos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Nace el Data Science (Ciencia de Datos)",
+    "text": "Nace el Data Science (Ciencia de Datos)\n\n\n\n\n\n\n\nExplicar las distintas etapas. Qué son cada uno de ellos.\nExplicar que no estoy de acuerdo con todas las definiciones."
   },
   {
     "objectID": "tics411/clase-0.html#cómo-aprovechar-la-información-que-tenemos",
     "href": "tics411/clase-0.html#cómo-aprovechar-la-información-que-tenemos",
-    "title": "Minería de Datos",
+    "title": "TICS-411 Minería de Datos",
     "section": "¿Cómo aprovechar la información que tenemos?",
-    "text": "¿Cómo aprovechar la información que tenemos?\n\n\nData Mining\n\n\n“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data”(Fayyad, Piatetsky-Shapiro & Smith 1996)\n\n\n\n\n\n\nMachine Learning\n\n\n“A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.” (Mitchell, 2006)"
+    "text": "¿Cómo aprovechar la información que tenemos?\n\n\nData Mining (Minería de Datos)\n\n\n“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data”.(Fayyad, Piatetsky-Shapiro & Smith 1996)\n\n\n\n\n\n\nMachine Learning (Aprendizaje Automático)\n\n\n“A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.” (Mitchell, 2006)\n\n\n\n\n\n\nExplicar que estos son dos tipos de Approaches con el que hoy en día se enfrentan los datos.\nEl primero más enfocado en un análisis manual.\nEl segundo en un enfoque más automático."
   },
   {
-    "objectID": "tics411/clase-0.html#tipos-de-datos-datos-estructurados",
-    "href": "tics411/clase-0.html#tipos-de-datos-datos-estructurados",
-    "title": "Minería de Datos",
-    "section": "Tipos de Datos: Datos Estructurados",
-    "text": "Tipos de Datos: Datos Estructurados\n\n\n\n\n\n\n\n\n\n\n\n\nFilas: Observaciones, instancias.\nColumnas: Variables, Atributos, Features.\n\n\n\n\n\n\n\n\n\n\n\nProbablemente el tipo de datos más amigable.\nRequiere conocimiento de negocio (Domain Knowledge)\n\n\n\n\n\n\n\n\n\n\n\nEs un % bajísimo del total de datos existentes en el Mundo.\nDistintos tipos, por lo que normalmente requiere de algún tipo de preprocesamiento."
+    "objectID": "tics411/clase-0.html#tipos-de-datos",
+    "href": "tics411/clase-0.html#tipos-de-datos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Datos",
+    "text": "Tipos de Datos\n\n\n\n\n\nDatos Estructurados\n\n\n\n\n\nDatos No Estructurados"
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-datos-datos-tabulares",
+    "href": "tics411/clase-0.html#tipos-de-datos-datos-tabulares",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Datos: Datos Tabulares",
+    "text": "Tipos de Datos: Datos Tabulares\n\n\n\n\n\n\n\n\n\n\n\n\nFilas: Observaciones, instancias. (Normalmente independientes).\nColumnas: Variables, Atributos, Features.\n\n\n\n\n\n\n\n\n\n\n\nProbablemente el tipo de datos más amigable.\nRequiere conocimiento de negocio (Domain Knowledge)\n\n\n\n\n\n\n\n\n\n\n\nEs un % bajísimo del total de datos existentes en el Mundo.\nDistintos tipos, por lo que normalmente requiere de algún tipo de preprocesamiento."
   },
   {
     "objectID": "tics411/clase-0.html#tipos-de-datos-series-de-tiempo",
     "href": "tics411/clase-0.html#tipos-de-datos-series-de-tiempo",
-    "title": "Minería de Datos",
+    "title": "TICS-411 Minería de Datos",
     "section": "Tipos de Datos: Series de Tiempo",
-    "text": "Tipos de Datos: Series de Tiempo"
+    "text": "Tipos de Datos: Series de Tiempo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFilas: Instancias temporales (Normalmente interdependientes).\nColumnas: Variables, Atributos, Features (Univariada o Multivariada).\n\n\n\n\n\n\n\n\n\n\n\nEs un % bajísimo del total de datos existentes en el Mundo.\nPropiedad temporal requiere preprocesamiento y modelos especiales."
   },
   {
-    "objectID": "tics411/clase-0.html#tipos-de-datos-datos-no-estructurados",
-    "href": "tics411/clase-0.html#tipos-de-datos-datos-no-estructurados",
-    "title": "Minería de Datos",
-    "section": "Tipos de Datos: Datos no Estructurados",
-    "text": "Tipos de Datos: Datos no Estructurados"
+    "objectID": "tics411/clase-0.html#tipos-de-datos-imágenes",
+    "href": "tics411/clase-0.html#tipos-de-datos-imágenes",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Datos: Imágenes",
+    "text": "Tipos de Datos: Imágenes\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste es el tipo de Datos que disparó la Inteligencia Artificial.\n¿Cuántos computadores para identificar un Gato? 16,000\n\n\n\n\n\n\n\n\n\n\n\n\n\nExplicar el concepto de Tensor, extensión de las matrices. Diferencia entre Grayscale y RGB."
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-datos-texto-libre",
+    "href": "tics411/clase-0.html#tipos-de-datos-texto-libre",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Datos: Texto Libre",
+    "text": "Tipos de Datos: Texto Libre\n\n\n\n\n\n\n\n\n\n\n\n\nDatos Masivos.\nDificiles de lidiar ya que deben ser llevarse a una representación numérica.\nAlto nivel de Sesgo y Subjetividad.\n\n\n\n\n\n\n\n\n\n\n\nGracias a este tipo de datos se han producido los avances más increíbles del último tiempo: Transformers"
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-datos-videos",
+    "href": "tics411/clase-0.html#tipos-de-datos-videos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Datos: Videos",
+    "text": "Tipos de Datos: Videos\n\n\n\n\n\n\n\n\nLos videos no son más que arreglos de imágenes.\nSon un tipo de dato muy pesado y difícil de lidiar.\nRequiere alto poder de Procesamiento."
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-aprendizaje",
+    "href": "tics411/clase-0.html#tipos-de-aprendizaje",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Aprendizaje",
+    "text": "Tipos de Aprendizaje"
+  },
+  {
+    "objectID": "tics411/clase-0.html#reinforcement-learning",
+    "href": "tics411/clase-0.html#reinforcement-learning",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Reinforcement Learning",
+    "text": "Reinforcement Learning"
+  },
+  {
+    "objectID": "tics411/clase-0.html#clustering",
+    "href": "tics411/clase-0.html#clustering",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering",
+    "text": "Clustering"
+  },
+  {
+    "objectID": "tics411/clase-0.html#reducción-de-dimensionalidad",
+    "href": "tics411/clase-0.html#reducción-de-dimensionalidad",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Reducción de Dimensionalidad",
+    "text": "Reducción de Dimensionalidad"
+  },
+  {
+    "objectID": "tics411/clase-0.html#regresión-y-clasificación",
+    "href": "tics411/clase-0.html#regresión-y-clasificación",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Regresión y Clasificación",
+    "text": "Regresión y Clasificación\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAmbos ejemplos se pueden realizar utilizando Largo (Eje Y) y Peso (Eje X)."
+  },
+  {
+    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml",
+    "href": "tics411/clase-0.html#nuestro-sistema-de-ml",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Nuestro Sistema de ML",
+    "text": "Nuestro Sistema de ML\nCreemos un Sistema de ML que sea capaz de ver una imágen y pronunciar correctamente el uso de la letra C.\n\n\n\n\n\n\nVamos a Entrenar un Modelo.\n\n\n\nFalta una imágen para mostrar la Arquitectura del Modelo."
+  },
+  {
+    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-train-set",
+    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-train-set",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Nuestro Sistema de ML: Train Set",
+    "text": "Nuestro Sistema de ML: Train Set\n\n\n\n\n\n\nPerro\n\n\n\n\n\n\n\nGato\n\n\n\n\n\n\n\nPerro\n\n\n\n\n\n\n\nGato"
+  },
+  {
+    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-test-set",
+    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-test-set",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Nuestro Sistema de ML: Test Set",
+    "text": "Nuestro Sistema de ML: Test Set\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nList One\n\n\nList One\n\n\nList One\n\n\nList One"
   },
   {
     "objectID": "tics411/clase-0.html#slide-backgrounds",
     "href": "tics411/clase-0.html#slide-backgrounds",
-    "title": "Minería de Datos",
+    "title": "TICS-411 Minería de Datos",
     "section": "Slide Backgrounds",
     "text": "Slide Backgrounds\nSet the background attribute on a slide to change the background color (all CSS color formats are supported).\nDifferent background transitions are available via the background-transition option.\n\nLearn more: Slide Backgrounds"
   },
   {
     "objectID": "tics411/clase-0.html#hola",
     "href": "tics411/clase-0.html#hola",
-    "title": "Minería de Datos",
+    "title": "TICS-411 Minería de Datos",
     "section": "Hola",
     "text": "Hola\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(subplot_kw={'projection': 'polar'})\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nr = np.arange(0, 2, 0.01)\ntheta = 2 * np.pi * r\nfig, ax = plt.subplots(subplot_kw={'projection': 'polar'})\nax.plot(theta, r)\nax.set_rticks([0.5, 1, 1.5, 2])\nax.grid(True)\nplt.show()"
   }

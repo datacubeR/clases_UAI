@@ -8,13 +8,15 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Alfonso Tobar-Arancibia">
-  <title>Clases UAI - Minería de Datos</title>
+  <title>Clases UAI - TICS-411 Minería de Datos</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -397,8 +399,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Minería de Datos</h1>
-  <p class="subtitle">Clase 0: Introducción</p>
+  <h1 class="title">TICS-411 Minería de Datos</h1>
+  <p class="subtitle">Clase 0: Presentación del Curso</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -424,7 +426,7 @@ Alfonso Tobar-Arancibia
 <li class="fragment">Terminando mi Msc. y empezando mi PhD en la UAI.</li>
 <li class="fragment">He ganado 2 competencias de Machine Learning.</li>
 <li class="fragment">Publiqué mi primer <a href="https://ieeexplore.ieee.org/abstract/document/10315748">paper</a>.</li>
-<li class="fragment">Juego Tenis de Mesa y hago Agility con mi perrita Kira y escribo en mi Blog.</li>
+<li class="fragment">Juego Tenis de Mesa, hago Agility con mi perrita Kira y escribo en mi Blog.</li>
 </ul>
 </div>
 </div>
@@ -455,24 +457,74 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="tópicos" class="slide level2">
 <h2>Tópicos</h2>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Introducción a la Minería de Datos</li>
+<li>Análisis Exploratorio de Datos (EDA)</li>
+<li>Modelos No Supervisados/Descriptivos</li>
+<li>Modelos Supervisados/Predictivos</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="columns">
 <div class="column" style="width:50%;">
-<h4 id="modelos-no-supervisados">Modelos no Supervisados</h4>
+<h4 class="smaller" id="modelos-no-supervisados">Modelos no Supervisados</h4>
 <ul>
 <li>K-Means</li>
-<li>DBScan</li>
 <li>Hierarchical Clustering</li>
-<li>Gaussian Mixture Model</li>
+<li>DBScan</li>
+<li>A priori</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<h4 id="modelos-supervisados">Modelos Supervisados</h4>
+<h4 class="smaller" id="modelos-supervisados">Modelos Supervisados</h4>
 <ul>
 <li>KNN</li>
-<li>Regresión Logística</li>
-<li>Naive Bayes</li>
 <li>Árboles de Decisión</li>
-<li>Support Vector Machine</li>
+<li>Naive Bayes</li>
+<li>Regresión Logística</li>
 </ul>
+</div>
+</div>
+</section>
+<section id="sobre-las-clases" class="slide level2">
+<h2>Sobre las clases</h2>
+<div>
+<ul>
+<li class="fragment">Clases presenciales, con participación activa de los estudiantes.</li>
+<li class="fragment">Mucha terminología será en Inglés.</li>
+<li class="fragment">Horario: Jueves.
+<ul>
+<li class="fragment">15:30 a 16:40 (Cátedra)</li>
+<li class="fragment">17:00 a 18:10 (Práctico)</li>
+</ul></li>
+<li class="fragment">Asistencia es voluntaria, pero altamente recomendada.</li>
+</ul>
+</div>
+</section>
+<section id="materiales-de-clases" class="slide level2">
+<h2>Materiales de Clases</h2>
+<ul>
+<li><a href="https://datacuber.cl/clases_UAI">Diapositivas</a></li>
+<li><a href="">Prácticos</a></li>
+</ul>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Slides interactivas</li>
+<li>Todo el código se puede copiar directamente.</li>
+<li>Se puede buscar contenido en las diapositivas mediante un buscador.</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="callout callout-important callout-style-simple">
@@ -481,23 +533,16 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>No vamos a ver modelos Ensamblados ni Redes Neuronales.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="sobre-las-clases" class="slide level2">
-<h2>Sobre las clases</h2>
-<p>Clase gringa, asistencia voluntaria, presencial. Horario Código es copiable</p>
-<h3 id="material-de-clases">Material de Clases</h3>
+<p>Se espera que los estudiantes dominen las siguientes tecnologías:</p>
 <ul>
-<li><a href="https://datacuber.cl/clases_UAI">Diapositivas</a></li>
-<li><a href="">Prácticos</a></li>
+<li><a href="https://www.python.org/">Python</a></li>
+<li><a href="https://colab.research.google.com/?hl=es#scrollTo=zwFnJsE6vjf8">Google Colab</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/10min.html">Pandas</a></li>
+<li><a href="https://scikit-learn.org/stable/">Scikit-Learn</a> (Se enseñará a lo largo del curso).</li>
 </ul>
-</section>
-<section id="sobre-los-prácticos" class="slide level2">
-<h2>Sobre los Prácticos</h2>
-<p>Colab, Python, Scikit-Learn</p>
+</div>
+</div>
+</div>
 </section>
 <section id="material-complementario" class="slide level2">
 <h2>Material Complementario</h2>
@@ -507,57 +552,51 @@ Alfonso Tobar-Arancibia
 </div><div class="column" style="width:30%;">
 <p><a href="img/sk-keras.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/sk-keras.jpg"></a></p>
 </div><div class="column" style="width:40%;">
-<p><a href="https://www.youtube.com/watch?v=d79mzijMAw0&amp;list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM">Youtube Playlist</a> <a href="img/andreas_mueller.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/andreas_mueller.png"></a></p>
-</div>
-</div>
-</section>
-<section id="evaluación-todo" class="slide level2">
-<h2>Evaluación TODO</h2>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Dos Evaluaciones Escritas (P1, P2) coordinadas.</p>
+<p><a href="https://www.youtube.com/watch?v=d79mzijMAw0&amp;list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM">Curso de Scikit-Learn</a> <a href="img/andreas_mueller.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/andreas_mueller.png"></a></p>
 <ul>
-<li>P1 a mitad de Semestre =&gt; Modelos no Supervisados</li>
-<li>P2 a fin de Semestre =&gt; Modelos Supervisados</li>
+<li><p><a href="https://www.youtube.com/watch?v=RLYoEyIHL6A">Tutorial Colab</a></p></li>
+<li><p><a href="https://www.youtube.com/watch?v=z1pBdycYCGY">Agregar Datos Externos a Colab</a></p></li>
 </ul>
 </div>
 </div>
-</div>
+</section>
+<section id="evaluación" class="slide level2 smaller">
+<h2>Evaluación</h2>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Dos tareas prácticas (T1, T2)</p>
 <ul>
-<li>T1 a mitad de Semestre =&gt; Modelos no Supervisados</li>
-<li>T2 a fin de Semestre =&gt; Modelos Supervisados</li>
+<li>Dos Evaluaciones Escritas (P1, P2) coordinadas y cuatro tareas prácticas (T1, T2, T3, T4) <span class="math display">\[NP = 0.35 \cdot P1 + 0.35 \cdot P2 + 0.3 \cdot \bar{T}\]</span> <span class="math display">\[ \bar{T} = (T1 + T2 + T3 + T4)/4 \]</span></li>
 </ul>
 </div>
 </div>
 </div>
-<div class="callout callout-tip callout-style-simple">
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
+<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
+<p><strong>Si NP &gt; 5</strong></p>
+</div>
 <div class="callout-content">
-<p><span class="math display">\[NF = 0.2 \cdot T1 + 0.2 \cdot T2 + 0.3 \cdot P1 + 0.3 \cdot P2\]</span></p>
+<p><span class="math display">\[NF = NP\]</span></p>
 </div>
 </div>
 </div>
-<div class="callout callout-warning callout-style-simple">
+<div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
+<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
+<p><strong>En caso contrario:</strong></p>
+</div>
 <div class="callout-content">
-<p>No hay Exámen</p>
+<p><span class="math display">\[NF = 0.7 \cdot NP + 0.3 \cdot E\]</span></p>
 </div>
 </div>
 </div>
@@ -574,15 +613,15 @@ Alfonso Tobar-Arancibia
 <div class="callout-content">
 <ul>
 <li>No habrán ayudantías todas las semanas.</li>
-<li>Estarán enfocadas en la parte Práctica</li>
+<li>Estarán enfocadas principalmente en aplicaciones y código.</li>
 </ul>
 </div>
 </div>
 </div>
 </section></section>
 <section>
-<section id="introducción" class="title-slide slide level1 center">
-<h1>Introducción</h1>
+<section id="introducción-al-curso" class="title-slide slide level1 center">
+<h1>Introducción al Curso</h1>
 
 </section>
 <section id="revolución-de-los-datos" class="slide level2">
@@ -592,30 +631,62 @@ Alfonso Tobar-Arancibia
 <p><a href="img/internet_2023.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/internet_2023.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
+<aside class="notes">
+<ul>
+<li>Hablar de los distintos tipos de Datos.</li>
+<li>Todo es datos, y está lleno de ellos en Internet y el mundo.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="revolución-de-los-datos-1" class="slide level2">
-<h2>Revolución de los Datos</h2>
+<section id="nace-el-data-science-ciencia-de-datos" class="slide level2">
+<h2>Nace el Data Science (Ciencia de Datos)</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="img/data_science.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/data_science.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
+<aside class="notes">
+<ul>
+<li>Explicar las distintas etapas. Qué son cada uno de ellos.</li>
+<li>Explicar que no estoy de acuerdo con todas las definiciones.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="cómo-aprovechar-la-información-que-tenemos" class="slide level2">
 <h2>¿Cómo aprovechar la información que tenemos?</h2>
 <div class="fragment">
 <dl>
-<dt>Data Mining</dt>
+<dt>Data Mining (Minería de Datos)</dt>
 <dd>
 <blockquote>
-<p>“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data”<strong>(Fayyad, Piatetsky-Shapiro &amp; Smith 1996)</strong></p>
+<p>“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data”.<strong>(Fayyad, Piatetsky-Shapiro &amp; Smith 1996)</strong></p>
 </blockquote>
 </dd>
 </dl>
 </div>
 <div class="fragment">
 <dl>
-<dt>Machine Learning</dt>
+<dt>Machine Learning (Aprendizaje Automático)</dt>
 <dd>
 <blockquote>
 <p>“A computer program is said to learn from experience <code>E</code> with respect to some class of tasks <code>T</code> and performance measure <code>P</code>, if its performance at tasks in <code>T</code>, as measured by <code>P</code>, improves with experience E.” <strong>(Mitchell, 2006)</strong></p>
@@ -623,9 +694,89 @@ Alfonso Tobar-Arancibia
 </dd>
 </dl>
 </div>
+<aside class="notes">
+<ul>
+<li>Explicar que estos son dos tipos de Approaches con el que hoy en día se enfrentan los datos.</li>
+<li>El primero más enfocado en un análisis manual.</li>
+<li>El segundo en un enfoque más automático.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="tipos-de-datos-datos-estructurados" class="slide level2">
-<h2>Tipos de Datos: Datos Estructurados</h2>
+<section id="tipos-de-datos" class="slide level2">
+<h2>Tipos de Datos</h2>
+<div class="quarto-layout-panel" data-layout="[ 40, 60 ]">
+<div class="quarto-layout-row">
+<div id="first-column" class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
+<div class="fragment" data-fragment-index="1">
+<!-- -->
+<h3 id="datos-estructurados">Datos Estructurados</h3>
+</div>
+</div>
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: flex-start;">
+<div class="fragment" data-fragment-index="5">
+<!-- -->
+<h3 id="datos-no-estructurados">Datos No Estructurados</h3>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="6">
+<div class="quarto-layout-row">
+<div class="fragment quarto-layout-cell" data-fragment-index="2" style="flex-basis: 16.7%;justify-content: center;">
+<p><img data-src="img/table.png"></p>
+</div>
+<div class="fragment quarto-layout-cell" data-fragment-index="3" style="flex-basis: 16.7%;justify-content: center;">
+<p><img data-src="img/ts.png"></p>
+</div>
+<div class="fragment quarto-layout-cell" data-fragment-index="6" style="flex-basis: 16.7%;justify-content: center;">
+<p><img data-src="img/image.png"></p>
+</div>
+<div class="fragment quarto-layout-cell" data-fragment-index="7" style="flex-basis: 16.7%;justify-content: center;">
+<p><img data-src="img/text.png"></p>
+</div>
+<div class="fragment quarto-layout-cell" data-fragment-index="8" style="flex-basis: 16.7%;justify-content: center;">
+<p><img data-src="img/video.png"></p>
+</div>
+<div class="fragment quarto-layout-cell" data-fragment-index="9" style="flex-basis: 16.7%;justify-content: center;">
+<p><img data-src="img/graph.png"></p>
+</div>
+</div>
+</div>
+<div class="quarto-layout-panel" data-layout="[ 40, 60 ]">
+<div class="quarto-layout-row">
+<div id="first-column" class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
+<div class="fragment" data-fragment-index="4">
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<p><img data-src="img/ml.jpg" class="quarto-figure quarto-figure-left" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: flex-start;">
+<div class="fragment" data-fragment-index="10">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/dl.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="tipos-de-datos-datos-tabulares" class="slide level2 smaller">
+<h2>Tipos de Datos: Datos Tabulares</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="img/tab_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/tab_data.png" class="quarto-figure quarto-figure-center"></a></p>
@@ -638,7 +789,7 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <ul>
-<li>Filas: Observaciones, instancias.</li>
+<li>Filas: Observaciones, instancias. (Normalmente independientes).</li>
 <li>Columnas: Variables, Atributos, Features.</li>
 </ul>
 </div>
@@ -671,11 +822,321 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </section>
-<section id="tipos-de-datos-series-de-tiempo" class="slide level2">
+<section id="tipos-de-datos-series-de-tiempo" class="slide level2 smaller">
 <h2>Tipos de Datos: Series de Tiempo</h2>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/ts_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/ts_data.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/ts_plot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/ts_plot.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Filas: Instancias temporales (Normalmente interdependientes).</li>
+<li>Columnas: Variables, Atributos, Features (Univariada o Multivariada).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Es un % bajísimo del total de datos existentes en el Mundo.</li>
+<li>Propiedad temporal requiere <strong>preprocesamiento</strong> y modelos especiales.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
-<section id="tipos-de-datos-datos-no-estructurados" class="slide level2">
-<h2>Tipos de Datos: Datos no Estructurados</h2>
+<section id="tipos-de-datos-imágenes" class="slide level2 smaller">
+<h2>Tipos de Datos: Imágenes</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment" data-fragment-index="1">
+<p><a href="img/image_tensor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/image_tensor.png"></a></p>
+</div>
+<div class="fragment" data-fragment-index="3">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Este es el tipo de Datos que disparó la Inteligencia Artificial.</li>
+<li><a href="https://www.nytimes.com/2012/06/26/technology/in-a-big-network-of-computers-evidence-of-machine-learning.html">¿Cuántos computadores para identificar un Gato? 16,000</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment" data-fragment-index="2">
+<p><a href="img/tensor_rgb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/tensor_rgb.jpg"></a></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Explicar el concepto de Tensor, extensión de las matrices. Diferencia entre Grayscale y RGB.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="tipos-de-datos-texto-libre" class="slide level2 smaller">
+<h2>Tipos de Datos: Texto Libre</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/free_text.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/free_text.jpg" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Datos Masivos.</li>
+<li>Dificiles de lidiar ya que deben ser llevarse a una representación numérica.</li>
+<li>Alto nivel de Sesgo y Subjetividad.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Gracias a este tipo de datos se han producido los avances más increíbles del último tiempo: <a href="https://arxiv.org/abs/1706.03762">Transformers</a></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="tipos-de-datos-videos" class="slide level2 smaller">
+<h2>Tipos de Datos: Videos</h2>
+<video id="video_shortcode_videojs_video1" width="800" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://www.neuralframes.com/videos/new_landingpage_video_squirrel.webm"></video>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Los videos no son más que arreglos de imágenes.</li>
+<li>Son un tipo de dato muy pesado y difícil de lidiar.</li>
+<li>Requiere alto poder de Procesamiento.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="cómo-aprenden-los-modelos" class="title-slide slide level1 center">
+<h1>¿Cómo aprenden los Modelos?</h1>
+
+</section>
+<section id="tipos-de-aprendizaje" class="slide level2">
+<h2>Tipos de Aprendizaje</h2>
+
+<img data-src="img/ML_types.png" class="r-stretch"></section>
+<section id="reinforcement-learning" class="slide level2">
+<h2>Reinforcement Learning</h2>
+
+<img data-src="img/alpha_tensor.png" class="r-stretch"></section>
+<section id="clustering" class="slide level2">
+<h2>Clustering</h2>
+
+<img data-src="img/clustering.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="reducción-de-dimensionalidad" class="slide level2">
+<h2>Reducción de Dimensionalidad</h2>
+
+<img data-src="img/dim_red.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="regresión-y-clasificación" class="slide level2">
+<h2>Regresión y Clasificación</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/clf_reg.jpeg" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/house_pred.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Ambos ejemplos se pueden realizar utilizando Largo (Eje Y) y Peso (Eje X).</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="intuición" class="title-slide slide level1 center">
+<h1>Intuición</h1>
+
+</section>
+<section id="nuestro-sistema-de-ml" class="slide level2 smaller">
+<h2>Nuestro Sistema de ML</h2>
+<p>Creemos un Sistema de ML que sea capaz de ver una imágen y pronunciar correctamente el uso de la letra <code>C</code>.</p>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Vamos a <code>Entrenar</code> un Modelo.</p>
+</div>
+</div>
+</div>
+<p>Falta una imágen para mostrar la Arquitectura del Modelo.</p>
+</section>
+<section id="nuestro-sistema-de-ml-train-set" class="slide level2 smaller">
+<h2>Nuestro Sistema de ML: Train Set</h2>
+<div class="quarto-layout-panel" data-layout-ncol="4">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<figcaption><code>P</code>erro</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<figcaption>Ga<code>t</code>o</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<figcaption><code>P</code>erro</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<figcaption>Ga<code>t</code>o</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="nuestro-sistema-de-ml-test-set" class="slide level2 smaller">
+<h2>Nuestro Sistema de ML: Test Set</h2>
+<div class="quarto-layout-panel" data-layout-ncol="4">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="4">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<p>List One</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<p>List One</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<p>List One</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<p>List One</p>
+</div>
+</div>
+</div>
 </section>
 <section id="slide-backgrounds" class="slide level2">
 <h2>Slide Backgrounds</h2>
@@ -707,6 +1168,18 @@ Alfonso Tobar-Arancibia
 <span id="cb2-8"><a></a>ax.set_rticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>])</span>
 <span id="cb2-9"><a></a>ax.grid(<span class="va">True</span>)</span>
 <span id="cb2-10"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section id="gracias" class="title-slide slide level1 center">
+<h1>Gracias</h1>
+<div class="footer">
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+</p><p><span property="dct:title">Tics-411 Minería de Datos</span> por <span property="cc:attributionName">Alfonso Tobar</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a>
+<p></p>
+</div>
 
 <div class="quarto-auto-generated-content">
 <p><img src="../logo.jpg" class="slide-logo"></p>
@@ -714,7 +1187,7 @@ Alfonso Tobar-Arancibia
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -1081,7 +1554,8 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom"});
+    <script>videojs(video_shortcode_videojs_video1);</script>
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
