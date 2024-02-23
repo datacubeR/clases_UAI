@@ -414,19 +414,26 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="quién-soy" class="slide level2">
+<section id="quién-soy" class="slide level2 smaller">
 <h2>¿Quién soy?</h2>
 <div class="columns">
-<div class="column" style="width:40%;">
-<p><img data-src="../me.jpg"></p>
-</div><div class="column" style="width:60%;">
+<div class="column" style="width:30%;">
+<p><img data-src="../me.jpg" style="width:60.0%"></p>
+<p><img data-src="img/chiquis.jpeg" style="width:60.0%"></p>
+</div><div class="column" style="width:70%;">
 <div class="smaller">
 <ul>
-<li class="fragment">Alfonso Tobar-Arancibia, estudié Ing. Civil pero llevo 9 años trabajando como Científico de Datos.</li>
+<li class="fragment">Alfonso Tobar-Arancibia, estudié <strong>Ingeniería Civil</strong> pero llevo 9 años trabajando como:
+<ul>
+<li class="fragment">Data Analyst.</li>
+<li class="fragment">Data Scientist.</li>
+<li class="fragment">ML Engineer.</li>
+<li class="fragment">Data Engineer.</li>
+</ul></li>
 <li class="fragment">Terminando mi Msc. y empezando mi PhD en la UAI.</li>
 <li class="fragment">He ganado 2 competencias de Machine Learning.</li>
 <li class="fragment">Publiqué mi primer <a href="https://ieeexplore.ieee.org/abstract/document/10315748">paper</a>.</li>
-<li class="fragment">Juego Tenis de Mesa, hago Agility con mi perrita Kira y escribo en mi Blog.</li>
+<li class="fragment">Juego <strong>Tenis de Mesa</strong>, hago <strong>Agility</strong> con mi perrita Kira y escribo en mi Blog.</li>
 </ul>
 </div>
 </div>
@@ -479,7 +486,7 @@ Alfonso Tobar-Arancibia
 <li>K-Means</li>
 <li>Hierarchical Clustering</li>
 <li>DBScan</li>
-<li>A priori</li>
+<li>Apriori</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <h4 class="smaller" id="modelos-supervisados">Modelos Supervisados</h4>
@@ -679,7 +686,7 @@ Alfonso Tobar-Arancibia
 <dt>Data Mining (Minería de Datos)</dt>
 <dd>
 <blockquote>
-<p>“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data”.<strong>(Fayyad, Piatetsky-Shapiro &amp; Smith 1996)</strong></p>
+<p>“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data.” <strong>(Fayyad, Piatetsky-Shapiro &amp; Smith 1996)</strong></p>
 </blockquote>
 </dd>
 </dl>
@@ -1048,8 +1055,8 @@ Alfonso Tobar-Arancibia
 </div>
 <p>Falta una imágen para mostrar la Arquitectura del Modelo.</p>
 </section>
-<section id="nuestro-sistema-de-ml-train-set" class="slide level2 smaller">
-<h2>Nuestro Sistema de ML: Train Set</h2>
+<section id="nuestro-sistema-de-ml-entrenamiento" class="slide level2 smaller">
+<h2>Nuestro Sistema de ML: Entrenamiento</h2>
 <div class="quarto-layout-panel" data-layout-ncol="4">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
@@ -1086,9 +1093,17 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
+<dl>
+<dt>Entrenamiento</dt>
+<dd>
+<blockquote>
+<p>Es el proceso en el cuál el modelo aprende mediante ejemplos.</p>
+</blockquote>
+</dd>
+</dl>
 </section>
-<section id="nuestro-sistema-de-ml-test-set" class="slide level2 smaller">
-<h2>Nuestro Sistema de ML: Test Set</h2>
+<section id="nuestro-sistema-de-ml-inferencia" class="slide level2 smaller">
+<h2>Nuestro Sistema de ML: Inferencia</h2>
 <div class="quarto-layout-panel" data-layout-ncol="4">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
@@ -1137,6 +1152,23 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
+<dl>
+<dt>Inferencia/Predicción</dt>
+<dd>
+<blockquote>
+<p>TBD</p>
+</blockquote>
+</dd>
+<dt>Generalización</dt>
+<dd>
+<blockquote>
+<p>TBD</p>
+</blockquote>
+</dd>
+</dl>
+</section>
+<section id="definiciones" class="slide level2">
+<h2>Definiciones</h2>
 </section>
 <section id="slide-backgrounds" class="slide level2">
 <h2>Slide Backgrounds</h2>
@@ -1168,9 +1200,6 @@ Alfonso Tobar-Arancibia
 <span id="cb2-8"><a></a>ax.set_rticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>])</span>
 <span id="cb2-9"><a></a>ax.grid(<span class="va">True</span>)</span>
 <span id="cb2-10"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
-
 </section></section>
 <section id="gracias" class="title-slide slide level1 center">
 <h1>Gracias</h1>
@@ -1555,7 +1584,7 @@ Alfonso Tobar-Arancibia
     });
     </script>
     <script>videojs(video_shortcode_videojs_video1);</script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

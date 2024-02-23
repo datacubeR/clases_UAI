@@ -14,28 +14,21 @@
     "href": "index.html",
     "title": "Alfonso Tobar",
     "section": "",
-    "text": "LinkedIn\n  \n  \n    \n     Github\n  \n  \n    \n     datacuber.cl\n  \n\n      \nSoy Alfonso y he trabajado como Científico de Datos por los últimos 9 años. Además me gusta el Machine Learning Competitivo y hasta el momento he ganado 2 competencias.\nActualmente me encuentro a punto de terminar mi Msc. y además comencé a cursar mi PhD. en Data Science. Mis intereses de investigación tienen que ver con Machine Learning y Deep Learning enfocándome principalmente en la aplicación de Transformers.\nEn mi tiempo libre practico Tenis de Mesa y escribo sobre Machine Learning en mi blog: datacuber.cl.\n\n\nUniversidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026\nUniversidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023\nUniversidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013\n\n\n\nGobLab | Data Engineer | 2023\nX-Analytics | Senior Data Scientist | 2022\nJooycar | Head Data Scientist | 2021\nCencosud Scotiabank | Senior Data Scientist | 2019 - 2020\nEvalueserve Chile | Senior Business Analyst | 2015 - 2019"
+    "text": "LinkedIn\n  \n  \n    \n     Github\n  \n  \n    \n     datacuber.cl\n  \n\n      \nSoy Alfonso y he trabajado como Científico de Datos por los últimos 9 años. Además me gusta el Machine Learning Competitivo y hasta el momento he ganado 2 competencias.\nActualmente me encuentro a punto de terminar mi Msc. y además comencé a cursar mi PhD. en Data Science. Mis intereses de investigación tienen que ver con Machine Learning y Deep Learning enfocándome principalmente en la aplicación de Transformers.\nEn mi tiempo libre practico Tenis de Mesa y escribo sobre Machine Learning en mi blog: datacuber.cl.\n\n\nUniversidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026\nUniversidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023\nUniversidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013\nPuedes ver más detalles de mi carrera acá."
   },
   {
     "objectID": "index.html#educación",
     "href": "index.html#educación",
     "title": "Alfonso Tobar",
     "section": "",
-    "text": "Universidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026\nUniversidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023\nUniversidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013"
-  },
-  {
-    "objectID": "index.html#experiencia",
-    "href": "index.html#experiencia",
-    "title": "Alfonso Tobar",
-    "section": "",
-    "text": "GobLab | Data Engineer | 2023\nX-Analytics | Senior Data Scientist | 2022\nJooycar | Head Data Scientist | 2021\nCencosud Scotiabank | Senior Data Scientist | 2019 - 2020\nEvalueserve Chile | Senior Business Analyst | 2015 - 2019"
+    "text": "Universidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026\nUniversidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023\nUniversidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013\nPuedes ver más detalles de mi carrera acá."
   },
   {
     "objectID": "tics411/clase-0.html#quién-soy",
     "href": "tics411/clase-0.html#quién-soy",
     "title": "TICS-411 Minería de Datos",
     "section": "¿Quién soy?",
-    "text": "¿Quién soy?\n\n\n\n\n\n\nAlfonso Tobar-Arancibia, estudié Ing. Civil pero llevo 9 años trabajando como Científico de Datos.\nTerminando mi Msc. y empezando mi PhD en la UAI.\nHe ganado 2 competencias de Machine Learning.\nPubliqué mi primer paper.\nJuego Tenis de Mesa, hago Agility con mi perrita Kira y escribo en mi Blog."
+    "text": "¿Quién soy?\n\n\n\n\n\n\n\nAlfonso Tobar-Arancibia, estudié Ingeniería Civil pero llevo 9 años trabajando como:\n\nData Analyst.\nData Scientist.\nML Engineer.\nData Engineer.\n\nTerminando mi Msc. y empezando mi PhD en la UAI.\nHe ganado 2 competencias de Machine Learning.\nPubliqué mi primer paper.\nJuego Tenis de Mesa, hago Agility con mi perrita Kira y escribo en mi Blog."
   },
   {
     "objectID": "tics411/clase-0.html#objetivos-del-curso",
@@ -49,7 +42,7 @@
     "href": "tics411/clase-0.html#tópicos",
     "title": "TICS-411 Minería de Datos",
     "section": "Tópicos",
-    "text": "Tópicos\n\n\n\n\n\n\n\nIntroducción a la Minería de Datos\nAnálisis Exploratorio de Datos (EDA)\nModelos No Supervisados/Descriptivos\nModelos Supervisados/Predictivos\n\n\n\n\n\n\nModelos no Supervisados\n\nK-Means\nHierarchical Clustering\nDBScan\nA priori\n\n\nModelos Supervisados\n\nKNN\nÁrboles de Decisión\nNaive Bayes\nRegresión Logística"
+    "text": "Tópicos\n\n\n\n\n\n\n\nIntroducción a la Minería de Datos\nAnálisis Exploratorio de Datos (EDA)\nModelos No Supervisados/Descriptivos\nModelos Supervisados/Predictivos\n\n\n\n\n\n\nModelos no Supervisados\n\nK-Means\nHierarchical Clustering\nDBScan\nApriori\n\n\nModelos Supervisados\n\nKNN\nÁrboles de Decisión\nNaive Bayes\nRegresión Logística"
   },
   {
     "objectID": "tics411/clase-0.html#sobre-las-clases",
@@ -105,7 +98,7 @@
     "href": "tics411/clase-0.html#cómo-aprovechar-la-información-que-tenemos",
     "title": "TICS-411 Minería de Datos",
     "section": "¿Cómo aprovechar la información que tenemos?",
-    "text": "¿Cómo aprovechar la información que tenemos?\n\n\nData Mining (Minería de Datos)\n\n\n“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data”.(Fayyad, Piatetsky-Shapiro & Smith 1996)\n\n\n\n\n\n\nMachine Learning (Aprendizaje Automático)\n\n\n“A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.” (Mitchell, 2006)\n\n\n\n\n\n\nExplicar que estos son dos tipos de Approaches con el que hoy en día se enfrentan los datos.\nEl primero más enfocado en un análisis manual.\nEl segundo en un enfoque más automático."
+    "text": "¿Cómo aprovechar la información que tenemos?\n\n\nData Mining (Minería de Datos)\n\n\n“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data.” (Fayyad, Piatetsky-Shapiro & Smith 1996)\n\n\n\n\n\n\nMachine Learning (Aprendizaje Automático)\n\n\n“A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.” (Mitchell, 2006)\n\n\n\n\n\n\nExplicar que estos son dos tipos de Approaches con el que hoy en día se enfrentan los datos.\nEl primero más enfocado en un análisis manual.\nEl segundo en un enfoque más automático."
   },
   {
     "objectID": "tics411/clase-0.html#tipos-de-datos",
@@ -192,18 +185,25 @@
     "text": "Nuestro Sistema de ML\nCreemos un Sistema de ML que sea capaz de ver una imágen y pronunciar correctamente el uso de la letra C.\n\n\n\n\n\n\nVamos a Entrenar un Modelo.\n\n\n\nFalta una imágen para mostrar la Arquitectura del Modelo."
   },
   {
-    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-train-set",
-    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-train-set",
+    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-entrenamiento",
+    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-entrenamiento",
     "title": "TICS-411 Minería de Datos",
-    "section": "Nuestro Sistema de ML: Train Set",
-    "text": "Nuestro Sistema de ML: Train Set\n\n\n\n\n\n\nPerro\n\n\n\n\n\n\n\nGato\n\n\n\n\n\n\n\nPerro\n\n\n\n\n\n\n\nGato"
+    "section": "Nuestro Sistema de ML: Entrenamiento",
+    "text": "Nuestro Sistema de ML: Entrenamiento\n\n\n\n\n\n\nPerro\n\n\n\n\n\n\n\nGato\n\n\n\n\n\n\n\nPerro\n\n\n\n\n\n\n\nGato\n\n\n\n\n\n\nEntrenamiento\n\n\nEs el proceso en el cuál el modelo aprende mediante ejemplos."
   },
   {
-    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-test-set",
-    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-test-set",
+    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-inferencia",
+    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-inferencia",
     "title": "TICS-411 Minería de Datos",
-    "section": "Nuestro Sistema de ML: Test Set",
-    "text": "Nuestro Sistema de ML: Test Set\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nList One\n\n\nList One\n\n\nList One\n\n\nList One"
+    "section": "Nuestro Sistema de ML: Inferencia",
+    "text": "Nuestro Sistema de ML: Inferencia\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nList One\n\n\nList One\n\n\nList One\n\n\nList One\n\n\n\n\nInferencia/Predicción\n\n\nTBD\n\n\nGeneralización\n\n\nTBD"
+  },
+  {
+    "objectID": "tics411/clase-0.html#definiciones",
+    "href": "tics411/clase-0.html#definiciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Definiciones",
+    "text": "Definiciones"
   },
   {
     "objectID": "tics411/clase-0.html#slide-backgrounds",
