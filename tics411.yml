@@ -1,28 +1,37 @@
 - title: "Clase 0"
-  subtitle: "Introducción"
+  subtitle: "Reglas del Curso e Introducción"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-03-05
-  image: tics411/img/clase-0.png
+  date: 2024-03-07
+  image: tics411/thumbnails/clase-0.png
+  path: tics411/clase-0.qmd
+  categories:
+   - slides
+
+- title: "Práctico 0"
+  subtitle: "Introducción a Scikit-Learn"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-03-07
+  image: tics411/thumbnails/lab-0.jpg
   path: tics411/clase-0.qmd
   categories:
    - slides
   
 
 - title: "Clase 1"
-  subtitle: "Introducción"
+  subtitle: "Análisis Exploratorio"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-03-05
-  image: tics411/img/404.png
+  date: 2024-03-14
+  image: tics411/thumbnails/clase-1.jpg
   path: tics411/clase-1.qmd
   categories:
    - slides
 
 
 - title: "Clase 2"
-  subtitle: "Introducción"
+  subtitle: "K-Means"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-03-05
-  image: tics411/img/404.png
+  date: 2024-03-21
+  image: tics411/thumbnails/clase-2.png
   path: tics411/clase-2.qmd
   categories:
    - slides
@@ -30,8 +39,8 @@
 - title: "Clase 3"
   subtitle: "Introducción"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-03-05
-  image: tics411/img/404.png
+  date: 2024-03-28
+  image: tics411/thumbnails/clase-3.png
   path: tics411/clase-3.qmd
   categories:
    - slides
@@ -39,8 +48,8 @@
 - title: "Clase 4"
   subtitle: "Introducción"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-03-05
-  image: tics411/img/404.png
+  date: 2024-04-04
+  image: tics411/thumbnails/clase-4.png
   path: tics411/clase-4.qmd
   categories:
    - slides

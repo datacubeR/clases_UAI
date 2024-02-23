@@ -1,0 +1,224 @@
+---
+title: "TICS-411 Minería de Datos"
+subtitle: "Práctico 0: Introducción a Scikit-Learn"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+date: 03/07/2024
+date-format: "MMM D, YYYY"
+format:
+  revealjs: 
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo.jpg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+    code-annotations: hover
+---
+
+## ¿Qué es Scikit-Learn?
+
+::: {.columns}
+::: {.column width="30%"}
+![](img/lab-0/sklearn.jpg)
+:::
+::: {.column width="70%"}
+* `Scikit-Learn` (`sklearn` para los amigos) es una librería creada por David Cournapeau, como un Google Summer Code Project y luego Matthieu Brucher en su tesis. 
+* En 2010 queda a cargo de [INRIA](https://www.inria.cl/es) y tiene un ciclo de actualización de 3 meses.
+* Es la librería más famosa y poderosa para hacer Machine Learning hoy en día. 
+* Su API es tan famosa, que hoy se sabe que una librería es de `calidad` si sigue los estándares implementados por `Scikit-Learn`.
+:::
+::: 
+
+## Diseño {.smaller}
+
+* `Scikit-Learn` sigue un patrón de `Programación Orientada a Objetos (POO)` basado en clases.
+
+::: {.callout-note}
+
+* En programación, una clase es un objeto que internamente contiene estados que pueden ir cambiando en el tiempo.
+  * Una clase posee:
+    * **Métodos**: Funciones que cambian el comportamiento de la clase.
+    * **Atributos**: Datos propios de la clase.
+:::
+
+::: {.incremental style="font-size: 90%;"}
+
+`Scikit-Learn` sigue el siguiente estándar:
+
+* Todas las Clases se escriben en `CamelCase`: Ej: `KMeans`,`LogisticRegression`, `StandardScaler`. 
+* Las clases en Scikit-Learn pueden representar algoritmos, o etapas de un preprocesamiento.
+  * Los algoritmos se denominan `Estimators`.
+  * Los preprocesamientos se denominan `Transformers`.
+* Las funciones se escriben como `snake_case` y permiten realizar algunas operaciones básicas en el proceso de modelamiento. Ej: `train_test_split()`, `cross_val_score()`.
+* Normalmente se utilizan letras mayúsculas para denotar `Matrices` o `DataFrames`, mientras que las letras minúsculas denotan `Vectores` o `Series`. 
+:::
+
+## Estimadores No supervisados 
+```{.python code-line-numbers="|1|2|3|5|7-8|"}
+from sklearn.sub_modulo import Estimator 
+model = Estimator(hp1=v1, hp2=v2,...) 
+model.fit(X) 
+
+y_pred = model.predict(X) 
+
+## Opcionalmente se puede entrenar y predecir a la vez.
+model.fit_predict(X) 
+```
+<br>
+
+::: {style="font-size: 75%;"}
+L1. Importar la clase a utilizar.
+
+L2. `Instanciar` el modelo y sus `hiperparámetros`. 
+
+L3. `Entrenar` o ajustar el modelo (Requiere sólo de X). 
+
+L5. `Predecir`. Los modelos de clasificación tienen la capacidad de generar probabilidades.
+
+L7-8. Este tipo de modelos permite entrenar y predecir en un sólo paso. 
+:::
+
+
+## Estimadores Predictivos
+
+```{.python code-line-numbers="|1|2|3|5-6|7|"}
+from sklearn.sub_modulo import Estimator 
+model = Estimator(hp1=v1, hp2=v2,...) 
+model.fit(X_train, y_train) 
+
+y_pred = model.predict(X_test) 
+y_pred_proba = model.predict_proba(X_test)
+
+model.score(X_test,y_test) 
+```
+<br>
+
+::: {style="font-size: 75%;"}
+L1. Importar la clase a utilizar.
+
+L2. `Instanciar` el modelo y sus `hiperparámetros`. 
+
+L3. `Entrenar` o ajustar el modelo (Ojo, requiere de `X` e `y`).  
+
+L5--6. `Predecir` en datos nuevos. (Algunos modelos pueden predecir probabilidades).
+
+L8. `Evaluar` el modelo en los datos nuevos.
+:::
+
+## Output de un Modelo {.smaller}
+
+* Los modelos no entregan directamente un output sino que los dejan almacenados en su interior como un estado. 
+* Los Estimators tienen dos estados:
+  * **Not Fitted**: Modelo antes de ser entrenado
+  * **Fitted**: Una vez que el modelo ya está entrenado. (Después de aplicar `.fit()`) 
+
+::: {.callout-tip .fragment}
+
+Muchos modelos pueden entregar información sólo luego de ser entrenados (su atributo termina con un `_`). 
+
+Ej: `model.coef_`, `model.intercept_`. 
+:::
+
+::: {.callout-note .fragment}
+El modelo es una herramienta a la cual le entregamos datos (Input), y nos devuelve datos (Predicciones). 
+:::
+
+
+## Transformers 
+
+::: {.callout-note style="font-size: 70%;"}
+
+* A diferencia de los `Estimators`, los `Transformers` no son modelos.
+* Su input y su output son datos. 
+* Algunos `Transformers` permiten escalar los datos, transformar categorías en números, rellenar valores faltantes. (Veremos más acerca de esto en los `Preprocesamiento`). 
+:::
+
+
+```{.python code-line-numbers="|1|2|3|5|7-8|"}
+from sklearn.preprocessing import Transformer 
+tr = Transformer(hp1=v1, hp2=v2,...) 
+tr.fit(X) 
+
+X_new = tr.transform(X) 
+
+## Opcionalmente
+X_new = tr.fit_transform(X) 
+```
+
+::: {style="font-size: 65%;"}
+L1. Importar la clase a utilizar (en este caso del submodulo `preprocessing`).
+
+L2. `Instanciar` el Transformer y sus `hiperparámetros`. 
+
+L3. `Entrenar` o ajustar el Transformer.
+
+L5. `Transformar` los datos. 
+
+L7-8. Adicionalmente se puede `entrenar` y `transformar` los datos en un sólo paso. 
+:::
+
+## Pipelines
+
+* En ocasiones un Dataset requiere más de un preprocesamiento.
+* Estas Transformaciones normalmente se hacen en serie de manera consecutiva. 
+
+![](img/lab-0/pipeline.png){.lightbox}
+
+## Pipelines: Código
+
+```{.python code-line-numbers="|1-2|3|5-9|11|12|14|"}
+from sklearn.tree import DecisionTreeClassifier 
+from sklearn.preprocessing import StandardScaler, OneHotEncoder 
+from sklearn.pipeline import Pipeline 
+
+pipe = Pipeline(steps=[ 
+    ("ohe", OneHotEncoder()),
+    ("sc", StandardScaler()),
+    ("model", DecisionTreeClassifier())
+])
+
+pipe.fit(X_train, y_train) 
+y_pred = pipe.predict(X_test) 
+
+pipe.score(X_test, y_test) 
+```
+
+::: {style="font-size: 50%;"}
+
+L1-2. Importo mi modelo y mis preprocesamientos
+
+L3. Importo el `Pipeline`.
+
+L5-9. Instancio un `Pipeline`.
+
+L11. Entreno el `Pipeline`. 
+
+L12. Predigo utilizando el `Pipeline` entrenado. 
+
+L14. Evalúo el modelo en datos no vistos. 
+
+:::
+
+# Preguntas para terminar
+
+* ¿Cómo se importan las clases en Scikit-Learn?
+* ¿Cuál es la diferencia entre un Transformer y un Estimator?
+* ¿Cuándo es buena idea usar un Pipeline?
+
+# Class Dismissed
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-411 Minería de Datos</span> por <span property="cc:attributionName">Alfonso Tobar</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::

@@ -3,6 +3,8 @@ title: "TICS-411 Minería de Datos"
 subtitle: "Clase 0: Presentación del Curso"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
+date: 03/07/2024
+date-format: "MMM D, YYYY"
 format:
   revealjs: 
     width: 1366
@@ -30,7 +32,7 @@ format:
 
 ![](../me.jpg){width="60%"}
 
-![](img/chiquis.jpeg){width="60%"}
+![](img/clase-0/chiquis.jpeg){width="60%"}
 
 :::
 
@@ -43,7 +45,7 @@ format:
   * Data Engineer.
 * Terminando mi Msc. y empezando mi PhD en la UAI.
 * He ganado 2 competencias de Machine Learning.
-* Publiqué mi primer [paper](https://ieeexplore.ieee.org/abstract/document/10315748).
+* Publiqué mi primer [paper](https://ieeexplore.ieee.org/abstract/document/10315748) el año pasado sobre Hate Speech en Español.
 * Juego **Tenis de Mesa**, hago **Agility** con mi perrita Kira y escribo en mi Blog. 
 :::
 :::
@@ -57,7 +59,7 @@ format:
 
 :::: {.columns}
 ::: {.column width="20%"}
-![](img/objetivos.jpg)
+![](img/clase-0/objetivos.jpg)
 :::
 
 ::: {.column width="80%"}
@@ -106,22 +108,23 @@ format:
 
 ::: {.incremental}
 * Clases presenciales, con participación activa de los estudiantes. 
-* Mucha terminología será en Inglés. 
+* Mucha terminología y material de estudio será en `Inglés`. 
 * Horario: Jueves. 
   * 15:30 a 16:40 (Cátedra)
   * 17:00 a 18:10 (Práctico)
-* Asistencia es voluntaria, pero altamente recomendada.
+* Asistencia es voluntaria, pero `altamente recomendada`.
 :::
 
 ## Materiales de Clases
 
-* [Diapositivas](https://datacuber.cl/clases_UAI)
+* [Diapositivas](https://datacuber.cl/clases_UAI/tics411.html)
 * [Prácticos]()
 
 ::: {.callout-tip}
 * Slides interactivas
 * Todo el código se puede copiar directamente.
 * Se puede buscar contenido en las diapositivas mediante un buscador. 
+* Se dejarán copias en PDF en Webcursos.
 :::
 
 ::: {.callout-important}
@@ -138,18 +141,18 @@ Se espera que los estudiantes dominen las siguientes tecnologías:
 :::: {.columns}
 ::: {.column width="30%"}
 
-![](img/data_mining.jpg){.lightbox}
+![](img/clase-0/data_mining.jpg){.lightbox}
 :::
 
 ::: {.column width="30%"}
 
-![](img/sk-keras.jpg){.lightbox}
+![](img/clase-0/sk-keras.jpg){.lightbox}
 
 :::
 ::: {.column width="40%"}
 
 [Curso de Scikit-Learn](https://www.youtube.com/watch?v=d79mzijMAw0&list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM)
-![](img/andreas_mueller.png){.lightbox}
+![](img/clase-0/andreas_mueller.png){.lightbox}
 
 * [Tutorial Colab](https://www.youtube.com/watch?v=RLYoEyIHL6A)
 
@@ -157,7 +160,7 @@ Se espera que los estudiantes dominen las siguientes tecnologías:
 :::
 ::::
 
-## Evaluación {.smaller}
+## Evaluación 
 
 ::: {.callout-note}
 * Dos Evaluaciones Escritas (P1, P2) coordinadas y cuatro tareas prácticas (T1, T2, T3, T4)
@@ -189,7 +192,7 @@ $$NF = 0.7 \cdot NP + 0.3 \cdot E$$
 
 ## Revolución de los Datos 
 
-![](img/internet_2023.png){.lightbox fig-align="center" width="50%"}
+![](img/clase-0/internet_2023.png){.lightbox fig-align="center" width="50%"}
 
 ::: {.notes}
 * Hablar de los distintos tipos de Datos.
@@ -198,7 +201,7 @@ $$NF = 0.7 \cdot NP + 0.3 \cdot E$$
 
 ## Nace el Data Science (Ciencia de Datos)
 
-![](img/data_science.png){.lightbox fig-align="center" width="50%"}
+![](img/clase-0/data_science.png){.lightbox fig-align="center" width="50%"}
 
 
 ::: {.notes}
@@ -215,7 +218,7 @@ Data Mining (Minería de Datos)
 
 ::: {.fragment}
 Machine Learning (Aprendizaje Automático)
-: > "A computer program is said to learn from experience `E` with respect to some class of tasks `T` and performance measure `P`, if its performance at tasks in `T`, as measured by `P`, improves with experience E." **(Mitchell, 2006)**
+: > "A computer program is said to learn from experience `E` with respect to some class of tasks `T` and performance measure `P`, if its performance at tasks in `T`, as measured by `P`, improves with experience `E`." **(Mitchell, 2006)**
 :::
 
 ::: {.notes}
@@ -245,27 +248,27 @@ Machine Learning (Aprendizaje Automático)
 ::: {layout-ncol=6}
 
 ::: {.fragment fragment-index=2}
-![](img/table.png)
+![](img/clase-0/table.png)
 :::
 
 ::: {.fragment fragment-index=3}
-![](img/ts.png)
+![](img/clase-0/ts.png)
 :::
 
 ::: {.fragment fragment-index=6}
-![](img/image.png)
+![](img/clase-0/image.png)
 :::
 
 ::: {.fragment fragment-index=7}
-![](img/text.png)
+![](img/clase-0/text.png)
 :::
 
 ::: {.fragment fragment-index=8}
-![](img/video.png)
+![](img/clase-0/video.png)
 :::
 
 ::: {.fragment fragment-index=9}
-![](img/graph.png)
+![](img/clase-0/graph.png)
 :::
 :::
 
@@ -274,21 +277,21 @@ Machine Learning (Aprendizaje Automático)
 
 ::: {#first-column}
 ::: {.fragment fragment-index=4}
-![](img/ml.jpg){fig-align="left" width="70%"}
+![](img/clase-0/ml.jpg){fig-align="left" width="80%"}
 :::
 :::
 
 ::: {#second-column}
 
 ::: {.fragment fragment-index=10}
-![](img/dl.png){fig-align="center" width="30%"}
+![](img/clase-0/dl.png){fig-align="center" width="30%"}
 :::
 :::
 
 ::::
 ## Tipos de Datos: Datos Tabulares {.smaller}
 
-![](img/tab_data.png){fig-align="center" .lightbox}
+![](img/clase-0/tab_data.png){fig-align="center" .lightbox}
 
 ::: {.callout-tip}
 * Filas: Observaciones, instancias. (Normalmente independientes).
@@ -308,9 +311,9 @@ Machine Learning (Aprendizaje Automático)
 
 ::: {layout-ncol=2}
 
-![](img/ts_data.png){fig-align="center" width="70%" .lightbox}
+![](img/clase-0/ts_data.png){fig-align="center" width="70%" .lightbox}
 
-![](img/ts_plot.png){fig-align="center" width="100%" .lightbox}
+![](img/clase-0/ts_plot.png){fig-align="center" width="100%" .lightbox}
 :::
 
 ::: {.callout-tip}
@@ -329,7 +332,7 @@ Machine Learning (Aprendizaje Automático)
 ::: {.column width="50%"}
 
 ::: {.fragment fragment-index=1}
-![](img/image_tensor.png){.lightbox}
+![](img/clase-0/image_tensor.png){.lightbox}
 :::
 
 ::: {.fragment fragment-index=3}
@@ -343,7 +346,7 @@ Machine Learning (Aprendizaje Automático)
 
 ::: {.column width="50%"}
 ::: {.fragment fragment-index=2}
-![](img/tensor_rgb.jpg){.lightbox}
+![](img/clase-0/tensor_rgb.jpg){.lightbox}
 :::
 :::
 
@@ -356,7 +359,7 @@ Diferencia entre Grayscale y RGB.
 
 ## Tipos de Datos: Texto Libre {.smaller}
 
-![](img/free_text.jpg){.lightbox fig-align="center"}
+![](img/clase-0/free_text.jpg){.lightbox fig-align="center"}
 
 
 ::: {.callout-caution}
@@ -383,44 +386,65 @@ Diferencia entre Grayscale y RGB.
 
 ## Tipos de Aprendizaje
 
-![](img/ML_types.png)
+![](img/clase-0/ML_types.png){.lightbox}
 
 
 ## Reinforcement Learning
 
-![](img/alpha_tensor.png)
-
-## Clustering
-
-![](img/clustering.png){fig-align="center"}
+![](img/clase-0/alpha_tensor.png){.lightbox}
 
 
-## Reducción de Dimensionalidad
-
-![](img/dim_red.jpeg){fig-align="center"}
-
-## Regresión y Clasificación
+## Regresión y Clasificación {.smaller}
 
 :::: {.columns}
-::: {.column width="40%"}
+::: {.column width="50%"}
 
-![](img/clf_reg.jpeg){fig-align="center" }
+![](img/clase-0/clf_reg.jpeg){fig-align="center" }
+
+::: {.callout-tip .fragment fragment-index=3}
+* **Regresión**: Se busca estimar un valor continuo. 
+  * `(Estimar el valor de una casa)`.
+* **Clasificación**: Se busca encontrar una categoría o un valor discreto. 
+  * `(Clasificar una imagen como Perro o Gato)`. 
+:::
+
+::: {.callout-important .fragment fragment-index=3}
+* Para entrenar este tipo de modelos se necesitan `etiquetas`, es decir, la respuesta esperada del modelo. 
+:::
+
 
 :::
-::: {.column width="60%"}
+::: {.column width="50%"}
 
-::: {.fragment}
-![](img/house_pred.png){fig-align="center" width="60%"}
-:::
+![](img/clase-0/house_pred.png){.fragment fragment-index=1 fig-align="center" width="60%"}
 
-::: {.fragment}
-![](img/cat_dog.jpg){fig-align="center" width="60%"}
-:::
+![](img/clase-0/cat_dog.jpg){.fragment fragment-index=2 fig-align="center" width="60%"}
 :::
 :::: 
 
 ::: {.notes}
 * Ambos ejemplos se pueden realizar utilizando Largo (Eje Y) y Peso (Eje X).
+:::
+
+## Clustering {.smaller}
+
+![](img/clase-0/clustering.png){fig-align="center" width="60%" .lightbox}
+
+::: {.callout-tip .fragment}
+* **Clusters**: Una categoría en la que sus componentes son similares. Los clusters normalmente no tienen un nombre propio, sino que uno les asigna uno.
+* También se les llama segmentos. No usar la palabra `clase`.
+:::
+
+::: {.callout-caution .fragment}
+* No requiere de etiquetas, por lo tanto, no es posible evaluar su desempeño de manera 100% acertada.
+:::
+
+## Reducción de Dimensionalidad {.smaller}
+
+![](img/clase-0/dim_red.jpeg){.lightbox fig-align="center" height="60%"}
+
+::: {.callout-tip}
+* **Reducción de la Dimensionalidad**: Eliminar complejidad sin perder información clave para poder entender su comportamiento. 
 :::
 
 # Intuición
@@ -433,95 +457,191 @@ Creemos un Sistema de ML que sea capaz de ver una imágen y pronunciar correctam
 Vamos a `Entrenar` un Modelo.
 :::
 
+![](img/clase-0/model.png){fig-align="center" width="60%" .fragment .lightbox}
 
-Falta una imágen para mostrar la Arquitectura del Modelo. 
+
 
 ## Nuestro Sistema de ML: Entrenamiento {.smaller}
 
-::: {layout-ncol=4}
+::: {layout-ncol=3}
 
-![`P`erro](img/cat_dog.jpg){fig-align="center" width="70%"}
+![`K`asa](img/clase-0/casa.png){fig-align="center" width="70%"}
 
-![Ga`t`o](img/cat_dog.jpg){fig-align="center" width="70%"}
+![`K`o`k`odrilo](img/clase-0/cocodrilo.png){fig-align="center" width="70%"}
 
-![`P`erro](img/cat_dog.jpg){fig-align="center" width="70%"}
+![`K`ubo](img/clase-0/cubo.png){fig-align="center" width="70%"}
 
-![Ga`t`o](img/cat_dog.jpg){fig-align="center" width="70%"}
+:::
 
+::: {.fragment}
+::: {.callout-important}
+**¿Qué patrones está aprendiendo el modelo?**
+:::
 :::
 
 Entrenamiento
-: > Es el proceso en el cuál el modelo aprende mediante ejemplos. 
+: > Es el proceso en el cuál se permite al modelo aprender. En este proceso se le entregan ejemplos (`Train Set`) para que el modelo de manera `autónoma` pueda aprender `patrones` que le permitan resolver la tarea dada.
+
 
 ## Nuestro Sistema de ML: Inferencia {.smaller}
 
-::: {layout-ncol=4}
-
-![](img/cat_dog.jpg){fig-align="center" width="30%"}
-
-![](img/cat_dog.jpg){fig-align="center" width="30%"}
-
-![](img/cat_dog.jpg){fig-align="center" width="30%"}
-
-![](img/cat_dog.jpg){fig-align="center" width="30%"}
-:::
-
-::: {layout-ncol=4}
-
-List One
-
-List One
-
-List One
-
-List One
-
-:::
-
 Inferencia/Predicción
-: > TBD
+: > Se refiere al proceso en el que el modelo tiene que demostrar cuál sería su decisión de acuerdo a los patrones aprendidos en el proceso de entrenamiento. Los ejemplos en los que se prueba se le denomina `Test Set`.
 
-Generalización 
-: > TBD
+::: {layout-ncol=4}
 
-## Definiciones
+![](img/clase-0/correa.png){fig-align="center" width="50%" .fragment fragment-index=1}
 
-## Slide Backgrounds 
+![](img/clase-0/conejo.png){fig-align="center" width="50%" .fragment fragment-index=3}
 
-Set the `background` attribute on a slide to change the background color (all CSS color formats are supported).
+![](img/clase-0/cuchillo.png){fig-align="center" width="50%" .fragment fragment-index=5}
 
-Different background transitions are available via the `background-transition` option.
-
-::: footer
-Learn more: [Slide Backgrounds](https://quarto.org/docs/presentations/revealjs/#color-backgrounds)
+![](img/clase-0/bicicleta.png){fig-align="center" width="50%" .fragment fragment-index=7}
 :::
 
-## Hola
+::: {layout-ncol=4}
 
-``` {.python code-line-numbers="4-5|7|10"}
-import numpy as np
-import matplotlib.pyplot as plt
+::: {.fragment fragment-index=2}
+`K`orrea
+:::
 
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
-plt.show()
-```
-```{.python}
-import numpy as np
-import matplotlib.pyplot as plt
+::: {.fragment fragment-index=4}
+`K`onejo
+:::
 
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
-plt.show()
-```
+::: {.fragment fragment-index=6}
+`K`u`k`illo
+:::
+
+::: {.fragment fragment-index=8}
+Bi`k`i`k`leta
+:::
+
+:::
+
+
+::: {.fragment fragment-index=11}
+Generalización 
+: > Se le llama generalización a la capacidad del modelo de aplicar lo aprendido de manera correcta en ejemplos no vistos.
+:::
+
+## Nuestro Sistema de ML: Nuevas instancias de Entrenamiento 
+
+::: {layout-ncol=3}
+
+![`K`u`ch`illo](img/clase-0/cuchillo.png){fig-align="center" width="70%" .fragment .fade-out fragment-index=1}
+
+![`Ch`o`k`olate](img/clase-0/chocolate.png){fig-align="center" width="70%"} 
+
+![`S`in`s`el](img/clase-0/cincel.png){fig-align="center" width="70%" }
+
+:::
+
+::: {.callout-warning .fragment fragment-index=2}
+No es bueno entrenar con las mismas instancias de entrenamiento. **¿Por qué?**
+:::
+
+## Nuestro Sistema de ML: Reevaluemos nuestro Modelo {.smaller}
+
+::: {layout-ncol=5}
+
+![](img/clase-0/correa.png){fig-align="center" width="50%" .fragment fragment-index=1}
+
+![](img/clase-0/conejo.png){fig-align="center" width="50%" .fragment fragment-index=3}
+
+![](img/clase-0/cuchillo.png){fig-align="center" width="50%" .fragment fragment-index=5}
+
+![](img/clase-0/bicicleta.png){fig-align="center" width="50%" .fragment fragment-index=7}
+:::
+
+::: {layout-ncol=4}
+
+::: {.fragment fragment-index=2}
+`K`orrea
+:::
+
+::: {.fragment fragment-index=4}
+`K`onejo
+:::
+
+::: {.fragment fragment-index=6}
+`K`u`ch`illo
+:::
+
+::: {.fragment fragment-index=8}
+Bi`s`i`k`leta
+:::
+
+:::
+
+::: {.fragment fragment-index=9}
+Evaluación 
+: > Utilizar una métrica que permita `ponerle nota` al modelo.
+
+:::
+::: {.fragment fragment-index=10}
+* 1er Modelo: 2 correctas de 4, es decir **50%**.
+:::
+::: {.fragment fragment-index=11}
+* 2do Modelo: 4 correctas de 4, es decir **100%**.
+:::
+
+## Problemas del Aprendizaje {.smaller}
+
+::: {.fragment fragment-index=1}
+Supongamos que queremos utilizar nuestro modelo para pronunciar palabras en otro idioma (otro `Test Set`). 
+
+**¿Qué problemas podemos encontrar?**
+
+:::
+
+::: {.incremental}
+* Stomach $\rightarrow$ Stoma<span style="color:green;">k</span>
+
+* School $\rightarrow$ S`ch`ul 
+  * S<span style="color:green;">k</span>ul.
+
+* Chicago $\rightarrow$ `Ch`icago
+  * <span style="color:green;">Sh</span>icago.
+
+* Schlaf $\rightarrow$ S`k`laf
+  * <span style="color:green;">Sh</span>laf.
+
+* Ich mag Schweinefleisch $\rightarrow$ I`ch` mag S`ch`weinefleis`k`.
+  * I<span style="color:green;">j</span> mag <span style="color:green;">Sh</span>vaineflai<span style="color:green;">sh</span>.
+:::
+
+## Problemas del Aprendizaje: Definiciones {.smaller}
+
+Overfitting (Sobreajuste) 
+: > Se refiere a cuando un modelo no es capaz de generalizar de manera correcta, porque se ajusta `demasiado` bien (llegando a `memorizar`) a los datos de entrenamiento. **¿Cómo se puede mitigar este problema?**
+
+::: {.callout-caution}
+Se le tiende a llamar `sobreentrenamiento`, pero no es del todo correcto para el caso de modelos de Machine Learning. Lo más correcto es que el `sobreentrenamiento` provoca overfitting.
+:::
+
+::: {.notes}
+Mostrar ejemplos en Pizarra de manera gráfica. Ejemplos típicos de Excel.
+:::
+
+
+::: {.fragment}
+Underfitting (Subajuste) 
+: > Se refiere a cuando un modelo no es capaz de generalizar de manera correcta, pero a diferencia del overfitting `no se ha ajustado` correctamente a los datos. **¿Cómo se vería el underfitting en nuestro ejemplo?**
+:::
+
+# Etapas del Modelamiento
+
+
+
+# Preguntas para terminar
+
+* ¿Qué tipo de modelo debo implementar si quiero estimar la temperatura del día de mañana?
+* ¿Qué tipo de modelo debo implementar si es que quiero detectar barrios de acuerdo a su condición socio-economica?
+* Si mi modelo aprende a resolver ejercicios de matemática.
+  * ¿Cómo se vería el overfitting?
+  * ¿Cómo se vería el underfitting?
+
 
 # Gracias
 
