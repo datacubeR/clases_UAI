@@ -34,71 +34,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../logo.css">
@@ -419,7 +354,7 @@ Alfonso Tobar-Arancibia
 <div class="columns">
 <div class="column" style="width:30%;">
 <p><img data-src="../me.jpg" style="width:60.0%"></p>
-<p><img data-src="img/chiquis.jpeg" style="width:60.0%"></p>
+<p><img data-src="img/clase-0/chiquis.jpeg" style="width:60.0%"></p>
 </div><div class="column" style="width:70%;">
 <div class="smaller">
 <ul>
@@ -432,7 +367,7 @@ Alfonso Tobar-Arancibia
 </ul></li>
 <li class="fragment">Terminando mi Msc. y empezando mi PhD en la UAI.</li>
 <li class="fragment">He ganado 2 competencias de Machine Learning.</li>
-<li class="fragment">Publiqué mi primer <a href="https://ieeexplore.ieee.org/abstract/document/10315748">paper</a>.</li>
+<li class="fragment">Publiqué mi primer <a href="https://ieeexplore.ieee.org/abstract/document/10315748">paper</a> el año pasado sobre Hate Speech en Español.</li>
 <li class="fragment">Juego <strong>Tenis de Mesa</strong>, hago <strong>Agility</strong> con mi perrita Kira y escribo en mi Blog.</li>
 </ul>
 </div>
@@ -448,7 +383,7 @@ Alfonso Tobar-Arancibia
 <h2>Objetivos del Curso</h2>
 <div class="columns">
 <div class="column" style="width:20%;">
-<p><img data-src="img/objetivos.jpg"></p>
+<p><img data-src="img/clase-0/objetivos.jpg"></p>
 </div><div class="column" style="width:80%;">
 <div>
 <ul>
@@ -504,20 +439,20 @@ Alfonso Tobar-Arancibia
 <div>
 <ul>
 <li class="fragment">Clases presenciales, con participación activa de los estudiantes.</li>
-<li class="fragment">Mucha terminología será en Inglés.</li>
+<li class="fragment">Mucha terminología y material de estudio será en <code>Inglés</code>.</li>
 <li class="fragment">Horario: Jueves.
 <ul>
 <li class="fragment">15:30 a 16:40 (Cátedra)</li>
 <li class="fragment">17:00 a 18:10 (Práctico)</li>
 </ul></li>
-<li class="fragment">Asistencia es voluntaria, pero altamente recomendada.</li>
+<li class="fragment">Asistencia es voluntaria, pero <code>altamente recomendada</code>.</li>
 </ul>
 </div>
 </section>
 <section id="materiales-de-clases" class="slide level2">
 <h2>Materiales de Clases</h2>
 <ul>
-<li><a href="https://datacuber.cl/clases_UAI">Diapositivas</a></li>
+<li><a href="https://datacuber.cl/clases_UAI/tics411.html">Diapositivas</a></li>
 <li><a href="">Prácticos</a></li>
 </ul>
 <div class="callout callout-tip callout-style-simple">
@@ -530,6 +465,7 @@ Alfonso Tobar-Arancibia
 <li>Slides interactivas</li>
 <li>Todo el código se puede copiar directamente.</li>
 <li>Se puede buscar contenido en las diapositivas mediante un buscador.</li>
+<li>Se dejarán copias en PDF en Webcursos.</li>
 </ul>
 </div>
 </div>
@@ -555,11 +491,11 @@ Alfonso Tobar-Arancibia
 <h2>Material Complementario</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<p><a href="img/data_mining.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/data_mining.jpg"></a></p>
+<p><a href="img/clase-0/data_mining.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-0/data_mining.jpg"></a></p>
 </div><div class="column" style="width:30%;">
-<p><a href="img/sk-keras.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/sk-keras.jpg"></a></p>
+<p><a href="img/clase-0/sk-keras.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-0/sk-keras.jpg"></a></p>
 </div><div class="column" style="width:40%;">
-<p><a href="https://www.youtube.com/watch?v=d79mzijMAw0&amp;list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM">Curso de Scikit-Learn</a> <a href="img/andreas_mueller.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/andreas_mueller.png"></a></p>
+<p><a href="https://www.youtube.com/watch?v=d79mzijMAw0&amp;list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM">Curso de Scikit-Learn</a> <a href="img/clase-0/andreas_mueller.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-0/andreas_mueller.png"></a></p>
 <ul>
 <li><p><a href="https://www.youtube.com/watch?v=RLYoEyIHL6A">Tutorial Colab</a></p></li>
 <li><p><a href="https://www.youtube.com/watch?v=z1pBdycYCGY">Agregar Datos Externos a Colab</a></p></li>
@@ -567,7 +503,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </section>
-<section id="evaluación" class="slide level2 smaller">
+<section id="evaluación" class="slide level2">
 <h2>Evaluación</h2>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
@@ -635,7 +571,7 @@ Alfonso Tobar-Arancibia
 <h2>Revolución de los Datos</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/internet_2023.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/internet_2023.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-0/internet_2023.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-0/internet_2023.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 <aside class="notes">
@@ -659,7 +595,7 @@ Alfonso Tobar-Arancibia
 <h2>Nace el Data Science (Ciencia de Datos)</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/data_science.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/data_science.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-0/data_science.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-0/data_science.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 <aside class="notes">
@@ -696,7 +632,7 @@ Alfonso Tobar-Arancibia
 <dt>Machine Learning (Aprendizaje Automático)</dt>
 <dd>
 <blockquote>
-<p>“A computer program is said to learn from experience <code>E</code> with respect to some class of tasks <code>T</code> and performance measure <code>P</code>, if its performance at tasks in <code>T</code>, as measured by <code>P</code>, improves with experience E.” <strong>(Mitchell, 2006)</strong></p>
+<p>“A computer program is said to learn from experience <code>E</code> with respect to some class of tasks <code>T</code> and performance measure <code>P</code>, if its performance at tasks in <code>T</code>, as measured by <code>P</code>, improves with experience <code>E</code>.” <strong>(Mitchell, 2006)</strong></p>
 </blockquote>
 </dd>
 </dl>
@@ -740,22 +676,22 @@ Alfonso Tobar-Arancibia
 <div class="quarto-layout-panel" data-layout-ncol="6">
 <div class="quarto-layout-row">
 <div class="fragment quarto-layout-cell" data-fragment-index="2" style="flex-basis: 16.7%;justify-content: center;">
-<p><img data-src="img/table.png"></p>
+<p><img data-src="img/clase-0/table.png"></p>
 </div>
 <div class="fragment quarto-layout-cell" data-fragment-index="3" style="flex-basis: 16.7%;justify-content: center;">
-<p><img data-src="img/ts.png"></p>
+<p><img data-src="img/clase-0/ts.png"></p>
 </div>
 <div class="fragment quarto-layout-cell" data-fragment-index="6" style="flex-basis: 16.7%;justify-content: center;">
-<p><img data-src="img/image.png"></p>
+<p><img data-src="img/clase-0/image.png"></p>
 </div>
 <div class="fragment quarto-layout-cell" data-fragment-index="7" style="flex-basis: 16.7%;justify-content: center;">
-<p><img data-src="img/text.png"></p>
+<p><img data-src="img/clase-0/text.png"></p>
 </div>
 <div class="fragment quarto-layout-cell" data-fragment-index="8" style="flex-basis: 16.7%;justify-content: center;">
-<p><img data-src="img/video.png"></p>
+<p><img data-src="img/clase-0/video.png"></p>
 </div>
 <div class="fragment quarto-layout-cell" data-fragment-index="9" style="flex-basis: 16.7%;justify-content: center;">
-<p><img data-src="img/graph.png"></p>
+<p><img data-src="img/clase-0/graph.png"></p>
 </div>
 </div>
 </div>
@@ -765,7 +701,7 @@ Alfonso Tobar-Arancibia
 <div class="fragment" data-fragment-index="4">
 <div class="quarto-figure quarto-figure-left">
 <figure>
-<p><img data-src="img/ml.jpg" class="quarto-figure quarto-figure-left" style="width:70.0%"></p>
+<p><img data-src="img/clase-0/ml.jpg" class="quarto-figure quarto-figure-left" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -774,7 +710,7 @@ Alfonso Tobar-Arancibia
 <div class="fragment" data-fragment-index="10">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/dl.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
+<p><img data-src="img/clase-0/dl.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
 </figure>
 </div>
 </div>
@@ -786,7 +722,7 @@ Alfonso Tobar-Arancibia
 <h2>Tipos de Datos: Datos Tabulares</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/tab_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/tab_data.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-0/tab_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-0/tab_data.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-tip callout-style-simple">
@@ -836,14 +772,14 @@ Alfonso Tobar-Arancibia
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/ts_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/ts_data.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-0/ts_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-0/ts_data.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/ts_plot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/ts_plot.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+<p><a href="img/clase-0/ts_plot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-0/ts_plot.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -881,7 +817,7 @@ Alfonso Tobar-Arancibia
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment" data-fragment-index="1">
-<p><a href="img/image_tensor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/image_tensor.png"></a></p>
+<p><a href="img/clase-0/image_tensor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-0/image_tensor.png"></a></p>
 </div>
 <div class="fragment" data-fragment-index="3">
 <div class="callout callout-tip callout-style-simple">
@@ -900,7 +836,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment" data-fragment-index="2">
-<p><a href="img/tensor_rgb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/tensor_rgb.jpg"></a></p>
+<p><a href="img/clase-0/tensor_rgb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-0/tensor_rgb.jpg"></a></p>
 </div>
 </div>
 </div>
@@ -924,7 +860,7 @@ Alfonso Tobar-Arancibia
 <h2>Tipos de Datos: Texto Libre</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/free_text.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/free_text.jpg" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-0/free_text.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-0/free_text.jpg" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-caution callout-style-simple">
@@ -979,43 +915,66 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="tipos-de-aprendizaje" class="slide level2">
 <h2>Tipos de Aprendizaje</h2>
-
-<img data-src="img/ML_types.png" class="r-stretch"></section>
+<p><a href="img/clase-0/ML_types.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-0/ML_types.png"></a></p>
+</section>
 <section id="reinforcement-learning" class="slide level2">
 <h2>Reinforcement Learning</h2>
-
-<img data-src="img/alpha_tensor.png" class="r-stretch"></section>
-<section id="clustering" class="slide level2">
-<h2>Clustering</h2>
-
-<img data-src="img/clustering.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="reducción-de-dimensionalidad" class="slide level2">
-<h2>Reducción de Dimensionalidad</h2>
-
-<img data-src="img/dim_red.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="regresión-y-clasificación" class="slide level2">
+<p><a href="img/clase-0/alpha_tensor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-0/alpha_tensor.png"></a></p>
+</section>
+<section id="regresión-y-clasificación" class="slide level2 smaller">
 <h2>Regresión y Clasificación</h2>
 <div class="columns">
-<div class="column" style="width:40%;">
+<div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/clf_reg.jpeg" class="quarto-figure quarto-figure-center"></p>
+<p><img data-src="img/clase-0/clf_reg.jpeg" class="quarto-figure quarto-figure-center"></p>
 </figure>
 </div>
-</div><div class="column" style="width:60%;">
-<div class="fragment">
+<div class="fragment" data-fragment-index="3">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong>Regresión</strong>: Se busca estimar un valor continuo.
+<ul>
+<li><code>(Estimar el valor de una casa)</code>.</li>
+</ul></li>
+<li><strong>Clasificación</strong>: Se busca encontrar una categoría o un valor discreto.
+<ul>
+<li><code>(Clasificar una imagen como Perro o Gato)</code>.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="3">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Para entrenar este tipo de modelos se necesitan <code>etiquetas</code>, es decir, la respuesta esperada del modelo.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/house_pred.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+<p><img data-src="img/clase-0/house_pred.png" class="fragment quarto-figure quarto-figure-center" style="width:60.0%" data-fragment-index="1"></p>
 </figure>
 </div>
-</div>
-<div class="fragment">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+<p><img data-src="img/clase-0/cat_dog.jpg" class="fragment quarto-figure quarto-figure-center" style="width:60.0%" data-fragment-index="2"></p>
 </figure>
-</div>
 </div>
 </div>
 </div>
@@ -1034,6 +993,63 @@ Alfonso Tobar-Arancibia
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="clustering" class="slide level2 smaller">
+<h2>Clustering</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-0/clustering.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-0/clustering.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong>Clusters</strong>: Una categoría en la que sus componentes son similares. Los clusters normalmente no tienen un nombre propio, sino que uno les asigna uno.</li>
+<li>También se les llama segmentos. No usar la palabra <code>clase</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>No requiere de etiquetas, por lo tanto, no es posible evaluar su desempeño de manera 100% acertada.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="reducción-de-dimensionalidad" class="slide level2 smaller">
+<h2>Reducción de Dimensionalidad</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-0/dim_red.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-0/dim_red.jpeg" class="quarto-figure quarto-figure-center" style="height:60.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong>Reducción de la Dimensionalidad</strong>: Eliminar complejidad sin perder información clave para poder entender su comportamiento.</li>
+</ul>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="intuición" class="title-slide slide level1 center">
@@ -1053,42 +1069,50 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-<p>Falta una imágen para mostrar la Arquitectura del Modelo.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-0/model.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-0/model.png" class="fragment quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
 </section>
 <section id="nuestro-sistema-de-ml-entrenamiento" class="slide level2 smaller">
 <h2>Nuestro Sistema de ML: Entrenamiento</h2>
-<div class="quarto-layout-panel" data-layout-ncol="4">
+<div class="quarto-layout-panel" data-layout-ncol="3">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
-<figcaption><code>P</code>erro</figcaption>
+<p><img data-src="img/clase-0/casa.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<figcaption><code>K</code>asa</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
-<figcaption>Ga<code>t</code>o</figcaption>
+<p><img data-src="img/clase-0/cocodrilo.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<figcaption><code>K</code>o<code>k</code>odrilo</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
-<figcaption><code>P</code>erro</figcaption>
+<p><img data-src="img/clase-0/cubo.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<figcaption><code>K</code>ubo</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
-<figcaption>Ga<code>t</code>o</figcaption>
-</figure>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>¿Qué patrones está aprendiendo el modelo?</strong></p>
 </div>
 </div>
 </div>
@@ -1097,110 +1121,284 @@ Alfonso Tobar-Arancibia
 <dt>Entrenamiento</dt>
 <dd>
 <blockquote>
-<p>Es el proceso en el cuál el modelo aprende mediante ejemplos.</p>
+<p>Es el proceso en el cuál se permite al modelo aprender. En este proceso se le entregan ejemplos (<code>Train Set</code>) para que el modelo de manera <code>autónoma</code> pueda aprender <code>patrones</code> que le permitan resolver la tarea dada.</p>
 </blockquote>
 </dd>
 </dl>
 </section>
 <section id="nuestro-sistema-de-ml-inferencia" class="slide level2 smaller">
 <h2>Nuestro Sistema de ML: Inferencia</h2>
-<div class="quarto-layout-panel" data-layout-ncol="4">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/cat_dog.jpg" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="4">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<p>List One</p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<p>List One</p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<p>List One</p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: flex-start;">
-<p>List One</p>
-</div>
-</div>
-</div>
 <dl>
 <dt>Inferencia/Predicción</dt>
 <dd>
 <blockquote>
-<p>TBD</p>
-</blockquote>
-</dd>
-<dt>Generalización</dt>
-<dd>
-<blockquote>
-<p>TBD</p>
+<p>Se refiere al proceso en el que el modelo tiene que demostrar cuál sería su decisión de acuerdo a los patrones aprendidos en el proceso de entrenamiento. Los ejemplos en los que se prueba se le denomina <code>Test Set</code>.</p>
 </blockquote>
 </dd>
 </dl>
-</section>
-<section id="definiciones" class="slide level2">
-<h2>Definiciones</h2>
-</section>
-<section id="slide-backgrounds" class="slide level2">
-<h2>Slide Backgrounds</h2>
-<p>Set the <code>background</code> attribute on a slide to change the background color (all CSS color formats are supported).</p>
-<p>Different background transitions are available via the <code>background-transition</code> option.</p>
-<div class="footer">
-<p>Learn more: <a href="https://quarto.org/docs/presentations/revealjs/#color-backgrounds">Slide Backgrounds</a></p>
+<div class="quarto-layout-panel" data-layout-ncol="4">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/clase-0/correa.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="1"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/clase-0/conejo.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="3"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/clase-0/cuchillo.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="5"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/clase-0/bicicleta.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="7"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="4">
+<div class="quarto-layout-row">
+<div class="fragment quarto-layout-cell" data-fragment-index="2" style="flex-basis: 25.0%;justify-content: flex-start;">
+<p><code>K</code>orrea</p>
+</div>
+<div class="fragment quarto-layout-cell" data-fragment-index="4" style="flex-basis: 25.0%;justify-content: flex-start;">
+<p><code>K</code>onejo</p>
+</div>
+<div class="fragment quarto-layout-cell" data-fragment-index="6" style="flex-basis: 25.0%;justify-content: flex-start;">
+<p><code>K</code>u<code>k</code>illo</p>
+</div>
+<div class="fragment quarto-layout-cell" data-fragment-index="8" style="flex-basis: 25.0%;justify-content: flex-start;">
+<p>Bi<code>k</code>i<code>k</code>leta</p>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="11">
+<dl>
+<dt>Generalización</dt>
+<dd>
+<blockquote>
+<p>Se le llama generalización a la capacidad del modelo de aplicar lo aprendido de manera correcta en ejemplos no vistos.</p>
+</blockquote>
+</dd>
+</dl>
 </div>
 </section>
-<section id="hola" class="slide level2">
-<h2>Hola</h2>
-<div class="sourceCode" id="cb1" data-code-line-numbers="4-5|7|10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a>r <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)</span>
-<span id="cb1-5"><a></a>theta <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> r</span>
-<span id="cb1-6"><a></a>fig, ax <span class="op">=</span> plt.subplots(subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: <span class="st">'polar'</span>})</span>
-<span id="cb1-7"><a></a>ax.plot(theta, r)</span>
-<span id="cb1-8"><a></a>ax.set_rticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>])</span>
-<span id="cb1-9"><a></a>ax.grid(<span class="va">True</span>)</span>
-<span id="cb1-10"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-3"><a></a></span>
-<span id="cb2-4"><a></a>r <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)</span>
-<span id="cb2-5"><a></a>theta <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> r</span>
-<span id="cb2-6"><a></a>fig, ax <span class="op">=</span> plt.subplots(subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: <span class="st">'polar'</span>})</span>
-<span id="cb2-7"><a></a>ax.plot(theta, r)</span>
-<span id="cb2-8"><a></a>ax.set_rticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>])</span>
-<span id="cb2-9"><a></a>ax.grid(<span class="va">True</span>)</span>
-<span id="cb2-10"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="nuestro-sistema-de-ml-nuevas-instancias-de-entrenamiento" class="slide level2">
+<h2>Nuestro Sistema de ML: Nuevas instancias de Entrenamiento</h2>
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/clase-0/cuchillo.png" class="fragment fade-out quarto-figure quarto-figure-center" style="width:70.0%" data-fragment-index="1"></p>
+<figcaption><code>K</code>u<code>ch</code>illo</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/clase-0/chocolate.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<figcaption><code>Ch</code>o<code>k</code>olate</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/clase-0/cincel.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<figcaption><code>S</code>in<code>s</code>el</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="2">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>No es bueno entrenar con las mismas instancias de entrenamiento. <strong>¿Por qué?</strong></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="nuestro-sistema-de-ml-reevaluemos-nuestro-modelo" class="slide level2 smaller">
+<h2>Nuestro Sistema de ML: Reevaluemos nuestro Modelo</h2>
+<div class="quarto-layout-panel" data-layout-ncol="5">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/clase-0/correa.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="1"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/clase-0/conejo.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="3"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/clase-0/cuchillo.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="5"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/clase-0/bicicleta.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="7"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="4">
+<div class="quarto-layout-row">
+<div class="fragment quarto-layout-cell" data-fragment-index="2" style="flex-basis: 25.0%;justify-content: flex-start;">
+<p><code>K</code>orrea</p>
+</div>
+<div class="fragment quarto-layout-cell" data-fragment-index="4" style="flex-basis: 25.0%;justify-content: flex-start;">
+<p><code>K</code>onejo</p>
+</div>
+<div class="fragment quarto-layout-cell" data-fragment-index="6" style="flex-basis: 25.0%;justify-content: flex-start;">
+<p><code>K</code>u<code>ch</code>illo</p>
+</div>
+<div class="fragment quarto-layout-cell" data-fragment-index="8" style="flex-basis: 25.0%;justify-content: flex-start;">
+<p>Bi<code>s</code>i<code>k</code>leta</p>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="9">
+<dl>
+<dt>Evaluación</dt>
+<dd>
+<blockquote>
+<p>Utilizar una métrica que permita <code>ponerle nota</code> al modelo.</p>
+</blockquote>
+</dd>
+</dl>
+</div>
+<div class="fragment" data-fragment-index="10">
+<ul>
+<li>1er Modelo: 2 correctas de 4, es decir <strong>50%</strong>.</li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="11">
+<ul>
+<li>2do Modelo: 4 correctas de 4, es decir <strong>100%</strong>.</li>
+</ul>
+</div>
+</section>
+<section id="problemas-del-aprendizaje" class="slide level2 smaller">
+<h2>Problemas del Aprendizaje</h2>
+<div class="fragment" data-fragment-index="1">
+<p>Supongamos que queremos utilizar nuestro modelo para pronunciar palabras en otro idioma (otro <code>Test Set</code>).</p>
+<p><strong>¿Qué problemas podemos encontrar?</strong></p>
+</div>
+<div>
+<ul>
+<li class="fragment"><p>Stomach <span class="math inline">\(\rightarrow\)</span> Stoma<span style="color:green;">k</span></p></li>
+<li class="fragment"><p>School <span class="math inline">\(\rightarrow\)</span> S<code>ch</code>ul</p>
+<ul>
+<li class="fragment">S<span style="color:green;">k</span>ul.</li>
+</ul></li>
+<li class="fragment"><p>Chicago <span class="math inline">\(\rightarrow\)</span> <code>Ch</code>icago</p>
+<ul>
+<li class="fragment"><span style="color:green;">Sh</span>icago.</li>
+</ul></li>
+<li class="fragment"><p>Schlaf <span class="math inline">\(\rightarrow\)</span> S<code>k</code>laf</p>
+<ul>
+<li class="fragment"><span style="color:green;">Sh</span>laf.</li>
+</ul></li>
+<li class="fragment"><p>Ich mag Schweinefleisch <span class="math inline">\(\rightarrow\)</span> I<code>ch</code> mag S<code>ch</code>weinefleis<code>k</code>.</p>
+<ul>
+<li class="fragment">I<span style="color:green;">j</span> mag <span style="color:green;">Sh</span>vaineflai<span style="color:green;">sh</span>.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="problemas-del-aprendizaje-definiciones" class="slide level2 smaller">
+<h2>Problemas del Aprendizaje: Definiciones</h2>
+<dl>
+<dt>Overfitting (Sobreajuste)</dt>
+<dd>
+<blockquote>
+<p>Se refiere a cuando un modelo no es capaz de generalizar de manera correcta, porque se ajusta <code>demasiado</code> bien (llegando a <code>memorizar</code>) a los datos de entrenamiento. <strong>¿Cómo se puede mitigar este problema?</strong></p>
+</blockquote>
+</dd>
+</dl>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Se le tiende a llamar <code>sobreentrenamiento</code>, pero no es del todo correcto para el caso de modelos de Machine Learning. Lo más correcto es que el <code>sobreentrenamiento</code> provoca overfitting.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Mostrar ejemplos en Pizarra de manera gráfica. Ejemplos típicos de Excel.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="fragment">
+<dl>
+<dt>Underfitting (Subajuste)</dt>
+<dd>
+<blockquote>
+<p>Se refiere a cuando un modelo no es capaz de generalizar de manera correcta, pero a diferencia del overfitting <code>no se ha ajustado</code> correctamente a los datos. <strong>¿Cómo se vería el underfitting en nuestro ejemplo?</strong></p>
+</blockquote>
+</dd>
+</dl>
+</div>
 </section></section>
+<section id="etapas-del-modelamiento" class="title-slide slide level1 center">
+<h1>Etapas del Modelamiento</h1>
+
+</section>
+
+<section id="preguntas-para-terminar" class="title-slide slide level1 center">
+<h1>Preguntas para terminar</h1>
+<ul>
+<li>¿Qué tipo de modelo debo implementar si quiero estimar la temperatura del día de mañana?</li>
+<li>¿Qué tipo de modelo debo implementar si es que quiero detectar barrios de acuerdo a su condición socio-economica?</li>
+<li>Si mi modelo aprende a resolver ejercicios de matemática.
+<ul>
+<li>¿Cómo se vería el overfitting?</li>
+<li>¿Cómo se vería el underfitting?</li>
+</ul></li>
+</ul>
+</section>
+
 <section id="gracias" class="title-slide slide level1 center">
 <h1>Gracias</h1>
 <div class="footer">
@@ -1584,7 +1782,7 @@ Alfonso Tobar-Arancibia
     });
     </script>
     <script>videojs(video_shortcode_videojs_video1);</script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
