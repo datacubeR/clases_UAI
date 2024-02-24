@@ -16,14 +16,15 @@ website:
     right:
       - href: index.qmd
         text: Acerca de Mí
-      - sidebar:slides
+      - sidebar:tics411
   sidebar: 
-    - id: slides
-      title: Cursos
+    - id: tics411
+      title: Tics411-Minería de Datos
       contents: 
-        - text: TICS 411 - Minería de Datos
+        - text: Diapositivas del Curso
           href: tics411.qmd
-
+        - text: Notebooks
+          href: tics411-labs.qmd
 format:
   html:
     theme: default

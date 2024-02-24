@@ -1,0 +1,18 @@
+---
+title: "Prácticos"
+description: |
+  Acá se pueden encontrar los notebooks correspondientes al curso de Minería de Datos.
+  
+page-layout: full
+execute: 
+  freeze: false
+  warning: false
+  echo: false
+
+title-block-banner: false
+---
+
+Laboratorio| Colab
+:----:|-----|
+Preprocesamiento|[![](tics411/thumbnails/colab.svg)](https://colab.research.google.com/github/microsoft/lida/blob/main/notebooks/tutorial.ipynb)
+K-Means|[![](tics411/thumbnails/colab.svg)](https://colab.research.google.com/github/microsoft/lida/blob/main/notebooks/tutorial.ipynb)
