@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Acá se pueden encontrar los notebooks correspondientes al curso de Minería de Datos.">
 
-<title>Clases UAI - Alfonso Tobar</title>
+<title>Clases UAI - Prácticos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,9 +31,11 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./tics411.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
@@ -70,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -91,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Acerca de Mí</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -115,60 +118,86 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tics411-labs.html">Notebooks</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tics411.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diapositivas del Curso</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tics411-labs.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Notebooks</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
-
-
-
-<div class="quarto-about-solana column-body content">
-  <div class="about-entity">
-    <div class="entity-contents">
-      <header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Alfonso Tobar</h1>
+<h1 class="title">Prácticos</h1>
 </div>
-<div class="quarto-title-meta">
-  </div>
-</header> <div class="about-links">
-  <a href="https://www.linkedin.com/in/alfonso-tobar/" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-  <a href="https://github.com/datacubeR" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-  <a href="https://datacuber.cl" class="about-link" rel="" target="">
-    <i class="bi bi-window"></i>
-     <span class="about-link-text">datacuber.cl</span>
-  </a>
-</div>
-      <div class="about-contents"><div id="hero-heading">
-<p>Soy Alfonso y he trabajado como Científico de Datos por los últimos 9 años. Además me gusta el <strong>Machine Learning Competitivo</strong> y hasta el momento he ganado 2 competencias.</p>
-<p>Actualmente me encuentro a punto de terminar mi Msc. y además comencé a cursar mi PhD. en Data Science. Mis intereses de investigación tienen que ver con <strong>Machine Learning</strong> y <strong>Deep Learning</strong> enfocándome principalmente en la aplicación de <strong>Transformers</strong>.</p>
-<p>En mi tiempo libre practico Tenis de Mesa y escribo sobre Machine Learning en mi blog: <a href="https://datacuber.cl">datacuber.cl</a>.</p>
-<section id="educación" class="level2">
-<h2 data-anchor-id="educación">Educación</h2>
-<p>Universidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026</p>
-<p>Universidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023</p>
-<p>Universidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013</p>
-<p>Puedes ver más detalles de mi carrera <a href="https://datacuber.cl/work/">acá</a>.</p>
-</section>
-</div></div>
-    </div>
-    <img src="me.jpg" class="about-image
-  rounded " style="width: 15em;">
+
+<div>
+  <div class="description">
+    <p>Acá se pueden encontrar los notebooks correspondientes al curso de Minería de Datos.</p>
   </div>
 </div>
 
 
+<div class="quarto-title-meta column-page-right">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Laboratorio</th>
+<th>Colab</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Preprocesamiento</td>
+<td><a href="https://colab.research.google.com/github/microsoft/lida/blob/main/notebooks/tutorial.ipynb"><img src="tics411/thumbnails/colab.svg" class="img-fluid"></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">K-Means</td>
+<td><a href="https://colab.research.google.com/github/microsoft/lida/blob/main/notebooks/tutorial.ipynb"><img src="tics411/thumbnails/colab.svg" class="img-fluid"></a></td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -193,6 +222,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -553,6 +589,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation column-page-right">
+  <div class="nav-page nav-page-previous">
+      <a href="./tics411.html" class="pagination-link" aria-label="Diapositivas del Curso">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Diapositivas del Curso</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

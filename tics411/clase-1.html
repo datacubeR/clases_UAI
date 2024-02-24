@@ -335,7 +335,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 0: Presentación del Curso</p>
+  <p class="subtitle">Clase 1: Calidad de los Datos y Preprocesamiento</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -348,7 +348,165 @@ Alfonso Tobar-Arancibia
     </div>
 </div>
 
-  <p class="date">Mar 7, 2024</p>
+  <p class="date">Mar 14, 2024</p>
+</section>
+<section id="tipos-de-datos-datos-tabulares" class="slide level2 smaller">
+<h2>Tipos de Datos: Datos Tabulares</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-0/tab_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-0/tab_data.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Filas: Observaciones, registros, instancias. (Normalmente independientes).</li>
+<li>Columnas: Variables, Atributos, Features.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Probablemente el tipo de datos más amigable.</li>
+<li>Requiere conocimiento de negocio (<strong>Domain Knowledge</strong>)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Es un % bajísimo del total de datos existentes en el Mundo.</li>
+<li>Distintos tipos, por lo que normalmente requiere de algún tipo de <strong>preprocesamiento</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="tipos-de-datos" class="slide level2 smaller">
+<h2>Tipos de Datos</h2>
+<dl>
+<dt>Numéricos</dt>
+<dd>
+<blockquote>
+<p>TBD</p>
+</blockquote>
+</dd>
+</dl>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Continuas:</li>
+<li>Discretas:</li>
+</ul>
+</div>
+</div>
+</div>
+<dl>
+<dt>Categóricos</dt>
+<dd>
+<blockquote>
+<p>TBD</p>
+</blockquote>
+</dd>
+</dl>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Nominales</li>
+<li>Ordinales</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="tipos-de-datos-otros-tipos-de-datos" class="slide level2 smaller">
+<h2>Tipos de Datos: Otros tipos de Datos</h2>
+<dl>
+<dt>Strings</dt>
+<dd>
+<blockquote>
+<p>TBD</p>
+</blockquote>
+</dd>
+<dt>Fechas</dt>
+<dd>
+<blockquote>
+<p>TBD</p>
+</blockquote>
+</dd>
+<dt>Datos Geográficos</dt>
+<dd>
+<blockquote>
+<p>TBD</p>
+</blockquote>
+</dd>
+</dl>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El principal problema de los datos son su calidad!!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="calidad-de-los-datos-ruido" class="slide level2">
+<h2>Calidad de los Datos: Ruido</h2>
+</section>
+<section id="calidad-de-los-datos-outliers" class="slide level2">
+<h2>Calidad de los Datos: Outliers</h2>
+<ul>
+<li>Ruido</li>
+<li>Outliers</li>
+<li>Valores Faltantes</li>
+<li>Datos Duplicados</li>
+<li>Dominio del Problema</li>
+</ul>
+</section>
+<section id="preprocesamiento" class="slide level2">
+<h2>Preprocesamiento</h2>
+<ul>
+<li>Agregación</li>
+<li>Sampleo</li>
+<li>Discretización</li>
+<li>Selección de Variables</li>
+<li>Reducción de Dimensionalidad</li>
+<li>Estandarización de Datos</li>
+<li>Manejo de Variables Categóricas.</li>
+</ul>
+</section>
+<section id="medidas" class="slide level2">
+<h2>Medidas</h2>
+<ul>
+<li>Similaridad</li>
+<li>Distancias</li>
+<li>Correlación</li>
+</ul>
 </section>
 <section id="quién-soy" class="slide level2 smaller">
 <h2>¿Quién soy?</h2>
@@ -492,11 +650,11 @@ Alfonso Tobar-Arancibia
 <h2>Material Complementario</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<p><a href="img/clase-0/data_mining.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-0/data_mining.jpg"></a></p>
+<p><a href="img/clase-0/data_mining.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-0/data_mining.jpg"></a></p>
 </div><div class="column" style="width:30%;">
-<p><a href="img/clase-0/sk-keras.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-0/sk-keras.jpg"></a></p>
+<p><a href="img/clase-0/sk-keras.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-0/sk-keras.jpg"></a></p>
 </div><div class="column" style="width:40%;">
-<p><a href="https://www.youtube.com/watch?v=d79mzijMAw0&amp;list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM">Curso de Scikit-Learn</a> <a href="img/clase-0/andreas_mueller.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-0/andreas_mueller.png"></a></p>
+<p><a href="https://www.youtube.com/watch?v=d79mzijMAw0&amp;list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM">Curso de Scikit-Learn</a> <a href="img/clase-0/andreas_mueller.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-0/andreas_mueller.png"></a></p>
 <ul>
 <li><p><a href="https://www.youtube.com/watch?v=RLYoEyIHL6A">Tutorial Colab</a></p></li>
 <li><p><a href="https://www.youtube.com/watch?v=z1pBdycYCGY">Agregar Datos Externos a Colab</a></p></li>
@@ -572,7 +730,7 @@ Alfonso Tobar-Arancibia
 <h2>Revolución de los Datos</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-0/internet_2023.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-0/internet_2023.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-0/internet_2023.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-0/internet_2023.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 <aside class="notes">
@@ -596,7 +754,7 @@ Alfonso Tobar-Arancibia
 <h2>Nace el Data Science (Ciencia de Datos)</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-0/data_science.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-0/data_science.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-0/data_science.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-0/data_science.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 <aside class="notes">
@@ -656,7 +814,7 @@ Alfonso Tobar-Arancibia
           display:block!important;
       }</style></aside>
 </section>
-<section id="tipos-de-datos" class="slide level2">
+<section id="tipos-de-datos-1" class="slide level2">
 <h2>Tipos de Datos</h2>
 <div class="quarto-layout-panel" data-layout="[ 40, 60 ]">
 <div class="quarto-layout-row">
@@ -719,11 +877,11 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </section>
-<section id="tipos-de-datos-datos-tabulares" class="slide level2 smaller">
+<section id="tipos-de-datos-datos-tabulares-1" class="slide level2 smaller">
 <h2>Tipos de Datos: Datos Tabulares</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-0/tab_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-0/tab_data.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-0/tab_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-0/tab_data.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-tip callout-style-simple">
@@ -773,14 +931,14 @@ Alfonso Tobar-Arancibia
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-0/ts_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-0/ts_data.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-0/ts_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-0/ts_data.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-0/ts_plot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-0/ts_plot.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+<p><a href="img/clase-0/ts_plot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-0/ts_plot.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -818,7 +976,7 @@ Alfonso Tobar-Arancibia
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment" data-fragment-index="1">
-<p><a href="img/clase-0/image_tensor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-0/image_tensor.png"></a></p>
+<p><a href="img/clase-0/image_tensor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-0/image_tensor.png"></a></p>
 </div>
 <div class="fragment" data-fragment-index="3">
 <div class="callout callout-tip callout-style-simple">
@@ -837,7 +995,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment" data-fragment-index="2">
-<p><a href="img/clase-0/tensor_rgb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-0/tensor_rgb.jpg"></a></p>
+<p><a href="img/clase-0/tensor_rgb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-0/tensor_rgb.jpg"></a></p>
 </div>
 </div>
 </div>
@@ -861,7 +1019,7 @@ Alfonso Tobar-Arancibia
 <h2>Tipos de Datos: Texto Libre</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-0/free_text.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-0/free_text.jpg" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-0/free_text.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-0/free_text.jpg" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-caution callout-style-simple">
@@ -916,11 +1074,11 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="tipos-de-aprendizaje" class="slide level2">
 <h2>Tipos de Aprendizaje</h2>
-<p><a href="img/clase-0/ML_types.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-0/ML_types.png"></a></p>
+<p><a href="img/clase-0/ML_types.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-0/ML_types.png"></a></p>
 </section>
 <section id="reinforcement-learning" class="slide level2">
 <h2>Reinforcement Learning</h2>
-<p><a href="img/clase-0/alpha_tensor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-0/alpha_tensor.png"></a></p>
+<p><a href="img/clase-0/alpha_tensor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-0/alpha_tensor.png"></a></p>
 </section>
 <section id="regresión-y-clasificación" class="slide level2 smaller">
 <h2>Regresión y Clasificación</h2>
@@ -999,7 +1157,7 @@ Alfonso Tobar-Arancibia
 <h2>Clustering</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-0/clustering.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-0/clustering.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-0/clustering.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-0/clustering.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
 <div class="fragment">
@@ -1036,7 +1194,7 @@ Alfonso Tobar-Arancibia
 <h2>Reducción de Dimensionalidad</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-0/dim_red.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-0/dim_red.jpeg" class="quarto-figure quarto-figure-center" style="height:60.0%"></a></p>
+<p><a href="img/clase-0/dim_red.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-0/dim_red.jpeg" class="quarto-figure quarto-figure-center" style="height:60.0%"></a></p>
 </figure>
 </div>
 <div class="callout callout-tip callout-style-simple">
@@ -1072,7 +1230,7 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-0/model.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-0/model.png" class="fragment quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-0/model.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-0/model.png" class="fragment quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
 </section>
@@ -1783,7 +1941,7 @@ Alfonso Tobar-Arancibia
     });
     </script>
     <script>videojs(video_shortcode_videojs_video1);</script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

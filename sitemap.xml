@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411.html</loc>
-    <lastmod>2024-02-22T02:35:45.723Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411-labs.html</loc>
+    <lastmod>2024-02-23T22:57:51.769Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/index.html</loc>
-    <lastmod>2024-02-23T21:33:36.324Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/lab-0.html</loc>
+    <lastmod>2024-02-23T21:44:49.981Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-2.html</loc>
+    <lastmod>2024-02-23T23:52:24.533Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-0.html</loc>
     <lastmod>2024-02-23T21:44:30.745Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/lab-0.html</loc>
-    <lastmod>2024-02-23T21:44:49.981Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-1.html</loc>
+    <lastmod>2024-02-23T23:50:55.743Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/index.html</loc>
+    <lastmod>2024-02-23T22:53:11.828Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411.html</loc>
+    <lastmod>2024-02-23T22:53:36.656Z</lastmod>
   </url>
 </urlset>
