@@ -346,7 +346,6 @@ Alfonso Tobar-Arancibia
     </div>
 </div>
 
-  <p class="date">Mar 14, 2024</p>
 </section>
 <section>
 <section id="datos-tabulares" class="title-slide slide level1 center">
@@ -567,7 +566,7 @@ Son datos considerablemente diferentes a la mayoría del dataset. Dependiendo de
 </div>
 <div class="callout-content">
 <ul>
-<li>Es importante notar que dependiendo del caso puede ser una buena idea deshacerse de ellos.</li>
+<li>Es importante notar que dependiendo del caso puede ser una buena idea deshacerse de ellos. <strong>¿En qué casos podría no ser necesario eliminarlos?</strong></li>
 </ul>
 </div>
 </div>
@@ -578,7 +577,9 @@ Son datos considerablemente diferentes a la mayoría del dataset. Dependiendo de
 <dl>
 <dt>Missing Values</dt>
 <dd>
-Son valores que por alguna razón no están presentes.
+<blockquote>
+<p>Son valores que por alguna razón no están presentes.</p>
+</blockquote>
 </dd>
 </dl>
 <div>
@@ -589,7 +590,7 @@ Son valores que por alguna razón no están presentes.
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/na.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-1/na.jpg" class="fragment quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-1/na.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-1/na.jpg" class="fragment quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </section>
@@ -802,7 +803,10 @@ Se refiere al proceso de acotar un atributo eliminando los valores extremos o at
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Este proceso fuerza (en la medida de lo posible) a tener media 0 y std 1.</p>
+<ul>
+<li>Este proceso fuerza (en la medida de lo posible) a tener media 0 y std 1.</li>
+<li>Notar que <span class="math inline">\(\sigma_x\)</span> hace referencia a la varianza poblacional.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -891,7 +895,7 @@ Se refiere al proceso de acotar un atributo eliminando los valores extremos o at
 </div><div class="column fragment">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/binning.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-1/binning.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+<p><a href="img/clase-1/binning.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-1/binning.png" class="quarto-figure quarto-figure-center" style="width:35.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -1016,7 +1020,7 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 </div>
 </div>
 </section>
-<section id="medidas-similaridad-intervalo-o-ratio" class="slide level2">
+<section id="medidas-similaridad-intervalo-o-ratio" class="slide level2 smaller">
 <h2>Medidas: Similaridad Intervalo o Ratio</h2>
 <div class="columns">
 <div class="column" style="text-align: center;">
@@ -1043,15 +1047,20 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 <p><span class="math display">\[Sim(p,q) = \sum_{i=1}^m S(p_i,q_i)\]</span></p>
 <p><br></p>
 <div class="columns">
-<div class="column">
+<div class="column" style="width:30%;">
 <ul>
-<li>Overlap: <span class="math display">\[S(p_i, q_i) = 1\]</span></li>
+<li>Overlap: <span class="math display">\[S(p_{a_i}, q_{a_i}) =
+\begin{cases}
+1,  &amp; \text{if $p_{a_i} = q_{a_i}$} \\[2ex]
+0, &amp; \text{if $p_i\neq q_i$}
+\end{cases}
+\]</span></li>
 </ul>
-</div><div class="column">
+</div><div class="column" style="width:40%;">
 <ul>
 <li>Frecuencia de Ocurrencia Inversa <span class="math display">\[S(p_i, q_i) = \frac{1}{p_k(p_i)^2}\]</span></li>
 </ul>
-</div><div class="column">
+</div><div class="column" style="width:30%;">
 <ul>
 <li>Medida de Goodall</li>
 </ul>
@@ -1064,13 +1073,16 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Todas estas medidas son 0 si <span class="math inline">\(p_i \neq q_i\)</span></p>
+<ul>
+<li><span class="math inline">\(p_k()\)</span> se refiere a la probabilidad de ocurrencia del atributo k.</li>
+<li>Todas estas medidas son 0 si <span class="math inline">\(p_i \neq q_i\)</span></li>
+</ul>
 </div>
 </div>
 </div>
 </section>
-<section id="medidas-similaridad-datos-categóricos." class="slide level2">
-<h2>Medidas: Similaridad Datos Categóricos.</h2>
+<section id="medidas-similaridad-datos-categóricos-1" class="slide level2 smaller">
+<h2>Medidas: Similaridad Datos Categóricos</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="img/clase-1/datos_cat.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-1/datos_cat.png" class="quarto-figure quarto-figure-center"></a></p>
@@ -1080,6 +1092,11 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="img/clase-1/sim_cat_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-1/sim_cat_1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/simil_calc.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-1/simil_calc.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 <style type="text/css">
@@ -1093,25 +1110,371 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="medidas-distancias" class="slide level2">
-<h2>Medidas: Distancias</h2>
+<h4 id="cuánto-vale-la-similaridad-entre-los-siguientes-registros">¿Cuánto vale la similaridad entre los siguientes registros?</h4>
 <ul>
-<li>Similaridad</li>
-<li>Distancias</li>
-<li>Correlación</li>
+<li>1-4</li>
+<li>2-5</li>
+<li>7-8</li>
 </ul>
+</section>
+<section id="medidas-similaridad-datos-binarios" class="slide level2 smaller">
+<h2>Medidas: Similaridad Datos Binarios</h2>
+<blockquote>
+<p>Sea <code>p</code> y <code>q</code> vectores de dimensión <span class="math inline">\(m\)</span> con <em>sólo atributos binarios</em>. Para calcular la similaridad entre vectores se usa lo siguiente:</p>
+</blockquote>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[SMC = \frac{M_{00} + M_{11}}{M_{00} + M_{01} + M_{10} + M_{11}}\]</span></p>
+<ul>
+<li>Simple Matching Coefficient = Número de Coincidencias / Total de Atributos</li>
+</ul>
+</div><div class="column">
+<p><span class="math display">\[JC = \frac{M_{11}}{M_{01} + M_{10} + M_{11}}\]</span></p>
+<ul>
+<li>Jaccard Coefficient = Número de Coincidencias 11 / Número de Atributos distintos de Ceros.</li>
+</ul>
+</div>
+</div>
+<p><br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/sim_bin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-1/sim_bin.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="medidas-similaridad-datos-binarios-1" class="slide level2 smaller">
+<h2>Medidas: Similaridad Datos Binarios</h2>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">name</th>
+<th style="text-align: center;"><span class="math inline">\(a_1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_3\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_4\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_5\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_6\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_7\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_8\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_9\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_{10}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">p_i</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">q_i</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[SMC = \frac{M_{00} + M_{11}}{M_{00} + M_{01} + M_{10} + M_{11}} = \]</span> <span class="math display">\[JC = \frac{M_{11}}{M_{01} + M_{10} + M_{11}} = \]</span></p>
+</div><div class="column" style="width:50%;">
+<div class="fragment" data-fragment-index="1">
+<p><span class="math display">\[\frac{7 + 0}{7 + 2 + 1 + 0} = 0.7\]</span></p>
+</div>
+<div class="fragment" data-fragment-index="2">
+<p><span class="math display">\[\frac{0}{2 + 1 + 0} = 0\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="medidas-similaridad-distancia-coseno" class="slide level2 smaller">
+<h2>Medidas: Similaridad (Distancia Coseno)</h2>
+<blockquote>
+<p>Sean <span class="math inline">\(d_1\)</span> y <span class="math inline">\(d_2\)</span> dos vectores. La distancia coseno se calcula como:</p>
+</blockquote>
+<p><span class="math display">\[cos(d_1, d_2) = \frac{d_1 \cdot d_2}{||d_1||||d_2||}\]</span></p>
+<table>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">name</th>
+<th style="text-align: center;"><span class="math inline">\(a_1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_3\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_4\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_5\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_6\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_7\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_8\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_9\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a_{10}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">d_1</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">d_2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">d_3</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><span class="math display">\[d_1 \cdot d_2 = 5\]</span> <span class="math display">\[d_1 \cdot d_3 = 84\]</span></p>
+</div><div class="column" style="width:40%;">
+<p><span class="math display">\[||d_1|| = \sqrt{42} = 6.481\]</span> <span class="math display">\[||d_2|| = \sqrt{6} = 2.449\]</span> <span class="math display">\[||d_3|| = \sqrt{168} = 12.962\]</span></p>
+</div><div class="column" style="width:30%;">
+<p><span class="math display">\[cos(d_1, d_2) = 0.3150\]</span> <span class="math display">\[cos(d_1, d_3) = 0.9999\]</span></p>
+</div>
+</div>
+</section></section>
+<section>
+<section id="distancias" class="title-slide slide level1 center">
+<h1>Distancias</h1>
+
+</section>
+<section id="distancias-1" class="slide level2 smaller">
+<h2>Distancias</h2>
+<blockquote>
+<p>Una métrica o función de distancia es una función que define una distancia para cada par de elementos de un conjunto. Sean dos puntos <code>x</code> e <code>y</code>, una métrica o función de distancia debe satisfacer las siguientes condiciones:</p>
+</blockquote>
+<ul>
+<li>No Negatividad:
+<ul>
+<li><span class="math inline">\(d(x,y) = \ge 0\)</span></li>
+</ul></li>
+<li>Identidad:
+<ul>
+<li><span class="math inline">\(d(x,y) = 0 \Leftrightarrow x = y\)</span></li>
+</ul></li>
+<li>Simetría:
+<ul>
+<li><span class="math inline">\(d(x,y) = d(y,x)\)</span></li>
+</ul></li>
+<li>Desigualdad Triangular:
+<ul>
+<li><span class="math inline">\(d(x,z) \le d(x,y) + d(y,z)\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="distancias-distancia-minkowski" class="slide level2 smaller">
+<h2>Distancias: Distancia Minkowski</h2>
+<p><span class="math display">\[d(p,q) = \left(\sum_{k=1}^m |p_k - q_k|^r\right)^{1/r}\]</span></p>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/data_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-1/data_dist.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<ul>
+<li><span class="math inline">\(r=1 \rightarrow\)</span> Distancia Manhattan (L1).</li>
+<li><span class="math inline">\(r=2 \rightarrow\)</span> Distancia Euclideana (L2).</li>
+<li><span class="math inline">\(r=\infty \rightarrow\)</span> Distancia Chebyshev (L<span class="math inline">\(\infty\)</span>). <span class="math display">\[D_{ch}(p,q) = \underset{k}{max} |p_k - q_k|\]</span></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Se denomina <code>Matriz de Distancias</code> a la Matriz que contiene la distancia <span class="math inline">\(d(p_i,p_j)\)</span> en la coordenada <span class="math inline">\(i,j\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="distancias-distancia-minkowski-resultados" class="slide level2">
+<h2>Distancias: Distancia Minkowski (Resultados)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/results_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-1/results_dist.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="distancias-distancia-mahalanobis" class="slide level2 smaller">
+<h2>Distancias: Distancia Mahalanobis</h2>
+<p><span class="math display">\[d(p,q) = \sqrt{(p-q)^T \Sigma^{-1}(p-q)}\]</span></p>
+<p>donde <span class="math inline">\(\Sigma\)</span> es la <code>Matriz de Covarianza</code> de los datos de entrada.</p>
+<p><span class="math display">\[cov(x,y) = \frac{1}{n-1}\sum_{i = 1}^n (x_i - \bar{x})(y_i - \bar{y})\]</span></p>
+<ul>
+<li>Para 2 variables p y q:</li>
+</ul>
+<p><span class="math display">\[\Sigma = \begin{bmatrix}
+cov(p,p) &amp; cov(p,q) \\
+cov(q,p) &amp; cov(q,q)
+\end{bmatrix}
+\]</span></p>
+<h4 id="ejercicio-supongamos-las-siguientes-escalas-de-notas.-calcular-la-distancia-entre-la-nota-1.0-y-7.0">Ejercicio: Supongamos las siguientes escalas de notas. Calcular la distancia entre la nota (1.0 y 7.0)</h4>
+<ul>
+<li>test #1: 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0</li>
+<li>test #2: 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0</li>
+</ul>
+</section>
+<section id="distancias-distancia-mahalanobis-resultados" class="slide level2 smaller">
+<h2>Distancias: Distancia Mahalanobis (Resultados)</h2>
+<div class="columns">
+<div class="column">
+<p><a href="img/clase-1/mah_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-1/mah_dist.png"></a></p>
+</div><div class="column">
+<p><br></p>
+<ul>
+<li class="fragment">test #1: <span class="math inline">\(d(7.0,1.0) = \sqrt{(7-1)\frac{1}{3.79}(7-1)} = 3.08\)</span></li>
+<li class="fragment">test #2: <span class="math inline">\(d(7.0,1.0) = \sqrt{(7-1)\frac{1}{1.59}(7-1)} = 4.76\)</span></li>
+</ul>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Es importante notar que la correlación existente entre los datos <code>influye en la distancia</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="correlación" class="slide level2 smaller">
+<h2>Correlación</h2>
+<blockquote>
+<p>La correlación mide la relación lineal entre 2 atributos.</p>
+</blockquote>
+<div class="columns">
+<div class="column">
+<dl>
+<dt>Correlación Poblacional</dt>
+<dd>
+<span class="math display">\[\rho(X,Y) = corr(X,Y) = \frac{cov(X,Y)}{\sigma_X\sigma_Y}\]</span>
+</dd>
+</dl>
+</div><div class="column">
+<dl>
+<dt>Correlación Muestral o Pearson</dt>
+<dd>
+<span class="math display">\[r(X,Y) = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i-\bar{y})}{S_xS_y}\]</span>
+</dd>
+</dl>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/corr_examples.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-1/corr_examples.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="correlación-1" class="slide level2 smaller">
+<h2>Correlación</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/cage_corr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="img/clase-1/cage_corr.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Es importante recalcar que <code>Causalidad</code> <strong>no es igual</strong> a <code>Correlación</code>.</li>
+<li>La <code>Correlación</code> no se ve afectada por la escala de los datos.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </section></section>
 <section id="preguntas-para-terminar" class="title-slide slide level1 center">
 <h1>Preguntas para terminar</h1>
 <ul>
-<li>¿Qué tipo de modelo debo implementar si quiero estimar la temperatura del día de mañana?</li>
-<li>¿Qué tipo de modelo debo implementar si es que quiero detectar barrios de acuerdo a su condición socio-economica?</li>
-<li>Si mi modelo aprende a resolver ejercicios de matemática.
-<ul>
-<li>¿Cómo se vería el overfitting?</li>
-<li>¿Cómo se vería el underfitting?</li>
-</ul></li>
+<li>¿En qué se diferencia un estimador muestral de uno poblacional?</li>
+<li>¿Cuándo es preferible utilizar la Distancia de Mahalanobis?</li>
+<li>¿Cuál es la diferencia entre Covarianza y Correlación?</li>
 </ul>
 </section>
 
@@ -1501,7 +1864,7 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox","openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
