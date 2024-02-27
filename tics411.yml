@@ -7,16 +7,6 @@
   categories:
    - slides
 
-- title: "Práctico 0"
-  subtitle: "Introducción a Scikit-Learn"
-  author: "Alfonso Tobar-Arancibia"
-  date: 2024-03-07
-  image: tics411/thumbnails/lab-0.jpg
-  path: tics411/clase-0.qmd
-  categories:
-   - slides
-  
-
 - title: "Clase 1"
   subtitle: "Calidad de los Datos y Feature Engineering"
   author: "Alfonso Tobar-Arancibia"
@@ -28,7 +18,7 @@
 
 
 - title: "Clase 2"
-  subtitle: "K-Means"
+  subtitle: "Exploratory Data Analysis (EDA)"
   author: "Alfonso Tobar-Arancibia"
   date: 2024-03-21
   image: tics411/thumbnails/clase-2.png
@@ -37,6 +27,15 @@
    - slides
 
 - title: "Clase 3"
+  subtitle: "Introducción a Scikit-Learn"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-03-21
+  image: tics411/thumbnails/lab-0.jpg
+  path: tics411/lab-0.qmd
+  categories:
+   - slides
+
+- title: "Clase 4"
   subtitle: "Introducción"
   author: "Alfonso Tobar-Arancibia"
   date: 2024-03-28

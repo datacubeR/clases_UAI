@@ -3,8 +3,6 @@ title: "TICS-411 Minería de Datos"
 subtitle: "Clase 0: Presentación del Curso"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
-date: 03/07/2024
-date-format: "MMM D, YYYY"
 format:
   revealjs: 
     width: 1366
@@ -112,13 +110,14 @@ format:
 * Horario: Jueves. 
   * 15:30 a 16:40 (Cátedra)
   * 17:00 a 18:10 (Práctico)
+  * Idealmente!!
 * Asistencia es voluntaria, pero `altamente recomendada`.
 :::
 
 ## Materiales de Clases
 
 * [Diapositivas](https://datacuber.cl/clases_UAI/tics411.html)
-* [Prácticos]()
+* [Prácticos](https://datacuber.cl/clases_UAI/tics411-labs.html)
 
 ::: {.callout-tip}
 * Slides interactivas

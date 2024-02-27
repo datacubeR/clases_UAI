@@ -3,8 +3,6 @@ title: "TICS-411 Minería de Datos"
 subtitle: "Clase 2: Exploratory Data Analysis (EDA)"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
-date: 03/14/2024
-date-format: "MMM D, YYYY"
 format:
   revealjs: 
     width: 1366

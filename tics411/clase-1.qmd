@@ -3,8 +3,6 @@ title: "TICS-411 Minería de Datos"
 subtitle: "Clase 1: Calidad de los Datos y Feature Engineering"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
-date: 03/14/2024
-date-format: "MMM D, YYYY"
 format:
   revealjs: 
     width: 1366
@@ -121,13 +119,13 @@ Outliers
 ![](img/clase-1/outliers.png){.lightbox fig-align="center"}
 
 ::: {.callout-note}
-* Es importante notar que dependiendo del caso puede ser una buena idea deshacerse de ellos. 
+* Es importante notar que dependiendo del caso puede ser una buena idea deshacerse de ellos. **¿En qué casos podría no ser necesario eliminarlos?**
 :::
 
 ## Calidad de los Datos: Valores Faltantes {.smaller}
 
 Missing Values
-: Son valores que por alguna razón no están presentes.
+: > Son valores que por alguna razón no están presentes.
 
 ::: {.incremental}
 * **Missing at Random (MAR)**: Son valores que no están presentes por causas que no se pueden controlar. **Ej**: No se registró, no se preguntó, fallas en el sistema de recolección de datos, etc.
@@ -135,7 +133,7 @@ Missing Values
 * **Informative Missing**: Es un valor no aplicable. **Ej**: Sueldo en niños, Precio de la entrada de un concierto si es que **NO** compró entrada. 
 :::
 
-![](img/clase-1/na.jpg){fig-align="center" .lightbox width="80%" .fragment}
+![](img/clase-1/na.jpg){fig-align="center" .lightbox width="70%" .fragment}
 
 
 
@@ -251,7 +249,9 @@ Al igual que en el caso anterior, es necesario evaluar la eliminación de regist
 $$x_j=\frac{x_j-\mu_x}{\sigma_x}$$
 
 ::: {.callout-important}
-Este proceso fuerza (en la medida de lo posible) a tener media 0 y std 1. 
+* Este proceso fuerza (en la medida de lo posible) a tener media 0 y std 1. 
+* Notar que $\sigma_x$ hace referencia a la varianza poblacional.
+
 :::
 
 #### MinMax Scaler
@@ -298,7 +298,7 @@ Discretización (Binning)
 : > Generar categorías a partir de una variable continua. 
 :::
 ::: {.column .fragment}
-![](img/clase-1/binning.png){fig-align="center" .lightbox width="40%"}
+![](img/clase-1/binning.png){fig-align="center" .lightbox width="35%"}
 :::
 ::: 
 
@@ -388,7 +388,7 @@ $$S(p,q) = 1 - \frac{5 - 4}{6 - 1} = 0.8$$
 :::
 ::: 
 
-## Medidas: Similaridad Intervalo o Ratio
+## Medidas: Similaridad Intervalo o Ratio {.smaller}
 
 :::: {.columns}
 ::: {.column style="text-align: center;"}
@@ -421,19 +421,25 @@ $$Sim(p,q) = \sum_{i=1}^m S(p_i,q_i)$$
 
 ::: {.columns}
 
-::: {.column}
+::: {.column width="30%"}
 
 * Overlap: 
-$$S(p_i, q_i) = 1$$
+$$S(p_{a_i}, q_{a_i}) =
+\begin{cases}
+1,  & \text{if $p_{a_i} = q_{a_i}$} \\[2ex]
+0, & \text{if $p_i\neq q_i$}
+\end{cases}
+$$
+
 :::
 
-::: {.column}
+::: {.column width="40%"}
 
 * Frecuencia de Ocurrencia Inversa
 $$S(p_i, q_i) = \frac{1}{p_k(p_i)^2}$$
 :::
 
-::: {.column}
+::: {.column width="30%"}
 
 * Medida de Goodall
 
@@ -442,31 +448,220 @@ $$S(p_i, q_i) = 1 - p_k(p_i)^2$$
 ::: 
 
 ::: {.callout-important}
-Todas estas medidas son 0 si $p_i \neq q_i$
+
+* $p_k()$ se refiere a la probabilidad de ocurrencia del atributo k.
+* Todas estas medidas son 0 si $p_i \neq q_i$
 :::
 
 
-## Medidas: Similaridad Datos Categóricos.
+## Medidas: Similaridad Datos Categóricos {.smaller}
+
 ![](img/clase-1/datos_cat.png){.lightbox fig-align="center" }
 
+
 ::: {.notes}
+
 ![](img/clase-1/sim_cat_1.png){.lightbox fig-align="center" width="70%"}
+
+![](img/clase-1/simil_calc.png){.lightbox fig-align="center" width="70%"}
 :::
 
-## Medidas: Distancias 
+#### ¿Cuánto vale la similaridad entre los siguientes registros?
 
-* Similaridad
-* Distancias
-* Correlación 
+* 1-4
+* 2-5
+* 7-8
+
+## Medidas: Similaridad Datos Binarios {.smaller}
+
+> Sea `p` y `q` vectores de dimensión $m$ con *sólo atributos binarios*. Para calcular la similaridad entre vectores se usa lo siguiente: 
+
+::: {.columns}
+::: {.column}
+$$SMC = \frac{M_{00} + M_{11}}{M_{00} + M_{01} + M_{10} + M_{11}}$$ 
+
+* Simple Matching Coefficient =  Número de Coincidencias / Total de Atributos
+:::
+::: {.column}
+$$JC = \frac{M_{11}}{M_{01} + M_{10} + M_{11}}$$
+
+* Jaccard Coefficient = Número de Coincidencias 11 / Número de Atributos distintos de Ceros.
+:::
+::: 
+
+<br>
+
+![](img/clase-1/sim_bin.png){.lightbox fig-align="center"}
+
+## Medidas: Similaridad Datos Binarios {.smaller}
+
+| name | $a_1$ | $a_2$ | $a_3$ |$a_4$ | $a_5$ | $a_6$ |$a_7$ | $a_8$ | $a_9$ |$a_{10}$ | 
+|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+|p_i|1|0|0|0|0|0|0|0|0|0|
+|q_i|0|0|0|0|0|0|1|0|0|1|
+
+<br>
+
+:::: {.columns}
+::: {.column width="50%"}
+$$SMC = \frac{M_{00} + M_{11}}{M_{00} + M_{01} + M_{10} + M_{11}} = $$ 
+$$JC = \frac{M_{11}}{M_{01} + M_{10} + M_{11}} = $$ 
+:::
+
+::: {.column width="50%"}
+::: {.fragment fragment-index=1}
+$$\frac{7 + 0}{7 + 2 + 1 + 0} = 0.7$$ 
+:::
+
+::: {.fragment fragment-index=2}
+$$\frac{0}{2 + 1 + 0} = 0$$
+:::
+::: 
+::::
+
+## Medidas: Similaridad (Distancia Coseno) {.smaller}
+
+> Sean $d_1$ y $d_2$ dos vectores. La distancia coseno se calcula como:
+
+$$cos(d_1, d_2) = \frac{d_1 \cdot d_2}{||d_1||||d_2||}$$
+
+
+| name | $a_1$ | $a_2$ | $a_3$ |$a_4$ | $a_5$ | $a_6$ |$a_7$ | $a_8$ | $a_9$ |$a_{10}$ | 
+|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+|d_1|3|2|0|5|0|0|0|2|0|0|
+|d_2|1|0|0|0|0|0|1|1|0|2|
+|d_3|6|4|0|10|0|0|0|4|0|0|
+
+::: {.columns}
+::: {.column width="30%"}
+$$d_1 \cdot d_2 = 5$$
+$$d_1 \cdot d_3 = 84$$
+:::
+::: {.column width="40%"}
+$$||d_1|| = \sqrt{42} = 6.481$$
+$$||d_2|| = \sqrt{6} = 2.449$$
+$$||d_3|| = \sqrt{168} = 12.962$$
+:::
+::: {.column width="30%"}
+$$cos(d_1, d_2) = 0.3150$$
+$$cos(d_1, d_3) = 0.9999$$
+:::
+::: 
+
+# Distancias
+
+## Distancias {.smaller}
+
+> Una métrica o función de distancia es una función que define una distancia para cada par de elementos de un conjunto. 
+> Sean dos puntos `x` e `y`, una métrica o función de distancia debe satisfacer las siguientes condiciones: 
+
+* No Negatividad: 
+  * $d(x,y) = \ge 0$
+* Identidad:
+  * $d(x,y) = 0 \Leftrightarrow x = y$ 
+* Simetría:
+  * $d(x,y) = d(y,x)$
+* Desigualdad Triangular:
+  * $d(x,z) \le d(x,y) + d(y,z)$
+
+## Distancias: Distancia Minkowski {.smaller}
+
+$$d(p,q) = \left(\sum_{k=1}^m |p_k - q_k|^r\right)^{1/r}$$
+
+::: {.columns}
+::: {.column}
+![](img/clase-1/data_dist.png){.lightbox fig-align="center" width="50%"}
+:::
+::: {.column}
+* $r=1 \rightarrow$ Distancia Manhattan (L1).
+* $r=2 \rightarrow$ Distancia Euclideana (L2).
+* $r=\infty \rightarrow$ Distancia Chebyshev (L$\infty$).
+  $$D_{ch}(p,q) = \underset{k}{max} |p_k - q_k|$$
+:::
+::: 
+
+:::::: {.callout-important}
+* Se denomina `Matriz de Distancias` a la Matriz que contiene la distancia $d(p_i,p_j)$ en la coordenada $i,j$.
+:::
+
+## Distancias: Distancia Minkowski (Resultados)
+
+![](img/clase-1/results_dist.png){.lightbox width="30%" fig-align="center"}
+
+## Distancias: Distancia Mahalanobis {.smaller}
+
+$$d(p,q) = \sqrt{(p-q)^T \Sigma^{-1}(p-q)}$$
+
+donde $\Sigma$ es la `Matriz de Covarianza` de los datos de entrada.
+
+$$cov(x,y) = \frac{1}{n-1}\sum_{i = 1}^n (x_i - \bar{x})(y_i - \bar{y})$$
+
+* Para 2 variables p y q: 
+
+$$\Sigma = \begin{bmatrix}
+cov(p,p) & cov(p,q) \\
+cov(q,p) & cov(q,q)
+\end{bmatrix}
+$$
+
+#### Ejercicio: Supongamos las siguientes escalas de notas. Calcular la distancia entre la nota (1.0 y 7.0)
+
+* test #1: 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0
+* test #2: 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0
+
+
+## Distancias: Distancia Mahalanobis (Resultados) {.smaller}
+
+::: {.columns}
+::: {.column}
+![](img/clase-1/mah_dist.png){.lightbox}
+:::
+::: {.column .incremental}
+
+<br>
+
+* test #1: $d(7.0,1.0) = \sqrt{(7-1)\frac{1}{3.79}(7-1)} = 3.08$
+* test #2: $d(7.0,1.0) = \sqrt{(7-1)\frac{1}{1.59}(7-1)} = 4.76$
+:::
+::: 
+
+::: {.callout-important .fragment}
+* Es importante notar que la correlación existente entre los datos `influye en la distancia`. 
+:::
+
+## Correlación {.smaller}
+
+> La correlación mide la relación lineal entre 2 atributos.
+
+:::: {.columns}
+::: {.column}
+Correlación Poblacional
+: $$\rho(X,Y) = corr(X,Y) = \frac{cov(X,Y)}{\sigma_X\sigma_Y}$$
+:::
+::: {.column}
+Correlación Muestral o Pearson
+: $$r(X,Y) = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i-\bar{y})}{S_xS_y}$$
+:::
+::::
+
+![](img/clase-1/corr_examples.png){.lightbox fig-align="center" width="60%"}
+
+
+## Correlación {.smaller}
+![](img/clase-1/cage_corr.png){.lightbox fig-align="center" width="80%"}
+
+
+::: {.callout-note .fragment}
+* Es importante recalcar que `Causalidad` **no es igual** a `Correlación`.
+* La `Correlación` no se ve afectada por la escala de los datos. 
+:::
 
 
 # Preguntas para terminar
 
-* ¿Qué tipo de modelo debo implementar si quiero estimar la temperatura del día de mañana?
-* ¿Qué tipo de modelo debo implementar si es que quiero detectar barrios de acuerdo a su condición socio-economica?
-* Si mi modelo aprende a resolver ejercicios de matemática.
-  * ¿Cómo se vería el overfitting?
-  * ¿Cómo se vería el underfitting?
+* ¿En qué se diferencia un estimador muestral de uno poblacional?
+* ¿Cuándo es preferible utilizar la Distancia de Mahalanobis?
+* ¿Cuál es la diferencia entre Covarianza y Correlación?
 
 
 # Danke Schön
