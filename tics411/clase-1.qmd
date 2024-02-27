@@ -1,6 +1,6 @@
 ---
 title: "TICS-411 Minería de Datos"
-subtitle: "Clase 1: Calidad de los Datos y Preprocesamiento"
+subtitle: "Clase 1: Calidad de los Datos y Feature Engineering"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 date: 03/14/2024
@@ -24,6 +24,8 @@ format:
     highlight-style: arrow
 ---
 
+# Datos Tabulares 
+
 ## Tipos de Datos: Datos Tabulares {.smaller}
 
 ![](img/clase-0/tab_data.png){fig-align="center" .lightbox}
@@ -42,673 +44,420 @@ format:
 * Distintos tipos, por lo que normalmente requiere de algún tipo de **preprocesamiento**.
 :::
 
-## Tipos de Datos {.smaller}
+## Tipos de Datos: Numéricos {.smaller}
 
 Numéricos
-: > TBD
+: > Valores a los que se les puede aplicar alguna operación matemática. 
 
-::: {.callout-tip}
-* Continuas:
-* Discretas:
+
+::: {.callout-tip }
+* Discretas: Número finito o contable de valores. Integers (Enteros). Ej: `Número de Hijos`, `Cantidad de Productos`, `Edad`.
+* Continuas: Existen infinitos puntos entre dos puntos. Floats (punto flotando o decimales). Ej. `Temperatura`, `Peso`.
 :::
 
+![](img/clase-1/cont_vs_disc.jpg){fig-align="center" .lightbox width="50%"}
+
+## Tipos de Datos: Categóricos {.smaller}
+
 Categóricos
-: > TBD
+: > Datos que representan una categoría. 
 
 ::: {.callout-tip}
-* Nominales
-* Ordinales
+* Nominales: Sólo nombres que no representan ningún orden. Ej: `Nacionalidad`, `género`, `ocupación`. 
+* Ordinales: Que tienen un orden o jerarquía inherente. Ej: `Nivel de Escolaridad`, `tamaño`. 
+:::
+
+![](img/clase-1/nom_vs_ord.png){fig-align="center" .lightbox width="50%"}
+
+::: {.callout-caution .fragment}
+No todas las operaciones matemáticas son aplicables. Ej: Media, Mediana, Sumas, Restas, etc.
 :::
 
 ## Tipos de Datos: Otros tipos de Datos {.smaller}
 
 Strings
-: > TBD
+: > Datos de texto, los cuales podrían eventualmente ser tratados y representar algo. Ej: `Rescatar comunas de una dirección`, `rescatar sexo desde el nombre`, etc.
 
 Fechas
-: > TBD
+: > Datos tipo fecha, los cuales podrían eventualmente ser tratados y representar variables de algún tipo. Ej: `Rescatar Años`, `meses`, `días`, `semanas`, `trimestres (quarters)`, etc. 
 
 Datos Geográficos
-: > TBD
+: > Datos que representan la ubicación geográfica de un elemento. Ej: `Latitud`, `Longitud`, `Coordenadas`.
 
-::: {.callout-important}
-El principal problema de los datos son su calidad!!
+::: {.callout-important .fragment}
+Sin importar el tipo de dato el mayor problema es su calidad. 
 :::
 
-## Calidad de los Datos: Ruido
-## Calidad de los Datos: Outliers
+# Calidad de los Datos
+
+## Calidad de los Datos: Ruido {.smaller}
+
+Ruido
+: Corresponde al error y extrema variabilidad en la medición en los datos. Este error puede ser aleatorio o sistemático. 
+
+<br>
+
+::: {.columns}
+::: {.column }
+![](img/clase-1/noise.png){width="75%" .lightbox fig-align="center"}
+:::
+::: {.column .fragment}
+![](img/clase-1/signal.png){.lightbox fig-align="center"}
+:::
+::: 
+
+::: {.callout-tip .fragment}
+Se le llama `Señal` a la tendencia principal y representa la información significativa y valiosa de los datos.
+:::
 
 
-* Ruido
-* Outliers
-* Valores Faltantes
-* Datos Duplicados
-* Dominio del Problema
 
-## Preprocesamiento
+## Calidad de los Datos: Outliers {.smaller}
 
-* Agregación
-* Sampleo
-* Discretización
-* Selección de Variables
-* Reducción de Dimensionalidad
-* Estandarización de Datos
-* Manejo de Variables Categóricas.
+Outliers
+: Son datos considerablemente diferentes a la mayoría del dataset. Dependiendo del caso pueden indicar casos `"interesantes"` o `errores de medición`. 
 
-## Medidas 
+
+![](img/clase-1/outliers.png){.lightbox fig-align="center"}
+
+::: {.callout-note}
+* Es importante notar que dependiendo del caso puede ser una buena idea deshacerse de ellos. 
+:::
+
+## Calidad de los Datos: Valores Faltantes {.smaller}
+
+Missing Values
+: Son valores que por alguna razón no están presentes.
+
+::: {.incremental}
+* **Missing at Random (MAR)**: Son valores que no están presentes por causas que no se pueden controlar. **Ej**: No se registró, no se preguntó, fallas en el sistema de recolección de datos, etc.
+
+* **Informative Missing**: Es un valor no aplicable. **Ej**: Sueldo en niños, Precio de la entrada de un concierto si es que **NO** compró entrada. 
+:::
+
+![](img/clase-1/na.jpg){fig-align="center" .lightbox width="80%" .fragment}
+
+
+
+## Calidad de los Datos: Datos Duplicados {.smaller}
+
+Duplicates
+: Se refiere a registros que pueden estar total o parcialmente duplicados.
+
+
+![](img/clase-1/dups.png){.lightbox fig-align="center"}
+
+::: {.callout-warning}
+Esto genera problemas en la confiabilidad de los datos. **¿Cuál es el registro correcto?**
+
+**Ej**: Caso particular de una Jooycar (una startup de seguros). 
+:::
+
+## Calidad de los Datos: Dominio del Problema {.smaller}
+
+![](img/clase-1/domain.png){.lightbox fig-align="center"}
+
+:::::: {.callout-caution .fragment}
+* Por lejos el problema de calidad más difícil de encontrar.
+* Se requiere experiencia y conocimiento profundo del negocio para detectarlo.
+
+**Ej**: Caso de Super Avances en Cencosud. 
+:::
+
+# Feature Engineering
+
+## Feature Engineering 
+
+Feature Engineering
+: > También conocida como Ingeniería de Atributos, es el `arte` de trabajar las `features` existentes para *limpiar* o *corregir* variables existentes o *crear* nuevas variables.
+
+Preprocesamiento
+: > Se refiere al proceso de preparación de los datos para su ingreso a un modelo. En una primera parte puede incluir limpieza de datos corruptos, redundantes y/o irrelevantes. Por otra parte, también hace referencia a la transformación de datos para que puedan ser consumidos por un algoritmo.  
+
+## Data Cleaning {.smaller}
+
+* No existe un procedimiento estándar. 
+* Revisar los datos y ver potenciales errores que puedan afectar el funcionamiento de un modelo. 
+
+![](img/clase-1/cleaning.png){.lightbox fig-align="center" width="80%"}
+
+## Preprocesamiento: Valores Faltantes {.smaller}
+
+> Imputación: Se refiere al proceso de rellenar datos faltantes.
+
+::: {.columns}
+::: {.column}
+![](img/clase-1/impute.jpeg){.lightbox fig-align="center"}
+:::
+::: {.column}
+![](img/clase-1/mean_median.png){.lightbox fig-align="center"}
+:::
+::: 
+
+::: {.callout-note .fragment}
+Dependiendo del nivel de valores faltantes, es necesario evaluar la eliminación de registros o atributos completos de ser necesario. 
+:::
+
+## Preprocesamiento: Manejo de Outliers 
+
+Winsorizer
+: Se refiere al proceso de acotar un atributo eliminando los valores extremos o atípicos (outliers). 
+
+::: {.columns}
+::: {.column}
+![](img/clase-1/winsorizer.jpg){.lightbox fig-align="center" width="80%"}
+:::
+::: {.column .fragment}
+::: {.callout-note}
+Al igual que en el caso anterior, es necesario evaluar la eliminación de registros si es que representan valores atípicos.
+:::
+:::
+::: 
+
+## Preprocesamiento: Manejo de Variables Categóricas {.smaller}
+
+> La mayoría de los modelos no tienen la capacidad de poder lidiar con variables categóricas por lo que deben ser transformadas en una representación numérica antes de ingresar a un modelo. 
+
+
+::: {.columns}
+::: {.column width="70%" .fragment}
+![One Hot Encoder](img/clase-1/ohe.png){.lightbox width="200%"} 
+:::
+::: {.column width="30%" .fragment}
+![Ordinal Encoder](img/clase-1/ordinal.png){.lightbox} 
+:::
+::: 
+
+::: {.callout-note .fragment}
+* `One Hot Encoder` suele dar mejores resultados en modelos lineales.
+* `Ordinal Encoder` suele dar mejores resultados en modelos de árbol. 
+:::
+
+## Preprocesamiento: Escalamiento {.smaller}
+
+> El `escalamiento` se refiere al proceso de llevar distintas variables a una misma escala.
+
+
+::: {.columns}
+::: {.column width="60%"}
+![](img/clase-1/scaling.png){.lightbox fig-align="center"} 
+
+* Evitar que la escala de una "sobre-importancia" a una cierta variable.
+* Permitir una mejor convergencia de los algoritmos. 
+:::
+::: {.column .fragment width="40%"}
+
+#### StandardScaler (Normalización)
+$$x_j=\frac{x_j-\mu_x}{\sigma_x}$$
+
+::: {.callout-important}
+Este proceso fuerza (en la medida de lo posible) a tener media 0 y std 1. 
+:::
+
+#### MinMax Scaler
+$$x_j=\frac{x_j-min(x_j)}{max(x_j)-min(x_j)}$$
+
+::: {.callout-important}
+Este proceso fuerza a los datos a distribuirse entre 0 y 1. 
+:::
+
+:::
+
+::: 
+
+
+## Preprocesamiento: Escalamiento {.smaller}
+
+![](img/clase-1/df_scale.png){.lightbox fig-align="center" }
+
+::: {.callout-note .fragment fragment-index=1}
+* **Media**: 0.75
+* **Std**: 3.1875
+* **Min**: -2
+* **Max**: 3
+:::
+
+::: {.callout-important .fragment fragment-index=2}
+* **Centering (Centrado)**: Se le llama a la diferencia entre la variable y su media.
+* **Scaling (Escalado)**: Se le llama al cuociente entre la variable y su Desviación Estándar.
+* **StandardScaler (Normalización)**: Es Centrado y Escalado. 
+:::
+
+
+## Creación de Variables {.smaller}
+
+Combinación
+: > Combinar 2 o más variables. Ej: Calcular el área de un sitio a partir del ancho y largo. 
+
+Transformación
+: > Aplicar una operación a una variable. Ej: El logaritmo de las ganancias.
+
+::: {.columns}
+::: {.column}
+Discretización (Binning)
+: > Generar categorías a partir de una variable continua. 
+:::
+::: {.column .fragment}
+![](img/clase-1/binning.png){fig-align="center" .lightbox width="40%"}
+:::
+::: 
+
+
+## Creación de Variables
+
+Ratios
+: Es una medida que expresa la relación entre dos cantidades. Ej: Puntos por partido, cantidad de transacciones por mes, etc.
+
+Agregación
+: Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de tiempo en aprobar un tipo de crédito. 
+
+## Selección de Variables {.smaller}
+> Se refiere al proceso de eliminar variables que pueden ser irrelevantes o poco significativas. 
+
+![](img/clase-1/f_sel.png){.lightbox fig-align="center" width="40%"}
+
+::: {.callout-tip}
+* Procesos Manuales. 
+* Procesos Automáticos:
+  * PCA (Principal Component Analysis).
+  * Recursive Feature Elimination. 
+  * Recursive Feature Addition. 
+  * Eliminación mediante alguna medida. 
+:::
+
+# Medidas
+
+## Medidas: Similaridad
+
+![](img/clase-1/simil.png){.lightbox fig-align="center"}
+
+## Medidas: Similaridad Nominal
+
+:::: {.columns}
+::: {.column width="60%" style="text-align: center;"}
+* Disimilaridad: 
+$$D =
+\begin{cases}
+0,  & \text{if $p=q$} \\[2ex]
+1, & \text{if $p\neq q$}
+\end{cases}
+$$
+:::
+::: {.column width="40%" style="text-align: center;"}
+* Similaridad:  
+$$S =
+\begin{cases}
+1,  & \text{if $p=q$} \\[2ex]
+0, & \text{if $p\neq q$}
+\end{cases}
+$$
+:::
+::::
+
+<br>
+
+::: {.columns .fragment}
+::: {.column}
+![](img/clase-1/s_nom.png){fig-align="center" .lightbox}
+:::
+::: {.column}
+$$S(p,q) = 0$$
+$$D(p,q) = 1$$
+:::
+::: 
+
+## Medidas: Similaridad Ordinal
+
+:::: {.columns}
+::: {.column style="text-align: center;"}
+* Disimilaridad: 
+$$D = \frac{|p-q|}{n-1}$$
+:::
+::: {.column style="text-align: center;"}
+* Similaridad:  
+$$S = 1 - \frac{|p-q|}{n-1}$$
+:::
+::::
+
+::: {.columns .fragment}
+::: {.column}
+![](img/clase-1/s_ord.png){fig-align="center" .lightbox}
+:::
+::: {.column}
+$$S(p,q) = 1 - \frac{5 - 4}{6 - 1} = 0.8$$
+:::
+::: 
+
+## Medidas: Similaridad Intervalo o Ratio
+
+:::: {.columns}
+::: {.column style="text-align: center;"}
+* Disimilaridad: 
+$$D = |p-q|$$
+:::
+
+::: {.column style="text-align: center;"}
+* Similaridad:  
+$$S = -D$$
+$$S = \frac{|p-q|}{n-1}$$
+$$S = 1 - \frac{d - min_d}{max_d - min_d}$$
+:::
+::::
+
+::: {.fragment}
+Sea $p=35 °C$ y $q = 40 °C$. Luego: 
+
+$$ S(p,q) = -5$$
+$$S(p,q) = \frac{1}{1 + 5} = 0.17$$
+:::
+
+## Medidas: Similaridad Datos Categóricos {.smaller}
+
+> Sea `p` y `q` vectores de dimensión $m$ con *sólo atributos categóricos*. Para calcular la similaridad entre vectores se usa lo siguiente: 
+
+$$Sim(p,q) = \sum_{i=1}^m S(p_i,q_i)$$
+
+<br>
+
+::: {.columns}
+
+::: {.column}
+
+* Overlap: 
+$$S(p_i, q_i) = 1$$
+:::
+
+::: {.column}
+
+* Frecuencia de Ocurrencia Inversa
+$$S(p_i, q_i) = \frac{1}{p_k(p_i)^2}$$
+:::
+
+::: {.column}
+
+* Medida de Goodall
+
+$$S(p_i, q_i) = 1 - p_k(p_i)^2$$
+:::
+::: 
+
+::: {.callout-important}
+Todas estas medidas son 0 si $p_i \neq q_i$
+:::
+
+
+## Medidas: Similaridad Datos Categóricos.
+![](img/clase-1/datos_cat.png){.lightbox fig-align="center" }
+
+::: {.notes}
+![](img/clase-1/sim_cat_1.png){.lightbox fig-align="center" width="70%"}
+:::
+
+## Medidas: Distancias 
 
 * Similaridad
 * Distancias
 * Correlación 
-
-## ¿Quién soy? {.smaller}
-
-:::: {.columns}
-
-::: {.column width="30%"}
-
-![](../me.jpg){width="60%"}
-
-![](img/clase-0/chiquis.jpeg){width="60%"}
-
-:::
-
-::: {.column width="70%"}
-::: {.incremental .smaller}
-* Alfonso Tobar-Arancibia, estudié **Ingeniería Civil** pero llevo 9 años trabajando como:
-  * Data Analyst.
-  * Data Scientist.
-  * ML Engineer.
-  * Data Engineer.
-* Terminando mi Msc. y empezando mi PhD en la UAI.
-* He ganado 2 competencias de Machine Learning.
-* Publiqué mi primer [paper](https://ieeexplore.ieee.org/abstract/document/10315748) el año pasado sobre Hate Speech en Español.
-* Juego **Tenis de Mesa**, hago **Agility** con mi perrita Kira y escribo en mi Blog. 
-:::
-:::
-
-::::
-
-# Sobre el Curso {.center}
-
-
-## Objetivos del Curso 
-
-:::: {.columns}
-::: {.column width="20%"}
-![](img/clase-0/objetivos.jpg)
-:::
-
-::: {.column width="80%"}
-:::{ .incremental}
-
-* Identificar Elementos Claves del Machine Learning (Terminología, Nomenclatura, Intuición). 
-* Entender como interactúan los algoritmos más importantes. 
-* Aprender a seleccionar el mejor Algoritmo para el Problema. 
-* Ejecutar y aplicar algoritmos clásicos de Machine Learning. 
-* Evaluar el desempeño esperado del Modelo. 
-:::
-:::
-::::
----
-
-## Tópicos
-
-::: {.callout-note}
-* Introducción a la Minería de Datos
-* Análisis Exploratorio de Datos (EDA)
-* Modelos No Supervisados/Descriptivos
-* Modelos Supervisados/Predictivos
-:::
-
-:::: {.columns}
-::: {.column width="50%"}
-#### Modelos no Supervisados {.smaller}
-
-* K-Means
-* Hierarchical Clustering
-* DBScan
-* Apriori
-:::
-
-::: {.column width="50%"}
-#### Modelos Supervisados {.smaller}
-
-* KNN 
-* Árboles de Decisión
-* Naive Bayes
-* Regresión Logística
-:::
-::::
-
-## Sobre las clases
-
-::: {.incremental}
-* Clases presenciales, con participación activa de los estudiantes. 
-* Mucha terminología y material de estudio será en `Inglés`. 
-* Horario: Jueves. 
-  * 15:30 a 16:40 (Cátedra)
-  * 17:00 a 18:10 (Práctico)
-* Asistencia es voluntaria, pero `altamente recomendada`.
-:::
-
-## Materiales de Clases
-
-* [Diapositivas](https://datacuber.cl/clases_UAI/tics411.html)
-* [Prácticos]()
-
-::: {.callout-tip}
-* Slides interactivas
-* Todo el código se puede copiar directamente.
-* Se puede buscar contenido en las diapositivas mediante un buscador. 
-* Se dejarán copias en PDF en Webcursos.
-:::
-
-::: {.callout-important}
-Se espera que los estudiantes dominen las siguientes tecnologías: 
-
-* [Python](https://www.python.org/)
-* [Google Colab](https://colab.research.google.com/?hl=es#scrollTo=zwFnJsE6vjf8)
-* [Pandas](https://pandas.pydata.org/docs/user_guide/10min.html)
-* [Scikit-Learn](https://scikit-learn.org/stable/) (Se enseñará a lo largo del curso).
-:::
-
-## Material Complementario
-
-:::: {.columns}
-::: {.column width="30%"}
-
-![](img/clase-0/data_mining.jpg){.lightbox}
-:::
-
-::: {.column width="30%"}
-
-![](img/clase-0/sk-keras.jpg){.lightbox}
-
-:::
-::: {.column width="40%"}
-
-[Curso de Scikit-Learn](https://www.youtube.com/watch?v=d79mzijMAw0&list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM)
-![](img/clase-0/andreas_mueller.png){.lightbox}
-
-* [Tutorial Colab](https://www.youtube.com/watch?v=RLYoEyIHL6A)
-
-* [Agregar Datos Externos a Colab](https://www.youtube.com/watch?v=z1pBdycYCGY)
-:::
-::::
-
-## Evaluación 
-
-::: {.callout-note}
-* Dos Evaluaciones Escritas (P1, P2) coordinadas y cuatro tareas prácticas (T1, T2, T3, T4)
-$$NP = 0.35 \cdot P1 + 0.35 \cdot P2 + 0.3 \cdot \bar{T}$$
-$$ \bar{T} = (T1 + T2 + T3 + T4)/4 $$
-:::
-
-::: {.callout-tip appearance="default"}
-## Si NP > 5
-$$NF = NP$$
-:::
-
-::: {.callout-warning appearance="default"}
-## En caso contrario: 
-$$NF = 0.7 \cdot NP + 0.3 \cdot E$$
-:::
-
-## Ayudantías
-
-### Ayudante: TBD
-### email: TBD
-
-::: {.callout-caution}
-* No habrán ayudantías todas las semanas.
-* Estarán enfocadas principalmente en aplicaciones y código.
-:::
-
-# Introducción al Curso
-
-## Revolución de los Datos 
-
-![](img/clase-0/internet_2023.png){.lightbox fig-align="center" width="50%"}
-
-::: {.notes}
-* Hablar de los distintos tipos de Datos.
-* Todo es datos, y está lleno de ellos en Internet y el mundo. 
-:::
-
-## Nace el Data Science (Ciencia de Datos)
-
-![](img/clase-0/data_science.png){.lightbox fig-align="center" width="50%"}
-
-
-::: {.notes}
-* Explicar las distintas etapas. Qué son cada uno de ellos.
-* Explicar que no estoy de acuerdo con todas las definiciones. 
-:::
-
-## ¿Cómo aprovechar la información que tenemos?
-
-::: {.fragment}
-Data Mining (Minería de Datos)
-: > "The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data." **(Fayyad, Piatetsky-Shapiro & Smith 1996)**
-:::
-
-::: {.fragment}
-Machine Learning (Aprendizaje Automático)
-: > "A computer program is said to learn from experience `E` with respect to some class of tasks `T` and performance measure `P`, if its performance at tasks in `T`, as measured by `P`, improves with experience `E`." **(Mitchell, 2006)**
-:::
-
-::: {.notes}
-* Explicar que estos son dos tipos de Approaches con el que hoy en día se enfrentan los datos. 
-* El primero más enfocado en un análisis manual. 
-* El segundo en un enfoque más automático. 
-:::
-
-## Tipos de Datos
-
-:::: {layout="[ 40, 60 ]"}
-
-::: {#first-column}
-::: {.fragment fragment-index=1}
-### Datos Estructurados
-:::
-:::
-
-::: {#second-column}
-
-::: {.fragment fragment-index=5}
-### Datos No Estructurados
-:::
-:::
-
-::::
-::: {layout-ncol=6}
-
-::: {.fragment fragment-index=2}
-![](img/clase-0/table.png)
-:::
-
-::: {.fragment fragment-index=3}
-![](img/clase-0/ts.png)
-:::
-
-::: {.fragment fragment-index=6}
-![](img/clase-0/image.png)
-:::
-
-::: {.fragment fragment-index=7}
-![](img/clase-0/text.png)
-:::
-
-::: {.fragment fragment-index=8}
-![](img/clase-0/video.png)
-:::
-
-::: {.fragment fragment-index=9}
-![](img/clase-0/graph.png)
-:::
-:::
-
-
-:::: {layout="[ 40, 60 ]"}
-
-::: {#first-column}
-::: {.fragment fragment-index=4}
-![](img/clase-0/ml.jpg){fig-align="left" width="80%"}
-:::
-:::
-
-::: {#second-column}
-
-::: {.fragment fragment-index=10}
-![](img/clase-0/dl.png){fig-align="center" width="30%"}
-:::
-:::
-
-::::
-## Tipos de Datos: Datos Tabulares {.smaller}
-
-![](img/clase-0/tab_data.png){fig-align="center" .lightbox}
-
-::: {.callout-tip}
-* Filas: Observaciones, instancias. (Normalmente independientes).
-* Columnas: Variables, Atributos, Features.
-:::
-::: {.callout-note}
-* Probablemente el tipo de datos más amigable.
-* Requiere conocimiento de negocio (**Domain Knowledge**)
-:::
-
-::: {.callout-warning}
-* Es un % bajísimo del total de datos existentes en el Mundo.
-* Distintos tipos, por lo que normalmente requiere de algún tipo de **preprocesamiento**.
-:::
-
-## Tipos de Datos: Series de Tiempo {.smaller}
-
-::: {layout-ncol=2}
-
-![](img/clase-0/ts_data.png){fig-align="center" width="70%" .lightbox}
-
-![](img/clase-0/ts_plot.png){fig-align="center" width="100%" .lightbox}
-:::
-
-::: {.callout-tip}
-* Filas: Instancias temporales (Normalmente interdependientes).
-* Columnas: Variables, Atributos, Features (Univariada o Multivariada). 
-:::
-
-::: {.callout-warning}
-* Es un % bajísimo del total de datos existentes en el Mundo.
-* Propiedad temporal requiere **preprocesamiento** y modelos especiales. 
-:::
-
-## Tipos de Datos: Imágenes {.smaller}
-
-:::: {.columns}
-::: {.column width="50%"}
-
-::: {.fragment fragment-index=1}
-![](img/clase-0/image_tensor.png){.lightbox}
-:::
-
-::: {.fragment fragment-index=3}
-::: {.callout-tip}
-* Este es el tipo de Datos que disparó la Inteligencia Artificial.
-* [¿Cuántos computadores para identificar un Gato? 16,000](https://www.nytimes.com/2012/06/26/technology/in-a-big-network-of-computers-evidence-of-machine-learning.html)
-:::
-:::
-
-:::
-
-::: {.column width="50%"}
-::: {.fragment fragment-index=2}
-![](img/clase-0/tensor_rgb.jpg){.lightbox}
-:::
-:::
-
-:::: 
-
-::: {.notes}
-* Explicar el concepto de Tensor, extensión de las matrices. 
-Diferencia entre Grayscale y RGB.
-:::
-
-## Tipos de Datos: Texto Libre {.smaller}
-
-![](img/clase-0/free_text.jpg){.lightbox fig-align="center"}
-
-
-::: {.callout-caution}
-* Datos Masivos.
-* Dificiles de lidiar ya que deben ser llevarse a una representación numérica.
-* Alto nivel de Sesgo y Subjetividad.
-:::
-
-::: {.callout-tip}
-* Gracias a este tipo de datos se han producido los avances más increíbles del último tiempo: [Transformers](https://arxiv.org/abs/1706.03762)
-:::
-
-## Tipos de Datos: Videos {.smaller}
-
-{{< video  https://www.neuralframes.com/videos/new_landingpage_video_squirrel.webm width="800">}}
-
-::: {.callout-note}
-* Los videos no son más que arreglos de imágenes. 
-* Son un tipo de dato muy pesado y difícil de lidiar.
-* Requiere alto poder de Procesamiento.
-:::
-
-# ¿Cómo aprenden los Modelos?
-
-## Tipos de Aprendizaje
-
-![](img/clase-0/ML_types.png){.lightbox}
-
-
-## Reinforcement Learning
-
-![](img/clase-0/alpha_tensor.png){.lightbox}
-
-
-## Regresión y Clasificación {.smaller}
-
-:::: {.columns}
-::: {.column width="50%"}
-
-![](img/clase-0/clf_reg.jpeg){fig-align="center" }
-
-::: {.callout-tip .fragment fragment-index=3}
-* **Regresión**: Se busca estimar un valor continuo. 
-  * `(Estimar el valor de una casa)`.
-* **Clasificación**: Se busca encontrar una categoría o un valor discreto. 
-  * `(Clasificar una imagen como Perro o Gato)`. 
-:::
-
-::: {.callout-important .fragment fragment-index=3}
-* Para entrenar este tipo de modelos se necesitan `etiquetas`, es decir, la respuesta esperada del modelo. 
-:::
-
-
-:::
-::: {.column width="50%"}
-
-![](img/clase-0/house_pred.png){.fragment fragment-index=1 fig-align="center" width="60%"}
-
-![](img/clase-0/cat_dog.jpg){.fragment fragment-index=2 fig-align="center" width="60%"}
-:::
-:::: 
-
-::: {.notes}
-* Ambos ejemplos se pueden realizar utilizando Largo (Eje Y) y Peso (Eje X).
-:::
-
-## Clustering {.smaller}
-
-![](img/clase-0/clustering.png){fig-align="center" width="60%" .lightbox}
-
-::: {.callout-tip .fragment}
-* **Clusters**: Una categoría en la que sus componentes son similares. Los clusters normalmente no tienen un nombre propio, sino que uno les asigna uno.
-* También se les llama segmentos. No usar la palabra `clase`.
-:::
-
-::: {.callout-caution .fragment}
-* No requiere de etiquetas, por lo tanto, no es posible evaluar su desempeño de manera 100% acertada.
-:::
-
-## Reducción de Dimensionalidad {.smaller}
-
-![](img/clase-0/dim_red.jpeg){.lightbox fig-align="center" height="60%"}
-
-::: {.callout-tip}
-* **Reducción de la Dimensionalidad**: Eliminar complejidad sin perder información clave para poder entender su comportamiento. 
-:::
-
-# Intuición
-
-## Nuestro Sistema de ML {.smaller}
-
-Creemos un Sistema de ML que sea capaz de ver una imágen y pronunciar correctamente el uso de la letra `C`.
-
-::: {.callout-note}
-Vamos a `Entrenar` un Modelo.
-:::
-
-![](img/clase-0/model.png){fig-align="center" width="60%" .fragment .lightbox}
-
-
-
-## Nuestro Sistema de ML: Entrenamiento {.smaller}
-
-::: {layout-ncol=3}
-
-![`K`asa](img/clase-0/casa.png){fig-align="center" width="70%"}
-
-![`K`o`k`odrilo](img/clase-0/cocodrilo.png){fig-align="center" width="70%"}
-
-![`K`ubo](img/clase-0/cubo.png){fig-align="center" width="70%"}
-
-:::
-
-::: {.fragment}
-::: {.callout-important}
-**¿Qué patrones está aprendiendo el modelo?**
-:::
-:::
-
-Entrenamiento
-: > Es el proceso en el cuál se permite al modelo aprender. En este proceso se le entregan ejemplos (`Train Set`) para que el modelo de manera `autónoma` pueda aprender `patrones` que le permitan resolver la tarea dada.
-
-
-## Nuestro Sistema de ML: Inferencia {.smaller}
-
-Inferencia/Predicción
-: > Se refiere al proceso en el que el modelo tiene que demostrar cuál sería su decisión de acuerdo a los patrones aprendidos en el proceso de entrenamiento. Los ejemplos en los que se prueba se le denomina `Test Set`.
-
-::: {layout-ncol=4}
-
-![](img/clase-0/correa.png){fig-align="center" width="50%" .fragment fragment-index=1}
-
-![](img/clase-0/conejo.png){fig-align="center" width="50%" .fragment fragment-index=3}
-
-![](img/clase-0/cuchillo.png){fig-align="center" width="50%" .fragment fragment-index=5}
-
-![](img/clase-0/bicicleta.png){fig-align="center" width="50%" .fragment fragment-index=7}
-:::
-
-::: {layout-ncol=4}
-
-::: {.fragment fragment-index=2}
-`K`orrea
-:::
-
-::: {.fragment fragment-index=4}
-`K`onejo
-:::
-
-::: {.fragment fragment-index=6}
-`K`u`k`illo
-:::
-
-::: {.fragment fragment-index=8}
-Bi`k`i`k`leta
-:::
-
-:::
-
-
-::: {.fragment fragment-index=11}
-Generalización 
-: > Se le llama generalización a la capacidad del modelo de aplicar lo aprendido de manera correcta en ejemplos no vistos.
-:::
-
-## Nuestro Sistema de ML: Nuevas instancias de Entrenamiento 
-
-::: {layout-ncol=3}
-
-![`K`u`ch`illo](img/clase-0/cuchillo.png){fig-align="center" width="70%" .fragment .fade-out fragment-index=1}
-
-![`Ch`o`k`olate](img/clase-0/chocolate.png){fig-align="center" width="70%"} 
-
-![`S`in`s`el](img/clase-0/cincel.png){fig-align="center" width="70%" }
-
-:::
-
-::: {.callout-warning .fragment fragment-index=2}
-No es bueno entrenar con las mismas instancias de entrenamiento. **¿Por qué?**
-:::
-
-## Nuestro Sistema de ML: Reevaluemos nuestro Modelo {.smaller}
-
-::: {layout-ncol=5}
-
-![](img/clase-0/correa.png){fig-align="center" width="50%" .fragment fragment-index=1}
-
-![](img/clase-0/conejo.png){fig-align="center" width="50%" .fragment fragment-index=3}
-
-![](img/clase-0/cuchillo.png){fig-align="center" width="50%" .fragment fragment-index=5}
-
-![](img/clase-0/bicicleta.png){fig-align="center" width="50%" .fragment fragment-index=7}
-:::
-
-::: {layout-ncol=4}
-
-::: {.fragment fragment-index=2}
-`K`orrea
-:::
-
-::: {.fragment fragment-index=4}
-`K`onejo
-:::
-
-::: {.fragment fragment-index=6}
-`K`u`ch`illo
-:::
-
-::: {.fragment fragment-index=8}
-Bi`s`i`k`leta
-:::
-
-:::
-
-::: {.fragment fragment-index=9}
-Evaluación 
-: > Utilizar una métrica que permita `ponerle nota` al modelo.
-
-:::
-::: {.fragment fragment-index=10}
-* 1er Modelo: 2 correctas de 4, es decir **50%**.
-:::
-::: {.fragment fragment-index=11}
-* 2do Modelo: 4 correctas de 4, es decir **100%**.
-:::
-
-## Problemas del Aprendizaje {.smaller}
-
-::: {.fragment fragment-index=1}
-Supongamos que queremos utilizar nuestro modelo para pronunciar palabras en otro idioma (otro `Test Set`). 
-
-**¿Qué problemas podemos encontrar?**
-
-:::
-
-::: {.incremental}
-* Stomach $\rightarrow$ Stoma<span style="color:green;">k</span>
-
-* School $\rightarrow$ S`ch`ul 
-  * S<span style="color:green;">k</span>ul.
-
-* Chicago $\rightarrow$ `Ch`icago
-  * <span style="color:green;">Sh</span>icago.
-
-* Schlaf $\rightarrow$ S`k`laf
-  * <span style="color:green;">Sh</span>laf.
-
-* Ich mag Schweinefleisch $\rightarrow$ I`ch` mag S`ch`weinefleis`k`.
-  * I<span style="color:green;">j</span> mag <span style="color:green;">Sh</span>vaineflai<span style="color:green;">sh</span>.
-:::
-
-## Problemas del Aprendizaje: Definiciones {.smaller}
-
-Overfitting (Sobreajuste) 
-: > Se refiere a cuando un modelo no es capaz de generalizar de manera correcta, porque se ajusta `demasiado` bien (llegando a `memorizar`) a los datos de entrenamiento. **¿Cómo se puede mitigar este problema?**
-
-::: {.callout-caution}
-Se le tiende a llamar `sobreentrenamiento`, pero no es del todo correcto para el caso de modelos de Machine Learning. Lo más correcto es que el `sobreentrenamiento` provoca overfitting.
-:::
-
-::: {.notes}
-Mostrar ejemplos en Pizarra de manera gráfica. Ejemplos típicos de Excel.
-:::
-
-
-::: {.fragment}
-Underfitting (Subajuste) 
-: > Se refiere a cuando un modelo no es capaz de generalizar de manera correcta, pero a diferencia del overfitting `no se ha ajustado` correctamente a los datos. **¿Cómo se vería el underfitting en nuestro ejemplo?**
-:::
-
-# Etapas del Modelamiento
-
 
 
 # Preguntas para terminar
@@ -720,7 +469,7 @@ Underfitting (Subajuste)
   * ¿Cómo se vería el underfitting?
 
 
-# Gracias
+# Danke Schön
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-411 Minería de Datos</span> por <span property="cc:attributionName">Alfonso Tobar</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
