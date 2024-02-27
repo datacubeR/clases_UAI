@@ -8,8 +8,6 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
-<link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
@@ -335,7 +333,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 1: Calidad de los Datos y Preprocesamiento</p>
+  <p class="subtitle">Clase 1: Calidad de los Datos y Feature Engineering</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -349,6 +347,11 @@ Alfonso Tobar-Arancibia
 </div>
 
   <p class="date">Mar 14, 2024</p>
+</section>
+<section>
+<section id="datos-tabulares" class="title-slide slide level1 center">
+<h1>Datos Tabulares</h1>
+
 </section>
 <section id="tipos-de-datos-datos-tabulares" class="slide level2 smaller">
 <h2>Tipos de Datos: Datos Tabulares</h2>
@@ -397,13 +400,13 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </section>
-<section id="tipos-de-datos" class="slide level2 smaller">
-<h2>Tipos de Datos</h2>
+<section id="tipos-de-datos-numéricos" class="slide level2 smaller">
+<h2>Tipos de Datos: Numéricos</h2>
 <dl>
 <dt>Numéricos</dt>
 <dd>
 <blockquote>
-<p>TBD</p>
+<p>Valores a los que se les puede aplicar alguna operación matemática.</p>
 </blockquote>
 </dd>
 </dl>
@@ -414,17 +417,25 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <ul>
-<li>Continuas:</li>
-<li>Discretas:</li>
+<li>Discretas: Número finito o contable de valores. Integers (Enteros). Ej: <code>Número de Hijos</code>, <code>Cantidad de Productos</code>, <code>Edad</code>.</li>
+<li>Continuas: Existen infinitos puntos entre dos puntos. Floats (punto flotando o decimales). Ej. <code>Temperatura</code>, <code>Peso</code>.</li>
 </ul>
 </div>
 </div>
 </div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/cont_vs_disc.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-1/cont_vs_disc.jpg" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="tipos-de-datos-categóricos" class="slide level2 smaller">
+<h2>Tipos de Datos: Categóricos</h2>
 <dl>
 <dt>Categóricos</dt>
 <dd>
 <blockquote>
-<p>TBD</p>
+<p>Datos que representan una categoría.</p>
 </blockquote>
 </dd>
 </dl>
@@ -435,9 +446,26 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <ul>
-<li>Nominales</li>
-<li>Ordinales</li>
+<li>Nominales: Sólo nombres que no representan ningún orden. Ej: <code>Nacionalidad</code>, <code>género</code>, <code>ocupación</code>.</li>
+<li>Ordinales: Que tienen un orden o jerarquía inherente. Ej: <code>Nivel de Escolaridad</code>, <code>tamaño</code>.</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/nom_vs_ord.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-1/nom_vs_ord.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+<div class="fragment">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>No todas las operaciones matemáticas son aplicables. Ej: Media, Mediana, Sumas, Restas, etc.</p>
+</div>
 </div>
 </div>
 </div>
@@ -448,1103 +476,632 @@ Alfonso Tobar-Arancibia
 <dt>Strings</dt>
 <dd>
 <blockquote>
-<p>TBD</p>
+<p>Datos de texto, los cuales podrían eventualmente ser tratados y representar algo. Ej: <code>Rescatar comunas de una dirección</code>, <code>rescatar sexo desde el nombre</code>, etc.</p>
 </blockquote>
 </dd>
 <dt>Fechas</dt>
 <dd>
 <blockquote>
-<p>TBD</p>
+<p>Datos tipo fecha, los cuales podrían eventualmente ser tratados y representar variables de algún tipo. Ej: <code>Rescatar Años</code>, <code>meses</code>, <code>días</code>, <code>semanas</code>, <code>trimestres (quarters)</code>, etc.</p>
 </blockquote>
 </dd>
 <dt>Datos Geográficos</dt>
 <dd>
 <blockquote>
-<p>TBD</p>
+<p>Datos que representan la ubicación geográfica de un elemento. Ej: <code>Latitud</code>, <code>Longitud</code>, <code>Coordenadas</code>.</p>
 </blockquote>
 </dd>
 </dl>
+<div class="fragment">
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>El principal problema de los datos son su calidad!!</p>
+<p>Sin importar el tipo de dato el mayor problema es su calidad.</p>
 </div>
 </div>
 </div>
+</div>
+</section></section>
+<section>
+<section id="calidad-de-los-datos" class="title-slide slide level1 center">
+<h1>Calidad de los Datos</h1>
+
 </section>
-<section id="calidad-de-los-datos-ruido" class="slide level2">
+<section id="calidad-de-los-datos-ruido" class="slide level2 smaller">
 <h2>Calidad de los Datos: Ruido</h2>
+<dl>
+<dt>Ruido</dt>
+<dd>
+Corresponde al error y extrema variabilidad en la medición en los datos. Este error puede ser aleatorio o sistemático.
+</dd>
+</dl>
+<p><br></p>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/noise.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-1/noise.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></a></p>
+</figure>
+</div>
+</div><div class="column fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/signal.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-1/signal.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Se le llama <code>Señal</code> a la tendencia principal y representa la información significativa y valiosa de los datos.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="calidad-de-los-datos-outliers" class="slide level2">
+<section id="calidad-de-los-datos-outliers" class="slide level2 smaller">
 <h2>Calidad de los Datos: Outliers</h2>
+<dl>
+<dt>Outliers</dt>
+<dd>
+Son datos considerablemente diferentes a la mayoría del dataset. Dependiendo del caso pueden indicar casos <code>"interesantes"</code> o <code>errores de medición</code>.
+</dd>
+</dl>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/outliers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-1/outliers.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
 <ul>
-<li>Ruido</li>
-<li>Outliers</li>
-<li>Valores Faltantes</li>
-<li>Datos Duplicados</li>
-<li>Dominio del Problema</li>
+<li>Es importante notar que dependiendo del caso puede ser una buena idea deshacerse de ellos.</li>
 </ul>
+</div>
+</div>
+</div>
 </section>
-<section id="preprocesamiento" class="slide level2">
-<h2>Preprocesamiento</h2>
+<section id="calidad-de-los-datos-valores-faltantes" class="slide level2 smaller">
+<h2>Calidad de los Datos: Valores Faltantes</h2>
+<dl>
+<dt>Missing Values</dt>
+<dd>
+Son valores que por alguna razón no están presentes.
+</dd>
+</dl>
+<div>
 <ul>
-<li>Agregación</li>
-<li>Sampleo</li>
-<li>Discretización</li>
-<li>Selección de Variables</li>
-<li>Reducción de Dimensionalidad</li>
-<li>Estandarización de Datos</li>
-<li>Manejo de Variables Categóricas.</li>
+<li class="fragment"><p><strong>Missing at Random (MAR)</strong>: Son valores que no están presentes por causas que no se pueden controlar. <strong>Ej</strong>: No se registró, no se preguntó, fallas en el sistema de recolección de datos, etc.</p></li>
+<li class="fragment"><p><strong>Informative Missing</strong>: Es un valor no aplicable. <strong>Ej</strong>: Sueldo en niños, Precio de la entrada de un concierto si es que <strong>NO</strong> compró entrada.</p></li>
 </ul>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/na.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-1/na.jpg" class="fragment quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
 </section>
-<section id="medidas" class="slide level2">
-<h2>Medidas</h2>
+<section id="calidad-de-los-datos-datos-duplicados" class="slide level2 smaller">
+<h2>Calidad de los Datos: Datos Duplicados</h2>
+<dl>
+<dt>Duplicates</dt>
+<dd>
+Se refiere a registros que pueden estar total o parcialmente duplicados.
+</dd>
+</dl>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/dups.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-1/dups.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Esto genera problemas en la confiabilidad de los datos. <strong>¿Cuál es el registro correcto?</strong></p>
+<p><strong>Ej</strong>: Caso particular de una Jooycar (una startup de seguros).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="calidad-de-los-datos-dominio-del-problema" class="slide level2 smaller">
+<h2>Calidad de los Datos: Dominio del Problema</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/domain.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-1/domain.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="fragment">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Por lejos el problema de calidad más difícil de encontrar.</li>
+<li>Se requiere experiencia y conocimiento profundo del negocio para detectarlo.</li>
+</ul>
+<p><strong>Ej</strong>: Caso de Super Avances en Cencosud.</p>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="feature-engineering" class="title-slide slide level1 center">
+<h1>Feature Engineering</h1>
+
+</section>
+<section id="feature-engineering-1" class="slide level2">
+<h2>Feature Engineering</h2>
+<dl>
+<dt>Feature Engineering</dt>
+<dd>
+<blockquote>
+<p>También conocida como Ingeniería de Atributos, es el <code>arte</code> de trabajar las <code>features</code> existentes para <em>limpiar</em> o <em>corregir</em> variables existentes o <em>crear</em> nuevas variables.</p>
+</blockquote>
+</dd>
+<dt>Preprocesamiento</dt>
+<dd>
+<blockquote>
+<p>Se refiere al proceso de preparación de los datos para su ingreso a un modelo. En una primera parte puede incluir limpieza de datos corruptos, redundantes y/o irrelevantes. Por otra parte, también hace referencia a la transformación de datos para que puedan ser consumidos por un algoritmo.</p>
+</blockquote>
+</dd>
+</dl>
+</section>
+<section id="data-cleaning" class="slide level2 smaller">
+<h2>Data Cleaning</h2>
+<ul>
+<li>No existe un procedimiento estándar.</li>
+<li>Revisar los datos y ver potenciales errores que puedan afectar el funcionamiento de un modelo.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/cleaning.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-1/cleaning.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="preprocesamiento-valores-faltantes" class="slide level2 smaller">
+<h2>Preprocesamiento: Valores Faltantes</h2>
+<blockquote>
+<p>Imputación: Se refiere al proceso de rellenar datos faltantes.</p>
+</blockquote>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/impute.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-1/impute.jpeg" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/mean_median.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-1/mean_median.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Dependiendo del nivel de valores faltantes, es necesario evaluar la eliminación de registros o atributos completos de ser necesario.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocesamiento-manejo-de-outliers" class="slide level2">
+<h2>Preprocesamiento: Manejo de Outliers</h2>
+<dl>
+<dt>Winsorizer</dt>
+<dd>
+Se refiere al proceso de acotar un atributo eliminando los valores extremos o atípicos (outliers).
+</dd>
+</dl>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/winsorizer.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-1/winsorizer.jpg" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Al igual que en el caso anterior, es necesario evaluar la eliminación de registros si es que representan valores atípicos.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocesamiento-manejo-de-variables-categóricas" class="slide level2 smaller">
+<h2>Preprocesamiento: Manejo de Variables Categóricas</h2>
+<blockquote>
+<p>La mayoría de los modelos no tienen la capacidad de poder lidiar con variables categóricas por lo que deben ser transformadas en una representación numérica antes de ingresar a un modelo.</p>
+</blockquote>
+<div class="columns">
+<div class="column fragment" style="width:70%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/ohe.png" class="lightbox" data-glightbox="description: .lightbox-desc-14" data-gallery="quarto-lightbox-gallery-14" title="One Hot Encoder"><img data-src="img/clase-1/ohe.png" style="width:200.0%" alt="One Hot Encoder"></a></p>
+<figcaption>One Hot Encoder</figcaption>
+</figure>
+</div>
+</div><div class="column fragment" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/ordinal.png" class="lightbox" data-glightbox="description: .lightbox-desc-15" data-gallery="quarto-lightbox-gallery-15" title="Ordinal Encoder"><img data-src="img/clase-1/ordinal.png" alt="Ordinal Encoder"></a></p>
+<figcaption>Ordinal Encoder</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><code>One Hot Encoder</code> suele dar mejores resultados en modelos lineales.</li>
+<li><code>Ordinal Encoder</code> suele dar mejores resultados en modelos de árbol.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocesamiento-escalamiento" class="slide level2 smaller">
+<h2>Preprocesamiento: Escalamiento</h2>
+<blockquote>
+<p>El <code>escalamiento</code> se refiere al proceso de llevar distintas variables a una misma escala.</p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/scaling.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-1/scaling.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<ul>
+<li>Evitar que la escala de una “sobre-importancia” a una cierta variable.</li>
+<li>Permitir una mejor convergencia de los algoritmos.</li>
+</ul>
+</div><div class="column fragment" style="width:40%;">
+<!-- -->
+<h4 id="standardscaler-normalización">StandardScaler (Normalización)</h4>
+<p><span class="math display">\[x_j=\frac{x_j-\mu_x}{\sigma_x}\]</span></p>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Este proceso fuerza (en la medida de lo posible) a tener media 0 y std 1.</p>
+</div>
+</div>
+</div>
+<h4 id="minmax-scaler">MinMax Scaler</h4>
+<p><span class="math display">\[x_j=\frac{x_j-min(x_j)}{max(x_j)-min(x_j)}\]</span></p>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Este proceso fuerza a los datos a distribuirse entre 0 y 1.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocesamiento-escalamiento-1" class="slide level2 smaller">
+<h2>Preprocesamiento: Escalamiento</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/df_scale.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-1/df_scale.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="fragment" data-fragment-index="1">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong>Media</strong>: 0.75</li>
+<li><strong>Std</strong>: 3.1875</li>
+<li><strong>Min</strong>: -2</li>
+<li><strong>Max</strong>: 3</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="2">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong>Centering (Centrado)</strong>: Se le llama a la diferencia entre la variable y su media.</li>
+<li><strong>Scaling (Escalado)</strong>: Se le llama al cuociente entre la variable y su Desviación Estándar.</li>
+<li><strong>StandardScaler (Normalización)</strong>: Es Centrado y Escalado.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="creación-de-variables" class="slide level2 smaller">
+<h2>Creación de Variables</h2>
+<dl>
+<dt>Combinación</dt>
+<dd>
+<blockquote>
+<p>Combinar 2 o más variables. Ej: Calcular el área de un sitio a partir del ancho y largo.</p>
+</blockquote>
+</dd>
+<dt>Transformación</dt>
+<dd>
+<blockquote>
+<p>Aplicar una operación a una variable. Ej: El logaritmo de las ganancias.</p>
+</blockquote>
+</dd>
+</dl>
+<div class="columns">
+<div class="column">
+<dl>
+<dt>Discretización (Binning)</dt>
+<dd>
+<blockquote>
+<p>Generar categorías a partir de una variable continua.</p>
+</blockquote>
+</dd>
+</dl>
+</div><div class="column fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/binning.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-1/binning.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="creación-de-variables-1" class="slide level2">
+<h2>Creación de Variables</h2>
+<dl>
+<dt>Ratios</dt>
+<dd>
+Es una medida que expresa la relación entre dos cantidades. Ej: Puntos por partido, cantidad de transacciones por mes, etc.
+</dd>
+<dt>Agregación</dt>
+<dd>
+Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de tiempo en aprobar un tipo de crédito.
+</dd>
+</dl>
+</section>
+<section id="selección-de-variables" class="slide level2 smaller">
+<h2>Selección de Variables</h2>
+<blockquote>
+<p>Se refiere al proceso de eliminar variables que pueden ser irrelevantes o poco significativas.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/f_sel.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-1/f_sel.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Procesos Manuales.</li>
+<li>Procesos Automáticos:
+<ul>
+<li>PCA (Principal Component Analysis).</li>
+<li>Recursive Feature Elimination.</li>
+<li>Recursive Feature Addition.</li>
+<li>Eliminación mediante alguna medida.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="medidas" class="title-slide slide level1 center">
+<h1>Medidas</h1>
+
+</section>
+<section id="medidas-similaridad" class="slide level2">
+<h2>Medidas: Similaridad</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/simil.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-1/simil.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="medidas-similaridad-nominal" class="slide level2">
+<h2>Medidas: Similaridad Nominal</h2>
+<div class="columns">
+<div class="column" style="text-align: center;">
+<ul>
+<li>Disimilaridad: <span class="math display">\[D =
+\begin{cases}
+0,  &amp; \text{if $p=q$} \\[2ex]
+1, &amp; \text{if $p\neq q$}
+\end{cases}
+\]</span></li>
+</ul>
+</div><div class="column" style="text-align: center;">
+<ul>
+<li>Similaridad:<br>
+<span class="math display">\[S =
+\begin{cases}
+1,  &amp; \text{if $p=q$} \\[2ex]
+0, &amp; \text{if $p\neq q$}
+\end{cases}
+\]</span></li>
+</ul>
+</div>
+</div>
+<p><br></p>
+<div class="columns fragment">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/s_nom.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-1/s_nom.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<p><span class="math display">\[S(p,q) = 0\]</span> <span class="math display">\[D(p,q) = 1\]</span></p>
+</div>
+</div>
+</section>
+<section id="medidas-similaridad-ordinal" class="slide level2">
+<h2>Medidas: Similaridad Ordinal</h2>
+<div class="columns">
+<div class="column" style="text-align: center;">
+<ul>
+<li>Disimilaridad: <span class="math display">\[D = \frac{|p-q|}{n-1}\]</span></li>
+</ul>
+</div><div class="column" style="text-align: center;">
+<ul>
+<li>Similaridad:<br>
+<span class="math display">\[S = 1 - \frac{|p-q|}{n-1}\]</span></li>
+</ul>
+</div>
+</div>
+<div class="columns fragment">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/s_ord.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-1/s_ord.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<p><span class="math display">\[S(p,q) = 1 - \frac{5 - 4}{6 - 1} = 0.8\]</span></p>
+</div>
+</div>
+</section>
+<section id="medidas-similaridad-intervalo-o-ratio" class="slide level2">
+<h2>Medidas: Similaridad Intervalo o Ratio</h2>
+<div class="columns">
+<div class="column" style="text-align: center;">
+<ul>
+<li>Disimilaridad: <span class="math display">\[D = |p-q|\]</span></li>
+</ul>
+</div><div class="column" style="text-align: center;">
+<ul>
+<li>Similaridad:<br>
+<span class="math display">\[S = -D\]</span> <span class="math display">\[S = \frac{|p-q|}{n-1}\]</span> <span class="math display">\[S = 1 - \frac{d - min_d}{max_d - min_d}\]</span></li>
+</ul>
+</div>
+</div>
+<div class="fragment">
+<p>Sea <span class="math inline">\(p=35 °C\)</span> y <span class="math inline">\(q = 40 °C\)</span>. Luego:</p>
+<p><span class="math display">\[ S(p,q) = -5\]</span> <span class="math display">\[S(p,q) = \frac{1}{1 + 5} = 0.17\]</span></p>
+</div>
+</section>
+<section id="medidas-similaridad-datos-categóricos" class="slide level2 smaller">
+<h2>Medidas: Similaridad Datos Categóricos</h2>
+<blockquote>
+<p>Sea <code>p</code> y <code>q</code> vectores de dimensión <span class="math inline">\(m\)</span> con <em>sólo atributos categóricos</em>. Para calcular la similaridad entre vectores se usa lo siguiente:</p>
+</blockquote>
+<p><span class="math display">\[Sim(p,q) = \sum_{i=1}^m S(p_i,q_i)\]</span></p>
+<p><br></p>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Overlap: <span class="math display">\[S(p_i, q_i) = 1\]</span></li>
+</ul>
+</div><div class="column">
+<ul>
+<li>Frecuencia de Ocurrencia Inversa <span class="math display">\[S(p_i, q_i) = \frac{1}{p_k(p_i)^2}\]</span></li>
+</ul>
+</div><div class="column">
+<ul>
+<li>Medida de Goodall</li>
+</ul>
+<p><span class="math display">\[S(p_i, q_i) = 1 - p_k(p_i)^2\]</span></p>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Todas estas medidas son 0 si <span class="math inline">\(p_i \neq q_i\)</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="medidas-similaridad-datos-categóricos." class="slide level2">
+<h2>Medidas: Similaridad Datos Categóricos.</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/datos_cat.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-1/datos_cat.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<aside class="notes">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/sim_cat_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-1/sim_cat_1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="medidas-distancias" class="slide level2">
+<h2>Medidas: Distancias</h2>
 <ul>
 <li>Similaridad</li>
 <li>Distancias</li>
 <li>Correlación</li>
 </ul>
-</section>
-<section id="quién-soy" class="slide level2 smaller">
-<h2>¿Quién soy?</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><img data-src="../me.jpg" style="width:60.0%"></p>
-<p><img data-src="img/clase-0/chiquis.jpeg" style="width:60.0%"></p>
-</div><div class="column" style="width:70%;">
-<div class="smaller">
-<ul>
-<li class="fragment">Alfonso Tobar-Arancibia, estudié <strong>Ingeniería Civil</strong> pero llevo 9 años trabajando como:
-<ul>
-<li class="fragment">Data Analyst.</li>
-<li class="fragment">Data Scientist.</li>
-<li class="fragment">ML Engineer.</li>
-<li class="fragment">Data Engineer.</li>
-</ul></li>
-<li class="fragment">Terminando mi Msc. y empezando mi PhD en la UAI.</li>
-<li class="fragment">He ganado 2 competencias de Machine Learning.</li>
-<li class="fragment">Publiqué mi primer <a href="https://ieeexplore.ieee.org/abstract/document/10315748">paper</a> el año pasado sobre Hate Speech en Español.</li>
-<li class="fragment">Juego <strong>Tenis de Mesa</strong>, hago <strong>Agility</strong> con mi perrita Kira y escribo en mi Blog.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section>
-<section id="sobre-el-curso" class="title-slide slide level1 center">
-<h1>Sobre el Curso</h1>
-
-</section>
-<section id="objetivos-del-curso" class="slide level2">
-<h2>Objetivos del Curso</h2>
-<div class="columns">
-<div class="column" style="width:20%;">
-<p><img data-src="img/clase-0/objetivos.jpg"></p>
-</div><div class="column" style="width:80%;">
-<div>
-<ul>
-<li class="fragment">Identificar Elementos Claves del Machine Learning (Terminología, Nomenclatura, Intuición).</li>
-<li class="fragment">Entender como interactúan los algoritmos más importantes.</li>
-<li class="fragment">Aprender a seleccionar el mejor Algoritmo para el Problema.</li>
-<li class="fragment">Ejecutar y aplicar algoritmos clásicos de Machine Learning.</li>
-<li class="fragment">Evaluar el desempeño esperado del Modelo.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="tópicos" class="slide level2">
-<h2>Tópicos</h2>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Introducción a la Minería de Datos</li>
-<li>Análisis Exploratorio de Datos (EDA)</li>
-<li>Modelos No Supervisados/Descriptivos</li>
-<li>Modelos Supervisados/Predictivos</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h4 class="smaller" id="modelos-no-supervisados">Modelos no Supervisados</h4>
-<ul>
-<li>K-Means</li>
-<li>Hierarchical Clustering</li>
-<li>DBScan</li>
-<li>Apriori</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<h4 class="smaller" id="modelos-supervisados">Modelos Supervisados</h4>
-<ul>
-<li>KNN</li>
-<li>Árboles de Decisión</li>
-<li>Naive Bayes</li>
-<li>Regresión Logística</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="sobre-las-clases" class="slide level2">
-<h2>Sobre las clases</h2>
-<div>
-<ul>
-<li class="fragment">Clases presenciales, con participación activa de los estudiantes.</li>
-<li class="fragment">Mucha terminología y material de estudio será en <code>Inglés</code>.</li>
-<li class="fragment">Horario: Jueves.
-<ul>
-<li class="fragment">15:30 a 16:40 (Cátedra)</li>
-<li class="fragment">17:00 a 18:10 (Práctico)</li>
-</ul></li>
-<li class="fragment">Asistencia es voluntaria, pero <code>altamente recomendada</code>.</li>
-</ul>
-</div>
-</section>
-<section id="materiales-de-clases" class="slide level2">
-<h2>Materiales de Clases</h2>
-<ul>
-<li><a href="https://datacuber.cl/clases_UAI/tics411.html">Diapositivas</a></li>
-<li><a href="">Prácticos</a></li>
-</ul>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Slides interactivas</li>
-<li>Todo el código se puede copiar directamente.</li>
-<li>Se puede buscar contenido en las diapositivas mediante un buscador.</li>
-<li>Se dejarán copias en PDF en Webcursos.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Se espera que los estudiantes dominen las siguientes tecnologías:</p>
-<ul>
-<li><a href="https://www.python.org/">Python</a></li>
-<li><a href="https://colab.research.google.com/?hl=es#scrollTo=zwFnJsE6vjf8">Google Colab</a></li>
-<li><a href="https://pandas.pydata.org/docs/user_guide/10min.html">Pandas</a></li>
-<li><a href="https://scikit-learn.org/stable/">Scikit-Learn</a> (Se enseñará a lo largo del curso).</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="material-complementario" class="slide level2">
-<h2>Material Complementario</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><a href="img/clase-0/data_mining.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-0/data_mining.jpg"></a></p>
-</div><div class="column" style="width:30%;">
-<p><a href="img/clase-0/sk-keras.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-0/sk-keras.jpg"></a></p>
-</div><div class="column" style="width:40%;">
-<p><a href="https://www.youtube.com/watch?v=d79mzijMAw0&amp;list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM">Curso de Scikit-Learn</a> <a href="img/clase-0/andreas_mueller.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-0/andreas_mueller.png"></a></p>
-<ul>
-<li><p><a href="https://www.youtube.com/watch?v=RLYoEyIHL6A">Tutorial Colab</a></p></li>
-<li><p><a href="https://www.youtube.com/watch?v=z1pBdycYCGY">Agregar Datos Externos a Colab</a></p></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="evaluación" class="slide level2">
-<h2>Evaluación</h2>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Dos Evaluaciones Escritas (P1, P2) coordinadas y cuatro tareas prácticas (T1, T2, T3, T4) <span class="math display">\[NP = 0.35 \cdot P1 + 0.35 \cdot P2 + 0.3 \cdot \bar{T}\]</span> <span class="math display">\[ \bar{T} = (T1 + T2 + T3 + T4)/4 \]</span></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Si NP &gt; 5</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[NF = NP\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>En caso contrario:</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[NF = 0.7 \cdot NP + 0.3 \cdot E\]</span></p>
-</div>
-</div>
-</div>
-</section>
-<section id="ayudantías" class="slide level2">
-<h2>Ayudantías</h2>
-<h3 id="ayudante-tbd">Ayudante: TBD</h3>
-<h3 id="email-tbd">email: TBD</h3>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>No habrán ayudantías todas las semanas.</li>
-<li>Estarán enfocadas principalmente en aplicaciones y código.</li>
-</ul>
-</div>
-</div>
-</div>
 </section></section>
-<section>
-<section id="introducción-al-curso" class="title-slide slide level1 center">
-<h1>Introducción al Curso</h1>
-
-</section>
-<section id="revolución-de-los-datos" class="slide level2">
-<h2>Revolución de los Datos</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-0/internet_2023.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-0/internet_2023.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
-<aside class="notes">
-<ul>
-<li>Hablar de los distintos tipos de Datos.</li>
-<li>Todo es datos, y está lleno de ellos en Internet y el mundo.</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="nace-el-data-science-ciencia-de-datos" class="slide level2">
-<h2>Nace el Data Science (Ciencia de Datos)</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-0/data_science.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-0/data_science.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
-<aside class="notes">
-<ul>
-<li>Explicar las distintas etapas. Qué son cada uno de ellos.</li>
-<li>Explicar que no estoy de acuerdo con todas las definiciones.</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="cómo-aprovechar-la-información-que-tenemos" class="slide level2">
-<h2>¿Cómo aprovechar la información que tenemos?</h2>
-<div class="fragment">
-<dl>
-<dt>Data Mining (Minería de Datos)</dt>
-<dd>
-<blockquote>
-<p>“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data.” <strong>(Fayyad, Piatetsky-Shapiro &amp; Smith 1996)</strong></p>
-</blockquote>
-</dd>
-</dl>
-</div>
-<div class="fragment">
-<dl>
-<dt>Machine Learning (Aprendizaje Automático)</dt>
-<dd>
-<blockquote>
-<p>“A computer program is said to learn from experience <code>E</code> with respect to some class of tasks <code>T</code> and performance measure <code>P</code>, if its performance at tasks in <code>T</code>, as measured by <code>P</code>, improves with experience <code>E</code>.” <strong>(Mitchell, 2006)</strong></p>
-</blockquote>
-</dd>
-</dl>
-</div>
-<aside class="notes">
-<ul>
-<li>Explicar que estos son dos tipos de Approaches con el que hoy en día se enfrentan los datos.</li>
-<li>El primero más enfocado en un análisis manual.</li>
-<li>El segundo en un enfoque más automático.</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="tipos-de-datos-1" class="slide level2">
-<h2>Tipos de Datos</h2>
-<div class="quarto-layout-panel" data-layout="[ 40, 60 ]">
-<div class="quarto-layout-row">
-<div id="first-column" class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
-<div class="fragment" data-fragment-index="1">
-<!-- -->
-<h3 id="datos-estructurados">Datos Estructurados</h3>
-</div>
-</div>
-<div id="second-column" class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: flex-start;">
-<div class="fragment" data-fragment-index="5">
-<!-- -->
-<h3 id="datos-no-estructurados">Datos No Estructurados</h3>
-</div>
-</div>
-</div>
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="6">
-<div class="quarto-layout-row">
-<div class="fragment quarto-layout-cell" data-fragment-index="2" style="flex-basis: 16.7%;justify-content: center;">
-<p><img data-src="img/clase-0/table.png"></p>
-</div>
-<div class="fragment quarto-layout-cell" data-fragment-index="3" style="flex-basis: 16.7%;justify-content: center;">
-<p><img data-src="img/clase-0/ts.png"></p>
-</div>
-<div class="fragment quarto-layout-cell" data-fragment-index="6" style="flex-basis: 16.7%;justify-content: center;">
-<p><img data-src="img/clase-0/image.png"></p>
-</div>
-<div class="fragment quarto-layout-cell" data-fragment-index="7" style="flex-basis: 16.7%;justify-content: center;">
-<p><img data-src="img/clase-0/text.png"></p>
-</div>
-<div class="fragment quarto-layout-cell" data-fragment-index="8" style="flex-basis: 16.7%;justify-content: center;">
-<p><img data-src="img/clase-0/video.png"></p>
-</div>
-<div class="fragment quarto-layout-cell" data-fragment-index="9" style="flex-basis: 16.7%;justify-content: center;">
-<p><img data-src="img/clase-0/graph.png"></p>
-</div>
-</div>
-</div>
-<div class="quarto-layout-panel" data-layout="[ 40, 60 ]">
-<div class="quarto-layout-row">
-<div id="first-column" class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
-<div class="fragment" data-fragment-index="4">
-<div class="quarto-figure quarto-figure-left">
-<figure>
-<p><img data-src="img/clase-0/ml.jpg" class="quarto-figure quarto-figure-left" style="width:80.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="second-column" class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: flex-start;">
-<div class="fragment" data-fragment-index="10">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/dl.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="tipos-de-datos-datos-tabulares-1" class="slide level2 smaller">
-<h2>Tipos de Datos: Datos Tabulares</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-0/tab_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-0/tab_data.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Filas: Observaciones, instancias. (Normalmente independientes).</li>
-<li>Columnas: Variables, Atributos, Features.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Probablemente el tipo de datos más amigable.</li>
-<li>Requiere conocimiento de negocio (<strong>Domain Knowledge</strong>)</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Es un % bajísimo del total de datos existentes en el Mundo.</li>
-<li>Distintos tipos, por lo que normalmente requiere de algún tipo de <strong>preprocesamiento</strong>.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="tipos-de-datos-series-de-tiempo" class="slide level2 smaller">
-<h2>Tipos de Datos: Series de Tiempo</h2>
-<div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-0/ts_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-0/ts_data.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-0/ts_plot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-0/ts_plot.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Filas: Instancias temporales (Normalmente interdependientes).</li>
-<li>Columnas: Variables, Atributos, Features (Univariada o Multivariada).</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Es un % bajísimo del total de datos existentes en el Mundo.</li>
-<li>Propiedad temporal requiere <strong>preprocesamiento</strong> y modelos especiales.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="tipos-de-datos-imágenes" class="slide level2 smaller">
-<h2>Tipos de Datos: Imágenes</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="fragment" data-fragment-index="1">
-<p><a href="img/clase-0/image_tensor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-0/image_tensor.png"></a></p>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Este es el tipo de Datos que disparó la Inteligencia Artificial.</li>
-<li><a href="https://www.nytimes.com/2012/06/26/technology/in-a-big-network-of-computers-evidence-of-machine-learning.html">¿Cuántos computadores para identificar un Gato? 16,000</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="fragment" data-fragment-index="2">
-<p><a href="img/clase-0/tensor_rgb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-0/tensor_rgb.jpg"></a></p>
-</div>
-</div>
-</div>
-<aside class="notes">
-<ul>
-<li>Explicar el concepto de Tensor, extensión de las matrices. Diferencia entre Grayscale y RGB.</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="tipos-de-datos-texto-libre" class="slide level2 smaller">
-<h2>Tipos de Datos: Texto Libre</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-0/free_text.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-0/free_text.jpg" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Datos Masivos.</li>
-<li>Dificiles de lidiar ya que deben ser llevarse a una representación numérica.</li>
-<li>Alto nivel de Sesgo y Subjetividad.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Gracias a este tipo de datos se han producido los avances más increíbles del último tiempo: <a href="https://arxiv.org/abs/1706.03762">Transformers</a></li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="tipos-de-datos-videos" class="slide level2 smaller">
-<h2>Tipos de Datos: Videos</h2>
-<video id="video_shortcode_videojs_video1" width="800" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="https://www.neuralframes.com/videos/new_landingpage_video_squirrel.webm"></video>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Los videos no son más que arreglos de imágenes.</li>
-<li>Son un tipo de dato muy pesado y difícil de lidiar.</li>
-<li>Requiere alto poder de Procesamiento.</li>
-</ul>
-</div>
-</div>
-</div>
-</section></section>
-<section>
-<section id="cómo-aprenden-los-modelos" class="title-slide slide level1 center">
-<h1>¿Cómo aprenden los Modelos?</h1>
-
-</section>
-<section id="tipos-de-aprendizaje" class="slide level2">
-<h2>Tipos de Aprendizaje</h2>
-<p><a href="img/clase-0/ML_types.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-0/ML_types.png"></a></p>
-</section>
-<section id="reinforcement-learning" class="slide level2">
-<h2>Reinforcement Learning</h2>
-<p><a href="img/clase-0/alpha_tensor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-0/alpha_tensor.png"></a></p>
-</section>
-<section id="regresión-y-clasificación" class="slide level2 smaller">
-<h2>Regresión y Clasificación</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/clf_reg.jpeg" class="quarto-figure quarto-figure-center"></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li><strong>Regresión</strong>: Se busca estimar un valor continuo.
-<ul>
-<li><code>(Estimar el valor de una casa)</code>.</li>
-</ul></li>
-<li><strong>Clasificación</strong>: Se busca encontrar una categoría o un valor discreto.
-<ul>
-<li><code>(Clasificar una imagen como Perro o Gato)</code>.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Para entrenar este tipo de modelos se necesitan <code>etiquetas</code>, es decir, la respuesta esperada del modelo.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/house_pred.png" class="fragment quarto-figure quarto-figure-center" style="width:60.0%" data-fragment-index="1"></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/cat_dog.jpg" class="fragment quarto-figure quarto-figure-center" style="width:60.0%" data-fragment-index="2"></p>
-</figure>
-</div>
-</div>
-</div>
-<aside class="notes">
-<ul>
-<li>Ambos ejemplos se pueden realizar utilizando Largo (Eje Y) y Peso (Eje X).</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="clustering" class="slide level2 smaller">
-<h2>Clustering</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-0/clustering.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-0/clustering.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-<div class="fragment">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li><strong>Clusters</strong>: Una categoría en la que sus componentes son similares. Los clusters normalmente no tienen un nombre propio, sino que uno les asigna uno.</li>
-<li>También se les llama segmentos. No usar la palabra <code>clase</code>.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>No requiere de etiquetas, por lo tanto, no es posible evaluar su desempeño de manera 100% acertada.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="reducción-de-dimensionalidad" class="slide level2 smaller">
-<h2>Reducción de Dimensionalidad</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-0/dim_red.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-0/dim_red.jpeg" class="quarto-figure quarto-figure-center" style="height:60.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li><strong>Reducción de la Dimensionalidad</strong>: Eliminar complejidad sin perder información clave para poder entender su comportamiento.</li>
-</ul>
-</div>
-</div>
-</div>
-</section></section>
-<section>
-<section id="intuición" class="title-slide slide level1 center">
-<h1>Intuición</h1>
-
-</section>
-<section id="nuestro-sistema-de-ml" class="slide level2 smaller">
-<h2>Nuestro Sistema de ML</h2>
-<p>Creemos un Sistema de ML que sea capaz de ver una imágen y pronunciar correctamente el uso de la letra <code>C</code>.</p>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Vamos a <code>Entrenar</code> un Modelo.</p>
-</div>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-0/model.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-0/model.png" class="fragment quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</section>
-<section id="nuestro-sistema-de-ml-entrenamiento" class="slide level2 smaller">
-<h2>Nuestro Sistema de ML: Entrenamiento</h2>
-<div class="quarto-layout-panel" data-layout-ncol="3">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/casa.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
-<figcaption><code>K</code>asa</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/cocodrilo.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
-<figcaption><code>K</code>o<code>k</code>odrilo</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/cubo.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
-<figcaption><code>K</code>ubo</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong>¿Qué patrones está aprendiendo el modelo?</strong></p>
-</div>
-</div>
-</div>
-</div>
-<dl>
-<dt>Entrenamiento</dt>
-<dd>
-<blockquote>
-<p>Es el proceso en el cuál se permite al modelo aprender. En este proceso se le entregan ejemplos (<code>Train Set</code>) para que el modelo de manera <code>autónoma</code> pueda aprender <code>patrones</code> que le permitan resolver la tarea dada.</p>
-</blockquote>
-</dd>
-</dl>
-</section>
-<section id="nuestro-sistema-de-ml-inferencia" class="slide level2 smaller">
-<h2>Nuestro Sistema de ML: Inferencia</h2>
-<dl>
-<dt>Inferencia/Predicción</dt>
-<dd>
-<blockquote>
-<p>Se refiere al proceso en el que el modelo tiene que demostrar cuál sería su decisión de acuerdo a los patrones aprendidos en el proceso de entrenamiento. Los ejemplos en los que se prueba se le denomina <code>Test Set</code>.</p>
-</blockquote>
-</dd>
-</dl>
-<div class="quarto-layout-panel" data-layout-ncol="4">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/correa.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="1"></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/conejo.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="3"></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/cuchillo.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="5"></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/bicicleta.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="7"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="4">
-<div class="quarto-layout-row">
-<div class="fragment quarto-layout-cell" data-fragment-index="2" style="flex-basis: 25.0%;justify-content: flex-start;">
-<p><code>K</code>orrea</p>
-</div>
-<div class="fragment quarto-layout-cell" data-fragment-index="4" style="flex-basis: 25.0%;justify-content: flex-start;">
-<p><code>K</code>onejo</p>
-</div>
-<div class="fragment quarto-layout-cell" data-fragment-index="6" style="flex-basis: 25.0%;justify-content: flex-start;">
-<p><code>K</code>u<code>k</code>illo</p>
-</div>
-<div class="fragment quarto-layout-cell" data-fragment-index="8" style="flex-basis: 25.0%;justify-content: flex-start;">
-<p>Bi<code>k</code>i<code>k</code>leta</p>
-</div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="11">
-<dl>
-<dt>Generalización</dt>
-<dd>
-<blockquote>
-<p>Se le llama generalización a la capacidad del modelo de aplicar lo aprendido de manera correcta en ejemplos no vistos.</p>
-</blockquote>
-</dd>
-</dl>
-</div>
-</section>
-<section id="nuestro-sistema-de-ml-nuevas-instancias-de-entrenamiento" class="slide level2">
-<h2>Nuestro Sistema de ML: Nuevas instancias de Entrenamiento</h2>
-<div class="quarto-layout-panel" data-layout-ncol="3">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/cuchillo.png" class="fragment fade-out quarto-figure quarto-figure-center" style="width:70.0%" data-fragment-index="1"></p>
-<figcaption><code>K</code>u<code>ch</code>illo</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/chocolate.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
-<figcaption><code>Ch</code>o<code>k</code>olate</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/cincel.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
-<figcaption><code>S</code>in<code>s</code>el</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="2">
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>No es bueno entrenar con las mismas instancias de entrenamiento. <strong>¿Por qué?</strong></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="nuestro-sistema-de-ml-reevaluemos-nuestro-modelo" class="slide level2 smaller">
-<h2>Nuestro Sistema de ML: Reevaluemos nuestro Modelo</h2>
-<div class="quarto-layout-panel" data-layout-ncol="5">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/correa.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="1"></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/conejo.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="3"></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/cuchillo.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="5"></p>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/clase-0/bicicleta.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="7"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="4">
-<div class="quarto-layout-row">
-<div class="fragment quarto-layout-cell" data-fragment-index="2" style="flex-basis: 25.0%;justify-content: flex-start;">
-<p><code>K</code>orrea</p>
-</div>
-<div class="fragment quarto-layout-cell" data-fragment-index="4" style="flex-basis: 25.0%;justify-content: flex-start;">
-<p><code>K</code>onejo</p>
-</div>
-<div class="fragment quarto-layout-cell" data-fragment-index="6" style="flex-basis: 25.0%;justify-content: flex-start;">
-<p><code>K</code>u<code>ch</code>illo</p>
-</div>
-<div class="fragment quarto-layout-cell" data-fragment-index="8" style="flex-basis: 25.0%;justify-content: flex-start;">
-<p>Bi<code>s</code>i<code>k</code>leta</p>
-</div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="9">
-<dl>
-<dt>Evaluación</dt>
-<dd>
-<blockquote>
-<p>Utilizar una métrica que permita <code>ponerle nota</code> al modelo.</p>
-</blockquote>
-</dd>
-</dl>
-</div>
-<div class="fragment" data-fragment-index="10">
-<ul>
-<li>1er Modelo: 2 correctas de 4, es decir <strong>50%</strong>.</li>
-</ul>
-</div>
-<div class="fragment" data-fragment-index="11">
-<ul>
-<li>2do Modelo: 4 correctas de 4, es decir <strong>100%</strong>.</li>
-</ul>
-</div>
-</section>
-<section id="problemas-del-aprendizaje" class="slide level2 smaller">
-<h2>Problemas del Aprendizaje</h2>
-<div class="fragment" data-fragment-index="1">
-<p>Supongamos que queremos utilizar nuestro modelo para pronunciar palabras en otro idioma (otro <code>Test Set</code>).</p>
-<p><strong>¿Qué problemas podemos encontrar?</strong></p>
-</div>
-<div>
-<ul>
-<li class="fragment"><p>Stomach <span class="math inline">\(\rightarrow\)</span> Stoma<span style="color:green;">k</span></p></li>
-<li class="fragment"><p>School <span class="math inline">\(\rightarrow\)</span> S<code>ch</code>ul</p>
-<ul>
-<li class="fragment">S<span style="color:green;">k</span>ul.</li>
-</ul></li>
-<li class="fragment"><p>Chicago <span class="math inline">\(\rightarrow\)</span> <code>Ch</code>icago</p>
-<ul>
-<li class="fragment"><span style="color:green;">Sh</span>icago.</li>
-</ul></li>
-<li class="fragment"><p>Schlaf <span class="math inline">\(\rightarrow\)</span> S<code>k</code>laf</p>
-<ul>
-<li class="fragment"><span style="color:green;">Sh</span>laf.</li>
-</ul></li>
-<li class="fragment"><p>Ich mag Schweinefleisch <span class="math inline">\(\rightarrow\)</span> I<code>ch</code> mag S<code>ch</code>weinefleis<code>k</code>.</p>
-<ul>
-<li class="fragment">I<span style="color:green;">j</span> mag <span style="color:green;">Sh</span>vaineflai<span style="color:green;">sh</span>.</li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="problemas-del-aprendizaje-definiciones" class="slide level2 smaller">
-<h2>Problemas del Aprendizaje: Definiciones</h2>
-<dl>
-<dt>Overfitting (Sobreajuste)</dt>
-<dd>
-<blockquote>
-<p>Se refiere a cuando un modelo no es capaz de generalizar de manera correcta, porque se ajusta <code>demasiado</code> bien (llegando a <code>memorizar</code>) a los datos de entrenamiento. <strong>¿Cómo se puede mitigar este problema?</strong></p>
-</blockquote>
-</dd>
-</dl>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Se le tiende a llamar <code>sobreentrenamiento</code>, pero no es del todo correcto para el caso de modelos de Machine Learning. Lo más correcto es que el <code>sobreentrenamiento</code> provoca overfitting.</p>
-</div>
-</div>
-</div>
-<aside class="notes">
-<p>Mostrar ejemplos en Pizarra de manera gráfica. Ejemplos típicos de Excel.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-<div class="fragment">
-<dl>
-<dt>Underfitting (Subajuste)</dt>
-<dd>
-<blockquote>
-<p>Se refiere a cuando un modelo no es capaz de generalizar de manera correcta, pero a diferencia del overfitting <code>no se ha ajustado</code> correctamente a los datos. <strong>¿Cómo se vería el underfitting en nuestro ejemplo?</strong></p>
-</blockquote>
-</dd>
-</dl>
-</div>
-</section></section>
-<section id="etapas-del-modelamiento" class="title-slide slide level1 center">
-<h1>Etapas del Modelamiento</h1>
-
-</section>
-
 <section id="preguntas-para-terminar" class="title-slide slide level1 center">
 <h1>Preguntas para terminar</h1>
 <ul>
@@ -1558,8 +1115,8 @@ Alfonso Tobar-Arancibia
 </ul>
 </section>
 
-<section id="gracias" class="title-slide slide level1 center">
-<h1>Gracias</h1>
+<section id="danke-schön" class="title-slide slide level1 center">
+<h1>Danke Schön</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-411 Minería de Datos</span> por <span property="cc:attributionName">Alfonso Tobar</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -1572,6 +1129,10 @@ Alfonso Tobar-Arancibia
 <div class="footer footer-default">
 
 </div>
+</div>
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-14">One Hot Encoder</span>
+<span class="glightbox-desc lightbox-desc-15">Ordinal Encoder</span>
 </div>
 </section>
     </div>
@@ -1940,8 +1501,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>videojs(video_shortcode_videojs_video1);</script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

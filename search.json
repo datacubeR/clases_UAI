@@ -528,249 +528,179 @@
     "text": "Tipos de Datos: Datos Tabulares\n\n\n\n\n\n\n\n\n\n\n\n\nFilas: Observaciones, registros, instancias. (Normalmente independientes).\nColumnas: Variables, Atributos, Features.\n\n\n\n\n\n\n\n\n\n\n\nProbablemente el tipo de datos más amigable.\nRequiere conocimiento de negocio (Domain Knowledge)\n\n\n\n\n\n\n\n\n\n\n\nEs un % bajísimo del total de datos existentes en el Mundo.\nDistintos tipos, por lo que normalmente requiere de algún tipo de preprocesamiento."
   },
   {
-    "objectID": "tics411/clase-1.html#tipos-de-datos",
-    "href": "tics411/clase-1.html#tipos-de-datos",
+    "objectID": "tics411/clase-1.html#tipos-de-datos-numéricos",
+    "href": "tics411/clase-1.html#tipos-de-datos-numéricos",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos",
-    "text": "Tipos de Datos\n\nNuméricos\n\n\nTBD\n\n\n\n\n\n\n\n\n\n\nContinuas:\nDiscretas:\n\n\n\n\n\nCategóricos\n\n\nTBD\n\n\n\n\n\n\n\n\n\n\nNominales\nOrdinales"
+    "section": "Tipos de Datos: Numéricos",
+    "text": "Tipos de Datos: Numéricos\n\nNuméricos\n\n\nValores a los que se les puede aplicar alguna operación matemática.\n\n\n\n\n\n\n\n\n\n\nDiscretas: Número finito o contable de valores. Integers (Enteros). Ej: Número de Hijos, Cantidad de Productos, Edad.\nContinuas: Existen infinitos puntos entre dos puntos. Floats (punto flotando o decimales). Ej. Temperatura, Peso."
+  },
+  {
+    "objectID": "tics411/clase-1.html#tipos-de-datos-categóricos",
+    "href": "tics411/clase-1.html#tipos-de-datos-categóricos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Datos: Categóricos",
+    "text": "Tipos de Datos: Categóricos\n\nCategóricos\n\n\nDatos que representan una categoría.\n\n\n\n\n\n\n\n\n\n\nNominales: Sólo nombres que no representan ningún orden. Ej: Nacionalidad, género, ocupación.\nOrdinales: Que tienen un orden o jerarquía inherente. Ej: Nivel de Escolaridad, tamaño.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo todas las operaciones matemáticas son aplicables. Ej: Media, Mediana, Sumas, Restas, etc."
   },
   {
     "objectID": "tics411/clase-1.html#tipos-de-datos-otros-tipos-de-datos",
     "href": "tics411/clase-1.html#tipos-de-datos-otros-tipos-de-datos",
     "title": "TICS-411 Minería de Datos",
     "section": "Tipos de Datos: Otros tipos de Datos",
-    "text": "Tipos de Datos: Otros tipos de Datos\n\nStrings\n\n\nTBD\n\n\nFechas\n\n\nTBD\n\n\nDatos Geográficos\n\n\nTBD\n\n\n\n\n\n\n\n\n\nEl principal problema de los datos son su calidad!!"
+    "text": "Tipos de Datos: Otros tipos de Datos\n\nStrings\n\n\nDatos de texto, los cuales podrían eventualmente ser tratados y representar algo. Ej: Rescatar comunas de una dirección, rescatar sexo desde el nombre, etc.\n\n\nFechas\n\n\nDatos tipo fecha, los cuales podrían eventualmente ser tratados y representar variables de algún tipo. Ej: Rescatar Años, meses, días, semanas, trimestres (quarters), etc.\n\n\nDatos Geográficos\n\n\nDatos que representan la ubicación geográfica de un elemento. Ej: Latitud, Longitud, Coordenadas.\n\n\n\n\n\n\n\n\n\n\nSin importar el tipo de dato el mayor problema es su calidad."
   },
   {
     "objectID": "tics411/clase-1.html#calidad-de-los-datos-ruido",
     "href": "tics411/clase-1.html#calidad-de-los-datos-ruido",
     "title": "TICS-411 Minería de Datos",
     "section": "Calidad de los Datos: Ruido",
-    "text": "Calidad de los Datos: Ruido"
+    "text": "Calidad de los Datos: Ruido\n\nRuido\n\nCorresponde al error y extrema variabilidad en la medición en los datos. Este error puede ser aleatorio o sistemático.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSe le llama Señal a la tendencia principal y representa la información significativa y valiosa de los datos."
   },
   {
     "objectID": "tics411/clase-1.html#calidad-de-los-datos-outliers",
     "href": "tics411/clase-1.html#calidad-de-los-datos-outliers",
     "title": "TICS-411 Minería de Datos",
     "section": "Calidad de los Datos: Outliers",
-    "text": "Calidad de los Datos: Outliers\n\nRuido\nOutliers\nValores Faltantes\nDatos Duplicados\nDominio del Problema"
+    "text": "Calidad de los Datos: Outliers\n\nOutliers\n\nSon datos considerablemente diferentes a la mayoría del dataset. Dependiendo del caso pueden indicar casos \"interesantes\" o errores de medición.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEs importante notar que dependiendo del caso puede ser una buena idea deshacerse de ellos."
   },
   {
-    "objectID": "tics411/clase-1.html#preprocesamiento",
-    "href": "tics411/clase-1.html#preprocesamiento",
+    "objectID": "tics411/clase-1.html#calidad-de-los-datos-valores-faltantes",
+    "href": "tics411/clase-1.html#calidad-de-los-datos-valores-faltantes",
     "title": "TICS-411 Minería de Datos",
-    "section": "Preprocesamiento",
-    "text": "Preprocesamiento\n\nAgregación\nSampleo\nDiscretización\nSelección de Variables\nReducción de Dimensionalidad\nEstandarización de Datos\nManejo de Variables Categóricas."
+    "section": "Calidad de los Datos: Valores Faltantes",
+    "text": "Calidad de los Datos: Valores Faltantes\n\nMissing Values\n\nSon valores que por alguna razón no están presentes.\n\n\n\n\nMissing at Random (MAR): Son valores que no están presentes por causas que no se pueden controlar. Ej: No se registró, no se preguntó, fallas en el sistema de recolección de datos, etc.\nInformative Missing: Es un valor no aplicable. Ej: Sueldo en niños, Precio de la entrada de un concierto si es que NO compró entrada."
   },
   {
-    "objectID": "tics411/clase-1.html#medidas",
-    "href": "tics411/clase-1.html#medidas",
+    "objectID": "tics411/clase-1.html#calidad-de-los-datos-datos-duplicados",
+    "href": "tics411/clase-1.html#calidad-de-los-datos-datos-duplicados",
     "title": "TICS-411 Minería de Datos",
-    "section": "Medidas",
-    "text": "Medidas\n\nSimilaridad\nDistancias\nCorrelación"
+    "section": "Calidad de los Datos: Datos Duplicados",
+    "text": "Calidad de los Datos: Datos Duplicados\n\nDuplicates\n\nSe refiere a registros que pueden estar total o parcialmente duplicados.\n\n\n\n\n\n\n\n\n\n\n\n\n\nEsto genera problemas en la confiabilidad de los datos. ¿Cuál es el registro correcto?\nEj: Caso particular de una Jooycar (una startup de seguros)."
   },
   {
-    "objectID": "tics411/clase-1.html#quién-soy",
-    "href": "tics411/clase-1.html#quién-soy",
+    "objectID": "tics411/clase-1.html#calidad-de-los-datos-dominio-del-problema",
+    "href": "tics411/clase-1.html#calidad-de-los-datos-dominio-del-problema",
     "title": "TICS-411 Minería de Datos",
-    "section": "¿Quién soy?",
-    "text": "¿Quién soy?\n\n\n\n\n\n\n\nAlfonso Tobar-Arancibia, estudié Ingeniería Civil pero llevo 9 años trabajando como:\n\nData Analyst.\nData Scientist.\nML Engineer.\nData Engineer.\n\nTerminando mi Msc. y empezando mi PhD en la UAI.\nHe ganado 2 competencias de Machine Learning.\nPubliqué mi primer paper el año pasado sobre Hate Speech en Español.\nJuego Tenis de Mesa, hago Agility con mi perrita Kira y escribo en mi Blog."
+    "section": "Calidad de los Datos: Dominio del Problema",
+    "text": "Calidad de los Datos: Dominio del Problema\n\n\n\n\n\n\n\n\n\n\n\n\n\nPor lejos el problema de calidad más difícil de encontrar.\nSe requiere experiencia y conocimiento profundo del negocio para detectarlo.\n\nEj: Caso de Super Avances en Cencosud."
   },
   {
-    "objectID": "tics411/clase-1.html#objetivos-del-curso",
-    "href": "tics411/clase-1.html#objetivos-del-curso",
+    "objectID": "tics411/clase-1.html#feature-engineering-1",
+    "href": "tics411/clase-1.html#feature-engineering-1",
     "title": "TICS-411 Minería de Datos",
-    "section": "Objetivos del Curso",
-    "text": "Objetivos del Curso\n\n\n\n\n\n\nIdentificar Elementos Claves del Machine Learning (Terminología, Nomenclatura, Intuición).\nEntender como interactúan los algoritmos más importantes.\nAprender a seleccionar el mejor Algoritmo para el Problema.\nEjecutar y aplicar algoritmos clásicos de Machine Learning.\nEvaluar el desempeño esperado del Modelo."
+    "section": "Feature Engineering",
+    "text": "Feature Engineering\n\nFeature Engineering\n\n\nTambién conocida como Ingeniería de Atributos, es el arte de trabajar las features existentes para limpiar o corregir variables existentes o crear nuevas variables.\n\n\nPreprocesamiento\n\n\nSe refiere al proceso de preparación de los datos para su ingreso a un modelo. En una primera parte puede incluir limpieza de datos corruptos, redundantes y/o irrelevantes. Por otra parte, también hace referencia a la transformación de datos para que puedan ser consumidos por un algoritmo."
   },
   {
-    "objectID": "tics411/clase-1.html#tópicos",
-    "href": "tics411/clase-1.html#tópicos",
+    "objectID": "tics411/clase-1.html#data-cleaning",
+    "href": "tics411/clase-1.html#data-cleaning",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tópicos",
-    "text": "Tópicos\n\n\n\n\n\n\n\nIntroducción a la Minería de Datos\nAnálisis Exploratorio de Datos (EDA)\nModelos No Supervisados/Descriptivos\nModelos Supervisados/Predictivos\n\n\n\n\n\n\nModelos no Supervisados\n\nK-Means\nHierarchical Clustering\nDBScan\nApriori\n\n\nModelos Supervisados\n\nKNN\nÁrboles de Decisión\nNaive Bayes\nRegresión Logística"
+    "section": "Data Cleaning",
+    "text": "Data Cleaning\n\nNo existe un procedimiento estándar.\nRevisar los datos y ver potenciales errores que puedan afectar el funcionamiento de un modelo."
   },
   {
-    "objectID": "tics411/clase-1.html#sobre-las-clases",
-    "href": "tics411/clase-1.html#sobre-las-clases",
+    "objectID": "tics411/clase-1.html#preprocesamiento-valores-faltantes",
+    "href": "tics411/clase-1.html#preprocesamiento-valores-faltantes",
     "title": "TICS-411 Minería de Datos",
-    "section": "Sobre las clases",
-    "text": "Sobre las clases\n\n\nClases presenciales, con participación activa de los estudiantes.\nMucha terminología y material de estudio será en Inglés.\nHorario: Jueves.\n\n15:30 a 16:40 (Cátedra)\n17:00 a 18:10 (Práctico)\n\nAsistencia es voluntaria, pero altamente recomendada."
+    "section": "Preprocesamiento: Valores Faltantes",
+    "text": "Preprocesamiento: Valores Faltantes\n\nImputación: Se refiere al proceso de rellenar datos faltantes.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDependiendo del nivel de valores faltantes, es necesario evaluar la eliminación de registros o atributos completos de ser necesario."
   },
   {
-    "objectID": "tics411/clase-1.html#materiales-de-clases",
-    "href": "tics411/clase-1.html#materiales-de-clases",
+    "objectID": "tics411/clase-1.html#preprocesamiento-manejo-de-outliers",
+    "href": "tics411/clase-1.html#preprocesamiento-manejo-de-outliers",
     "title": "TICS-411 Minería de Datos",
-    "section": "Materiales de Clases",
-    "text": "Materiales de Clases\n\nDiapositivas\nPrácticos\n\n\n\n\n\n\n\n\nSlides interactivas\nTodo el código se puede copiar directamente.\nSe puede buscar contenido en las diapositivas mediante un buscador.\nSe dejarán copias en PDF en Webcursos.\n\n\n\n\n\n\n\n\n\n\nSe espera que los estudiantes dominen las siguientes tecnologías:\n\nPython\nGoogle Colab\nPandas\nScikit-Learn (Se enseñará a lo largo del curso)."
+    "section": "Preprocesamiento: Manejo de Outliers",
+    "text": "Preprocesamiento: Manejo de Outliers\n\nWinsorizer\n\nSe refiere al proceso de acotar un atributo eliminando los valores extremos o atípicos (outliers).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAl igual que en el caso anterior, es necesario evaluar la eliminación de registros si es que representan valores atípicos."
   },
   {
-    "objectID": "tics411/clase-1.html#material-complementario",
-    "href": "tics411/clase-1.html#material-complementario",
+    "objectID": "tics411/clase-1.html#preprocesamiento-manejo-de-variables-categóricas",
+    "href": "tics411/clase-1.html#preprocesamiento-manejo-de-variables-categóricas",
     "title": "TICS-411 Minería de Datos",
-    "section": "Material Complementario",
-    "text": "Material Complementario\n\n\n\n\n\n\nCurso de Scikit-Learn \n\nTutorial Colab\nAgregar Datos Externos a Colab"
+    "section": "Preprocesamiento: Manejo de Variables Categóricas",
+    "text": "Preprocesamiento: Manejo de Variables Categóricas\n\nLa mayoría de los modelos no tienen la capacidad de poder lidiar con variables categóricas por lo que deben ser transformadas en una representación numérica antes de ingresar a un modelo.\n\n\n\n\n\n\nOne Hot Encoder\n\n\n\n\n\n\nOrdinal Encoder\n\n\n\n\n\n\n\n\n\n\n\n\nOne Hot Encoder suele dar mejores resultados en modelos lineales.\nOrdinal Encoder suele dar mejores resultados en modelos de árbol."
   },
   {
-    "objectID": "tics411/clase-1.html#evaluación",
-    "href": "tics411/clase-1.html#evaluación",
+    "objectID": "tics411/clase-1.html#preprocesamiento-escalamiento",
+    "href": "tics411/clase-1.html#preprocesamiento-escalamiento",
     "title": "TICS-411 Minería de Datos",
-    "section": "Evaluación",
-    "text": "Evaluación\n\n\n\n\n\n\n\nDos Evaluaciones Escritas (P1, P2) coordinadas y cuatro tareas prácticas (T1, T2, T3, T4) \\[NP = 0.35 \\cdot P1 + 0.35 \\cdot P2 + 0.3 \\cdot \\bar{T}\\] \\[ \\bar{T} = (T1 + T2 + T3 + T4)/4 \\]\n\n\n\n\n\n\n\n\n\n\nSi NP &gt; 5\n\n\n\\[NF = NP\\]\n\n\n\n\n\n\n\n\n\nEn caso contrario:\n\n\n\\[NF = 0.7 \\cdot NP + 0.3 \\cdot E\\]"
+    "section": "Preprocesamiento: Escalamiento",
+    "text": "Preprocesamiento: Escalamiento\n\nEl escalamiento se refiere al proceso de llevar distintas variables a una misma escala.\n\n\n\n\n\n\n\n\n\nEvitar que la escala de una “sobre-importancia” a una cierta variable.\nPermitir una mejor convergencia de los algoritmos.\n\n\n\nStandardScaler (Normalización)\n\\[x_j=\\frac{x_j-\\mu_x}{\\sigma_x}\\]\n\n\n\n\n\n\nEste proceso fuerza (en la medida de lo posible) a tener media 0 y std 1.\n\n\n\nMinMax Scaler\n\\[x_j=\\frac{x_j-min(x_j)}{max(x_j)-min(x_j)}\\]\n\n\n\n\n\n\nEste proceso fuerza a los datos a distribuirse entre 0 y 1."
   },
   {
-    "objectID": "tics411/clase-1.html#ayudantías",
-    "href": "tics411/clase-1.html#ayudantías",
+    "objectID": "tics411/clase-1.html#preprocesamiento-escalamiento-1",
+    "href": "tics411/clase-1.html#preprocesamiento-escalamiento-1",
     "title": "TICS-411 Minería de Datos",
-    "section": "Ayudantías",
-    "text": "Ayudantías\nAyudante: TBD\nemail: TBD\n\n\n\n\n\n\n\nNo habrán ayudantías todas las semanas.\nEstarán enfocadas principalmente en aplicaciones y código."
+    "section": "Preprocesamiento: Escalamiento",
+    "text": "Preprocesamiento: Escalamiento\n\n\n\n\n\n\n\n\n\n\n\n\n\nMedia: 0.75\nStd: 3.1875\nMin: -2\nMax: 3\n\n\n\n\n\n\n\n\n\n\n\n\n\nCentering (Centrado): Se le llama a la diferencia entre la variable y su media.\nScaling (Escalado): Se le llama al cuociente entre la variable y su Desviación Estándar.\nStandardScaler (Normalización): Es Centrado y Escalado."
   },
   {
-    "objectID": "tics411/clase-1.html#revolución-de-los-datos",
-    "href": "tics411/clase-1.html#revolución-de-los-datos",
+    "objectID": "tics411/clase-1.html#creación-de-variables",
+    "href": "tics411/clase-1.html#creación-de-variables",
     "title": "TICS-411 Minería de Datos",
-    "section": "Revolución de los Datos",
-    "text": "Revolución de los Datos\n\n\n\n\n\n\n\nHablar de los distintos tipos de Datos.\nTodo es datos, y está lleno de ellos en Internet y el mundo."
+    "section": "Creación de Variables",
+    "text": "Creación de Variables\n\nCombinación\n\n\nCombinar 2 o más variables. Ej: Calcular el área de un sitio a partir del ancho y largo.\n\n\nTransformación\n\n\nAplicar una operación a una variable. Ej: El logaritmo de las ganancias.\n\n\n\n\n\n\nDiscretización (Binning)\n\n\nGenerar categorías a partir de una variable continua."
   },
   {
-    "objectID": "tics411/clase-1.html#nace-el-data-science-ciencia-de-datos",
-    "href": "tics411/clase-1.html#nace-el-data-science-ciencia-de-datos",
+    "objectID": "tics411/clase-1.html#creación-de-variables-1",
+    "href": "tics411/clase-1.html#creación-de-variables-1",
     "title": "TICS-411 Minería de Datos",
-    "section": "Nace el Data Science (Ciencia de Datos)",
-    "text": "Nace el Data Science (Ciencia de Datos)\n\n\n\n\n\n\n\nExplicar las distintas etapas. Qué son cada uno de ellos.\nExplicar que no estoy de acuerdo con todas las definiciones."
+    "section": "Creación de Variables",
+    "text": "Creación de Variables\n\nRatios\n\nEs una medida que expresa la relación entre dos cantidades. Ej: Puntos por partido, cantidad de transacciones por mes, etc.\n\nAgregación\n\nAgregar o agrupar información resumida de ciertas variables. Ej: Promedio de tiempo en aprobar un tipo de crédito."
   },
   {
-    "objectID": "tics411/clase-1.html#cómo-aprovechar-la-información-que-tenemos",
-    "href": "tics411/clase-1.html#cómo-aprovechar-la-información-que-tenemos",
+    "objectID": "tics411/clase-1.html#selección-de-variables",
+    "href": "tics411/clase-1.html#selección-de-variables",
     "title": "TICS-411 Minería de Datos",
-    "section": "¿Cómo aprovechar la información que tenemos?",
-    "text": "¿Cómo aprovechar la información que tenemos?\n\n\nData Mining (Minería de Datos)\n\n\n“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data.” (Fayyad, Piatetsky-Shapiro & Smith 1996)\n\n\n\n\n\n\nMachine Learning (Aprendizaje Automático)\n\n\n“A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.” (Mitchell, 2006)\n\n\n\n\n\n\nExplicar que estos son dos tipos de Approaches con el que hoy en día se enfrentan los datos.\nEl primero más enfocado en un análisis manual.\nEl segundo en un enfoque más automático."
+    "section": "Selección de Variables",
+    "text": "Selección de Variables\n\nSe refiere al proceso de eliminar variables que pueden ser irrelevantes o poco significativas.\n\n\n\n\n\n\n\n\n\n\n\n\n\nProcesos Manuales.\nProcesos Automáticos:\n\nPCA (Principal Component Analysis).\nRecursive Feature Elimination.\nRecursive Feature Addition.\nEliminación mediante alguna medida."
   },
   {
-    "objectID": "tics411/clase-1.html#tipos-de-datos-1",
-    "href": "tics411/clase-1.html#tipos-de-datos-1",
+    "objectID": "tics411/clase-1.html#medidas-similaridad",
+    "href": "tics411/clase-1.html#medidas-similaridad",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos",
-    "text": "Tipos de Datos\n\n\n\n\n\nDatos Estructurados\n\n\n\n\n\nDatos No Estructurados"
+    "section": "Medidas: Similaridad",
+    "text": "Medidas: Similaridad"
   },
   {
-    "objectID": "tics411/clase-1.html#tipos-de-datos-datos-tabulares-1",
-    "href": "tics411/clase-1.html#tipos-de-datos-datos-tabulares-1",
+    "objectID": "tics411/clase-1.html#medidas-similaridad-nominal",
+    "href": "tics411/clase-1.html#medidas-similaridad-nominal",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Datos Tabulares",
-    "text": "Tipos de Datos: Datos Tabulares\n\n\n\n\n\n\n\n\n\n\n\n\nFilas: Observaciones, instancias. (Normalmente independientes).\nColumnas: Variables, Atributos, Features.\n\n\n\n\n\n\n\n\n\n\n\nProbablemente el tipo de datos más amigable.\nRequiere conocimiento de negocio (Domain Knowledge)\n\n\n\n\n\n\n\n\n\n\n\nEs un % bajísimo del total de datos existentes en el Mundo.\nDistintos tipos, por lo que normalmente requiere de algún tipo de preprocesamiento."
+    "section": "Medidas: Similaridad Nominal",
+    "text": "Medidas: Similaridad Nominal\n\n\n\nDisimilaridad: \\[D =\n\\begin{cases}\n0,  & \\text{if $p=q$} \\\\[2ex]\n1, & \\text{if $p\\neq q$}\n\\end{cases}\n\\]\n\n\n\nSimilaridad:\n\\[S =\n\\begin{cases}\n1,  & \\text{if $p=q$} \\\\[2ex]\n0, & \\text{if $p\\neq q$}\n\\end{cases}\n\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[S(p,q) = 0\\] \\[D(p,q) = 1\\]"
   },
   {
-    "objectID": "tics411/clase-1.html#tipos-de-datos-series-de-tiempo",
-    "href": "tics411/clase-1.html#tipos-de-datos-series-de-tiempo",
+    "objectID": "tics411/clase-1.html#medidas-similaridad-ordinal",
+    "href": "tics411/clase-1.html#medidas-similaridad-ordinal",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Series de Tiempo",
-    "text": "Tipos de Datos: Series de Tiempo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFilas: Instancias temporales (Normalmente interdependientes).\nColumnas: Variables, Atributos, Features (Univariada o Multivariada).\n\n\n\n\n\n\n\n\n\n\n\nEs un % bajísimo del total de datos existentes en el Mundo.\nPropiedad temporal requiere preprocesamiento y modelos especiales."
+    "section": "Medidas: Similaridad Ordinal",
+    "text": "Medidas: Similaridad Ordinal\n\n\n\nDisimilaridad: \\[D = \\frac{|p-q|}{n-1}\\]\n\n\n\nSimilaridad:\n\\[S = 1 - \\frac{|p-q|}{n-1}\\]\n\n\n\n\n\n\n\n\n\n\n\n\\[S(p,q) = 1 - \\frac{5 - 4}{6 - 1} = 0.8\\]"
   },
   {
-    "objectID": "tics411/clase-1.html#tipos-de-datos-imágenes",
-    "href": "tics411/clase-1.html#tipos-de-datos-imágenes",
+    "objectID": "tics411/clase-1.html#medidas-similaridad-intervalo-o-ratio",
+    "href": "tics411/clase-1.html#medidas-similaridad-intervalo-o-ratio",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Imágenes",
-    "text": "Tipos de Datos: Imágenes\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste es el tipo de Datos que disparó la Inteligencia Artificial.\n¿Cuántos computadores para identificar un Gato? 16,000\n\n\n\n\n\n\n\n\n\n\n\n\n\nExplicar el concepto de Tensor, extensión de las matrices. Diferencia entre Grayscale y RGB."
+    "section": "Medidas: Similaridad Intervalo o Ratio",
+    "text": "Medidas: Similaridad Intervalo o Ratio\n\n\n\nDisimilaridad: \\[D = |p-q|\\]\n\n\n\nSimilaridad:\n\\[S = -D\\] \\[S = \\frac{|p-q|}{n-1}\\] \\[S = 1 - \\frac{d - min_d}{max_d - min_d}\\]\n\n\n\n\nSea \\(p=35 °C\\) y \\(q = 40 °C\\). Luego:\n\\[ S(p,q) = -5\\] \\[S(p,q) = \\frac{1}{1 + 5} = 0.17\\]"
   },
   {
-    "objectID": "tics411/clase-1.html#tipos-de-datos-texto-libre",
-    "href": "tics411/clase-1.html#tipos-de-datos-texto-libre",
+    "objectID": "tics411/clase-1.html#medidas-similaridad-datos-categóricos",
+    "href": "tics411/clase-1.html#medidas-similaridad-datos-categóricos",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Texto Libre",
-    "text": "Tipos de Datos: Texto Libre\n\n\n\n\n\n\n\n\n\n\n\n\nDatos Masivos.\nDificiles de lidiar ya que deben ser llevarse a una representación numérica.\nAlto nivel de Sesgo y Subjetividad.\n\n\n\n\n\n\n\n\n\n\n\nGracias a este tipo de datos se han producido los avances más increíbles del último tiempo: Transformers"
+    "section": "Medidas: Similaridad Datos Categóricos",
+    "text": "Medidas: Similaridad Datos Categóricos\n\nSea p y q vectores de dimensión \\(m\\) con sólo atributos categóricos. Para calcular la similaridad entre vectores se usa lo siguiente:\n\n\\[Sim(p,q) = \\sum_{i=1}^m S(p_i,q_i)\\]\n\n\n\n\nOverlap: \\[S(p_i, q_i) = 1\\]\n\n\n\nFrecuencia de Ocurrencia Inversa \\[S(p_i, q_i) = \\frac{1}{p_k(p_i)^2}\\]\n\n\n\nMedida de Goodall\n\n\\[S(p_i, q_i) = 1 - p_k(p_i)^2\\]\n\n\n\n\n\n\n\n\nTodas estas medidas son 0 si \\(p_i \\neq q_i\\)"
   },
   {
-    "objectID": "tics411/clase-1.html#tipos-de-datos-videos",
-    "href": "tics411/clase-1.html#tipos-de-datos-videos",
+    "objectID": "tics411/clase-1.html#medidas-similaridad-datos-categóricos.",
+    "href": "tics411/clase-1.html#medidas-similaridad-datos-categóricos.",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Videos",
-    "text": "Tipos de Datos: Videos\n\n\n\n\n\n\n\n\nLos videos no son más que arreglos de imágenes.\nSon un tipo de dato muy pesado y difícil de lidiar.\nRequiere alto poder de Procesamiento."
+    "section": "Medidas: Similaridad Datos Categóricos.",
+    "text": "Medidas: Similaridad Datos Categóricos."
   },
   {
-    "objectID": "tics411/clase-1.html#tipos-de-aprendizaje",
-    "href": "tics411/clase-1.html#tipos-de-aprendizaje",
+    "objectID": "tics411/clase-1.html#medidas-distancias",
+    "href": "tics411/clase-1.html#medidas-distancias",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Aprendizaje",
-    "text": "Tipos de Aprendizaje"
-  },
-  {
-    "objectID": "tics411/clase-1.html#reinforcement-learning",
-    "href": "tics411/clase-1.html#reinforcement-learning",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Reinforcement Learning",
-    "text": "Reinforcement Learning"
-  },
-  {
-    "objectID": "tics411/clase-1.html#regresión-y-clasificación",
-    "href": "tics411/clase-1.html#regresión-y-clasificación",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Regresión y Clasificación",
-    "text": "Regresión y Clasificación\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegresión: Se busca estimar un valor continuo.\n\n(Estimar el valor de una casa).\n\nClasificación: Se busca encontrar una categoría o un valor discreto.\n\n(Clasificar una imagen como Perro o Gato).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPara entrenar este tipo de modelos se necesitan etiquetas, es decir, la respuesta esperada del modelo.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAmbos ejemplos se pueden realizar utilizando Largo (Eje Y) y Peso (Eje X)."
-  },
-  {
-    "objectID": "tics411/clase-1.html#clustering",
-    "href": "tics411/clase-1.html#clustering",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Clustering",
-    "text": "Clustering\n\n\n\n\n\n\n\n\n\n\n\n\n\nClusters: Una categoría en la que sus componentes son similares. Los clusters normalmente no tienen un nombre propio, sino que uno les asigna uno.\nTambién se les llama segmentos. No usar la palabra clase.\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo requiere de etiquetas, por lo tanto, no es posible evaluar su desempeño de manera 100% acertada."
-  },
-  {
-    "objectID": "tics411/clase-1.html#reducción-de-dimensionalidad",
-    "href": "tics411/clase-1.html#reducción-de-dimensionalidad",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Reducción de Dimensionalidad",
-    "text": "Reducción de Dimensionalidad\n\n\n\n\n\n\n\n\n\n\n\n\nReducción de la Dimensionalidad: Eliminar complejidad sin perder información clave para poder entender su comportamiento."
-  },
-  {
-    "objectID": "tics411/clase-1.html#nuestro-sistema-de-ml",
-    "href": "tics411/clase-1.html#nuestro-sistema-de-ml",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Nuestro Sistema de ML",
-    "text": "Nuestro Sistema de ML\nCreemos un Sistema de ML que sea capaz de ver una imágen y pronunciar correctamente el uso de la letra C.\n\n\n\n\n\n\nVamos a Entrenar un Modelo."
-  },
-  {
-    "objectID": "tics411/clase-1.html#nuestro-sistema-de-ml-entrenamiento",
-    "href": "tics411/clase-1.html#nuestro-sistema-de-ml-entrenamiento",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Nuestro Sistema de ML: Entrenamiento",
-    "text": "Nuestro Sistema de ML: Entrenamiento\n\n\n\n\n\n\nKasa\n\n\n\n\n\n\n\nKokodrilo\n\n\n\n\n\n\n\nKubo\n\n\n\n\n\n\n\n\n\n\n\n\n¿Qué patrones está aprendiendo el modelo?\n\n\n\n\n\nEntrenamiento\n\n\nEs el proceso en el cuál se permite al modelo aprender. En este proceso se le entregan ejemplos (Train Set) para que el modelo de manera autónoma pueda aprender patrones que le permitan resolver la tarea dada."
-  },
-  {
-    "objectID": "tics411/clase-1.html#nuestro-sistema-de-ml-inferencia",
-    "href": "tics411/clase-1.html#nuestro-sistema-de-ml-inferencia",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Nuestro Sistema de ML: Inferencia",
-    "text": "Nuestro Sistema de ML: Inferencia\n\nInferencia/Predicción\n\n\nSe refiere al proceso en el que el modelo tiene que demostrar cuál sería su decisión de acuerdo a los patrones aprendidos en el proceso de entrenamiento. Los ejemplos en los que se prueba se le denomina Test Set.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKorrea\n\n\nKonejo\n\n\nKukillo\n\n\nBikikleta\n\n\n\n\n\nGeneralización\n\n\nSe le llama generalización a la capacidad del modelo de aplicar lo aprendido de manera correcta en ejemplos no vistos."
-  },
-  {
-    "objectID": "tics411/clase-1.html#nuestro-sistema-de-ml-nuevas-instancias-de-entrenamiento",
-    "href": "tics411/clase-1.html#nuestro-sistema-de-ml-nuevas-instancias-de-entrenamiento",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Nuestro Sistema de ML: Nuevas instancias de Entrenamiento",
-    "text": "Nuestro Sistema de ML: Nuevas instancias de Entrenamiento\n\n\n\n\n\n\nKuchillo\n\n\n\n\n\n\n\nChokolate\n\n\n\n\n\n\n\nSinsel\n\n\n\n\n\n\n\n\n\n\n\n\nNo es bueno entrenar con las mismas instancias de entrenamiento. ¿Por qué?"
-  },
-  {
-    "objectID": "tics411/clase-1.html#nuestro-sistema-de-ml-reevaluemos-nuestro-modelo",
-    "href": "tics411/clase-1.html#nuestro-sistema-de-ml-reevaluemos-nuestro-modelo",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Nuestro Sistema de ML: Reevaluemos nuestro Modelo",
-    "text": "Nuestro Sistema de ML: Reevaluemos nuestro Modelo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKorrea\n\n\nKonejo\n\n\nKuchillo\n\n\nBisikleta\n\n\n\n\n\nEvaluación\n\n\nUtilizar una métrica que permita ponerle nota al modelo.\n\n\n\n\n\n\n1er Modelo: 2 correctas de 4, es decir 50%.\n\n\n\n\n2do Modelo: 4 correctas de 4, es decir 100%."
-  },
-  {
-    "objectID": "tics411/clase-1.html#problemas-del-aprendizaje",
-    "href": "tics411/clase-1.html#problemas-del-aprendizaje",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Problemas del Aprendizaje",
-    "text": "Problemas del Aprendizaje\n\nSupongamos que queremos utilizar nuestro modelo para pronunciar palabras en otro idioma (otro Test Set).\n¿Qué problemas podemos encontrar?\n\n\n\nStomach \\(\\rightarrow\\) Stomak\nSchool \\(\\rightarrow\\) Schul\n\nSkul.\n\nChicago \\(\\rightarrow\\) Chicago\n\nShicago.\n\nSchlaf \\(\\rightarrow\\) Sklaf\n\nShlaf.\n\nIch mag Schweinefleisch \\(\\rightarrow\\) Ich mag Schweinefleisk.\n\nIj mag Shvaineflaish."
-  },
-  {
-    "objectID": "tics411/clase-1.html#problemas-del-aprendizaje-definiciones",
-    "href": "tics411/clase-1.html#problemas-del-aprendizaje-definiciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Problemas del Aprendizaje: Definiciones",
-    "text": "Problemas del Aprendizaje: Definiciones\n\nOverfitting (Sobreajuste)\n\n\nSe refiere a cuando un modelo no es capaz de generalizar de manera correcta, porque se ajusta demasiado bien (llegando a memorizar) a los datos de entrenamiento. ¿Cómo se puede mitigar este problema?\n\n\n\n\n\n\n\n\n\nSe le tiende a llamar sobreentrenamiento, pero no es del todo correcto para el caso de modelos de Machine Learning. Lo más correcto es que el sobreentrenamiento provoca overfitting.\n\n\n\n\nMostrar ejemplos en Pizarra de manera gráfica. Ejemplos típicos de Excel.\n\n\n\nUnderfitting (Subajuste)\n\n\nSe refiere a cuando un modelo no es capaz de generalizar de manera correcta, pero a diferencia del overfitting no se ha ajustado correctamente a los datos. ¿Cómo se vería el underfitting en nuestro ejemplo?"
+    "section": "Medidas: Distancias",
+    "text": "Medidas: Distancias\n\nSimilaridad\nDistancias\nCorrelación"
   },
   {
     "objectID": "index.html",
