@@ -629,9 +629,22 @@ Underfitting (Subajuste)
 : > Se refiere a cuando un modelo no es capaz de generalizar de manera correcta, pero a diferencia del overfitting `no se ha ajustado` correctamente a los datos. **¿Cómo se vería el underfitting en nuestro ejemplo?**
 :::
 
-# Etapas del Modelamiento
+## Etapas del Modelamiento: Crisp-DM
+
+![](img/clase-0/crisp_dm.png){.lightbox width="50%" fig-align="center"}
+
+## Etapas del Modelamiento: KDD
+
+![](img/clase-0/kdd.png){.lightbox width="80%" fig-align="center"}
 
 
+## Etapas del Modelamiento: Semma
+
+![](img/clase-0/semma.png){.lightbox width="60%" fig-align="center"}
+
+## Etapas del Modelamiento: Metodología Propia
+
+![](img/clase-0/own.png){.lightbox width="50%" fig-align="center"}
 
 # Preguntas para terminar
 
