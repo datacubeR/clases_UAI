@@ -521,6 +521,34 @@
     "text": "Problemas del Aprendizaje: Definiciones\n\nOverfitting (Sobreajuste)\n\n\nSe refiere a cuando un modelo no es capaz de generalizar de manera correcta, porque se ajusta demasiado bien (llegando a memorizar) a los datos de entrenamiento. ¿Cómo se puede mitigar este problema?\n\n\n\n\n\n\n\n\n\nSe le tiende a llamar sobreentrenamiento, pero no es del todo correcto para el caso de modelos de Machine Learning. Lo más correcto es que el sobreentrenamiento provoca overfitting.\n\n\n\n\nMostrar ejemplos en Pizarra de manera gráfica. Ejemplos típicos de Excel.\n\n\n\nUnderfitting (Subajuste)\n\n\nSe refiere a cuando un modelo no es capaz de generalizar de manera correcta, pero a diferencia del overfitting no se ha ajustado correctamente a los datos. ¿Cómo se vería el underfitting en nuestro ejemplo?"
   },
   {
+    "objectID": "tics411/clase-0.html#etapas-del-modelamiento-crisp-dm",
+    "href": "tics411/clase-0.html#etapas-del-modelamiento-crisp-dm",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Etapas del Modelamiento: Crisp-DM",
+    "text": "Etapas del Modelamiento: Crisp-DM"
+  },
+  {
+    "objectID": "tics411/clase-0.html#etapas-del-modelamiento-kdd",
+    "href": "tics411/clase-0.html#etapas-del-modelamiento-kdd",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Etapas del Modelamiento: KDD",
+    "text": "Etapas del Modelamiento: KDD"
+  },
+  {
+    "objectID": "tics411/clase-0.html#etapas-del-modelamiento-semma",
+    "href": "tics411/clase-0.html#etapas-del-modelamiento-semma",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Etapas del Modelamiento: Semma",
+    "text": "Etapas del Modelamiento: Semma"
+  },
+  {
+    "objectID": "tics411/clase-0.html#etapas-del-modelamiento-metodología-propia",
+    "href": "tics411/clase-0.html#etapas-del-modelamiento-metodología-propia",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Etapas del Modelamiento: Metodología Propia",
+    "text": "Etapas del Modelamiento: Metodología Propia"
+  },
+  {
     "objectID": "tics411/clase-1.html#tipos-de-datos-datos-tabulares",
     "href": "tics411/clase-1.html#tipos-de-datos-datos-tabulares",
     "title": "TICS-411 Minería de Datos",
