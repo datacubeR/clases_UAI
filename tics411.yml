@@ -10,7 +10,7 @@
 - title: "Clase 1"
   subtitle: "Calidad de los Datos y Feature Engineering"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-03-14
+  date: 2024-03-07
   image: tics411/thumbnails/clase-1.png
   path: tics411/clase-1.qmd
   categories:
@@ -36,18 +36,9 @@
    - slides
 
 - title: "Clase 4"
-  subtitle: "Introducción"
+  subtitle: "K-Means"
   author: "Alfonso Tobar-Arancibia"
   date: 2024-03-28
-  image: tics411/thumbnails/clase-3.png
-  path: tics411/clase-3.qmd
-  categories:
-   - slides
-
-- title: "Clase 4"
-  subtitle: "Introducción"
-  author: "Alfonso Tobar-Arancibia"
-  date: 2024-04-04
   image: tics411/thumbnails/clase-4.png
   path: tics411/clase-4.qmd
   categories:

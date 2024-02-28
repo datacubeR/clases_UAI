@@ -7,7 +7,7 @@ listing:
   contents:
     - "tics411.yml"
   type: grid
-  fields: [date, title, subtitle, image, categories]
+  fields: [date, title, subtitle, image]
   sort: "date asc"
   image-height: 100%
   #categories: unnumbered
