@@ -4,7 +4,7 @@
     "href": "tics411-labs.html",
     "title": "Prácticos",
     "section": "",
-    "text": "Laboratorio\nColab\n\n\n\n\nPreprocesamiento\n\n\n\nK-Means\n\n\n\n\n\n\n\n Back to top",
+    "text": "Laboratorio\nColab\n\n\n\n\nPreprocesamiento\n\n\n\n\n\n\n\n Back to top",
     "crumbs": [
       "Notebooks"
     ]
@@ -56,7 +56,7 @@
     "href": "tics411/lab-0.html#pipelines",
     "title": "TICS-411 Minería de Datos",
     "section": "Pipelines",
-    "text": "Pipelines\n\nEn ocasiones un Dataset requiere más de un preprocesamiento.\nEstas Transformaciones normalmente se hacen en serie de manera consecutiva."
+    "text": "Pipelines\n\nEn ocasiones un Dataset requiere más de un preprocesamiento.\nEstas Transformaciones normalmente se hacen en serie de manera consecutiva.\n\n\n\n\n\n\n\n\n\n\n\n\n\nEl Estimator es opcional, es decir, el Pipeline puede ser para combinar sólo Transformers o Transformers + un Estimator.\n\n\n\n\n\n\n\n\n\n\nUn Pipeline puede tener sólo un Estimator."
   },
   {
     "objectID": "tics411/lab-0.html#pipelines-código",
@@ -66,95 +66,46 @@
     "text": "Pipelines: Código\nfrom sklearn.tree import DecisionTreeClassifier \nfrom sklearn.preprocessing import StandardScaler, OneHotEncoder \nfrom sklearn.pipeline import Pipeline \n\npipe = Pipeline(steps=[ \n    (\"ohe\", OneHotEncoder()),\n    (\"sc\", StandardScaler()),\n    (\"model\", DecisionTreeClassifier())\n])\n\npipe.fit(X_train, y_train) \ny_pred = pipe.predict(X_test) \n\npipe.score(X_test, y_test) \n\nL1-2. Importo mi modelo y mis preprocesamientos\nL3. Importo el Pipeline.\nL5-9. Instancio un Pipeline.\nL11. Entreno el Pipeline.\nL12. Predigo utilizando el Pipeline entrenado.\nL14. Evalúo el modelo en datos no vistos."
   },
   {
-    "objectID": "tics411/clase-2.html#eda",
-    "href": "tics411/clase-2.html#eda",
+    "objectID": "tics411/lab-0.html#documentación",
+    "href": "tics411/lab-0.html#documentación",
     "title": "TICS-411 Minería de Datos",
-    "section": "EDA",
-    "text": "EDA\n\nEl Analisis Exploratorio de Datos (EDA, por sus siglas en inglés) es procedimiento en el cual se analiza un dataset para explorar sus características principales.\n\n\nSu objetivo principal es poder familiarizarse con los datos además de encontrar potenciales problemas en su calidad.\nPrincipalmente hace uso de técnicas de manipulación de datos y visualizaciones.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos hallazgos importantes dentro del proceso se les denomina insights.\n\n\n\n\n\n\n\n\n\nEl uso de visualizaciones inadecuadas podría llevar a conclusiones erróneas.\n\n\n\n\n\n\n\n\n\n\nSummary.\nVisualización."
+    "section": "Documentación",
+    "text": "Documentación\n\nProbablemente Scikit-Learn tenga una de las mejores documentaciones existentes.\n\n\nVeamos el caso de la Documentación del One Hot Encoder"
   },
   {
-    "objectID": "tics411/clase-2.html#medidas-de-tendencia-central",
-    "href": "tics411/clase-2.html#medidas-de-tendencia-central",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Medidas de Tendencia Central",
-    "text": "Medidas de Tendencia Central"
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html",
+    "href": "tics411/notebooks/01-Preprocesamiento.html",
+    "title": "Clases UAI",
+    "section": "",
+    "text": "# %%capture\n#!pip install feature_engine\nimport pandas as pd\nimport numpy as np\nimport seaborn as sns\nfrom sklearn import set_config\n\nset_config(transform_output=\"pandas\")\n\ndf = sns.load_dataset(\"titanic\")\ndf"
   },
   {
-    "objectID": "tics411/clase-2.html#medidas-de-dispersión-y-asimetría",
-    "href": "tics411/clase-2.html#medidas-de-dispersión-y-asimetría",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Medidas de Dispersión y Asimetría",
-    "text": "Medidas de Dispersión y Asimetría"
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#valores-faltantes",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#valores-faltantes",
+    "title": "Clases UAI",
+    "section": "Valores Faltantes",
+    "text": "Valores Faltantes\n\ndf.isnull().sum()\n\n\n### Pandas\n# Veamos cuánto vale el promedio de Edad de los pasajeros del Titanic.\nmedia = df[\"age\"].mean()\nmediana = df[\"age\"].median()\nprint(f\"Promedio de Edad: {media}\")\nprint(f'Promedio de Edad con Imputación con Ceros: {df[\"age\"].fillna(0).mean()}')\nprint(f'Promedio de Edad con Imputación por Media: {df[\"age\"].fillna(media).mean()}')\nprint(\n    f'Promedio de Edad con Imputación por Mediana: {df[\"age\"].fillna(mediana).mean()}'\n)\n\n\nfrom sklearn.impute import SimpleImputer\n\nsc = SimpleImputer(strategy=\"mean\")\ndata_imputed = sc.fit_transform(df[[\"age\"]])  # Ojo con el doble []\ndata_imputed.isnull().sum()\n\n\nmode = df[\"embark_town\"].mode()[0]  # Hablar del tipo de datos que es la Moda.\ndf[\"embark_town\"].fillna(mode).isnull().sum()"
   },
   {
-    "objectID": "tics411/clase-2.html#eda-visualización",
-    "href": "tics411/clase-2.html#eda-visualización",
-    "title": "TICS-411 Minería de Datos",
-    "section": "EDA: Visualización",
-    "text": "EDA: Visualización\n\nLa visualización de datos es la presentación de datos en forma gráfica. Permite ver los análisis de modo que los responsables a cargo pueden comprender conceptos complejos.\n\n\nGracias a la evoluación del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la Visión.\n\n\n\n\n\n\n\n\nPuede ser difícil de aplicar si el tamaño de los datos es grande (sea en instancias o atributos). Por ejemplo, si los datos están en 4 dimensiones.\n\n\n\n\n\n\n\n\n\n\n\n\nSe suelen resumir los datos en estadísticas simples.\nGraficar datos en 1D, 2D y 3D (evitar dentro de lo posible).\nLa visualización debe ser comprensible ojalá sin ninguna explicación.\n\n\n\n\n\n\n\n\n\n\n\n\nEn caso de datos de alta dimensionalidad puede ser una buena idea reducir dimensiones mediante técnicas como:\n\nPCA\nUMAP\netc."
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#outliers",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#outliers",
+    "title": "Clases UAI",
+    "section": "Outliers",
+    "text": "Outliers\n\nprint(f\"Promedio de Tarifas: {df.fare.mean()}\")\ndf[\"fare\"].agg([\"min\", \"max\"])\n\n\nlower: Define la cota inferior.\nupper: Define la cota superior.\n\n\nclipped_data = df[[\"fare\"]].clip(lower=10, upper=50)\nclipped_data.agg([\"min\", \"max\"])\n\n\ndf[[\"fare\"]]\n\n\nclipped_data\n\n\nfrom feature_engine.outliers import ArbitraryOutlierCapper, Winsorizer\n\ncapper = ArbitraryOutlierCapper(\n    max_capping_dict=dict(fare=50), min_capping_dict=dict(fare=10)\n)\ncapper.fit_transform(df[[\"fare\"]])\n\n\ncapping_method: Define la Estragegia a utilizar para el Winsorizer. Ver Docs.\n\n\nwin = Winsorizer(capping_method=\"gaussian\")\nwin.fit_transform(df[[\"fare\"]])"
   },
   {
-    "objectID": "tics411/clase-2.html#caso-de-visualización",
-    "href": "tics411/clase-2.html#caso-de-visualización",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Caso de Visualización",
-    "text": "Caso de Visualización\n\n\n\n\n\n\n\nFiguras\nEscala de Colores.\nTamaño de los puntos.\nDemasiada información en un sólo gráfico.\nNo se entiende el mensaje."
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#variables-categóricas",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#variables-categóricas",
+    "title": "Clases UAI",
+    "section": "Variables Categóricas",
+    "text": "Variables Categóricas\n\ndrop_first: Si es True se elimina la primera categoría.\n\n\npd.get_dummies(df[\"embark_town\"], drop_first=False)\n\n\npd.get_dummies(\n    df[\"embark_town\"], drop_first=True\n)  # No considera los Nulos como otra categoría...\n\n\nsort: Usar True ya que coloca las categorías en orden. Además de esta manera se comporta igual que OrdinalEncoder de Scikit-Learn.\n\n\npd.DataFrame(pd.factorize(df[\"embark_town\"], sort=True)[0], columns=[\"new_column\"])\n\n\nsparse_output: Se debe fijar como False para poder ver el output como Pandas\ndrop: Se debe colocar \"first\" o el nombre de una sóla categoría a eliminar.\n\n\nfrom sklearn.preprocessing import OneHotEncoder, OrdinalEncoder\n\nohe = OneHotEncoder(drop=\"first\", sparse_output=False)\nohe.fit_transform(df[[\"embark_town\"]])\n\n\nohe = OneHotEncoder(\n    drop=[\"Queenstown\"], sparse_output=False\n)  # También se puede colocar np.nan.\nohe.fit_transform(df[[\"embark_town\"]])\n\n\noe = OrdinalEncoder()\noe.fit_transform(df[[\"embark_town\"]])"
   },
   {
-    "objectID": "tics411/clase-2.html#canales-visuales",
-    "href": "tics411/clase-2.html#canales-visuales",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Canales Visuales",
-    "text": "Canales Visuales\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSe les llama canales visuales a elementos visuales que pueden expresarse para poder expresar información (Clase Visualizacion Andreas Mueller).\nLa idea es poder mapear valores a cada uno de estos canales a valores.\n\n\n\n\n\n\n\n\n\n\n\nNo todos los canales son igual de útiles ni fáciles de entender."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones",
-    "href": "tics411/clase-2.html#visualizaciones-distribuciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Distribuciones",
-    "text": "Visualizaciones: Distribuciones\n\nHistograma\n\n\nEl histograma permite visualizar distribuciones univariadas acumulando los datos en rangos de igual tamaño (bins).\n\n\n\n\nPermite visualizar el centro, la extensión, la asimetría y outliers.\n\n\n\n\n\n\n\n\nEl histograma puede ser “engañoso” para conjuntos de datos pequeños.\nLa visualización puede resultar de manera muy distintas dependiendo del número de bins."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones-1",
-    "href": "tics411/clase-2.html#visualizaciones-distribuciones-1",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Distribuciones",
-    "text": "Visualizaciones: Distribuciones\n\nKernel Density\n\n\nCorresponde a un suavizamiento de un Histograma en el cuál se usa un Kernel (función no negativa que suma 1 y tiene media 0) para agrupar los puntos vecinos.\n\n\n\n\n\nLa función estimada es:\n\\[f(x) = \\frac{1}{n} = \\sum_{i=1}^n K \\left(\\frac{x - x(i)}{h}\\right)\\]\n\n\\(K(u)\\) es el Kernel.\n\\(h\\) es el ancho de banda."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones-2",
-    "href": "tics411/clase-2.html#visualizaciones-distribuciones-2",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Distribuciones",
-    "text": "Visualizaciones: Distribuciones\n\nBoxplot (Caja y Bigotes)\n\nEs un tipo de gráfico que muestra la distribución de manera univariada.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTiene la capacidad de mostrar varias distribuciones a la vez.\nAdemás presenta estadísticos de interés: Mediana, IQR y outliers.\nLos puntos fuera de los bigotes son considerados Outliers.\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos bigotes pueden representar:\n\nMínimo y Máximo. (En este caso no hay outliers).\n\\(\\mu \\pm 3\\sigma\\)\nPercentiles 5 y 95.\nOtros valores."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-barras",
-    "href": "tics411/clase-2.html#visualizaciones-barras",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Barras",
-    "text": "Visualizaciones: Barras\n\nBar Plot\n\n\nLa altura de la barra (normalmente Eje y) representa una cantidad asociada a una categoría (normalmente Eje x).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOtras convenciones llaman a este gráfico Column Plot, mientras que el Bar Plot tiene las barras de manera horizontal."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-puntos",
-    "href": "tics411/clase-2.html#visualizaciones-puntos",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Puntos",
-    "text": "Visualizaciones: Puntos\n\nScatter\n\n\nGráfico empleado para mostrar distribución de datos bivariados * Muestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y). * Permite mostrar relaciones lineales o no-lineales. * Correlaciones. * Outliers."
-  },
-  {
-    "objectID": "tics411/clase-2.html#estadísticos-vs-visualizaciones",
-    "href": "tics411/clase-2.html#estadísticos-vs-visualizaciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Estadísticos vs Visualizaciones",
-    "text": "Estadísticos vs Visualizaciones"
-  },
-  {
-    "objectID": "tics411/clase-2.html#otras-visualizaciones",
-    "href": "tics411/clase-2.html#otras-visualizaciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "¿Otras Visualizaciones?",
-    "text": "¿Otras Visualizaciones?"
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#escalamiento",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#escalamiento",
+    "title": "Clases UAI",
+    "section": "Escalamiento",
+    "text": "Escalamiento\n\nfrom sklearn.preprocessing import StandardScaler, MinMaxScaler\n\nsc = StandardScaler()\ndata = sc.fit_transform(df[[\"fare\"]])\ndata.agg([\"mean\", \"std\"])\n\n\nmms = MinMaxScaler()\nmms.fit_transform(df[[\"fare\"]]).agg([\"min\", \"max\"])"
   },
   {
     "objectID": "tics411/clase-0.html#quién-soy",
@@ -388,6 +339,97 @@
     "text": "Etapas del Modelamiento: Metodología Propia"
   },
   {
+    "objectID": "tics411/clase-2.html#eda",
+    "href": "tics411/clase-2.html#eda",
+    "title": "TICS-411 Minería de Datos",
+    "section": "EDA",
+    "text": "EDA\n\nEl Analisis Exploratorio de Datos (EDA, por sus siglas en inglés) es procedimiento en el cual se analiza un dataset para explorar sus características principales.\n\n\nSu objetivo principal es poder familiarizarse con los datos además de encontrar potenciales problemas en su calidad.\nPrincipalmente hace uso de técnicas de manipulación de datos y visualizaciones.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos hallazgos importantes dentro del proceso se les denomina insights.\n\n\n\n\n\n\n\n\n\nEl uso de visualizaciones inadecuadas podría llevar a conclusiones erróneas.\n\n\n\n\n\n\n\n\n\n\nSummary.\nVisualización."
+  },
+  {
+    "objectID": "tics411/clase-2.html#medidas-de-tendencia-central",
+    "href": "tics411/clase-2.html#medidas-de-tendencia-central",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Medidas de Tendencia Central",
+    "text": "Medidas de Tendencia Central"
+  },
+  {
+    "objectID": "tics411/clase-2.html#medidas-de-dispersión-y-asimetría",
+    "href": "tics411/clase-2.html#medidas-de-dispersión-y-asimetría",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Medidas de Dispersión y Asimetría",
+    "text": "Medidas de Dispersión y Asimetría"
+  },
+  {
+    "objectID": "tics411/clase-2.html#eda-visualización",
+    "href": "tics411/clase-2.html#eda-visualización",
+    "title": "TICS-411 Minería de Datos",
+    "section": "EDA: Visualización",
+    "text": "EDA: Visualización\n\nLa visualización de datos es la presentación de datos en forma gráfica. Permite ver los análisis de modo que los responsables a cargo pueden comprender conceptos complejos.\n\n\nGracias a la evoluación del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la Visión.\n\n\n\n\n\n\n\n\nPuede ser difícil de aplicar si el tamaño de los datos es grande (sea en instancias o atributos). Por ejemplo, si los datos están en 4 dimensiones.\n\n\n\n\n\n\n\n\n\n\n\n\nSe suelen resumir los datos en estadísticas simples.\nGraficar datos en 1D, 2D y 3D (evitar dentro de lo posible).\nLa visualización debe ser comprensible ojalá sin ninguna explicación.\n\n\n\n\n\n\n\n\n\n\n\n\nEn caso de datos de alta dimensionalidad puede ser una buena idea reducir dimensiones mediante técnicas como:\n\nPCA\nUMAP\netc."
+  },
+  {
+    "objectID": "tics411/clase-2.html#caso-de-visualización",
+    "href": "tics411/clase-2.html#caso-de-visualización",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Caso de Visualización",
+    "text": "Caso de Visualización\n\n\n\n\n\n\n\nFiguras\nEscala de Colores.\nTamaño de los puntos.\nDemasiada información en un sólo gráfico.\nNo se entiende el mensaje."
+  },
+  {
+    "objectID": "tics411/clase-2.html#canales-visuales",
+    "href": "tics411/clase-2.html#canales-visuales",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Canales Visuales",
+    "text": "Canales Visuales\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSe les llama canales visuales a elementos visuales que pueden expresarse para poder expresar información (Clase Visualizacion Andreas Mueller).\nLa idea es poder mapear valores a cada uno de estos canales a valores.\n\n\n\n\n\n\n\n\n\n\n\nNo todos los canales son igual de útiles ni fáciles de entender."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones",
+    "href": "tics411/clase-2.html#visualizaciones-distribuciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Distribuciones",
+    "text": "Visualizaciones: Distribuciones\n\nHistograma\n\n\nEl histograma permite visualizar distribuciones univariadas acumulando los datos en rangos de igual tamaño (bins).\n\n\n\n\nPermite visualizar el centro, la extensión, la asimetría y outliers.\n\n\n\n\n\n\n\n\nEl histograma puede ser “engañoso” para conjuntos de datos pequeños.\nLa visualización puede resultar de manera muy distintas dependiendo del número de bins."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones-1",
+    "href": "tics411/clase-2.html#visualizaciones-distribuciones-1",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Distribuciones",
+    "text": "Visualizaciones: Distribuciones\n\nKernel Density\n\n\nCorresponde a un suavizamiento de un Histograma en el cuál se usa un Kernel (función no negativa que suma 1 y tiene media 0) para agrupar los puntos vecinos.\n\n\n\n\n\nLa función estimada es:\n\\[f(x) = \\frac{1}{n} = \\sum_{i=1}^n K \\left(\\frac{x - x(i)}{h}\\right)\\]\n\n\\(K(u)\\) es el Kernel.\n\\(h\\) es el ancho de banda."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones-2",
+    "href": "tics411/clase-2.html#visualizaciones-distribuciones-2",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Distribuciones",
+    "text": "Visualizaciones: Distribuciones\n\nBoxplot (Caja y Bigotes)\n\nEs un tipo de gráfico que muestra la distribución de manera univariada.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTiene la capacidad de mostrar varias distribuciones a la vez.\nAdemás presenta estadísticos de interés: Mediana, IQR y outliers.\nLos puntos fuera de los bigotes son considerados Outliers.\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos bigotes pueden representar:\n\nMínimo y Máximo. (En este caso no hay outliers).\n\\(\\mu \\pm 3\\sigma\\)\nPercentiles 5 y 95.\nOtros valores."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-barras",
+    "href": "tics411/clase-2.html#visualizaciones-barras",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Barras",
+    "text": "Visualizaciones: Barras\n\nBar Plot\n\n\nLa altura de la barra (normalmente Eje y) representa una cantidad asociada a una categoría (normalmente Eje x).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOtras convenciones llaman a este gráfico Column Plot, mientras que el Bar Plot tiene las barras de manera horizontal."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-puntos",
+    "href": "tics411/clase-2.html#visualizaciones-puntos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Puntos",
+    "text": "Visualizaciones: Puntos\n\nScatter\n\n\nGráfico empleado para mostrar distribución de datos bivariados * Muestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y). * Permite mostrar relaciones lineales o no-lineales. * Correlaciones. * Outliers."
+  },
+  {
+    "objectID": "tics411/clase-2.html#estadísticos-vs-visualizaciones",
+    "href": "tics411/clase-2.html#estadísticos-vs-visualizaciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Estadísticos vs Visualizaciones",
+    "text": "Estadísticos vs Visualizaciones"
+  },
+  {
+    "objectID": "tics411/clase-2.html#otras-visualizaciones",
+    "href": "tics411/clase-2.html#otras-visualizaciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "¿Otras Visualizaciones?",
+    "text": "¿Otras Visualizaciones?"
+  },
+  {
     "objectID": "tics411/clase-1.html#tipos-de-datos-datos-tabulares",
     "href": "tics411/clase-1.html#tipos-de-datos-datos-tabulares",
     "title": "TICS-411 Minería de Datos",
@@ -483,7 +525,7 @@
     "href": "tics411/clase-1.html#preprocesamiento-manejo-de-variables-categóricas",
     "title": "TICS-411 Minería de Datos",
     "section": "Preprocesamiento: Manejo de Variables Categóricas",
-    "text": "Preprocesamiento: Manejo de Variables Categóricas\n\nLa mayoría de los modelos no tienen la capacidad de poder lidiar con variables categóricas por lo que deben ser transformadas en una representación numérica antes de ingresar a un modelo.\n\n\n\n\n\n\nOne Hot Encoder\n\n\n\n\n\n\nOrdinal Encoder\n\n\n\n\n\n\n\n\n\n\n\n\nOne Hot Encoder suele dar mejores resultados en modelos lineales.\nOrdinal Encoder suele dar mejores resultados en modelos de árbol."
+    "text": "Preprocesamiento: Manejo de Variables Categóricas\n\nLa mayoría de los modelos no tienen la capacidad de poder lidiar con variables categóricas por lo que deben ser transformadas en una representación numérica antes de ingresar a un modelo.\n\n\n\n\n\n\nOne Hot Encoder\n\n\n\n\n\n\nOrdinal Encoder\n\n\n\n\n\n\n\n\n\n\n\n\nOne Hot Encoder suele dar mejores resultados en modelos lineales.\nOrdinal Encoder suele dar mejores resultados en modelos de árbol.\n\n\n\n\n\n\n\n¿Son necesarias todas las columnas en un One Hot Encoder?"
   },
   {
     "objectID": "tics411/clase-1.html#preprocesamiento-escalamiento",
@@ -651,7 +693,7 @@
     "href": "tics411.html",
     "title": "Diapositivas",
     "section": "",
-    "text": "Clase 0\n\n\nReglas del Curso e Introducción\n\n\n\nMar 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nCalidad de los Datos y Feature Engineering\n\n\n\nMar 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nExploratory Data Analysis (EDA)\n\n\n\nMar 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\nIntroducción a Scikit-Learn\n\n\n\nMar 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 4\n\n\nK-Means\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
+    "text": "Clase 0\n\n\nReglas del Curso e Introducción\n\n\n\nMar 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nCalidad de los Datos y Feature Engineering\n\n\n\nMar 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nExploratory Data Analysis (EDA)\n\n\n\nMar 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase Bonus\n\n\nIntroducción a Scikit-Learn\n\n\n\nMar 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\nK-Means\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
     "crumbs": [
       "Diapositivas del Curso"
     ]

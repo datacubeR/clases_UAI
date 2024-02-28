@@ -573,13 +573,39 @@ Alfonso Tobar-Arancibia
 <p>L7-8. Adicionalmente se puede <code>entrenar</code> y <code>transformar</code> los datos en un sólo paso.</p>
 </div>
 </section>
-<section id="pipelines" class="slide level2">
+<section id="pipelines" class="slide level2 smaller">
 <h2>Pipelines</h2>
 <ul>
 <li>En ocasiones un Dataset requiere más de un preprocesamiento.</li>
 <li>Estas Transformaciones normalmente se hacen en serie de manera consecutiva.</li>
 </ul>
-<p><a href="img/lab-0/pipeline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/lab-0/pipeline.png"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/lab-0/pipeline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/lab-0/pipeline.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>El Estimator es opcional, es decir, el Pipeline puede ser para combinar sólo <code>Transformers</code> o <code>Transformers + un Estimator</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Un Pipeline puede tener <strong>sólo un Estimator</strong>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="pipelines-código" class="slide level2">
 <h2>Pipelines: Código</h2>
@@ -604,6 +630,20 @@ Alfonso Tobar-Arancibia
 <p>L11. Entreno el <code>Pipeline</code>.</p>
 <p>L12. Predigo utilizando el <code>Pipeline</code> entrenado.</p>
 <p>L14. Evalúo el modelo en datos no vistos.</p>
+</div>
+</section>
+<section id="documentación" class="slide level2">
+<h2>Documentación</h2>
+<blockquote>
+<p>Probablemente <code>Scikit-Learn</code> tenga una de las mejores documentaciones existentes.</p>
+</blockquote>
+<ul>
+<li>Veamos el caso de la Documentación del <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html#sklearn.preprocessing.OneHotEncoder">One Hot Encoder</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/lab-0/ohe_docs.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/lab-0/ohe_docs.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
 </div>
 </section>
 <section id="preguntas-para-terminar" class="title-slide slide level1 center">
@@ -1149,7 +1189,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":false,"closeEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
