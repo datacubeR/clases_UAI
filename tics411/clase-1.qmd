@@ -231,6 +231,10 @@ Al igual que en el caso anterior, es necesario evaluar la eliminación de regist
 * `Ordinal Encoder` suele dar mejores resultados en modelos de árbol. 
 :::
 
+::: {.fragment}
+#### ¿Son necesarias todas las columnas en un One Hot Encoder?
+:::
+
 ## Preprocesamiento: Escalamiento {.smaller}
 
 > El `escalamiento` se refiere al proceso de llevar distintas variables a una misma escala.

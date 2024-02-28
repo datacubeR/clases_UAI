@@ -165,12 +165,19 @@ L5. `Transformar` los datos.
 L7-8. Adicionalmente se puede `entrenar` y `transformar` los datos en un sólo paso. 
 :::
 
-## Pipelines
+## Pipelines {.smaller}
 
 * En ocasiones un Dataset requiere más de un preprocesamiento.
 * Estas Transformaciones normalmente se hacen en serie de manera consecutiva. 
 
-![](img/lab-0/pipeline.png){.lightbox}
+![](img/lab-0/pipeline.png){.lightbox fig-align="center"}
+
+::: {.callout-tip}
+* El Estimator es opcional, es decir, el Pipeline puede ser para combinar sólo `Transformers` o `Transformers + un Estimator`.
+:::
+::: {.callout-caution}
+Un Pipeline puede tener **sólo un Estimator**.
+:::
 
 ## Pipelines: Código
 
@@ -206,6 +213,14 @@ L12. Predigo utilizando el `Pipeline` entrenado.
 L14. Evalúo el modelo en datos no vistos. 
 
 :::
+
+## Documentación
+
+> Probablemente `Scikit-Learn` tenga una de las mejores documentaciones existentes. 
+
+* Veamos el caso de la Documentación del [One Hot Encoder](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html#sklearn.preprocessing.OneHotEncoder)
+
+![](img/lab-0/ohe_docs.png){.lightbox fig-align="center"}
 
 # Preguntas para terminar
 
