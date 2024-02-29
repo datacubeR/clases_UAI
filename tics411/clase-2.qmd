@@ -152,7 +152,7 @@ Histograma
 * La visualización puede resultar de manera muy distintas dependiendo del número de `bins`.
 :::
 
-![](img/clase-2/hist.png){.lightbox fig-align="center" width="80%"}
+![](img/clase-2/hist.png){.lightbox fig-align="center" width="70%"}
 
 
 ## Visualizaciones: Distribuciones {.smaller}
@@ -239,6 +239,28 @@ Scatter
 * Outliers.
 
 ![](img/clase-2/scatter.png){.lightbox fig-align="center" width="40%"}
+
+## Visualizaciones Líneas {.smaller}
+
+Lineplot
+: > Gráfico empleado para visualizar tendencias y su evolución en el tiempo. 
+
+::: {.columns}
+::: {.column}
+![](img/clase-2/line.png){.lightbox fig-align="center" width="70%"}
+
+:::
+::: {.column}
+
+![](img/clase-2/line_2.png){.lightbox fig-align="center" width="70%"}
+
+:::
+::: 
+
+::: {.callout-important .fragment}
+* Si bien es posible utilizarlo para gráficar dos medidas continuas, las buenas prácticas indican que el eje X siempre debería contener una componente temporal.
+:::
+
 
 ## Estadísticos vs Visualizaciones
 

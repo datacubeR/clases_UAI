@@ -390,7 +390,21 @@ Diferencia entre Grayscale y RGB.
 
 ## Reinforcement Learning
 
-![](img/clase-0/alpha_tensor.png){.lightbox}
+::: {.r-stack}
+
+![](img/clase-0/kira_3.jpeg){.lightbox .fragment width="50%" fig-align="center"}
+
+![](img/clase-0/kira_0.jpeg){.lightbox .fragment width="50%" fig-align="center"}
+
+![](img/clase-0/kira_2.jpeg){.lightbox .fragment width="50%" fig-align="center"}
+
+![](img/clase-0/kira_1.jpeg){.lightbox .fragment width="50%" fig-align="center"}
+
+
+![](img/clase-0/alpha_tensor.png){.lightbox .fragment}
+
+:::
+
 
 
 ## Regresión y Clasificación {.smaller}
@@ -501,7 +515,7 @@ Inferencia/Predicción
 ::: {layout-ncol=4}
 
 ::: {.fragment fragment-index=2}
-`K`orrea
+`K`ollar
 :::
 
 ::: {.fragment fragment-index=4}
@@ -556,7 +570,7 @@ No es bueno entrenar con las mismas instancias de entrenamiento. **¿Por qué?**
 ::: {layout-ncol=4}
 
 ::: {.fragment fragment-index=2}
-`K`orrea
+`K`ollar
 :::
 
 ::: {.fragment fragment-index=4}
@@ -615,7 +629,7 @@ Supongamos que queremos utilizar nuestro modelo para pronunciar palabras en otro
 Overfitting (Sobreajuste) 
 : > Se refiere a cuando un modelo no es capaz de generalizar de manera correcta, porque se ajusta `demasiado` bien (llegando a `memorizar`) a los datos de entrenamiento. **¿Cómo se puede mitigar este problema?**
 
-::: {.callout-caution}
+::: {.callout-caution .fragment}
 Se le tiende a llamar `sobreentrenamiento`, pero no es del todo correcto para el caso de modelos de Machine Learning. Lo más correcto es que el `sobreentrenamiento` provoca overfitting.
 :::
 
