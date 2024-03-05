@@ -70,7 +70,7 @@
     "href": "tics411/clase-3.html#clustering-jerarquía",
     "title": "TICS-411 Minería de Datos",
     "section": "Clustering: Jerarquía",
-    "text": "Clustering: Jerarquía\n\nLos algoritmos basados en jerarquía pueden seguir 2 estrategias:\n\n\nAglomerativos: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. Para n objetos se realizan n-1 uniones.\nDivisionales: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad."
+    "text": "Clustering: Jerarquía\n\nLos algoritmos basados en jerarquía pueden seguir 2 estrategias:\n\n\n**Aglomerativos*n: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. Para n objetos se realizan n-1 uniones.\nDivisionales: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad."
   },
   {
     "objectID": "tics411/clase-3.html#clustering-probabilístico",
@@ -148,104 +148,6 @@
     "title": "TICS-411 Minería de Datos",
     "section": "K-Means: Detalles Técnicos",
     "text": "K-Means: Detalles Técnicos\n\n\n\n\n\n\nFortalezas\n\n\n\nAlgoritmo relativamente eficiente (existen muy buenas implementaciones). \\(O(k \\cdot n \\cdot i)\\). Donde \\(k\\) es el número de clusters, \\(n\\) el número de puntos, e \\(i\\) el número de iteraciones.\nEncuentra clusters esféricos.\n\n\n\n\n\n\n\n\n\n\nDebilidades\n\n\n\nSensible al punto de inicio.\nSolo se puede aplicar cuando el promedio es calculable.\nSe requiere definir K a priori (K es un hiperparámetro).\nSuceptible al ruido."
-  },
-  {
-    "objectID": "tics411/clase-3.html#eda",
-    "href": "tics411/clase-3.html#eda",
-    "title": "TICS-411 Minería de Datos",
-    "section": "EDA",
-    "text": "EDA\n\nEl Analisis Exploratorio de Datos (EDA, por sus siglas en inglés) es procedimiento en el cual se analiza un dataset para explorar sus características principales.\n\n\nSu objetivo principal es poder familiarizarse con los datos además de encontrar potenciales problemas en su calidad.\nPrincipalmente hace uso de técnicas de manipulación de datos y visualizaciones.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos hallazgos importantes dentro del proceso se les denomina insights.\n\n\n\n\n\n\n\n\n\nEl uso de visualizaciones inadecuadas podría llevar a conclusiones erróneas.\n\n\n\n\n\n\n\n\n\n\nSummary.\nVisualización."
-  },
-  {
-    "objectID": "tics411/clase-3.html#medidas-de-tendencia-central",
-    "href": "tics411/clase-3.html#medidas-de-tendencia-central",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Medidas de Tendencia Central",
-    "text": "Medidas de Tendencia Central"
-  },
-  {
-    "objectID": "tics411/clase-3.html#medidas-de-dispersión-y-asimetría",
-    "href": "tics411/clase-3.html#medidas-de-dispersión-y-asimetría",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Medidas de Dispersión y Asimetría",
-    "text": "Medidas de Dispersión y Asimetría"
-  },
-  {
-    "objectID": "tics411/clase-3.html#eda-visualización",
-    "href": "tics411/clase-3.html#eda-visualización",
-    "title": "TICS-411 Minería de Datos",
-    "section": "EDA: Visualización",
-    "text": "EDA: Visualización\n\nLa visualización de datos es la presentación de datos en forma gráfica. Permite ver los análisis de modo que los responsables a cargo pueden comprender conceptos complejos.\n\n\nGracias a la evoluación del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la Visión.\n\n\n\n\n\n\n\n\nPuede ser difícil de aplicar si el tamaño de los datos es grande (sea en instancias o atributos). Por ejemplo, si los datos están en 4 dimensiones.\n\n\n\n\n\n\n\n\n\n\n\n\nSe suelen resumir los datos en estadísticas simples.\nGraficar datos en 1D, 2D y 3D (evitar dentro de lo posible).\nLa visualización debe ser comprensible ojalá sin ninguna explicación.\n\n\n\n\n\n\n\n\n\n\n\n\nEn caso de datos de alta dimensionalidad puede ser una buena idea reducir dimensiones mediante técnicas como:\n\nPCA\nUMAP\netc."
-  },
-  {
-    "objectID": "tics411/clase-3.html#caso-de-visualización",
-    "href": "tics411/clase-3.html#caso-de-visualización",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Caso de Visualización",
-    "text": "Caso de Visualización\n\n\n\n\n\n\n\nFiguras\nEscala de Colores.\nTamaño de los puntos.\nDemasiada información en un sólo gráfico.\nNo se entiende el mensaje."
-  },
-  {
-    "objectID": "tics411/clase-3.html#canales-visuales",
-    "href": "tics411/clase-3.html#canales-visuales",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Canales Visuales",
-    "text": "Canales Visuales\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSe les llama canales visuales a elementos visuales que pueden expresarse para poder expresar información (Clase Visualizacion Andreas Mueller).\nLa idea es poder mapear valores a cada uno de estos canales a valores.\n\n\n\n\n\n\n\n\n\n\n\nNo todos los canales son igual de útiles ni fáciles de entender."
-  },
-  {
-    "objectID": "tics411/clase-3.html#visualizaciones-distribuciones",
-    "href": "tics411/clase-3.html#visualizaciones-distribuciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Distribuciones",
-    "text": "Visualizaciones: Distribuciones\n\nHistograma\n\n\nEl histograma permite visualizar distribuciones univariadas acumulando los datos en rangos de igual tamaño (bins).\n\n\n\n\nPermite visualizar el centro, la extensión, la asimetría y outliers.\n\n\n\n\n\n\n\n\nEl histograma puede ser “engañoso” para conjuntos de datos pequeños.\nLa visualización puede resultar de manera muy distintas dependiendo del número de bins."
-  },
-  {
-    "objectID": "tics411/clase-3.html#visualizaciones-distribuciones-1",
-    "href": "tics411/clase-3.html#visualizaciones-distribuciones-1",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Distribuciones",
-    "text": "Visualizaciones: Distribuciones\n\nKernel Density\n\n\nCorresponde a un suavizamiento de un Histograma en el cuál se usa un Kernel (función no negativa que suma 1 y tiene media 0) para agrupar los puntos vecinos.\n\n\n\n\n\nLa función estimada es:\n\\[f(x) = \\frac{1}{n} = \\sum_{i=1}^n K \\left(\\frac{x - x(i)}{h}\\right)\\]\n\n\\(K(u)\\) es el Kernel.\n\\(h\\) es el ancho de banda."
-  },
-  {
-    "objectID": "tics411/clase-3.html#visualizaciones-distribuciones-2",
-    "href": "tics411/clase-3.html#visualizaciones-distribuciones-2",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Distribuciones",
-    "text": "Visualizaciones: Distribuciones\n\nBoxplot (Caja y Bigotes)\n\nEs un tipo de gráfico que muestra la distribución de manera univariada.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTiene la capacidad de mostrar varias distribuciones a la vez.\nAdemás presenta estadísticos de interés: Mediana, IQR y outliers.\nLos puntos fuera de los bigotes son considerados Outliers.\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos bigotes pueden representar:\n\nMínimo y Máximo. (En este caso no hay outliers).\n\\(\\mu \\pm 3\\sigma\\)\nPercentiles 5 y 95.\nOtros valores."
-  },
-  {
-    "objectID": "tics411/clase-3.html#visualizaciones-barras",
-    "href": "tics411/clase-3.html#visualizaciones-barras",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Barras",
-    "text": "Visualizaciones: Barras\n\nBar Plot\n\n\nLa altura de la barra (normalmente Eje y) representa una cantidad asociada a una categoría (normalmente Eje x).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOtras convenciones llaman a este gráfico Column Plot, mientras que el Bar Plot tiene las barras de manera horizontal."
-  },
-  {
-    "objectID": "tics411/clase-3.html#visualizaciones-puntos",
-    "href": "tics411/clase-3.html#visualizaciones-puntos",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Puntos",
-    "text": "Visualizaciones: Puntos\n\nScatter\n\n\nGráfico empleado para mostrar distribución de datos bivariados * Muestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y). * Permite mostrar relaciones lineales o no-lineales. * Correlaciones. * Outliers."
-  },
-  {
-    "objectID": "tics411/clase-3.html#visualizaciones-líneas",
-    "href": "tics411/clase-3.html#visualizaciones-líneas",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Líneas",
-    "text": "Visualizaciones: Líneas\n\nLineplot\n\n\nGráfico empleado para visualizar tendencias y su evolución en el tiempo.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSi bien es posible utilizarlo para gráficar dos medidas continuas, las buenas prácticas indican que el eje X siempre debería contener una componente temporal."
-  },
-  {
-    "objectID": "tics411/clase-3.html#estadísticos-vs-visualizaciones",
-    "href": "tics411/clase-3.html#estadísticos-vs-visualizaciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Estadísticos vs Visualizaciones",
-    "text": "Estadísticos vs Visualizaciones"
-  },
-  {
-    "objectID": "tics411/clase-3.html#otras-visualizaciones",
-    "href": "tics411/clase-3.html#otras-visualizaciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "¿Otras Visualizaciones?",
-    "text": "¿Otras Visualizaciones?"
   },
   {
     "objectID": "tics411/clase-1.html#tipos-de-datos-datos-tabulares",
