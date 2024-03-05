@@ -632,9 +632,10 @@ Supongamos que queremos utilizar nuestro modelo para pronunciar palabras en otro
 
 ::: {.incremental}
 * Stomach $\rightarrow$ Stoma<span style="color:green;">k</span>
+* Archer $\rightarrow$ Ar<span style="color:green;">ch</span>er
 
-* School $\rightarrow$ S`ch`ul 
-  * S<span style="color:green;">k</span>ul.
+* Archeology $\rightarrow$ Ar`ch`eology
+  * Ar<span style="color:green;">k</span>eology.
 
 * Chicago $\rightarrow$ `Ch`icago
   * <span style="color:green;">Sh</span>icago.

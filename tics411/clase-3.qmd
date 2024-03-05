@@ -1,6 +1,6 @@
 ---
 title: "TICS-411 Minería de Datos"
-subtitle: "Clase 3: K-Means"
+subtitle: "Modelación Descriptiva y K-Means"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -22,272 +22,380 @@ format:
     highlight-style: arrow
 ---
 
-# Análisis Exploratorio
+# Modelación Descriptiva (Aprendizaje no Supervisado)
 
-## EDA {.smaller}
+## Definiciones {.smaller}
 
-> El `Analisis Exploratorio de Datos` (EDA, por sus siglas en inglés) es procedimiento en el cual se analiza un dataset para explorar sus características principales.
+Aprendizaje No supervisado
+: > Es un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender. 
 
-* Su objetivo principal es poder familiarizarse con los datos además de encontrar potenciales problemas en su calidad.
-* Principalmente hace uso de técnicas de manipulación de datos y visualizaciones.
-
-
-::: {.columns}
-::: {.column}
-![](img/clase-2/eda_obj.png){.lightbox fig-align="center" width="90%"}
-:::
-::: {.column .fragment}
 ::: {.callout-note}
-Los hallazgos importantes dentro del proceso se les denomina `insights`.
+En nuestro caso nos enfocaremos en un caso particular de Modelación Descriptiva llamada Clustering.
 :::
 
-::: {.callout-important}
-El uso de visualizaciones inadecuadas podría llevar a **conclusiones erróneas**. 
+Clustering
+: > Consiste en agrupar los datos en un menor número de `entidades/grupos`. A estos grupos se les conoce como `clusters` y pueden ser agrupados de manera global, o modelando las principales características de los datos. 
+
+
+## Intuición {.smaller}
+#### ¿Cuántos clusters se pueden apreciar?
+
+
+::: {.r-stack}
+![](img/clase-3/0_clusters.png){.lightbox fig-align="center" .fragment}
+
+![](img/clase-3/2_clusters.png){.lightbox fig-align="center" .fragment}
+
+![](img/clase-3/3_clusters.png){.lightbox fig-align="center" .fragment}
 :::
 
-::: {.callout-tip}
-* Summary.
-* Visualización.
-:::
 
-:::
-::: 
+# Clustering
 
-# EDA: Summary
-
-## Medidas de Tendencia Central
-
-![](img/clase-2/central_tend.png){.lightbox fig-align="center" width="70%"}
-
-
-## Medidas de Dispersión y Asimetría
-
-![](img/clase-2/spread_meas.png){.lightbox fig-align="center" width="40%"}
-
-::: {.columns}
-::: {.column}
-![](img/clase-2/rangos.png){.lightbox fig-align="center" width="50%" .fragment}
-:::
-::: {.column}
-![](img/clase-2/skewness.png){.lightbox fig-align="center" width="90%" .fragment}
-:::
-::: 
-
-# Visualizaciones
-
-## EDA: Visualización {.smaller}
-
-> La visualización de datos es la presentación de datos en forma gráfica. Permite ver los análisis de modo que los responsables a cargo pueden comprender conceptos complejos.
-
-> Gracias a la evoluación del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la `Visión`.
-
-::: {.callout-important .fragment}
-Puede ser difícil de aplicar si el tamaño de los datos es grande (sea en instancias o atributos). Por ejemplo, si los datos están en 4 dimensiones.
-:::
+## Clustering: Introducción
 
 ::: {.callout-note .fragment}
-* Se suelen resumir los datos en `estadísticas simples`.
-* Graficar datos en 1D, 2D y 3D (evitar dentro de lo posible).
-* La visualización debe ser comprensible ojalá sin ninguna explicación.
+Clustering: Consiste en buscar grupos de objetos tales que la similaridad `intra-grupo` sea alta, mientras que la similaridad `inter-grupos` sea baja. Normalmente la distancia es usada para determinar **qué tan similares** son estos grupos. 
+:::
+
+::: {.columns}
+::: {.column}
+![](img/clase-3/intra_grupo.png){.lightbox fig-align="center" .fragment width="70%"}
+:::
+::: {.column}
+![](img/clase-3/inter_grupo.png){.lightbox fig-align="center" .fragment width="70%"}
+:::
+::: 
+
+## Clustering: Evaluación {.smaller}
+
+::: {.callout-important}
+* Evaluar el nivel del éxito o logro del Clustering es complicado. **¿Por qué?**
+:::
+
+
+![](img/clase-3/ambiguo.png){.lightbox fig-align="center" width="60%"}
+
+## Clustering: Tipos
+
+<br>
+
+::: {.columns}
+::: {.column}
+![](img/clase-3/clust_tipo1.png){.lightbox fig-align="center" }
+:::
+::: {.column}
+![](img/clase-3/clust_tipo2.png){.lightbox fig-align="center" }
+:::
+::: 
+
+
+## Clustering: Tipos
+
+<br>
+
+![](img/clase-3/clust_tipo3.png){.lightbox fig-align="center" }
+
+
+## Clustering: Partición
+
+> Los datos son separados en `K` clusters, donde cada punto pertenece exclusivamente a un `único` cluster.
+
+![](img/clase-3/particion.png){.lightbox fig-align="center" }
+
+## Clustering: Densidad
+
+> Se basan en la idea de continuar el crecimiento de un cluster a medida que la densidad (número de objetos o puntos) en el vecindario sobrepase algún umbral.
+
+![](img/clase-3/densidad.png){.lightbox fig-align="center" }
+
+## Clustering: Jerarquía {.smaller}
+
+> Los algoritmos basados en jerarquía pueden seguir 2 estrategias: 
+
+* **Aglomerativos*n: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. `Para n objetos se realizan n-1 uniones`. 
+
+* **Divisionales**: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad. 
+
+
+![](img/clase-3/jerarquia.png){.lightbox fig-align="center" width="70%"}
+
+
+## Clustering: Probabilístico {.smaller}
+
+Se ajusta cada punto a una distribución de probabilidades que indica cuál es la probabilidad de pertenencia a dicho cluster. 
+
+::: {.columns}
+::: {.column}
+![](img/clase-3/gmm_1.png){.lightbox fig-align="center" width="80%"}
+:::
+::: {.column}
+![](img/clase-3/gmm_2.png){.lightbox fig-align="center" }
+:::
+::: 
+
+# Métodos Basados en Partición
+
+## Partición
+
+> Los datos son separados en K Clusters, donde cada punto pertenece exclusivamente a un único cluster. 
+
+::: {.callout-tip}
+* Cluster Compactos: Minimizar la `distancia intra-cluster` (within cluster). 
+* Clusters bien separados: Maximizar la `distancia inter-cluster` (between cluster).
+:::
+
+$$ Score (C,D) = f(wc(C),bc(C))$$
+
+El puntaje/score mide la calidad del clustering $C$ para el Dataset $D$. 
+
+## Score
+
+$$ Score (C,D) = f(wc(C),bc(C))$$
+
+<br>
+
+::: {.columns style="font-size: 70%;"}
+::: {.column}
+* Distancia Between-Cluster:
+  $$bc(C) = \sum_{1 \le j \le k \le K} d(r_j, r_k)$$
+  
+
+donde $r_k$ representa el centro del cluster $k$:
+  $$r_k = \frac{1}{n_k} \sum_{x_i \in C_k} x_i$$
+
+:::
+::: {.column}
+* Distancia Within-Cluster:
+  $$wc(C) = \sum_{k=1}^K \sum_{x_i \in C_k} d(x_i, r_k)$$
+
+:::
+::: 
+
+::: {.columns}
+::: {.column style="font-size: 70%;"}
+::: {.callout-tip}
+Distancia entre los centros de cada cluster.
+:::
+:::
+::: {.column style="font-size: 70%;"}
+::: {.callout-tip}
+Distancia entre todos los puntos del cluster y su respectivo centro. 
+:::
+:::
+::: 
+
+## K-Means {.smaller}
+
+K-Means
+: > Dado un número de clusters $K$ (determinado por el usuario), cada cluster es asociado a un centro (centroide). Luego, cada punto es asociado al cluster con el centroide más cercano. 
+
+::: {.columns}
+::: {.column}
+![](img/clase-3/particion.png){.lightbox fig-align="center" width="90%"}
+:::
+::: {.column}
+Normalmente se utiliza la Distancia Euclideana como medida de `similaridad`.
+
+::: {.incremental}
+1. Se seleccionan $K$ puntos como centroides iniciales.
+2. Repite:
+   - Forma K clusters asignando todos los puntos al centroide más cercano. 
+   - Recalcula el centroide para cada clase como la media de todos los puntos de dicho cluster.
+- Se repite este procedimiento por un **número finito de iteraciones** o hasta que los **centroides no cambien**.  
+:::
+:::
+::: 
+
+
+## K-Means: Ejemplo {.smaller}
+
+#### Resolvamos el siguiente ejemplo. 
+
+Supongamos que tenemos tipos de manzana, y cada una de ellas tiene 2 atributos (features). Agrupemos estos objetos en 2 grupos de manzanas basados en sus características. 
+
+::: {.columns}
+::: {.column}
+![](img/clase-3/ej_1.png){.lightbox fig-align="center"} 
+:::
+::: {.column}
+![](img/clase-3/ej_2.png){.lightbox fig-align="center"} 
+:::
+::: 
+
+
+## K-Means: Ejemplo {.smaller}
+
+#### 1era Iteración
+
+::: {.columns}
+::: {.column}
+::: {.fragment fragment-index=1}
+* Definamos los centroides. 
+$$C_1 = (1,1)$$
+$$C_2 = (2,1)$$
+:::
+
+::: {.fragment fragment-index=2}
+* Calculemos la Matriz de Distancias:
+:::
+
+::: {.fragment fragment-index=2}
+$$D^1 = \begin{bmatrix}
+0 & 1 & 3.61 & 5\\
+1 & 0 & 2.83 & 4.24
+\end{bmatrix}$$
+:::
+
+::: {.fragment fragment-index=3}
+* Calculemos la Matriz de Pertenencia $G$: 
+:::
+
+::: {.fragment fragment-index=4}
+$$G^1 = \begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 1 & 1
+\end{bmatrix}$$
+:::
+:::
+::: {.column .fragment fragment-index=1}
+![](img/clase-3/kmeans_1.png){.lightbox fig-align="center"}
+
+::: {.fragment fragment-index=5}
+
+Los nuevos centroides son:
+$$C_1 = (1,1)$$
+$$C_2 = (\frac{11}{3}, \frac{8}{3})$$
+:::
+
+:::
+
+::: 
+
+
+## K-Means: Ejemplo {.smaller}
+
+#### 2da Iteración
+
+::: {.columns}
+::: {.column}
+::: {.fragment fragment-index=1}
+* Los nuevos centroides son:
+
+$$C_1 = (1,1)$$
+$$C_2 = (\frac{11}{3}, \frac{8}{3})$$
+:::
+
+::: {.fragment fragment-index=2}
+* Calculemos la Matriz de Distancias:
+:::
+
+::: {.fragment fragment-index=2}
+$$D^1 = \begin{bmatrix}
+0 & 1 & 3.61 & 5\\
+3.14 & 2.26 & 0.47 & 1.89
+\end{bmatrix}$$
+:::
+
+::: {.fragment fragment-index=3}
+* Calculemos la Matriz de Pertenencia $G$: 
+:::
+
+::: {.fragment fragment-index=4}
+$$G^1 = \begin{bmatrix}
+1 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1
+\end{bmatrix}$$
+:::
+:::
+::: {.column .fragment fragment-index=1}
+![](img/clase-3/kmeans_2.png){.lightbox fig-align="center"}
+
+::: {.fragment fragment-index=5}
+
+Los nuevos centroides son:
+$$C_1 = (1,1)$$
+$$C_2 = (\frac{9}{2}, \frac{7}{2})$$
+:::
+
+:::
+
+::: 
+
+## K-Means: Ejemplo {.smaller}
+
+![](img/clase-3/kmeans_3.png){.lightbox fig-align="center"}
+
+::: {.callout-tip}
+* Si seguimos iterando notaremos que ya no hay cambios en los clusters. El algoritmo converge. 
+* Este es el resultado de usar $K=2$. Utilizar otro valor de $K$ entregará valores distintos. 
+* **¿Es este el número de clusters óptimos?**
+:::
+
+## K-Means: Número de Clusters Óptimos {.smaller}
+
+::: {.columns}
+::: {.column width="70%"}
+::: {.r-stack}
+
+![](img/clase-3/optim_1.png){.lightbox fig-align="center" .fragment .fade-in-then-out}
+
+![](img/clase-3/optim_2.png){.lightbox fig-align="center" .fragment}
+:::
+:::
+::: {.column width="30%"}
+::: {.callout-caution .fragment}
+* Siempre es posible encontrar el número de clusters indicados. 
+* Entonces, 
+
+**¿Cómo debería escoger el valor de $K$?**
+:::
+:::
+::: 
+
+## K-Means: Número de Clusters Óptimos {.smaller}
+
+Curva del Codo
+: Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.g. within distance) para distintos valores de $K$. El valor óptimo de $K$ será el codo de la curva, que es el valor donde se estabiliza la métrica. 
+
+::: {.columns}
+::: {.column}
+![](img/clase-3/elbow.png){.lightbox fig-align="center"} 
+:::
+::: {.column}
+<br>
+
+::: {.callout-important .fragment}
+* Este valor del codo muchas veces es subjetivo y distintas apreciaciones pueden llegar a distintos $K$ óptimos. 
 :::
 
 ::: {.callout-tip .fragment}
-En caso de datos de alta dimensionalidad puede ser una buena idea reducir dimensiones mediante técnicas como:
-
-* PCA
-* UMAP
-* etc.
+Eventualmente otras métricas distintas al `within distance` podrían también ser usadas. 
 :::
-
-## Caso de Visualización
-
-![](img/clase-2/visual_problem.png){.lightbox fig-align="center" width="60%"}
-
-::: {.notes}
-* Figuras
-* Escala de Colores.
-* Tamaño de los puntos.
-* Demasiada información en un sólo gráfico. 
-* No se entiende el mensaje.
-:::
-
-## Canales Visuales 
-
-:::: {.columns}
-::: {.column}
-
-::: {.r-stack}
-::: {.fragment .fade-out fragment-index=3}
-![](img/clase-2/visual_channels.png){.lightbox fig-align="center" width="90%" .fragment fragment-index=1}
-:::
-
-![](img/clase-2/best_channels.png){.lightbox fig-align="center" width="70%" .fragment fragment-index=3}
-
-:::
-
-
-:::
-::: {.column .fragment fragment-index=2}
-::: {.callout-note}
-* Se les llama canales visuales a elementos visuales que pueden expresarse para poder expresar información **(Clase Visualizacion Andreas Mueller)**.
-* La idea es poder mapear valores a cada uno de estos canales a valores.
-:::
-
-::: {.callout-caution}
-* No todos los canales son igual de útiles ni fáciles de entender.
-:::
-
-:::
-:::: 
-
-## Visualizaciones: Distribuciones {.smaller}
-
-Histograma
-: > El histograma permite visualizar distribuciones univariadas acumulando los datos en rangos de igual tamaño (`bins`).
-
-* Permite visualizar el `centro`, la `extensión`, la `asimetría` y `outliers`.
-
-::: {.callout-important}
-* El histograma puede ser "engañoso" para conjuntos de datos pequeños. 
-* La visualización puede resultar de manera muy distintas dependiendo del número de `bins`.
-:::
-
-![](img/clase-2/hist.png){.lightbox fig-align="center" width="70%"}
-
-
-## Visualizaciones: Distribuciones {.smaller}
-
-Kernel Density
-: > Corresponde a un suavizamiento de un Histograma en el cuál se usa un `Kernel` **(función no negativa que suma 1 y tiene media 0)** para agrupar los puntos vecinos. 
-
-::: {.columns}
-::: {.column width="50%"}
-
-La función estimada es: 
-
-$$f(x) = \frac{1}{n} = \sum_{i=1}^n K \left(\frac{x - x(i)}{h}\right)$$
-
-* $K(u)$ es el Kernel.
-* $h$ es el ancho de banda.
-
-![](img/clase-2/kernel_type.png){.lightbox fig-align="center" width="60%"}
-
-:::
-::: {.column width="50%"}
-
-![](img/clase-2/kernel.png){.lightbox fig-align="center" width="100%"}
-
-![](img/clase-2/kernel_07.png){.lightbox fig-align="center" width="100%"}
 :::
 ::: 
 
-## Visualizaciones: Distribuciones {.smaller}
+## K-Means: Detalles Técnicos
 
-Boxplot (Caja y Bigotes)
-: Es un tipo de gráfico que muestra la distribución de manera univariada.
+::: {.callout-note appearance="default"}
+## Fortalezas
 
-::: {.columns}
-::: {.column}
-
-![](img/clase-2/box_def.png){.lightbox fig-align="center" width="50%"}
-
-::: {.callout-note style="font-size: 70%;"}
-* Tiene la capacidad de mostrar varias distribuciones a la vez.
-* Además presenta estadísticos de interés: Mediana, IQR y outliers.
-* Los puntos fuera de los bigotes son considerados Outliers.
-:::
-::: {.callout-tip style="font-size: 70%;"}
-* Los bigotes pueden representar:
-  * Mínimo y Máximo. (En este caso no hay outliers). 
-  * $\mu \pm 3\sigma$
-  * Percentiles 5 y 95.
-  * Otros valores.
-:::
+* Algoritmo relativamente eficiente (existen muy buenas implementaciones). $O(k \cdot n \cdot i)$. Donde $k$ es el número de clusters, $n$ el número de puntos, e $i$ el número de iteraciones. 
+* Encuentra ***clusters esféricos***. 
 :::
 
-::: {.column}
-![](img/clase-2/boxplot.png){.lightbox fig-align="center"}
-:::
-::: 
+::: {.callout-warning appearance="default"}
+## Debilidades
 
+* Sensible al punto de inicio. 
+* Solo se puede aplicar cuando el promedio es calculable. 
+* Se requiere definir K a priori (K es un *hiperparámetro*). 
+* Suceptible al ruido. 
 
-## Visualizaciones: Barras {.smaller}
-
-Bar Plot
-: > La altura de la barra (normalmente Eje y) representa una cantidad asociada a una categoría (normalmente Eje x). 
-
-::: {.columns}
-::: {.column}
-![](img/clase-2/bar_plot1.png){.lightbox fig-align="center" width="65%"}
-:::
-::: {.column}
-![](img/clase-2/bar_plot2.png){.lightbox fig-align="center" width="65%"}
-:::
-::: 
-
-::: {.callout-warning .fragment}
-* Otras convenciones llaman a este gráfico `Column Plot`, mientras que el `Bar Plot` tiene las barras de manera horizontal. 
-:::
-
-## Visualizaciones: Puntos {.smaller}
-
-Scatter
-: > Gráfico empleado para mostrar distribución de datos bivariados
-* Muestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y). 
-* Permite mostrar relaciones lineales o no-lineales.
-* Correlaciones.
-* Outliers.
-
-![](img/clase-2/scatter.png){.lightbox fig-align="center" width="40%"}
-
-## Visualizaciones: Líneas {.smaller}
-
-Lineplot
-: > Gráfico empleado para visualizar tendencias y su evolución en el tiempo. 
-
-::: {.columns}
-::: {.column}
-![](img/clase-2/line.png){.lightbox fig-align="center" width="70%"}
-
-:::
-::: {.column}
-
-![](img/clase-2/line_2.png){.lightbox fig-align="center" width="70%"}
-
-:::
-::: 
-
-::: {.callout-important .fragment}
-* Si bien es posible utilizarlo para gráficar dos medidas continuas, las buenas prácticas indican que el eje X siempre debería contener una componente temporal.
 :::
 
 
-## Estadísticos vs Visualizaciones
-
-::: {.columns}
-::: {.column}
-![](img/clase-2/cuarteto_anscombe.png){.lightbox fig-align="center" width="80%"}
-:::
-::: {.column}
-
-<br> 
-
-![](img/clase-2/anscombe_data.png){.lightbox fig-align="center" width="80%"}
-:::
-::: 
-
-## ¿Otras Visualizaciones?
-
-![](img/clase-2/charts.png){.lightbox fig-align="center" width="60%"}
-
-# Preguntas para terminar
-
-* ¿Por qué usar visualizaciones? ¿Qué son los canales visuales?
-* ¿Por qué es necesario el EDA?
-* ¿Por qué es necesario utilizar tanto Estadísticos como Visualizaciones?
-
-
-# Le cours est terminé
+# Eso es todo
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0

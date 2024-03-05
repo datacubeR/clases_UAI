@@ -1,5 +1,5 @@
 - title: "Clase 0"
-  subtitle: "Reglas del Curso e Introducción"
+  subtitle: "Presentación del Curso"
   author: "Alfonso Tobar-Arancibia"
   date: 2024-03-07
   image: tics411/thumbnails/clase-0.png
@@ -36,7 +36,7 @@
    - slides
 
 - title: "Clase 3"
-  subtitle: "K-Means"
+  subtitle: "Modelación Descriptiva y K-Means"
   author: "Alfonso Tobar-Arancibia"
   date: 2024-03-28
   image: tics411/thumbnails/clase-3.png
