@@ -1,6 +1,6 @@
 ---
 title: "TICS-411 Minería de Datos"
-subtitle: "Clase 2: Exploratory Data Analysis (EDA)"
+subtitle: "Clase 3: K-Means"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:

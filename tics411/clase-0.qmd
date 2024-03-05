@@ -388,22 +388,41 @@ Diferencia entre Grayscale y RGB.
 ![](img/clase-0/ML_types.png){.lightbox}
 
 
-## Reinforcement Learning
+## Reinforcement Learning {.smaller}
 
+::: {.columns}
+::: {.column}
 ::: {.r-stack}
 
-![](img/clase-0/kira_3.jpeg){.lightbox .fragment width="50%" fig-align="center"}
+![](img/clase-0/kira_3.jpeg){.lightbox .fragment width="50%" fig-align="center" fragment-index=1}
 
-![](img/clase-0/kira_0.jpeg){.lightbox .fragment width="50%" fig-align="center"}
+![](img/clase-0/kira_0.jpeg){.lightbox .fragment width="50%" fig-align="center" fragment-index=2}
 
-![](img/clase-0/kira_2.jpeg){.lightbox .fragment width="50%" fig-align="center"}
+![](img/clase-0/kira_2.jpeg){.lightbox .fragment width="50%" fig-align="center" fragment-index=3}
 
-![](img/clase-0/kira_1.jpeg){.lightbox .fragment width="50%" fig-align="center"}
+![](img/clase-0/kira_1.jpeg){.lightbox .fragment width="50%" fig-align="center" fragment-index=4}
 
+![](img/clase-0/alpha_tensor.png){.lightbox .fragment fragment-index=5}
 
-![](img/clase-0/alpha_tensor.png){.lightbox .fragment}
+![](img/clase-0/alpha_fold.png){.lightbox .fragment fragment-index=6}
 
 :::
+:::
+::: {.column}
+::: {.callout-note .fragment fragment-index=1}
+En este tipo de aprendizaje se enseña por refuerzo. Es decir se da una recompensa si el sistema aprende lo que queremos.
+:::
+::: {.callout-tip .fragment fragment-index=2}
+Si el premio es mayor, se pueden obtener aprendizajes mayores. 
+:::
+::: {.callout-important .fragment fragment-index=5}
+Un ejemplo de esto es **Alpha Tensor** en el cual un modelo `aprendió` una nueva manera de multiplicar matrices que es más eficiente. 
+:::
+::: {.callout-important .fragment fragment-index=6}
+Otro ejemplo es **AlphaFold** donde el modelo `aprendió/descubrió` cómo se doblan las proteínas cuando se vuelven aminoácidos. 
+:::
+:::
+::: 
 
 
 
@@ -672,7 +691,7 @@ Underfitting (Subajuste)
 # Gracias
 
 ::: {.footer}
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-411 Minería de Datos</span> por <span property="cc:attributionName">Alfonso Tobar</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
 
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
 :::

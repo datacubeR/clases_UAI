@@ -23,7 +23,7 @@ format:
     code-annotations: hover
 ---
 
-## ¿Qué es Scikit-Learn?
+## ¿Qué es Scikit-Learn? {.smaller}
 
 ::: {.columns}
 ::: {.column width="30%"}
@@ -34,6 +34,8 @@ format:
 * En 2010 queda a cargo de [INRIA](https://www.inria.cl/es) y tiene un ciclo de actualización de 3 meses.
 * Es la librería más famosa y poderosa para hacer Machine Learning hoy en día. 
 * Su API es tan famosa, que hoy se sabe que una librería es de `calidad` si sigue los estándares implementados por `Scikit-Learn`.
+* Para que un algoritmo sea parte de `Scikit-Learn` debe poseer 3 años desde su publicación y 200+ citaciones mostrando su utilidad y amplio uso (ver [acá](https://scikit-learn.org/stable/faq.html#new-algorithms-inclusion-criteria)).
+* Además es una librería que obliga a que sus algoritmos tengan la capacidad de generalizar. 
 :::
 ::: 
 
@@ -89,7 +91,7 @@ L7-8. Este tipo de modelos permite entrenar y predecir en un sólo paso.
 
 ## Estimadores Predictivos
 
-```{.python code-line-numbers="|1|2|3|5-6|7|"}
+```{.python code-line-numbers="|1|2|3|5-6|8|"}
 from sklearn.sub_modulo import Estimator 
 model = Estimator(hp1=v1, hp2=v2,...) 
 model.fit(X_train, y_train) 
@@ -141,7 +143,7 @@ El modelo es una herramienta a la cual le entregamos datos (Input), y nos devuel
 * Algunos `Transformers` permiten escalar los datos, transformar categorías en números, rellenar valores faltantes. (Veremos más acerca de esto en los `Preprocesamiento`). 
 :::
 
-
+::: {.fragment}
 ```{.python code-line-numbers="|1|2|3|5|7-8|"}
 from sklearn.preprocessing import Transformer 
 tr = Transformer(hp1=v1, hp2=v2,...) 
@@ -154,7 +156,7 @@ X_new = tr.fit_transform(X)
 ```
 
 ::: {style="font-size: 65%;"}
-L1. Importar la clase a utilizar (en este caso del submodulo `preprocessing`).
+L1. Importar la clase a utilizar (en este caso del submodulo `preprocessing`, aunque pueden haber otros como `impute`).
 
 L2. `Instanciar` el Transformer y sus `hiperparámetros`. 
 
@@ -164,7 +166,7 @@ L5. `Transformar` los datos.
 
 L7-8. Adicionalmente se puede `entrenar` y `transformar` los datos en un sólo paso. 
 :::
-
+:::
 ## Pipelines {.smaller}
 
 * En ocasiones un Dataset requiere más de un preprocesamiento.
