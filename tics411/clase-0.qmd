@@ -42,6 +42,7 @@ format:
   * ML Engineer.
   * Data Engineer.
 * Terminando mi Msc. y empezando mi PhD en la UAI.
+* Me gusta mucho programar.
 * He ganado 2 competencias de Machine Learning.
 * Publiqué mi primer [paper](https://ieeexplore.ieee.org/abstract/document/10315748) el año pasado sobre Hate Speech en Español.
 * Juego **Tenis de Mesa**, hago **Agility** con mi perrita Kira y escribo en mi Blog. 
@@ -106,6 +107,8 @@ format:
 
 ::: {.incremental}
 * Clases presenciales, con participación activa de los estudiantes. 
+* **Es un curso coordinado**. 
+* Canal oficial será **Webcursos**.
 * Mucha terminología y material de estudio será en `Inglés`. 
 * Horario: Jueves. 
   * 15:30 a 16:40 (Cátedra)

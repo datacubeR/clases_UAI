@@ -34,4 +34,8 @@ Universidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023
 Universidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013
 
 Puedes ver más detalles de mi carrera [acá](https://datacuber.cl/work/).
+
+## Publicaciones
+
+* [Hate Speech Recognition in Chilean Tweets](https://ieeexplore.ieee.org/abstract/document/10315748)
 :::
