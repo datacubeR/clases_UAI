@@ -333,7 +333,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 3: K-Means</p>
+  <p class="subtitle">Modelación Descriptiva y K-Means</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -348,9 +348,552 @@ Alfonso Tobar-Arancibia
 
 </section>
 <section>
-<section id="análisis-exploratorio" class="title-slide slide level1 center">
-<h1>Análisis Exploratorio</h1>
+<section id="modelación-descriptiva-aprendizaje-no-supervisado" class="title-slide slide level1 center">
+<h1>Modelación Descriptiva (Aprendizaje no Supervisado)</h1>
 
+</section>
+<section id="definiciones" class="slide level2 smaller">
+<h2>Definiciones</h2>
+<dl>
+<dt>Aprendizaje No supervisado</dt>
+<dd>
+<blockquote>
+<p>Es un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender.</p>
+</blockquote>
+</dd>
+</dl>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En nuestro caso nos enfocaremos en un caso particular de Modelación Descriptiva llamada Clustering.</p>
+</div>
+</div>
+</div>
+<dl>
+<dt>Clustering</dt>
+<dd>
+<blockquote>
+<p>Consiste en agrupar los datos en un menor número de <code>entidades/grupos</code>. A estos grupos se les conoce como <code>clusters</code> y pueden ser agrupados de manera global, o modelando las principales características de los datos.</p>
+</blockquote>
+</dd>
+</dl>
+</section>
+<section id="intuición" class="slide level2 smaller">
+<h2>Intuición</h2>
+<h4 id="cuántos-clusters-se-pueden-apreciar">¿Cuántos clusters se pueden apreciar?</h4>
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/0_clusters.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-3/0_clusters.png" class="fragment quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/2_clusters.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-3/2_clusters.png" class="fragment quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/3_clusters.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-3/3_clusters.png" class="fragment quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</section></section>
+<section>
+<section id="clustering" class="title-slide slide level1 center">
+<h1>Clustering</h1>
+
+</section>
+<section id="clustering-introducción" class="slide level2">
+<h2>Clustering: Introducción</h2>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Clustering: Consiste en buscar grupos de objetos tales que la similaridad <code>intra-grupo</code> sea alta, mientras que la similaridad <code>inter-grupos</code> sea baja. Normalmente la distancia es usada para determinar <strong>qué tan similares</strong> son estos grupos.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/intra_grupo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-3/intra_grupo.png" class="fragment quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/inter_grupo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-3/inter_grupo.png" class="fragment quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="clustering-evaluación" class="slide level2 smaller">
+<h2>Clustering: Evaluación</h2>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Evaluar el nivel del éxito o logro del Clustering es complicado. <strong>¿Por qué?</strong></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/ambiguo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-3/ambiguo.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="clustering-tipos" class="slide level2">
+<h2>Clustering: Tipos</h2>
+<p><br></p>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/clust_tipo1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-3/clust_tipo1.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/clust_tipo2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-3/clust_tipo2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="clustering-tipos-1" class="slide level2">
+<h2>Clustering: Tipos</h2>
+<p><br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/clust_tipo3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-3/clust_tipo3.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="clustering-partición" class="slide level2">
+<h2>Clustering: Partición</h2>
+<blockquote>
+<p>Los datos son separados en <code>K</code> clusters, donde cada punto pertenece exclusivamente a un <code>único</code> cluster.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/particion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-3/particion.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="clustering-densidad" class="slide level2">
+<h2>Clustering: Densidad</h2>
+<blockquote>
+<p>Se basan en la idea de continuar el crecimiento de un cluster a medida que la densidad (número de objetos o puntos) en el vecindario sobrepase algún umbral.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/densidad.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-3/densidad.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="clustering-jerarquía" class="slide level2 smaller">
+<h2>Clustering: Jerarquía</h2>
+<blockquote>
+<p>Los algoritmos basados en jerarquía pueden seguir 2 estrategias:</p>
+</blockquote>
+<ul>
+<li><p>Aglomerativos: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. <code>Para n objetos se realizan n-1 uniones</code>.</p></li>
+<li><p>Divisionales: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/jerarquia.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-3/jerarquia.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="clustering-probabilístico" class="slide level2 smaller">
+<h2>Clustering: Probabilístico</h2>
+<p>Se ajusta cada punto a una distribución de probabilidades que indica cuál es la probabilidad de pertenencia a dicho cluster.</p>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/gmm_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-3/gmm_1.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/gmm_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-3/gmm_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="métodos-basados-en-partición" class="title-slide slide level1 center">
+<h1>Métodos Basados en Partición</h1>
+
+</section>
+<section id="partición" class="slide level2">
+<h2>Partición</h2>
+<blockquote>
+<p>Los datos son separados en K Clusters, donde cada punto pertenece exclusivamente a un único cluster.</p>
+</blockquote>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Cluster Compactos: Minimizar la <code>distancia intra-cluster</code> (within cluster).</li>
+<li>Clusters bien separados: Maximizar la <code>distancia inter-cluster</code> (between cluster).</li>
+</ul>
+</div>
+</div>
+</div>
+<p><span class="math display">\[ Score (C,D) = f(wc(C),bc(C))\]</span></p>
+<p>El puntaje/score mide la calidad del clustering <span class="math inline">\(C\)</span> para el Dataset <span class="math inline">\(D\)</span>.</p>
+</section>
+<section id="score" class="slide level2">
+<h2>Score</h2>
+<p><span class="math display">\[ Score (C,D) = f(wc(C),bc(C))\]</span></p>
+<p><br></p>
+<div class="columns" style="font-size: 70%;">
+<div class="column">
+<ul>
+<li>Distancia Between-Cluster: <span class="math display">\[bc(C) = \sum_{1 \le j \le k \le K} d(r_j, r_k)\]</span></li>
+</ul>
+<p>donde <span class="math inline">\(r_k\)</span> representa el centro del cluster <span class="math inline">\(k\)</span>: <span class="math display">\[r_k = \frac{1}{n_k} \sum_{x_i \in C_k} x_i\]</span></p>
+</div><div class="column">
+<ul>
+<li>Distancia Within-Cluster: <span class="math display">\[wc(C) = \sum_{k=1}^K \sum_{x_i \in C_k} d(x_i, r_k)\]</span></li>
+</ul>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="font-size: 70%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Distancia entre los centros de cada cluster.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="font-size: 70%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Distancia entre todos los puntos del cluster y su respectivo centro.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="k-means" class="slide level2 smaller">
+<h2>K-Means</h2>
+<dl>
+<dt>K-Means</dt>
+<dd>
+<blockquote>
+<p>Dado un número de clusters <span class="math inline">\(K\)</span> (determinado por el usuario), cada cluster es asociado a un centro (centroide). Luego, cada punto es asociado al cluster con el centroide más cercano.</p>
+</blockquote>
+</dd>
+</dl>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/particion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-3/particion.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<p>Normalmente se utiliza la Distancia Euclideana como medida de <code>similaridad</code>.</p>
+<div>
+<ol type="1">
+<li class="fragment">Se seleccionan <span class="math inline">\(K\)</span> puntos como centroides iniciales.</li>
+<li class="fragment">Repite:
+<ul>
+<li class="fragment">Forma K clusters asignando todos los puntos al centroide más cercano.</li>
+<li class="fragment">Recalcula el centroide para cada clase como la media de todos los puntos de dicho cluster.</li>
+</ul></li>
+</ol>
+<ul>
+<li class="fragment">Se repite este procedimiento por un <strong>número finito de iteraciones</strong> o hasta que los <strong>centroides no cambien</strong>.<br>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="k-means-ejemplo" class="slide level2 smaller">
+<h2>K-Means: Ejemplo</h2>
+<h4 id="resolvamos-el-siguiente-ejemplo.">Resolvamos el siguiente ejemplo.</h4>
+<p>Supongamos que tenemos tipos de manzana, y cada una de ellas tiene 2 atributos (features). Agrupemos estos objetos en 2 grupos de manzanas basados en sus características.</p>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/ej_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-3/ej_1.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/ej_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-3/ej_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="k-means-ejemplo-1" class="slide level2 smaller">
+<h2>K-Means: Ejemplo</h2>
+<h4 id="era-iteración">1era Iteración</h4>
+<div class="columns">
+<div class="column">
+<div class="fragment" data-fragment-index="1">
+<ul>
+<li>Definamos los centroides. <span class="math display">\[C_1 = (1,1)\]</span> <span class="math display">\[C_2 = (2,1)\]</span></li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="2">
+<ul>
+<li>Calculemos la Matriz de Distancias:</li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="2">
+<p><span class="math display">\[D^1 = \begin{bmatrix}
+0 &amp; 1 &amp; 3.61 &amp; 5\\
+1 &amp; 0 &amp; 2.83 &amp; 4.24
+\end{bmatrix}\]</span></p>
+</div>
+<div class="fragment" data-fragment-index="3">
+<ul>
+<li>Calculemos la Matriz de Pertenencia <span class="math inline">\(G\)</span>:</li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="4">
+<p><span class="math display">\[G^1 = \begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 1
+\end{bmatrix}\]</span></p>
+</div>
+</div><div class="column fragment" data-fragment-index="1">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/kmeans_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-3/kmeans_1.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="fragment" data-fragment-index="5">
+<p>Los nuevos centroides son: <span class="math display">\[C_1 = (1,1)\]</span> <span class="math display">\[C_2 = (\frac{11}{3}, \frac{8}{3})\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="k-means-ejemplo-2" class="slide level2 smaller">
+<h2>K-Means: Ejemplo</h2>
+<h4 id="da-iteración">2da Iteración</h4>
+<div class="columns">
+<div class="column">
+<div class="fragment" data-fragment-index="1">
+<ul>
+<li>Los nuevos centroides son:</li>
+</ul>
+<p><span class="math display">\[C_1 = (1,1)\]</span> <span class="math display">\[C_2 = (\frac{11}{3}, \frac{8}{3})\]</span></p>
+</div>
+<div class="fragment" data-fragment-index="2">
+<ul>
+<li>Calculemos la Matriz de Distancias:</li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="2">
+<p><span class="math display">\[D^1 = \begin{bmatrix}
+0 &amp; 1 &amp; 3.61 &amp; 5\\
+3.14 &amp; 2.26 &amp; 0.47 &amp; 1.89
+\end{bmatrix}\]</span></p>
+</div>
+<div class="fragment" data-fragment-index="3">
+<ul>
+<li>Calculemos la Matriz de Pertenencia <span class="math inline">\(G\)</span>:</li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="4">
+<p><span class="math display">\[G^1 = \begin{bmatrix}
+1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1
+\end{bmatrix}\]</span></p>
+</div>
+</div><div class="column fragment" data-fragment-index="1">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/kmeans_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-3/kmeans_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="fragment" data-fragment-index="5">
+<p>Los nuevos centroides son: <span class="math display">\[C_1 = (1,1)\]</span> <span class="math display">\[C_2 = (\frac{9}{2}, \frac{7}{2})\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="k-means-ejemplo-3" class="slide level2 smaller">
+<h2>K-Means: Ejemplo</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/kmeans_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-3/kmeans_3.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Si seguimos iterando notaremos que ya no hay cambios en los clusters. El algoritmo converge.</li>
+<li>Este es el resultado de usar <span class="math inline">\(K=2\)</span>. Utilizar otro valor de <span class="math inline">\(K\)</span> entregará valores distintos.</li>
+<li><strong>¿Es este el número de clusters óptimos?</strong></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="k-means-número-de-clusters-óptimos" class="slide level2 smaller">
+<h2>K-Means: Número de Clusters Óptimos</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/optim_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-3/optim_1.png" class="fragment fade-in-then-out quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/optim_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-3/optim_2.png" class="fragment quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="fragment">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Siempre es posible encontrar el número de clusters indicados.</li>
+<li>Entonces,</li>
+</ul>
+<p><strong>¿Cómo debería escoger el valor de <span class="math inline">\(K\)</span>?</strong></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="k-means-número-de-clusters-óptimos-1" class="slide level2 smaller">
+<h2>K-Means: Número de Clusters Óptimos</h2>
+<dl>
+<dt>Curva del Codo</dt>
+<dd>
+Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.g.&nbsp;within distance) para distintos valores de <span class="math inline">\(K\)</span>. El valor óptimo de <span class="math inline">\(K\)</span> será el codo de la curva, que es el valor donde se estabiliza la métrica.
+</dd>
+</dl>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/elbow.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-3/elbow.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<p><br></p>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Este valor del codo muchas veces es subjetivo y distintas apreciaciones pueden llegar a distintos <span class="math inline">\(K\)</span> óptimos.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Eventualmente otras métricas distintas al <code>within distance</code> podrían también ser usadas.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="k-means-detalles-técnicos" class="slide level2">
+<h2>K-Means: Detalles Técnicos</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Fortalezas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Algoritmo relativamente eficiente (existen muy buenas implementaciones). <span class="math inline">\(O(k \cdot n \cdot i)\)</span>. Donde <span class="math inline">\(k\)</span> es el número de clusters, <span class="math inline">\(n\)</span> el número de puntos, e <span class="math inline">\(i\)</span> el número de iteraciones.</li>
+<li>Encuentra <strong><em>clusters esféricos</em></strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Debilidades</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Sensible al punto de inicio.</li>
+<li>Solo se puede aplicar cuando el promedio es calculable.</li>
+<li>Se requiere definir K a priori (K es un <em>hiperparámetro</em>).</li>
+<li>Suceptible al ruido.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 <section id="eda" class="slide level2 smaller">
 <h2>EDA</h2>
@@ -365,7 +908,7 @@ Alfonso Tobar-Arancibia
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/eda_obj.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-2/eda_obj.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+<p><a href="img/clase-2/eda_obj.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-2/eda_obj.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
 </figure>
 </div>
 </div><div class="column fragment">
@@ -414,7 +957,7 @@ Alfonso Tobar-Arancibia
 <h2>Medidas de Tendencia Central</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/central_tend.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-2/central_tend.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-2/central_tend.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-2/central_tend.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </section>
@@ -422,20 +965,20 @@ Alfonso Tobar-Arancibia
 <h2>Medidas de Dispersión y Asimetría</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/spread_meas.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-2/spread_meas.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+<p><a href="img/clase-2/spread_meas.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-2/spread_meas.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
 </figure>
 </div>
 <div class="columns">
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/rangos.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-2/rangos.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-2/rangos.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-2/rangos.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/skewness.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-2/skewness.png" class="fragment quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+<p><a href="img/clase-2/skewness.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-2/skewness.png" class="fragment quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -504,7 +1047,7 @@ Alfonso Tobar-Arancibia
 <h2>Caso de Visualización</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/visual_problem.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-2/visual_problem.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-2/visual_problem.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-2/visual_problem.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
 <aside class="notes">
@@ -535,13 +1078,13 @@ Alfonso Tobar-Arancibia
 <div class="fragment fade-out" data-fragment-index="3">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/visual_channels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-2/visual_channels.png" class="fragment quarto-figure quarto-figure-center" style="width:90.0%" data-fragment-index="1"></a></p>
+<p><a href="img/clase-2/visual_channels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-2/visual_channels.png" class="fragment quarto-figure quarto-figure-center" style="width:90.0%" data-fragment-index="1"></a></p>
 </figure>
 </div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/best_channels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-2/best_channels.png" class="fragment quarto-figure quarto-figure-center" style="width:70.0%" data-fragment-index="3"></a></p>
+<p><a href="img/clase-2/best_channels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="img/clase-2/best_channels.png" class="fragment quarto-figure quarto-figure-center" style="width:70.0%" data-fragment-index="3"></a></p>
 </figure>
 </div>
 </div>
@@ -602,7 +1145,7 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/hist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-2/hist.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-2/hist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32"><img data-src="img/clase-2/hist.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </section>
@@ -626,18 +1169,18 @@ Alfonso Tobar-Arancibia
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/kernel_type.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-2/kernel_type.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-2/kernel_type.png" class="lightbox" data-gallery="quarto-lightbox-gallery-33"><img data-src="img/clase-2/kernel_type.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/kernel.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-2/kernel.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+<p><a href="img/clase-2/kernel.png" class="lightbox" data-gallery="quarto-lightbox-gallery-34"><img data-src="img/clase-2/kernel.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/kernel_07.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-2/kernel_07.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+<p><a href="img/clase-2/kernel_07.png" class="lightbox" data-gallery="quarto-lightbox-gallery-35"><img data-src="img/clase-2/kernel_07.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -655,7 +1198,7 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/box_def.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-2/box_def.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-2/box_def.png" class="lightbox" data-gallery="quarto-lightbox-gallery-36"><img data-src="img/clase-2/box_def.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 <div style="font-size: 70%;">
@@ -697,7 +1240,7 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/boxplot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-2/boxplot.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-2/boxplot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-37"><img data-src="img/clase-2/boxplot.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div>
@@ -717,13 +1260,13 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/bar_plot1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-2/bar_plot1.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></a></p>
+<p><a href="img/clase-2/bar_plot1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-38"><img data-src="img/clase-2/bar_plot1.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/bar_plot2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-2/bar_plot2.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></a></p>
+<p><a href="img/clase-2/bar_plot2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-39"><img data-src="img/clase-2/bar_plot2.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -755,7 +1298,7 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
 </dl>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/scatter.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-2/scatter.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+<p><a href="img/clase-2/scatter.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40"><img data-src="img/clase-2/scatter.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
 </figure>
 </div>
 </section>
@@ -773,13 +1316,13 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/line.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-2/line.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-2/line.png" class="lightbox" data-gallery="quarto-lightbox-gallery-41"><img data-src="img/clase-2/line.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/line_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-2/line_2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-2/line_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-42"><img data-src="img/clase-2/line_2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -805,14 +1348,14 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/cuarteto_anscombe.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-2/cuarteto_anscombe.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-2/cuarteto_anscombe.png" class="lightbox" data-gallery="quarto-lightbox-gallery-43"><img data-src="img/clase-2/cuarteto_anscombe.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
 <p><br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/anscombe_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-2/anscombe_data.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-2/anscombe_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-44"><img data-src="img/clase-2/anscombe_data.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -822,7 +1365,7 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
 <h2>¿Otras Visualizaciones?</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/charts.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-2/charts.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-2/charts.png" class="lightbox" data-gallery="quarto-lightbox-gallery-45"><img data-src="img/clase-2/charts.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
 </section></section>
@@ -1217,7 +1760,7 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","loop":false,"closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

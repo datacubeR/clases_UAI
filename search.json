@@ -10,6 +10,146 @@
     ]
   },
   {
+    "objectID": "tics411/clase-3.html#definiciones",
+    "href": "tics411/clase-3.html#definiciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Definiciones",
+    "text": "Definiciones\n\nAprendizaje No supervisado\n\n\nEs un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender.\n\n\n\n\n\n\n\n\n\nEn nuestro caso nos enfocaremos en un caso particular de Modelación Descriptiva llamada Clustering.\n\n\n\n\nClustering\n\n\nConsiste en agrupar los datos en un menor número de entidades/grupos. A estos grupos se les conoce como clusters y pueden ser agrupados de manera global, o modelando las principales características de los datos."
+  },
+  {
+    "objectID": "tics411/clase-3.html#intuición",
+    "href": "tics411/clase-3.html#intuición",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Intuición",
+    "text": "Intuición\n¿Cuántos clusters se pueden apreciar?"
+  },
+  {
+    "objectID": "tics411/clase-3.html#clustering-introducción",
+    "href": "tics411/clase-3.html#clustering-introducción",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering: Introducción",
+    "text": "Clustering: Introducción\n\n\n\n\n\n\n\nClustering: Consiste en buscar grupos de objetos tales que la similaridad intra-grupo sea alta, mientras que la similaridad inter-grupos sea baja. Normalmente la distancia es usada para determinar qué tan similares son estos grupos."
+  },
+  {
+    "objectID": "tics411/clase-3.html#clustering-evaluación",
+    "href": "tics411/clase-3.html#clustering-evaluación",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering: Evaluación",
+    "text": "Clustering: Evaluación\n\n\n\n\n\n\n\nEvaluar el nivel del éxito o logro del Clustering es complicado. ¿Por qué?"
+  },
+  {
+    "objectID": "tics411/clase-3.html#clustering-tipos",
+    "href": "tics411/clase-3.html#clustering-tipos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering: Tipos",
+    "text": "Clustering: Tipos"
+  },
+  {
+    "objectID": "tics411/clase-3.html#clustering-tipos-1",
+    "href": "tics411/clase-3.html#clustering-tipos-1",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering: Tipos",
+    "text": "Clustering: Tipos"
+  },
+  {
+    "objectID": "tics411/clase-3.html#clustering-partición",
+    "href": "tics411/clase-3.html#clustering-partición",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering: Partición",
+    "text": "Clustering: Partición\n\nLos datos son separados en K clusters, donde cada punto pertenece exclusivamente a un único cluster."
+  },
+  {
+    "objectID": "tics411/clase-3.html#clustering-densidad",
+    "href": "tics411/clase-3.html#clustering-densidad",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering: Densidad",
+    "text": "Clustering: Densidad\n\nSe basan en la idea de continuar el crecimiento de un cluster a medida que la densidad (número de objetos o puntos) en el vecindario sobrepase algún umbral."
+  },
+  {
+    "objectID": "tics411/clase-3.html#clustering-jerarquía",
+    "href": "tics411/clase-3.html#clustering-jerarquía",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering: Jerarquía",
+    "text": "Clustering: Jerarquía\n\nLos algoritmos basados en jerarquía pueden seguir 2 estrategias:\n\n\nAglomerativos: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. Para n objetos se realizan n-1 uniones.\nDivisionales: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad."
+  },
+  {
+    "objectID": "tics411/clase-3.html#clustering-probabilístico",
+    "href": "tics411/clase-3.html#clustering-probabilístico",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering: Probabilístico",
+    "text": "Clustering: Probabilístico\nSe ajusta cada punto a una distribución de probabilidades que indica cuál es la probabilidad de pertenencia a dicho cluster."
+  },
+  {
+    "objectID": "tics411/clase-3.html#partición",
+    "href": "tics411/clase-3.html#partición",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Partición",
+    "text": "Partición\n\nLos datos son separados en K Clusters, donde cada punto pertenece exclusivamente a un único cluster.\n\n\n\n\n\n\n\n\nCluster Compactos: Minimizar la distancia intra-cluster (within cluster).\nClusters bien separados: Maximizar la distancia inter-cluster (between cluster).\n\n\n\n\n\\[ Score (C,D) = f(wc(C),bc(C))\\]\nEl puntaje/score mide la calidad del clustering \\(C\\) para el Dataset \\(D\\)."
+  },
+  {
+    "objectID": "tics411/clase-3.html#score",
+    "href": "tics411/clase-3.html#score",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Score",
+    "text": "Score\n\\[ Score (C,D) = f(wc(C),bc(C))\\]\n\n\n\n\nDistancia Between-Cluster: \\[bc(C) = \\sum_{1 \\le j \\le k \\le K} d(r_j, r_k)\\]\n\ndonde \\(r_k\\) representa el centro del cluster \\(k\\): \\[r_k = \\frac{1}{n_k} \\sum_{x_i \\in C_k} x_i\\]\n\n\nDistancia Within-Cluster: \\[wc(C) = \\sum_{k=1}^K \\sum_{x_i \\in C_k} d(x_i, r_k)\\]\n\n\n\n\n\n\n\n\n\n\n\nDistancia entre los centros de cada cluster.\n\n\n\n\n\n\n\n\n\n\nDistancia entre todos los puntos del cluster y su respectivo centro."
+  },
+  {
+    "objectID": "tics411/clase-3.html#k-means",
+    "href": "tics411/clase-3.html#k-means",
+    "title": "TICS-411 Minería de Datos",
+    "section": "K-Means",
+    "text": "K-Means\n\nK-Means\n\n\nDado un número de clusters \\(K\\) (determinado por el usuario), cada cluster es asociado a un centro (centroide). Luego, cada punto es asociado al cluster con el centroide más cercano.\n\n\n\n\n\n\n\n\n\n\n\nNormalmente se utiliza la Distancia Euclideana como medida de similaridad.\n\n\nSe seleccionan \\(K\\) puntos como centroides iniciales.\nRepite:\n\nForma K clusters asignando todos los puntos al centroide más cercano.\nRecalcula el centroide para cada clase como la media de todos los puntos de dicho cluster.\n\n\n\nSe repite este procedimiento por un número finito de iteraciones o hasta que los centroides no cambien."
+  },
+  {
+    "objectID": "tics411/clase-3.html#k-means-ejemplo",
+    "href": "tics411/clase-3.html#k-means-ejemplo",
+    "title": "TICS-411 Minería de Datos",
+    "section": "K-Means: Ejemplo",
+    "text": "K-Means: Ejemplo\nResolvamos el siguiente ejemplo.\nSupongamos que tenemos tipos de manzana, y cada una de ellas tiene 2 atributos (features). Agrupemos estos objetos en 2 grupos de manzanas basados en sus características."
+  },
+  {
+    "objectID": "tics411/clase-3.html#k-means-ejemplo-1",
+    "href": "tics411/clase-3.html#k-means-ejemplo-1",
+    "title": "TICS-411 Minería de Datos",
+    "section": "K-Means: Ejemplo",
+    "text": "K-Means: Ejemplo\n1era Iteración\n\n\n\n\nDefinamos los centroides. \\[C_1 = (1,1)\\] \\[C_2 = (2,1)\\]\n\n\n\n\nCalculemos la Matriz de Distancias:\n\n\n\n\\[D^1 = \\begin{bmatrix}\n0 & 1 & 3.61 & 5\\\\\n1 & 0 & 2.83 & 4.24\n\\end{bmatrix}\\]\n\n\n\nCalculemos la Matriz de Pertenencia \\(G\\):\n\n\n\n\\[G^1 = \\begin{bmatrix}\n1 & 0 & 0 & 0 \\\\\n0 & 1 & 1 & 1\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\nLos nuevos centroides son: \\[C_1 = (1,1)\\] \\[C_2 = (\\frac{11}{3}, \\frac{8}{3})\\]"
+  },
+  {
+    "objectID": "tics411/clase-3.html#k-means-ejemplo-2",
+    "href": "tics411/clase-3.html#k-means-ejemplo-2",
+    "title": "TICS-411 Minería de Datos",
+    "section": "K-Means: Ejemplo",
+    "text": "K-Means: Ejemplo\n2da Iteración\n\n\n\n\nLos nuevos centroides son:\n\n\\[C_1 = (1,1)\\] \\[C_2 = (\\frac{11}{3}, \\frac{8}{3})\\]\n\n\n\nCalculemos la Matriz de Distancias:\n\n\n\n\\[D^1 = \\begin{bmatrix}\n0 & 1 & 3.61 & 5\\\\\n3.14 & 2.26 & 0.47 & 1.89\n\\end{bmatrix}\\]\n\n\n\nCalculemos la Matriz de Pertenencia \\(G\\):\n\n\n\n\\[G^1 = \\begin{bmatrix}\n1 & 1 & 0 & 0 \\\\\n0 & 0 & 1 & 1\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\nLos nuevos centroides son: \\[C_1 = (1,1)\\] \\[C_2 = (\\frac{9}{2}, \\frac{7}{2})\\]"
+  },
+  {
+    "objectID": "tics411/clase-3.html#k-means-ejemplo-3",
+    "href": "tics411/clase-3.html#k-means-ejemplo-3",
+    "title": "TICS-411 Minería de Datos",
+    "section": "K-Means: Ejemplo",
+    "text": "K-Means: Ejemplo\n\n\n\n\n\n\n\n\n\n\n\n\nSi seguimos iterando notaremos que ya no hay cambios en los clusters. El algoritmo converge.\nEste es el resultado de usar \\(K=2\\). Utilizar otro valor de \\(K\\) entregará valores distintos.\n¿Es este el número de clusters óptimos?"
+  },
+  {
+    "objectID": "tics411/clase-3.html#k-means-número-de-clusters-óptimos",
+    "href": "tics411/clase-3.html#k-means-número-de-clusters-óptimos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "K-Means: Número de Clusters Óptimos",
+    "text": "K-Means: Número de Clusters Óptimos\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSiempre es posible encontrar el número de clusters indicados.\nEntonces,\n\n¿Cómo debería escoger el valor de \\(K\\)?"
+  },
+  {
+    "objectID": "tics411/clase-3.html#k-means-número-de-clusters-óptimos-1",
+    "href": "tics411/clase-3.html#k-means-número-de-clusters-óptimos-1",
+    "title": "TICS-411 Minería de Datos",
+    "section": "K-Means: Número de Clusters Óptimos",
+    "text": "K-Means: Número de Clusters Óptimos\n\nCurva del Codo\n\nEs una heurísitca en la cual gráfica el valor de una métrica de distancia (e.g. within distance) para distintos valores de \\(K\\). El valor óptimo de \\(K\\) será el codo de la curva, que es el valor donde se estabiliza la métrica.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste valor del codo muchas veces es subjetivo y distintas apreciaciones pueden llegar a distintos \\(K\\) óptimos.\n\n\n\n\n\n\n\n\n\n\n\n\nEventualmente otras métricas distintas al within distance podrían también ser usadas."
+  },
+  {
+    "objectID": "tics411/clase-3.html#k-means-detalles-técnicos",
+    "href": "tics411/clase-3.html#k-means-detalles-técnicos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "K-Means: Detalles Técnicos",
+    "text": "K-Means: Detalles Técnicos\n\n\n\n\n\n\nFortalezas\n\n\n\nAlgoritmo relativamente eficiente (existen muy buenas implementaciones). \\(O(k \\cdot n \\cdot i)\\). Donde \\(k\\) es el número de clusters, \\(n\\) el número de puntos, e \\(i\\) el número de iteraciones.\nEncuentra clusters esféricos.\n\n\n\n\n\n\n\n\n\n\nDebilidades\n\n\n\nSensible al punto de inicio.\nSolo se puede aplicar cuando el promedio es calculable.\nSe requiere definir K a priori (K es un hiperparámetro).\nSuceptible al ruido."
+  },
+  {
     "objectID": "tics411/clase-3.html#eda",
     "href": "tics411/clase-3.html#eda",
     "title": "TICS-411 Minería de Datos",
@@ -357,7 +497,7 @@
     "href": "tics411/notebooks/viz.html",
     "title": "Clases UAI",
     "section": "",
-    "text": "import matplotlib.pyplot as plt\nimport numpy as np\n\na = np.array([4.5, 4, 4.1, 1, 2.3, 2.2, 2.4, 5, 5.5, 6.2, 6, 6, 6, 6])\nb = np.append(a, a + 1)\n\nfig = plt.figure(figsize=(20, 6))\nax = fig.subplot_mosaic(\"ABC\")\nax[\"A\"].hist(b, bins=5)\nax[\"A\"].set_title(\"Bins 5\")\nax[\"A\"].set_xlabel(\"Notas\")\nax[\"A\"].set_ylabel(\"Número de Estudiantes\")\nax[\"B\"].hist(b, bins=15)\nax[\"B\"].set_title(\"Bins 15\")\nax[\"B\"].set_xlabel(\"Notas\")\nax[\"C\"].hist(b, bins=30)\nax[\"C\"].set_title(\"Bins 30\")\nax[\"C\"].set_xlabel(\"Notas\")\nplt.show()\n\n\n\n\n\n\n\n\n\nfrom sklearn.neighbors import KernelDensity\n\n\nkd_gauss = KernelDensity(kernel=\"epanechnikov\")\nkd_gauss.fit(b[:, np.newaxis])\nx_grid = np.linspace(1, 6, 1000)\nb_gauss = np.exp(kd_gauss.score_samples(x_grid[:, np.newaxis]))\nplt.hist(b)\nplt.plot(b_gauss)\n\n\n\n\n\n\n\n\n\nfrom scipy.stats import norm\n\nnp.random.seed(0)\nx_grid = np.linspace(-4.5, 3.5, 1000)\nx = np.concatenate([norm(-1, 1.0).rvs(400), norm(1, 0.3).rvs(100)])\n\n\ndef kde_sklearn(x, x_grid, bandwidth=0.2, **kwargs):\n    \"\"\"Kernel Density Estimation with Scikit-learn\"\"\"\n    kde_skl = KernelDensity(bandwidth=bandwidth, **kwargs)\n    kde_skl.fit(x[:, np.newaxis])\n    # score_samples() returns the log-likelihood of the samples\n    log_pdf = kde_skl.score_samples(x_grid[:, np.newaxis])\n    return np.exp(log_pdf)\n\n\npdf = kde_sklearn(x, x_grid, bandwidth=0.2)\n\nplt.hist(x)\nplt.plot(x_grid, pdf)\n\n\n\n\n\n\n\n\n\nn = 100\nnp.random.seed(123)\nmuestra_1 = np.random.normal(loc=1, scale=0.5, size=int(n * 0.75))\nmuestra_2 = np.random.normal(loc=-1, scale=0.5, size=int(n * 0.25))\ndatos = np.hstack((muestra_1, muestra_2)) + 3\n\nX_grid = np.linspace(0, 7, 200)\n\nmodelo_kde = KernelDensity(kernel=\"tophat\", bandwidth=0.2)\nmodelo_kde.fit(datos.reshape(-1, 1))\n\nlog_densidad_pred = modelo_kde.score_samples(X_grid.reshape((-1, 1)))\n# Se aplica el exponente para deshacer el logaritmo\ndensidad_pred_tophat = np.exp(log_densidad_pred)\n\n\nn = 100\nnp.random.seed(123)\nmuestra_1 = np.random.normal(loc=1, scale=0.5, size=int(n * 0.75))\nmuestra_2 = np.random.normal(loc=-1, scale=0.5, size=int(n * 0.25))\ndatos = np.hstack((muestra_1, muestra_2)) + 3\n\nX_grid = np.linspace(0, 7, 200)\n\nmodelo_kde = KernelDensity(kernel=\"gaussian\", bandwidth=0.2)\nmodelo_kde.fit(datos.reshape(-1, 1))\n\nlog_densidad_pred = modelo_kde.score_samples(X_grid.reshape((-1, 1)))\n# Se aplica el exponente para deshacer el logaritmo\ndensidad_pred_gaussian = np.exp(log_densidad_pred)\n\n\nn = 100\nnp.random.seed(123)\nmuestra_1 = np.random.normal(loc=1, scale=0.5, size=int(n * 0.75))\nmuestra_2 = np.random.normal(loc=-1, scale=0.5, size=int(n * 0.25))\ndatos = np.hstack((muestra_1, muestra_2)) + 3\n\nX_grid = np.linspace(0, 7, 200)\n\nmodelo_kde = KernelDensity(kernel=\"epanechnikov\", bandwidth=0.2)\nmodelo_kde.fit(datos.reshape(-1, 1))\n\nlog_densidad_pred = modelo_kde.score_samples(X_grid.reshape((-1, 1)))\n# Se aplica el exponente para deshacer el logaritmo\ndensidad_pred_epa = np.exp(log_densidad_pred)\n\n\nfig = plt.figure(figsize=(20, 6))\nax = fig.subplot_mosaic(\"ABC\")\nax[\"A\"].hist(datos, bins=30, density=True, color=\"#3182bd\", alpha=0.5)\nax[\"A\"].plot(X_grid, densidad_pred_tophat, color=\"red\", label=\"predicción\")\nax[\"A\"].set_title(\"Kernel Uniforme/Tophat h=0.2\")\n\nax[\"B\"].hist(datos, bins=30, density=True, color=\"#3182bd\", alpha=0.5)\nax[\"B\"].plot(X_grid, densidad_pred_gaussian, color=\"red\", label=\"predicción\")\nax[\"B\"].set_title(\"Kernel Gaussiano h=0.2\")\n\nax[\"C\"].hist(datos, bins=30, density=True, color=\"#3182bd\", alpha=0.5)\nax[\"C\"].plot(X_grid, densidad_pred_epa, color=\"red\", label=\"predicción\")\nax[\"C\"].set_title(\"Kernel Epanechnikov h=0.2\")\n\nText(0.5, 1.0, 'Kernel Epanechnikov h=0.2')\n\n\n\n\n\n\n\n\n\n\nn = 1000\nnp.random.seed(123)\nmuestra_1 = np.random.normal(loc=1, scale=0.5, size=int(n * 0.75))\nmuestra_2 = np.random.normal(loc=-1, scale=0.5, size=int(n * 0.25))\ndatos = np.hstack((muestra_1, muestra_2))\n\nX_grid = np.linspace(-3, 4, 1000)\n\nmodelo_kde = KernelDensity(kernel=\"linear\", bandwidth=1)\nmodelo_kde.fit(datos.reshape(-1, 1))\n\nlog_densidad_pred = modelo_kde.score_samples(X_grid.reshape((-1, 1)))\n# Se aplica el exponente para deshacer el logaritmo\ndensidad_pred = np.exp(log_densidad_pred)\n\nfig, ax = plt.subplots(figsize=(7, 4))\nax.hist(datos, bins=30, density=True, color=\"#3182bd\", alpha=0.5)\nax.plot(X_grid, densidad_pred, color=\"red\", label=\"predicción\")\n\n\n\n\n\n\n\n\n\nimport seaborn as sns\n\ntitanic_df = sns.load_dataset(\"titanic\")\ntitanic_df[\"embarked\"].value_counts().plot(\n    kind=\"bar\", rot=0, title=\"Personas embarcadas por puerto del Titanic\"\n)\n\n\n\n\n\n\n\n\n\ntitanic_df.dtypes\n\nsurvived          int64\npclass            int64\nsex              object\nage             float64\nsibsp             int64\nparch             int64\nfare            float64\nembarked         object\nclass          category\nwho              object\nadult_male         bool\ndeck           category\nembark_town      object\nalive            object\nalone              bool\ndtype: object\n\n\n\ng = sns.catplot(\n    data=titanic_df, y=\"fare\", x=\"pclass\", kind=\"bar\", errorbar=None, hue=\"sex\"\n)\ng.figure.suptitle(\"Tarifa Promedio de Pasajeros del Titanic\\n por Clase y Sexo.\")\n\n\n\n\n\n\n\n\n\ndata = titanic_df[[\"age\", \"fare\"]].melt(value_vars=[\"age\", \"fare\"])\ndata\n\n\n\n\n\n\n\n\n\nvariable\nvalue\n\n\n\n\n0\nage\n22.00\n\n\n1\nage\n38.00\n\n\n2\nage\n26.00\n\n\n3\nage\n35.00\n\n\n4\nage\n35.00\n\n\n...\n...\n...\n\n\n1777\nfare\n13.00\n\n\n1778\nfare\n30.00\n\n\n1779\nfare\n23.45\n\n\n1780\nfare\n30.00\n\n\n1781\nfare\n7.75\n\n\n\n\n1782 rows × 2 columns\n\n\n\n\n\nsns.catplot(\n    kind=\"box\", x=\"variable\", y=\"value\", data=data, height=6, aspect=0.5, hue=\"variable\"\n)\n\n\n\n\n\n\n\n\n\niris_df = sns.load_dataset(\"iris\")\niris_df\n\n\n\n\n\n\n\n\n\nsepal_length\nsepal_width\npetal_length\npetal_width\nspecies\n\n\n\n\n0\n5.1\n3.5\n1.4\n0.2\nsetosa\n\n\n1\n4.9\n3.0\n1.4\n0.2\nsetosa\n\n\n2\n4.7\n3.2\n1.3\n0.2\nsetosa\n\n\n3\n4.6\n3.1\n1.5\n0.2\nsetosa\n\n\n4\n5.0\n3.6\n1.4\n0.2\nsetosa\n\n\n...\n...\n...\n...\n...\n...\n\n\n145\n6.7\n3.0\n5.2\n2.3\nvirginica\n\n\n146\n6.3\n2.5\n5.0\n1.9\nvirginica\n\n\n147\n6.5\n3.0\n5.2\n2.0\nvirginica\n\n\n148\n6.2\n3.4\n5.4\n2.3\nvirginica\n\n\n149\n5.9\n3.0\n5.1\n1.8\nvirginica\n\n\n\n\n150 rows × 5 columns\n\n\n\n\n\ndata = iris_df.melt(\n    value_vars=[\"sepal_length\", \"sepal_width\", \"petal_length\", \"petal_width\"]\n)\ndata\n\n\n\n\n\n\n\n\n\nvariable\nvalue\n\n\n\n\n0\nsepal_length\n5.1\n\n\n1\nsepal_length\n4.9\n\n\n2\nsepal_length\n4.7\n\n\n3\nsepal_length\n4.6\n\n\n4\nsepal_length\n5.0\n\n\n...\n...\n...\n\n\n595\npetal_width\n2.3\n\n\n596\npetal_width\n1.9\n\n\n597\npetal_width\n2.0\n\n\n598\npetal_width\n2.3\n\n\n599\npetal_width\n1.8\n\n\n\n\n600 rows × 2 columns\n\n\n\n\n\ng = sns.catplot(x=\"variable\", y=\"value\", kind=\"box\", hue=\"variable\", data=data)\ng.figure.suptitle(\"Distribución de Medidas de Flores\")\ng._legend.remove()\ng.set(xlabel=None)\ng.set(ylabel=None)\n\n\n\n\n\n\n\n\n\nplt.scatter(iris_df.sepal_length, iris_df.petal_length)\nplt.title(\"Relación entre Largo del Sépalo y del Pétalo\")\nplt.xlabel(\"Largo del Sépalo\")\nplt.ylabel(\"Largo del Pétalo\")\n\nText(0, 0.5, 'Largo del Pétalo')\n\n\n\n\n\n\n\n\n\n\nanscombe = sns.load_dataset(\"anscombe\")\n\nfig = plt.figure(figsize=(10, 9))\nax = fig.subplot_mosaic(\n    \"\"\"AB\n                        CD\"\"\"\n)\nsns.regplot(data=anscombe.query(\"dataset == 'I'\"), x=\"x\", y=\"y\", ax=ax[\"A\"], ci=None)\nsns.regplot(data=anscombe.query(\"dataset == 'II'\"), x=\"x\", y=\"y\", ax=ax[\"B\"], ci=None)\nsns.regplot(data=anscombe.query(\"dataset == 'III'\"), x=\"x\", y=\"y\", ax=ax[\"C\"], ci=None)\nsns.regplot(data=anscombe.query(\"dataset == 'IV'\"), x=\"x\", y=\"y\", ax=ax[\"D\"], ci=None)\nplt.suptitle(\"Cuarteto de Anscombe\")\n\nText(0.5, 0.98, 'Cuarteto de Anscombe')\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
+    "text": "import matplotlib.pyplot as plt\nimport numpy as np\n\na = np.array([4.5, 4, 4.1, 1, 2.3, 2.2, 2.4, 5, 5.5, 6.2, 6, 6, 6, 6])\nb = np.append(a, a + 1)\n\nfig = plt.figure(figsize=(20, 6))\nax = fig.subplot_mosaic(\"ABC\")\nax[\"A\"].hist(b, bins=5)\nax[\"A\"].set_title(\"Bins 5\")\nax[\"A\"].set_xlabel(\"Notas\")\nax[\"A\"].set_ylabel(\"Número de Estudiantes\")\nax[\"B\"].hist(b, bins=15)\nax[\"B\"].set_title(\"Bins 15\")\nax[\"B\"].set_xlabel(\"Notas\")\nax[\"C\"].hist(b, bins=30)\nax[\"C\"].set_title(\"Bins 30\")\nax[\"C\"].set_xlabel(\"Notas\")\nplt.show()\n\n\n\n\n\n\n\n\n\nfrom sklearn.neighbors import KernelDensity\n\n\nkd_gauss = KernelDensity(kernel=\"epanechnikov\")\nkd_gauss.fit(b[:, np.newaxis])\nx_grid = np.linspace(1, 6, 1000)\nb_gauss = np.exp(kd_gauss.score_samples(x_grid[:, np.newaxis]))\nplt.hist(b)\nplt.plot(b_gauss)\n\n\n\n\n\n\n\n\n\nfrom scipy.stats import norm\n\nnp.random.seed(0)\nx_grid = np.linspace(-4.5, 3.5, 1000)\nx = np.concatenate([norm(-1, 1.0).rvs(400), norm(1, 0.3).rvs(100)])\n\n\ndef kde_sklearn(x, x_grid, bandwidth=0.2, **kwargs):\n    \"\"\"Kernel Density Estimation with Scikit-learn\"\"\"\n    kde_skl = KernelDensity(bandwidth=bandwidth, **kwargs)\n    kde_skl.fit(x[:, np.newaxis])\n    # score_samples() returns the log-likelihood of the samples\n    log_pdf = kde_skl.score_samples(x_grid[:, np.newaxis])\n    return np.exp(log_pdf)\n\n\npdf = kde_sklearn(x, x_grid, bandwidth=0.2)\n\nplt.hist(x)\nplt.plot(x_grid, pdf)\n\n\n\n\n\n\n\n\n\nn = 100\nnp.random.seed(123)\nmuestra_1 = np.random.normal(loc=1, scale=0.5, size=int(n * 0.75))\nmuestra_2 = np.random.normal(loc=-1, scale=0.5, size=int(n * 0.25))\ndatos = np.hstack((muestra_1, muestra_2)) + 3\n\nX_grid = np.linspace(0, 7, 200)\n\nmodelo_kde = KernelDensity(kernel=\"tophat\", bandwidth=0.2)\nmodelo_kde.fit(datos.reshape(-1, 1))\n\nlog_densidad_pred = modelo_kde.score_samples(X_grid.reshape((-1, 1)))\n# Se aplica el exponente para deshacer el logaritmo\ndensidad_pred_tophat = np.exp(log_densidad_pred)\n\n\nn = 100\nnp.random.seed(123)\nmuestra_1 = np.random.normal(loc=1, scale=0.5, size=int(n * 0.75))\nmuestra_2 = np.random.normal(loc=-1, scale=0.5, size=int(n * 0.25))\ndatos = np.hstack((muestra_1, muestra_2)) + 3\n\nX_grid = np.linspace(0, 7, 200)\n\nmodelo_kde = KernelDensity(kernel=\"gaussian\", bandwidth=0.2)\nmodelo_kde.fit(datos.reshape(-1, 1))\n\nlog_densidad_pred = modelo_kde.score_samples(X_grid.reshape((-1, 1)))\n# Se aplica el exponente para deshacer el logaritmo\ndensidad_pred_gaussian = np.exp(log_densidad_pred)\n\n\nn = 100\nnp.random.seed(123)\nmuestra_1 = np.random.normal(loc=1, scale=0.5, size=int(n * 0.75))\nmuestra_2 = np.random.normal(loc=-1, scale=0.5, size=int(n * 0.25))\ndatos = np.hstack((muestra_1, muestra_2)) + 3\n\nX_grid = np.linspace(0, 7, 200)\n\nmodelo_kde = KernelDensity(kernel=\"epanechnikov\", bandwidth=0.2)\nmodelo_kde.fit(datos.reshape(-1, 1))\n\nlog_densidad_pred = modelo_kde.score_samples(X_grid.reshape((-1, 1)))\n# Se aplica el exponente para deshacer el logaritmo\ndensidad_pred_epa = np.exp(log_densidad_pred)\n\n\nfig = plt.figure(figsize=(20, 6))\nax = fig.subplot_mosaic(\"ABC\")\nax[\"A\"].hist(datos, bins=30, density=True, color=\"#3182bd\", alpha=0.5)\nax[\"A\"].plot(X_grid, densidad_pred_tophat, color=\"red\", label=\"predicción\")\nax[\"A\"].set_title(\"Kernel Uniforme/Tophat h=0.2\")\n\nax[\"B\"].hist(datos, bins=30, density=True, color=\"#3182bd\", alpha=0.5)\nax[\"B\"].plot(X_grid, densidad_pred_gaussian, color=\"red\", label=\"predicción\")\nax[\"B\"].set_title(\"Kernel Gaussiano h=0.2\")\n\nax[\"C\"].hist(datos, bins=30, density=True, color=\"#3182bd\", alpha=0.5)\nax[\"C\"].plot(X_grid, densidad_pred_epa, color=\"red\", label=\"predicción\")\nax[\"C\"].set_title(\"Kernel Epanechnikov h=0.2\")\n\nText(0.5, 1.0, 'Kernel Epanechnikov h=0.2')\n\n\n\n\n\n\n\n\n\n\nn = 1000\nnp.random.seed(123)\nmuestra_1 = np.random.normal(loc=1, scale=0.5, size=int(n * 0.75))\nmuestra_2 = np.random.normal(loc=-1, scale=0.5, size=int(n * 0.25))\ndatos = np.hstack((muestra_1, muestra_2))\n\nX_grid = np.linspace(-3, 4, 1000)\n\nmodelo_kde = KernelDensity(kernel=\"linear\", bandwidth=1)\nmodelo_kde.fit(datos.reshape(-1, 1))\n\nlog_densidad_pred = modelo_kde.score_samples(X_grid.reshape((-1, 1)))\n# Se aplica el exponente para deshacer el logaritmo\ndensidad_pred = np.exp(log_densidad_pred)\n\nfig, ax = plt.subplots(figsize=(7, 4))\nax.hist(datos, bins=30, density=True, color=\"#3182bd\", alpha=0.5)\nax.plot(X_grid, densidad_pred, color=\"red\", label=\"predicción\")\n\n\n\n\n\n\n\n\n\nimport seaborn as sns\n\ntitanic_df = sns.load_dataset(\"titanic\")\ntitanic_df[\"embarked\"].value_counts().plot(\n    kind=\"bar\", rot=0, title=\"Personas embarcadas por puerto del Titanic\"\n)\n\n\n\n\n\n\n\n\n\ntitanic_df.dtypes\n\nsurvived          int64\npclass            int64\nsex              object\nage             float64\nsibsp             int64\nparch             int64\nfare            float64\nembarked         object\nclass          category\nwho              object\nadult_male         bool\ndeck           category\nembark_town      object\nalive            object\nalone              bool\ndtype: object\n\n\n\ng = sns.catplot(\n    data=titanic_df, y=\"fare\", x=\"pclass\", kind=\"bar\", errorbar=None, hue=\"sex\"\n)\ng.figure.suptitle(\"Tarifa Promedio de Pasajeros del Titanic\\n por Clase y Sexo.\")\n\n\n\n\n\n\n\n\n\ndata = titanic_df[[\"age\", \"fare\"]].melt(value_vars=[\"age\", \"fare\"])\ndata\n\n\n\n\n\n\n\n\n\nvariable\nvalue\n\n\n\n\n0\nage\n22.00\n\n\n1\nage\n38.00\n\n\n2\nage\n26.00\n\n\n3\nage\n35.00\n\n\n4\nage\n35.00\n\n\n...\n...\n...\n\n\n1777\nfare\n13.00\n\n\n1778\nfare\n30.00\n\n\n1779\nfare\n23.45\n\n\n1780\nfare\n30.00\n\n\n1781\nfare\n7.75\n\n\n\n\n1782 rows × 2 columns\n\n\n\n\n\nsns.catplot(\n    kind=\"box\", x=\"variable\", y=\"value\", data=data, height=6, aspect=0.5, hue=\"variable\"\n)\n\n\n\n\n\n\n\n\n\niris_df = sns.load_dataset(\"iris\")\niris_df\n\n\n\n\n\n\n\n\n\nsepal_length\nsepal_width\npetal_length\npetal_width\nspecies\n\n\n\n\n0\n5.1\n3.5\n1.4\n0.2\nsetosa\n\n\n1\n4.9\n3.0\n1.4\n0.2\nsetosa\n\n\n2\n4.7\n3.2\n1.3\n0.2\nsetosa\n\n\n3\n4.6\n3.1\n1.5\n0.2\nsetosa\n\n\n4\n5.0\n3.6\n1.4\n0.2\nsetosa\n\n\n...\n...\n...\n...\n...\n...\n\n\n145\n6.7\n3.0\n5.2\n2.3\nvirginica\n\n\n146\n6.3\n2.5\n5.0\n1.9\nvirginica\n\n\n147\n6.5\n3.0\n5.2\n2.0\nvirginica\n\n\n148\n6.2\n3.4\n5.4\n2.3\nvirginica\n\n\n149\n5.9\n3.0\n5.1\n1.8\nvirginica\n\n\n\n\n150 rows × 5 columns\n\n\n\n\n\ndata = iris_df.melt(\n    value_vars=[\"sepal_length\", \"sepal_width\", \"petal_length\", \"petal_width\"]\n)\ndata\n\n\n\n\n\n\n\n\n\nvariable\nvalue\n\n\n\n\n0\nsepal_length\n5.1\n\n\n1\nsepal_length\n4.9\n\n\n2\nsepal_length\n4.7\n\n\n3\nsepal_length\n4.6\n\n\n4\nsepal_length\n5.0\n\n\n...\n...\n...\n\n\n595\npetal_width\n2.3\n\n\n596\npetal_width\n1.9\n\n\n597\npetal_width\n2.0\n\n\n598\npetal_width\n2.3\n\n\n599\npetal_width\n1.8\n\n\n\n\n600 rows × 2 columns\n\n\n\n\n\ng = sns.catplot(x=\"variable\", y=\"value\", kind=\"box\", hue=\"variable\", data=data)\ng.figure.suptitle(\"Distribución de Medidas de Flores\")\ng._legend.remove()\ng.set(xlabel=None)\ng.set(ylabel=None)\n\n\n\n\n\n\n\n\n\nplt.scatter(iris_df.sepal_length, iris_df.petal_length)\nplt.title(\"Relación entre Largo del Sépalo y del Pétalo\")\nplt.xlabel(\"Largo del Sépalo\")\nplt.ylabel(\"Largo del Pétalo\")\n\nText(0, 0.5, 'Largo del Pétalo')\n\n\n\n\n\n\n\n\n\n\nanscombe = sns.load_dataset(\"anscombe\")\n\nfig = plt.figure(figsize=(10, 9))\nax = fig.subplot_mosaic(\n    \"\"\"AB\n                        CD\"\"\"\n)\nsns.regplot(data=anscombe.query(\"dataset == 'I'\"), x=\"x\", y=\"y\", ax=ax[\"A\"], ci=None)\nsns.regplot(data=anscombe.query(\"dataset == 'II'\"), x=\"x\", y=\"y\", ax=ax[\"B\"], ci=None)\nsns.regplot(data=anscombe.query(\"dataset == 'III'\"), x=\"x\", y=\"y\", ax=ax[\"C\"], ci=None)\nsns.regplot(data=anscombe.query(\"dataset == 'IV'\"), x=\"x\", y=\"y\", ax=ax[\"D\"], ci=None)\nplt.suptitle(\"Cuarteto de Anscombe\")\n\nText(0.5, 0.98, 'Cuarteto de Anscombe')\n\n\n\n\n\n\n\n\n\n\nimport seaborn as sns\n\niris_df = sns.load_dataset(\"iris\")\niris_df\n\n\n\n\n\n\n\n\n\nsepal_length\nsepal_width\npetal_length\npetal_width\nspecies\n\n\n\n\n0\n5.1\n3.5\n1.4\n0.2\nsetosa\n\n\n1\n4.9\n3.0\n1.4\n0.2\nsetosa\n\n\n2\n4.7\n3.2\n1.3\n0.2\nsetosa\n\n\n3\n4.6\n3.1\n1.5\n0.2\nsetosa\n\n\n4\n5.0\n3.6\n1.4\n0.2\nsetosa\n\n\n...\n...\n...\n...\n...\n...\n\n\n145\n6.7\n3.0\n5.2\n2.3\nvirginica\n\n\n146\n6.3\n2.5\n5.0\n1.9\nvirginica\n\n\n147\n6.5\n3.0\n5.2\n2.0\nvirginica\n\n\n148\n6.2\n3.4\n5.4\n2.3\nvirginica\n\n\n149\n5.9\n3.0\n5.1\n1.8\nvirginica\n\n\n\n\n150 rows × 5 columns\n\n\n\n\n\nfrom sklearn.decomposition import PCA\nimport matplotlib.pyplot as plt\n\npca = PCA(n_components=2)\ndata = pca.fit_transform(iris_df.drop(columns=\"species\"))\nx, y = data[:,0], data[:,1]\n\nplt.scatter(x, y);\n\n\n\n\n\n\n\n\n\nc = iris_df.species.astype(\"category\").cat.codes\nplt.scatter(x,y, c = c)\nplt.title(\"3 Clusters\");\n\n\n\n\n\n\n\n\n\nc_prima = (c == 0).astype(\"int64\")\nplt.scatter(x,y, c= c_prima)\nplt.title(\"2 Clusters\")\n\nText(0.5, 1.0, '2 Clusters')\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "tics411/clase-2.html#eda",
@@ -687,6 +827,13 @@
     "title": "TICS-411 Minería de Datos",
     "section": "Etapas del Modelamiento: Metodología Propia",
     "text": "Etapas del Modelamiento: Metodología Propia"
+  },
+  {
+    "objectID": "tics411/kmeans.html",
+    "href": "tics411/kmeans.html",
+    "title": "Clases UAI",
+    "section": "",
+    "text": "import numpy as np\n\n## Primera fila son coordenadas X\n## Segunda fila son coordenadas Y\n## Cada columna es el punto.\npuntos = np.array([[1,2,4,5], [1,1,3,4]])\npuntos\n\nc_1 = np.array([1,1])\nc_2 = np.array([2,1])\n\n\nimport matplotlib.pyplot as plt\ndef plot_clusters(puntos, c_1, c_2, c = None):\n    plt.scatter(puntos[0], puntos[1], s = 500, c = c)\n    plt.scatter(c_1[0], c_1[1], marker = \"^\", label = \"Centroide Cluster 1\", edgecolors=\"k\", s = 200, color = \"orange\")\n    plt.scatter(c_2[0], c_2[1], marker = \"^\", label = \"Centroide Cluster 2\", edgecolors=\"k\", s=200, c = \"green\")\n    plt.grid(alpha=0.5)\n    plt.legend();\n\nplot_clusters(puntos, c_1, c_2)\n\n\n\n\n\n\n\n\n\ndef distancia(p0,p1): \n    x0 = p0[0]\n    x1 = p1[0]\n    y0 = p0[1]\n    y1 = p1[1]\n    return np.sqrt((x1-x0)**2 + (y1-y0)**2)\n\n\ndef calculate_distances(puntos, c_1, c_2):\n\n    distancia_mat = np.zeros((2,4))\n    distancia_mat\n\n    for i in range(4):\n        p = puntos[:,i]\n        distancia_mat[0,i] = distancia(p, c_1)\n        distancia_mat[1,i] = distancia(p, c_2)\n\n    return distancia_mat\n\ndistancia_mat = calculate_distances(puntos, c_1, c_2)\ndistancia_mat\n\narray([[0.        , 1.        , 3.60555128, 5.        ],\n       [1.        , 0.        , 2.82842712, 4.24264069]])\n\n\n\ndef calculate_clusters(distancia_mat):\n    min_distancia_mat = np.min(distancia_mat, axis = 0)\n    min_distancia_mat\n\n    clusters = (distancia_mat == min_distancia_mat)\n    return clusters\n\nclusters = calculate_clusters(distancia_mat)\nclusters\n\n## Solo el punto 1 pertenece al cluster 1, todo el resto al cluster 2\n\narray([[ True, False, False, False],\n       [False,  True,  True,  True]])\n\n\n\ndef calculate_centroids(clusters):\n    c_1 = puntos[:,clusters[0]].mean(axis = 1)\n    c_2 = puntos[:,clusters[1]].mean(axis = 1)\n\n    return c_1, c_2\n\nc_1, c_2 = calculate_centroids(clusters)\nc_1, c_2\n\n(array([1., 1.]), array([3.66666667, 2.66666667]))\n\n\n\nplot_clusters(puntos, c_1, c_2, c = [\"red\",\"blue\", \"blue\", \"blue\"])\n\n\n\n\n\n\n\n\n\ndistancia_mat = calculate_distances(puntos, c_1, c_2)\nclusters = calculate_clusters(distancia_mat)\nc_1, c_2 = calculate_centroids(clusters)\nclusters\n\narray([[ True,  True, False, False],\n       [False, False,  True,  True]])\n\n\n\nc_1, c_2\n\n(array([1.5, 1. ]), array([4.5, 3.5]))\n\n\n\nplot_clusters(puntos, c_1, c_2, c = [\"red\",\"red\", \"blue\", \"blue\"])\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "tics411/notebooks/01-Preprocesamiento.html",
