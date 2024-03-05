@@ -412,7 +412,7 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="qué-es-scikit-learn" class="slide level2">
+<section id="qué-es-scikit-learn" class="slide level2 smaller">
 <h2>¿Qué es Scikit-Learn?</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
@@ -423,6 +423,8 @@ Alfonso Tobar-Arancibia
 <li>En 2010 queda a cargo de <a href="https://www.inria.cl/es">INRIA</a> y tiene un ciclo de actualización de 3 meses.</li>
 <li>Es la librería más famosa y poderosa para hacer Machine Learning hoy en día.</li>
 <li>Su API es tan famosa, que hoy se sabe que una librería es de <code>calidad</code> si sigue los estándares implementados por <code>Scikit-Learn</code>.</li>
+<li>Para que un algoritmo sea parte de <code>Scikit-Learn</code> debe poseer 3 años desde su publicación y 200+ citaciones mostrando su utilidad y amplio uso (ver <a href="https://scikit-learn.org/stable/faq.html#new-algorithms-inclusion-criteria">acá</a>).</li>
+<li>Además es una librería que obliga a que sus algoritmos tengan la capacidad de generalizar.</li>
 </ul>
 </div>
 </div>
@@ -486,7 +488,7 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="estimadores-predictivos" class="slide level2">
 <h2>Estimadores Predictivos</h2>
-<div class="sourceCode" id="cb2" data-code-line-numbers="|1|2|3|5-6|7|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> sklearn.sub_modulo <span class="im">import</span> Estimator </span>
+<div class="sourceCode" id="cb2" data-code-line-numbers="|1|2|3|5-6|8|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> sklearn.sub_modulo <span class="im">import</span> Estimator </span>
 <span id="cb2-2"><a></a>model <span class="op">=</span> Estimator(hp1<span class="op">=</span>v1, hp2<span class="op">=</span>v2,...) </span>
 <span id="cb2-3"><a></a>model.fit(X_train, y_train) </span>
 <span id="cb2-4"><a></a></span>
@@ -557,6 +559,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
+<div class="fragment">
 <div class="sourceCode" id="cb3" data-code-line-numbers="|1|2|3|5|7-8|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> Transformer </span>
 <span id="cb3-2"><a></a>tr <span class="op">=</span> Transformer(hp1<span class="op">=</span>v1, hp2<span class="op">=</span>v2,...) </span>
 <span id="cb3-3"><a></a>tr.fit(X) </span>
@@ -566,11 +569,12 @@ Alfonso Tobar-Arancibia
 <span id="cb3-7"><a></a><span class="co">## Opcionalmente</span></span>
 <span id="cb3-8"><a></a>X_new <span class="op">=</span> tr.fit_transform(X) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div style="font-size: 65%;">
-<p>L1. Importar la clase a utilizar (en este caso del submodulo <code>preprocessing</code>).</p>
+<p>L1. Importar la clase a utilizar (en este caso del submodulo <code>preprocessing</code>, aunque pueden haber otros como <code>impute</code>).</p>
 <p>L2. <code>Instanciar</code> el Transformer y sus <code>hiperparámetros</code>.</p>
 <p>L3. <code>Entrenar</code> o ajustar el Transformer.</p>
 <p>L5. <code>Transformar</code> los datos.</p>
 <p>L7-8. Adicionalmente se puede <code>entrenar</code> y <code>transformar</code> los datos en un sólo paso.</p>
+</div>
 </div>
 </section>
 <section id="pipelines" class="slide level2 smaller">
@@ -1189,7 +1193,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
