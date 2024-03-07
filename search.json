@@ -4,7 +4,7 @@
     "href": "tics411-labs.html",
     "title": "Prácticos",
     "section": "",
-    "text": "Laboratorio\nColab\n\n\n\n\nPreprocesamiento\n\n\n\nEDA\n\n\n\n\n\n\n\n Back to top",
+    "text": "Práctico\nColab\n\n\n\n\nPreprocesamiento\n\n\n\nEDA\n\n\n\n\n\n\n\n\nDesarrollos en clase\nColab\n\n\n\n\nK-Means\n\n\n\n\n\n\n\n Back to top",
     "crumbs": [
       "Notebooks"
     ]
@@ -238,7 +238,7 @@
     "href": "tics411/clase-1.html#preprocesamiento-manejo-de-outliers",
     "title": "TICS-411 Minería de Datos",
     "section": "Preprocesamiento: Manejo de Outliers",
-    "text": "Preprocesamiento: Manejo de Outliers\n\nWinsorizer\n\nSe refiere al proceso de acotar un atributo eliminando los valores extremos o atípicos (outliers).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAl igual que en el caso anterior, es necesario evaluar la eliminación de registros si es que representan valores atípicos."
+    "text": "Preprocesamiento: Manejo de Outliers\n\nCapping\n\nSe refiere al proceso de acotar un atributo eliminando los valores extremos o atípicos (outliers).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAl igual que en el caso anterior, es necesario evaluar la eliminación de registros si es que representan valores atípicos."
   },
   {
     "objectID": "tics411/clase-1.html#preprocesamiento-manejo-de-variables-categóricas",
