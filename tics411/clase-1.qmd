@@ -42,7 +42,7 @@ format:
 * Distintos tipos, por lo que normalmente requiere de algún tipo de **preprocesamiento**.
 :::
 
-## Tipos de Datos: Numéricos {.smaller}
+## Data Types: Numéricos {.smaller}
 
 Numéricos
 : > Valores a los que se les puede aplicar alguna operación matemática. 
@@ -55,7 +55,7 @@ Numéricos
 
 ![](img/clase-1/cont_vs_disc.jpg){fig-align="center" .lightbox width="50%"}
 
-## Tipos de Datos: Categóricos {.smaller}
+## Data Types: Categóricos {.smaller}
 
 Categóricos
 : > Datos que representan una categoría. 
@@ -71,7 +71,7 @@ Categóricos
 No todas las operaciones matemáticas son aplicables. Ej: Media, Mediana, Sumas, Restas, etc.
 :::
 
-## Tipos de Datos: Otros tipos de Datos {.smaller}
+## Data Types: Otros {.smaller}
 
 Strings
 : > Datos de texto, los cuales podrían eventualmente ser tratados y representar algo. Ej: `Rescatar comunas de una dirección`, `rescatar sexo desde el nombre`, etc.
@@ -83,7 +83,7 @@ Datos Geográficos
 : > Datos que representan la ubicación geográfica de un elemento. Ej: `Latitud`, `Longitud`, `Coordenadas`.
 
 ::: {.callout-important .fragment}
-Sin importar el tipo de dato el mayor problema es su calidad. 
+Sin importar el tipo de dato el mayor problema es su **calidad**. 
 :::
 
 # Calidad de los Datos
@@ -172,7 +172,7 @@ Feature Engineering
 Preprocesamiento
 : > Se refiere al proceso de preparación de los datos para su ingreso a un modelo. En una primera parte puede incluir limpieza de datos corruptos, redundantes y/o irrelevantes. Por otra parte, también hace referencia a la transformación de datos para que puedan ser consumidos por un algoritmo.  
 
-## Data Cleaning {.smaller}
+## Feature Engineering {.smaller}
 
 * No existe un procedimiento estándar. 
 * Revisar los datos y ver potenciales errores que puedan afectar el funcionamiento de un modelo. 
@@ -196,7 +196,7 @@ Preprocesamiento
 Dependiendo del nivel de valores faltantes, es necesario evaluar la eliminación de registros o atributos completos de ser necesario. 
 :::
 
-## Preprocesamiento: Manejo de Outliers 
+## Preprocesamiento: Manejo de Outliers {.smaller}
 
 Capping
 : Se refiere al proceso de acotar un atributo eliminando los valores extremos o atípicos (outliers). 
@@ -227,7 +227,7 @@ Al igual que en el caso anterior, es necesario evaluar la eliminación de regist
 ::: 
 
 ::: {.callout-note .fragment}
-* `One Hot Encoder` suele dar mejores resultados en modelos lineales.
+* `One Hot Encoder` suele dar mejores resultados en modelos lineales modelos que dependan de distancias.
 * `Ordinal Encoder` suele dar mejores resultados en modelos de árbol. 
 :::
 
@@ -331,6 +331,13 @@ Agregación
 
 # Medidas
 
+## Medidas {.smaller}
+
+> Son métricas que permiten cuantificar la relación existente entre dos o más objetos.
+
+![](img/clase-1/medidas_.png){.lightbox fig-align="center"}
+
+
 ## Medidas: Similaridad
 
 ![](img/clase-1/simil.png){.lightbox fig-align="center"}
@@ -403,7 +410,7 @@ $$D = |p-q|$$
 ::: {.column style="text-align: center;"}
 * Similaridad:  
 $$S = -D$$
-$$S = \frac{|p-q|}{n-1}$$
+$$S = \frac{1}{1+D}$$
 $$S = 1 - \frac{d - min_d}{max_d - min_d}$$
 :::
 ::::
@@ -537,16 +544,16 @@ $$cos(d_1, d_2) = \frac{d_1 \cdot d_2}{||d_1||||d_2||}$$
 |d_3|6|4|0|10|0|0|0|4|0|0|
 
 ::: {.columns}
-::: {.column width="30%"}
+::: {.column width="30%" .fragment}
 $$d_1 \cdot d_2 = 5$$
 $$d_1 \cdot d_3 = 84$$
 :::
-::: {.column width="40%"}
+::: {.column width="40%" .fragment}
 $$||d_1|| = \sqrt{42} = 6.481$$
 $$||d_2|| = \sqrt{6} = 2.449$$
 $$||d_3|| = \sqrt{168} = 12.962$$
 :::
-::: {.column width="30%"}
+::: {.column width="30%" .fragment}
 $$cos(d_1, d_2) = 0.3150$$
 $$cos(d_1, d_3) = 0.9999$$
 :::
@@ -581,6 +588,10 @@ $$d(p,q) = \left(\sum_{k=1}^m |p_k - q_k|^r\right)^{1/r}$$
 * $r=2 \rightarrow$ Distancia Euclideana (L2).
 * $r=\infty \rightarrow$ Distancia Chebyshev (L$\infty$).
   $$D_{ch}(p,q) = \underset{k}{max} |p_k - q_k|$$
+
+::: {.callout-note}
+**Resolvamos en [Colab](https://colab.research.google.com/?hl=es)**
+:::
 :::
 ::: 
 
@@ -611,7 +622,7 @@ $$
 #### Ejercicio: Supongamos las siguientes escalas de notas. Calcular la distancia entre la nota (1.0 y 7.0)
 
 * test #1: 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0
-* test #2: 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0
+* test #2: 1.0, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0
 
 
 ## Distancias: Distancia Mahalanobis (Resultados) {.smaller}

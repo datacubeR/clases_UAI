@@ -42,7 +42,8 @@ format:
   * ML Engineer.
   * Data Engineer.
 * Terminando mi Msc. y empezando mi PhD en la UAI.
-* Me gusta mucho programar.
+* Me gusta mucho programar (en vivo).
+* Contribuyo a **HuggingFace** y **Feature Engine**.
 * He ganado 2 competencias de Machine Learning.
 * Publiqué mi primer [paper](https://ieeexplore.ieee.org/abstract/document/10315748) el año pasado sobre Hate Speech en Español.
 * Juego **Tenis de Mesa**, hago **Agility** con mi perrita Kira y escribo en mi Blog. 
@@ -51,8 +52,9 @@ format:
 
 ::::
 
-# Sobre el Curso {.center}
+# Cuéntenme de ustedes!!
 
+# Sobre el Curso {.center}
 
 ## Objetivos del Curso 
 
@@ -123,10 +125,9 @@ format:
 * [Prácticos](https://datacuber.cl/clases_UAI/tics411-labs.html)
 
 ::: {.callout-tip}
-* Slides interactivas
-* Todo el código se puede copiar directamente.
+* Slides interactivas (Código se puede copiar e imágenes se pueden ver en grande). 
 * Se puede buscar contenido en las diapositivas mediante un buscador. 
-* Se dejarán copias en PDF en Webcursos.
+* Se dejarán copias en PDF en Webcursos (levemente distintas).
 :::
 
 ::: {.callout-important}
@@ -134,7 +135,7 @@ Se espera que los estudiantes dominen las siguientes tecnologías:
 
 * [Python](https://www.python.org/)
 * [Google Colab](https://colab.research.google.com/?hl=es#scrollTo=zwFnJsE6vjf8)
-* [Pandas](https://pandas.pydata.org/docs/user_guide/10min.html)
+* [Pandas](https://pandas.pydata.org/docs/user_guide/10min.html)/[Numpy](https://numpy.org/doc/stable/user/absolute_beginners.html)
 * [Scikit-Learn](https://scikit-learn.org/stable/) (Se enseñará a lo largo del curso).
 :::
 
@@ -165,7 +166,7 @@ Se espera que los estudiantes dominen las siguientes tecnologías:
 ## Evaluación 
 
 ::: {.callout-note}
-* Dos Evaluaciones Escritas (P1, P2) coordinadas y cuatro tareas prácticas (T1, T2, T3, T4)
+* Dos Evaluaciones Escritas (P1, P2) coordinadas y cuatro **tareas prácticas en `parejas`** (T1, T2, T3, T4)
 $$NP = 0.35 \cdot P1 + 0.35 \cdot P2 + 0.3 \cdot \bar{T}$$
 $$ \bar{T} = (T1 + T2 + T3 + T4)/4 $$
 :::
@@ -186,7 +187,7 @@ $$NF = 0.7 \cdot NP + 0.3 \cdot E$$
 ### email: TBD
 
 ::: {.callout-caution}
-* No habrán ayudantías todas las semanas.
+* Las ayudantías serán en la manera que sean necesarias.
 * Estarán enfocadas principalmente en aplicaciones y código.
 :::
 
@@ -296,7 +297,7 @@ Machine Learning (Aprendizaje Automático)
 ![](img/clase-0/tab_data.png){fig-align="center" .lightbox}
 
 ::: {.callout-tip}
-* Filas: Observaciones, instancias. (Normalmente independientes).
+* Filas: Observaciones, instancias, registros. (Normalmente independientes).
 * Columnas: Variables, Atributos, Features.
 :::
 ::: {.callout-note}
@@ -305,8 +306,8 @@ Machine Learning (Aprendizaje Automático)
 :::
 
 ::: {.callout-warning}
-* Es un % bajísimo del total de datos existentes en el Mundo.
-* Distintos tipos, por lo que normalmente requiere de algún tipo de **preprocesamiento**.
+* Es un % bajísimo del total de datos existentes en el Mundo. También el que más disponible está en las empresas. 
+* Distintos `data types`, por lo que normalmente requiere de algún tipo de **preprocesamiento**.
 :::
 
 ## Tipos de Datos: Series de Tiempo {.smaller}
@@ -419,7 +420,7 @@ En este tipo de aprendizaje se enseña por refuerzo. Es decir se da una recompen
 Si el premio es mayor, se pueden obtener aprendizajes mayores. 
 :::
 ::: {.callout-important .fragment fragment-index=5}
-Un ejemplo de esto es **Alpha Tensor** en el cual un modelo `aprendió` una nueva manera de multiplicar matrices que es más eficiente. 
+Un ejemplo de esto es **AlphaTensor** en el cual un modelo `aprendió` una nueva manera de multiplicar matrices que es más eficiente. 
 :::
 ::: {.callout-important .fragment fragment-index=6}
 Otro ejemplo es **AlphaFold** donde el modelo `aprendió/descubrió` cómo se doblan las proteínas cuando se vuelven aminoácidos. 
@@ -429,7 +430,7 @@ Otro ejemplo es **AlphaFold** donde el modelo `aprendió/descubrió` cómo se do
 
 
 
-## Regresión y Clasificación {.smaller}
+## Problemas Supervisados: Regresión y Clasificación {.smaller}
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -493,7 +494,6 @@ Vamos a `Entrenar` un Modelo.
 :::
 
 ![](img/clase-0/model.png){fig-align="center" width="60%" .fragment .lightbox}
-
 
 
 ## Nuestro Sistema de ML: Entrenamiento {.smaller}
@@ -564,7 +564,7 @@ Generalización
 
 ::: {layout-ncol=3}
 
-![`K`u`ch`illo](img/clase-0/cuchillo.png){fig-align="center" width="70%" .fragment .fade-out fragment-index=1}
+![`K`u`ch`illo](img/clase-0/cuchillo.png){fig-align="center" width="70%" .fragment .fade-out fragment-index=2}
 
 ![`Ch`o`k`olate](img/clase-0/chocolate.png){fig-align="center" width="70%"} 
 
@@ -572,8 +572,12 @@ Generalización
 
 :::
 
-::: {.callout-warning .fragment fragment-index=2}
+::: {.callout-warning .fragment fragment-index=1}
 No es bueno entrenar con las mismas instancias de entrenamiento. **¿Por qué?**
+:::
+
+::: {.notes}
+Mencionar el caso de error de ImageNet.
 :::
 
 ## Nuestro Sistema de ML: Reevaluemos nuestro Modelo {.smaller}
@@ -630,9 +634,13 @@ Supongamos que queremos utilizar nuestro modelo para pronunciar palabras en otro
 
 :::
 
-::: {.incremental}
+::: {.columns}
+::: {.column .incremental}
 * Stomach $\rightarrow$ Stoma<span style="color:green;">k</span>
 * Archer $\rightarrow$ Ar<span style="color:green;">ch</span>er
+
+* Church $\rightarrow$ <span style="color:green;">Ch</span>ur`k`
+  * <span style="color:green;">Ch</span>ur<span style="color:green;">ch</span>.
 
 * Archeology $\rightarrow$ Ar`ch`eology
   * Ar<span style="color:green;">k</span>eology.
@@ -640,12 +648,19 @@ Supongamos que queremos utilizar nuestro modelo para pronunciar palabras en otro
 * Chicago $\rightarrow$ `Ch`icago
   * <span style="color:green;">Sh</span>icago.
 
-* Schlaf $\rightarrow$ S`k`laf
-  * <span style="color:green;">Sh</span>laf.
+* Muscle $\rightarrow$ Mus`k`le
+  * Mus<span style="color:green;">_</span>le.
 
 * Ich mag Schweinefleisch $\rightarrow$ I`ch` mag S`ch`weinefleis`k`.
   * I<span style="color:green;">j</span> mag <span style="color:green;">Sh</span>vaineflai<span style="color:green;">sh</span>.
 :::
+::: {.column}
+::: {.callout-important .fragment}
+Claramente tenemos un problema. **¿A qué se debe esto?**
+:::
+:::
+::: 
+
 
 ## Problemas del Aprendizaje: Definiciones {.smaller}
 
