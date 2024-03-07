@@ -399,8 +399,8 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </section>
-<section id="tipos-de-datos-numéricos" class="slide level2 smaller">
-<h2>Tipos de Datos: Numéricos</h2>
+<section id="data-types-numéricos" class="slide level2 smaller">
+<h2>Data Types: Numéricos</h2>
 <dl>
 <dt>Numéricos</dt>
 <dd>
@@ -428,8 +428,8 @@ Alfonso Tobar-Arancibia
 </figure>
 </div>
 </section>
-<section id="tipos-de-datos-categóricos" class="slide level2 smaller">
-<h2>Tipos de Datos: Categóricos</h2>
+<section id="data-types-categóricos" class="slide level2 smaller">
+<h2>Data Types: Categóricos</h2>
 <dl>
 <dt>Categóricos</dt>
 <dd>
@@ -469,8 +469,8 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </section>
-<section id="tipos-de-datos-otros-tipos-de-datos" class="slide level2 smaller">
-<h2>Tipos de Datos: Otros tipos de Datos</h2>
+<section id="data-types-otros" class="slide level2 smaller">
+<h2>Data Types: Otros</h2>
 <dl>
 <dt>Strings</dt>
 <dd>
@@ -498,7 +498,7 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Sin importar el tipo de dato el mayor problema es su calidad.</p>
+<p>Sin importar el tipo de dato el mayor problema es su <strong>calidad</strong>.</p>
 </div>
 </div>
 </div>
@@ -665,8 +665,8 @@ Se refiere a registros que pueden estar total o parcialmente duplicados.
 </dd>
 </dl>
 </section>
-<section id="data-cleaning" class="slide level2 smaller">
-<h2>Data Cleaning</h2>
+<section id="feature-engineering-2" class="slide level2 smaller">
+<h2>Feature Engineering</h2>
 <ul>
 <li>No existe un procedimiento estándar.</li>
 <li>Revisar los datos y ver potenciales errores que puedan afectar el funcionamiento de un modelo.</li>
@@ -710,7 +710,7 @@ Se refiere a registros que pueden estar total o parcialmente duplicados.
 </div>
 </div>
 </section>
-<section id="preprocesamiento-manejo-de-outliers" class="slide level2">
+<section id="preprocesamiento-manejo-de-outliers" class="slide level2 smaller">
 <h2>Preprocesamiento: Manejo de Outliers</h2>
 <dl>
 <dt>Capping</dt>
@@ -748,14 +748,14 @@ Se refiere al proceso de acotar un atributo eliminando los valores extremos o at
 <div class="column fragment" style="width:70%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/ohe.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" data-glightbox="description: .lightbox-desc-14" title="One Hot Encoder"><img data-src="img/clase-1/ohe.png" style="width:200.0%" alt="One Hot Encoder"></a></p>
+<p><a href="img/clase-1/ohe.png" class="lightbox" data-glightbox="description: .lightbox-desc-14" data-gallery="quarto-lightbox-gallery-14" title="One Hot Encoder"><img data-src="img/clase-1/ohe.png" style="width:200.0%" alt="One Hot Encoder"></a></p>
 <figcaption>One Hot Encoder</figcaption>
 </figure>
 </div>
 </div><div class="column fragment" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/ordinal.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" data-glightbox="description: .lightbox-desc-15" title="Ordinal Encoder"><img data-src="img/clase-1/ordinal.png" alt="Ordinal Encoder"></a></p>
+<p><a href="img/clase-1/ordinal.png" class="lightbox" data-glightbox="description: .lightbox-desc-15" data-gallery="quarto-lightbox-gallery-15" title="Ordinal Encoder"><img data-src="img/clase-1/ordinal.png" alt="Ordinal Encoder"></a></p>
 <figcaption>Ordinal Encoder</figcaption>
 </figure>
 </div>
@@ -769,7 +769,7 @@ Se refiere al proceso de acotar un atributo eliminando los valores extremos o at
 </div>
 <div class="callout-content">
 <ul>
-<li><code>One Hot Encoder</code> suele dar mejores resultados en modelos lineales.</li>
+<li><code>One Hot Encoder</code> suele dar mejores resultados en modelos lineales modelos que dependan de distancias.</li>
 <li><code>Ordinal Encoder</code> suele dar mejores resultados en modelos de árbol.</li>
 </ul>
 </div>
@@ -953,11 +953,22 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 <h1>Medidas</h1>
 
 </section>
+<section id="medidas-1" class="slide level2 smaller">
+<h2>Medidas</h2>
+<blockquote>
+<p>Son métricas que permiten cuantificar la relación existente entre dos o más objetos.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/medidas_.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-1/medidas_.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
 <section id="medidas-similaridad" class="slide level2">
 <h2>Medidas: Similaridad</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/simil.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-1/simil.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/simil.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-1/simil.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </section>
@@ -990,7 +1001,7 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/s_nom.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-1/s_nom.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/s_nom.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-1/s_nom.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column">
@@ -1016,7 +1027,7 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/s_ord.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-1/s_ord.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/s_ord.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-1/s_ord.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column">
@@ -1034,7 +1045,7 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 </div><div class="column" style="text-align: center;">
 <ul>
 <li>Similaridad:<br>
-<span class="math display">\[S = -D\]</span> <span class="math display">\[S = \frac{|p-q|}{n-1}\]</span> <span class="math display">\[S = 1 - \frac{d - min_d}{max_d - min_d}\]</span></li>
+<span class="math display">\[S = -D\]</span> <span class="math display">\[S = \frac{1}{1+D}\]</span> <span class="math display">\[S = 1 - \frac{d - min_d}{max_d - min_d}\]</span></li>
 </ul>
 </div>
 </div>
@@ -1089,18 +1100,18 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 <h2>Medidas: Similaridad Datos Categóricos</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/datos_cat.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-1/datos_cat.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/datos_cat.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-1/datos_cat.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <aside class="notes">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/sim_cat_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-1/sim_cat_1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-1/sim_cat_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-1/sim_cat_1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/simil_calc.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-1/simil_calc.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-1/simil_calc.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-1/simil_calc.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 <style type="text/css">
@@ -1142,7 +1153,7 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 <p><br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/sim_bin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-1/sim_bin.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/sim_bin.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-1/sim_bin.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </section>
@@ -1298,11 +1309,11 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 </tbody>
 </table>
 <div class="columns">
-<div class="column" style="width:30%;">
+<div class="column fragment" style="width:30%;">
 <p><span class="math display">\[d_1 \cdot d_2 = 5\]</span> <span class="math display">\[d_1 \cdot d_3 = 84\]</span></p>
-</div><div class="column" style="width:40%;">
+</div><div class="column fragment" style="width:40%;">
 <p><span class="math display">\[||d_1|| = \sqrt{42} = 6.481\]</span> <span class="math display">\[||d_2|| = \sqrt{6} = 2.449\]</span> <span class="math display">\[||d_3|| = \sqrt{168} = 12.962\]</span></p>
-</div><div class="column" style="width:30%;">
+</div><div class="column fragment" style="width:30%;">
 <p><span class="math display">\[cos(d_1, d_2) = 0.3150\]</span> <span class="math display">\[cos(d_1, d_3) = 0.9999\]</span></p>
 </div>
 </div>
@@ -1343,7 +1354,7 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/data_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-1/data_dist.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-1/data_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-1/data_dist.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
@@ -1352,6 +1363,16 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 <li><span class="math inline">\(r=2 \rightarrow\)</span> Distancia Euclideana (L2).</li>
 <li><span class="math inline">\(r=\infty \rightarrow\)</span> Distancia Chebyshev (L<span class="math inline">\(\infty\)</span>). <span class="math display">\[D_{ch}(p,q) = \underset{k}{max} |p_k - q_k|\]</span></li>
 </ul>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Resolvamos en <a href="https://colab.research.google.com/?hl=es">Colab</a></strong></p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="callout callout-important callout-style-simple">
@@ -1371,7 +1392,7 @@ Agregar o agrupar información resumida de ciertas variables. Ej: Promedio de ti
 <h2>Distancias: Distancia Minkowski (Resultados)</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/results_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-1/results_dist.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></a></p>
+<p><a href="img/clase-1/results_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-1/results_dist.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></a></p>
 </figure>
 </div>
 </section>
@@ -1391,14 +1412,14 @@ cov(q,p) &amp; cov(q,q)
 <h4 id="ejercicio-supongamos-las-siguientes-escalas-de-notas.-calcular-la-distancia-entre-la-nota-1.0-y-7.0">Ejercicio: Supongamos las siguientes escalas de notas. Calcular la distancia entre la nota (1.0 y 7.0)</h4>
 <ul>
 <li>test #1: 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0</li>
-<li>test #2: 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0</li>
+<li>test #2: 1.0, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0</li>
 </ul>
 </section>
 <section id="distancias-distancia-mahalanobis-resultados" class="slide level2 smaller">
 <h2>Distancias: Distancia Mahalanobis (Resultados)</h2>
 <div class="columns">
 <div class="column">
-<p><a href="img/clase-1/mah_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-1/mah_dist.png"></a></p>
+<p><a href="img/clase-1/mah_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-1/mah_dist.png"></a></p>
 </div><div class="column">
 <p><br></p>
 <ul>
@@ -1446,7 +1467,7 @@ cov(q,p) &amp; cov(q,q)
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/corr_examples.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-1/corr_examples.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-1/corr_examples.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="img/clase-1/corr_examples.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
 </section>
@@ -1454,7 +1475,7 @@ cov(q,p) &amp; cov(q,q)
 <h2>Correlación</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/cage_corr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="img/clase-1/cage_corr.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-1/cage_corr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32"><img data-src="img/clase-1/cage_corr.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
 <div class="fragment">
@@ -1868,7 +1889,7 @@ cov(q,p) &amp; cov(q,q)
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","loop":false,"closeEffect":"zoom","openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

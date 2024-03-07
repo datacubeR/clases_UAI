@@ -157,25 +157,25 @@
     "text": "Tipos de Datos: Datos Tabulares\n\n\n\n\n\n\n\n\n\n\n\n\nFilas: Observaciones, registros, instancias. (Normalmente independientes).\nColumnas: Variables, Atributos, Features.\n\n\n\n\n\n\n\n\n\n\n\nProbablemente el tipo de datos más amigable.\nRequiere conocimiento de negocio (Domain Knowledge)\n\n\n\n\n\n\n\n\n\n\n\nEs un % bajísimo del total de datos existentes en el Mundo.\nDistintos tipos, por lo que normalmente requiere de algún tipo de preprocesamiento."
   },
   {
-    "objectID": "tics411/clase-1.html#tipos-de-datos-numéricos",
-    "href": "tics411/clase-1.html#tipos-de-datos-numéricos",
+    "objectID": "tics411/clase-1.html#data-types-numéricos",
+    "href": "tics411/clase-1.html#data-types-numéricos",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Numéricos",
-    "text": "Tipos de Datos: Numéricos\n\nNuméricos\n\n\nValores a los que se les puede aplicar alguna operación matemática.\n\n\n\n\n\n\n\n\n\n\nDiscretas: Número finito o contable de valores. Integers (Enteros). Ej: Número de Hijos, Cantidad de Productos, Edad.\nContinuas: Existen infinitos puntos entre dos puntos. Floats (punto flotando o decimales). Ej. Temperatura, Peso."
+    "section": "Data Types: Numéricos",
+    "text": "Data Types: Numéricos\n\nNuméricos\n\n\nValores a los que se les puede aplicar alguna operación matemática.\n\n\n\n\n\n\n\n\n\n\nDiscretas: Número finito o contable de valores. Integers (Enteros). Ej: Número de Hijos, Cantidad de Productos, Edad.\nContinuas: Existen infinitos puntos entre dos puntos. Floats (punto flotando o decimales). Ej. Temperatura, Peso."
   },
   {
-    "objectID": "tics411/clase-1.html#tipos-de-datos-categóricos",
-    "href": "tics411/clase-1.html#tipos-de-datos-categóricos",
+    "objectID": "tics411/clase-1.html#data-types-categóricos",
+    "href": "tics411/clase-1.html#data-types-categóricos",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Categóricos",
-    "text": "Tipos de Datos: Categóricos\n\nCategóricos\n\n\nDatos que representan una categoría.\n\n\n\n\n\n\n\n\n\n\nNominales: Sólo nombres que no representan ningún orden. Ej: Nacionalidad, género, ocupación.\nOrdinales: Que tienen un orden o jerarquía inherente. Ej: Nivel de Escolaridad, tamaño.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo todas las operaciones matemáticas son aplicables. Ej: Media, Mediana, Sumas, Restas, etc."
+    "section": "Data Types: Categóricos",
+    "text": "Data Types: Categóricos\n\nCategóricos\n\n\nDatos que representan una categoría.\n\n\n\n\n\n\n\n\n\n\nNominales: Sólo nombres que no representan ningún orden. Ej: Nacionalidad, género, ocupación.\nOrdinales: Que tienen un orden o jerarquía inherente. Ej: Nivel de Escolaridad, tamaño.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo todas las operaciones matemáticas son aplicables. Ej: Media, Mediana, Sumas, Restas, etc."
   },
   {
-    "objectID": "tics411/clase-1.html#tipos-de-datos-otros-tipos-de-datos",
-    "href": "tics411/clase-1.html#tipos-de-datos-otros-tipos-de-datos",
+    "objectID": "tics411/clase-1.html#data-types-otros",
+    "href": "tics411/clase-1.html#data-types-otros",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Otros tipos de Datos",
-    "text": "Tipos de Datos: Otros tipos de Datos\n\nStrings\n\n\nDatos de texto, los cuales podrían eventualmente ser tratados y representar algo. Ej: Rescatar comunas de una dirección, rescatar sexo desde el nombre, etc.\n\n\nFechas\n\n\nDatos tipo fecha, los cuales podrían eventualmente ser tratados y representar variables de algún tipo. Ej: Rescatar Años, meses, días, semanas, trimestres (quarters), etc.\n\n\nDatos Geográficos\n\n\nDatos que representan la ubicación geográfica de un elemento. Ej: Latitud, Longitud, Coordenadas.\n\n\n\n\n\n\n\n\n\n\nSin importar el tipo de dato el mayor problema es su calidad."
+    "section": "Data Types: Otros",
+    "text": "Data Types: Otros\n\nStrings\n\n\nDatos de texto, los cuales podrían eventualmente ser tratados y representar algo. Ej: Rescatar comunas de una dirección, rescatar sexo desde el nombre, etc.\n\n\nFechas\n\n\nDatos tipo fecha, los cuales podrían eventualmente ser tratados y representar variables de algún tipo. Ej: Rescatar Años, meses, días, semanas, trimestres (quarters), etc.\n\n\nDatos Geográficos\n\n\nDatos que representan la ubicación geográfica de un elemento. Ej: Latitud, Longitud, Coordenadas.\n\n\n\n\n\n\n\n\n\n\nSin importar el tipo de dato el mayor problema es su calidad."
   },
   {
     "objectID": "tics411/clase-1.html#calidad-de-los-datos-ruido",
@@ -220,11 +220,11 @@
     "text": "Feature Engineering\n\nFeature Engineering\n\n\nTambién conocida como Ingeniería de Atributos, es el arte de trabajar las features existentes para limpiar o corregir variables existentes o crear nuevas variables.\n\n\nPreprocesamiento\n\n\nSe refiere al proceso de preparación de los datos para su ingreso a un modelo. En una primera parte puede incluir limpieza de datos corruptos, redundantes y/o irrelevantes. Por otra parte, también hace referencia a la transformación de datos para que puedan ser consumidos por un algoritmo."
   },
   {
-    "objectID": "tics411/clase-1.html#data-cleaning",
-    "href": "tics411/clase-1.html#data-cleaning",
+    "objectID": "tics411/clase-1.html#feature-engineering-2",
+    "href": "tics411/clase-1.html#feature-engineering-2",
     "title": "TICS-411 Minería de Datos",
-    "section": "Data Cleaning",
-    "text": "Data Cleaning\n\nNo existe un procedimiento estándar.\nRevisar los datos y ver potenciales errores que puedan afectar el funcionamiento de un modelo."
+    "section": "Feature Engineering",
+    "text": "Feature Engineering\n\nNo existe un procedimiento estándar.\nRevisar los datos y ver potenciales errores que puedan afectar el funcionamiento de un modelo."
   },
   {
     "objectID": "tics411/clase-1.html#preprocesamiento-valores-faltantes",
@@ -245,7 +245,7 @@
     "href": "tics411/clase-1.html#preprocesamiento-manejo-de-variables-categóricas",
     "title": "TICS-411 Minería de Datos",
     "section": "Preprocesamiento: Manejo de Variables Categóricas",
-    "text": "Preprocesamiento: Manejo de Variables Categóricas\n\nLa mayoría de los modelos no tienen la capacidad de poder lidiar con variables categóricas por lo que deben ser transformadas en una representación numérica antes de ingresar a un modelo.\n\n\n\n\n\n\nOne Hot Encoder\n\n\n\n\n\n\nOrdinal Encoder\n\n\n\n\n\n\n\n\n\n\n\n\nOne Hot Encoder suele dar mejores resultados en modelos lineales.\nOrdinal Encoder suele dar mejores resultados en modelos de árbol.\n\n\n\n\n\n\n\n¿Son necesarias todas las columnas en un One Hot Encoder?"
+    "text": "Preprocesamiento: Manejo de Variables Categóricas\n\nLa mayoría de los modelos no tienen la capacidad de poder lidiar con variables categóricas por lo que deben ser transformadas en una representación numérica antes de ingresar a un modelo.\n\n\n\n\n\n\nOne Hot Encoder\n\n\n\n\n\n\nOrdinal Encoder\n\n\n\n\n\n\n\n\n\n\n\n\nOne Hot Encoder suele dar mejores resultados en modelos lineales modelos que dependan de distancias.\nOrdinal Encoder suele dar mejores resultados en modelos de árbol.\n\n\n\n\n\n\n\n¿Son necesarias todas las columnas en un One Hot Encoder?"
   },
   {
     "objectID": "tics411/clase-1.html#preprocesamiento-escalamiento",
@@ -283,6 +283,13 @@
     "text": "Selección de Variables\n\nSe refiere al proceso de eliminar variables que pueden ser irrelevantes o poco significativas.\n\n\n\n\n\n\n\n\n\n\n\n\n\nProcesos Manuales.\nProcesos Automáticos:\n\nPCA (Principal Component Analysis).\nRecursive Feature Elimination.\nRecursive Feature Addition.\nEliminación mediante alguna medida."
   },
   {
+    "objectID": "tics411/clase-1.html#medidas-1",
+    "href": "tics411/clase-1.html#medidas-1",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Medidas",
+    "text": "Medidas\n\nSon métricas que permiten cuantificar la relación existente entre dos o más objetos."
+  },
+  {
     "objectID": "tics411/clase-1.html#medidas-similaridad",
     "href": "tics411/clase-1.html#medidas-similaridad",
     "title": "TICS-411 Minería de Datos",
@@ -308,7 +315,7 @@
     "href": "tics411/clase-1.html#medidas-similaridad-intervalo-o-ratio",
     "title": "TICS-411 Minería de Datos",
     "section": "Medidas: Similaridad Intervalo o Ratio",
-    "text": "Medidas: Similaridad Intervalo o Ratio\n\n\n\nDisimilaridad: \\[D = |p-q|\\]\n\n\n\nSimilaridad:\n\\[S = -D\\] \\[S = \\frac{|p-q|}{n-1}\\] \\[S = 1 - \\frac{d - min_d}{max_d - min_d}\\]\n\n\n\n\nSea \\(p=35 °C\\) y \\(q = 40 °C\\). Luego:\n\\[ S(p,q) = -5\\] \\[S(p,q) = \\frac{1}{1 + 5} = 0.17\\]"
+    "text": "Medidas: Similaridad Intervalo o Ratio\n\n\n\nDisimilaridad: \\[D = |p-q|\\]\n\n\n\nSimilaridad:\n\\[S = -D\\] \\[S = \\frac{1}{1+D}\\] \\[S = 1 - \\frac{d - min_d}{max_d - min_d}\\]\n\n\n\n\nSea \\(p=35 °C\\) y \\(q = 40 °C\\). Luego:\n\\[ S(p,q) = -5\\] \\[S(p,q) = \\frac{1}{1 + 5} = 0.17\\]"
   },
   {
     "objectID": "tics411/clase-1.html#medidas-similaridad-datos-categóricos",
@@ -357,7 +364,7 @@
     "href": "tics411/clase-1.html#distancias-distancia-minkowski",
     "title": "TICS-411 Minería de Datos",
     "section": "Distancias: Distancia Minkowski",
-    "text": "Distancias: Distancia Minkowski\n\\[d(p,q) = \\left(\\sum_{k=1}^m |p_k - q_k|^r\\right)^{1/r}\\]\n\n\n\n\n\n\n\n\n\n\\(r=1 \\rightarrow\\) Distancia Manhattan (L1).\n\\(r=2 \\rightarrow\\) Distancia Euclideana (L2).\n\\(r=\\infty \\rightarrow\\) Distancia Chebyshev (L\\(\\infty\\)). \\[D_{ch}(p,q) = \\underset{k}{max} |p_k - q_k|\\]\n\n\n\n\n\n\n\n\n\n\nSe denomina Matriz de Distancias a la Matriz que contiene la distancia \\(d(p_i,p_j)\\) en la coordenada \\(i,j\\)."
+    "text": "Distancias: Distancia Minkowski\n\\[d(p,q) = \\left(\\sum_{k=1}^m |p_k - q_k|^r\\right)^{1/r}\\]\n\n\n\n\n\n\n\n\n\n\\(r=1 \\rightarrow\\) Distancia Manhattan (L1).\n\\(r=2 \\rightarrow\\) Distancia Euclideana (L2).\n\\(r=\\infty \\rightarrow\\) Distancia Chebyshev (L\\(\\infty\\)). \\[D_{ch}(p,q) = \\underset{k}{max} |p_k - q_k|\\]\n\n\n\n\n\n\n\nResolvamos en Colab\n\n\n\n\n\n\n\n\n\n\n\n\nSe denomina Matriz de Distancias a la Matriz que contiene la distancia \\(d(p_i,p_j)\\) en la coordenada \\(i,j\\)."
   },
   {
     "objectID": "tics411/clase-1.html#distancias-distancia-minkowski-resultados",
@@ -371,7 +378,7 @@
     "href": "tics411/clase-1.html#distancias-distancia-mahalanobis",
     "title": "TICS-411 Minería de Datos",
     "section": "Distancias: Distancia Mahalanobis",
-    "text": "Distancias: Distancia Mahalanobis\n\\[d(p,q) = \\sqrt{(p-q)^T \\Sigma^{-1}(p-q)}\\]\ndonde \\(\\Sigma\\) es la Matriz de Covarianza de los datos de entrada.\n\\[cov(x,y) = \\frac{1}{n-1}\\sum_{i = 1}^n (x_i - \\bar{x})(y_i - \\bar{y})\\]\n\nPara 2 variables p y q:\n\n\\[\\Sigma = \\begin{bmatrix}\ncov(p,p) & cov(p,q) \\\\\ncov(q,p) & cov(q,q)\n\\end{bmatrix}\n\\]\nEjercicio: Supongamos las siguientes escalas de notas. Calcular la distancia entre la nota (1.0 y 7.0)\n\ntest #1: 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0\ntest #2: 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0"
+    "text": "Distancias: Distancia Mahalanobis\n\\[d(p,q) = \\sqrt{(p-q)^T \\Sigma^{-1}(p-q)}\\]\ndonde \\(\\Sigma\\) es la Matriz de Covarianza de los datos de entrada.\n\\[cov(x,y) = \\frac{1}{n-1}\\sum_{i = 1}^n (x_i - \\bar{x})(y_i - \\bar{y})\\]\n\nPara 2 variables p y q:\n\n\\[\\Sigma = \\begin{bmatrix}\ncov(p,p) & cov(p,q) \\\\\ncov(q,p) & cov(q,q)\n\\end{bmatrix}\n\\]\nEjercicio: Supongamos las siguientes escalas de notas. Calcular la distancia entre la nota (1.0 y 7.0)\n\ntest #1: 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0\ntest #2: 1.0, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0"
   },
   {
     "objectID": "tics411/clase-1.html#distancias-distancia-mahalanobis-resultados",
@@ -402,270 +409,11 @@
     "text": "import matplotlib.pyplot as plt\nimport numpy as np\n\na = np.array([4.5, 4, 4.1, 1, 2.3, 2.2, 2.4, 5, 5.5, 6.2, 6, 6, 6, 6])\nb = np.append(a, a + 1)\n\nfig = plt.figure(figsize=(20, 6))\nax = fig.subplot_mosaic(\"ABC\")\nax[\"A\"].hist(b, bins=5)\nax[\"A\"].set_title(\"Bins 5\")\nax[\"A\"].set_xlabel(\"Notas\")\nax[\"A\"].set_ylabel(\"Número de Estudiantes\")\nax[\"B\"].hist(b, bins=15)\nax[\"B\"].set_title(\"Bins 15\")\nax[\"B\"].set_xlabel(\"Notas\")\nax[\"C\"].hist(b, bins=30)\nax[\"C\"].set_title(\"Bins 30\")\nax[\"C\"].set_xlabel(\"Notas\")\nplt.show()\n\n\n\n\n\n\n\n\n\nfrom sklearn.neighbors import KernelDensity\n\n\nkd_gauss = KernelDensity(kernel=\"epanechnikov\")\nkd_gauss.fit(b[:, np.newaxis])\nx_grid = np.linspace(1, 6, 1000)\nb_gauss = np.exp(kd_gauss.score_samples(x_grid[:, np.newaxis]))\nplt.hist(b)\nplt.plot(b_gauss)\n\n\n\n\n\n\n\n\n\nfrom scipy.stats import norm\n\nnp.random.seed(0)\nx_grid = np.linspace(-4.5, 3.5, 1000)\nx = np.concatenate([norm(-1, 1.0).rvs(400), norm(1, 0.3).rvs(100)])\n\n\ndef kde_sklearn(x, x_grid, bandwidth=0.2, **kwargs):\n    \"\"\"Kernel Density Estimation with Scikit-learn\"\"\"\n    kde_skl = KernelDensity(bandwidth=bandwidth, **kwargs)\n    kde_skl.fit(x[:, np.newaxis])\n    # score_samples() returns the log-likelihood of the samples\n    log_pdf = kde_skl.score_samples(x_grid[:, np.newaxis])\n    return np.exp(log_pdf)\n\n\npdf = kde_sklearn(x, x_grid, bandwidth=0.2)\n\nplt.hist(x)\nplt.plot(x_grid, pdf)\n\n\n\n\n\n\n\n\n\nn = 100\nnp.random.seed(123)\nmuestra_1 = np.random.normal(loc=1, scale=0.5, size=int(n * 0.75))\nmuestra_2 = np.random.normal(loc=-1, scale=0.5, size=int(n * 0.25))\ndatos = np.hstack((muestra_1, muestra_2)) + 3\n\nX_grid = np.linspace(0, 7, 200)\n\nmodelo_kde = KernelDensity(kernel=\"tophat\", bandwidth=0.2)\nmodelo_kde.fit(datos.reshape(-1, 1))\n\nlog_densidad_pred = modelo_kde.score_samples(X_grid.reshape((-1, 1)))\n# Se aplica el exponente para deshacer el logaritmo\ndensidad_pred_tophat = np.exp(log_densidad_pred)\n\n\nn = 100\nnp.random.seed(123)\nmuestra_1 = np.random.normal(loc=1, scale=0.5, size=int(n * 0.75))\nmuestra_2 = np.random.normal(loc=-1, scale=0.5, size=int(n * 0.25))\ndatos = np.hstack((muestra_1, muestra_2)) + 3\n\nX_grid = np.linspace(0, 7, 200)\n\nmodelo_kde = KernelDensity(kernel=\"gaussian\", bandwidth=0.2)\nmodelo_kde.fit(datos.reshape(-1, 1))\n\nlog_densidad_pred = modelo_kde.score_samples(X_grid.reshape((-1, 1)))\n# Se aplica el exponente para deshacer el logaritmo\ndensidad_pred_gaussian = np.exp(log_densidad_pred)\n\n\nn = 100\nnp.random.seed(123)\nmuestra_1 = np.random.normal(loc=1, scale=0.5, size=int(n * 0.75))\nmuestra_2 = np.random.normal(loc=-1, scale=0.5, size=int(n * 0.25))\ndatos = np.hstack((muestra_1, muestra_2)) + 3\n\nX_grid = np.linspace(0, 7, 200)\n\nmodelo_kde = KernelDensity(kernel=\"epanechnikov\", bandwidth=0.2)\nmodelo_kde.fit(datos.reshape(-1, 1))\n\nlog_densidad_pred = modelo_kde.score_samples(X_grid.reshape((-1, 1)))\n# Se aplica el exponente para deshacer el logaritmo\ndensidad_pred_epa = np.exp(log_densidad_pred)\n\n\nfig = plt.figure(figsize=(20, 6))\nax = fig.subplot_mosaic(\"ABC\")\nax[\"A\"].hist(datos, bins=30, density=True, color=\"#3182bd\", alpha=0.5)\nax[\"A\"].plot(X_grid, densidad_pred_tophat, color=\"red\", label=\"predicción\")\nax[\"A\"].set_title(\"Kernel Uniforme/Tophat h=0.2\")\n\nax[\"B\"].hist(datos, bins=30, density=True, color=\"#3182bd\", alpha=0.5)\nax[\"B\"].plot(X_grid, densidad_pred_gaussian, color=\"red\", label=\"predicción\")\nax[\"B\"].set_title(\"Kernel Gaussiano h=0.2\")\n\nax[\"C\"].hist(datos, bins=30, density=True, color=\"#3182bd\", alpha=0.5)\nax[\"C\"].plot(X_grid, densidad_pred_epa, color=\"red\", label=\"predicción\")\nax[\"C\"].set_title(\"Kernel Epanechnikov h=0.2\")\n\nText(0.5, 1.0, 'Kernel Epanechnikov h=0.2')\n\n\n\n\n\n\n\n\n\n\nn = 1000\nnp.random.seed(123)\nmuestra_1 = np.random.normal(loc=1, scale=0.5, size=int(n * 0.75))\nmuestra_2 = np.random.normal(loc=-1, scale=0.5, size=int(n * 0.25))\ndatos = np.hstack((muestra_1, muestra_2))\n\nX_grid = np.linspace(-3, 4, 1000)\n\nmodelo_kde = KernelDensity(kernel=\"linear\", bandwidth=1)\nmodelo_kde.fit(datos.reshape(-1, 1))\n\nlog_densidad_pred = modelo_kde.score_samples(X_grid.reshape((-1, 1)))\n# Se aplica el exponente para deshacer el logaritmo\ndensidad_pred = np.exp(log_densidad_pred)\n\nfig, ax = plt.subplots(figsize=(7, 4))\nax.hist(datos, bins=30, density=True, color=\"#3182bd\", alpha=0.5)\nax.plot(X_grid, densidad_pred, color=\"red\", label=\"predicción\")\n\n\n\n\n\n\n\n\n\nimport seaborn as sns\n\ntitanic_df = sns.load_dataset(\"titanic\")\ntitanic_df[\"embarked\"].value_counts().plot(\n    kind=\"bar\", rot=0, title=\"Personas embarcadas por puerto del Titanic\"\n)\n\n\n\n\n\n\n\n\n\ntitanic_df.dtypes\n\nsurvived          int64\npclass            int64\nsex              object\nage             float64\nsibsp             int64\nparch             int64\nfare            float64\nembarked         object\nclass          category\nwho              object\nadult_male         bool\ndeck           category\nembark_town      object\nalive            object\nalone              bool\ndtype: object\n\n\n\ng = sns.catplot(\n    data=titanic_df, y=\"fare\", x=\"pclass\", kind=\"bar\", errorbar=None, hue=\"sex\"\n)\ng.figure.suptitle(\"Tarifa Promedio de Pasajeros del Titanic\\n por Clase y Sexo.\")\n\n\n\n\n\n\n\n\n\ndata = titanic_df[[\"age\", \"fare\"]].melt(value_vars=[\"age\", \"fare\"])\ndata\n\n\n\n\n\n\n\n\n\nvariable\nvalue\n\n\n\n\n0\nage\n22.00\n\n\n1\nage\n38.00\n\n\n2\nage\n26.00\n\n\n3\nage\n35.00\n\n\n4\nage\n35.00\n\n\n...\n...\n...\n\n\n1777\nfare\n13.00\n\n\n1778\nfare\n30.00\n\n\n1779\nfare\n23.45\n\n\n1780\nfare\n30.00\n\n\n1781\nfare\n7.75\n\n\n\n\n1782 rows × 2 columns\n\n\n\n\n\nsns.catplot(\n    kind=\"box\", x=\"variable\", y=\"value\", data=data, height=6, aspect=0.5, hue=\"variable\"\n)\n\n\n\n\n\n\n\n\n\niris_df = sns.load_dataset(\"iris\")\niris_df\n\n\n\n\n\n\n\n\n\nsepal_length\nsepal_width\npetal_length\npetal_width\nspecies\n\n\n\n\n0\n5.1\n3.5\n1.4\n0.2\nsetosa\n\n\n1\n4.9\n3.0\n1.4\n0.2\nsetosa\n\n\n2\n4.7\n3.2\n1.3\n0.2\nsetosa\n\n\n3\n4.6\n3.1\n1.5\n0.2\nsetosa\n\n\n4\n5.0\n3.6\n1.4\n0.2\nsetosa\n\n\n...\n...\n...\n...\n...\n...\n\n\n145\n6.7\n3.0\n5.2\n2.3\nvirginica\n\n\n146\n6.3\n2.5\n5.0\n1.9\nvirginica\n\n\n147\n6.5\n3.0\n5.2\n2.0\nvirginica\n\n\n148\n6.2\n3.4\n5.4\n2.3\nvirginica\n\n\n149\n5.9\n3.0\n5.1\n1.8\nvirginica\n\n\n\n\n150 rows × 5 columns\n\n\n\n\n\ndata = iris_df.melt(\n    value_vars=[\"sepal_length\", \"sepal_width\", \"petal_length\", \"petal_width\"]\n)\ndata\n\n\n\n\n\n\n\n\n\nvariable\nvalue\n\n\n\n\n0\nsepal_length\n5.1\n\n\n1\nsepal_length\n4.9\n\n\n2\nsepal_length\n4.7\n\n\n3\nsepal_length\n4.6\n\n\n4\nsepal_length\n5.0\n\n\n...\n...\n...\n\n\n595\npetal_width\n2.3\n\n\n596\npetal_width\n1.9\n\n\n597\npetal_width\n2.0\n\n\n598\npetal_width\n2.3\n\n\n599\npetal_width\n1.8\n\n\n\n\n600 rows × 2 columns\n\n\n\n\n\ng = sns.catplot(x=\"variable\", y=\"value\", kind=\"box\", hue=\"variable\", data=data)\ng.figure.suptitle(\"Distribución de Medidas de Flores\")\ng._legend.remove()\ng.set(xlabel=None)\ng.set(ylabel=None)\n\n\n\n\n\n\n\n\n\nplt.scatter(iris_df.sepal_length, iris_df.petal_length)\nplt.title(\"Relación entre Largo del Sépalo y del Pétalo\")\nplt.xlabel(\"Largo del Sépalo\")\nplt.ylabel(\"Largo del Pétalo\")\n\nText(0, 0.5, 'Largo del Pétalo')\n\n\n\n\n\n\n\n\n\n\nanscombe = sns.load_dataset(\"anscombe\")\n\nfig = plt.figure(figsize=(10, 9))\nax = fig.subplot_mosaic(\n    \"\"\"AB\n                        CD\"\"\"\n)\nsns.regplot(data=anscombe.query(\"dataset == 'I'\"), x=\"x\", y=\"y\", ax=ax[\"A\"], ci=None)\nsns.regplot(data=anscombe.query(\"dataset == 'II'\"), x=\"x\", y=\"y\", ax=ax[\"B\"], ci=None)\nsns.regplot(data=anscombe.query(\"dataset == 'III'\"), x=\"x\", y=\"y\", ax=ax[\"C\"], ci=None)\nsns.regplot(data=anscombe.query(\"dataset == 'IV'\"), x=\"x\", y=\"y\", ax=ax[\"D\"], ci=None)\nplt.suptitle(\"Cuarteto de Anscombe\")\n\nText(0.5, 0.98, 'Cuarteto de Anscombe')\n\n\n\n\n\n\n\n\n\n\nimport seaborn as sns\n\niris_df = sns.load_dataset(\"iris\")\niris_df\n\n\n\n\n\n\n\n\n\nsepal_length\nsepal_width\npetal_length\npetal_width\nspecies\n\n\n\n\n0\n5.1\n3.5\n1.4\n0.2\nsetosa\n\n\n1\n4.9\n3.0\n1.4\n0.2\nsetosa\n\n\n2\n4.7\n3.2\n1.3\n0.2\nsetosa\n\n\n3\n4.6\n3.1\n1.5\n0.2\nsetosa\n\n\n4\n5.0\n3.6\n1.4\n0.2\nsetosa\n\n\n...\n...\n...\n...\n...\n...\n\n\n145\n6.7\n3.0\n5.2\n2.3\nvirginica\n\n\n146\n6.3\n2.5\n5.0\n1.9\nvirginica\n\n\n147\n6.5\n3.0\n5.2\n2.0\nvirginica\n\n\n148\n6.2\n3.4\n5.4\n2.3\nvirginica\n\n\n149\n5.9\n3.0\n5.1\n1.8\nvirginica\n\n\n\n\n150 rows × 5 columns\n\n\n\n\n\nfrom sklearn.decomposition import PCA\nimport matplotlib.pyplot as plt\n\npca = PCA(n_components=2)\ndata = pca.fit_transform(iris_df.drop(columns=\"species\"))\nx, y = data[:,0], data[:,1]\n\nplt.scatter(x, y);\n\n\n\n\n\n\n\n\n\nc = iris_df.species.astype(\"category\").cat.codes\nplt.scatter(x,y, c = c)\nplt.title(\"3 Clusters\");\n\n\n\n\n\n\n\n\n\nc_prima = (c == 0).astype(\"int64\")\nplt.scatter(x,y, c= c_prima)\nplt.title(\"2 Clusters\")\n\nText(0.5, 1.0, '2 Clusters')\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "tics411/notebooks/01-Preprocesamiento.html",
-    "href": "tics411/notebooks/01-Preprocesamiento.html",
+    "objectID": "tics411/notebooks/distancia.html",
+    "href": "tics411/notebooks/distancia.html",
     "title": "Clases UAI",
     "section": "",
-    "text": "# %%capture\n#!pip install feature_engine\nimport pandas as pd\nimport numpy as np\nimport seaborn as sns\nfrom sklearn import set_config\n\nset_config(transform_output=\"pandas\")\n\ndf = sns.load_dataset(\"titanic\")\ndf"
-  },
-  {
-    "objectID": "tics411/notebooks/01-Preprocesamiento.html#valores-faltantes",
-    "href": "tics411/notebooks/01-Preprocesamiento.html#valores-faltantes",
-    "title": "Clases UAI",
-    "section": "Valores Faltantes",
-    "text": "Valores Faltantes\n\ndf.isnull().sum()\n\n\n### Pandas\n# Veamos cuánto vale el promedio de Edad de los pasajeros del Titanic.\nmedia = df[\"age\"].mean()\nmediana = df[\"age\"].median()\nprint(f\"Promedio de Edad: {media}\")\nprint(f'Promedio de Edad con Imputación con Ceros: {df[\"age\"].fillna(0).mean()}')\nprint(f'Promedio de Edad con Imputación por Media: {df[\"age\"].fillna(media).mean()}')\nprint(\n    f'Promedio de Edad con Imputación por Mediana: {df[\"age\"].fillna(mediana).mean()}'\n)\n\n\nfrom sklearn.impute import SimpleImputer\n\nsc = SimpleImputer(strategy=\"mean\")\ndata_imputed = sc.fit_transform(df[[\"age\"]])  # Ojo con el doble []\ndata_imputed.isnull().sum()\n\n\nmode = df[\"embark_town\"].mode()[0]  # Hablar del tipo de datos que es la Moda.\ndf[\"embark_town\"].fillna(mode).isnull().sum()"
-  },
-  {
-    "objectID": "tics411/notebooks/01-Preprocesamiento.html#outliers",
-    "href": "tics411/notebooks/01-Preprocesamiento.html#outliers",
-    "title": "Clases UAI",
-    "section": "Outliers",
-    "text": "Outliers\n\nprint(f\"Promedio de Tarifas: {df.fare.mean()}\")\ndf[\"fare\"].agg([\"min\", \"max\"])\n\n\nlower: Define la cota inferior.\nupper: Define la cota superior.\n\n\nclipped_data = df[[\"fare\"]].clip(lower=10, upper=50)\nclipped_data.agg([\"min\", \"max\"])\n\n\ndf[[\"fare\"]]\n\n\nclipped_data\n\n\nfrom feature_engine.outliers import ArbitraryOutlierCapper, Winsorizer\n\ncapper = ArbitraryOutlierCapper(\n    max_capping_dict=dict(fare=50), min_capping_dict=dict(fare=10)\n)\ncapper.fit_transform(df[[\"fare\"]])\n\n\ncapping_method: Define la Estragegia a utilizar para el Winsorizer. Ver Docs.\n\n\nwin = Winsorizer(capping_method=\"gaussian\")\nwin.fit_transform(df[[\"fare\"]])"
-  },
-  {
-    "objectID": "tics411/notebooks/01-Preprocesamiento.html#variables-categóricas",
-    "href": "tics411/notebooks/01-Preprocesamiento.html#variables-categóricas",
-    "title": "Clases UAI",
-    "section": "Variables Categóricas",
-    "text": "Variables Categóricas\n\ndrop_first: Si es True se elimina la primera categoría.\n\n\npd.get_dummies(df[\"embark_town\"], drop_first=False)\n\n\npd.get_dummies(\n    df[\"embark_town\"], drop_first=True\n)  # No considera los Nulos como otra categoría...\n\n\nsort: Usar True ya que coloca las categorías en orden. Además de esta manera se comporta igual que OrdinalEncoder de Scikit-Learn.\n\n\npd.DataFrame(pd.factorize(df[\"embark_town\"], sort=True)[0], columns=[\"new_column\"])\n\n\nsparse_output: Se debe fijar como False para poder ver el output como Pandas\ndrop: Se debe colocar \"first\" o el nombre de una sóla categoría a eliminar.\n\n\nfrom sklearn.preprocessing import OneHotEncoder, OrdinalEncoder\n\nohe = OneHotEncoder(drop=\"first\", sparse_output=False)\nohe.fit_transform(df[[\"embark_town\"]])\n\n\nohe = OneHotEncoder(\n    drop=[\"Queenstown\"], sparse_output=False\n)  # También se puede colocar np.nan.\nohe.fit_transform(df[[\"embark_town\"]])\n\n\noe = OrdinalEncoder()\noe.fit_transform(df[[\"embark_town\"]])"
-  },
-  {
-    "objectID": "tics411/notebooks/01-Preprocesamiento.html#escalamiento",
-    "href": "tics411/notebooks/01-Preprocesamiento.html#escalamiento",
-    "title": "Clases UAI",
-    "section": "Escalamiento",
-    "text": "Escalamiento\n\nfrom sklearn.preprocessing import StandardScaler, MinMaxScaler\n\nsc = StandardScaler()\ndata = sc.fit_transform(df[[\"fare\"]])\ndata.agg([\"mean\", \"std\"])\n\n\nmms = MinMaxScaler()\nmms.fit_transform(df[[\"fare\"]]).agg([\"min\", \"max\"])"
-  },
-  {
-    "objectID": "tics411/clase-0.html#quién-soy",
-    "href": "tics411/clase-0.html#quién-soy",
-    "title": "TICS-411 Minería de Datos",
-    "section": "¿Quién soy?",
-    "text": "¿Quién soy?\n\n\n\n\n\n\n\nAlfonso Tobar-Arancibia, estudié Ingeniería Civil pero llevo 9 años trabajando como:\n\nData Analyst.\nData Scientist.\nML Engineer.\nData Engineer.\n\nTerminando mi Msc. y empezando mi PhD en la UAI.\nMe gusta mucho programar.\nHe ganado 2 competencias de Machine Learning.\nPubliqué mi primer paper el año pasado sobre Hate Speech en Español.\nJuego Tenis de Mesa, hago Agility con mi perrita Kira y escribo en mi Blog."
-  },
-  {
-    "objectID": "tics411/clase-0.html#objetivos-del-curso",
-    "href": "tics411/clase-0.html#objetivos-del-curso",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Objetivos del Curso",
-    "text": "Objetivos del Curso\n\n\n\n\n\n\nIdentificar Elementos Claves del Machine Learning (Terminología, Nomenclatura, Intuición).\nEntender como interactúan los algoritmos más importantes.\nAprender a seleccionar el mejor Algoritmo para el Problema.\nEjecutar y aplicar algoritmos clásicos de Machine Learning.\nEvaluar el desempeño esperado del Modelo."
-  },
-  {
-    "objectID": "tics411/clase-0.html#tópicos",
-    "href": "tics411/clase-0.html#tópicos",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Tópicos",
-    "text": "Tópicos\n\n\n\n\n\n\n\nIntroducción a la Minería de Datos\nAnálisis Exploratorio de Datos (EDA)\nModelos No Supervisados/Descriptivos\nModelos Supervisados/Predictivos\n\n\n\n\n\n\nModelos no Supervisados\n\nK-Means\nHierarchical Clustering\nDBScan\nApriori\n\n\nModelos Supervisados\n\nKNN\nÁrboles de Decisión\nNaive Bayes\nRegresión Logística"
-  },
-  {
-    "objectID": "tics411/clase-0.html#sobre-las-clases",
-    "href": "tics411/clase-0.html#sobre-las-clases",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Sobre las clases",
-    "text": "Sobre las clases\n\n\nClases presenciales, con participación activa de los estudiantes.\nEs un curso coordinado.\nCanal oficial será Webcursos.\nMucha terminología y material de estudio será en Inglés.\nHorario: Jueves.\n\n15:30 a 16:40 (Cátedra)\n17:00 a 18:10 (Práctico)\nIdealmente!!\n\nAsistencia es voluntaria, pero altamente recomendada."
-  },
-  {
-    "objectID": "tics411/clase-0.html#materiales-de-clases",
-    "href": "tics411/clase-0.html#materiales-de-clases",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Materiales de Clases",
-    "text": "Materiales de Clases\n\nDiapositivas\nPrácticos\n\n\n\n\n\n\n\n\nSlides interactivas\nTodo el código se puede copiar directamente.\nSe puede buscar contenido en las diapositivas mediante un buscador.\nSe dejarán copias en PDF en Webcursos.\n\n\n\n\n\n\n\n\n\n\nSe espera que los estudiantes dominen las siguientes tecnologías:\n\nPython\nGoogle Colab\nPandas\nScikit-Learn (Se enseñará a lo largo del curso)."
-  },
-  {
-    "objectID": "tics411/clase-0.html#material-complementario",
-    "href": "tics411/clase-0.html#material-complementario",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Material Complementario",
-    "text": "Material Complementario\n\n\n\n\n\n\nCurso de Scikit-Learn \n\nTutorial Colab\nAgregar Datos Externos a Colab"
-  },
-  {
-    "objectID": "tics411/clase-0.html#evaluación",
-    "href": "tics411/clase-0.html#evaluación",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Evaluación",
-    "text": "Evaluación\n\n\n\n\n\n\n\nDos Evaluaciones Escritas (P1, P2) coordinadas y cuatro tareas prácticas (T1, T2, T3, T4) \\[NP = 0.35 \\cdot P1 + 0.35 \\cdot P2 + 0.3 \\cdot \\bar{T}\\] \\[ \\bar{T} = (T1 + T2 + T3 + T4)/4 \\]\n\n\n\n\n\n\n\n\n\n\nSi NP &gt; 5\n\n\n\\[NF = NP\\]\n\n\n\n\n\n\n\n\n\nEn caso contrario:\n\n\n\\[NF = 0.7 \\cdot NP + 0.3 \\cdot E\\]"
-  },
-  {
-    "objectID": "tics411/clase-0.html#ayudantías",
-    "href": "tics411/clase-0.html#ayudantías",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Ayudantías",
-    "text": "Ayudantías\nAyudante: TBD\nemail: TBD\n\n\n\n\n\n\n\nNo habrán ayudantías todas las semanas.\nEstarán enfocadas principalmente en aplicaciones y código."
-  },
-  {
-    "objectID": "tics411/clase-0.html#revolución-de-los-datos",
-    "href": "tics411/clase-0.html#revolución-de-los-datos",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Revolución de los Datos",
-    "text": "Revolución de los Datos\n\n\n\n\n\n\n\nHablar de los distintos tipos de Datos.\nTodo es datos, y está lleno de ellos en Internet y el mundo."
-  },
-  {
-    "objectID": "tics411/clase-0.html#nace-el-data-science-ciencia-de-datos",
-    "href": "tics411/clase-0.html#nace-el-data-science-ciencia-de-datos",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Nace el Data Science (Ciencia de Datos)",
-    "text": "Nace el Data Science (Ciencia de Datos)\n\n\n\n\n\n\n\nExplicar las distintas etapas. Qué son cada uno de ellos.\nExplicar que no estoy de acuerdo con todas las definiciones."
-  },
-  {
-    "objectID": "tics411/clase-0.html#cómo-aprovechar-la-información-que-tenemos",
-    "href": "tics411/clase-0.html#cómo-aprovechar-la-información-que-tenemos",
-    "title": "TICS-411 Minería de Datos",
-    "section": "¿Cómo aprovechar la información que tenemos?",
-    "text": "¿Cómo aprovechar la información que tenemos?\n\n\nData Mining (Minería de Datos)\n\n\n“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data.” (Fayyad, Piatetsky-Shapiro & Smith 1996)\n\n\n\n\n\n\nMachine Learning (Aprendizaje Automático)\n\n\n“A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.” (Mitchell, 2006)\n\n\n\n\n\n\nExplicar que estos son dos tipos de Approaches con el que hoy en día se enfrentan los datos.\nEl primero más enfocado en un análisis manual.\nEl segundo en un enfoque más automático."
-  },
-  {
-    "objectID": "tics411/clase-0.html#tipos-de-datos",
-    "href": "tics411/clase-0.html#tipos-de-datos",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos",
-    "text": "Tipos de Datos\n\n\n\n\n\nDatos Estructurados\n\n\n\n\n\nDatos No Estructurados"
-  },
-  {
-    "objectID": "tics411/clase-0.html#tipos-de-datos-datos-tabulares",
-    "href": "tics411/clase-0.html#tipos-de-datos-datos-tabulares",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Datos Tabulares",
-    "text": "Tipos de Datos: Datos Tabulares\n\n\n\n\n\n\n\n\n\n\n\n\nFilas: Observaciones, instancias. (Normalmente independientes).\nColumnas: Variables, Atributos, Features.\n\n\n\n\n\n\n\n\n\n\n\nProbablemente el tipo de datos más amigable.\nRequiere conocimiento de negocio (Domain Knowledge)\n\n\n\n\n\n\n\n\n\n\n\nEs un % bajísimo del total de datos existentes en el Mundo.\nDistintos tipos, por lo que normalmente requiere de algún tipo de preprocesamiento."
-  },
-  {
-    "objectID": "tics411/clase-0.html#tipos-de-datos-series-de-tiempo",
-    "href": "tics411/clase-0.html#tipos-de-datos-series-de-tiempo",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Series de Tiempo",
-    "text": "Tipos de Datos: Series de Tiempo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFilas: Instancias temporales (Normalmente interdependientes).\nColumnas: Variables, Atributos, Features (Univariada o Multivariada).\n\n\n\n\n\n\n\n\n\n\n\nEs un % bajísimo del total de datos existentes en el Mundo.\nPropiedad temporal requiere preprocesamiento y modelos especiales."
-  },
-  {
-    "objectID": "tics411/clase-0.html#tipos-de-datos-imágenes",
-    "href": "tics411/clase-0.html#tipos-de-datos-imágenes",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Imágenes",
-    "text": "Tipos de Datos: Imágenes\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste es el tipo de Datos que disparó la Inteligencia Artificial.\n¿Cuántos computadores para identificar un Gato? 16,000\n\n\n\n\n\n\n\n\n\n\n\n\n\nExplicar el concepto de Tensor, extensión de las matrices. Diferencia entre Grayscale y RGB."
-  },
-  {
-    "objectID": "tics411/clase-0.html#tipos-de-datos-texto-libre",
-    "href": "tics411/clase-0.html#tipos-de-datos-texto-libre",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Texto Libre",
-    "text": "Tipos de Datos: Texto Libre\n\n\n\n\n\n\n\n\n\n\n\n\nDatos Masivos.\nDificiles de lidiar ya que deben ser llevarse a una representación numérica.\nAlto nivel de Sesgo y Subjetividad.\n\n\n\n\n\n\n\n\n\n\n\nGracias a este tipo de datos se han producido los avances más increíbles del último tiempo: Transformers"
-  },
-  {
-    "objectID": "tics411/clase-0.html#tipos-de-datos-videos",
-    "href": "tics411/clase-0.html#tipos-de-datos-videos",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Datos: Videos",
-    "text": "Tipos de Datos: Videos\n\n\n\n\n\n\n\n\nLos videos no son más que arreglos de imágenes.\nSon un tipo de dato muy pesado y difícil de lidiar.\nRequiere alto poder de Procesamiento."
-  },
-  {
-    "objectID": "tics411/clase-0.html#tipos-de-aprendizaje",
-    "href": "tics411/clase-0.html#tipos-de-aprendizaje",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Tipos de Aprendizaje",
-    "text": "Tipos de Aprendizaje"
-  },
-  {
-    "objectID": "tics411/clase-0.html#reinforcement-learning",
-    "href": "tics411/clase-0.html#reinforcement-learning",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Reinforcement Learning",
-    "text": "Reinforcement Learning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEn este tipo de aprendizaje se enseña por refuerzo. Es decir se da una recompensa si el sistema aprende lo que queremos.\n\n\n\n\n\n\n\n\n\n\n\nSi el premio es mayor, se pueden obtener aprendizajes mayores.\n\n\n\n\n\n\n\n\n\n\n\nUn ejemplo de esto es Alpha Tensor en el cual un modelo aprendió una nueva manera de multiplicar matrices que es más eficiente.\n\n\n\n\n\n\n\n\n\n\n\nOtro ejemplo es AlphaFold donde el modelo aprendió/descubrió cómo se doblan las proteínas cuando se vuelven aminoácidos."
-  },
-  {
-    "objectID": "tics411/clase-0.html#regresión-y-clasificación",
-    "href": "tics411/clase-0.html#regresión-y-clasificación",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Regresión y Clasificación",
-    "text": "Regresión y Clasificación\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegresión: Se busca estimar un valor continuo.\n\n(Estimar el valor de una casa).\n\nClasificación: Se busca encontrar una categoría o un valor discreto.\n\n(Clasificar una imagen como Perro o Gato).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPara entrenar este tipo de modelos se necesitan etiquetas, es decir, la respuesta esperada del modelo.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAmbos ejemplos se pueden realizar utilizando Largo (Eje Y) y Peso (Eje X)."
-  },
-  {
-    "objectID": "tics411/clase-0.html#clustering",
-    "href": "tics411/clase-0.html#clustering",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Clustering",
-    "text": "Clustering\n\n\n\n\n\n\n\n\n\n\n\n\n\nClusters: Una categoría en la que sus componentes son similares. Los clusters normalmente no tienen un nombre propio, sino que uno les asigna uno.\nTambién se les llama segmentos. No usar la palabra clase.\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo requiere de etiquetas, por lo tanto, no es posible evaluar su desempeño de manera 100% acertada."
-  },
-  {
-    "objectID": "tics411/clase-0.html#reducción-de-dimensionalidad",
-    "href": "tics411/clase-0.html#reducción-de-dimensionalidad",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Reducción de Dimensionalidad",
-    "text": "Reducción de Dimensionalidad\n\n\n\n\n\n\n\n\n\n\n\n\nReducción de la Dimensionalidad: Eliminar complejidad sin perder información clave para poder entender su comportamiento."
-  },
-  {
-    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml",
-    "href": "tics411/clase-0.html#nuestro-sistema-de-ml",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Nuestro Sistema de ML",
-    "text": "Nuestro Sistema de ML\nCreemos un Sistema de ML que sea capaz de ver una imágen y pronunciar correctamente el uso de la letra C.\n\n\n\n\n\n\nVamos a Entrenar un Modelo."
-  },
-  {
-    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-entrenamiento",
-    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-entrenamiento",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Nuestro Sistema de ML: Entrenamiento",
-    "text": "Nuestro Sistema de ML: Entrenamiento\n\n\n\n\n\n\nKasa\n\n\n\n\n\n\n\nKokodrilo\n\n\n\n\n\n\n\nKubo\n\n\n\n\n\n\n\n\n\n\n\n\n¿Qué patrones está aprendiendo el modelo?\n\n\n\n\n\nEntrenamiento\n\n\nEs el proceso en el cuál se permite al modelo aprender. En este proceso se le entregan ejemplos (Train Set) para que el modelo de manera autónoma pueda aprender patrones que le permitan resolver la tarea dada."
-  },
-  {
-    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-inferencia",
-    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-inferencia",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Nuestro Sistema de ML: Inferencia",
-    "text": "Nuestro Sistema de ML: Inferencia\n\nInferencia/Predicción\n\n\nSe refiere al proceso en el que el modelo tiene que demostrar cuál sería su decisión de acuerdo a los patrones aprendidos en el proceso de entrenamiento. Los ejemplos en los que se prueba se le denomina Test Set.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKollar\n\n\nKonejo\n\n\nKukillo\n\n\nBikikleta\n\n\n\n\n\nGeneralización\n\n\nSe le llama generalización a la capacidad del modelo de aplicar lo aprendido de manera correcta en ejemplos no vistos."
-  },
-  {
-    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-nuevas-instancias-de-entrenamiento",
-    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-nuevas-instancias-de-entrenamiento",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Nuestro Sistema de ML: Nuevas instancias de Entrenamiento",
-    "text": "Nuestro Sistema de ML: Nuevas instancias de Entrenamiento\n\n\n\n\n\n\nKuchillo\n\n\n\n\n\n\n\nChokolate\n\n\n\n\n\n\n\nSinsel\n\n\n\n\n\n\n\n\n\n\n\n\nNo es bueno entrenar con las mismas instancias de entrenamiento. ¿Por qué?"
-  },
-  {
-    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-reevaluemos-nuestro-modelo",
-    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-reevaluemos-nuestro-modelo",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Nuestro Sistema de ML: Reevaluemos nuestro Modelo",
-    "text": "Nuestro Sistema de ML: Reevaluemos nuestro Modelo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKollar\n\n\nKonejo\n\n\nKuchillo\n\n\nBisikleta\n\n\n\n\n\nEvaluación\n\n\nUtilizar una métrica que permita ponerle nota al modelo.\n\n\n\n\n\n\n1er Modelo: 2 correctas de 4, es decir 50%.\n\n\n\n\n2do Modelo: 4 correctas de 4, es decir 100%."
-  },
-  {
-    "objectID": "tics411/clase-0.html#problemas-del-aprendizaje",
-    "href": "tics411/clase-0.html#problemas-del-aprendizaje",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Problemas del Aprendizaje",
-    "text": "Problemas del Aprendizaje\n\nSupongamos que queremos utilizar nuestro modelo para pronunciar palabras en otro idioma (otro Test Set).\n¿Qué problemas podemos encontrar?\n\n\n\nStomach \\(\\rightarrow\\) Stomak\nArcher \\(\\rightarrow\\) Archer\nArcheology \\(\\rightarrow\\) Archeology\n\nArkeology.\n\nChicago \\(\\rightarrow\\) Chicago\n\nShicago.\n\nSchlaf \\(\\rightarrow\\) Sklaf\n\nShlaf.\n\nIch mag Schweinefleisch \\(\\rightarrow\\) Ich mag Schweinefleisk.\n\nIj mag Shvaineflaish."
-  },
-  {
-    "objectID": "tics411/clase-0.html#problemas-del-aprendizaje-definiciones",
-    "href": "tics411/clase-0.html#problemas-del-aprendizaje-definiciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Problemas del Aprendizaje: Definiciones",
-    "text": "Problemas del Aprendizaje: Definiciones\n\nOverfitting (Sobreajuste)\n\n\nSe refiere a cuando un modelo no es capaz de generalizar de manera correcta, porque se ajusta demasiado bien (llegando a memorizar) a los datos de entrenamiento. ¿Cómo se puede mitigar este problema?\n\n\n\n\n\n\n\n\n\n\nSe le tiende a llamar sobreentrenamiento, pero no es del todo correcto para el caso de modelos de Machine Learning. Lo más correcto es que el sobreentrenamiento provoca overfitting.\n\n\n\n\n\nMostrar ejemplos en Pizarra de manera gráfica. Ejemplos típicos de Excel.\n\n\n\nUnderfitting (Subajuste)\n\n\nSe refiere a cuando un modelo no es capaz de generalizar de manera correcta, pero a diferencia del overfitting no se ha ajustado correctamente a los datos. ¿Cómo se vería el underfitting en nuestro ejemplo?"
-  },
-  {
-    "objectID": "tics411/clase-0.html#etapas-del-modelamiento-crisp-dm",
-    "href": "tics411/clase-0.html#etapas-del-modelamiento-crisp-dm",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Etapas del Modelamiento: Crisp-DM",
-    "text": "Etapas del Modelamiento: Crisp-DM"
-  },
-  {
-    "objectID": "tics411/clase-0.html#etapas-del-modelamiento-kdd",
-    "href": "tics411/clase-0.html#etapas-del-modelamiento-kdd",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Etapas del Modelamiento: KDD",
-    "text": "Etapas del Modelamiento: KDD"
-  },
-  {
-    "objectID": "tics411/clase-0.html#etapas-del-modelamiento-semma",
-    "href": "tics411/clase-0.html#etapas-del-modelamiento-semma",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Etapas del Modelamiento: Semma",
-    "text": "Etapas del Modelamiento: Semma"
-  },
-  {
-    "objectID": "tics411/clase-0.html#etapas-del-modelamiento-metodología-propia",
-    "href": "tics411/clase-0.html#etapas-del-modelamiento-metodología-propia",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Etapas del Modelamiento: Metodología Propia",
-    "text": "Etapas del Modelamiento: Metodología Propia"
+    "text": "import pandas as pd\nimport numpy as np\n\ndf = pd.DataFrame(dict(\n    x = [0,2,3,5],\n    y = [2,0,1,1]\n))\n\ndf\n\n\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n0\n0\n2\n\n\n1\n2\n0\n\n\n2\n3\n1\n\n\n3\n5\n1\n\n\n\n\n\n\n\n\n\ndef distancia_l1(p1, p2):\n   x1 = p1[\"x\"] \n   x2 = p2[\"x\"] \n   y1 = p1[\"y\"]\n   y2 = p2[\"y\"]\n\n   return np.abs(x1-x2) + np.abs(y1-y2)\n\ndef distancia_l2(p1,p2):\n   x1 = p1[\"x\"] \n   x2 = p2[\"x\"] \n   y1 = p1[\"y\"]\n   y2 = p2[\"y\"]\n   return np.sqrt((x1 -x2)**2 + (y1 - y2)**2)\n\ndef distancia_linf(p1, p2):\n   x1 = p1[\"x\"] \n   x2 = p2[\"x\"] \n   y1 = p1[\"y\"]\n   y2 = p2[\"y\"]\n   d_x = np.abs(x1-x2)\n   d_y = np.abs(y1-y2)\n   return np.max([d_x, d_y])\n\ndef calculate_matrix(distance, n_puntos):\n    m = np.zeros((n_puntos, n_puntos))\n    for i in range(n_puntos):\n        for j in range(n_puntos):\n            m[i,j] = distance(df.iloc[i],df.iloc[j])\n    \n    return m\n\nm_m = calculate_matrix(distancia_l1, 4)\nm_e = calculate_matrix(distancia_l2, 4)\nm_c = calculate_matrix(distancia_linf, 4)\n\n\nm_m\n\narray([[0., 4., 4., 6.],\n       [4., 0., 2., 4.],\n       [4., 2., 0., 2.],\n       [6., 4., 2., 0.]])\n\n\n\nm_e\n\narray([[0.        , 2.82842712, 3.16227766, 5.09901951],\n       [2.82842712, 0.        , 1.41421356, 3.16227766],\n       [3.16227766, 1.41421356, 0.        , 2.        ],\n       [5.09901951, 3.16227766, 2.        , 0.        ]])\n\n\n\nm_c\n\narray([[0., 2., 3., 5.],\n       [2., 0., 1., 3.],\n       [3., 1., 0., 2.],\n       [5., 3., 2., 0.]])\n\n\n\na = pd.Series([1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0])\nb = pd.Series([1.0,3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5,7.0])\n\na.var(ddof=0) # Varianza Poblacional\n\n3.5\n\n\n\na.var(ddof=1) # Varianza Muestral\n\n3.7916666666666665\n\n\n\nb.var(ddof=1)\n\n1.5916666666666668\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "tics411/clase-2.html#eda",
@@ -764,6 +512,272 @@
     "title": "TICS-411 Minería de Datos",
     "section": "¿Otras Visualizaciones?",
     "text": "¿Otras Visualizaciones?"
+  },
+  {
+    "objectID": "tics411/clase-0.html#quién-soy",
+    "href": "tics411/clase-0.html#quién-soy",
+    "title": "TICS-411 Minería de Datos",
+    "section": "¿Quién soy?",
+    "text": "¿Quién soy?\n\n\n\n\n\n\n\nAlfonso Tobar-Arancibia, estudié Ingeniería Civil pero llevo 9 años trabajando como:\n\nData Analyst.\nData Scientist.\nML Engineer.\nData Engineer.\n\nTerminando mi Msc. y empezando mi PhD en la UAI.\nMe gusta mucho programar (en vivo).\nContribuyo a HuggingFace y Feature Engine.\nHe ganado 2 competencias de Machine Learning.\nPubliqué mi primer paper el año pasado sobre Hate Speech en Español.\nJuego Tenis de Mesa, hago Agility con mi perrita Kira y escribo en mi Blog."
+  },
+  {
+    "objectID": "tics411/clase-0.html#objetivos-del-curso",
+    "href": "tics411/clase-0.html#objetivos-del-curso",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Objetivos del Curso",
+    "text": "Objetivos del Curso\n\n\n\n\n\n\nIdentificar Elementos Claves del Machine Learning (Terminología, Nomenclatura, Intuición).\nEntender como interactúan los algoritmos más importantes.\nAprender a seleccionar el mejor Algoritmo para el Problema.\nEjecutar y aplicar algoritmos clásicos de Machine Learning.\nEvaluar el desempeño esperado del Modelo."
+  },
+  {
+    "objectID": "tics411/clase-0.html#tópicos",
+    "href": "tics411/clase-0.html#tópicos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tópicos",
+    "text": "Tópicos\n\n\n\n\n\n\n\nIntroducción a la Minería de Datos\nAnálisis Exploratorio de Datos (EDA)\nModelos No Supervisados/Descriptivos\nModelos Supervisados/Predictivos\n\n\n\n\n\n\nModelos no Supervisados\n\nK-Means\nHierarchical Clustering\nDBScan\nApriori\n\n\nModelos Supervisados\n\nKNN\nÁrboles de Decisión\nNaive Bayes\nRegresión Logística"
+  },
+  {
+    "objectID": "tics411/clase-0.html#sobre-las-clases",
+    "href": "tics411/clase-0.html#sobre-las-clases",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Sobre las clases",
+    "text": "Sobre las clases\n\n\nClases presenciales, con participación activa de los estudiantes.\nEs un curso coordinado.\nCanal oficial será Webcursos.\nMucha terminología y material de estudio será en Inglés.\nHorario: Jueves.\n\n15:30 a 16:40 (Cátedra)\n17:00 a 18:10 (Práctico)\nIdealmente!!\n\nAsistencia es voluntaria, pero altamente recomendada."
+  },
+  {
+    "objectID": "tics411/clase-0.html#materiales-de-clases",
+    "href": "tics411/clase-0.html#materiales-de-clases",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Materiales de Clases",
+    "text": "Materiales de Clases\n\nDiapositivas\nPrácticos\n\n\n\n\n\n\n\n\nSlides interactivas (Código se puede copiar e imágenes se pueden ver en grande).\nSe puede buscar contenido en las diapositivas mediante un buscador.\nSe dejarán copias en PDF en Webcursos (levemente distintas).\n\n\n\n\n\n\n\n\n\n\nSe espera que los estudiantes dominen las siguientes tecnologías:\n\nPython\nGoogle Colab\nPandas/Numpy\nScikit-Learn (Se enseñará a lo largo del curso)."
+  },
+  {
+    "objectID": "tics411/clase-0.html#material-complementario",
+    "href": "tics411/clase-0.html#material-complementario",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Material Complementario",
+    "text": "Material Complementario\n\n\n\n\n\n\nCurso de Scikit-Learn \n\nTutorial Colab\nAgregar Datos Externos a Colab"
+  },
+  {
+    "objectID": "tics411/clase-0.html#evaluación",
+    "href": "tics411/clase-0.html#evaluación",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Evaluación",
+    "text": "Evaluación\n\n\n\n\n\n\n\nDos Evaluaciones Escritas (P1, P2) coordinadas y cuatro tareas prácticas en parejas (T1, T2, T3, T4) \\[NP = 0.35 \\cdot P1 + 0.35 \\cdot P2 + 0.3 \\cdot \\bar{T}\\] \\[ \\bar{T} = (T1 + T2 + T3 + T4)/4 \\]\n\n\n\n\n\n\n\n\n\n\nSi NP &gt; 5\n\n\n\\[NF = NP\\]\n\n\n\n\n\n\n\n\n\nEn caso contrario:\n\n\n\\[NF = 0.7 \\cdot NP + 0.3 \\cdot E\\]"
+  },
+  {
+    "objectID": "tics411/clase-0.html#ayudantías",
+    "href": "tics411/clase-0.html#ayudantías",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Ayudantías",
+    "text": "Ayudantías\nAyudante: TBD\nemail: TBD\n\n\n\n\n\n\n\nLas ayudantías serán en la manera que sean necesarias.\nEstarán enfocadas principalmente en aplicaciones y código."
+  },
+  {
+    "objectID": "tics411/clase-0.html#revolución-de-los-datos",
+    "href": "tics411/clase-0.html#revolución-de-los-datos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Revolución de los Datos",
+    "text": "Revolución de los Datos\n\n\n\n\n\n\n\nHablar de los distintos tipos de Datos.\nTodo es datos, y está lleno de ellos en Internet y el mundo."
+  },
+  {
+    "objectID": "tics411/clase-0.html#nace-el-data-science-ciencia-de-datos",
+    "href": "tics411/clase-0.html#nace-el-data-science-ciencia-de-datos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Nace el Data Science (Ciencia de Datos)",
+    "text": "Nace el Data Science (Ciencia de Datos)\n\n\n\n\n\n\n\nExplicar las distintas etapas. Qué son cada uno de ellos.\nExplicar que no estoy de acuerdo con todas las definiciones."
+  },
+  {
+    "objectID": "tics411/clase-0.html#cómo-aprovechar-la-información-que-tenemos",
+    "href": "tics411/clase-0.html#cómo-aprovechar-la-información-que-tenemos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "¿Cómo aprovechar la información que tenemos?",
+    "text": "¿Cómo aprovechar la información que tenemos?\n\n\nData Mining (Minería de Datos)\n\n\n“The process of identifying valid, novel, potentially useful, and ultimately understandable patterns in data.” (Fayyad, Piatetsky-Shapiro & Smith 1996)\n\n\n\n\n\n\nMachine Learning (Aprendizaje Automático)\n\n\n“A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.” (Mitchell, 2006)\n\n\n\n\n\n\nExplicar que estos son dos tipos de Approaches con el que hoy en día se enfrentan los datos.\nEl primero más enfocado en un análisis manual.\nEl segundo en un enfoque más automático."
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-datos",
+    "href": "tics411/clase-0.html#tipos-de-datos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Datos",
+    "text": "Tipos de Datos\n\n\n\n\n\nDatos Estructurados\n\n\n\n\n\nDatos No Estructurados"
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-datos-datos-tabulares",
+    "href": "tics411/clase-0.html#tipos-de-datos-datos-tabulares",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Datos: Datos Tabulares",
+    "text": "Tipos de Datos: Datos Tabulares\n\n\n\n\n\n\n\n\n\n\n\n\nFilas: Observaciones, instancias, registros. (Normalmente independientes).\nColumnas: Variables, Atributos, Features.\n\n\n\n\n\n\n\n\n\n\n\nProbablemente el tipo de datos más amigable.\nRequiere conocimiento de negocio (Domain Knowledge)\n\n\n\n\n\n\n\n\n\n\n\nEs un % bajísimo del total de datos existentes en el Mundo. También el que más disponible está en las empresas.\nDistintos data types, por lo que normalmente requiere de algún tipo de preprocesamiento."
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-datos-series-de-tiempo",
+    "href": "tics411/clase-0.html#tipos-de-datos-series-de-tiempo",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Datos: Series de Tiempo",
+    "text": "Tipos de Datos: Series de Tiempo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFilas: Instancias temporales (Normalmente interdependientes).\nColumnas: Variables, Atributos, Features (Univariada o Multivariada).\n\n\n\n\n\n\n\n\n\n\n\nEs un % bajísimo del total de datos existentes en el Mundo.\nPropiedad temporal requiere preprocesamiento y modelos especiales."
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-datos-imágenes",
+    "href": "tics411/clase-0.html#tipos-de-datos-imágenes",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Datos: Imágenes",
+    "text": "Tipos de Datos: Imágenes\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste es el tipo de Datos que disparó la Inteligencia Artificial.\n¿Cuántos computadores para identificar un Gato? 16,000\n\n\n\n\n\n\n\n\n\n\n\n\n\nExplicar el concepto de Tensor, extensión de las matrices. Diferencia entre Grayscale y RGB."
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-datos-texto-libre",
+    "href": "tics411/clase-0.html#tipos-de-datos-texto-libre",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Datos: Texto Libre",
+    "text": "Tipos de Datos: Texto Libre\n\n\n\n\n\n\n\n\n\n\n\n\nDatos Masivos.\nDificiles de lidiar ya que deben ser llevarse a una representación numérica.\nAlto nivel de Sesgo y Subjetividad.\n\n\n\n\n\n\n\n\n\n\n\nGracias a este tipo de datos se han producido los avances más increíbles del último tiempo: Transformers"
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-datos-videos",
+    "href": "tics411/clase-0.html#tipos-de-datos-videos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Datos: Videos",
+    "text": "Tipos de Datos: Videos\n\n\n\n\n\n\n\n\nLos videos no son más que arreglos de imágenes.\nSon un tipo de dato muy pesado y difícil de lidiar.\nRequiere alto poder de Procesamiento."
+  },
+  {
+    "objectID": "tics411/clase-0.html#tipos-de-aprendizaje",
+    "href": "tics411/clase-0.html#tipos-de-aprendizaje",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tipos de Aprendizaje",
+    "text": "Tipos de Aprendizaje"
+  },
+  {
+    "objectID": "tics411/clase-0.html#reinforcement-learning",
+    "href": "tics411/clase-0.html#reinforcement-learning",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Reinforcement Learning",
+    "text": "Reinforcement Learning\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEn este tipo de aprendizaje se enseña por refuerzo. Es decir se da una recompensa si el sistema aprende lo que queremos.\n\n\n\n\n\n\n\n\n\n\n\nSi el premio es mayor, se pueden obtener aprendizajes mayores.\n\n\n\n\n\n\n\n\n\n\n\nUn ejemplo de esto es AlphaTensor en el cual un modelo aprendió una nueva manera de multiplicar matrices que es más eficiente.\n\n\n\n\n\n\n\n\n\n\n\nOtro ejemplo es AlphaFold donde el modelo aprendió/descubrió cómo se doblan las proteínas cuando se vuelven aminoácidos."
+  },
+  {
+    "objectID": "tics411/clase-0.html#problemas-supervisados-regresión-y-clasificación",
+    "href": "tics411/clase-0.html#problemas-supervisados-regresión-y-clasificación",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Problemas Supervisados: Regresión y Clasificación",
+    "text": "Problemas Supervisados: Regresión y Clasificación\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegresión: Se busca estimar un valor continuo.\n\n(Estimar el valor de una casa).\n\nClasificación: Se busca encontrar una categoría o un valor discreto.\n\n(Clasificar una imagen como Perro o Gato).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPara entrenar este tipo de modelos se necesitan etiquetas, es decir, la respuesta esperada del modelo.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAmbos ejemplos se pueden realizar utilizando Largo (Eje Y) y Peso (Eje X)."
+  },
+  {
+    "objectID": "tics411/clase-0.html#clustering",
+    "href": "tics411/clase-0.html#clustering",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering",
+    "text": "Clustering\n\n\n\n\n\n\n\n\n\n\n\n\n\nClusters: Una categoría en la que sus componentes son similares. Los clusters normalmente no tienen un nombre propio, sino que uno les asigna uno.\nTambién se les llama segmentos. No usar la palabra clase.\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo requiere de etiquetas, por lo tanto, no es posible evaluar su desempeño de manera 100% acertada."
+  },
+  {
+    "objectID": "tics411/clase-0.html#reducción-de-dimensionalidad",
+    "href": "tics411/clase-0.html#reducción-de-dimensionalidad",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Reducción de Dimensionalidad",
+    "text": "Reducción de Dimensionalidad\n\n\n\n\n\n\n\n\n\n\n\n\nReducción de la Dimensionalidad: Eliminar complejidad sin perder información clave para poder entender su comportamiento."
+  },
+  {
+    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml",
+    "href": "tics411/clase-0.html#nuestro-sistema-de-ml",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Nuestro Sistema de ML",
+    "text": "Nuestro Sistema de ML\nCreemos un Sistema de ML que sea capaz de ver una imágen y pronunciar correctamente el uso de la letra C.\n\n\n\n\n\n\nVamos a Entrenar un Modelo."
+  },
+  {
+    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-entrenamiento",
+    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-entrenamiento",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Nuestro Sistema de ML: Entrenamiento",
+    "text": "Nuestro Sistema de ML: Entrenamiento\n\n\n\n\n\n\nKasa\n\n\n\n\n\n\n\nKokodrilo\n\n\n\n\n\n\n\nKubo\n\n\n\n\n\n\n\n\n\n\n\n\n¿Qué patrones está aprendiendo el modelo?\n\n\n\n\n\nEntrenamiento\n\n\nEs el proceso en el cuál se permite al modelo aprender. En este proceso se le entregan ejemplos (Train Set) para que el modelo de manera autónoma pueda aprender patrones que le permitan resolver la tarea dada."
+  },
+  {
+    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-inferencia",
+    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-inferencia",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Nuestro Sistema de ML: Inferencia",
+    "text": "Nuestro Sistema de ML: Inferencia\n\nInferencia/Predicción\n\n\nSe refiere al proceso en el que el modelo tiene que demostrar cuál sería su decisión de acuerdo a los patrones aprendidos en el proceso de entrenamiento. Los ejemplos en los que se prueba se le denomina Test Set.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKollar\n\n\nKonejo\n\n\nKukillo\n\n\nBikikleta\n\n\n\n\n\nGeneralización\n\n\nSe le llama generalización a la capacidad del modelo de aplicar lo aprendido de manera correcta en ejemplos no vistos."
+  },
+  {
+    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-nuevas-instancias-de-entrenamiento",
+    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-nuevas-instancias-de-entrenamiento",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Nuestro Sistema de ML: Nuevas instancias de Entrenamiento",
+    "text": "Nuestro Sistema de ML: Nuevas instancias de Entrenamiento\n\n\n\n\n\n\nKuchillo\n\n\n\n\n\n\n\nChokolate\n\n\n\n\n\n\n\nSinsel\n\n\n\n\n\n\n\n\n\n\n\n\nNo es bueno entrenar con las mismas instancias de entrenamiento. ¿Por qué?"
+  },
+  {
+    "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-reevaluemos-nuestro-modelo",
+    "href": "tics411/clase-0.html#nuestro-sistema-de-ml-reevaluemos-nuestro-modelo",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Nuestro Sistema de ML: Reevaluemos nuestro Modelo",
+    "text": "Nuestro Sistema de ML: Reevaluemos nuestro Modelo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKollar\n\n\nKonejo\n\n\nKuchillo\n\n\nBisikleta\n\n\n\n\n\nEvaluación\n\n\nUtilizar una métrica que permita ponerle nota al modelo.\n\n\n\n\n\n\n1er Modelo: 2 correctas de 4, es decir 50%.\n\n\n\n\n2do Modelo: 4 correctas de 4, es decir 100%."
+  },
+  {
+    "objectID": "tics411/clase-0.html#problemas-del-aprendizaje",
+    "href": "tics411/clase-0.html#problemas-del-aprendizaje",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Problemas del Aprendizaje",
+    "text": "Problemas del Aprendizaje\n\nSupongamos que queremos utilizar nuestro modelo para pronunciar palabras en otro idioma (otro Test Set).\n¿Qué problemas podemos encontrar?\n\n\n\n\nStomach \\(\\rightarrow\\) Stomak\nArcher \\(\\rightarrow\\) Archer\nChurch \\(\\rightarrow\\) Churk\n\nChurch.\n\nArcheology \\(\\rightarrow\\) Archeology\n\nArkeology.\n\nChicago \\(\\rightarrow\\) Chicago\n\nShicago.\n\nMuscle \\(\\rightarrow\\) Muskle\n\nMus_le.\n\nIch mag Schweinefleisch \\(\\rightarrow\\) Ich mag Schweinefleisk.\n\nIj mag Shvaineflaish.\n\n\n\n\n\n\n\n\n\n\nClaramente tenemos un problema. ¿A qué se debe esto?"
+  },
+  {
+    "objectID": "tics411/clase-0.html#problemas-del-aprendizaje-definiciones",
+    "href": "tics411/clase-0.html#problemas-del-aprendizaje-definiciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Problemas del Aprendizaje: Definiciones",
+    "text": "Problemas del Aprendizaje: Definiciones\n\nOverfitting (Sobreajuste)\n\n\nSe refiere a cuando un modelo no es capaz de generalizar de manera correcta, porque se ajusta demasiado bien (llegando a memorizar) a los datos de entrenamiento. ¿Cómo se puede mitigar este problema?\n\n\n\n\n\n\n\n\n\n\nSe le tiende a llamar sobreentrenamiento, pero no es del todo correcto para el caso de modelos de Machine Learning. Lo más correcto es que el sobreentrenamiento provoca overfitting.\n\n\n\n\n\nMostrar ejemplos en Pizarra de manera gráfica. Ejemplos típicos de Excel.\n\n\n\nUnderfitting (Subajuste)\n\n\nSe refiere a cuando un modelo no es capaz de generalizar de manera correcta, pero a diferencia del overfitting no se ha ajustado correctamente a los datos. ¿Cómo se vería el underfitting en nuestro ejemplo?"
+  },
+  {
+    "objectID": "tics411/clase-0.html#etapas-del-modelamiento-crisp-dm",
+    "href": "tics411/clase-0.html#etapas-del-modelamiento-crisp-dm",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Etapas del Modelamiento: Crisp-DM",
+    "text": "Etapas del Modelamiento: Crisp-DM"
+  },
+  {
+    "objectID": "tics411/clase-0.html#etapas-del-modelamiento-kdd",
+    "href": "tics411/clase-0.html#etapas-del-modelamiento-kdd",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Etapas del Modelamiento: KDD",
+    "text": "Etapas del Modelamiento: KDD"
+  },
+  {
+    "objectID": "tics411/clase-0.html#etapas-del-modelamiento-semma",
+    "href": "tics411/clase-0.html#etapas-del-modelamiento-semma",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Etapas del Modelamiento: Semma",
+    "text": "Etapas del Modelamiento: Semma"
+  },
+  {
+    "objectID": "tics411/clase-0.html#etapas-del-modelamiento-metodología-propia",
+    "href": "tics411/clase-0.html#etapas-del-modelamiento-metodología-propia",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Etapas del Modelamiento: Metodología Propia",
+    "text": "Etapas del Modelamiento: Metodología Propia"
+  },
+  {
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html",
+    "href": "tics411/notebooks/01-Preprocesamiento.html",
+    "title": "Clases UAI",
+    "section": "",
+    "text": "# %%capture\n#!pip install feature_engine\nimport pandas as pd\nimport numpy as np\nimport seaborn as sns\nfrom sklearn import set_config\n\nset_config(transform_output=\"pandas\")\n\ndf = sns.load_dataset(\"titanic\")\ndf"
+  },
+  {
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#valores-faltantes",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#valores-faltantes",
+    "title": "Clases UAI",
+    "section": "Valores Faltantes",
+    "text": "Valores Faltantes\n\ndf.isnull().sum()\n\n\n### Pandas\n# Veamos cuánto vale el promedio de Edad de los pasajeros del Titanic.\nmedia = df[\"age\"].mean()\nmediana = df[\"age\"].median()\nprint(f\"Promedio de Edad: {media}\")\nprint(f'Promedio de Edad con Imputación con Ceros: {df[\"age\"].fillna(0).mean()}')\nprint(f'Promedio de Edad con Imputación por Media: {df[\"age\"].fillna(media).mean()}')\nprint(\n    f'Promedio de Edad con Imputación por Mediana: {df[\"age\"].fillna(mediana).mean()}'\n)\n\n\nfrom sklearn.impute import SimpleImputer\n\nsc = SimpleImputer(strategy=\"mean\")\ndata_imputed = sc.fit_transform(df[[\"age\"]])  # Ojo con el doble []\ndata_imputed.isnull().sum()\n\n\nmode = df[\"embark_town\"].mode()[0]  # Hablar del tipo de datos que es la Moda.\ndf[\"embark_town\"].fillna(mode).isnull().sum()"
+  },
+  {
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#outliers",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#outliers",
+    "title": "Clases UAI",
+    "section": "Outliers",
+    "text": "Outliers\n\nprint(f\"Promedio de Tarifas: {df.fare.mean()}\")\ndf[\"fare\"].agg([\"min\", \"max\"])\n\n\nlower: Define la cota inferior.\nupper: Define la cota superior.\n\n\nclipped_data = df[[\"fare\"]].clip(lower=10, upper=50)\nclipped_data.agg([\"min\", \"max\"])\n\n\ndf[[\"fare\"]]\n\n\nclipped_data\n\n\nfrom feature_engine.outliers import ArbitraryOutlierCapper, Winsorizer\n\ncapper = ArbitraryOutlierCapper(\n    max_capping_dict=dict(fare=50), min_capping_dict=dict(fare=10)\n)\ncapper.fit_transform(df[[\"fare\"]])\n\n\ncapping_method: Define la Estragegia a utilizar para el Winsorizer. Ver Docs.\n\n\nwin = Winsorizer(capping_method=\"gaussian\")\nwin.fit_transform(df[[\"fare\"]])"
+  },
+  {
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#variables-categóricas",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#variables-categóricas",
+    "title": "Clases UAI",
+    "section": "Variables Categóricas",
+    "text": "Variables Categóricas\n\ndrop_first: Si es True se elimina la primera categoría.\n\n\npd.get_dummies(df[\"embark_town\"], drop_first=False)\n\n\npd.get_dummies(\n    df[\"embark_town\"], drop_first=True\n)  # No considera los Nulos como otra categoría...\n\n\nsort: Usar True ya que coloca las categorías en orden. Además de esta manera se comporta igual que OrdinalEncoder de Scikit-Learn.\n\n\npd.DataFrame(pd.factorize(df[\"embark_town\"], sort=True)[0], columns=[\"new_column\"])\n\n\nsparse_output: Se debe fijar como False para poder ver el output como Pandas\ndrop: Se debe colocar \"first\" o el nombre de una sóla categoría a eliminar.\n\n\nfrom sklearn.preprocessing import OneHotEncoder, OrdinalEncoder\n\nohe = OneHotEncoder(drop=\"first\", sparse_output=False)\nohe.fit_transform(df[[\"embark_town\"]])\n\n\nohe = OneHotEncoder(\n    drop=[\"Queenstown\"], sparse_output=False\n)  # También se puede colocar np.nan.\nohe.fit_transform(df[[\"embark_town\"]])\n\n\noe = OrdinalEncoder()\noe.fit_transform(df[[\"embark_town\"]])"
+  },
+  {
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#escalamiento",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#escalamiento",
+    "title": "Clases UAI",
+    "section": "Escalamiento",
+    "text": "Escalamiento\n\nfrom sklearn.preprocessing import StandardScaler, MinMaxScaler\n\nsc = StandardScaler()\ndata = sc.fit_transform(df[[\"fare\"]])\ndata.agg([\"mean\", \"std\"])\n\n\nmms = MinMaxScaler()\nmms.fit_transform(df[[\"fare\"]]).agg([\"min\", \"max\"])"
   },
   {
     "objectID": "tics411/notebooks/kmeans.html",
