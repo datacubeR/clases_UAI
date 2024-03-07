@@ -198,7 +198,7 @@ Dependiendo del nivel de valores faltantes, es necesario evaluar la eliminación
 
 ## Preprocesamiento: Manejo de Outliers 
 
-Winsorizer
+Capping
 : Se refiere al proceso de acotar un atributo eliminando los valores extremos o atípicos (outliers). 
 
 ::: {.columns}
