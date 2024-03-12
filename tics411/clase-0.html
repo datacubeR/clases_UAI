@@ -1317,7 +1317,7 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>No es bueno entrenar con las mismas instancias de entrenamiento. <strong>¿Por qué?</strong></p>
+<p>No es bueno entrenar con las mismas instancias de de <code>Test</code>, es decir, con las cuales se evalúa el modelo. <strong>¿Por qué?</strong></p>
 </div>
 </div>
 </div>
@@ -1929,7 +1929,7 @@ Alfonso Tobar-Arancibia
     });
     </script>
     <script>videojs(video_shortcode_videojs_video1);</script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
+    <script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","selector":".lightbox"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

@@ -693,7 +693,7 @@
     "href": "tics411/clase-0.html#nuestro-sistema-de-ml-nuevas-instancias-de-entrenamiento",
     "title": "TICS-411 Minería de Datos",
     "section": "Nuestro Sistema de ML: Nuevas instancias de Entrenamiento",
-    "text": "Nuestro Sistema de ML: Nuevas instancias de Entrenamiento\n\n\n\n\n\n\nKuchillo\n\n\n\n\n\n\n\nChokolate\n\n\n\n\n\n\n\nSinsel\n\n\n\n\n\n\n\n\n\n\n\n\nNo es bueno entrenar con las mismas instancias de entrenamiento. ¿Por qué?\n\n\n\n\n\nMencionar el caso de error de ImageNet."
+    "text": "Nuestro Sistema de ML: Nuevas instancias de Entrenamiento\n\n\n\n\n\n\nKuchillo\n\n\n\n\n\n\n\nChokolate\n\n\n\n\n\n\n\nSinsel\n\n\n\n\n\n\n\n\n\n\n\n\nNo es bueno entrenar con las mismas instancias de de Test, es decir, con las cuales se evalúa el modelo. ¿Por qué?\n\n\n\n\n\nMencionar el caso de error de ImageNet."
   },
   {
     "objectID": "tics411/clase-0.html#nuestro-sistema-de-ml-reevaluemos-nuestro-modelo",
