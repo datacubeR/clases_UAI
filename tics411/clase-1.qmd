@@ -470,14 +470,8 @@ $$S(p_i, q_i) = 1 - p_k(p_i)^2$$
 ![](img/clase-1/datos_cat.png){.lightbox fig-align="center" }
 
 
-::: {.notes}
 
-![](img/clase-1/sim_cat_1.png){.lightbox fig-align="center" width="70%"}
-
-![](img/clase-1/simil_calc.png){.lightbox fig-align="center" width="70%"}
-:::
-
-#### ¿Cuánto vale la similaridad entre los siguientes registros?
+#### Ejercicio Propuesto: ¿Cuánto vale la similaridad entre los siguientes registros?
 
 * 1-4
 * 2-5
@@ -543,21 +537,8 @@ $$cos(d_1, d_2) = \frac{d_1 \cdot d_2}{||d_1||||d_2||}$$
 |d_2|1|0|0|0|0|0|1|1|0|2|
 |d_3|6|4|0|10|0|0|0|4|0|0|
 
-::: {.columns}
-::: {.column width="30%" .fragment}
-$$d_1 \cdot d_2 = 5$$
-$$d_1 \cdot d_3 = 84$$
-:::
-::: {.column width="40%" .fragment}
-$$||d_1|| = \sqrt{42} = 6.481$$
-$$||d_2|| = \sqrt{6} = 2.449$$
-$$||d_3|| = \sqrt{168} = 12.962$$
-:::
-::: {.column width="30%" .fragment}
-$$cos(d_1, d_2) = 0.3150$$
-$$cos(d_1, d_3) = 0.9999$$
-:::
-::: 
+#### Ejercicio Propuesto: ¿Cuánto vale $cos(d_1,d_2)$ y $cos(d_1,d_3)$?
+
 
 # Distancias
 
@@ -686,3 +667,25 @@ Correlación Muestral o Pearson
 
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
 :::
+
+## Medidas: Similaridad Datos Categóricos {.smaller}
+
+![](img/clase-1/simil_calc.png){.lightbox fig-align="center" width="70%"}
+
+## Medidas: Similaridad (Distancia Coseno) {.smaller}
+
+| name | $a_1$ | $a_2$ | $a_3$ |$a_4$ | $a_5$ | $a_6$ |$a_7$ | $a_8$ | $a_9$ |$a_{10}$ | 
+|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+|d_1|3|2|0|5|0|0|0|2|0|0|
+|d_2|1|0|0|0|0|0|1|1|0|2|
+|d_3|6|4|0|10|0|0|0|4|0|0|
+
+$$d_1 \cdot d_2 = 5$$
+$$d_1 \cdot d_3 = 84$$
+
+$$||d_1|| = \sqrt{42} = 6.481$$
+$$||d_2|| = \sqrt{6} = 2.449$$
+$$||d_3|| = \sqrt{168} = 12.962$$
+
+$$cos(d_1, d_2) = 0.3150$$
+$$cos(d_1, d_3) = 0.9999$$
