@@ -573,7 +573,7 @@ Generalización
 :::
 
 ::: {.callout-warning .fragment fragment-index=1}
-No es bueno entrenar con las mismas instancias de entrenamiento. **¿Por qué?**
+No es bueno entrenar con las mismas instancias de de `Test`, es decir, con las cuales se evalúa el modelo. **¿Por qué?**
 :::
 
 ::: {.notes}
