@@ -34,10 +34,11 @@ En nuestro caso nos enfocaremos en un caso particular de Modelación Descriptiva
 :::
 
 Clustering
-: > Consiste en agrupar los datos en un menor número de `entidades/grupos`. A estos grupos se les conoce como `clusters` y pueden ser agrupados de manera global, o modelando las principales características de los datos. 
+: > Consiste en agrupar los datos en un menor número de `entidades` o `grupos`. A estos `grupos` se les conoce como `clusters` y pueden ser generados de manera global, o modelando las principales características de los datos. 
 
 
 ## Intuición {.smaller}
+
 #### ¿Cuántos clusters se pueden apreciar?
 
 
@@ -54,16 +55,16 @@ Clustering
 
 ## Clustering: Introducción
 
-::: {.callout-note .fragment}
-Clustering: Consiste en buscar grupos de objetos tales que la similaridad `intra-grupo` sea alta, mientras que la similaridad `inter-grupos` sea baja. Normalmente la distancia es usada para determinar **qué tan similares** son estos grupos. 
+::: {.callout-note }
+**Clustering**: Consiste en buscar grupos de objetos tales que la similaridad `intra-grupo` sea alta, mientras que la similaridad `inter-grupos` sea baja. Normalmente la distancia es usada para determinar **qué tan similares** son estos grupos. 
 :::
 
 ::: {.columns}
 ::: {.column}
-![](img/clase-3/intra_grupo.png){.lightbox fig-align="center" .fragment width="70%"}
+![](img/clase-3/intra_grupo.png){.lightbox fig-align="center" width="70%"}
 :::
 ::: {.column}
-![](img/clase-3/inter_grupo.png){.lightbox fig-align="center" .fragment width="70%"}
+![](img/clase-3/inter_grupo.png){.lightbox fig-align="center" width="70%"}
 :::
 ::: 
 
@@ -75,19 +76,6 @@ Clustering: Consiste en buscar grupos de objetos tales que la similaridad `intra
 
 
 ![](img/clase-3/ambiguo.png){.lightbox fig-align="center" width="60%"}
-
-## Clustering: Tipos
-
-<br>
-
-::: {.columns}
-::: {.column}
-![](img/clase-3/clust_tipo1.png){.lightbox fig-align="center" }
-:::
-::: {.column}
-![](img/clase-3/clust_tipo2.png){.lightbox fig-align="center" }
-:::
-::: 
 
 
 ## Clustering: Tipos
@@ -113,7 +101,7 @@ Clustering: Consiste en buscar grupos de objetos tales que la similaridad `intra
 
 > Los algoritmos basados en jerarquía pueden seguir 2 estrategias: 
 
-* **Aglomerativos*n: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. `Para n objetos se realizan n-1 uniones`. 
+* **Aglomerativos**: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. `Para n objetos se realizan n-1 uniones`. 
 
 * **Divisionales**: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad. 
 
@@ -138,7 +126,7 @@ Se ajusta cada punto a una distribución de probabilidades que indica cuál es l
 
 ## Partición
 
-> Los datos son separados en K Clusters, donde cada punto pertenece exclusivamente a un único cluster. 
+> Los datos son separados en `K` Clusters, donde cada punto pertenece exclusivamente a un único cluster. A `K` se le considera como un `hiperparámetro`.
 
 ::: {.callout-tip}
 * Cluster Compactos: Minimizar la `distancia intra-cluster` (within cluster). 
@@ -166,7 +154,7 @@ donde $r_k$ representa el centro del cluster $k$:
 
 :::
 ::: {.column}
-* Distancia Within-Cluster:
+* Distancia Within-Cluster (Inercia):
   $$wc(C) = \sum_{k=1}^K \sum_{x_i \in C_k} d(x_i, r_k)$$
 
 :::
@@ -231,13 +219,13 @@ Supongamos que tenemos tipos de manzana, y cada una de ellas tiene 2 atributos (
 ::: {.columns}
 ::: {.column}
 ::: {.fragment fragment-index=1}
-* Definamos los centroides. 
+* Supongamos los siguientes centroides iniciales: 
 $$C_1 = (1,1)$$
 $$C_2 = (2,1)$$
 :::
 
-::: {.fragment fragment-index=2}
-* Calculemos la Matriz de Distancias:
+:::{.callout-note .fragment fragment-index=2}
+Matriz de Distancias al Centroide: (coordenada `i,j` representa distancia  del punto `j` al centroide `i`)
 :::
 
 ::: {.fragment fragment-index=2}
@@ -287,7 +275,7 @@ $$C_2 = (\frac{11}{3}, \frac{8}{3})$$
 :::
 
 ::: {.fragment fragment-index=2}
-* Calculemos la Matriz de Distancias:
+* Calculamos la Matriz de Distancias al Centroide:
 :::
 
 ::: {.fragment fragment-index=2}
@@ -381,7 +369,7 @@ Eventualmente otras métricas distintas al `within distance` podrían también s
 ## Fortalezas
 
 * Algoritmo relativamente eficiente (existen muy buenas implementaciones). $O(k \cdot n \cdot i)$. Donde $k$ es el número de clusters, $n$ el número de puntos, e $i$ el número de iteraciones. 
-* Encuentra ***clusters esféricos***. 
+* Encuentra ***"clusters esféricos"***. 
 :::
 
 ::: {.callout-warning appearance="default"}
@@ -390,12 +378,112 @@ Eventualmente otras métricas distintas al `within distance` podrían también s
 * Sensible al punto de inicio. 
 * Solo se puede aplicar cuando el promedio es calculable. 
 * Se requiere definir K a priori (K es un *hiperparámetro*). 
-* Suceptible al ruido. 
+* Suceptible al ruido y a mínimos locales (podría no converger). 
 
 :::
 
+## Implementación en Scikit-Learn
 
-# Eso es todo
+```{.python code-line-numbers="|1|3|4|5|7-8|"}
+from sklearn.cluster import KMeans
+
+km = KMeans(n_clusters=8, n_init=10,random_state=None)
+km.fit(X)
+km.predict(X)
+
+## opcionalmente
+km.fit_predict(X)
+```
+
+::: {.columns style="font-size: 70%;"}
+* **n_clusters**: Define el número de clusters a crear, por defecto 8.
+*  **n_init**: Cuántas veces se ejecuta el algoritmo, por defecto 10.
+*  **random_state**: Define la semilla aleatoria. Por defecto sin semilla.
+*  **init**: Permite agregar centroides de manera manual.
+
+* `.fit()`: Entrenará el modelo en los datos suministrados. 
+* `.predict()` Entregará las clusters asignados a cada dato suministrado. 
+* `.clusters_centers_`: Entregará las coordenadas de los centroides de cada Cluster.
+:::
+
+👀 Veamos un ejemplo en Colab.
+
+## Sugerencias
+
+::: {.callout-important appearance="default"}
+## Pre-procesamientos
+
+Es importante recordar que K-Means es un Algoritmo basado en `distancias`, por lo tanto se ve afectado por Outliers y por Escalamiento. 
+
+Se recomienda preprocesar los datos con:
+
+* `Winsorizer()` para eliminar Outliers.
+* `StandardScaler()` o `MinMaxScaler()` para llevar a una escala común. 
+:::
+
+## Interpretación Clusters
+
+::: {.callout-note}
+Recordar, que el clustering no clasifica. Por lo tanto, a pesar de que K-Means nos indica a qué cluster pertenece cierto punto, debemos interpretar cada cluster para entender `qué es lo que se agrupó`.
+:::
+
+:::::: {.callout-caution}
+La interpretación del cluster es principalmente intuición y exploración, por lo tanto el EDA puede ser de utilidad para analizar clusters.
+:::
+
+![](img/clase-3/center_analysis.png){.lightbox fig-align="center"}
+
+## Post-Procesamiento: Merge {.smaller}
+
+Post-Procesamiento
+: > Se define como el `tratamiento` que podemos realizar al algoritmo luego de haber entregado ya sus predicciones. 
+
+Es posible generar *más clusters* de los necesarios y luego ir agrupando los más cercanos.
+
+::: {.columns}
+::: {.column}
+![](img/clase-3/merge_1.png){.lightbox fig-align="center" }
+:::
+::: {.column}
+![](img/clase-3/merge_2.png){.lightbox fig-align="center" .fragment}
+:::
+::: 
+
+## Post-Procesamiento: Merge
+
+![](img/clase-3/merge_3.png){.lightbox fig-align="center" }
+
+::: {.callout-warning .fragment}
+**¿Cuál es el problema con este caso de Post-Procesamiento?**
+:::
+
+## Post-Procesamiento: Split 
+
+![](img/clase-3/split.png){.lightbox fig-align="center" }
+
+::: {.callout-note}
+En `Scikit-Learn` esto puede conseguirse utilizando el parámetro **init**. Se entregan los nuevos centroides para `forzar` a K-Means que separe ciertos clusters.
+:::
+
+## Variantes K-Means
+
+::: {.columns}
+::: {.column}
+![](img/clase-3/variantes.png){.lightbox fig-align="center" }
+:::
+::: {.column}
+![](img/clase-3/variantes_2.png){.lightbox fig-align="center" }
+
+$$SMD(p_1,p_2) = 4$$
+:::
+::: 
+
+::: {.callout-tip}
+[Acá](https://pypi.org/project/kmodes/) pueden encontrar una implementación de K-Modas en Python.
+:::
+
+
+# That's all Folks
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0

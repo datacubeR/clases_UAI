@@ -10,7 +10,7 @@
 - title: "Clase 1"
   subtitle: "Calidad de los Datos y Feature Engineering"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-03-07
+  date: 2024-03-21
   image: tics411/thumbnails/clase-1.png
   path: tics411/clase-1.qmd
   categories:
@@ -20,7 +20,7 @@
 - title: "Clase 2"
   subtitle: "Exploratory Data Analysis (EDA)"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-03-21
+  date: 2024-03-28
   image: tics411/thumbnails/clase-2.png
   path: tics411/clase-2.qmd
   categories:
@@ -29,7 +29,7 @@
 - title: "Clase Bonus"
   subtitle: "Introducción a Scikit-Learn"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-03-21
+  date: 2024-03-28
   image: tics411/thumbnails/lab-0.jpg
   path: tics411/lab-0.qmd
   categories:

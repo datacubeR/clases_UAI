@@ -66,10 +66,10 @@ El uso de visualizaciones inadecuadas podría llevar a **conclusiones erróneas*
 
 ::: {.columns}
 ::: {.column}
-![](img/clase-2/rangos.png){.lightbox fig-align="center" width="50%" .fragment}
+![](img/clase-2/rangos.png){.lightbox fig-align="center" width="50%" }
 :::
 ::: {.column}
-![](img/clase-2/skewness.png){.lightbox fig-align="center" width="90%" .fragment}
+![](img/clase-2/skewness.png){.lightbox fig-align="center" width="90%" }
 :::
 ::: 
 
@@ -214,7 +214,7 @@ Boxplot (Caja y Bigotes)
 ## Visualizaciones: Barras {.smaller}
 
 Bar Plot
-: > La altura de la barra (normalmente Eje y) representa una cantidad asociada a una categoría (normalmente Eje x). 
+: > La altura de la barra (normalmente Eje y) representa una agregación asociada a una categoría (normalmente Eje x). 
 
 ::: {.columns}
 ::: {.column}
@@ -233,17 +233,18 @@ Bar Plot
 
 Scatter
 : > Gráfico empleado para mostrar distribución de datos bivariados
-* Muestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y). 
-* Permite mostrar relaciones lineales o no-lineales.
-* Correlaciones.
-* Outliers.
 
-![](img/clase-2/scatter.png){.lightbox fig-align="center" width="40%"}
+* Muestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y). 
+* Permite mostrar relaciones lineales o no-lineales (Correlaciones).
+* Outliers.
+* Simplemente ubicación de Puntos en el Espacio. 
+
+![](img/clase-2/scatter.png){.lightbox fig-align="center" width="30%"}
 
 ## Visualizaciones: Líneas {.smaller}
 
 Lineplot
-: > Gráfico empleado para visualizar tendencias y su evolución en el tiempo. 
+: > Gráfico empleado para visualizar tendencias y su evolución de una medida (Eje Y) en el tiempo (Eje X). 
 
 ::: {.columns}
 ::: {.column}

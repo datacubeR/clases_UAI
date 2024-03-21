@@ -22,6 +22,37 @@ format:
     highlight-style: arrow
 ---
 
+# Avisos
+
+## Avisos {.smaller}
+::: {.callout-caution appearance="default"}
+## Ayudantía
+
+# Avisos
+
+Tenemos (posible) ayudante, pero tenemos un problema de horario.
+
+* **Horario Actual**: Viernes 20:00 a 21:10 hrs.
+* **Horario Propuesto**: Lunes 11:45 a 12:55 hrs.
+:::
+
+::: {.callout-important .fragment appearance="default"}
+
+## Tarea 1
+
+* Entrega el **7 de Abril**: Parejas inscribirse en Webcursos.
+* Plazo para inscribir parejas: **Este Domingo**.
+
+:::
+
+:::{.callout-note .fragment appearance="default"}
+
+## Fechas de Prueba
+
+* **Prueba 1**: Martes 30 de Abril 18:30 a 21:00
+* **Prueba 2**: Martes 11 de Julio 18:30 a 21:00
+:::
+
 # Datos Tabulares 
 
 ## Tipos de Datos: Datos Tabulares {.smaller}
@@ -382,11 +413,11 @@ $$D(p,q) = 1$$
 :::: {.columns}
 ::: {.column style="text-align: center;"}
 * Disimilaridad: 
-$$D = \frac{|p-q|}{n-1}$$
+$$D = \frac{|p-q|}{n}$$
 :::
 ::: {.column style="text-align: center;"}
 * Similaridad:  
-$$S = 1 - \frac{|p-q|}{n-1}$$
+$$S = 1 - \frac{|p-q|}{n}$$
 :::
 ::::
 
@@ -395,7 +426,7 @@ $$S = 1 - \frac{|p-q|}{n-1}$$
 ![](img/clase-1/s_ord.png){fig-align="center" .lightbox}
 :::
 ::: {.column}
-$$S(p,q) = 1 - \frac{5 - 4}{6 - 1} = 0.8$$
+$$S(p,q) = 1 - \frac{5 - 4}{5} = 0.8$$
 :::
 ::: 
 
@@ -411,7 +442,6 @@ $$D = |p-q|$$
 * Similaridad:  
 $$S = -D$$
 $$S = \frac{1}{1+D}$$
-$$S = 1 - \frac{d - min_d}{max_d - min_d}$$
 :::
 ::::
 
@@ -584,6 +614,16 @@ $$d(p,q) = \left(\sum_{k=1}^m |p_k - q_k|^r\right)^{1/r}$$
 
 ![](img/clase-1/results_dist.png){.lightbox width="30%" fig-align="center"}
 
+## Ayudantías
+
+### Ayudante: Sofía Alvarez
+### email: sofalvarez@alumnos.uai.cl
+
+::: {.callout-caution}
+* Las ayudantías serán en la manera que sean necesarias.
+* Estarán enfocadas principalmente en aplicaciones, código y dudas sobre Tarea.
+:::
+
 ## Distancias: Distancia Mahalanobis {.smaller}
 
 $$d(p,q) = \sqrt{(p-q)^T \Sigma^{-1}(p-q)}$$
@@ -604,6 +644,7 @@ $$
 
 * test #1: 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0
 * test #2: 1.0, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0
+
 
 
 ## Distancias: Distancia Mahalanobis (Resultados) {.smaller}
