@@ -749,13 +749,19 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
 <dt>Scatter</dt>
 <dd>
 <blockquote>
-<p>Gráfico empleado para mostrar distribución de datos bivariados * Muestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y). * Permite mostrar relaciones lineales o no-lineales. * Correlaciones. * Outliers.</p>
+<p>Gráfico empleado para mostrar distribución de datos bivariados</p>
 </blockquote>
 </dd>
 </dl>
+<ul>
+<li>Muestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y).</li>
+<li>Permite mostrar relaciones lineales o no-lineales.</li>
+<li>Correlaciones.</li>
+<li>Outliers.</li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/scatter.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-2/scatter.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+<p><a href="img/clase-2/scatter.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-2/scatter.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></a></p>
 </figure>
 </div>
 </section>
@@ -1217,7 +1223,7 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

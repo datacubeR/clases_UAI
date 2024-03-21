@@ -150,6 +150,13 @@
     "text": "K-Means: Detalles Técnicos\n\n\n\n\n\n\nFortalezas\n\n\n\nAlgoritmo relativamente eficiente (existen muy buenas implementaciones). \\(O(k \\cdot n \\cdot i)\\). Donde \\(k\\) es el número de clusters, \\(n\\) el número de puntos, e \\(i\\) el número de iteraciones.\nEncuentra clusters esféricos.\n\n\n\n\n\n\n\n\n\n\nDebilidades\n\n\n\nSensible al punto de inicio.\nSolo se puede aplicar cuando el promedio es calculable.\nSe requiere definir K a priori (K es un hiperparámetro).\nSuceptible al ruido."
   },
   {
+    "objectID": "tics411/clase-1.html#tenemos-posible-ayudante-pero-tenemos-un-problema-de-horario.",
+    "href": "tics411/clase-1.html#tenemos-posible-ayudante-pero-tenemos-un-problema-de-horario.",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Tenemos (posible) ayudante, pero tenemos un problema de horario.",
+    "text": "Tenemos (posible) ayudante, pero tenemos un problema de horario.\n\nHorario Actual: Viernes 20:00 a 21:10 hrs.\nHorario Propuesto: Lunes 11:45 a 12:55 hrs.\n\n\n\nTenemos pruebas:\n\nPrueba 1: Martes 30 de Abril 18:30 a 21:00\nPrueba 2: Martes 11 de Julio 18:30 a 21:00"
+  },
+  {
     "objectID": "tics411/clase-1.html#tipos-de-datos-datos-tabulares",
     "href": "tics411/clase-1.html#tipos-de-datos-datos-tabulares",
     "title": "TICS-411 Minería de Datos",
@@ -308,14 +315,14 @@
     "href": "tics411/clase-1.html#medidas-similaridad-ordinal",
     "title": "TICS-411 Minería de Datos",
     "section": "Medidas: Similaridad Ordinal",
-    "text": "Medidas: Similaridad Ordinal\n\n\n\nDisimilaridad: \\[D = \\frac{|p-q|}{n-1}\\]\n\n\n\nSimilaridad:\n\\[S = 1 - \\frac{|p-q|}{n-1}\\]\n\n\n\n\n\n\n\n\n\n\n\n\\[S(p,q) = 1 - \\frac{5 - 4}{6 - 1} = 0.8\\]"
+    "text": "Medidas: Similaridad Ordinal\n\n\n\nDisimilaridad: \\[D = \\frac{|p-q|}{n}\\]\n\n\n\nSimilaridad:\n\\[S = 1 - \\frac{|p-q|}{n}\\]\n\n\n\n\n\n\n\n\n\n\n\n\\[S(p,q) = 1 - \\frac{5 - 4}{5} = 0.8\\]"
   },
   {
     "objectID": "tics411/clase-1.html#medidas-similaridad-intervalo-o-ratio",
     "href": "tics411/clase-1.html#medidas-similaridad-intervalo-o-ratio",
     "title": "TICS-411 Minería de Datos",
     "section": "Medidas: Similaridad Intervalo o Ratio",
-    "text": "Medidas: Similaridad Intervalo o Ratio\n\n\n\nDisimilaridad: \\[D = |p-q|\\]\n\n\n\nSimilaridad:\n\\[S = -D\\] \\[S = \\frac{1}{1+D}\\] \\[S = 1 - \\frac{d - min_d}{max_d - min_d}\\]\n\n\n\n\nSea \\(p=35 °C\\) y \\(q = 40 °C\\). Luego:\n\\[ S(p,q) = -5\\] \\[S(p,q) = \\frac{1}{1 + 5} = 0.17\\]"
+    "text": "Medidas: Similaridad Intervalo o Ratio\n\n\n\nDisimilaridad: \\[D = |p-q|\\]\n\n\n\nSimilaridad:\n\\[S = -D\\] \\[S = \\frac{1}{1+D}\\]\n\n\n\n\nSea \\(p=35 °C\\) y \\(q = 40 °C\\). Luego:\n\\[ S(p,q) = -5\\] \\[S(p,q) = \\frac{1}{1 + 5} = 0.17\\]"
   },
   {
     "objectID": "tics411/clase-1.html#medidas-similaridad-datos-categóricos",
@@ -329,7 +336,7 @@
     "href": "tics411/clase-1.html#medidas-similaridad-datos-categóricos-1",
     "title": "TICS-411 Minería de Datos",
     "section": "Medidas: Similaridad Datos Categóricos",
-    "text": "Medidas: Similaridad Datos Categóricos\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n¿Cuánto vale la similaridad entre los siguientes registros?\n\n1-4\n2-5\n7-8"
+    "text": "Medidas: Similaridad Datos Categóricos\n\n\n\n\n\nEjercicio Propuesto: ¿Cuánto vale la similaridad entre los siguientes registros?\n\n1-4\n2-5\n7-8"
   },
   {
     "objectID": "tics411/clase-1.html#medidas-similaridad-datos-binarios",
@@ -350,7 +357,7 @@
     "href": "tics411/clase-1.html#medidas-similaridad-distancia-coseno",
     "title": "TICS-411 Minería de Datos",
     "section": "Medidas: Similaridad (Distancia Coseno)",
-    "text": "Medidas: Similaridad (Distancia Coseno)\n\nSean \\(d_1\\) y \\(d_2\\) dos vectores. La distancia coseno se calcula como:\n\n\\[cos(d_1, d_2) = \\frac{d_1 \\cdot d_2}{||d_1||||d_2||}\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nname\n\\(a_1\\)\n\\(a_2\\)\n\\(a_3\\)\n\\(a_4\\)\n\\(a_5\\)\n\\(a_6\\)\n\\(a_7\\)\n\\(a_8\\)\n\\(a_9\\)\n\\(a_{10}\\)\n\n\n\n\nd_1\n3\n2\n0\n5\n0\n0\n0\n2\n0\n0\n\n\nd_2\n1\n0\n0\n0\n0\n0\n1\n1\n0\n2\n\n\nd_3\n6\n4\n0\n10\n0\n0\n0\n4\n0\n0\n\n\n\n\n\n\\[d_1 \\cdot d_2 = 5\\] \\[d_1 \\cdot d_3 = 84\\]\n\n\\[||d_1|| = \\sqrt{42} = 6.481\\] \\[||d_2|| = \\sqrt{6} = 2.449\\] \\[||d_3|| = \\sqrt{168} = 12.962\\]\n\n\\[cos(d_1, d_2) = 0.3150\\] \\[cos(d_1, d_3) = 0.9999\\]"
+    "text": "Medidas: Similaridad (Distancia Coseno)\n\nSean \\(d_1\\) y \\(d_2\\) dos vectores. La distancia coseno se calcula como:\n\n\\[cos(d_1, d_2) = \\frac{d_1 \\cdot d_2}{||d_1||||d_2||}\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nname\n\\(a_1\\)\n\\(a_2\\)\n\\(a_3\\)\n\\(a_4\\)\n\\(a_5\\)\n\\(a_6\\)\n\\(a_7\\)\n\\(a_8\\)\n\\(a_9\\)\n\\(a_{10}\\)\n\n\n\n\nd_1\n3\n2\n0\n5\n0\n0\n0\n2\n0\n0\n\n\nd_2\n1\n0\n0\n0\n0\n0\n1\n1\n0\n2\n\n\nd_3\n6\n4\n0\n10\n0\n0\n0\n4\n0\n0\n\n\n\nEjercicio Propuesto: ¿Cuánto vale \\(cos(d_1,d_2)\\) y \\(cos(d_1,d_3)\\)?"
   },
   {
     "objectID": "tics411/clase-1.html#distancias-1",
@@ -402,6 +409,20 @@
     "text": "Correlación\n\n\n\n\n\n\n\n\n\n\n\n\n\nEs importante recalcar que Causalidad no es igual a Correlación.\nLa Correlación no se ve afectada por la escala de los datos."
   },
   {
+    "objectID": "tics411/clase-1.html#medidas-similaridad-datos-categóricos-2",
+    "href": "tics411/clase-1.html#medidas-similaridad-datos-categóricos-2",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Medidas: Similaridad Datos Categóricos",
+    "text": "Medidas: Similaridad Datos Categóricos"
+  },
+  {
+    "objectID": "tics411/clase-1.html#medidas-similaridad-distancia-coseno-1",
+    "href": "tics411/clase-1.html#medidas-similaridad-distancia-coseno-1",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Medidas: Similaridad (Distancia Coseno)",
+    "text": "Medidas: Similaridad (Distancia Coseno)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nname\n\\(a_1\\)\n\\(a_2\\)\n\\(a_3\\)\n\\(a_4\\)\n\\(a_5\\)\n\\(a_6\\)\n\\(a_7\\)\n\\(a_8\\)\n\\(a_9\\)\n\\(a_{10}\\)\n\n\n\n\nd_1\n3\n2\n0\n5\n0\n0\n0\n2\n0\n0\n\n\nd_2\n1\n0\n0\n0\n0\n0\n1\n1\n0\n2\n\n\nd_3\n6\n4\n0\n10\n0\n0\n0\n4\n0\n0\n\n\n\n\\[d_1 \\cdot d_2 = 5\\] \\[d_1 \\cdot d_3 = 84\\]\n\\[||d_1|| = \\sqrt{42} = 6.481\\] \\[||d_2|| = \\sqrt{6} = 2.449\\] \\[||d_3|| = \\sqrt{168} = 12.962\\]\n\\[cos(d_1, d_2) = 0.3150\\] \\[cos(d_1, d_3) = 0.9999\\]\n\n\n\n\n\n\n\n\nOne Hot Encoder\nOrdinal Encoder"
+  },
+  {
     "objectID": "tics411/notebooks/viz.html",
     "href": "tics411/notebooks/viz.html",
     "title": "Clases UAI",
@@ -413,105 +434,49 @@
     "href": "tics411/notebooks/distancia.html",
     "title": "Clases UAI",
     "section": "",
-    "text": "import pandas as pd\nimport numpy as np\n\ndf = pd.DataFrame(dict(\n    x = [0,2,3,5],\n    y = [2,0,1,1]\n))\n\ndf\n\n\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n0\n0\n2\n\n\n1\n2\n0\n\n\n2\n3\n1\n\n\n3\n5\n1\n\n\n\n\n\n\n\n\n\ndef distancia_l1(p1, p2):\n   x1 = p1[\"x\"] \n   x2 = p2[\"x\"] \n   y1 = p1[\"y\"]\n   y2 = p2[\"y\"]\n\n   return np.abs(x1-x2) + np.abs(y1-y2)\n\ndef distancia_l2(p1,p2):\n   x1 = p1[\"x\"] \n   x2 = p2[\"x\"] \n   y1 = p1[\"y\"]\n   y2 = p2[\"y\"]\n   return np.sqrt((x1 -x2)**2 + (y1 - y2)**2)\n\ndef distancia_linf(p1, p2):\n   x1 = p1[\"x\"] \n   x2 = p2[\"x\"] \n   y1 = p1[\"y\"]\n   y2 = p2[\"y\"]\n   d_x = np.abs(x1-x2)\n   d_y = np.abs(y1-y2)\n   return np.max([d_x, d_y])\n\ndef calculate_matrix(distance, n_puntos):\n    m = np.zeros((n_puntos, n_puntos))\n    for i in range(n_puntos):\n        for j in range(n_puntos):\n            m[i,j] = distance(df.iloc[i],df.iloc[j])\n    \n    return m\n\nm_m = calculate_matrix(distancia_l1, 4)\nm_e = calculate_matrix(distancia_l2, 4)\nm_c = calculate_matrix(distancia_linf, 4)\n\n\nm_m\n\narray([[0., 4., 4., 6.],\n       [4., 0., 2., 4.],\n       [4., 2., 0., 2.],\n       [6., 4., 2., 0.]])\n\n\n\nm_e\n\narray([[0.        , 2.82842712, 3.16227766, 5.09901951],\n       [2.82842712, 0.        , 1.41421356, 3.16227766],\n       [3.16227766, 1.41421356, 0.        , 2.        ],\n       [5.09901951, 3.16227766, 2.        , 0.        ]])\n\n\n\nm_c\n\narray([[0., 2., 3., 5.],\n       [2., 0., 1., 3.],\n       [3., 1., 0., 2.],\n       [5., 3., 2., 0.]])\n\n\n\na = pd.Series([1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0])\nb = pd.Series([1.0,3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5,7.0])\n\na.var(ddof=0) # Varianza Poblacional\n\n3.5\n\n\n\na.var(ddof=1) # Varianza Muestral\n\n3.7916666666666665\n\n\n\nb.var(ddof=1)\n\n1.5916666666666668\n\n\n\n\n\n Back to top"
+    "text": "import pandas as pd\nimport numpy as np\n\ndf = pd.DataFrame(dict(x=[0, 2, 3, 5], y=[2, 0, 1, 1]))\n\ndf\n\n\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n0\n0\n2\n\n\n1\n2\n0\n\n\n2\n3\n1\n\n\n3\n5\n1\n\n\n\n\n\n\n\n\n\ndef distancia_l1(p1, p2):\n    x1 = p1[\"x\"]\n    x2 = p2[\"x\"]\n    y1 = p1[\"y\"]\n    y2 = p2[\"y\"]\n\n    return np.abs(x1 - x2) + np.abs(y1 - y2)\n\n\ndef distancia_l2(p1, p2):\n    x1 = p1[\"x\"]\n    x2 = p2[\"x\"]\n    y1 = p1[\"y\"]\n    y2 = p2[\"y\"]\n    return np.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)\n\n\ndef distancia_linf(p1, p2):\n    x1 = p1[\"x\"]\n    x2 = p2[\"x\"]\n    y1 = p1[\"y\"]\n    y2 = p2[\"y\"]\n    d_x = np.abs(x1 - x2)\n    d_y = np.abs(y1 - y2)\n    return np.max([d_x, d_y])\n\n\ndef calculate_matrix(distance, n_puntos):\n    m = np.zeros((n_puntos, n_puntos))\n    for i in range(n_puntos):\n        for j in range(n_puntos):\n            m[i, j] = distance(df.iloc[i], df.iloc[j])\n\n    return m\n\n\nm_m = calculate_matrix(distancia_l1, 4)\nm_e = calculate_matrix(distancia_l2, 4)\nm_c = calculate_matrix(distancia_linf, 4)\n\n\nm_m\n\narray([[0., 4., 4., 6.],\n       [4., 0., 2., 4.],\n       [4., 2., 0., 2.],\n       [6., 4., 2., 0.]])\n\n\n\nm_e\n\narray([[0.        , 2.82842712, 3.16227766, 5.09901951],\n       [2.82842712, 0.        , 1.41421356, 3.16227766],\n       [3.16227766, 1.41421356, 0.        , 2.        ],\n       [5.09901951, 3.16227766, 2.        , 0.        ]])\n\n\n\nm_c\n\narray([[0., 2., 3., 5.],\n       [2., 0., 1., 3.],\n       [3., 1., 0., 2.],\n       [5., 3., 2., 0.]])\n\n\n\na = pd.Series(\n    [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0]\n)\nb = pd.Series(\n    [1.0, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0]\n)\n\na.var(ddof=0)  # Varianza Poblacional\n\n3.5\n\n\n\na.var(ddof=1)  # Varianza Muestral\n\n3.7916666666666665\n\n\n\nb.var(ddof=1)\n\n1.5916666666666668\n\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "tics411/clase-2.html#eda",
-    "href": "tics411/clase-2.html#eda",
-    "title": "TICS-411 Minería de Datos",
-    "section": "EDA",
-    "text": "EDA\n\nEl Analisis Exploratorio de Datos (EDA, por sus siglas en inglés) es procedimiento en el cual se analiza un dataset para explorar sus características principales.\n\n\nSu objetivo principal es poder familiarizarse con los datos además de encontrar potenciales problemas en su calidad.\nPrincipalmente hace uso de técnicas de manipulación de datos y visualizaciones.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos hallazgos importantes dentro del proceso se les denomina insights.\n\n\n\n\n\n\n\n\n\nEl uso de visualizaciones inadecuadas podría llevar a conclusiones erróneas.\n\n\n\n\n\n\n\n\n\n\nSummary.\nVisualización."
+    "objectID": "tics411/notebooks/02-EDA-solved.html",
+    "href": "tics411/notebooks/02-EDA-solved.html",
+    "title": "Medidas de Tendencia Central",
+    "section": "",
+    "text": "import seaborn as sns\nimport matplotlib.pyplot as plt\n\niris_df = sns.load_dataset(\"iris\")\ntitanic_df = sns.load_dataset(\"titanic\")\nts_df = sns.load_dataset(\"dowjones\")\niris_df\n\n\n\n\n\n\n\n\n\nsepal_length\nsepal_width\npetal_length\npetal_width\nspecies\n\n\n\n\n0\n5.1\n3.5\n1.4\n0.2\nsetosa\n\n\n1\n4.9\n3.0\n1.4\n0.2\nsetosa\n\n\n2\n4.7\n3.2\n1.3\n0.2\nsetosa\n\n\n3\n4.6\n3.1\n1.5\n0.2\nsetosa\n\n\n4\n5.0\n3.6\n1.4\n0.2\nsetosa\n\n\n...\n...\n...\n...\n...\n...\n\n\n145\n6.7\n3.0\n5.2\n2.3\nvirginica\n\n\n146\n6.3\n2.5\n5.0\n1.9\nvirginica\n\n\n147\n6.5\n3.0\n5.2\n2.0\nvirginica\n\n\n148\n6.2\n3.4\n5.4\n2.3\nvirginica\n\n\n149\n5.9\n3.0\n5.1\n1.8\nvirginica\n\n\n\n\n150 rows × 5 columns"
   },
   {
-    "objectID": "tics411/clase-2.html#medidas-de-tendencia-central",
-    "href": "tics411/clase-2.html#medidas-de-tendencia-central",
-    "title": "TICS-411 Minería de Datos",
+    "objectID": "tics411/notebooks/02-EDA-solved.html#medidas-de-tendencia-central",
+    "href": "tics411/notebooks/02-EDA-solved.html#medidas-de-tendencia-central",
+    "title": "Medidas de Tendencia Central",
     "section": "Medidas de Tendencia Central",
-    "text": "Medidas de Tendencia Central"
+    "text": "Medidas de Tendencia Central\n\nprint(f\"Promedio de Ancho de Petalo {iris_df['sepal_width'].mean()}\")\nprint(f\"Mediana de Largo de Petalo {iris_df['sepal_length'].median()}\")\n\nPromedio de Ancho de Petalo 3.0573333333333337\nMediana de Largo de Petalo 5.8\n\n\n\nprint(f\"Moda de Especies: \")\niris_df[\"species\"].mode()\n\nModa de Especies: \n\n\n0        setosa\n1    versicolor\n2     virginica\nName: species, dtype: object\n\n\n\np25 = iris_df[\"sepal_width\"].quantile(q=0.25)\np50 = iris_df[\"sepal_width\"].quantile(q=0.50)\np75 = iris_df[\"sepal_width\"].quantile(q=0.75)\niris_df[\"sepal_width\"].median(), p25, p50, p75\n\n(3.0, 2.8, 3.0, 3.3)"
   },
   {
-    "objectID": "tics411/clase-2.html#medidas-de-dispersión-y-asimetría",
-    "href": "tics411/clase-2.html#medidas-de-dispersión-y-asimetría",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Medidas de Dispersión y Asimetría",
-    "text": "Medidas de Dispersión y Asimetría"
+    "objectID": "tics411/notebooks/02-EDA-solved.html#medidas-de-dispersión",
+    "href": "tics411/notebooks/02-EDA-solved.html#medidas-de-dispersión",
+    "title": "Medidas de Tendencia Central",
+    "section": "Medidas de Dispersión",
+    "text": "Medidas de Dispersión\n\n# Mostrar error en caso de no usar numeric_only\niris_df.var(numeric_only=True, ddof=0)\n\nsepal_length    0.681122\nsepal_width     0.188713\npetal_length    3.095503\npetal_width     0.577133\ndtype: float64\n\n\n\niris_df.var(numeric_only=True, ddof=1)\n\nsepal_length    0.685694\nsepal_width     0.189979\npetal_length    3.116278\npetal_width     0.581006\ndtype: float64\n\n\n\niris_df.std(numeric_only=True, ddof=1)\n\nsepal_length    0.828066\nsepal_width     0.435866\npetal_length    1.765298\npetal_width     0.762238\ndtype: float64\n\n\n\n# Mostrar cómo se construye esta función...\ndef calculate_quantiles(column):\n    quantiles = iris_df.quantile([0.25, 0.75], numeric_only=True)\n    iqr_sl = quantiles.loc[0.75, column] - quantiles.loc[0.25, column]\n    return iqr_sl\n\n\ncalculate_quantiles(\"sepal_length\")\ncalculate_quantiles(\"petal_width\")\n\n1.5\n\n\n\niris_df.skew(numeric_only=True)\n\nsepal_length    0.314911\nsepal_width     0.318966\npetal_length   -0.274884\npetal_width    -0.102967\ndtype: float64\n\n\n\nCuando hacemos visualizaciones tenemos 2 formas de hacerlas: * Usar Pandas directamente y/o Matplotlib: Buena documentación, gráficos bonitos. * Usar Seaborn: Documentación Complicada, fácil para descubrir insights."
   },
   {
-    "objectID": "tics411/clase-2.html#eda-visualización",
-    "href": "tics411/clase-2.html#eda-visualización",
-    "title": "TICS-411 Minería de Datos",
-    "section": "EDA: Visualización",
-    "text": "EDA: Visualización\n\nLa visualización de datos es la presentación de datos en forma gráfica. Permite ver los análisis de modo que los responsables a cargo pueden comprender conceptos complejos.\n\n\nGracias a la evoluación del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la Visión.\n\n\n\n\n\n\n\n\nPuede ser difícil de aplicar si el tamaño de los datos es grande (sea en instancias o atributos). Por ejemplo, si los datos están en 4 dimensiones.\n\n\n\n\n\n\n\n\n\n\n\n\nSe suelen resumir los datos en estadísticas simples.\nGraficar datos en 1D, 2D y 3D (evitar dentro de lo posible).\nLa visualización debe ser comprensible ojalá sin ninguna explicación.\n\n\n\n\n\n\n\n\n\n\n\n\nEn caso de datos de alta dimensionalidad puede ser una buena idea reducir dimensiones mediante técnicas como:\n\nPCA\nUMAP\netc."
+    "objectID": "tics411/notebooks/02-EDA-solved.html#visualizaciones-pandas",
+    "href": "tics411/notebooks/02-EDA-solved.html#visualizaciones-pandas",
+    "title": "Medidas de Tendencia Central",
+    "section": "Visualizaciones: Pandas",
+    "text": "Visualizaciones: Pandas\n\nHistogramas\n\niris_df.hist(figsize=(20, 6), bins=30, edgecolor=\"black\", grid=False)\nplt.tight_layout()\n\n\n\n\n\n\n\n\n\niris_df.plot(\n    kind=\"hist\", alpha=0.5, bins=30, figsize=(20, 6), edgecolor=\"black\"\n)\n# Notar que este genera todos los histogramas super puestos...\n\n\n\n\n\n\n\n\n\n\nBarplots\n\ntitanic_df[\"sex\"].value_counts().plot(\n    kind=\"bar\",\n    figsize=(5, 6),\n    title=\"Número de Pasajeros por Sexo...\",\n    edgecolor=\"black\",\n)\n\n\n\n\n\n\n\n\n\nPara este tipo de gráficas se requiere entender el concepto de agrupación…\n\n\n## Gráficar varias dimensiones\ntitanic_df.groupby(\"pclass\")[[\"age\", \"fare\"]].mean().plot(\n    kind=\"bar\", edgecolor=\"black\", title=\"Edad y Tarifa por cada Clase\"\n)\n\n\n\n\n\n\n\n\n\niris_df.groupby(\"species\").mean().plot(kind=\"bar\", edgecolor=\"black\")"
   },
   {
-    "objectID": "tics411/clase-2.html#caso-de-visualización",
-    "href": "tics411/clase-2.html#caso-de-visualización",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Caso de Visualización",
-    "text": "Caso de Visualización\n\n\n\n\n\n\n\nFiguras\nEscala de Colores.\nTamaño de los puntos.\nDemasiada información en un sólo gráfico.\nNo se entiende el mensaje."
+    "objectID": "tics411/notebooks/02-EDA-solved.html#boxplots",
+    "href": "tics411/notebooks/02-EDA-solved.html#boxplots",
+    "title": "Medidas de Tendencia Central",
+    "section": "Boxplots",
+    "text": "Boxplots\n\niris_df.drop(columns=\"species\").plot(kind=\"box\")\n\n\n\n\n\n\n\n\n\nPuntos\n\niris_df.plot(\n    x=\"petal_length\",\n    y=\"petal_width\",\n    kind=\"scatter\",\n    title=\"Largo de Pétalo vs Ancho de Pétalo\",\n    xlabel=\"Largo\",\n    ylabel=\"Ancho\",\n)\n\n\n\n\n\n\n\n\n\nts_df.plot(x=\"Date\", y=\"Price\", title=\"Evolución del Dow Jones\")\n\n\n\n\n\n\n\n\n\nfrom scipy.stats import norm\n\nts_df[\"AA\"] = ts_df[\"Price\"] + norm.rvs(size=649) * 55 + 1000\nts_df[\"BB\"] = -norm.rvs(size=649) * 55\n\nts_df.set_index(\"Date\").plot(title=\"Comparación distintas Tendencias\")\n\n\n\n\n\n\n\n\n\nfig = plt.figure(figsize=(20, 10))\nax = fig.subplot_mosaic(\n    \"\"\"AAA\n       BCC\"\"\"\n)\n\niris_df.drop(columns=\"species\").plot(\n    kind=\"box\", ax=ax[\"C\"], title=\"Distribución de Datos por Variable\"\n)\niris_df.plot(\n    x=\"petal_length\",\n    y=\"petal_width\",\n    kind=\"scatter\",\n    title=\"Largo de Pétalo vs Ancho de Pétalo\",\n    xlabel=\"Largo\",\n    ylabel=\"Ancho\",\n    ax=ax[\"B\"],\n)\niris_df.groupby(\"species\").mean().plot(\n    kind=\"bar\",\n    edgecolor=\"black\",\n    ax=ax[\"A\"],\n    rot=0,\n    title=\"Valores promedio por Especie\",\n)\nplt.suptitle(\"Súper Título\", fontsize=20)\n\nText(0.5, 0.98, 'Súper Título')"
   },
   {
-    "objectID": "tics411/clase-2.html#canales-visuales",
-    "href": "tics411/clase-2.html#canales-visuales",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Canales Visuales",
-    "text": "Canales Visuales\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSe les llama canales visuales a elementos visuales que pueden expresarse para poder expresar información (Clase Visualizacion Andreas Mueller).\nLa idea es poder mapear valores a cada uno de estos canales a valores.\n\n\n\n\n\n\n\n\n\n\n\nNo todos los canales son igual de útiles ni fáciles de entender."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones",
-    "href": "tics411/clase-2.html#visualizaciones-distribuciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Distribuciones",
-    "text": "Visualizaciones: Distribuciones\n\nHistograma\n\n\nEl histograma permite visualizar distribuciones univariadas acumulando los datos en rangos de igual tamaño (bins).\n\n\n\n\nPermite visualizar el centro, la extensión, la asimetría y outliers.\n\n\n\n\n\n\n\n\nEl histograma puede ser “engañoso” para conjuntos de datos pequeños.\nLa visualización puede resultar de manera muy distintas dependiendo del número de bins."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones-1",
-    "href": "tics411/clase-2.html#visualizaciones-distribuciones-1",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Distribuciones",
-    "text": "Visualizaciones: Distribuciones\n\nKernel Density\n\n\nCorresponde a un suavizamiento de un Histograma en el cuál se usa un Kernel (función no negativa que suma 1 y tiene media 0) para agrupar los puntos vecinos.\n\n\n\n\n\nLa función estimada es:\n\\[f(x) = \\frac{1}{n} = \\sum_{i=1}^n K \\left(\\frac{x - x(i)}{h}\\right)\\]\n\n\\(K(u)\\) es el Kernel.\n\\(h\\) es el ancho de banda."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones-2",
-    "href": "tics411/clase-2.html#visualizaciones-distribuciones-2",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Distribuciones",
-    "text": "Visualizaciones: Distribuciones\n\nBoxplot (Caja y Bigotes)\n\nEs un tipo de gráfico que muestra la distribución de manera univariada.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTiene la capacidad de mostrar varias distribuciones a la vez.\nAdemás presenta estadísticos de interés: Mediana, IQR y outliers.\nLos puntos fuera de los bigotes son considerados Outliers.\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos bigotes pueden representar:\n\nMínimo y Máximo. (En este caso no hay outliers).\n\\(\\mu \\pm 3\\sigma\\)\nPercentiles 5 y 95.\nOtros valores."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-barras",
-    "href": "tics411/clase-2.html#visualizaciones-barras",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Barras",
-    "text": "Visualizaciones: Barras\n\nBar Plot\n\n\nLa altura de la barra (normalmente Eje y) representa una cantidad asociada a una categoría (normalmente Eje x).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOtras convenciones llaman a este gráfico Column Plot, mientras que el Bar Plot tiene las barras de manera horizontal."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-puntos",
-    "href": "tics411/clase-2.html#visualizaciones-puntos",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Puntos",
-    "text": "Visualizaciones: Puntos\n\nScatter\n\n\nGráfico empleado para mostrar distribución de datos bivariados * Muestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y). * Permite mostrar relaciones lineales o no-lineales. * Correlaciones. * Outliers."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-líneas",
-    "href": "tics411/clase-2.html#visualizaciones-líneas",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Líneas",
-    "text": "Visualizaciones: Líneas\n\nLineplot\n\n\nGráfico empleado para visualizar tendencias y su evolución en el tiempo.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSi bien es posible utilizarlo para gráficar dos medidas continuas, las buenas prácticas indican que el eje X siempre debería contener una componente temporal."
-  },
-  {
-    "objectID": "tics411/clase-2.html#estadísticos-vs-visualizaciones",
-    "href": "tics411/clase-2.html#estadísticos-vs-visualizaciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Estadísticos vs Visualizaciones",
-    "text": "Estadísticos vs Visualizaciones"
-  },
-  {
-    "objectID": "tics411/clase-2.html#otras-visualizaciones",
-    "href": "tics411/clase-2.html#otras-visualizaciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "¿Otras Visualizaciones?",
-    "text": "¿Otras Visualizaciones?"
+    "objectID": "tics411/notebooks/02-EDA-solved.html#seaborn",
+    "href": "tics411/notebooks/02-EDA-solved.html#seaborn",
+    "title": "Medidas de Tendencia Central",
+    "section": "Seaborn",
+    "text": "Seaborn\n\nsns.catplot(kind=\"count\", data=titanic_df, y=\"embark_town\")\nplt.title(\"Pasajeros por Puerto\")\nsns.catplot(kind=\"count\", data=titanic_df, x=\"pclass\")\nplt.title(\"Pasajeros por Clase\")\n\nText(0.5, 1.0, 'Pasajeros por Clase')\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEn el caso de querer entender los colores de Seaborn ver acá\n\n\n# Agrupar por ambos casos\nsns.catplot(\n    kind=\"count\", y=\"sex\", hue=\"pclass\", data=titanic_df, palette=\"Set1\"\n)\n\n\n\n\n\n\n\n\n\n## Barplot\nimport numpy as np\n\nsns.catplot(\n    kind=\"bar\",\n    x=\"sex\",\n    y=\"fare\",\n    data=titanic_df,\n    estimator=np.median,\n    errorbar=None,\n    hue=\"embark_town\",\n    col=\"pclass\",\n)\n\n\n\n\n\n\n\n\n\nHistogramas\n\nsns.displot(x=\"fare\", data=titanic_df, kind=\"kde\", height=4, aspect=6)\n\n\n\n\n\n\n\n\n\nsns.displot(x=\"fare\", data=titanic_df, height=4, aspect=6)\n\n\n\n\n\n\n\n\n\nsns.displot(x=\"fare\", data=titanic_df, kde=True, height=4, aspect=6)\n\n\n\n\n\n\n\n\n\nsns.relplot(\n    kind=\"scatter\", x=\"age\", y=\"fare\", data=titanic_df, hue=\"pclass\"\n)\n\n\n\n\n\n\n\n\n\nsns.relplot(x=\"Date\", y=\"Price\", data=ts_df, kind=\"line\")\nplt.title(\"Precio del Dow Jones\")\n\nText(0.5, 1.0, 'Precio del Dow Jones')\n\n\n\n\n\n\n\n\n\n\nnew_data = ts_df.melt(\n    id_vars=[\"Date\"],\n    value_vars=[\"AA\", \"BB\"],\n    var_name=\"Tipo\",\n    value_name=\"stock_price\",\n)\nnew_data\n\n\n\n\n\n\n\n\n\nDate\nTipo\nstock_price\n\n\n\n\n0\n1914-12-01\nAA\n1108.502557\n\n\n1\n1915-01-01\nAA\n1047.266778\n\n\n2\n1915-02-01\nAA\n962.881350\n\n\n3\n1915-03-01\nAA\n1087.728331\n\n\n4\n1915-04-01\nAA\n981.036020\n\n\n...\n...\n...\n...\n\n\n1293\n1968-08-01\nBB\n36.633113\n\n\n1294\n1968-09-01\nBB\n40.238166\n\n\n1295\n1968-10-01\nBB\n61.388597\n\n\n1296\n1968-11-01\nBB\n-16.274181\n\n\n1297\n1968-12-01\nBB\n-43.500801\n\n\n\n\n1298 rows × 3 columns\n\n\n\n\n\nsns.relplot(\n    kind=\"line\", y=\"stock_price\", x=\"Date\", data=new_data, hue=\"Tipo\"\n)\n\n\n\n\n\n\n\n\n\nsns.relplot(\n    kind=\"scatter\",\n    x=\"age\",\n    y=\"fare\",\n    data=titanic_df,\n    col=\"alone\",\n    hue=\"survived\",\n)\n\n\n\n\n\n\n\n\n\n# Esto es un insight... Los hombres solos sobrevivieron muchísimo más...\nsns.catplot(\n    kind=\"count\", x=\"sex\", hue=\"survived\", data=titanic_df, col=\"alone\"\n)\n\n\n\n\n\n\n\n\n\nEl contra de estos gráficos en Seaborn es que no permiten agregarse a un Layout Mosaic."
   },
   {
     "objectID": "tics411/clase-0.html#quién-soy",
@@ -745,6 +710,104 @@
     "text": "Etapas del Modelamiento: Metodología Propia"
   },
   {
+    "objectID": "tics411/clase-2.html#eda",
+    "href": "tics411/clase-2.html#eda",
+    "title": "TICS-411 Minería de Datos",
+    "section": "EDA",
+    "text": "EDA\n\nEl Analisis Exploratorio de Datos (EDA, por sus siglas en inglés) es procedimiento en el cual se analiza un dataset para explorar sus características principales.\n\n\nSu objetivo principal es poder familiarizarse con los datos además de encontrar potenciales problemas en su calidad.\nPrincipalmente hace uso de técnicas de manipulación de datos y visualizaciones.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos hallazgos importantes dentro del proceso se les denomina insights.\n\n\n\n\n\n\n\n\n\nEl uso de visualizaciones inadecuadas podría llevar a conclusiones erróneas.\n\n\n\n\n\n\n\n\n\n\nSummary.\nVisualización."
+  },
+  {
+    "objectID": "tics411/clase-2.html#medidas-de-tendencia-central",
+    "href": "tics411/clase-2.html#medidas-de-tendencia-central",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Medidas de Tendencia Central",
+    "text": "Medidas de Tendencia Central"
+  },
+  {
+    "objectID": "tics411/clase-2.html#medidas-de-dispersión-y-asimetría",
+    "href": "tics411/clase-2.html#medidas-de-dispersión-y-asimetría",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Medidas de Dispersión y Asimetría",
+    "text": "Medidas de Dispersión y Asimetría"
+  },
+  {
+    "objectID": "tics411/clase-2.html#eda-visualización",
+    "href": "tics411/clase-2.html#eda-visualización",
+    "title": "TICS-411 Minería de Datos",
+    "section": "EDA: Visualización",
+    "text": "EDA: Visualización\n\nLa visualización de datos es la presentación de datos en forma gráfica. Permite ver los análisis de modo que los responsables a cargo pueden comprender conceptos complejos.\n\n\nGracias a la evoluación del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la Visión.\n\n\n\n\n\n\n\n\nPuede ser difícil de aplicar si el tamaño de los datos es grande (sea en instancias o atributos). Por ejemplo, si los datos están en 4 dimensiones.\n\n\n\n\n\n\n\n\n\n\n\n\nSe suelen resumir los datos en estadísticas simples.\nGraficar datos en 1D, 2D y 3D (evitar dentro de lo posible).\nLa visualización debe ser comprensible ojalá sin ninguna explicación.\n\n\n\n\n\n\n\n\n\n\n\n\nEn caso de datos de alta dimensionalidad puede ser una buena idea reducir dimensiones mediante técnicas como:\n\nPCA\nUMAP\netc."
+  },
+  {
+    "objectID": "tics411/clase-2.html#caso-de-visualización",
+    "href": "tics411/clase-2.html#caso-de-visualización",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Caso de Visualización",
+    "text": "Caso de Visualización\n\n\n\n\n\n\n\nFiguras\nEscala de Colores.\nTamaño de los puntos.\nDemasiada información en un sólo gráfico.\nNo se entiende el mensaje."
+  },
+  {
+    "objectID": "tics411/clase-2.html#canales-visuales",
+    "href": "tics411/clase-2.html#canales-visuales",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Canales Visuales",
+    "text": "Canales Visuales\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSe les llama canales visuales a elementos visuales que pueden expresarse para poder expresar información (Clase Visualizacion Andreas Mueller).\nLa idea es poder mapear valores a cada uno de estos canales a valores.\n\n\n\n\n\n\n\n\n\n\n\nNo todos los canales son igual de útiles ni fáciles de entender."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones",
+    "href": "tics411/clase-2.html#visualizaciones-distribuciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Distribuciones",
+    "text": "Visualizaciones: Distribuciones\n\nHistograma\n\n\nEl histograma permite visualizar distribuciones univariadas acumulando los datos en rangos de igual tamaño (bins).\n\n\n\n\nPermite visualizar el centro, la extensión, la asimetría y outliers.\n\n\n\n\n\n\n\n\nEl histograma puede ser “engañoso” para conjuntos de datos pequeños.\nLa visualización puede resultar de manera muy distintas dependiendo del número de bins."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones-1",
+    "href": "tics411/clase-2.html#visualizaciones-distribuciones-1",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Distribuciones",
+    "text": "Visualizaciones: Distribuciones\n\nKernel Density\n\n\nCorresponde a un suavizamiento de un Histograma en el cuál se usa un Kernel (función no negativa que suma 1 y tiene media 0) para agrupar los puntos vecinos.\n\n\n\n\n\nLa función estimada es:\n\\[f(x) = \\frac{1}{n} = \\sum_{i=1}^n K \\left(\\frac{x - x(i)}{h}\\right)\\]\n\n\\(K(u)\\) es el Kernel.\n\\(h\\) es el ancho de banda."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones-2",
+    "href": "tics411/clase-2.html#visualizaciones-distribuciones-2",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Distribuciones",
+    "text": "Visualizaciones: Distribuciones\n\nBoxplot (Caja y Bigotes)\n\nEs un tipo de gráfico que muestra la distribución de manera univariada.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTiene la capacidad de mostrar varias distribuciones a la vez.\nAdemás presenta estadísticos de interés: Mediana, IQR y outliers.\nLos puntos fuera de los bigotes son considerados Outliers.\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos bigotes pueden representar:\n\nMínimo y Máximo. (En este caso no hay outliers).\n\\(\\mu \\pm 3\\sigma\\)\nPercentiles 5 y 95.\nOtros valores."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-barras",
+    "href": "tics411/clase-2.html#visualizaciones-barras",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Barras",
+    "text": "Visualizaciones: Barras\n\nBar Plot\n\n\nLa altura de la barra (normalmente Eje y) representa una cantidad asociada a una categoría (normalmente Eje x).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOtras convenciones llaman a este gráfico Column Plot, mientras que el Bar Plot tiene las barras de manera horizontal."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-puntos",
+    "href": "tics411/clase-2.html#visualizaciones-puntos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Puntos",
+    "text": "Visualizaciones: Puntos\n\nScatter\n\n\nGráfico empleado para mostrar distribución de datos bivariados\n\n\n\n\nMuestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y).\nPermite mostrar relaciones lineales o no-lineales.\nCorrelaciones.\nOutliers."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-líneas",
+    "href": "tics411/clase-2.html#visualizaciones-líneas",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Líneas",
+    "text": "Visualizaciones: Líneas\n\nLineplot\n\n\nGráfico empleado para visualizar tendencias y su evolución en el tiempo.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSi bien es posible utilizarlo para gráficar dos medidas continuas, las buenas prácticas indican que el eje X siempre debería contener una componente temporal."
+  },
+  {
+    "objectID": "tics411/clase-2.html#estadísticos-vs-visualizaciones",
+    "href": "tics411/clase-2.html#estadísticos-vs-visualizaciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Estadísticos vs Visualizaciones",
+    "text": "Estadísticos vs Visualizaciones"
+  },
+  {
+    "objectID": "tics411/clase-2.html#otras-visualizaciones",
+    "href": "tics411/clase-2.html#otras-visualizaciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "¿Otras Visualizaciones?",
+    "text": "¿Otras Visualizaciones?"
+  },
+  {
     "objectID": "tics411/notebooks/01-Preprocesamiento.html",
     "href": "tics411/notebooks/01-Preprocesamiento.html",
     "title": "Clases UAI",
@@ -812,21 +875,21 @@
     "href": "tics411/notebooks/02-EDA.html#visualizaciones-pandas",
     "title": "Medidas de Tendencia Central",
     "section": "Visualizaciones: Pandas",
-    "text": "Visualizaciones: Pandas\n\nHistogramas\n\niris_df.hist(figsize=(20, 6), bins=30, edgecolor = \"black\", grid = False);\n\n\niris_df.plot(kind=\"hist\", alpha=0.5, bins=30, figsize=(20,6), edgecolor = \"black\");\n# Notar que este genera todos los histogramas super puestos...\n\n\n\nBarplots\n\ntitanic_df[\"sex\"].value_counts().plot(kind = \"bar\", figsize=(5,6), title = \"Número de Pasajeros por Sexo...\", edgecolor = \"black\");\n\n\nPara este tipo de gráficas se requiere entender el concepto de agrupación…\n\n\n## Gráficar varias dimensiones\ntitanic_df.groupby(\"pclass\")[[\"age\",\"fare\"]].mean().plot(kind = \"bar\", edgecolor = \"black\", title = \"Edad y Tarifa por cada Clase\");\n\n\niris_df.groupby(\"species\").mean().plot(kind = \"bar\", edgecolor = \"black\");"
+    "text": "Visualizaciones: Pandas\n\nHistogramas\n\niris_df.hist(figsize=(20, 6), bins=30, edgecolor=\"black\", grid=False)\nplt.tight_layout()\n\n\niris_df.plot(\n    kind=\"hist\", alpha=0.5, bins=30, figsize=(20, 6), edgecolor=\"black\"\n)\n# Notar que este genera todos los histogramas super puestos...\n\n\n\nBarplots\n\ntitanic_df[\"sex\"].value_counts().plot(\n    kind=\"bar\",\n    figsize=(5, 6),\n    title=\"Número de Pasajeros por Sexo...\",\n    edgecolor=\"black\",\n)\n\n\nPara este tipo de gráficas se requiere entender el concepto de agrupación…\n\n\n## Gráficar varias dimensiones\ntitanic_df.groupby(\"pclass\")[[\"age\", \"fare\"]].mean().plot(\n    kind=\"bar\", edgecolor=\"black\", title=\"Edad y Tarifa por cada Clase\"\n)\n\n\niris_df.groupby(\"species\").mean().plot(kind=\"bar\", edgecolor=\"black\")"
   },
   {
     "objectID": "tics411/notebooks/02-EDA.html#boxplots",
     "href": "tics411/notebooks/02-EDA.html#boxplots",
     "title": "Medidas de Tendencia Central",
     "section": "Boxplots",
-    "text": "Boxplots\n\niris_df.drop(columns = \"species\").plot(kind = \"box\");\n\n\nPuntos\n\niris_df.plot(x = \"petal_length\", y = \"petal_width\", kind = \"scatter\", title = \"Largo de Pétalo vs Ancho de Pétalo\", xlabel=\"Largo\", ylabel=\"Ancho\");\n\n\nts_df.plot(x = \"Date\", y = \"Price\", title = \"Evolución del Dow Jones\");\n\n\nfrom scipy.stats import norm\nts_df[\"AA\"] = ts_df[\"Price\"] + norm.rvs(size = 649)*55+ 1000\nts_df[\"BB\"] = -norm.rvs(size = 649)*55\n\nts_df.set_index(\"Date\").plot(title = \"Comparación distintas Tendencias\");\n\n\nfig = plt.figure(figsize=(20, 10))\nax = fig.subplot_mosaic(\"\"\"AAA\n                        BCC\"\"\")\n\niris_df.drop(columns = \"species\").plot(kind = \"box\", ax = ax[\"C\"], title = \"Distribución de Datos por Variable\");\niris_df.plot(x = \"petal_length\", y = \"petal_width\", kind = \"scatter\", title = \"Largo de Pétalo vs Ancho de Pétalo\", xlabel=\"Largo\", ylabel=\"Ancho\", ax = ax[\"B\"]);\niris_df.groupby(\"species\").mean().plot(kind = \"bar\", edgecolor = \"black\", ax = ax[\"A\"], rot=0, title=\"Valores promedio por Especie\")\nplt.suptitle(\"Súper Título\", fontsize = 20);"
+    "text": "Boxplots\n\niris_df.drop(columns=\"species\").plot(kind=\"box\")\n\n\nPuntos\n\niris_df.plot(\n    x=\"petal_length\",\n    y=\"petal_width\",\n    kind=\"scatter\",\n    title=\"Largo de Pétalo vs Ancho de Pétalo\",\n    xlabel=\"Largo\",\n    ylabel=\"Ancho\",\n)\n\n\nts_df.plot(x=\"Date\", y=\"Price\", title=\"Evolución del Dow Jones\")\n\n\nfrom scipy.stats import norm\n\nts_df[\"AA\"] = ts_df[\"Price\"] + norm.rvs(size=649) * 55 + 1000\nts_df[\"BB\"] = -norm.rvs(size=649) * 55\n\nts_df.set_index(\"Date\").plot(title=\"Comparación distintas Tendencias\")\n\n\nfig = plt.figure(figsize=(20, 10))\nax = fig.subplot_mosaic(\n    \"\"\"AAA\n       BCC\"\"\"\n)\n\niris_df.drop(columns=\"species\").plot(\n    kind=\"box\", ax=ax[\"C\"], title=\"Distribución de Datos por Variable\"\n)\niris_df.plot(\n    x=\"petal_length\",\n    y=\"petal_width\",\n    kind=\"scatter\",\n    title=\"Largo de Pétalo vs Ancho de Pétalo\",\n    xlabel=\"Largo\",\n    ylabel=\"Ancho\",\n    ax=ax[\"B\"],\n)\niris_df.groupby(\"species\").mean().plot(\n    kind=\"bar\",\n    edgecolor=\"black\",\n    ax=ax[\"A\"],\n    rot=0,\n    title=\"Valores promedio por Especie\",\n)\nplt.suptitle(\"Súper Título\", fontsize=20)"
   },
   {
     "objectID": "tics411/notebooks/02-EDA.html#seaborn",
     "href": "tics411/notebooks/02-EDA.html#seaborn",
     "title": "Medidas de Tendencia Central",
     "section": "Seaborn",
-    "text": "Seaborn\n\nsns.catplot(kind = \"count\", data = titanic_df, y = \"embark_town\")\nplt.title(\"Pasajeros por Puerto\")\nsns.catplot(kind = \"count\", data = titanic_df, x = \"pclass\")\nplt.title(\"Pasajeros por Clase\");\n\n\nEn el caso de querer entender los colores de Seaborn ver acá\n\n\n# Agrupar por ambos casos\nsns.catplot(kind =\"count\", y = \"sex\", hue = \"pclass\", data = titanic_df, palette = \"Set1\");\n\n\n## Barplot\nsns.catplot(kind = \"bar\", x = \"sex\", y = \"fare\", data = titanic_df, errorbar=None, hue = \"embark_town\", col = \"pclass\");\n\n\nHistogramas\n\nsns.displot(x = \"fare\", data = titanic_df, kind = \"kde\", height=4, aspect = 6);\n\n\nsns.displot(x = \"fare\", data = titanic_df, height=4, aspect = 6);\n\n\nsns.displot(x = \"fare\", data = titanic_df, kde = True, height=4, aspect = 6);\n\n\nsns.relplot(kind = \"scatter\", x = \"age\", y = \"fare\", data = titanic_df, hue = \"pclass\");\n\n\nsns.relplot(x = \"Date\", y = \"Price\", data = ts_df, kind = \"line\")\nplt.title(\"Precio del Dow Jones\");\n\n\nsns.relplot(kind = \"scatter\", x = \"age\", y = \"fare\", data = titanic_df, col = \"alone\", hue = \"survived\");\n\n\n# Esto es un insight... Los hombres solos sobrevivieron muchísimo más...\nsns.catplot(kind = \"count\", x = \"sex\", hue = \"survived\", data = titanic_df, col = \"alone\");\n\n\nEl contra de estos gráficos en Seaborn es que no permiten agregarse a un Layout Mosaic."
+    "text": "Seaborn\n\nsns.catplot(kind=\"count\", data=titanic_df, y=\"embark_town\")\nplt.title(\"Pasajeros por Puerto\")\nsns.catplot(kind=\"count\", data=titanic_df, x=\"pclass\")\nplt.title(\"Pasajeros por Clase\")\n\n\nEn el caso de querer entender los colores de Seaborn ver acá\n\n\n# Agrupar por ambos casos\nsns.catplot(\n    kind=\"count\", y=\"sex\", hue=\"pclass\", data=titanic_df, palette=\"Set1\"\n)\n\n\n## Barplot\nimport numpy as np\n\nsns.catplot(\n    kind=\"bar\",\n    x=\"sex\",\n    y=\"fare\",\n    data=titanic_df,\n    estimator=np.median,\n    errorbar=None,\n    hue=\"embark_town\",\n    col=\"pclass\",\n)\n\n\nHistogramas\n\nsns.displot(x=\"fare\", data=titanic_df, kind=\"kde\", height=4, aspect=6)\n\n\nsns.displot(x=\"fare\", data=titanic_df, height=4, aspect=6)\n\n\nsns.displot(x=\"fare\", data=titanic_df, kde=True, height=4, aspect=6)\n\n\nsns.relplot(\n    kind=\"scatter\", x=\"age\", y=\"fare\", data=titanic_df, hue=\"pclass\"\n)\n\n\nsns.relplot(x=\"Date\", y=\"Price\", data=ts_df, kind=\"line\")\nplt.title(\"Precio del Dow Jones\")\n\n\nnew_data = ts_df.melt(\n    id_vars=[\"Date\"],\n    value_vars=[\"AA\", \"BB\"],\n    var_name=\"Tipo\",\n    value_name=\"stock_price\",\n)\nnew_data\n\n\nsns.relplot(\n    kind=\"line\", y=\"stock_price\", x=\"Date\", data=new_data, hue=\"Tipo\"\n)\n\n\nsns.relplot(\n    kind=\"scatter\",\n    x=\"age\",\n    y=\"fare\",\n    data=titanic_df,\n    col=\"alone\",\n    hue=\"survived\",\n)\n\n\n# Esto es un insight... Los hombres solos sobrevivieron muchísimo más...\nsns.catplot(\n    kind=\"count\", x=\"sex\", hue=\"survived\", data=titanic_df, col=\"alone\"\n)\n\n\nEl contra de estos gráficos en Seaborn es que no permiten agregarse a un Layout Mosaic."
   },
   {
     "objectID": "tics411/lab-0.html#qué-es-scikit-learn",
