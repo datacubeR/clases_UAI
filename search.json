@@ -150,11 +150,11 @@
     "text": "K-Means: Detalles Técnicos\n\n\n\n\n\n\nFortalezas\n\n\n\nAlgoritmo relativamente eficiente (existen muy buenas implementaciones). \\(O(k \\cdot n \\cdot i)\\). Donde \\(k\\) es el número de clusters, \\(n\\) el número de puntos, e \\(i\\) el número de iteraciones.\nEncuentra clusters esféricos.\n\n\n\n\n\n\n\n\n\n\nDebilidades\n\n\n\nSensible al punto de inicio.\nSolo se puede aplicar cuando el promedio es calculable.\nSe requiere definir K a priori (K es un hiperparámetro).\nSuceptible al ruido."
   },
   {
-    "objectID": "tics411/clase-1.html#tenemos-posible-ayudante-pero-tenemos-un-problema-de-horario.",
-    "href": "tics411/clase-1.html#tenemos-posible-ayudante-pero-tenemos-un-problema-de-horario.",
+    "objectID": "tics411/clase-1.html#avisos-1",
+    "href": "tics411/clase-1.html#avisos-1",
     "title": "TICS-411 Minería de Datos",
-    "section": "Tenemos (posible) ayudante, pero tenemos un problema de horario.",
-    "text": "Tenemos (posible) ayudante, pero tenemos un problema de horario.\n\nHorario Actual: Viernes 20:00 a 21:10 hrs.\nHorario Propuesto: Lunes 11:45 a 12:55 hrs.\n\n\n\nTenemos pruebas:\n\nPrueba 1: Martes 30 de Abril 18:30 a 21:00\nPrueba 2: Martes 11 de Julio 18:30 a 21:00"
+    "section": "Avisos",
+    "text": "Avisos\n\n\n\n\n\n\nAyudantía\n\n\nTenemos (posible) ayudante, pero tenemos un problema de horario.\n\nHorario Actual: Viernes 20:00 a 21:10 hrs.\nHorario Propuesto: Lunes 11:45 a 12:55 hrs.\n\n\n\n\n\n\n\n\n\n\n\nTarea 1\n\n\n\nEntrega el 7 de Abril: Parejas inscribirse en Webcursos.\nPlazo para inscribir parejas: Este Domingo.\n\n\n\n\n\n\n\n\n\n\n\n\nFechas de Prueba\n\n\n\nPrueba 1: Martes 30 de Abril 18:30 a 21:00\nPrueba 2: Martes 11 de Julio 18:30 a 21:00"
   },
   {
     "objectID": "tics411/clase-1.html#tipos-de-datos-datos-tabulares",
