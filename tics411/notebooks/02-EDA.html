@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Clases UAI - Medidas de Tendencia Central</title>
+<title>Clases UAI - EDA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,7 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -100,6 +100,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -161,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Medidas de Tendencia Central</h1>
+<h1 class="title">EDA</h1>
 </div>
 
 
@@ -178,250 +181,479 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="cell-0" class="cell">
+<section id="eda" class="level1">
+<h1>EDA</h1>
+<p>El siguiente notebook tiene por propósito mostrar algunos comandos básicos para poder realizar Exploración de Datos utilizando Pandas.</p>
+<div id="cell-1" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>iris_df <span class="op">=</span> sns.load_dataset(<span class="st">"iris"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>titanic_df <span class="op">=</span> sns.load_dataset(<span class="st">"titanic"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ts_df <span class="op">=</span> sns.load_dataset(<span class="st">"dowjones"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>iris_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Vamos a cargar los siguientes datos para poder explorarlos.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>iris_df <span class="op">=</span> sns.load_dataset(<span class="st">"iris"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>titanic_df <span class="op">=</span> sns.load_dataset(<span class="st">"titanic"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>ts_df <span class="op">=</span> sns.load_dataset(<span class="st">"dowjones"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>iris_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sepal_length</th>
+<th data-quarto-table-cell-role="th">sepal_width</th>
+<th data-quarto-table-cell-role="th">petal_length</th>
+<th data-quarto-table-cell-role="th">petal_width</th>
+<th data-quarto-table-cell-role="th">species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5.1</td>
+<td>3.5</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>4.9</td>
+<td>3.0</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>4.7</td>
+<td>3.2</td>
+<td>1.3</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4.6</td>
+<td>3.1</td>
+<td>1.5</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5.0</td>
+<td>3.6</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">145</td>
+<td>6.7</td>
+<td>3.0</td>
+<td>5.2</td>
+<td>2.3</td>
+<td>virginica</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">146</td>
+<td>6.3</td>
+<td>2.5</td>
+<td>5.0</td>
+<td>1.9</td>
+<td>virginica</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">147</td>
+<td>6.5</td>
+<td>3.0</td>
+<td>5.2</td>
+<td>2.0</td>
+<td>virginica</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">148</td>
+<td>6.2</td>
+<td>3.4</td>
+<td>5.4</td>
+<td>2.3</td>
+<td>virginica</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">149</td>
+<td>5.9</td>
+<td>3.0</td>
+<td>5.1</td>
+<td>1.8</td>
+<td>virginica</td>
+</tr>
+</tbody>
+</table>
+
+<p>150 rows × 5 columns</p>
+</div>
+</div>
+</div>
 </div>
 <section id="medidas-de-tendencia-central" class="level2">
 <h2 class="anchored" data-anchor-id="medidas-de-tendencia-central">Medidas de Tendencia Central</h2>
-<div id="cell-2" class="cell">
+<p>Los comandos <code>.mean()</code> y <code>.median()</code> permiten calcular la <em>media</em> y la <em>mediana</em> en datos numéricos. Como se ve en los ejemplos permite llamar una <code>Serie</code> de Pandas y calcular un valor.</p>
+<blockquote class="blockquote">
+<p>Tip: En caso de querer aplicar estos comandos a un DataFrame se recomienda utilizar el flag <code>numeric_only = True</code> para evitar calcular estos valores en Datos Categóricos donde no hacen sentido.</p>
+</blockquote>
+<div id="cell-4" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Promedio de Ancho de Petalo </span><span class="sc">{</span>iris_df[<span class="st">'sepal_width'</span>]<span class="sc">.</span>mean()<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mediana de Largo de Petalo </span><span class="sc">{</span>iris_df[<span class="st">'sepal_length'</span>]<span class="sc">.</span>median()<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Promedio de Ancho de Petalo 3.0573333333333337
+Mediana de Largo de Petalo 5.8</code></pre>
 </div>
-<div id="cell-3" class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Moda de Especies: "</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>iris_df[<span class="st">"species"</span>].mode()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-4" class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p25 <span class="op">=</span> iris_df[<span class="st">"sepal_width"</span>].quantile(q<span class="op">=</span><span class="fl">0.25</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>p50 <span class="op">=</span> iris_df[<span class="st">"sepal_width"</span>].quantile(q<span class="op">=</span><span class="fl">0.50</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>p75 <span class="op">=</span> iris_df[<span class="st">"sepal_width"</span>].quantile(q<span class="op">=</span><span class="fl">0.75</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>iris_df[<span class="st">"sepal_width"</span>].median(), p25, p50, p75</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pandas también cuenta con el comando <code>.mode()</code> el cuál devuelve la moda. A diferencia de los comandos anteriores, <code>.mode()</code> puede utilizarse tanto para datos categóricos como datos numéricos.</p>
+<div id="cell-6" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Moda de Especies: "</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>iris_df[<span class="st">"species"</span>].mode()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Moda de Especies: </code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>0        setosa
+1    versicolor
+2     virginica
+Name: species, dtype: object</code></pre>
+</div>
+</div>
+<p>El comando <code>.quantile()</code> permite calcular algún percentil de interés. <code>q</code> es un valor que va entre 0 y 1 para indicar el percentil requerido. Recordar que la mediana es equivalente al Percentil 50.</p>
+<div id="cell-8" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p25 <span class="op">=</span> iris_df[<span class="st">"sepal_width"</span>].quantile(q<span class="op">=</span><span class="fl">0.25</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>p50 <span class="op">=</span> iris_df[<span class="st">"sepal_width"</span>].quantile(q<span class="op">=</span><span class="fl">0.50</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>p75 <span class="op">=</span> iris_df[<span class="st">"sepal_width"</span>].quantile(q<span class="op">=</span><span class="fl">0.75</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>iris_df[<span class="st">"sepal_width"</span>].median(), p25, p50, p75</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>(3.0, 2.8, 3.0, 3.3)</code></pre>
+</div>
 </div>
 </section>
 <section id="medidas-de-dispersión" class="level2">
 <h2 class="anchored" data-anchor-id="medidas-de-dispersión">Medidas de Dispersión</h2>
-<div id="cell-6" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar error en caso de no usar numeric_only</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>iris_df.var(numeric_only<span class="op">=</span><span class="va">True</span>, ddof<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pandas permite el cálculo de distintas medidas de dispersión. Al igual que los comandos anteriores contiene el flag <code>numeric_only = True</code> para evitar inconvenientes en DataFrames con distintos data types. Además contiene el comando <code>ddof</code> el cuál permitirá diferenciar si se quiere la medida <em>poblacional</em> (<code>ddof = 0</code>) o la <em>muestral</em> (<code>ddof = 1</code>).</p>
+<div id="cell-11" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Varianza Poblacional</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>iris_df.var(numeric_only<span class="op">=</span><span class="va">True</span>, ddof<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>sepal_length    0.681122
+sepal_width     0.188713
+petal_length    3.095503
+petal_width     0.577133
+dtype: float64</code></pre>
 </div>
-<div id="cell-7" class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>iris_df.var(numeric_only<span class="op">=</span><span class="va">True</span>, ddof<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-8" class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>iris_df.std(numeric_only<span class="op">=</span><span class="va">True</span>, ddof<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-12" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Varianza Muestral</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>iris_df.var(numeric_only<span class="op">=</span><span class="va">True</span>, ddof<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>sepal_length    0.685694
+sepal_width     0.189979
+petal_length    3.116278
+petal_width     0.581006
+dtype: float64</code></pre>
 </div>
-<div id="cell-9" class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar cómo se construye esta función...</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_quantiles(column):</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    quantiles <span class="op">=</span> iris_df.quantile([<span class="fl">0.25</span>, <span class="fl">0.75</span>], numeric_only<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    iqr_sl <span class="op">=</span> quantiles.loc[<span class="fl">0.75</span>, column] <span class="op">-</span> quantiles.loc[<span class="fl">0.25</span>, column]</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> iqr_sl</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>calculate_quantiles(<span class="st">"sepal_length"</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>calculate_quantiles(<span class="st">"petal_width"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-10" class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>iris_df.skew(numeric_only<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-13" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Desviación Estándar Muestral</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>iris_df.std(numeric_only<span class="op">=</span><span class="va">True</span>, ddof<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>sepal_length    0.828066
+sepal_width     0.435866
+petal_length    1.765298
+petal_width     0.762238
+dtype: float64</code></pre>
 </div>
-<blockquote class="blockquote">
-<p>Cuando hacemos visualizaciones tenemos 2 formas de hacerlas: * Usar Pandas directamente y/o Matplotlib: Buena documentación, gráficos bonitos. * Usar Seaborn: Documentación Complicada, fácil para descubrir insights.</p>
-</blockquote>
+</div>
+<div id="cell-14" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Función para calcular el Rango Intercuartil...</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_IQR(column):</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    quantiles <span class="op">=</span> iris_df.quantile([<span class="fl">0.25</span>, <span class="fl">0.75</span>], numeric_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    iqr_sl <span class="op">=</span> quantiles.loc[<span class="fl">0.75</span>, column] <span class="op">-</span> quantiles.loc[<span class="fl">0.25</span>, column]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> iqr_sl</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>calculate_IQR(<span class="st">"sepal_length"</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>calculate_IQR(<span class="st">"petal_width"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>1.5</code></pre>
+</div>
+</div>
+<div id="cell-15" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coeficiente de Skewness o Asimetría.</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>iris_df.skew(numeric_only<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>sepal_length    0.314911
+sepal_width     0.318966
+petal_length   -0.274884
+petal_width    -0.102967
+dtype: float64</code></pre>
+</div>
+</div>
 </section>
-<section id="visualizaciones-pandas" class="level2">
-<h2 class="anchored" data-anchor-id="visualizaciones-pandas">Visualizaciones: Pandas</h2>
+<section id="visualizaciones" class="level2">
+<h2 class="anchored" data-anchor-id="visualizaciones">Visualizaciones</h2>
+<p>A continuación se mostrarán comandos propios de Pandas para poder generar los gráficos visto a lo largo de las clases. Se sugiere este tipo de gráficos cuando se trabaje con DataFrames ya que poseen buena documentación y una interfaz común para todos los gráficos.</p>
+<p>Opciones:</p>
+<ul>
+<li><code>kind</code>: Permite indicar mediante un string el tipo de gráfico a mostrar.</li>
+<li><code>figsize = (w,h)</code>: Permite fijar el tamaño de la figura. Notar que primero se entrega el ancho y luego el alto. Yo normalmente uso (20,6) ya que considero que queda bastante bien.</li>
+<li><code>edgecolor</code>: Permite indicar el color del borde de las barras mediante un string. Tiene sentido para histogramás y bar plots.</li>
+<li><code>grid = True/False</code>: Permite mostrar o no una grilla.</li>
+<li><code>bins = n</code>: Opción sólo para histogramas que permite indicar en cuántos bins se dividen los datos en el Histograma.</li>
+<li><code>alpha = 0.5</code>: Corresponde al grado de transparecencia. Es un valor que va entre 0 y 1. Entre más pequeño el valor, más transparente.</li>
+<li><code>title</code>: Permite agregar un Título como String.</li>
+<li><code>xlabel</code>: Permite agregar un Título al Eje X.</li>
+<li><code>ylabel</code>: Permite agregar un Título al Eje Y.</li>
+</ul>
 <section id="histogramas" class="level3">
 <h3 class="anchored" data-anchor-id="histogramas">Histogramas</h3>
-<div id="cell-14" class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>iris_df.hist(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">6</span>), bins<span class="op">=</span><span class="dv">30</span>, edgecolor<span class="op">=</span><span class="st">"black"</span>, grid<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-19" class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>iris_df.plot(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"hist"</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, bins<span class="op">=</span><span class="dv">30</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">6</span>), edgecolor<span class="op">=</span><span class="st">"black"</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Notar que este genera todos los histogramas superpuestos...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-15" class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>iris_df.plot(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"hist"</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, bins<span class="op">=</span><span class="dv">30</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">6</span>), edgecolor<span class="op">=</span><span class="st">"black"</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Notar que este genera todos los histogramas super puestos...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Por alguna razón Pandas tiene el comando <code>.hist()</code>. Este comando es bastante útil porque a diferencia del anterior no superpone los histogramas, lo cual la mayoría de las veces es lo que se busca.</p>
+<div id="cell-21" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>iris_df.hist(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">6</span>), bins<span class="op">=</span><span class="dv">30</span>, edgecolor<span class="op">=</span><span class="st">"black"</span>, grid<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tight_layout es opcional y a veces evita que hayan traslapes de títulos.</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Usarlo si es que es necesario.</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-EDA_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="barplots" class="level3">
 <h3 class="anchored" data-anchor-id="barplots">Barplots</h3>
-<div id="cell-17" class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>titanic_df[<span class="st">"sex"</span>].value_counts().plot(</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">6</span>),</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Número de Pasajeros por Sexo..."</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A diferencia de los Histográmas, los Barplots son utilizados para aplicar una agregación antes de gráficar. Esta agregación se puede utilizar mediante <code>.value_counts()</code> que permite contar valores, o mediante <code>.groupby()</code> el cuál permite aplicar otros tipos de agregación.</p>
+<div id="cell-24" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Acá por ejemplos contamos la cantidad de pasajeros por Sexo</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>titanic_df[<span class="st">"sex"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>sex
+male      577
+female    314
+Name: count, dtype: int64</code></pre>
 </div>
-<blockquote class="blockquote">
-<p>Para este tipo de gráficas se requiere entender el concepto de agrupación…</p>
-</blockquote>
-<div id="cell-19" class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Gráficar varias dimensiones</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>titanic_df.groupby(<span class="st">"pclass"</span>)[[<span class="st">"age"</span>, <span class="st">"fare"</span>]].mean().plot(</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>, edgecolor<span class="op">=</span><span class="st">"black"</span>, title<span class="op">=</span><span class="st">"Edad y Tarifa por cada Clase"</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-20" class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>iris_df.groupby(<span class="st">"species"</span>).mean().plot(kind<span class="op">=</span><span class="st">"bar"</span>, edgecolor<span class="op">=</span><span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-25" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Una vez que tenemos contados los elementos podemos graficar...</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>titanic_df[<span class="st">"sex"</span>].value_counts().plot(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">6</span>),</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Número de Pasajeros por Sexo..."</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-EDA_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-26" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Otro ejemplo, en este caso calculando el promedio por de Edad y Tarifa por Año.</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>titanic_df.groupby(<span class="st">"pclass"</span>)[[<span class="st">"age"</span>, <span class="st">"fare"</span>]].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">fare</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">pclass</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>38.233441</td>
+<td>84.154687</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>29.877630</td>
+<td>20.662183</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>25.140620</td>
+<td>13.675550</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-27" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">## En este caso, el índice Pclass irá al Eje X y los valores agregados de Age y Fare irán como barras.</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>iris_df.groupby(<span class="st">"species"</span>).mean().plot(kind<span class="op">=</span><span class="st">"bar"</span>, edgecolor<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-EDA_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 </section>
 <section id="boxplots" class="level2">
 <h2 class="anchored" data-anchor-id="boxplots">Boxplots</h2>
-<div id="cell-22" class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>iris_df.drop(columns<span class="op">=</span><span class="st">"species"</span>).plot(kind<span class="op">=</span><span class="st">"box"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-29" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>iris_df.drop(columns<span class="op">=</span><span class="st">"species"</span>).plot(kind<span class="op">=</span><span class="st">"box"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-EDA_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 <section id="puntos" class="level3">
 <h3 class="anchored" data-anchor-id="puntos">Puntos</h3>
-<div id="cell-24" class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>iris_df.plot(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"petal_length"</span>,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"petal_width"</span>,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Largo de Pétalo vs Ancho de Pétalo"</span>,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Largo"</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"Ancho"</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-25" class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ts_df.plot(x<span class="op">=</span><span class="st">"Date"</span>, y<span class="op">=</span><span class="st">"Price"</span>, title<span class="op">=</span><span class="st">"Evolución del Dow Jones"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-26" class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ts_df[<span class="st">"AA"</span>] <span class="op">=</span> ts_df[<span class="st">"Price"</span>] <span class="op">+</span> norm.rvs(size<span class="op">=</span><span class="dv">649</span>) <span class="op">*</span> <span class="dv">55</span> <span class="op">+</span> <span class="dv">1000</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ts_df[<span class="st">"BB"</span>] <span class="op">=</span> <span class="op">-</span>norm.rvs(size<span class="op">=</span><span class="dv">649</span>) <span class="op">*</span> <span class="dv">55</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>ts_df.set_index(<span class="st">"Date"</span>).plot(title<span class="op">=</span><span class="st">"Comparación distintas Tendencias"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-27" class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>))</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.subplot_mosaic(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"""AAA</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="st">       BCC"""</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>iris_df.drop(columns<span class="op">=</span><span class="st">"species"</span>).plot(</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"box"</span>, ax<span class="op">=</span>ax[<span class="st">"C"</span>], title<span class="op">=</span><span class="st">"Distribución de Datos por Variable"</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>iris_df.plot(</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"petal_length"</span>,</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"petal_width"</span>,</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>,</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Largo de Pétalo vs Ancho de Pétalo"</span>,</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Largo"</span>,</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"Ancho"</span>,</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax[<span class="st">"B"</span>],</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>iris_df.groupby(<span class="st">"species"</span>).mean().plot(</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>,</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax[<span class="st">"A"</span>],</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    rot<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Valores promedio por Especie"</span>,</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Súper Título"</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
-<section id="seaborn" class="level2">
-<h2 class="anchored" data-anchor-id="seaborn">Seaborn</h2>
-<div id="cell-29" class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(kind<span class="op">=</span><span class="st">"count"</span>, data<span class="op">=</span>titanic_df, y<span class="op">=</span><span class="st">"embark_town"</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Pasajeros por Puerto"</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>sns.catplot(kind<span class="op">=</span><span class="st">"count"</span>, data<span class="op">=</span>titanic_df, x<span class="op">=</span><span class="st">"pclass"</span>)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Pasajeros por Clase"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <blockquote class="blockquote">
-<p>En el caso de querer entender los colores de Seaborn ver <a href="https://seaborn.pydata.org/tutorial/color_palettes.html#palette-tutorial">acá</a></p>
+<p>Notar que a diferencia de los casos anteriores, el gráfico de puntos requiere que se definan qué columna irá en <code>x</code> y en <code>y</code> respectivamente.</p>
 </blockquote>
-<div id="cell-31" class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Agrupar por ambos casos</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sns.catplot(</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"count"</span>, y<span class="op">=</span><span class="st">"sex"</span>, hue<span class="op">=</span><span class="st">"pclass"</span>, data<span class="op">=</span>titanic_df, palette<span class="op">=</span><span class="st">"Set1"</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <div id="cell-32" class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Barplot</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>sns.catplot(</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>,</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"sex"</span>,</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"fare"</span>,</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>titanic_df,</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    estimator<span class="op">=</span>np.median,</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    errorbar<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"embark_town"</span>,</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"pclass"</span>,</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>iris_df.plot(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"petal_length"</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"petal_width"</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Largo de Pétalo vs Ancho de Pétalo"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Largo"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"Ancho"</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="histogramas-1" class="level3">
-<h3 class="anchored" data-anchor-id="histogramas-1">Histogramas</h3>
+</section>
+</section>
+<section id="lineplot" class="level2">
+<h2 class="anchored" data-anchor-id="lineplot">Lineplot</h2>
+<p>El lineplot es el gráfico por defecto de Pandas, por lo tanto no es necesario definir el parámetro <code>kind</code>. Al igual que el gráfico de Puntos se debe definir las variables <code>x</code> e <code>y</code>. Se recomienda siempre que <code>x</code> sea una variable de tipo temporal.</p>
 <div id="cell-34" class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sns.displot(x<span class="op">=</span><span class="st">"fare"</span>, data<span class="op">=</span>titanic_df, kind<span class="op">=</span><span class="st">"kde"</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ts_df.plot(x<span class="op">=</span><span class="st">"Date"</span>, y<span class="op">=</span><span class="st">"Price"</span>, title<span class="op">=</span><span class="st">"Evolución del Dow Jones"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-35" class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sns.displot(x<span class="op">=</span><span class="st">"fare"</span>, data<span class="op">=</span>titanic_df, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-35" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Este es un ejemplo de varias series de tiempo en conjunto.</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Este código sólo genera datos sintéticos.</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>ts_df[<span class="st">"AA"</span>] <span class="op">=</span> ts_df[<span class="st">"Price"</span>] <span class="op">+</span> norm.rvs(size<span class="op">=</span><span class="dv">649</span>) <span class="op">*</span> <span class="dv">55</span> <span class="op">+</span> <span class="dv">1000</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>ts_df[<span class="st">"BB"</span>] <span class="op">=</span> <span class="op">-</span>norm.rvs(size<span class="op">=</span><span class="dv">649</span>) <span class="op">*</span> <span class="dv">55</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>ts_df.set_index(<span class="st">"Date"</span>).plot(title<span class="op">=</span><span class="st">"Comparación distintas Tendencias"</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-EDA_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<div id="cell-36" class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>sns.displot(x<span class="op">=</span><span class="st">"fare"</span>, data<span class="op">=</span>titanic_df, kde<span class="op">=</span><span class="va">True</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </section>
+<section id="mosaico" class="level2">
+<h2 class="anchored" data-anchor-id="mosaico">Mosaico</h2>
+<p>En muchas ocaciones nosotros queremos mostrar una compilación de todos nuestros gráficos más que cada uno por separado. Para eso Matplotlib cuenta con la opción Mosaico.</p>
+<p>Mosaico permite generar una grilla definida como un String. Si se fijan nuestra grilla se define por el string:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""AAA</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">   BCC"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>En este caso nuestro canvas se divide en 6 partes, el gráfico que asigne a <code>A</code> utilizará las 3 secciones superiores, <code>B</code> utilizará sólo la sección de abajo a la izquierda y <code>C</code> utilizará las 2 restantes.</p>
+<p>Para asignar cada sección <code>.plot()</code> de pandas posee el parámetro <code>ax</code> donde se debe generar la asignación.</p>
+<div id="cell-37" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>))</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.subplot_mosaic(</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"""AAA</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="st">       BCC"""</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico asignado a C</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>iris_df.drop(columns<span class="op">=</span><span class="st">"species"</span>).plot(</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"box"</span>, ax<span class="op">=</span>ax[<span class="st">"C"</span>], title<span class="op">=</span><span class="st">"Distribución de Datos por Variable"</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co">## Gráfico asignado a B</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>iris_df.plot(</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"petal_length"</span>,</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"petal_width"</span>,</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>,</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Largo de Pétalo vs Ancho de Pétalo"</span>,</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Largo"</span>,</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"Ancho"</span>,</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax[<span class="st">"B"</span>],</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="co">## Gráfico asignado a A</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>iris_df.groupby(<span class="st">"species"</span>).mean().plot(</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>,</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax[<span class="st">"A"</span>],</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>    rot<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Valores promedio por Especie"</span>,</span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a><span class="co">## Permite Agregar un título general a todo el Gráfico</span></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Este será un título para todo el Gráfico"</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02-EDA_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="lineplots" class="level2">
-<h2 class="anchored" data-anchor-id="lineplots">Lineplots</h2>
-<div id="cell-38" class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>, x<span class="op">=</span><span class="st">"age"</span>, y<span class="op">=</span><span class="st">"fare"</span>, data<span class="op">=</span>titanic_df, hue<span class="op">=</span><span class="st">"pclass"</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-39" class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(x<span class="op">=</span><span class="st">"Date"</span>, y<span class="op">=</span><span class="st">"Price"</span>, data<span class="op">=</span>ts_df, kind<span class="op">=</span><span class="st">"line"</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Precio del Dow Jones"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-40" class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> ts_df.melt(</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span>[<span class="st">"Date"</span>],</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    value_vars<span class="op">=</span>[<span class="st">"AA"</span>, <span class="st">"BB"</span>],</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    var_name<span class="op">=</span><span class="st">"Tipo"</span>,</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    value_name<span class="op">=</span><span class="st">"stock_price"</span>,</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>new_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-41" class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"line"</span>, y<span class="op">=</span><span class="st">"stock_price"</span>, x<span class="op">=</span><span class="st">"Date"</span>, data<span class="op">=</span>new_data, hue<span class="op">=</span><span class="st">"Tipo"</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-42" class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>,</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"age"</span>,</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"fare"</span>,</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>titanic_df,</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"alone"</span>,</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"survived"</span>,</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-43" class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Esto es un insight... Los hombres solos sobrevivieron muchísimo más...</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>sns.catplot(</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"count"</span>, x<span class="op">=</span><span class="st">"sex"</span>, hue<span class="op">=</span><span class="st">"survived"</span>, data<span class="op">=</span>titanic_df, col<span class="op">=</span><span class="st">"alone"</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<blockquote class="blockquote">
-<p>El contra de estos gráficos en Seaborn es que no permiten agregarse a un <code>Layout Mosaic</code>.</p>
-</blockquote>
+<section id="matplotlib" class="level2">
+<h2 class="anchored" data-anchor-id="matplotlib">Matplotlib</h2>
+<p>Los comandos mostrados anteriormente son una adaptación de Matplotlib a Pandas. La gracia que tienen es que son fáciles de aprender y funcionarán directamente en Pandas que será nuestra principal fuente de datos.</p>
+<p>En el caso de trabajar con Numpy, estos comandos <code>NO FUNCIONARÁN</code>. Por lo tanto es necesario utilizar la API de Matplotlib. La traducción no es 100% directa, pero normalmente todos los parámetros de <code>.plot()</code> se cambiarán por comandos del tipo <code>plt.---</code></p>
+</section>
+<section id="ejemplo" class="level2">
+<h2 class="anchored" data-anchor-id="ejemplo">Ejemplo</h2>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y, c <span class="op">=</span> <span class="st">"red"</span>) <span class="co">#Existe también plt.bar, plt.hist, plt.scatter, plt.boxplot.</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Este va a ser un título"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Este será una etiqueta del Eje X"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Aprender Matplotlib es bastante más complicado pero tiene funcionalidades muchísimo más avanzadas que Pandas. Para este curso, no será necesario especializarse en Matplotlib, pero sí más adelante utilizaremos algunos gráficos que no se pueden hacer tan fácilmente en Pandas (pero serán casos puntuales).</p>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
