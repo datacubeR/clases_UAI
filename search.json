@@ -112,7 +112,7 @@
     "href": "tics411/clase-3.html#k-means-ejemplo-2",
     "title": "TICS-411 Minería de Datos",
     "section": "K-Means: Ejemplo",
-    "text": "K-Means: Ejemplo\n2da Iteración\n\n\n\n\nLos nuevos centroides son:\n\n\\[C_1 = (1,1)\\] \\[C_2 = (\\frac{11}{3}, \\frac{8}{3})\\]\n\n\n\nCalculamos la Matriz de Distancias al Centroide:\n\n\n\n\\[D^1 = \\begin{bmatrix}\n0 & 1 & 3.61 & 5\\\\\n3.14 & 2.26 & 0.47 & 1.89\n\\end{bmatrix}\\]\n\n\n\nCalculemos la Matriz de Pertenencia \\(G\\):\n\n\n\n\\[G^1 = \\begin{bmatrix}\n1 & 1 & 0 & 0 \\\\\n0 & 0 & 1 & 1\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\nLos nuevos centroides son: \\[C_1 = (1,1)\\] \\[C_2 = (\\frac{9}{2}, \\frac{7}{2})\\]"
+    "text": "K-Means: Ejemplo\n2da Iteración\n\n\n\n\nLos nuevos centroides son:\n\n\\[C_1 = (1,1)\\] \\[C_2 = (\\frac{11}{3}, \\frac{8}{3})\\]\n\n\n\nCalculamos la Matriz de Distancias al Centroide:\n\n\n\n\\[D^2 = \\begin{bmatrix}\n0 & 1 & 3.61 & 5\\\\\n3.14 & 2.26 & 0.47 & 1.89\n\\end{bmatrix}\\]\n\n\n\nCalculemos la Matriz de Pertenencia \\(G\\):\n\n\n\n\\[G^2 = \\begin{bmatrix}\n1 & 1 & 0 & 0 \\\\\n0 & 0 & 1 & 1\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\nLos nuevos centroides son: \\[C_1 = (1,1)\\] \\[C_2 = (\\frac{9}{2}, \\frac{7}{2})\\]"
   },
   {
     "objectID": "tics411/clase-3.html#k-means-ejemplo-3",
@@ -140,7 +140,7 @@
     "href": "tics411/clase-3.html#k-means-detalles-técnicos",
     "title": "TICS-411 Minería de Datos",
     "section": "K-Means: Detalles Técnicos",
-    "text": "K-Means: Detalles Técnicos\n\n\n\n\n\n\nFortalezas\n\n\n\nAlgoritmo relativamente eficiente (existen muy buenas implementaciones). \\(O(k \\cdot n \\cdot i)\\). Donde \\(k\\) es el número de clusters, \\(n\\) el número de puntos, e \\(i\\) el número de iteraciones.\nEncuentra “clusters esféricos”.\n\n\n\n\n\n\n\n\n\n\nDebilidades\n\n\n\nSensible al punto de inicio.\nSolo se puede aplicar cuando el promedio es calculable.\nSe requiere definir K a priori (K es un hiperparámetro).\nSuceptible al ruido y a mínimos locales (podría no converger)."
+    "text": "K-Means: Detalles Técnicos\n\n\n\n\n\n\nFortalezas\n\n\n\nAlgoritmo relativamente eficiente (\\(O(k \\cdot n \\cdot i)\\)). Donde \\(k\\) es el número de clusters, \\(n\\) el número de puntos, e \\(i\\) el número de iteraciones.\nEncuentra “clusters esféricos”.\n\n\n\n\n\n\n\n\n\n\nDebilidades\n\n\n\nSensible al punto de inicio.\nSolo se puede aplicar cuando el promedio es calculable.\nSe requiere definir K a priori (K es un hiperparámetro).\nSuceptible al ruido y a mínimos locales (podría no converger)."
   },
   {
     "objectID": "tics411/clase-3.html#implementación-en-scikit-learn",
@@ -189,7 +189,7 @@
     "href": "tics411/clase-3.html#variantes-k-means",
     "title": "TICS-411 Minería de Datos",
     "section": "Variantes K-Means",
-    "text": "Variantes K-Means\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SMD(p_1,p_2) = 4\\]\n\n\n\n\n\n\n\n\nAcá pueden encontrar una implementación de K-Modas en Python."
+    "text": "Variantes K-Means\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SMD(p_1,p_2) = 4\\]\n\n\n\n\n\n\n\n\nAcá pueden encontrar una implementación de K-Modes en Python."
   },
   {
     "objectID": "tics411/clase-1.html#avisos-1",
@@ -441,21 +441,21 @@
     "href": "tics411/clase-1.html#distancias-distancia-mahalanobis-resultados",
     "title": "TICS-411 Minería de Datos",
     "section": "Distancias: Distancia Mahalanobis (Resultados)",
-    "text": "Distancias: Distancia Mahalanobis (Resultados)\n\n\n\n\n\n\ntest #1: \\(d(7.0,1.0) = \\sqrt{(7-1)\\frac{1}{3.79}(7-1)} = 3.08\\)\ntest #2: \\(d(7.0,1.0) = \\sqrt{(7-1)\\frac{1}{1.59}(7-1)} = 4.76\\)\n\n\n\n\n\n\n\n\n\n\n\nEs importante notar que la correlación existente entre los datos influye en la distancia."
-  },
-  {
-    "objectID": "tics411/clase-1.html#correlación",
-    "href": "tics411/clase-1.html#correlación",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Correlación",
-    "text": "Correlación\n\nLa correlación mide la relación lineal entre 2 atributos.\n\n\n\n\nCorrelación Poblacional\n\n\\[\\rho(X,Y) = corr(X,Y) = \\frac{cov(X,Y)}{\\sigma_X\\sigma_Y}\\]\n\n\n\n\nCorrelación Muestral o Pearson\n\n\\[r(X,Y) = \\frac{\\sum_{i=1}^n (x_i - \\bar{x})(y_i-\\bar{y})}{S_xS_y}\\]"
+    "text": "Distancias: Distancia Mahalanobis (Resultados)\n\n\n\n\n\n\ntest #1: \\(d(7.0,1.0) = \\sqrt{(7-1)\\frac{1}{3.79}(7-1)} = 3.08\\)\ntest #2: \\(d(7.0,1.0) = \\sqrt{(7-1)\\frac{1}{1.59}(7-1)} = 4.76\\)\n\n\n\n\n\n\n\n\n\n\n\nEs importante notar que la covarianza existente entre los datos influye en la distancia."
   },
   {
     "objectID": "tics411/clase-1.html#correlación-1",
     "href": "tics411/clase-1.html#correlación-1",
     "title": "TICS-411 Minería de Datos",
     "section": "Correlación",
-    "text": "Correlación\n\n\n\n\n\n\n\n\n\n\n\n\n\nEs importante recalcar que Causalidad no es igual a Correlación.\nLa Correlación no se ve afectada por la escala de los datos."
+    "text": "Correlación\n\nLa correlación mide la relación lineal entre 2 atributos.\n\n\n\n\nCorrelación Poblacional\n\n\\[\\rho(X,Y) = corr(X,Y) = \\frac{cov(X,Y)}{\\sigma_X\\sigma_Y}\\]\n\n\n\n\nCorrelación Muestral o Pearson\n\n\\[r(X,Y) = \\frac{\\sum_{i=1}^n (x_i - \\bar{x})(y_i-\\bar{y})}{S_xS_y}\\]"
+  },
+  {
+    "objectID": "tics411/clase-1.html#correlación-no-es-causalidad",
+    "href": "tics411/clase-1.html#correlación-no-es-causalidad",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Correlación no es Causalidad",
+    "text": "Correlación no es Causalidad\n\n\n\n\n\n\n\n\n\n\n\n\nEs importante recalcar que Causalidad no es igual a Correlación. Ver video.\nLa Correlación no se ve afectada por la escala de los datos."
   },
   {
     "objectID": "tics411/clase-1.html#medidas-similaridad-datos-categóricos-2",
@@ -623,7 +623,7 @@
     "href": "tics411/clase-2.html#eda-visualización",
     "title": "TICS-411 Minería de Datos",
     "section": "EDA: Visualización",
-    "text": "EDA: Visualización\n\nLa visualización de datos es la presentación de datos en forma gráfica. Permite ver los análisis de modo que los responsables a cargo pueden comprender conceptos complejos.\n\n\nGracias a la evoluación del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la Visión.\n\n\n\n\n\n\n\n\nPuede ser difícil de aplicar si el tamaño de los datos es grande (sea en instancias o atributos). Por ejemplo, si los datos están en 4 dimensiones.\n\n\n\n\n\n\n\n\n\n\n\n\nSe suelen resumir los datos en estadísticas simples.\nGraficar datos en 1D, 2D y 3D (evitar dentro de lo posible).\nLa visualización debe ser comprensible ojalá sin ninguna explicación.\n\n\n\n\n\n\n\n\n\n\n\n\nEn caso de datos de alta dimensionalidad puede ser una buena idea reducir dimensiones mediante técnicas como:\n\nPCA\nUMAP\netc."
+    "text": "EDA: Visualización\n\nLa visualización de datos es la presentación de datos en forma gráfica. Permite simplificar conceptos más complejos en especial a altos mandos.\n\n\nGracias a la evolución del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la Visión.\n\n\n\n\n\n\n\n\nPuede ser difícil de aplicar si el tamaño de los datos es grande (sea en instancias o atributos). Por ejemplo, si los datos están en 4 dimensiones.\n\n\n\n\n\n\n\n\n\n\n\n\nSe suelen resumir los datos en estadísticas simples.\nGraficar datos en 1D, 2D y 3D (evitar dentro de lo posible).\nLa visualización debe ser comprensible ojalá sin ninguna explicación.\n\n\n\n\n\n\n\n\n\n\n\n\nEn caso de datos de alta dimensionalidad puede ser una buena idea reducir dimensiones mediante técnicas como:\n\nPCA\nUMAP\netc."
   },
   {
     "objectID": "tics411/clase-2.html#caso-de-visualización",
@@ -637,7 +637,7 @@
     "href": "tics411/clase-2.html#canales-visuales",
     "title": "TICS-411 Minería de Datos",
     "section": "Canales Visuales",
-    "text": "Canales Visuales\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSe les llama canales visuales a elementos visuales que pueden expresarse para poder expresar información (Clase Visualizacion Andreas Mueller).\nLa idea es poder mapear valores a cada uno de estos canales a valores.\n\n\n\n\n\n\n\n\n\n\n\nNo todos los canales son igual de útiles ni fáciles de entender."
+    "text": "Canales Visuales\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSe les llama canales visuales a elementos visuales que pueden utilizarse para expresar información (Clase Visualizacion Andreas Mueller).\nLa idea es poder mapear cada uno de estos canales a valores que queremos visualizar.\n\n\n\n\n\n\n\n\n\n\n\nNo todos los canales son igual de útiles ni fáciles de entender."
   },
   {
     "objectID": "tics411/clase-2.html#visualizaciones-distribuciones",

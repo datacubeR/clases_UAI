@@ -777,7 +777,7 @@ Alfonso Tobar-Arancibia
 </ul>
 </div>
 <div class="fragment" data-fragment-index="2">
-<p><span class="math display">\[D^1 = \begin{bmatrix}
+<p><span class="math display">\[D^2 = \begin{bmatrix}
 0 &amp; 1 &amp; 3.61 &amp; 5\\
 3.14 &amp; 2.26 &amp; 0.47 &amp; 1.89
 \end{bmatrix}\]</span></p>
@@ -788,7 +788,7 @@ Alfonso Tobar-Arancibia
 </ul>
 </div>
 <div class="fragment" data-fragment-index="4">
-<p><span class="math display">\[G^1 = \begin{bmatrix}
+<p><span class="math display">\[G^2 = \begin{bmatrix}
 1 &amp; 1 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 1 &amp; 1
 \end{bmatrix}\]</span></p>
@@ -921,7 +921,7 @@ Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.
 </div>
 <div class="callout-content">
 <ul>
-<li>Algoritmo relativamente eficiente (existen muy buenas implementaciones). <span class="math inline">\(O(k \cdot n \cdot i)\)</span>. Donde <span class="math inline">\(k\)</span> es el número de clusters, <span class="math inline">\(n\)</span> el número de puntos, e <span class="math inline">\(i\)</span> el número de iteraciones.</li>
+<li>Algoritmo relativamente eficiente (<span class="math inline">\(O(k \cdot n \cdot i)\)</span>). Donde <span class="math inline">\(k\)</span> es el número de clusters, <span class="math inline">\(n\)</span> el número de puntos, e <span class="math inline">\(i\)</span> el número de iteraciones.</li>
 <li>Encuentra <strong><em>“clusters esféricos”</em></strong>.</li>
 </ul>
 </div>
@@ -1107,7 +1107,7 @@ Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p><a href="https://pypi.org/project/kmodes/">Acá</a> pueden encontrar una implementación de K-Modas en Python.</p>
+<p><a href="https://pypi.org/project/kmodes/">Acá</a> pueden encontrar una implementación de K-Modes en Python.</p>
 </div>
 </div>
 </div>
@@ -1494,7 +1494,7 @@ Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false,"selector":".lightbox"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

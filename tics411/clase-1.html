@@ -1487,14 +1487,19 @@ cov(q,p) &amp; cov(q,q)
 </div>
 <div class="callout-content">
 <ul>
-<li>Es importante notar que la correlación existente entre los datos <code>influye en la distancia</code>.</li>
+<li>Es importante notar que la <code>covarianza</code> existente entre los datos <code>influye en la distancia</code>.</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
+</section></section>
+<section>
+<section id="correlación" class="title-slide slide level1 center">
+<h1>Correlación</h1>
+
 </section>
-<section id="correlación" class="slide level2 smaller">
+<section id="correlación-1" class="slide level2 smaller">
 <h2>Correlación</h2>
 <blockquote>
 <p>La correlación mide la relación lineal entre 2 atributos.</p>
@@ -1522,14 +1527,13 @@ cov(q,p) &amp; cov(q,q)
 </figure>
 </div>
 </section>
-<section id="correlación-1" class="slide level2 smaller">
-<h2>Correlación</h2>
+<section id="correlación-no-es-causalidad" class="slide level2 smaller">
+<h2>Correlación no es Causalidad</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="img/clase-1/cage_corr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-1/cage_corr.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
-<div class="fragment">
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -1537,10 +1541,9 @@ cov(q,p) &amp; cov(q,q)
 </div>
 <div class="callout-content">
 <ul>
-<li>Es importante recalcar que <code>Causalidad</code> <strong>no es igual</strong> a <code>Correlación</code>.</li>
+<li>Es importante recalcar que <code>Causalidad</code> <strong>no es igual</strong> a <code>Correlación</code>. Ver <a href="https://twitter.com/AmeetRKini/status/1186491285919731713">video</a>.</li>
 <li>La <code>Correlación</code> no se ve afectada por la escala de los datos.</li>
 </ul>
-</div>
 </div>
 </div>
 </div>
@@ -2026,7 +2029,7 @@ cov(q,p) &amp; cov(q,q)
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
