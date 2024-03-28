@@ -1,6 +1,6 @@
 ---
 title: "TICS-411 Minería de Datos"
-subtitle: "Modelación Descriptiva y K-Means"
+subtitle: "Clase 3: Modelación Descriptiva y K-Means"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -279,7 +279,7 @@ $$C_2 = (\frac{11}{3}, \frac{8}{3})$$
 :::
 
 ::: {.fragment fragment-index=2}
-$$D^1 = \begin{bmatrix}
+$$D^2 = \begin{bmatrix}
 0 & 1 & 3.61 & 5\\
 3.14 & 2.26 & 0.47 & 1.89
 \end{bmatrix}$$
@@ -290,7 +290,7 @@ $$D^1 = \begin{bmatrix}
 :::
 
 ::: {.fragment fragment-index=4}
-$$G^1 = \begin{bmatrix}
+$$G^2 = \begin{bmatrix}
 1 & 1 & 0 & 0 \\
 0 & 0 & 1 & 1
 \end{bmatrix}$$
@@ -368,7 +368,7 @@ Eventualmente otras métricas distintas al `within distance` podrían también s
 ::: {.callout-note appearance="default"}
 ## Fortalezas
 
-* Algoritmo relativamente eficiente (existen muy buenas implementaciones). $O(k \cdot n \cdot i)$. Donde $k$ es el número de clusters, $n$ el número de puntos, e $i$ el número de iteraciones. 
+* Algoritmo relativamente eficiente ($O(k \cdot n \cdot i)$). Donde $k$ es el número de clusters, $n$ el número de puntos, e $i$ el número de iteraciones. 
 * Encuentra ***"clusters esféricos"***. 
 :::
 
@@ -479,7 +479,7 @@ $$SMD(p_1,p_2) = 4$$
 ::: 
 
 ::: {.callout-tip}
-[Acá](https://pypi.org/project/kmodes/) pueden encontrar una implementación de K-Modas en Python.
+[Acá](https://pypi.org/project/kmodes/) pueden encontrar una implementación de K-Modes en Python.
 :::
 
 

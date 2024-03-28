@@ -663,8 +663,10 @@ $$
 ::: 
 
 ::: {.callout-important .fragment}
-* Es importante notar que la correlación existente entre los datos `influye en la distancia`. 
+* Es importante notar que la `covarianza` existente entre los datos `influye en la distancia`. 
 :::
+
+# Correlación
 
 ## Correlación {.smaller}
 
@@ -684,12 +686,12 @@ Correlación Muestral o Pearson
 ![](img/clase-1/corr_examples.png){.lightbox fig-align="center" width="60%"}
 
 
-## Correlación {.smaller}
+## Correlación no es Causalidad {.smaller}
 ![](img/clase-1/cage_corr.png){.lightbox fig-align="center" width="80%"}
 
 
-::: {.callout-note .fragment}
-* Es importante recalcar que `Causalidad` **no es igual** a `Correlación`.
+::: {.callout-note }
+* Es importante recalcar que `Causalidad` **no es igual** a `Correlación`. Ver [video](https://twitter.com/AmeetRKini/status/1186491285919731713).
 * La `Correlación` no se ve afectada por la escala de los datos. 
 :::
 
