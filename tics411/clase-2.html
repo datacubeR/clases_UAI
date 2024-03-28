@@ -429,13 +429,13 @@ Alfonso Tobar-Arancibia
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/rangos.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-2/rangos.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-2/rangos.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-2/rangos.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/skewness.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-2/skewness.png" class="fragment quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+<p><a href="img/clase-2/skewness.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-2/skewness.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -709,7 +709,7 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
 <dt>Bar Plot</dt>
 <dd>
 <blockquote>
-<p>La altura de la barra (normalmente Eje y) representa una cantidad asociada a una categoría (normalmente Eje x).</p>
+<p>La altura de la barra (normalmente Eje y) representa una agregación asociada a una categoría (normalmente Eje x).</p>
 </blockquote>
 </dd>
 </dl>
@@ -755,9 +755,9 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
 </dl>
 <ul>
 <li>Muestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y).</li>
-<li>Permite mostrar relaciones lineales o no-lineales.</li>
-<li>Correlaciones.</li>
+<li>Permite mostrar relaciones lineales o no-lineales (Correlaciones).</li>
 <li>Outliers.</li>
+<li>Simplemente ubicación de Puntos en el Espacio.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -771,7 +771,7 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
 <dt>Lineplot</dt>
 <dd>
 <blockquote>
-<p>Gráfico empleado para visualizar tendencias y su evolución en el tiempo.</p>
+<p>Gráfico empleado para visualizar tendencias y su evolución de una medida (Eje Y) en el tiempo (Eje X).</p>
 </blockquote>
 </dd>
 </dl>
@@ -1223,7 +1223,7 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
