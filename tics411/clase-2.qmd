@@ -77,9 +77,9 @@ El uso de visualizaciones inadecuadas podría llevar a **conclusiones erróneas*
 
 ## EDA: Visualización {.smaller}
 
-> La visualización de datos es la presentación de datos en forma gráfica. Permite ver los análisis de modo que los responsables a cargo pueden comprender conceptos complejos.
+> La visualización de datos es la presentación de datos en forma gráfica. Permite simplificar conceptos más complejos en especial a altos mandos.
 
-> Gracias a la evoluación del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la `Visión`.
+> Gracias a la evolución del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la `Visión`.
 
 ::: {.callout-important .fragment}
 Puede ser difícil de aplicar si el tamaño de los datos es grande (sea en instancias o atributos). Por ejemplo, si los datos están en 4 dimensiones.
@@ -117,20 +117,20 @@ En caso de datos de alta dimensionalidad puede ser una buena idea reducir dimens
 ::: {.column}
 
 ::: {.r-stack}
-::: {.fragment .fade-out fragment-index=3}
+::: {.fragment .fade-out fragment-index=2}
 ![](img/clase-2/visual_channels.png){.lightbox fig-align="center" width="90%" .fragment fragment-index=1}
 :::
 
-![](img/clase-2/best_channels.png){.lightbox fig-align="center" width="70%" .fragment fragment-index=3}
+![](img/clase-2/best_channels.png){.lightbox fig-align="center" width="70%" .fragment fragment-index=2}
 
 :::
 
 
 :::
-::: {.column .fragment fragment-index=2}
+::: {.column .fragment fragment-index=1}
 ::: {.callout-note}
-* Se les llama canales visuales a elementos visuales que pueden expresarse para poder expresar información **(Clase Visualizacion Andreas Mueller)**.
-* La idea es poder mapear valores a cada uno de estos canales a valores.
+* Se les llama canales visuales a elementos visuales que pueden utilizarse para expresar información **(Clase Visualizacion Andreas Mueller)**.
+* La idea es poder mapear cada uno de estos canales a valores que queremos visualizar.
 :::
 
 ::: {.callout-caution}

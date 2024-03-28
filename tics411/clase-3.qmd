@@ -1,6 +1,6 @@
 ---
 title: "TICS-411 Minería de Datos"
-subtitle: "Modelación Descriptiva y K-Means"
+subtitle: "Clase 3: Modelación Descriptiva y K-Means"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -279,7 +279,7 @@ $$C_2 = (\frac{11}{3}, \frac{8}{3})$$
 :::
 
 ::: {.fragment fragment-index=2}
-$$D^1 = \begin{bmatrix}
+$$D^2 = \begin{bmatrix}
 0 & 1 & 3.61 & 5\\
 3.14 & 2.26 & 0.47 & 1.89
 \end{bmatrix}$$
@@ -290,7 +290,7 @@ $$D^1 = \begin{bmatrix}
 :::
 
 ::: {.fragment fragment-index=4}
-$$G^1 = \begin{bmatrix}
+$$G^2 = \begin{bmatrix}
 1 & 1 & 0 & 0 \\
 0 & 0 & 1 & 1
 \end{bmatrix}$$
@@ -302,7 +302,7 @@ $$G^1 = \begin{bmatrix}
 ::: {.fragment fragment-index=5}
 
 Los nuevos centroides son:
-$$C_1 = (1,1)$$
+$$C_1 = (3/2, 1)$$
 $$C_2 = (\frac{9}{2}, \frac{7}{2})$$
 :::
 
@@ -358,8 +358,13 @@ Curva del Codo
 :::
 
 ::: {.callout-tip .fragment}
-Eventualmente otras métricas distintas al `within distance` podrían también ser usadas. 
+Eventualmente otras métricas distintas al `within cluster distance` podrían también ser usadas. 
 :::
+
+::: {.callout-note .fragment}
+¿Cuál es el efecto que está buscando la curva del codo? ¿Qué implica el valor de K escogido?
+:::
+
 :::
 ::: 
 
@@ -368,7 +373,7 @@ Eventualmente otras métricas distintas al `within distance` podrían también s
 ::: {.callout-note appearance="default"}
 ## Fortalezas
 
-* Algoritmo relativamente eficiente (existen muy buenas implementaciones). $O(k \cdot n \cdot i)$. Donde $k$ es el número de clusters, $n$ el número de puntos, e $i$ el número de iteraciones. 
+* Algoritmo relativamente eficiente ($O(k \cdot n \cdot i)$). Donde $k$ es el número de clusters, $n$ el número de puntos, e $i$ el número de iteraciones. 
 * Encuentra ***"clusters esféricos"***. 
 :::
 
@@ -404,6 +409,7 @@ km.fit_predict(X)
 * `.fit()`: Entrenará el modelo en los datos suministrados. 
 * `.predict()` Entregará las clusters asignados a cada dato suministrado. 
 * `.clusters_centers_`: Entregará las coordenadas de los centroides de cada Cluster.
+* `.inertia_`: Entrega valores correspondiente a la `within cluster distance`.
 :::
 
 👀 Veamos un ejemplo en Colab.
@@ -479,7 +485,7 @@ $$SMD(p_1,p_2) = 4$$
 ::: 
 
 ::: {.callout-tip}
-[Acá](https://pypi.org/project/kmodes/) pueden encontrar una implementación de K-Modas en Python.
+[Acá](https://pypi.org/project/kmodes/) pueden encontrar una implementación de K-Modes en Python.
 :::
 
 
