@@ -112,7 +112,7 @@
     "href": "tics411/clase-3.html#k-means-ejemplo-2",
     "title": "TICS-411 Minería de Datos",
     "section": "K-Means: Ejemplo",
-    "text": "K-Means: Ejemplo\n2da Iteración\n\n\n\n\nLos nuevos centroides son:\n\n\\[C_1 = (1,1)\\] \\[C_2 = (\\frac{11}{3}, \\frac{8}{3})\\]\n\n\n\nCalculamos la Matriz de Distancias al Centroide:\n\n\n\n\\[D^2 = \\begin{bmatrix}\n0 & 1 & 3.61 & 5\\\\\n3.14 & 2.26 & 0.47 & 1.89\n\\end{bmatrix}\\]\n\n\n\nCalculemos la Matriz de Pertenencia \\(G\\):\n\n\n\n\\[G^2 = \\begin{bmatrix}\n1 & 1 & 0 & 0 \\\\\n0 & 0 & 1 & 1\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\nLos nuevos centroides son: \\[C_1 = (1,1)\\] \\[C_2 = (\\frac{9}{2}, \\frac{7}{2})\\]"
+    "text": "K-Means: Ejemplo\n2da Iteración\n\n\n\n\nLos nuevos centroides son:\n\n\\[C_1 = (1,1)\\] \\[C_2 = (\\frac{11}{3}, \\frac{8}{3})\\]\n\n\n\nCalculamos la Matriz de Distancias al Centroide:\n\n\n\n\\[D^2 = \\begin{bmatrix}\n0 & 1 & 3.61 & 5\\\\\n3.14 & 2.26 & 0.47 & 1.89\n\\end{bmatrix}\\]\n\n\n\nCalculemos la Matriz de Pertenencia \\(G\\):\n\n\n\n\\[G^2 = \\begin{bmatrix}\n1 & 1 & 0 & 0 \\\\\n0 & 0 & 1 & 1\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\nLos nuevos centroides son: \\[C_1 = (3/2, 1)\\] \\[C_2 = (\\frac{9}{2}, \\frac{7}{2})\\]"
   },
   {
     "objectID": "tics411/clase-3.html#k-means-ejemplo-3",
@@ -133,7 +133,7 @@
     "href": "tics411/clase-3.html#k-means-número-de-clusters-óptimos-1",
     "title": "TICS-411 Minería de Datos",
     "section": "K-Means: Número de Clusters Óptimos",
-    "text": "K-Means: Número de Clusters Óptimos\n\nCurva del Codo\n\nEs una heurísitca en la cual gráfica el valor de una métrica de distancia (e.g. within distance) para distintos valores de \\(K\\). El valor óptimo de \\(K\\) será el codo de la curva, que es el valor donde se estabiliza la métrica.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste valor del codo muchas veces es subjetivo y distintas apreciaciones pueden llegar a distintos \\(K\\) óptimos.\n\n\n\n\n\n\n\n\n\n\n\n\nEventualmente otras métricas distintas al within distance podrían también ser usadas."
+    "text": "K-Means: Número de Clusters Óptimos\n\nCurva del Codo\n\nEs una heurísitca en la cual gráfica el valor de una métrica de distancia (e.g. within distance) para distintos valores de \\(K\\). El valor óptimo de \\(K\\) será el codo de la curva, que es el valor donde se estabiliza la métrica.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste valor del codo muchas veces es subjetivo y distintas apreciaciones pueden llegar a distintos \\(K\\) óptimos.\n\n\n\n\n\n\n\n\n\n\n\n\nEventualmente otras métricas distintas al within cluster distance podrían también ser usadas.\n\n\n\n\n\n\n\n\n\n\n\n¿Cuál es el efecto que está buscando la curva del codo? ¿Qué implica el valor de K escogido?"
   },
   {
     "objectID": "tics411/clase-3.html#k-means-detalles-técnicos",
@@ -147,7 +147,7 @@
     "href": "tics411/clase-3.html#implementación-en-scikit-learn",
     "title": "TICS-411 Minería de Datos",
     "section": "Implementación en Scikit-Learn",
-    "text": "Implementación en Scikit-Learn\nfrom sklearn.cluster import KMeans\n\nkm = KMeans(n_clusters=8, n_init=10,random_state=None)\nkm.fit(X)\nkm.predict(X)\n\n## opcionalmente\nkm.fit_predict(X)\n\n\nn_clusters: Define el número de clusters a crear, por defecto 8.\nn_init: Cuántas veces se ejecuta el algoritmo, por defecto 10.\nrandom_state: Define la semilla aleatoria. Por defecto sin semilla.\ninit: Permite agregar centroides de manera manual.\n.fit(): Entrenará el modelo en los datos suministrados.\n.predict() Entregará las clusters asignados a cada dato suministrado.\n.clusters_centers_: Entregará las coordenadas de los centroides de cada Cluster.\n\n\n👀 Veamos un ejemplo en Colab."
+    "text": "Implementación en Scikit-Learn\nfrom sklearn.cluster import KMeans\n\nkm = KMeans(n_clusters=8, n_init=10,random_state=None)\nkm.fit(X)\nkm.predict(X)\n\n## opcionalmente\nkm.fit_predict(X)\n\n\nn_clusters: Define el número de clusters a crear, por defecto 8.\nn_init: Cuántas veces se ejecuta el algoritmo, por defecto 10.\nrandom_state: Define la semilla aleatoria. Por defecto sin semilla.\ninit: Permite agregar centroides de manera manual.\n.fit(): Entrenará el modelo en los datos suministrados.\n.predict() Entregará las clusters asignados a cada dato suministrado.\n.clusters_centers_: Entregará las coordenadas de los centroides de cada Cluster.\n.inertia_: Entrega valores correspondiente a la within cluster distance.\n\n\n👀 Veamos un ejemplo en Colab."
   },
   {
     "objectID": "tics411/clase-3.html#sugerencias",

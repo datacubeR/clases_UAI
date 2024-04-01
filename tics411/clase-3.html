@@ -800,7 +800,7 @@ Alfonso Tobar-Arancibia
 </figure>
 </div>
 <div class="fragment" data-fragment-index="5">
-<p>Los nuevos centroides son: <span class="math display">\[C_1 = (1,1)\]</span> <span class="math display">\[C_2 = (\frac{9}{2}, \frac{7}{2})\]</span></p>
+<p>Los nuevos centroides son: <span class="math display">\[C_1 = (3/2, 1)\]</span> <span class="math display">\[C_2 = (\frac{9}{2}, \frac{7}{2})\]</span></p>
 </div>
 </div>
 </div>
@@ -901,7 +901,19 @@ Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Eventualmente otras métricas distintas al <code>within distance</code> podrían también ser usadas.</p>
+<p>Eventualmente otras métricas distintas al <code>within cluster distance</code> podrían también ser usadas.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>¿Cuál es el efecto que está buscando la curva del codo? ¿Qué implica el valor de K escogido?</p>
 </div>
 </div>
 </div>
@@ -965,6 +977,7 @@ Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.
 <li><p><code>.fit()</code>: Entrenará el modelo en los datos suministrados.</p></li>
 <li><p><code>.predict()</code> Entregará las clusters asignados a cada dato suministrado.</p></li>
 <li><p><code>.clusters_centers_</code>: Entregará las coordenadas de los centroides de cada Cluster.</p></li>
+<li><p><code>.inertia_</code>: Entrega valores correspondiente a la <code>within cluster distance</code>.</p></li>
 </ul>
 </div>
 <p>👀 Veamos un ejemplo en Colab.</p>
@@ -1494,7 +1507,7 @@ Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
+    <script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","closeEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
