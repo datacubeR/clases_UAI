@@ -423,13 +423,13 @@ Alfonso Tobar-Arancibia
 <dt>Clustering Jerárquico</dt>
 <dd>
 <blockquote>
-<p>Es un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender.</p>
+<p>Es un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender. Se basa en la construcción de Jerarquías para ir construyendo clusters.</p>
 </blockquote>
 </dd>
 <dt>Dendograma</dt>
 <dd>
 <blockquote>
-<p>Corresponde a un diagrama en le que se muestran las distancias de atributos entre clases que se van fusionando secuencialmente.</p>
+<p>Corresponde a un diagrama en el que se muestran las distancias de atributos entre clases que son parte de un mismo cluster.</p>
 </blockquote>
 </dd>
 </dl>
@@ -1604,7 +1604,7 @@ Se define como la proporción de variables que tienen distinto valor con respect
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false});
+    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","loop":false,"selector":".lightbox","openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

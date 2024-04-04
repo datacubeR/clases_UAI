@@ -357,7 +357,7 @@
     "href": "tics411/clase-4.html#definiciones",
     "title": "TICS-411 Minería de Datos",
     "section": "Definiciones",
-    "text": "Definiciones\n\nClustering Jerárquico\n\n\nEs un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender.\n\n\nDendograma\n\n\nCorresponde a un diagrama en le que se muestran las distancias de atributos entre clases que se van fusionando secuencialmente."
+    "text": "Definiciones\n\nClustering Jerárquico\n\n\nEs un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender. Se basa en la construcción de Jerarquías para ir construyendo clusters.\n\n\nDendograma\n\n\nCorresponde a un diagrama en el que se muestran las distancias de atributos entre clases que son parte de un mismo cluster."
   },
   {
     "objectID": "tics411/clase-4.html#clustering-jerarquía",
