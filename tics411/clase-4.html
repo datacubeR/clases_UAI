@@ -823,6 +823,36 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </section>
+<section id="hiperparámetros" class="slide level2">
+<h2>Hiperparámetros</h2>
+<p>Los Hiperparámetros de este modelo serán:</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><code>linkage</code>: La forma de calcular la distancia entre clusters.</li>
+<li><code>distancia</code>: La distancia utilizada como similaridad entre los clusters.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>A diferencia de K-Means, este método no requiere definir el número de Clusters a priori.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="volvamos-a-la-iteración-1" class="slide level2 smaller">
 <h2>Volvamos a la Iteración 1</h2>
 <blockquote>
@@ -1087,11 +1117,23 @@ Alfonso Tobar-Arancibia
 <span id="cb1-6"><a></a>km.fit_predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="columns" style="font-size: 70%;">
 <ul>
-<li><p><strong>n_clusters</strong>: Define el número de clusters a crear, por defecto 8.</p></li>
+<li><p><strong>n_clusters</strong>: Define el número de clusters a crear, por defecto 2.</p></li>
 <li><p><strong>metric</strong>: Permite distancias L1, L2 y coseno.</p></li>
 <li><p><strong>linkage</strong>: Permite single, complete, average y ward.</p></li>
 <li><p><code>.fit_predict()</code>: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento.</p></li>
 </ul>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Si bien el método de Aglomeración no requiere el número de clusters a generar, Scikit-Learn lo exige de modo de poder etiquetar cada elemento.</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="fragment">
 <div class="callout callout-important callout-style-simple">
@@ -1562,7 +1604,7 @@ Se define como la proporción de variables que tienen distinto valor con respect
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
