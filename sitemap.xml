@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411-labs.html</loc>
-    <lastmod>2024-03-28T16:04:12.518Z</lastmod>
+    <lastmod>2024-04-04T14:55:05.244Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-3.html</loc>
@@ -21,40 +21,44 @@
     <lastmod>2024-03-31T21:20:21.730Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/kmeans.html</loc>
-    <lastmod>2024-03-26T17:07:56.355Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/05-ex-jerarquico.html</loc>
+    <lastmod>2024-04-04T14:53:58.214Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/preguntas-prueba.html</loc>
-    <lastmod>2024-04-01T15:22:08.485Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/03-ex_kmeans.html</loc>
-    <lastmod>2024-03-28T15:30:11.812Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-2.html</loc>
-    <lastmod>2024-03-28T19:01:50.352Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-4.html</loc>
-    <lastmod>2024-04-04T14:09:16.260Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-0.html</loc>
-    <lastmod>2024-03-12T14:16:50.265Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/01-Preprocesamiento.html</loc>
-    <lastmod>2024-03-28T15:05:14.743Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/jerarquico.html</loc>
+    <lastmod>2024-04-04T01:27:41.468Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/distancia.html</loc>
     <lastmod>2024-03-23T03:07:44.822Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/jerarquico.html</loc>
-    <lastmod>2024-04-04T01:27:41.468Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/01-Preprocesamiento.html</loc>
+    <lastmod>2024-03-28T15:05:14.743Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-0.html</loc>
+    <lastmod>2024-03-12T14:16:50.265Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-4.html</loc>
+    <lastmod>2024-04-04T14:09:16.260Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-2.html</loc>
+    <lastmod>2024-03-28T19:01:50.352Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/03-ex_kmeans.html</loc>
+    <lastmod>2024-03-28T15:30:11.812Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/preguntas-prueba.html</loc>
+    <lastmod>2024-04-01T15:22:08.485Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/kmeans.html</loc>
+    <lastmod>2024-03-26T17:07:56.355Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/viz.html</loc>
@@ -74,7 +78,7 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/index.html</loc>
-    <lastmod>2024-04-04T14:11:52.968Z</lastmod>
+    <lastmod>2024-04-04T14:55:13.640Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411.html</loc>
