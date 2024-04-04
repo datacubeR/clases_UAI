@@ -800,7 +800,8 @@ Alfonso Tobar-Arancibia
 </figure>
 </div>
 <div class="fragment" data-fragment-index="5">
-<p>Los nuevos centroides son: <span class="math display">\[C_1 = (3/2, 1)\]</span> <span class="math display">\[C_2 = (\frac{9}{2}, \frac{7}{2})\]</span></p>
+<p>Los nuevos centroides son:</p>
+<p><span class="math inline">\(C_1 = (\frac{3}{2}, 1)\)</span> y <span class="math inline">\(C_2 = (\frac{9}{2}, \frac{7}{2})\)</span></p>
 </div>
 </div>
 </div>
@@ -880,7 +881,6 @@ Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.
 </div>
 </div><div class="column">
 <p><br></p>
-<div class="fragment">
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -893,8 +893,6 @@ Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.
 </div>
 </div>
 </div>
-</div>
-<div class="fragment">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -905,8 +903,6 @@ Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.
 </div>
 </div>
 </div>
-</div>
-<div class="fragment">
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -914,7 +910,6 @@ Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.
 </div>
 <div class="callout-content">
 <p>¿Cuál es el efecto que está buscando la curva del codo? ¿Qué implica el valor de K escogido?</p>
-</div>
 </div>
 </div>
 </div>
@@ -993,7 +988,7 @@ Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.
 <p><strong>Pre-procesamientos</strong></p>
 </div>
 <div class="callout-content">
-<p>Es importante recordar que K-Means es un Algoritmo basado en <code>distancias</code>, por lo tanto se ve afectado por Outliers y por Escalamiento.</p>
+<p>Es importante recordar que K-Means es un Algoritmo basado en <code>distancias</code>, por lo tanto se ve afectado por Outliers y por Escala.</p>
 <p>Se recomienda preprocesar los datos con:</p>
 <ul>
 <li><code>Winsorizer()</code> para eliminar Outliers.</li>
@@ -1507,7 +1502,7 @@ Es una heurísitca en la cual gráfica el valor de una métrica de distancia (e.
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","loop":false});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

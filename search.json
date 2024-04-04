@@ -112,7 +112,7 @@
     "href": "tics411/clase-3.html#k-means-ejemplo-2",
     "title": "TICS-411 Minería de Datos",
     "section": "K-Means: Ejemplo",
-    "text": "K-Means: Ejemplo\n2da Iteración\n\n\n\n\nLos nuevos centroides son:\n\n\\[C_1 = (1,1)\\] \\[C_2 = (\\frac{11}{3}, \\frac{8}{3})\\]\n\n\n\nCalculamos la Matriz de Distancias al Centroide:\n\n\n\n\\[D^2 = \\begin{bmatrix}\n0 & 1 & 3.61 & 5\\\\\n3.14 & 2.26 & 0.47 & 1.89\n\\end{bmatrix}\\]\n\n\n\nCalculemos la Matriz de Pertenencia \\(G\\):\n\n\n\n\\[G^2 = \\begin{bmatrix}\n1 & 1 & 0 & 0 \\\\\n0 & 0 & 1 & 1\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\nLos nuevos centroides son: \\[C_1 = (3/2, 1)\\] \\[C_2 = (\\frac{9}{2}, \\frac{7}{2})\\]"
+    "text": "K-Means: Ejemplo\n2da Iteración\n\n\n\n\nLos nuevos centroides son:\n\n\\[C_1 = (1,1)\\] \\[C_2 = (\\frac{11}{3}, \\frac{8}{3})\\]\n\n\n\nCalculamos la Matriz de Distancias al Centroide:\n\n\n\n\\[D^2 = \\begin{bmatrix}\n0 & 1 & 3.61 & 5\\\\\n3.14 & 2.26 & 0.47 & 1.89\n\\end{bmatrix}\\]\n\n\n\nCalculemos la Matriz de Pertenencia \\(G\\):\n\n\n\n\\[G^2 = \\begin{bmatrix}\n1 & 1 & 0 & 0 \\\\\n0 & 0 & 1 & 1\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\nLos nuevos centroides son:\n\\(C_1 = (\\frac{3}{2}, 1)\\) y \\(C_2 = (\\frac{9}{2}, \\frac{7}{2})\\)"
   },
   {
     "objectID": "tics411/clase-3.html#k-means-ejemplo-3",
@@ -133,7 +133,7 @@
     "href": "tics411/clase-3.html#k-means-número-de-clusters-óptimos-1",
     "title": "TICS-411 Minería de Datos",
     "section": "K-Means: Número de Clusters Óptimos",
-    "text": "K-Means: Número de Clusters Óptimos\n\nCurva del Codo\n\nEs una heurísitca en la cual gráfica el valor de una métrica de distancia (e.g. within distance) para distintos valores de \\(K\\). El valor óptimo de \\(K\\) será el codo de la curva, que es el valor donde se estabiliza la métrica.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste valor del codo muchas veces es subjetivo y distintas apreciaciones pueden llegar a distintos \\(K\\) óptimos.\n\n\n\n\n\n\n\n\n\n\n\n\nEventualmente otras métricas distintas al within cluster distance podrían también ser usadas.\n\n\n\n\n\n\n\n\n\n\n\n¿Cuál es el efecto que está buscando la curva del codo? ¿Qué implica el valor de K escogido?"
+    "text": "K-Means: Número de Clusters Óptimos\n\nCurva del Codo\n\nEs una heurísitca en la cual gráfica el valor de una métrica de distancia (e.g. within distance) para distintos valores de \\(K\\). El valor óptimo de \\(K\\) será el codo de la curva, que es el valor donde se estabiliza la métrica.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste valor del codo muchas veces es subjetivo y distintas apreciaciones pueden llegar a distintos \\(K\\) óptimos.\n\n\n\n\n\n\n\n\n\n\nEventualmente otras métricas distintas al within cluster distance podrían también ser usadas.\n\n\n\n\n\n\n\n\n\n¿Cuál es el efecto que está buscando la curva del codo? ¿Qué implica el valor de K escogido?"
   },
   {
     "objectID": "tics411/clase-3.html#k-means-detalles-técnicos",
@@ -154,7 +154,7 @@
     "href": "tics411/clase-3.html#sugerencias",
     "title": "TICS-411 Minería de Datos",
     "section": "Sugerencias",
-    "text": "Sugerencias\n\n\n\n\n\n\nPre-procesamientos\n\n\nEs importante recordar que K-Means es un Algoritmo basado en distancias, por lo tanto se ve afectado por Outliers y por Escalamiento.\nSe recomienda preprocesar los datos con:\n\nWinsorizer() para eliminar Outliers.\nStandardScaler() o MinMaxScaler() para llevar a una escala común."
+    "text": "Sugerencias\n\n\n\n\n\n\nPre-procesamientos\n\n\nEs importante recordar que K-Means es un Algoritmo basado en distancias, por lo tanto se ve afectado por Outliers y por Escala.\nSe recomienda preprocesar los datos con:\n\nWinsorizer() para eliminar Outliers.\nStandardScaler() o MinMaxScaler() para llevar a una escala común."
   },
   {
     "objectID": "tics411/clase-3.html#interpretación-clusters",
@@ -563,6 +563,13 @@
     "text": "import numpy as np\n\n## Primera fila son coordenadas X\n## Segunda fila son coordenadas Y\n## Cada columna es el punto.\npuntos = np.array([[1, 2, 4, 5], [1, 1, 3, 4]])\npuntos\n\nc_1 = np.array([1, 1])\nc_2 = np.array([2, 1])\npuntos\n\narray([[1, 2, 4, 5],\n       [1, 1, 3, 4]])\n\n\n\nimport matplotlib.pyplot as plt\n\n\ndef plot_clusters(puntos, c_1, c_2, c=None):\n    plt.scatter(puntos[0], puntos[1], s=500, c=c)\n    plt.scatter(\n        c_1[0],\n        c_1[1],\n        marker=\"^\",\n        label=\"Centroide Cluster 1\",\n        edgecolors=\"k\",\n        s=200,\n        color=\"orange\",\n    )\n    plt.scatter(\n        c_2[0],\n        c_2[1],\n        marker=\"^\",\n        label=\"Centroide Cluster 2\",\n        edgecolors=\"k\",\n        s=200,\n        c=\"green\",\n    )\n    plt.grid(alpha=0.5)\n    plt.legend()\n\n\nplot_clusters(puntos, c_1, c_2)\n\n\n\n\n\n\n\n\n\ndef distancia(p0, p1):\n    x0 = p0[0]\n    x1 = p1[0]\n    y0 = p0[1]\n    y1 = p1[1]\n    return np.sqrt((x1 - x0) ** 2 + (y1 - y0) ** 2)\n\n\ndef calculate_distances(puntos, c_1, c_2):\n\n    distancia_mat = np.zeros((2, 4))\n    distancia_mat\n\n    for i in range(4):\n        p = puntos[:, i]\n        distancia_mat[0, i] = distancia(p, c_1)\n        distancia_mat[1, i] = distancia(p, c_2)\n\n    return distancia_mat\n\n\ndistancia_mat = calculate_distances(puntos, c_1, c_2)\ndistancia_mat\n\narray([[0.        , 1.        , 3.60555128, 5.        ],\n       [1.        , 0.        , 2.82842712, 4.24264069]])\n\n\n\ndef calculate_clusters(distancia_mat):\n    min_distancia_mat = np.min(distancia_mat, axis=0)\n\n    clusters = distancia_mat == min_distancia_mat\n    return clusters\n\n\nclusters = calculate_clusters(distancia_mat)\nclusters.astype(\"int64\")\n\n## Solo el punto 1 pertenece al cluster 1, todo el resto al cluster 2\n\narray([[1, 0, 0, 0],\n       [0, 1, 1, 1]])\n\n\n\ndef calculate_centroids(clusters):\n    c_1 = puntos[:, clusters[0]].mean(axis=1)\n    c_2 = puntos[:, clusters[1]].mean(axis=1)\n\n    return c_1, c_2\n\n\nc_1, c_2 = calculate_centroids(clusters)\nc_1, c_2\n\n(array([1., 1.]), array([3.66666667, 2.66666667]))\n\n\n\nplot_clusters(puntos, c_1, c_2, c=[\"red\", \"blue\", \"blue\", \"blue\"])\n\n\n\n\n\n\n\n\n\ndistancia_mat = calculate_distances(puntos, c_1, c_2)\nclusters = calculate_clusters(distancia_mat)\nc_1, c_2 = calculate_centroids(clusters)\nclusters\n\narray([[ True,  True, False, False],\n       [False, False,  True,  True]])\n\n\n\nc_1, c_2\n\n(array([1.5, 1. ]), array([4.5, 3.5]))\n\n\n\nplot_clusters(puntos, c_1, c_2, c=[\"red\", \"red\", \"blue\", \"blue\"])\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
   },
   {
+    "objectID": "tics411/notebooks/preguntas-prueba.html",
+    "href": "tics411/notebooks/preguntas-prueba.html",
+    "title": "Clases UAI",
+    "section": "",
+    "text": "import pandas as pd\nimport numpy as np\n\ndf = pd.DataFrame(\n    dict(\n        x=[2, 8, 13, 16, 19, 2, 8, 13, 16, 19],\n        y=[7, 7, 7, 7, 7, 3, 3, 5, 5, 5],\n    )\n)\ndf\n\n\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n0\n2\n7\n\n\n1\n8\n7\n\n\n2\n13\n7\n\n\n3\n16\n7\n\n\n4\n19\n7\n\n\n5\n2\n3\n\n\n6\n8\n3\n\n\n7\n13\n5\n\n\n8\n16\n5\n\n\n9\n19\n5\n\n\n\n\n\n\n\n\n\nfrom scipy.spatial import distance_matrix\nimport numpy as np\n\nc1 = df.iloc[0]\nc2 = df.iloc[9]\n\nvals = np.arange(1, 11)\nd_m = distance_matrix(df.to_numpy(), df.to_numpy(), p=2)\nd_m = pd.DataFrame(d_m, index=vals, columns=vals).round(2)\nd_m\n\n\n\n\n\n\n\n\n\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n1\n0.00\n6.00\n11.00\n14.00\n17.00\n4.00\n7.21\n11.18\n14.14\n17.12\n\n\n2\n6.00\n0.00\n5.00\n8.00\n11.00\n7.21\n4.00\n5.39\n8.25\n11.18\n\n\n3\n11.00\n5.00\n0.00\n3.00\n6.00\n11.70\n6.40\n2.00\n3.61\n6.32\n\n\n4\n14.00\n8.00\n3.00\n0.00\n3.00\n14.56\n8.94\n3.61\n2.00\n3.61\n\n\n5\n17.00\n11.00\n6.00\n3.00\n0.00\n17.46\n11.70\n6.32\n3.61\n2.00\n\n\n6\n4.00\n7.21\n11.70\n14.56\n17.46\n0.00\n6.00\n11.18\n14.14\n17.12\n\n\n7\n7.21\n4.00\n6.40\n8.94\n11.70\n6.00\n0.00\n5.39\n8.25\n11.18\n\n\n8\n11.18\n5.39\n2.00\n3.61\n6.32\n11.18\n5.39\n0.00\n3.00\n6.00\n\n\n9\n14.14\n8.25\n3.61\n2.00\n3.61\n14.14\n8.25\n3.00\n0.00\n3.00\n\n\n10\n17.12\n11.18\n6.32\n3.61\n2.00\n17.12\n11.18\n6.00\n3.00\n0.00\n\n\n\n\n\n\n\n\n\nD = d_m.loc[[1, 10]]\nD\n\n\n\n\n\n\n\n\n\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n1\n0.00\n6.00\n11.00\n14.00\n17.0\n4.00\n7.21\n11.18\n14.14\n17.12\n\n\n10\n17.12\n11.18\n6.32\n3.61\n2.0\n17.12\n11.18\n6.00\n3.00\n0.00\n\n\n\n\n\n\n\n\n\nG = D == D.min()\nG.astype(\"int64\")\n\n\n\n\n\n\n\n\n\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n1\n1\n1\n0\n0\n0\n1\n1\n0\n0\n0\n\n\n10\n0\n0\n1\n1\n1\n0\n0\n1\n1\n1\n\n\n\n\n\n\n\n\n\nG\n\n\nA = np.array([-5, -1, 1, 2, 3])\nA.mean()\n\n0.0\n\n\n\nA.std(ddof=0)\n\n2.8284271247461903\n\n\n\nprint(A.mean())\n(A**2).sum()\n\n0.0\n\n\n40\n\n\n\nfrom sklearn.preprocessing import MinMaxScaler, StandardScaler\n\nsc = StandardScaler()\nmm = MinMaxScaler()\nsc.fit_transform(A.reshape(-1, 1))\n\narray([[-1.76776695],\n       [-0.35355339],\n       [ 0.35355339],\n       [ 0.70710678],\n       [ 1.06066017]])\n\n\n\nmm.fit_transform(A.reshape(-1, 1))\n\narray([[0.   ],\n       [0.5  ],\n       [0.75 ],\n       [0.875],\n       [1.   ]])\n\n\n\n\n\n Back to top"
+  },
+  {
     "objectID": "tics411/notebooks/03-ex_kmeans.html",
     "href": "tics411/notebooks/03-ex_kmeans.html",
     "title": "Ejemplo K-Means",
@@ -694,6 +701,139 @@
     "title": "TICS-411 Minería de Datos",
     "section": "¿Otras Visualizaciones?",
     "text": "¿Otras Visualizaciones?"
+  },
+  {
+    "objectID": "tics411/clase-4.html#definiciones",
+    "href": "tics411/clase-4.html#definiciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Definiciones",
+    "text": "Definiciones\n\nClustering Jerárquico\n\n\nEs un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender.\n\n\nDendograma\n\n\nCorresponde a un diagrama en le que se muestran las distancias de atributos entre clases que se van fusionando secuencialmente."
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-jerarquía",
+    "href": "tics411/clase-4.html#clustering-jerarquía",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering: Jerarquía",
+    "text": "Clustering: Jerarquía\n\nLos algoritmos basados en jerarquía pueden seguir 2 estrategias:\n\n\nAglomerativos: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. Para n objetos se realizan n-1 uniones.\nDivisionales: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad."
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-aglomerativo-algoritmo",
+    "href": "tics411/clase-4.html#clustering-aglomerativo-algoritmo",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Aglomerativo: Algoritmo",
+    "text": "Clustering Aglomerativo: Algoritmo\nAlgoritmo\n\nInicialmente se considera cada punto como un cluster.\nCalcula la matriz de proximidad/distancia entre cada cluster.\nRepetir (hasta que exista un solo cluster):\n\nUnir los cluster más cercanos.\nActualizar la matriz de proximidad/distancia.\n\n\n\n\n\n\n\n\nLo más importante de este proceso es el cálculo de la matriz de proximidad/distancia entre clusters\n\n\n\n\n\n\n\n\n\nDistintos enfoques de distancia entre clusters, segmentan los datos en forma distinta."
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-aglomerativo-ejemplo",
+    "href": "tics411/clase-4.html#clustering-aglomerativo-ejemplo",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Aglomerativo: Ejemplo",
+    "text": "Clustering Aglomerativo: Ejemplo\nSupongamos que tenemos cinco tipos de genes cuya expresión ha sido determinada por 3 caracteríticas. Las siguientes expresiones pueden ser vistas como la expresión dados los genes en tres experimentos. ​\n\nApliquemos un Clustering Jerárquico Aglomerativo utilizando como medida de similaridad la Distancia Euclideana.\n\n\n\n\n\n\n\nOtros tipos de distancia también son aplicables siguiendo un procedimiento análogo."
+  },
+  {
+    "objectID": "tics411/clase-4.html#algoritmo-1era-iteración",
+    "href": "tics411/clase-4.html#algoritmo-1era-iteración",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Algoritmo: 1era Iteración",
+    "text": "Algoritmo: 1era Iteración\n\n\n\n\n\n\nEl algoritmo considerará que todos los puntos inicialmente son un cluster. Por lo tanto, tratará de encontrar los 2 puntos más cercanos e intentará unirnos en un sólo cluster.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProblema: ¿Cómo actualizamos la matriz de Distancias?\n\n\n\n\n\n\n\n\n\n\n\nEntonces crearemos un nuevo cluster: bcl2-Caspade."
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-aglomerativo-single-linkage",
+    "href": "tics411/clase-4.html#clustering-aglomerativo-single-linkage",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Aglomerativo: Single Linkage",
+    "text": "Clustering Aglomerativo: Single Linkage\n\n\n\n\n\n\n\n\n\nDistancia entre clusters determinada por los puntos más similares entre los clusters.\n\n\n\n\n\n\n\n\n\n\n\n\n\\[D(C_i, C_j) = min\\{d(x,y) | x \\in C_i, y \\in C_j\\}\\]\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nGenera Clusters largos y delgados.\n\n\n\n\n\n\n\n\n\n\n\nLimitaciones\n\n\n\nAfectado por Outliers"
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-aglomerativo-complete-linkage",
+    "href": "tics411/clase-4.html#clustering-aglomerativo-complete-linkage",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Aglomerativo: Complete Linkage",
+    "text": "Clustering Aglomerativo: Complete Linkage\n\n\n\n\n\n\n\n\n\nDistancia determinada por la distancia ente los puntos más disímiles entre los clusters.\n\n\n\n\n\n\n\n\n\n\n\n\n\\[D(C_i, C_j) = max\\{d(x,y) | x \\in C_i, y \\in C_j\\}\\]\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nMenos suceptible a dato atípicos.\n\n\n\n\n\n\n\n\n\n\n\nLimitaciones\n\n\n\nTiende a quebrar Clusters Grandes.\nTiene tendencia a generar Clusters circulares."
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-aglomerativo-average-linkage",
+    "href": "tics411/clase-4.html#clustering-aglomerativo-average-linkage",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Aglomerativo: Average Linkage",
+    "text": "Clustering Aglomerativo: Average Linkage\n\n\n\n\n\n\n\n\n\nDistancia determinada por el promedio de las distancias que componen los clusters.\nPunto intermedio entre Single y Complete.\n\n\n\n\n\n\n\n\n\n\n\n\n\\[D(C_i, C_j) = avg\\{d(x,y) | x \\in C_i, y \\in C_j\\}\\]\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nMenos suceptible a datos atípicos.\n\n\n\n\n\n\n\n\n\n\n\nLimitaciones\n\n\n\nTiende a generar clusters circulares."
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-aglomerativo-ward-linkage",
+    "href": "tics411/clase-4.html#clustering-aglomerativo-ward-linkage",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Aglomerativo: Ward Linkage",
+    "text": "Clustering Aglomerativo: Ward Linkage\n\n\n\n\n\n\n\n\n\nDistancia determinada por el incremento del Within cluster distance.\nMinimiza la distancia intra cluster y maximiza la distancia entre clusters.\n\n\n\n\n\n\n\n\n\n\n\n\n\\[D(C_i, C_j) = wc(Cij) - wc(C_i) - wc(C_j) = \\frac{n_i\\cdot n_j}{n_i + n_j}||\\bar{C_i} - \\bar{C_j}||^2\\]\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nMenos suceptible a dato atípicos.\n\n\n\n\n\n\n\n\n\n\n\nLimitaciones\n\n\n\nTiende a generar clusters circulares."
+  },
+  {
+    "objectID": "tics411/clase-4.html#volvamos-a-la-iteración-1",
+    "href": "tics411/clase-4.html#volvamos-a-la-iteración-1",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Volvamos a la Iteración 1",
+    "text": "Volvamos a la Iteración 1\n\nSupongamos que por simplicidad utilizaremos Average Linkage. (El proceso para utilizar otro linkage es análogo).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVamos a extraer una Matriz entre los puntos a fusionar y los puntos de los clusters restantes.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDendograma: 1era Iteración"
+  },
+  {
+    "objectID": "tics411/clase-4.html#iteración-2",
+    "href": "tics411/clase-4.html#iteración-2",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Iteración 2",
+    "text": "Iteración 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDendograma: 2da Iteración"
+  },
+  {
+    "objectID": "tics411/clase-4.html#iteración-3",
+    "href": "tics411/clase-4.html#iteración-3",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Iteración 3",
+    "text": "Iteración 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDendograma: 3ra Iteración"
+  },
+  {
+    "objectID": "tics411/clase-4.html#dendograma-resultante",
+    "href": "tics411/clase-4.html#dendograma-resultante",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Dendograma Resultante",
+    "text": "Dendograma Resultante\n\n\n\n\n\n\nNo es necesario realizar la última iteración ya que se entiende que ambos clusters se unen.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n¿Cómo encontramos los clusters una vez que tenemos el Dendograma?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPodemos escoger un umbral de distancia y ver cuántos clusters se forman.\n\n\n\n\n\n\n\n\n\n\n\n\n\nComo regla general se deben escoger clusters más distanciados entre sí."
+  },
+  {
+    "objectID": "tics411/clase-4.html#efecto-del-linkage-escogido",
+    "href": "tics411/clase-4.html#efecto-del-linkage-escogido",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Efecto del Linkage Escogido",
+    "text": "Efecto del Linkage Escogido"
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-jerárquico-detalles-técnicos",
+    "href": "tics411/clase-4.html#clustering-jerárquico-detalles-técnicos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Jerárquico: Detalles Técnicos",
+    "text": "Clustering Jerárquico: Detalles Técnicos\n\n\n\n\n\n\nFortalezas\n\n\n\nNo requiere definir el número de Clusters a priori.\nAl tener distintas variantes es posible que los puntos sean agrupados de manera completamente distintas.\n\n\n\n\n\n\n\n\n\n\nDebilidades\n\n\n\nMuy ineficiente computacionalmente debido a que genera una nueva matriz de distancia en cada iteración lo que entrega una complejidad \\(O(n^2)\\) o \\(O(n^3)\\) dependiendo del linkage.\nUna vez que se decide combinar 2 clusters no es posible revertir esta decisión.\nNo tiene capacidad de generalización, ya que no es posible aplicarlo a datos nuevos."
+  },
+  {
+    "objectID": "tics411/clase-4.html#implementación-en-scikit-learn",
+    "href": "tics411/clase-4.html#implementación-en-scikit-learn",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Implementación en Scikit-Learn",
+    "text": "Implementación en Scikit-Learn\nfrom sklearn.cluster import AgglomerativeClustering\n\nkm = AgglomerativeClustering(n_clusters=2, metric=\"euclidean\",linkage=\"ward\")\n\n## Se entrena y se genera la predicción\nkm.fit_predict(X)\n\n\nn_clusters: Define el número de clusters a crear, por defecto 8.\nmetric: Permite distancias L1, L2 y coseno.\nlinkage: Permite single, complete, average y ward.\n.fit_predict(): Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento.\n\n\n\n\n\n\n\n\n\n¿Por qué no existen los métodos .fit() y .predict() por separado?"
+  },
+  {
+    "objectID": "tics411/clase-4.html#otras-implementaciones-dendograma",
+    "href": "tics411/clase-4.html#otras-implementaciones-dendograma",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Otras implementaciones (Dendograma)",
+    "text": "Otras implementaciones (Dendograma)\nfrom scipy.cluster.hierarchy import dendrogram, linkage\n\n# Genera los cálculos necesarios para construir el Histograma.\nZ = linkage(X, method='single', metric=\"euclidean\") \n\n# Graficar el Dendograma\nplt.figure(figsize=(10, 5)) # Define el tamaño del Gráfico\nplt.title('Dendograma Clustering Jerárquico') # Define un título para el dendograma\nplt.xlabel('Iris Samples')\nplt.ylabel('Distance')\ndendrogram(Z, leaf_rotation=90., leaf_font_size=8.)\nplt.show()\n\n\nPrincipalmente este código permite graficar el Dendograma completo.\nL5-L12: Corresponde al código necesario para graficar el Dendograma."
+  },
+  {
+    "objectID": "tics411/clase-4.html#sugerencias",
+    "href": "tics411/clase-4.html#sugerencias",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Sugerencias",
+    "text": "Sugerencias\n\n\n\n\n\n\nPre-procesamientos\n\n\nEs importante recordar que el clustering aglomerativo también es un Algoritmo basado en distancias, por lo tanto se ve afectado por Outliers y por Escala.\nSe recomienda preprocesar los datos con:\n\nWinsorizer() para eliminar Outliers.\nStandardScaler() o MinMaxScaler() para llevar a una escala común.\n\n\n\n\n\n\n\n\n\n\nOtras técnicas como merge y split, no aplican a este tipo de clustering debido a las limitaciones del algoritmo."
+  },
+  {
+    "objectID": "tics411/clase-4.html#variantes",
+    "href": "tics411/clase-4.html#variantes",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Variantes",
+    "text": "Variantes\n\nEn casos en los que no es posible calcular distancias debido a la presencia de datos categóricos, es posible utilizar el Gower Dissimilarity como medida de similitud.\n\n\n\n\n\n\n\n\n\nGower\n\nSe define como la proporción de variables que tienen distinto valor con respecto al total sin considerar donde ambos son ceros.\n\n\n\n\\[Gower(p1,p2) = \\frac{3}{9}\\]"
   },
   {
     "objectID": "tics411/clase-0.html#quién-soy",
@@ -976,6 +1116,13 @@
     "text": "import pandas as pd\nimport numpy as np\n\ndf = pd.DataFrame(dict(x=[0, 2, 3, 5], y=[2, 0, 1, 1]))\ndf.index = [1, 2, 3, 4]\ndf\n\n\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n1\n0\n2\n\n\n2\n2\n0\n\n\n3\n3\n1\n\n\n4\n5\n1\n\n\n\n\n\n\n\n\n\nnp.zeros((4, 4))\n\narray([[0., 0., 0., 0.],\n       [0., 0., 0., 0.],\n       [0., 0., 0., 0.],\n       [0., 0., 0., 0.]])\n\n\n\ndef distancia_l1(p, q):\n    x1 = p[\"x\"]\n    x2 = q[\"x\"]\n    y1 = p[\"y\"]\n    y2 = q[\"y\"]\n\n    return np.abs(x1 - x2) + np.abs(y1 - y2)\n\n\ndef distancia_l2(p, q):\n    x1 = p[\"x\"]\n    x2 = q[\"x\"]\n    y1 = p[\"y\"]\n    y2 = q[\"y\"]\n    return np.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)\n\n\ndef distancia_linf(p, q):\n    x1 = p[\"x\"]\n    x2 = q[\"x\"]\n    y1 = p[\"y\"]\n    y2 = q[\"y\"]\n    d_x = np.abs(x1 - x2)\n    d_y = np.abs(y1 - y2)\n    return np.max([d_x, d_y])\n\n\ndef calculate_matrix(distance, n_puntos):\n    m = np.zeros((n_puntos, n_puntos))\n    for i in range(n_puntos):\n        for j in range(n_puntos):\n            p = df.iloc[i]\n            q = df.iloc[j]\n            m[i, j] = distance(p, q)\n\n    return m\n\n\nm_m = calculate_matrix(distancia_l1, 4)\nm_e = calculate_matrix(distancia_l2, 4)\nm_c = calculate_matrix(distancia_linf, 4)\n\n\nm_m\n\narray([[0., 4., 4., 6.],\n       [4., 0., 2., 4.],\n       [4., 2., 0., 2.],\n       [6., 4., 2., 0.]])\n\n\n\nm_e\n\narray([[0.        , 2.82842712, 3.16227766, 5.09901951],\n       [2.82842712, 0.        , 1.41421356, 3.16227766],\n       [3.16227766, 1.41421356, 0.        , 2.        ],\n       [5.09901951, 3.16227766, 2.        , 0.        ]])\n\n\n\nm_c\n\narray([[0., 2., 3., 5.],\n       [2., 0., 1., 3.],\n       [3., 1., 0., 2.],\n       [5., 3., 2., 0.]])\n\n\n\n\na = pd.Series(\n    [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0]\n)\nb = pd.Series(\n    [1.0, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0]\n)\n\na.var(ddof=0)  # Varianza Poblacional\n\n3.5\n\n\n\na.var(ddof=1)  # Varianza Muestral\n\n3.7916666666666665\n\n\n\nb.var(ddof=1)\n\n1.5916666666666668\n\n\n\n\n\n Back to top"
   },
   {
+    "objectID": "tics411/notebooks/jerarquico.html",
+    "href": "tics411/notebooks/jerarquico.html",
+    "title": "Clases UAI",
+    "section": "",
+    "text": "import pandas as pd\nimport numpy as np\n\ndf = pd.DataFrame(\n    dict(\n        alpha=[9, 10, 1, 6, 1],\n        beta=[3, 2, 9, 5, 10],\n        gamma=[7, 9, 4, 5, 3],\n    )\n)\n\nindices = [\"p53\", \"mdm2\", \"bcl2\", \"cylinE\", \"Caspade\"]\ndf.index = indices\ndf\n\n\n\n\n\n\n\n\n\nalpha\nbeta\ngamma\n\n\n\n\np53\n9\n3\n7\n\n\nmdm2\n10\n2\n9\n\n\nbcl2\n1\n9\n4\n\n\ncylinE\n6\n5\n5\n\n\nCaspade\n1\n10\n3\n\n\n\n\n\n\n\n\n\nfrom scipy.spatial import distance_matrix\n\n\ndef calculate_global_min(dm):\n    data = np.triu(dm)\n\n    min_val = np.nanmin(data[np.nonzero(data)])\n    position = [dm.index[val[0]] for val in np.where(data == min_val)]\n    return min_val, position\n\n\noriginal_dm = distance_matrix(df, df, p=2)\noriginal_dm = pd.DataFrame(\n    original_dm, index=df.index, columns=df.index\n).round(2)\noriginal_dm.index = np.arange(5).astype(str)\noriginal_dm.columns = np.arange(5).astype(str)\noriginal_dm\n\n\n\n\n\n\n\n\n\n0\n1\n2\n3\n4\n\n\n\n\n0\n0.00\n2.45\n10.44\n4.12\n11.36\n\n\n1\n2.45\n0.00\n12.45\n6.40\n13.45\n\n\n2\n10.44\n12.45\n0.00\n6.48\n1.41\n\n\n3\n4.12\n6.40\n6.48\n0.00\n7.35\n\n\n4\n11.36\n13.45\n1.41\n7.35\n0.00\n\n\n\n\n\n\n\n\n\ndata = original_dm.copy()\ndata.index = indices\ndata.columns = indices\ndata\n\n\n\n\n\n\n\n\n\np53\nmdm2\nbcl2\ncylinE\nCaspade\n\n\n\n\np53\n0.00\n2.45\n10.44\n4.12\n11.36\n\n\nmdm2\n2.45\n0.00\n12.45\n6.40\n13.45\n\n\nbcl2\n10.44\n12.45\n0.00\n6.48\n1.41\n\n\ncylinE\n4.12\n6.40\n6.48\n0.00\n7.35\n\n\nCaspade\n11.36\n13.45\n1.41\n7.35\n0.00\n\n\n\n\n\n\n\n\n\ndef clean_position(position):\n    pos = []\n    for p in position:\n        pos.extend(p.split(\",\"))\n    return pos\n\n\ndef new_iteration(dm, original_dm, linkage=np.nanmean):\n    min_val, position = calculate_global_min(dm)\n    print(f\"El valor mínimo encontrado es: {min_val}\")\n    print(f\"Clusters a fusionar: {position}\")\n    non_position = [col for col in dm.columns if col not in position]\n    print(f\"Clusters que no se fusionan: {non_position}\")\n    new_position = \",\".join(position)\n    new_dm = dm.copy()\n    values = []\n    clean_pos = clean_position(position)\n    for n_p in non_position:\n        n_p = n_p.split(\",\")\n        v = linkage(original_dm.loc[n_p, clean_pos])\n        values.append(v)\n\n    new_dm[new_position] = pd.Series(values, index=non_position)\n    new_dm = new_dm.T\n    new_dm[new_position] = pd.Series(values, index=non_position)\n    return new_dm.drop(index=position, columns=position)\n\n\ndm_1 = new_iteration(original_dm, original_dm)\ndm_1\n\nEl valor mínimo encontrado es: 1.41\nClusters a fusionar: ['2', '4']\nClusters que no se fusionan: ['0', '1', '3']\n\n\n\n\n\n\n\n\n\n\n0\n1\n3\n2,4\n\n\n\n\n0\n0.00\n2.45\n4.120\n10.900\n\n\n1\n2.45\n0.00\n6.400\n12.950\n\n\n3\n4.12\n6.40\n0.000\n6.915\n\n\n2,4\n10.90\n12.95\n6.915\nNaN\n\n\n\n\n\n\n\n\n\ndm_2 = new_iteration(dm_1, original_dm)\ndm_2\n\nEl valor mínimo encontrado es: 2.45\nClusters a fusionar: ['0', '1']\nClusters que no se fusionan: ['3', '2,4']\n\n\n\n\n\n\n\n\n\n\n3\n2,4\n0,1\n\n\n\n\n3\n0.000\n6.915\n5.260\n\n\n2,4\n6.915\nNaN\n11.925\n\n\n0,1\n5.260\n11.925\nNaN\n\n\n\n\n\n\n\n\n\ndm_3 = new_iteration(dm_2, original_dm)\ndm_3\n\nEl valor mínimo encontrado es: 5.26\nClusters a fusionar: ['3', '0,1']\nClusters que no se fusionan: ['2,4']\n\n\n\n\n\n\n\n\n\n\n2,4\n3,0,1\n\n\n\n\n2,4\nNaN\n10.255\n\n\n3,0,1\n10.255\nNaN\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
+  },
+  {
     "objectID": "tics411/notebooks/viz.html",
     "href": "tics411/notebooks/viz.html",
     "title": "Clases UAI",
@@ -1099,7 +1246,7 @@
     "href": "tics411.html",
     "title": "Diapositivas",
     "section": "",
-    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nMar 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nCalidad de los Datos y Feature Engineering\n\n\n\nMar 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nExploratory Data Analysis (EDA)\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase Bonus\n\n\nIntroducción a Scikit-Learn\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\nModelación Descriptiva y K-Means\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
+    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nMar 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nCalidad de los Datos y Feature Engineering\n\n\n\nMar 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nExploratory Data Analysis (EDA)\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase Bonus\n\n\nIntroducción a Scikit-Learn\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\nModelación Descriptiva y K-Means\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 4\n\n\nClustering Jerárquico\n\n\n\nApr 4, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
     "crumbs": [
       "Diapositivas del Curso"
     ]

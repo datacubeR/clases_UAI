@@ -398,7 +398,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Práctico 0: Introducción a Scikit-Learn</p>
+  <p class="subtitle">Clase 4: Clustering Jerárquico</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -412,182 +412,597 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="qué-es-scikit-learn" class="slide level2 smaller">
-<h2>¿Qué es Scikit-Learn?</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><img data-src="img/lab-0/sklearn.jpg"></p>
-</div><div class="column" style="width:70%;">
-<ul>
-<li><code>Scikit-Learn</code> (<code>sklearn</code> para los amigos) es una librería creada por David Cournapeau, como un Google Summer Code Project y luego Matthieu Brucher en su tesis.</li>
-<li>En 2010 queda a cargo de <a href="https://www.inria.cl/es">INRIA</a> y tiene un ciclo de actualización de 3 meses.</li>
-<li>Es la librería más famosa y poderosa para hacer Machine Learning hoy en día.</li>
-<li>Su API es tan famosa, que hoy se sabe que una librería es de <code>calidad</code> si sigue los estándares implementados por <code>Scikit-Learn</code>.</li>
-<li>Para que un algoritmo sea parte de <code>Scikit-Learn</code> debe poseer 3 años desde su publicación y 200+ citaciones mostrando su utilidad y amplio uso (ver <a href="https://scikit-learn.org/stable/faq.html#new-algorithms-inclusion-criteria">acá</a>).</li>
-<li>Además es una librería que obliga a que sus algoritmos tengan la capacidad de generalizar.</li>
-</ul>
-</div>
-</div>
+<section>
+<section id="clustering-jerárquico" class="title-slide slide level1 center">
+<h1>Clustering Jerárquico</h1>
+
 </section>
-<section id="diseño" class="slide level2 smaller">
-<h2>Diseño</h2>
-<ul>
-<li><code>Scikit-Learn</code> sigue un patrón de <code>Programación Orientada a Objetos (POO)</code> basado en clases.</li>
-</ul>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>En programación, una clase es un objeto que internamente contiene estados que pueden ir cambiando en el tiempo.
-<ul>
-<li>Una clase posee:
-<ul>
-<li><strong>Métodos</strong>: Funciones que cambian el comportamiento de la clase.</li>
-<li><strong>Atributos</strong>: Datos propios de la clase.</li>
-</ul></li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-<div style="font-size: 90%;">
-<p><code>Scikit-Learn</code> sigue el siguiente estándar:</p>
-<ul>
-<li class="fragment">Todas las Clases se escriben en <code>CamelCase</code>: Ej: <code>KMeans</code>,<code>LogisticRegression</code>, <code>StandardScaler</code>.</li>
-<li class="fragment">Las clases en Scikit-Learn pueden representar algoritmos, o etapas de un preprocesamiento.
-<ul>
-<li class="fragment">Los algoritmos se denominan <code>Estimators</code>.</li>
-<li class="fragment">Los preprocesamientos se denominan <code>Transformers</code>.</li>
-</ul></li>
-<li class="fragment">Las funciones se escriben como <code>snake_case</code> y permiten realizar algunas operaciones básicas en el proceso de modelamiento. Ej: <code>train_test_split()</code>, <code>cross_val_score()</code>.</li>
-<li class="fragment">Normalmente se utilizan letras mayúsculas para denotar <code>Matrices</code> o <code>DataFrames</code>, mientras que las letras minúsculas denotan <code>Vectores</code> o <code>Series</code>.</li>
-</ul>
-</div>
+<section id="definiciones" class="slide level2 smaller">
+<h2>Definiciones</h2>
+<dl>
+<dt>Clustering Jerárquico</dt>
+<dd>
+<blockquote>
+<p>Es un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender.</p>
+</blockquote>
+</dd>
+<dt>Dendograma</dt>
+<dd>
+<blockquote>
+<p>Corresponde a un diagrama en le que se muestran las distancias de atributos entre clases que se van fusionando secuencialmente.</p>
+</blockquote>
+</dd>
+</dl>
 </section>
-<section id="estimadores-no-supervisados" class="slide level2">
-<h2>Estimadores No supervisados</h2>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|2|3|5|7-8|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.sub_modulo <span class="im">import</span> Estimator </span>
-<span id="cb1-2"><a></a>model <span class="op">=</span> Estimator(hp1<span class="op">=</span>v1, hp2<span class="op">=</span>v2,...) </span>
-<span id="cb1-3"><a></a>model.fit(X) </span>
-<span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a>y_pred <span class="op">=</span> model.predict(X) </span>
-<span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a><span class="co">## Opcionalmente se puede entrenar y predecir a la vez.</span></span>
-<span id="cb1-8"><a></a>model.fit_predict(X) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><br></p>
-<div style="font-size: 75%;">
-<p>L1. Importar la clase a utilizar.</p>
-<p>L2. <code>Instanciar</code> el modelo y sus <code>hiperparámetros</code>.</p>
-<p>L3. <code>Entrenar</code> o ajustar el modelo (Requiere sólo de X).</p>
-<p>L5. <code>Predecir</code>. Los modelos de clasificación tienen la capacidad de generar probabilidades.</p>
-<p>L7-8. Este tipo de modelos permite entrenar y predecir en un sólo paso.</p>
-</div>
-</section>
-<section id="estimadores-predictivos" class="slide level2">
-<h2>Estimadores Predictivos</h2>
-<div class="sourceCode" id="cb2" data-code-line-numbers="|1|2|3|5-6|8|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> sklearn.sub_modulo <span class="im">import</span> Estimator </span>
-<span id="cb2-2"><a></a>model <span class="op">=</span> Estimator(hp1<span class="op">=</span>v1, hp2<span class="op">=</span>v2,...) </span>
-<span id="cb2-3"><a></a>model.fit(X_train, y_train) </span>
-<span id="cb2-4"><a></a></span>
-<span id="cb2-5"><a></a>y_pred <span class="op">=</span> model.predict(X_test) </span>
-<span id="cb2-6"><a></a>y_pred_proba <span class="op">=</span> model.predict_proba(X_test)</span>
-<span id="cb2-7"><a></a></span>
-<span id="cb2-8"><a></a>model.score(X_test,y_test) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><br></p>
-<div style="font-size: 75%;">
-<p>L1. Importar la clase a utilizar.</p>
-<p>L2. <code>Instanciar</code> el modelo y sus <code>hiperparámetros</code>.</p>
-<p>L3. <code>Entrenar</code> o ajustar el modelo (Ojo, requiere de <code>X</code> e <code>y</code>).</p>
-<p>L5–6. <code>Predecir</code> en datos nuevos. (Algunos modelos pueden predecir probabilidades).</p>
-<p>L8. <code>Evaluar</code> el modelo en los datos nuevos.</p>
-</div>
-</section>
-<section id="output-de-un-modelo" class="slide level2 smaller">
-<h2>Output de un Modelo</h2>
+<section id="clustering-jerarquía" class="slide level2 smaller">
+<h2>Clustering: Jerarquía</h2>
+<blockquote>
+<p>Los algoritmos basados en jerarquía pueden seguir 2 estrategias:</p>
+</blockquote>
 <ul>
-<li>Los modelos no entregan directamente un output sino que los dejan almacenados en su interior como un estado.</li>
-<li>Los Estimators tienen dos estados:
-<ul>
-<li><strong>Not Fitted</strong>: Modelo antes de ser entrenado</li>
-<li><strong>Fitted</strong>: Una vez que el modelo ya está entrenado. (Después de aplicar <code>.fit()</code>)</li>
-</ul></li>
-</ul>
-<div class="fragment">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Muchos modelos pueden entregar información sólo luego de ser entrenados (su atributo termina con un <code>_</code>).</p>
-<p>Ej: <code>model.coef_</code>, <code>model.intercept_</code>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>El modelo es una herramienta a la cual le entregamos datos (Input), y nos devuelve datos (Predicciones).</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="transformers" class="slide level2">
-<h2>Transformers</h2>
-<div style="font-size: 70%;">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>A diferencia de los <code>Estimators</code>, los <code>Transformers</code> no son modelos.</li>
-<li>Su input y su output son datos.</li>
-<li>Algunos <code>Transformers</code> permiten escalar los datos, transformar categorías en números, rellenar valores faltantes. (Veremos más acerca de esto en los <code>Preprocesamiento</code>).</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="sourceCode" id="cb3" data-code-line-numbers="|1|2|3|5|7-8|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> Transformer </span>
-<span id="cb3-2"><a></a>tr <span class="op">=</span> Transformer(hp1<span class="op">=</span>v1, hp2<span class="op">=</span>v2,...) </span>
-<span id="cb3-3"><a></a>tr.fit(X) </span>
-<span id="cb3-4"><a></a></span>
-<span id="cb3-5"><a></a>X_new <span class="op">=</span> tr.transform(X) </span>
-<span id="cb3-6"><a></a></span>
-<span id="cb3-7"><a></a><span class="co">## Opcionalmente</span></span>
-<span id="cb3-8"><a></a>X_new <span class="op">=</span> tr.fit_transform(X) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div style="font-size: 65%;">
-<p>L1. Importar la clase a utilizar (en este caso del submodulo <code>preprocessing</code>, aunque pueden haber otros como <code>impute</code>).</p>
-<p>L2. <code>Instanciar</code> el Transformer y sus <code>hiperparámetros</code>.</p>
-<p>L3. <code>Entrenar</code> o ajustar el Transformer.</p>
-<p>L5. <code>Transformar</code> los datos.</p>
-<p>L7-8. Adicionalmente se puede <code>entrenar</code> y <code>transformar</code> los datos en un sólo paso.</p>
-</div>
-</div>
-</section>
-<section id="pipelines" class="slide level2 smaller">
-<h2>Pipelines</h2>
-<ul>
-<li>En ocasiones un Dataset requiere más de un preprocesamiento.</li>
-<li>Estas Transformaciones normalmente se hacen en serie de manera consecutiva.</li>
+<li><p><strong>Aglomerativos</strong>: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. <code>Para n objetos se realizan n-1 uniones</code>.</p></li>
+<li><p><strong>Divisionales</strong>: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad.</p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/lab-0/pipeline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/lab-0/pipeline.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-3/jerarquia.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-3/jerarquia.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
+</section></section>
+<section>
+<section id="clustering-aglomerativo" class="title-slide slide level1 center">
+<h1>Clustering Aglomerativo</h1>
+
+</section>
+<section id="clustering-aglomerativo-algoritmo" class="slide level2">
+<h2>Clustering Aglomerativo: Algoritmo</h2>
+<p>Algoritmo</p>
+<ol type="1">
+<li>Inicialmente se considera <strong>cada punto como un cluster</strong>.</li>
+<li>Calcula la matriz de <em><code>proximidad/distancia</code></em> entre cada cluster.</li>
+<li>Repetir <code>(hasta que exista un solo cluster)</code>:
+<ul>
+<li>Unir los cluster más cercanos.</li>
+<li>Actualizar la matriz de <em><code>proximidad/distancia</code></em>.</li>
+</ul></li>
+</ol>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Lo más importante de este proceso es el cálculo de la matriz de proximidad/distancia entre clusters</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Distintos enfoques de distancia entre clusters, segmentan los datos en forma distinta.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="clustering-aglomerativo-ejemplo" class="slide level2 smaller">
+<h2>Clustering Aglomerativo: Ejemplo</h2>
+<p>Supongamos que tenemos cinco tipos de genes cuya expresión ha sido determinada por 3 caracteríticas. Las siguientes expresiones pueden ser vistas como la expresión dados los genes en tres experimentos. ​</p>
+<blockquote>
+<p>Apliquemos un Clustering Jerárquico Aglomerativo utilizando como medida de similaridad la <code>Distancia Euclideana</code>.</p>
+</blockquote>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Otros tipos de distancia también son aplicables siguiendo un procedimiento análogo.</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/data_jerarquico.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-4/data_jerarquico.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/d_matrix_ejemplo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-4/d_matrix_ejemplo.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="algoritmo-1era-iteración" class="slide level2">
+<h2>Algoritmo: 1era Iteración</h2>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El algoritmo considerará que todos los puntos inicialmente son un cluster. Por lo tanto, tratará de encontrar los 2 puntos más cercanos e intentará unirnos en un sólo cluster.</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/d_matrix_ejemplo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-4/d_matrix_ejemplo.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/iter_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-4/iter_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
+</figure>
+</div>
+</div>
+<div class="fragment" data-fragment-index="3">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Problema</strong>: ¿Cómo actualizamos la matriz de Distancias?</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column fragment" data-fragment-index="2">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Entonces crearemos un nuevo cluster: <code>bcl2-Caspade.</code></p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-4/update.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="clustering-aglomerativo-single-linkage" class="slide level2">
+<h2>Clustering Aglomerativo: Single Linkage</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Distancia entre clusters determinada por los puntos más <em><code>similares</code></em> entre los clusters.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/single.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-4/single.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[D(C_i, C_j) = min\{d(x,y) | x \in C_i, y \in C_j\}\]</span></p>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Ventajas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Genera Clusters largos y delgados.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Limitaciones</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Afectado por Outliers</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="clustering-aglomerativo-complete-linkage" class="slide level2">
+<h2>Clustering Aglomerativo: Complete Linkage</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Distancia determinada por la distancia ente los puntos más <em><code>disímiles</code></em> entre los clusters.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/complete.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-4/complete.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[D(C_i, C_j) = max\{d(x,y) | x \in C_i, y \in C_j\}\]</span></p>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Ventajas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Menos suceptible a dato atípicos.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Limitaciones</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Tiende a quebrar Clusters Grandes.</li>
+<li>Tiene tendencia a generar Clusters circulares.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="clustering-aglomerativo-average-linkage" class="slide level2">
+<h2>Clustering Aglomerativo: Average Linkage</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Distancia determinada por el promedio de las distancias que componen los clusters.</li>
+<li>Punto intermedio entre <em>Single</em> y <em>Complete</em>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/average.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-4/average.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[D(C_i, C_j) = avg\{d(x,y) | x \in C_i, y \in C_j\}\]</span></p>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Ventajas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Menos suceptible a datos atípicos.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Limitaciones</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Tiende a generar clusters circulares.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="clustering-aglomerativo-ward-linkage" class="slide level2">
+<h2>Clustering Aglomerativo: Ward Linkage</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Distancia determinada por el incremento del <code>Within cluster distance</code>.</li>
+<li>Minimiza la distancia intra cluster y maximiza la distancia entre clusters.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/ward.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-4/ward.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[D(C_i, C_j) = wc(Cij) - wc(C_i) - wc(C_j) = \frac{n_i\cdot n_j}{n_i + n_j}||\bar{C_i} - \bar{C_j}||^2\]</span></p>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Ventajas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Menos suceptible a dato atípicos.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Limitaciones</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Tiende a generar clusters circulares.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="volvamos-a-la-iteración-1" class="slide level2 smaller">
+<h2>Volvamos a la Iteración 1</h2>
+<blockquote>
+<p>Supongamos que por simplicidad utilizaremos <code>Average Linkage</code>. (El proceso para utilizar otro linkage es análogo).</p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-4/update.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="fragment" data-fragment-index="1">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Vamos a extraer una Matriz entre los puntos a fusionar y los puntos de los clusters restantes.</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/up_11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-4/up_11.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/up_12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-4/up_12.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/up_13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-4/up_13.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="4"></a></p>
+</figure>
+</div>
+<div class="fragment" data-fragment-index="5">
+<!-- -->
+<h5 id="dendograma-1era-iteración">Dendograma: 1era Iteración</h5>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/dend_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-4/dend_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="5"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="iteración-2" class="slide level2 smaller">
+<h2>Iteración 2</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/iter_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-4/iter_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/iter_2_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-4/iter_2_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/update_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-4/update_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/up_21.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-4/up_21.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="4"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/up_22.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-4/up_22.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="5"></a></p>
+</figure>
+</div>
+<div class="fragment" data-fragment-index="6">
+<!-- -->
+<h5 id="dendograma-2da-iteración">Dendograma: 2da Iteración</h5>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/dend_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-4/dend_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="6"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="iteración-3" class="slide level2 smaller">
+<h2>Iteración 3</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/iter_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-4/iter_3.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/iter_3_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-4/iter_3_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
+</figure>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/update_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-4/update_3.png" class="fragment quarto-figure quarto-figure-center" style="width:70.0%" data-fragment-index="3"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/up_31.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-4/up_31.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="4"></a></p>
+</figure>
+</div>
+<div class="fragment" data-fragment-index="5">
+<!-- -->
+<h5 id="dendograma-3ra-iteración">Dendograma: 3ra Iteración</h5>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/dend_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-4/dend_3.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="4"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="dendograma-resultante" class="slide level2">
+<h2>Dendograma Resultante</h2>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>No es necesario realizar la última iteración ya que se entiende que ambos clusters se unen.</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/dend_4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-4/dend_4.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>¿Cómo encontramos los clusters una vez que tenemos el <strong>Dendograma</strong>?</p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/d_cluster_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-4/d_cluster_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/d_cluster_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-4/d_cluster_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
+</figure>
+</div>
+</div>
+<div class="fragment" data-fragment-index="2" style="font-size: 85%;">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -595,7 +1010,138 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <ul>
-<li>El Estimator es opcional, es decir, el Pipeline puede ser para combinar sólo <code>Transformers</code> o <code>Transformers + un Estimator</code>.</li>
+<li>Podemos escoger un <em><code>umbral de distancia</code></em> y ver cuántos clusters se forman.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="2" style="font-size: 85%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Como regla general se deben escoger clusters más <em><code>distanciados</code></em> entre sí.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="efecto-del-linkage-escogido" class="slide level2">
+<h2>Efecto del Linkage Escogido</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-4/linkage_types.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-4/linkage_types.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="clustering-jerárquico-detalles-técnicos" class="slide level2">
+<h2>Clustering Jerárquico: Detalles Técnicos</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Fortalezas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>No requiere definir el número de Clusters a priori.</li>
+<li>Al tener distintas variantes es posible que los puntos sean agrupados de manera completamente distintas.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Debilidades</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Muy ineficiente computacionalmente debido a que genera una nueva matriz de distancia en cada iteración lo que entrega una complejidad <span class="math inline">\(O(n^2)\)</span> o <span class="math inline">\(O(n^3)\)</span> dependiendo del linkage.</li>
+<li>Una vez que se decide combinar 2 clusters no es posible revertir esta decisión.</li>
+<li>No tiene capacidad de generalización, ya que no es posible aplicarlo a datos nuevos.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="implementación-en-scikit-learn" class="slide level2">
+<h2>Implementación en Scikit-Learn</h2>
+<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3|5-6|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a>km <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span><span class="dv">2</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>,linkage<span class="op">=</span><span class="st">"ward"</span>)</span>
+<span id="cb1-4"><a></a></span>
+<span id="cb1-5"><a></a><span class="co">## Se entrena y se genera la predicción</span></span>
+<span id="cb1-6"><a></a>km.fit_predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns" style="font-size: 70%;">
+<ul>
+<li><p><strong>n_clusters</strong>: Define el número de clusters a crear, por defecto 8.</p></li>
+<li><p><strong>metric</strong>: Permite distancias L1, L2 y coseno.</p></li>
+<li><p><strong>linkage</strong>: Permite single, complete, average y ward.</p></li>
+<li><p><code>.fit_predict()</code>: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento.</p></li>
+</ul>
+</div>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>¿Por qué no existen los métodos <code>.fit()</code> y <code>.predict()</code> por separado?</strong></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="otras-implementaciones-dendograma" class="slide level2">
+<h2>Otras implementaciones (Dendograma)</h2>
+<div class="sourceCode" id="cb2" data-code-line-numbers="|1|3-4|5-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a><span class="co"># Genera los cálculos necesarios para construir el Histograma.</span></span>
+<span id="cb2-4"><a></a>Z <span class="op">=</span> linkage(X, method<span class="op">=</span><span class="st">'single'</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>) </span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a><span class="co"># Graficar el Dendograma</span></span>
+<span id="cb2-7"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>)) <span class="co"># Define el tamaño del Gráfico</span></span>
+<span id="cb2-8"><a></a>plt.title(<span class="st">'Dendograma Clustering Jerárquico'</span>) <span class="co"># Define un título para el dendograma</span></span>
+<span id="cb2-9"><a></a>plt.xlabel(<span class="st">'Iris Samples'</span>)</span>
+<span id="cb2-10"><a></a>plt.ylabel(<span class="st">'Distance'</span>)</span>
+<span id="cb2-11"><a></a>dendrogram(Z, leaf_rotation<span class="op">=</span><span class="fl">90.</span>, leaf_font_size<span class="op">=</span><span class="fl">8.</span>)</span>
+<span id="cb2-12"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns" style="font-size: 70%;">
+<blockquote>
+<p>Principalmente este código permite graficar el Dendograma completo.</p>
+</blockquote><p>L5-L12: Corresponde al código necesario para graficar el Dendograma.</p>
+</div>
+</section>
+<section id="sugerencias" class="slide level2">
+<h2>Sugerencias</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Pre-procesamientos</strong></p>
+</div>
+<div class="callout-content">
+<p>Es importante recordar que el clustering aglomerativo también es un Algoritmo basado en <code>distancias</code>, por lo tanto se ve afectado por Outliers y por Escala.</p>
+<p>Se recomienda preprocesar los datos con:</p>
+<ul>
+<li><code>Winsorizer()</code> para eliminar Outliers.</li>
+<li><code>StandardScaler()</code> o <code>MinMaxScaler()</code> para llevar a una escala común.</li>
 </ul>
 </div>
 </div>
@@ -606,64 +1152,39 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Un Pipeline puede tener <strong>sólo un Estimator</strong>.</p>
+<p>Otras técnicas como merge y split, no aplican a este tipo de clustering debido a las limitaciones del algoritmo.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="pipelines-código" class="slide level2">
-<h2>Pipelines: Código</h2>
-<div class="sourceCode" id="cb4" data-code-line-numbers="|1-2|3|5-9|11|12|14|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier </span>
-<span id="cb4-2"><a></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler, OneHotEncoder </span>
-<span id="cb4-3"><a></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline </span>
-<span id="cb4-4"><a></a></span>
-<span id="cb4-5"><a></a>pipe <span class="op">=</span> Pipeline(steps<span class="op">=</span>[ </span>
-<span id="cb4-6"><a></a>    (<span class="st">"ohe"</span>, OneHotEncoder()),</span>
-<span id="cb4-7"><a></a>    (<span class="st">"sc"</span>, StandardScaler()),</span>
-<span id="cb4-8"><a></a>    (<span class="st">"model"</span>, DecisionTreeClassifier())</span>
-<span id="cb4-9"><a></a>])</span>
-<span id="cb4-10"><a></a></span>
-<span id="cb4-11"><a></a>pipe.fit(X_train, y_train) </span>
-<span id="cb4-12"><a></a>y_pred <span class="op">=</span> pipe.predict(X_test) </span>
-<span id="cb4-13"><a></a></span>
-<span id="cb4-14"><a></a>pipe.score(X_test, y_test) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div style="font-size: 50%;">
-<p>L1-2. Importo mi modelo y mis preprocesamientos</p>
-<p>L3. Importo el <code>Pipeline</code>.</p>
-<p>L5-9. Instancio un <code>Pipeline</code>.</p>
-<p>L11. Entreno el <code>Pipeline</code>.</p>
-<p>L12. Predigo utilizando el <code>Pipeline</code> entrenado.</p>
-<p>L14. Evalúo el modelo en datos no vistos.</p>
-</div>
-</section>
-<section id="documentación" class="slide level2">
-<h2>Documentación</h2>
+<section id="variantes" class="slide level2 smaller">
+<h2>Variantes</h2>
 <blockquote>
-<p>Probablemente <code>Scikit-Learn</code> tenga una de las mejores documentaciones existentes.</p>
+<p>En casos en los que no es posible calcular distancias debido a la presencia de datos categóricos, es posible utilizar el <strong>Gower Dissimilarity</strong> como medida de similitud.</p>
 </blockquote>
-<ul>
-<li>Veamos el caso de la Documentación del <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html#sklearn.preprocessing.OneHotEncoder">One Hot Encoder</a></li>
-</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/lab-0/ohe_docs.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/lab-0/ohe_docs.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-4/gower.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="img/clase-4/gower.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
-</section>
-<section id="preguntas-para-terminar" class="title-slide slide level1 center">
-<h1>Preguntas para terminar</h1>
-<ul>
-<li>¿Cómo se importan las clases en Scikit-Learn?</li>
-<li>¿Cuál es la diferencia entre un Transformer y un Estimator?</li>
-<li>¿Cuándo es buena idea usar un Pipeline?</li>
-</ul>
-</section>
-
-<section id="class-dismissed" class="title-slide slide level1 center">
-<h1>Class Dismissed</h1>
+<div class="columns">
+<div class="column">
+<dl>
+<dt>Gower</dt>
+<dd>
+Se define como la proporción de variables que tienen distinto valor con respecto al total sin considerar donde ambos son ceros.
+</dd>
+</dl>
+</div><div class="column">
+<p><span class="math display">\[Gower(p1,p2) = \frac{3}{9}\]</span></p>
+</div>
+</div>
+</section></section>
+<section id="cest-fini" class="title-slide slide level1 center">
+<h1>C’est fini</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
-</p><p><span property="dct:title">Tics-411 Minería de Datos</span> por <span property="cc:attributionName">Alfonso Tobar</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+</p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a>
 <p></p>
 </div>
@@ -1002,158 +1523,6 @@ Alfonso Tobar-Arancibia
           return note.innerHTML;
         });
       }
-          let selectedAnnoteEl;
-          const selectorForAnnotation = ( cell, annotation) => {
-            let cellAttr = 'data-code-cell="' + cell + '"';
-            let lineAttr = 'data-code-annotation="' +  annotation + '"';
-            const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-            return selector;
-          }
-          const selectCodeLines = (annoteEl) => {
-            const doc = window.document;
-            const targetCell = annoteEl.getAttribute("data-target-cell");
-            const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-            const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-            const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-            const lineIds = lines.map((line) => {
-              return targetCell + "-" + line;
-            })
-            let top = null;
-            let height = null;
-            let parent = null;
-            if (lineIds.length > 0) {
-                //compute the position of the single el (top and bottom and make a div)
-                const el = window.document.getElementById(lineIds[0]);
-                top = el.offsetTop;
-                height = el.offsetHeight;
-                parent = el.parentElement.parentElement;
-              if (lineIds.length > 1) {
-                const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-                const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-                height = bottom - top;
-              }
-              if (top !== null && height !== null && parent !== null) {
-                // cook up a div (if necessary) and position it 
-                let div = window.document.getElementById("code-annotation-line-highlight");
-                if (div === null) {
-                  div = window.document.createElement("div");
-                  div.setAttribute("id", "code-annotation-line-highlight");
-                  div.style.position = 'absolute';
-                  parent.appendChild(div);
-                }
-                div.style.top = top - 2 + "px";
-                div.style.height = height + 4 + "px";
-                div.style.left = 0;
-                let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-                if (gutterDiv === null) {
-                  gutterDiv = window.document.createElement("div");
-                  gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                  gutterDiv.style.position = 'absolute';
-                  const codeCell = window.document.getElementById(targetCell);
-                  const gutter = codeCell.querySelector('.code-annotation-gutter');
-                  gutter.appendChild(gutterDiv);
-                }
-                gutterDiv.style.top = top - 2 + "px";
-                gutterDiv.style.height = height + 4 + "px";
-              }
-              selectedAnnoteEl = annoteEl;
-            }
-          };
-          const unselectCodeLines = () => {
-            const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-            elementsIds.forEach((elId) => {
-              const div = window.document.getElementById(elId);
-              if (div) {
-                div.remove();
-              }
-            });
-            selectedAnnoteEl = undefined;
-          };
-            // Handle positioning of the toggle
-        window.addEventListener(
-          "resize",
-          throttle(() => {
-            elRect = undefined;
-            if (selectedAnnoteEl) {
-              selectCodeLines(selectedAnnoteEl);
-            }
-          }, 10)
-        );
-        function throttle(fn, ms) {
-        let throttle = false;
-        let timer;
-          return (...args) => {
-            if(!throttle) { // first call gets through
-                fn.apply(this, args);
-                throttle = true;
-            } else { // all the others get throttled
-                if(timer) clearTimeout(timer); // cancel #2
-                timer = setTimeout(() => {
-                  fn.apply(this, args);
-                  timer = throttle = false;
-                }, ms);
-            }
-          };
-        }
-          const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
-          for (let i=0; i<annoteTargets.length; i++) {
-            const annoteTarget = annoteTargets[i];
-            const targetCell = annoteTarget.getAttribute("data-target-cell");
-            const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
-            const contentFn = () => {
-              const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-              if (content) {
-                const tipContent = content.cloneNode(true);
-                tipContent.classList.add("code-annotation-tip-content");
-                return tipContent.outerHTML;
-              }
-            }
-            const config = {
-              allowHTML: true,
-              content: contentFn,
-              onShow: (instance) => {
-                selectCodeLines(instance.reference);
-                instance.reference.classList.add('code-annotation-active');
-                window.tippy.hideAll();
-              },
-              onHide: (instance) => {
-                unselectCodeLines();
-                instance.reference.classList.remove('code-annotation-active');
-              },
-              maxWidth: 300,
-              delay: [50, 0],
-              duration: [200, 0],
-              offset: [5, 10],
-              arrow: true,
-              appendTo: function(el) {
-                return el.parentElement.parentElement.parentElement;
-              },
-              interactive: true,
-              interactiveBorder: 10,
-              theme: 'light-border',
-              placement: 'right',
-              popperOptions: {
-                modifiers: [
-                {
-                  name: 'flip',
-                  options: {
-                    flipVariations: false, // true by default
-                    allowedAutoPlacements: ['right'],
-                    fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
-                  },
-                },
-                {
-                  name: 'preventOverflow',
-                  options: {
-                    mainAxis: false,
-                    altAxis: false
-                  }
-                }
-                ]        
-              }      
-            };
-            window.tippy(annoteTarget, config); 
-          }
       const findCites = (el) => {
         const parentEl = el.parentElement;
         if (parentEl) {
@@ -1193,7 +1562,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox"});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
