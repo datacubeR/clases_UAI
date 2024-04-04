@@ -1,0 +1,482 @@
+---
+title: "TICS-411 Minería de Datos"
+subtitle: "Clase 4: Clustering Jerárquico"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs: 
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo.jpg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+---
+
+# Clustering Jerárquico
+
+## Definiciones {.smaller}
+
+Clustering Jerárquico
+: > Es un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender. 
+
+Dendograma
+: >  Corresponde a un diagrama en le que se muestran las distancias de atributos entre clases que se van fusionando secuencialmente.
+
+
+## Clustering: Jerarquía {.smaller}
+
+> Los algoritmos basados en jerarquía pueden seguir 2 estrategias: 
+
+* **Aglomerativos**: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. `Para n objetos se realizan n-1 uniones`. 
+
+* **Divisionales**: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad. 
+
+
+![](img/clase-3/jerarquia.png){.lightbox fig-align="center" width="70%"}
+
+## Clustering Aglomerativo {.smaller}
+
+Algoritmo
+
+* El algoritmo más básico del MJA es bastante sencillo
+    - Sea cada punto un cluster
+    - Calcula la matriz de proximidad/distancia entre cada cluster
+    - Repetir
+        - Unir los cluster más cercanos
+        - Recalcular/updatear la matriz de proximidad/distancia
+    - Hasta que exista un solo cluster
+
+::: {.callout-note}
+
+Lo más importante de este proceso es el cálculo de la matriz de proximidad/distancia entre clusters
+:::
+::: {.callout-important}
+Distintos enfoques de distancia entre clusters, segmentan los datos en forma distinta.
+:::
+
+
+## Ejemplo {.smaller}
+
+> Apliquemos un Clustering Jerárquico Aglomerativo utilizando la distancia Euclideana.
+
+::: {.columns}
+::: {.column}
+![](img/clase-4/data_jerarquico.png){.lightbox fig-align="center" }
+:::
+::: {.column}
+![](img/clase-4/d_matrix_ejemplo.png){.lightbox fig-align="center" }
+
+::: {.callout-caution}
+A modo de ejemplo estamos utilizando distancia L2 (Distancia Euclideana). Pero se podría utilizar otros tipos de distancia. 
+:::
+:::
+::: 
+
+## Algoritmo: 1era Iteración
+
+::: {.callout-note}
+El algoritmo considerará que todos los puntos inicialmente son un cluster. Por lo tanto, tratará de encontrar los 2 puntos más cercanos e intentará unirnos en un sólo cluster.
+:::
+
+::: {.columns}
+::: {.column}
+![](img/clase-4/iter_1.png){.lightbox fig-align="center" }
+
+
+::: {.callout-caution}
+Problema: La matriz de Distancias se debe actualizar ya que `bcl2` y `Caspade` ya no existen por sí solos sino como un Cluster. Se debe calcular la distancia del nuevo cluster hasta el resto de *`"Clusters"`*.
+:::
+:::
+::: {.column}
+::: {.callout-tip}
+Entonces crearemos un nuevo cluster llamado `bcl2-Caspade.` 
+:::
+
+![](img/clase-4/update.png){.lightbox fig-align="center" }
+:::
+::: 
+
+## Clustering Aglomerativo: Single Linkage 
+
+::: {.columns}
+::: {.column}
+
+::: {.callout-note}
+* Distancia entre clusters determinada por los puntos más cercanos (similares) entre los clusters.
+:::
+
+:::
+::: {.column}
+![](img/clase-4/single.png){.lightbox fig-align="center" }
+
+
+:::
+::: 
+
+$$D(C_i, C_j) = min\{d(x,y) | x \in C_i, y \in C_j\}$$
+
+::: {.columns}
+::: {.column}
+::: {.callout-tip appearance="default"}
+#### Ventajas
+* Genera Clusters largos y delgados.
+:::
+:::
+::: {.column}
+::: {.callout-caution appearance="default"}
+#### Limitaciones
+* Afectado por Outliers
+:::
+
+:::
+::: 
+
+## Clustering Aglomerativo: Complete Linkage 
+
+::: {.columns}
+::: {.column}
+
+::: {.callout-note}
+* Distancia determinada por la distancia ente los puntos más lejanos (disímiles) entre los clusters. 
+:::
+
+:::
+::: {.column}
+![](img/clase-4/complete.png){.lightbox fig-align="center" }
+:::
+::: 
+
+$$D(C_i, C_j) = max\{d(x,y) | x \in C_i, y \in C_j\}$$
+
+::: {.columns}
+::: {.column}
+::: {.callout-tip appearance="default"}
+#### Ventajas
+* Menos suceptible a dato atípicos.
+:::
+:::
+::: {.column}
+::: {.callout-caution appearance="default"}
+#### Limitaciones
+* Tiende a quebrar Clusters Grandes.
+* Tiene tendencia a generar Clusters circulares. 
+:::
+:::
+:::
+
+## Clustering Aglomerativo: Average Linkage 
+
+
+::: {.columns}
+::: {.column}
+
+::: {.callout-note}
+* Distancia determinada por el promedio de las distancias que componen los clusters.
+* Punto intermedio entre Single y Complete.
+:::
+
+:::
+::: {.column}
+![](img/clase-4/average.png){.lightbox fig-align="center" }
+:::
+::: 
+
+$$D(C_i, C_j) = avg\{d(x,y) | x \in C_i, y \in C_j\}$$
+
+
+::: {.columns}
+::: {.column}
+::: {.callout-tip appearance="default"}
+#### Ventajas
+* Menos suceptible a datos atípicos. 
+:::
+:::
+::: {.column}
+::: {.callout-caution appearance="default"}
+#### Limitaciones
+* Tiende a generar clusters circulares.
+:::
+:::
+:::
+
+## Clustering Aglomerativo: Ward Linkage 
+
+::: {.columns}
+::: {.column}
+
+::: {.callout-note}
+* Distancia determinada por el incremento del `Within cluster distance`.
+* Minimiza la distancia intra cluster y maximiza la distancia entre clusters.
+:::
+
+:::
+
+::: {.column}
+![](img/clase-4/ward.png){.lightbox fig-align="center" }
+:::
+::: 
+
+$$D(C_i, C_j) = wc(Cij) - wc(C_i) - wc(C_j) = \frac{n_i\cdot n_j}{n_i + n_j}||\bar{C_i} - \bar{C_j}||^2$$
+
+
+::: {.columns}
+::: {.column}
+::: {.callout-tip appearance="default"}
+#### Ventajas
+* Menos suceptible a dato atípicos.
+:::
+:::
+::: {.column}
+::: {.callout-caution appearance="default"}
+#### Limitaciones
+* Tiende a generar clusters circulares.
+:::
+:::
+:::
+
+## Volvamos a la Iteración 1 {.smaller}
+
+> Supongamos que por simplicidad utilizaremos `Average Linkage`. (El proceso para utilizar otro linkage es análogo). 
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-4/update.png){.lightbox fig-align="center" }
+
+::: {.callout-tip .fragment fragment-index=1}
+Vamos a extraer una Matriz entre los puntos a fusionar y los puntos de los clusters restantes.
+:::
+
+:::
+::: {.column width="30%"}
+
+:::{.fragment fragment-index=2}
+* Mean: 10.90
+:::
+
+![](img/clase-4/up_11.png){.lightbox fig-align="center" .fragment fragment-index=2}
+
+:::{.fragment fragment-index=3}
+* Mean: 12.95
+:::
+![](img/clase-4/up_12.png){.lightbox fig-align="center" .fragment fragment-index=3}
+
+
+:::
+
+::: {.column width="30%"}
+:::{.fragment fragment-index=4}
+* Mean: 6.92
+:::
+![](img/clase-4/up_13.png){.lightbox fig-align="center" .fragment fragment-index=4}
+
+::: {.fragment fragment-index=5}
+##### Dendograma: 1era Iteración
+:::
+![](img/clase-4/dend_1.png){.lightbox fig-align="center" .fragment fragment-index=5}
+:::
+
+::: 
+
+
+## Iteración 2 {.smaller}
+
+:::: {.columns}
+::: {.column width="40%"}
+
+::: {.r-stack}
+![](img/clase-4/iter_2.png){.lightbox fig-align="center" .fragment fragment-index=1}
+
+![](img/clase-4/iter_2_2.png){.lightbox fig-align="center" .fragment fragment-index=2}
+:::
+
+![](img/clase-4/update_2.png){.lightbox fig-align="center" .fragment fragment-index=3}
+
+
+
+:::
+::: {.column width="30%"}
+
+
+:::{.fragment fragment-index=4}
+* Mean: 5.26
+:::
+![](img/clase-4/up_21.png){.lightbox fig-align="center" .fragment fragment-index=4}
+
+
+:::
+
+::: {.column width="30%"}
+:::{.fragment fragment-index=5}
+
+* Mean: 11.93
+:::
+![](img/clase-4/up_22.png){.lightbox fig-align="center" .fragment fragment-index=5}
+
+::: {.fragment fragment-index=6}
+##### Dendograma: 2da Iteración
+:::
+![](img/clase-4/dend_2.png){.lightbox fig-align="center" .fragment fragment-index=6}
+:::
+
+::::
+
+
+## Iteración 3 {.smaller}
+
+:::: {.columns}
+::: {.column width="40%"}
+
+::: {.r-stack}
+![](img/clase-4/iter_3.png){.lightbox fig-align="center" .fragment fragment-index=1}
+
+![](img/clase-4/iter_3_2.png){.lightbox fig-align="center" .fragment fragment-index=2}
+:::
+
+![](img/clase-4/update_3.png){.lightbox fig-align="center" .fragment fragment-index=3 width="70%"}
+
+:::
+
+::: {.column width="60%"}
+
+
+:::{.fragment fragment-index=4}
+* Mean: 10.30
+:::
+![](img/clase-4/up_31.png){.lightbox fig-align="center" .fragment fragment-index=4}
+
+::: {.fragment fragment-index=5}
+##### Dendograma: 3ra Iteración
+![](img/clase-4/dend_3.png){.lightbox fig-align="center" .fragment fragment-index=4 width="50%"}
+:::
+
+::: {.callout-tip .fragment fragment-index=6}
+Obviamente no es necesario realizar la última iteración porque se entiende que ambos clusters se unen.
+:::
+:::
+::::
+
+## Dendograma Resultante
+
+::: {.columns}
+::: {.column}
+![](img/clase-4/dend_4.png){.lightbox fig-align="center" }
+
+::: {.callout-note}
+¿Cómo encontramos los clusters una vez que tenemos el **Dendograma**?
+:::
+:::
+::: {.column}
+
+::: {.r-stack}
+
+![](img/clase-4/d_cluster_1.png){.lightbox fig-align="center" .fragment fragment-index=1}
+
+![](img/clase-4/d_cluster_2.png){.lightbox fig-align="center" .fragment fragment-index=2}
+:::
+
+::: {.callout-tip .fragment fragment-index=2}
+* Podemos escoger un *`umbral de distancia`* y ver cuántos clusters se forman.
+:::
+::: {.callout-tip .fragment fragment-index=2}
+* Como regla general se deben escoger clusters que más *`distanciados`* entre sí.
+:::
+
+:::
+::: 
+
+## Efecto del Linkage Escogido
+
+
+![](img/clase-4/linkage_types.png){.lightbox fig-align="center" width="80%"}
+
+
+## Clustering Jerárquico: Detalles Técnicos
+
+::: {.callout-note appearance="default"}
+## Fortalezas
+* No requiere definir el número de Clusters a priori.
+* Al tener distintas variantes es posible que los puntos sean agrupados de manera completamente distintas.
+:::
+
+::: {.callout-warning appearance="default"}
+## Debilidades
+
+* Muy ineficiente computacionalmente. Para cada iteración requiere calcular una nueva matriz de distancias para todos los puntos lo que entrega una complejidad $O(n^3)$.
+* Una vez que se decide combinar 2 clusters no es posible revertir esta decisión.
+* No tiene capacidad de generalización, ya que no es posible aplicarlo a datos nuevos. 
+:::
+
+## Variantes {.smaller}
+
+> En casos en los que no es posible calcular distancias debido a la presencia de datos categóricos, es posible utilizar el **Gower Dissimilarity** como medida de similitud. 
+
+![](img/clase-4/gower.png){.lightbox fig-align="center" width="70%"}
+
+::: {.columns}
+::: {.column}
+Gower
+: Se define como la proporción de variables que tienen distinto valor con respecto al total sin considerar donde ambos son ceros.
+:::
+::: {.column}
+$$Gower(p1,p2) = \frac{3}{9}$$
+:::
+::: 
+
+## Implementación en Scikit-Learn
+
+
+```{.python code-line-numbers="|1|3|4|5|"}
+from sklearn.cluster import AgglomerativeClustering
+
+km = AgglomerativeClustering(n_clusters=2, metric="euclidean",linkage="ward")
+## Este modelo no permite hacer fit y predict por separado
+km.fit_predict(X)
+```
+
+::: {.columns style="font-size: 70%;"}
+* **n_clusters**: Define el número de clusters a crear, por defecto 8.
+*  **metric**: Permite distancias L1, L2 y coseno. 
+*  **linkage**: Permite single, complete, average y ward.
+
+* `.fit_predict()`: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento. 
+:::
+
+## Otras implementaciones
+
+```{.python code-line-numbers="|1|3|5-11|"}
+from scipy.cluster.hierarchy import dendrogram, linkage
+
+Z = linkage(X, method='single', metric="euclidean")  # Using Ward's method for linkage
+
+# Graficar el Dendograma
+plt.figure(figsize=(10, 5)) # Define el tamaño del Gráfico
+plt.title('Dendograma Clustering Jerárquico') # Define un título para el dendograma
+plt.xlabel('Iris Samples')
+plt.ylabel('Distance')
+dendrogram(Z, leaf_rotation=90., leaf_font_size=8.)
+plt.show()
+```
+::: {.columns style="font-size: 70%;"}
+> Principalmente este código permite graficar el Dendograma completo. 
+
+L5-L11: Corresponde al código necesario para graficar el Dendograma. 
+:::
+
+
+# C'est fini
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::

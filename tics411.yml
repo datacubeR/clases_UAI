@@ -43,3 +43,12 @@
   path: tics411/clase-3.qmd
   categories:
    - slides
+
+- title: "Clase 4"
+  subtitle: "Clustering Jerárquico"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-04-04
+  image: tics411/thumbnails/clase-4.png
+  path: tics411/clase-4.qmd
+  categories:
+   - slides
