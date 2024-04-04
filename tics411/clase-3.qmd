@@ -302,8 +302,8 @@ $$G^2 = \begin{bmatrix}
 ::: {.fragment fragment-index=5}
 
 Los nuevos centroides son:
-$$C_1 = (3/2, 1)$$
-$$C_2 = (\frac{9}{2}, \frac{7}{2})$$
+
+$C_1 = (\frac{3}{2}, 1)$ y $C_2 = (\frac{9}{2}, \frac{7}{2})$
 :::
 
 :::
@@ -353,15 +353,15 @@ Curva del Codo
 ::: {.column}
 <br>
 
-::: {.callout-important .fragment}
+::: {.callout-important }
 * Este valor del codo muchas veces es subjetivo y distintas apreciaciones pueden llegar a distintos $K$ óptimos. 
 :::
 
-::: {.callout-tip .fragment}
+::: {.callout-tip }
 Eventualmente otras métricas distintas al `within cluster distance` podrían también ser usadas. 
 :::
 
-::: {.callout-note .fragment}
+::: {.callout-note }
 ¿Cuál es el efecto que está buscando la curva del codo? ¿Qué implica el valor de K escogido?
 :::
 
@@ -419,7 +419,7 @@ km.fit_predict(X)
 ::: {.callout-important appearance="default"}
 ## Pre-procesamientos
 
-Es importante recordar que K-Means es un Algoritmo basado en `distancias`, por lo tanto se ve afectado por Outliers y por Escalamiento. 
+Es importante recordar que K-Means es un Algoritmo basado en `distancias`, por lo tanto se ve afectado por Outliers y por Escala. 
 
 Se recomienda preprocesar los datos con:
 
