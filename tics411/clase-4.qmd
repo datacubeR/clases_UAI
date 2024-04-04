@@ -252,6 +252,20 @@ $$D(C_i, C_j) = wc(Cij) - wc(C_i) - wc(C_j) = \frac{n_i\cdot n_j}{n_i + n_j}||\b
 :::
 :::
 
+## Hiperparámetros
+
+Los Hiperparámetros de este modelo serán:
+
+::: {.callout-note appearance="default"}
+
+* `linkage`: La forma de calcular la distancia entre clusters.
+* `distancia`: La distancia utilizada como similaridad entre los clusters. 
+:::
+
+::: {.callout-warning}
+A diferencia de K-Means, este método no requiere definir el número de Clusters a priori.
+:::
+
 ## Volvamos a la Iteración 1 {.smaller}
 
 > Supongamos que por simplicidad utilizaremos `Average Linkage`. (El proceso para utilizar otro linkage es análogo). 
@@ -420,11 +434,15 @@ km.fit_predict(X)
 ```
 
 ::: {.columns style="font-size: 70%;"}
-* **n_clusters**: Define el número de clusters a crear, por defecto 8.
+* **n_clusters**: Define el número de clusters a crear, por defecto 2.
 *  **metric**: Permite distancias L1, L2 y coseno. 
 *  **linkage**: Permite single, complete, average y ward.
 
 * `.fit_predict()`: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento. 
+:::
+
+::: {.callout-warning}
+* Si bien el método de Aglomeración no requiere el número de clusters a generar, Scikit-Learn lo exige de modo de poder etiquetar cada elemento.
 :::
 
 ::: {.callout-important .fragment}

@@ -1,0 +1,308 @@
+---
+title: "TICS-411 Minería de Datos"
+subtitle: "Clase 5: DBSCAN"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs: 
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo.jpg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+---
+
+
+# Clustering por Densidad
+
+## Clustering: Densidad
+
+> Se basan en la idea de continuar el crecimiento de un cluster a medida que la densidad (número de objetos o puntos) en el vecindario sobrepase algún umbral.
+
+![](img/clase-3/densidad.png){.lightbox fig-align="center" }
+
+::: {.callout-note}
+En nuestro caso utilizaremos **DBSCAN** (Density-Based Spatial Clustering Applications with Noise). 
+:::
+
+## DBSCAN: Definiciones {.smaller}
+
+::: {.callout-note appearance="default"}
+## Hiperparámetros del Modelo
+* `eps`: Radio de análisis
+* `MinPts`: Corresponde al mínimo de puntos necesarios en un Radio `eps`. 
+
+:::
+::: {.columns}
+::: {.column}
+Densidad
+: > Densidad es el número de puntos dentro del radio `eps`. 
+
+Core Point/Punto Central
+: > Un punto central/core es aquel que tiene al menos `MinPts` puntos dentro de la esfera definida por `eps` (se incluye él mismo).
+
+:::
+::: {.column}
+Border Point/Punto Borde
+: > Un punto de borde tiene menos puntos que `MinPts` del `eps`, pero está dentro de la esfera de un punto central.
+
+Noise Point/Punto Ruido
+: > Un punto de ruido es todo aquel que no es punto central ni de borde.
+:::
+::: 
+
+## DBSCAN: Algoritmo categorización de puntos {.smaller}
+
+> Primeramente se aplica un algoritmo para categorizar cada punto de acuerdo a las definiciones anteriores.
+
+* Para cada punto en el espacio: 
+  * Calcular su densidad en EPS y aplicar el siguiente algoritmo:
+
+![](img/clase-5/dbscan_algo.png){.lightbox fig-align="center" width="50%"}
+
+## Ejemplo: Iteración 1
+
+
+::: {.columns}
+::: {.column}
+
+::: {.r-stack}
+![](img/clase-5/ejemplo.png){.lightbox fig-align="center" .fragment fragment-index=1}
+
+![](img/clase-5/ejemplo_1.png){.lightbox fig-align="center" .fragment fragment-index=2}
+
+![](img/clase-5/ejemplo_2.png){.lightbox fig-align="center" .fragment fragment-index=3}
+:::
+:::
+
+::: {.column}
+
+![](img/clase-5/iter_1.png){.lightbox fig-align="center" .fragment fragment-index=2}
+
+::: {.callout-note .fragment fragment-index=3}
+Este punto corresponde a un **Core Point**.
+:::
+:::
+::: 
+
+## Ejemplo: Iteración 2
+
+::: {.columns}
+::: {.column}
+
+::: {.r-stack}
+![](img/clase-5/border_1.png){.lightbox fig-align="center" }
+
+![](img/clase-5/border_2.png){.lightbox fig-align="center" .fragment fragment-index=1}
+
+:::
+:::
+
+::: {.column}
+
+![](img/clase-5/border_algo.png){.lightbox fig-align="center" }
+
+::: {.callout-note .fragment fragment-index=1}
+Este punto corresponde a un **Border Point**.
+:::
+:::
+::: 
+
+## Ejemplo: Iteración 3
+
+::: {.columns}
+::: {.column}
+
+::: {.r-stack}
+![](img/clase-5/noise_1.png){.lightbox fig-align="center" }
+
+![](img/clase-5/noise_2.png){.lightbox fig-align="center" .fragment fragment-index=1}
+
+:::
+:::
+
+::: {.column}
+
+![](img/clase-5/noise_algo.png){.lightbox fig-align="center" }
+
+::: {.callout-note .fragment fragment-index=1}
+Este punto corresponde a un **Noise Point**.
+:::
+:::
+::: 
+
+## Ejemplo: Iteración Final
+
+![](img/clase-5/iter_final.png){.lightbox fig-align="center" }
+
+::: {.callout-important}
+Ahora, **¿Cómo definimos que partes son clusters o no?**
+:::
+
+## Algoritmo de Clustering
+
+Se aplica el siguiente algoritmo para calcular clusterings.
+
+::: {.callout-important}
+Antes de aplicar se desechan los Noise Points ya que no serán considerados. **(Veremos luego que ocurre con estos puntos)**.
+:::
+
+```{.python code-line-numbers="|1|2|3-5|6|7-8|"}
+label=0
+for punto_c in corePoints:
+    if punto_c no tiene etiqueta:
+        label += 1
+        punto_c = label
+    for point_eps dentro de eps:
+        if punto_eps no tiene etiqueta:
+            punto_eps = label
+```
+
+## Iteración 1
+
+::: {.columns}
+::: {.column}
+:::{.r-stack}
+
+![](img/clase-5/c1_0.png){.lightbox fig-align="center"}
+
+![](img/clase-5/c1.png){.lightbox fig-align="center" .fragment fragment-index=1}
+
+![](img/clase-5/c1_1.png){.lightbox fig-align="center" .fragment fragment-index=2}
+:::
+:::
+::: {.column}
+
+::: {.r-stack}
+:::{.fragment .fade-in-then-out fragment-index=1 }
+```{.python code-line-numbers="2-5"}
+label=0
+for punto_c in corePoints:
+    if punto_c no tiene etiqueta:
+        label += 1
+        punto_c = label
+    for point_eps dentro de eps:
+        if punto_eps no tiene etiqueta:
+            punto_eps = label
+```
+:::
+
+:::{.fragment fragment-index=2 }
+```{.python code-line-numbers="6-8"}
+label=0
+for punto_c in corePoints:
+    if punto_c no tiene etiqueta:
+        label += 1
+        punto_c = label
+    for point_eps dentro de eps:
+        if punto_eps no tiene etiqueta:
+            punto_eps = label
+```
+:::
+:::
+
+::: {.callout-note .fragment fragment-index=3}
+Todos los puntos cercanos a un Core reciben la misma etiqueta.
+:::
+
+:::
+::: 
+
+## Iteración 2
+
+::: {.columns}
+::: {.column}
+:::{.r-stack}
+
+![](img/clase-5/c2_0.png){.lightbox fig-align="center"}
+
+![](img/clase-5/c2.png){.lightbox fig-align="center" .fragment fragment-index=1}
+
+![](img/clase-5/c2_1.png){.lightbox fig-align="center" .fragment fragment-index=2}
+:::
+:::
+::: {.column}
+
+::: {.r-stack}
+:::{.fragment .fade-in-then-out fragment-index=1 }
+```{.python code-line-numbers="2-5"}
+label=0
+for punto_c in corePoints:
+    if punto_c no tiene etiqueta:
+        label += 1
+        punto_c = label
+    for point_eps dentro de eps:
+        if punto_eps no tiene etiqueta:
+            punto_eps = label
+```
+:::
+
+:::{.fragment fragment-index=2 }
+```{.python code-line-numbers="6-8"}
+## label ya está en 1
+for punto_c in corePoints:
+    if punto_c no tiene etiqueta:
+        label += 1
+        punto_c = label
+    for point_eps dentro de eps:
+        if punto_eps no tiene etiqueta:
+            punto_eps = label
+```
+:::
+:::
+
+::: {.callout-note .fragment fragment-index=3}
+En este caso obtuvimos 2 clusters, e indirectamente un 3 que contiene ruido.
+:::
+
+:::
+::: 
+
+## DBSCAN
+
+![](img/clase-5/dbscan.png){.lightbox fig-align="center"}
+
+::: {.callout-caution .fragment}
+**¿Sería posible replicar un proceso de Clustering similar utilizando K-Means?** **¿Por qué?**
+:::
+
+
+## DBSCAN: Detalles Técnicos
+
+::: {.callout-note appearance="default"}
+## Fortalezas
+* Resistente al ruido.
+* Puede lidiar con clusters de diferentes formas y tamaños.
+* No es necesario especificar cuántos clusters encontrar.
+:::
+
+::: {.callout-warning appearance="default"}
+## Debilidades
+
+* Algoritmo de alta complejidad computacional que puede llegar $O(n^2)$ en el peor caso.
+* Se ve afectado por densidad de los datos y por datos con una alta dimensionalidad.
+:::
+
+## Cómo encontrar los HP
+
+## Implementación en Scikit-Learn
+
+
+
+# It's over!!
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::
