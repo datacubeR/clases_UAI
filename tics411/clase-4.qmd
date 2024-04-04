@@ -27,10 +27,10 @@ format:
 ## Definiciones {.smaller}
 
 Clustering Jerárquico
-: > Es un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender. 
+: > Es un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender. Se basa en la construcción de Jerarquías para ir construyendo clusters.
 
 Dendograma
-: >  Corresponde a un diagrama en le que se muestran las distancias de atributos entre clases que se van fusionando secuencialmente.
+: >  Corresponde a un diagrama en el que se muestran las distancias de atributos entre clases que son parte de un mismo cluster.
 
 
 ## Clustering: Jerarquía {.smaller}
