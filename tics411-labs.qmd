@@ -19,3 +19,4 @@ EDA|[![](tics411/thumbnails/colab.svg)](https://colab.research.google.com/github
 K-Means|[![](tics411/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics411/notebooks/03-ex_kmeans.ipynb)
 Análisis de Centros|[![](tics411/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics411/notebooks/04-analisis_centros.ipynb)
 Aglomerativo|[![](tics411/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics411/notebooks/05-ex-jerarquico.ipynb)
+DBSCAN|[![](tics411/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics411/notebooks/06-ex-DBSCAN.ipynb)
