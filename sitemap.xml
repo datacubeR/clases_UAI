@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411-labs.html</loc>
-    <lastmod>2024-04-04T14:55:05.244Z</lastmod>
+    <lastmod>2024-04-09T21:19:09.910Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-5.html</loc>
-    <lastmod>2024-04-04T17:48:32.792Z</lastmod>
+    <lastmod>2024-04-09T20:48:02.776Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/lab-0.html</loc>
@@ -34,19 +34,23 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/03-ex_kmeans.html</loc>
-    <lastmod>2024-04-04T18:06:01.932Z</lastmod>
+    <lastmod>2024-04-09T21:17:28.135Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-2.html</loc>
-    <lastmod>2024-03-28T19:01:50.352Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-4.html</loc>
-    <lastmod>2024-04-04T17:59:28.830Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/06-ex-DBSCAN.html</loc>
+    <lastmod>2024-04-09T20:45:01.082Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-0.html</loc>
     <lastmod>2024-03-12T14:16:50.265Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-4.html</loc>
+    <lastmod>2024-04-09T20:38:23.656Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-2.html</loc>
+    <lastmod>2024-03-28T19:01:50.352Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/01-Preprocesamiento.html</loc>
@@ -66,7 +70,7 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/04-analisis_centros.html</loc>
-    <lastmod>2024-03-31T21:20:21.730Z</lastmod>
+    <lastmod>2024-04-09T19:29:11.631Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/02-EDA.html</loc>
@@ -78,11 +82,11 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-3.html</loc>
-    <lastmod>2024-04-04T17:56:52.634Z</lastmod>
+    <lastmod>2024-04-04T18:28:05.657Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/index.html</loc>
-    <lastmod>2024-04-04T17:50:59.386Z</lastmod>
+    <lastmod>2024-04-09T21:17:44.596Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411.html</loc>

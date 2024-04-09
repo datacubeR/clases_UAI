@@ -773,7 +773,7 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>En este caso obtuvimos 2 clusters, e indirectamente un 3 que contiene ruido.</p>
+<p>En este caso obtuvimos 2 clusters, e indirectamente un 3er de puntos ruido.</p>
 </div>
 </div>
 </div>
@@ -832,16 +832,105 @@ Alfonso Tobar-Arancibia
 <ul>
 <li>Algoritmo de alta complejidad computacional que puede llegar <span class="math inline">\(O(n^2)\)</span> en el peor caso.</li>
 <li>Se ve afectado por densidad de los datos y por datos con una alta dimensionalidad.</li>
+<li>Su óptimo resultado depende específicamente de sus Hiperparámetros.</li>
+<li>No puede generalizar en datos no usados en entrenamiento.</li>
 </ul>
 </div>
 </div>
 </div>
 </section>
-<section id="cómo-encontrar-los-hp" class="slide level2">
-<h2>Cómo encontrar los HP</h2>
+<section id="cómo-encontrar-los-hiperparámetros" class="slide level2">
+<h2>¿Cómo encontrar los Hiperparámetros?</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>minPts</strong></p>
+</div>
+<div class="callout-content">
+<p>Para datasets multidimensionales grandes, la regla es:</p>
+<p><span class="math display">\[minPts \ge dim + 1\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Otras recomendaciones:</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Para dos dimensiones: <span class="math inline">\(minPts=4\)</span> (Ester et al., 1996)</li>
+<li>Para más de 2 dimensiones: <span class="math inline">\(minPts = 2 \cdot dim\)</span> (Sander et al., 1998)</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><br> <br> <br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-5/hp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-5/hp.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="cómo-encontrar-los-hiperparámetros-1" class="slide level2 smaller">
+<h2>¿Cómo encontrar los Hiperparámetros?</h2>
+<blockquote>
+<p>Para encontrar EPS se suele utilizar el método de Vecinos más cercanos.</p>
+</blockquote>
+<div class="columns">
+<div class="column">
+<h4 id="idea">Idea</h4>
+<ul>
+<li><p>La distancia de los puntos dentro de un cluster a su k-ésimo vecino deberían ser similares.</p></li>
+<li><p>Luego, los puntos atípicos (o ruidosos) tienen el k-ésimo vecino a una mayor distancia.</p></li>
+</ul>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>💡 Podemos plotear la distancia ordenada de cada punto a su k-ésimo vecino y seleccionar un <code>eps</code> cercano al crecimiento exponencial (codo).</p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-5/codo_dbscan.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-5/codo_dbscan.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="implementación-en-scikit-learn" class="slide level2">
 <h2>Implementación en Scikit-Learn</h2>
+<div class="sourceCode" id="cb6" data-code-line-numbers="|1|3|5-6|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
+<span id="cb6-2"><a></a></span>
+<span id="cb6-3"><a></a>dbs <span class="op">=</span> DBSCAN(min_samples <span class="op">=</span> <span class="dv">5</span>, eps <span class="op">=</span> <span class="fl">0.5</span>, metric <span class="op">=</span> <span class="st">"euclidean"</span>)</span>
+<span id="cb6-4"><a></a></span>
+<span id="cb6-5"><a></a><span class="co">## Se entrena y se genera la predicción</span></span>
+<span id="cb6-6"><a></a>dbs.fit_predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="columns" style="font-size: 70%;">
+<ul>
+<li><p><strong>min_samples</strong>: Corresponde a minPts.</p></li>
+<li><p><strong>eps</strong>: Corresponde al radio de la esfera en la que se buscan los puntos cercanos.</p></li>
+<li><p><strong>metric</strong>: Corresponde a la distancia utilizada para medir la distancia. Permite todas las distancias mencionadas <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise_distances.html#sklearn.metrics.pairwise_distances">acá</a>.</p></li>
+<li><p><code>.fit_predict()</code>: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento. Adicionalmente los puntos ruidosos se etiquetarán como -1.</p></li>
+</ul>
+</div>
+<p>👀 Veamos un ejemplo.</p>
 </section></section>
 <section id="its-over" class="title-slide slide level1 center">
 <h1>It’s over!!</h1>
@@ -1225,7 +1314,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
