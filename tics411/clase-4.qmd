@@ -435,8 +435,8 @@ ac.fit_predict(X)
 
 ::: {.columns style="font-size: 70%;"}
 * **n_clusters**: Define el número de clusters a crear, por defecto 2.
-*  **metric**: Permite distancias L1, L2 y coseno. 
-*  **linkage**: Permite single, complete, average y ward.
+*  **metric**: Permite distancias L1, L2 y coseno. Por defecto "euclidean". 
+*  **linkage**: Permite single, complete, average y ward. Por defecto "ward".
 
 * `.fit_predict()`: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento. 
 :::
@@ -468,6 +468,7 @@ plt.show()
 ::: {.columns style="font-size: 70%;"}
 > Principalmente este código permite graficar el Dendograma completo. 
 
+L4: Genera una instancia del Dendograma. (Sería equivalente al `.fit()` de `Scikit-Learn`).  
 L5-L12: Corresponde al código necesario para graficar el Dendograma. 
 :::
 

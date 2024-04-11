@@ -357,8 +357,8 @@ dbs.fit_predict(X)
 ```
 
 ::: {.columns style="font-size: 70%;"}
-* **min_samples**: Corresponde a minPts. 
-* **eps**: Corresponde al radio de la esfera en la que se buscan los puntos cercanos. 
+* **min_samples**: Corresponde a minPts. Por defecto 5.
+* **eps**: Corresponde al radio de la esfera en la que se buscan los puntos cercanos. Por defecto 0.5.
 *  **metric**: Corresponde a la distancia utilizada para medir la distancia. Permite todas las distancias mencionadas [acá](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise_distances.html#sklearn.metrics.pairwise_distances).
 
 * `.fit_predict()`: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento. Adicionalmente los puntos ruidosos se etiquetarán como -1. 

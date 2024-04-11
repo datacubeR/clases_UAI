@@ -61,3 +61,12 @@
   path: tics411/clase-5.qmd
   categories:
    - slides
+
+- title: "Clase 6"
+  subtitle: "Evaluación de Clusters"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-04-17
+  image: tics411/thumbnails/clase-6.jpg
+  path: tics411/clase-6.qmd
+  categories:
+   - slides
