@@ -1118,8 +1118,8 @@ Alfonso Tobar-Arancibia
 <div class="columns" style="font-size: 70%;">
 <ul>
 <li><p><strong>n_clusters</strong>: Define el número de clusters a crear, por defecto 2.</p></li>
-<li><p><strong>metric</strong>: Permite distancias L1, L2 y coseno.</p></li>
-<li><p><strong>linkage</strong>: Permite single, complete, average y ward.</p></li>
+<li><p><strong>metric</strong>: Permite distancias L1, L2 y coseno. Por defecto “euclidean”.</p></li>
+<li><p><strong>linkage</strong>: Permite single, complete, average y ward. Por defecto “ward”.</p></li>
 <li><p><code>.fit_predict()</code>: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento.</p></li>
 </ul>
 </div>
@@ -1165,7 +1165,8 @@ Alfonso Tobar-Arancibia
 <div class="columns" style="font-size: 70%;">
 <blockquote>
 <p>Principalmente este código permite graficar el Dendograma completo.</p>
-</blockquote><p>L5-L12: Corresponde al código necesario para graficar el Dendograma.</p>
+</blockquote><p>L4: Genera una instancia del Dendograma. (Sería equivalente al <code>.fit()</code> de <code>Scikit-Learn</code>).<br>
+L5-L12: Corresponde al código necesario para graficar el Dendograma.</p>
 </div>
 </section>
 <section id="sugerencias" class="slide level2">
@@ -1604,7 +1605,7 @@ Se define como la proporción de variables que tienen distinto valor con respect
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"closeEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

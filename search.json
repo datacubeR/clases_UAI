@@ -112,7 +112,7 @@
     "href": "tics411/clase-5.html#implementación-en-scikit-learn",
     "title": "TICS-411 Minería de Datos",
     "section": "Implementación en Scikit-Learn",
-    "text": "Implementación en Scikit-Learn\nfrom sklearn.cluster import DBSCAN\n\ndbs = DBSCAN(min_samples = 5, eps = 0.5, metric = \"euclidean\")\n\n## Se entrena y se genera la predicción\ndbs.fit_predict(X)\n\n\nmin_samples: Corresponde a minPts.\neps: Corresponde al radio de la esfera en la que se buscan los puntos cercanos.\nmetric: Corresponde a la distancia utilizada para medir la distancia. Permite todas las distancias mencionadas acá.\n.fit_predict(): Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento. Adicionalmente los puntos ruidosos se etiquetarán como -1.\n\n\n👀 Veamos un ejemplo."
+    "text": "Implementación en Scikit-Learn\nfrom sklearn.cluster import DBSCAN\n\ndbs = DBSCAN(min_samples = 5, eps = 0.5, metric = \"euclidean\")\n\n## Se entrena y se genera la predicción\ndbs.fit_predict(X)\n\n\nmin_samples: Corresponde a minPts. Por defecto 5.\neps: Corresponde al radio de la esfera en la que se buscan los puntos cercanos. Por defecto 0.5.\nmetric: Corresponde a la distancia utilizada para medir la distancia. Permite todas las distancias mencionadas acá.\n.fit_predict(): Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento. Adicionalmente los puntos ruidosos se etiquetarán como -1.\n\n\n👀 Veamos un ejemplo."
   },
   {
     "objectID": "tics411/lab-0.html#qué-es-scikit-learn",
@@ -220,74 +220,298 @@
     "text": "import numpy as np\n\n## Primera fila son coordenadas X\n## Segunda fila son coordenadas Y\n## Cada columna es el punto.\npuntos = np.array([[1, 2, 4, 5], [1, 1, 3, 4]])\npuntos\n\nc_1 = np.array([1, 1])\nc_2 = np.array([2, 1])\npuntos\n\narray([[1, 2, 4, 5],\n       [1, 1, 3, 4]])\n\n\n\nimport matplotlib.pyplot as plt\n\n\ndef plot_clusters(puntos, c_1, c_2, c=None):\n    plt.scatter(puntos[0], puntos[1], s=500, c=c)\n    plt.scatter(\n        c_1[0],\n        c_1[1],\n        marker=\"^\",\n        label=\"Centroide Cluster 1\",\n        edgecolors=\"k\",\n        s=200,\n        color=\"orange\",\n    )\n    plt.scatter(\n        c_2[0],\n        c_2[1],\n        marker=\"^\",\n        label=\"Centroide Cluster 2\",\n        edgecolors=\"k\",\n        s=200,\n        c=\"green\",\n    )\n    plt.grid(alpha=0.5)\n    plt.legend()\n\n\nplot_clusters(puntos, c_1, c_2)\n\n\n\n\n\n\n\n\n\ndef distancia(p0, p1):\n    x0 = p0[0]\n    x1 = p1[0]\n    y0 = p0[1]\n    y1 = p1[1]\n    return np.sqrt((x1 - x0) ** 2 + (y1 - y0) ** 2)\n\n\ndef calculate_distances(puntos, c_1, c_2):\n\n    distancia_mat = np.zeros((2, 4))\n    distancia_mat\n\n    for i in range(4):\n        p = puntos[:, i]\n        distancia_mat[0, i] = distancia(p, c_1)\n        distancia_mat[1, i] = distancia(p, c_2)\n\n    return distancia_mat\n\n\ndistancia_mat = calculate_distances(puntos, c_1, c_2)\ndistancia_mat\n\narray([[0.        , 1.        , 3.60555128, 5.        ],\n       [1.        , 0.        , 2.82842712, 4.24264069]])\n\n\n\ndef calculate_clusters(distancia_mat):\n    min_distancia_mat = np.min(distancia_mat, axis=0)\n\n    clusters = distancia_mat == min_distancia_mat\n    return clusters\n\n\nclusters = calculate_clusters(distancia_mat)\nclusters.astype(\"int64\")\n\n## Solo el punto 1 pertenece al cluster 1, todo el resto al cluster 2\n\narray([[1, 0, 0, 0],\n       [0, 1, 1, 1]])\n\n\n\ndef calculate_centroids(clusters):\n    c_1 = puntos[:, clusters[0]].mean(axis=1)\n    c_2 = puntos[:, clusters[1]].mean(axis=1)\n\n    return c_1, c_2\n\n\nc_1, c_2 = calculate_centroids(clusters)\nc_1, c_2\n\n(array([1., 1.]), array([3.66666667, 2.66666667]))\n\n\n\nplot_clusters(puntos, c_1, c_2, c=[\"red\", \"blue\", \"blue\", \"blue\"])\n\n\n\n\n\n\n\n\n\ndistancia_mat = calculate_distances(puntos, c_1, c_2)\nclusters = calculate_clusters(distancia_mat)\nc_1, c_2 = calculate_centroids(clusters)\nclusters\n\narray([[ True,  True, False, False],\n       [False, False,  True,  True]])\n\n\n\nc_1, c_2\n\n(array([1.5, 1. ]), array([4.5, 3.5]))\n\n\n\nplot_clusters(puntos, c_1, c_2, c=[\"red\", \"red\", \"blue\", \"blue\"])\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "tics411/notebooks/preguntas-prueba.html",
-    "href": "tics411/notebooks/preguntas-prueba.html",
+    "objectID": "tics411/notebooks/ex-kmeans-avanzado.html",
+    "href": "tics411/notebooks/ex-kmeans-avanzado.html",
     "title": "Clases UAI",
     "section": "",
-    "text": "import pandas as pd\nimport numpy as np\n\ndf = pd.DataFrame(\n    dict(\n        x=[2, 8, 13, 16, 19, 2, 8, 13, 16, 19],\n        y=[7, 7, 7, 7, 7, 3, 3, 5, 5, 5],\n    )\n)\ndf\n\n\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n0\n2\n7\n\n\n1\n8\n7\n\n\n2\n13\n7\n\n\n3\n16\n7\n\n\n4\n19\n7\n\n\n5\n2\n3\n\n\n6\n8\n3\n\n\n7\n13\n5\n\n\n8\n16\n5\n\n\n9\n19\n5\n\n\n\n\n\n\n\n\n\nfrom scipy.spatial import distance_matrix\nimport numpy as np\n\nc1 = df.iloc[0]\nc2 = df.iloc[9]\n\nvals = np.arange(1, 11)\nd_m = distance_matrix(df.to_numpy(), df.to_numpy(), p=2)\nd_m = pd.DataFrame(d_m, index=vals, columns=vals).round(2)\nd_m\n\n\n\n\n\n\n\n\n\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n1\n0.00\n6.00\n11.00\n14.00\n17.00\n4.00\n7.21\n11.18\n14.14\n17.12\n\n\n2\n6.00\n0.00\n5.00\n8.00\n11.00\n7.21\n4.00\n5.39\n8.25\n11.18\n\n\n3\n11.00\n5.00\n0.00\n3.00\n6.00\n11.70\n6.40\n2.00\n3.61\n6.32\n\n\n4\n14.00\n8.00\n3.00\n0.00\n3.00\n14.56\n8.94\n3.61\n2.00\n3.61\n\n\n5\n17.00\n11.00\n6.00\n3.00\n0.00\n17.46\n11.70\n6.32\n3.61\n2.00\n\n\n6\n4.00\n7.21\n11.70\n14.56\n17.46\n0.00\n6.00\n11.18\n14.14\n17.12\n\n\n7\n7.21\n4.00\n6.40\n8.94\n11.70\n6.00\n0.00\n5.39\n8.25\n11.18\n\n\n8\n11.18\n5.39\n2.00\n3.61\n6.32\n11.18\n5.39\n0.00\n3.00\n6.00\n\n\n9\n14.14\n8.25\n3.61\n2.00\n3.61\n14.14\n8.25\n3.00\n0.00\n3.00\n\n\n10\n17.12\n11.18\n6.32\n3.61\n2.00\n17.12\n11.18\n6.00\n3.00\n0.00\n\n\n\n\n\n\n\n\n\nD = d_m.loc[[1, 10]]\nD\n\n\n\n\n\n\n\n\n\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n1\n0.00\n6.00\n11.00\n14.00\n17.0\n4.00\n7.21\n11.18\n14.14\n17.12\n\n\n10\n17.12\n11.18\n6.32\n3.61\n2.0\n17.12\n11.18\n6.00\n3.00\n0.00\n\n\n\n\n\n\n\n\n\nG = D == D.min()\nG.astype(\"int64\")\n\n\n\n\n\n\n\n\n\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n1\n1\n1\n0\n0\n0\n1\n1\n0\n0\n0\n\n\n10\n0\n0\n1\n1\n1\n0\n0\n1\n1\n1\n\n\n\n\n\n\n\n\n\nG\n\n\nA = np.array([-5, -1, 1, 2, 3])\nA.mean()\n\n0.0\n\n\n\nA.std(ddof=0)\n\n2.8284271247461903\n\n\n\nprint(A.mean())\n(A**2).sum()\n\n0.0\n\n\n40\n\n\n\nfrom sklearn.preprocessing import MinMaxScaler, StandardScaler\n\nsc = StandardScaler()\nmm = MinMaxScaler()\nsc.fit_transform(A.reshape(-1, 1))\n\narray([[-1.76776695],\n       [-0.35355339],\n       [ 0.35355339],\n       [ 0.70710678],\n       [ 1.06066017]])\n\n\n\nmm.fit_transform(A.reshape(-1, 1))\n\narray([[0.   ],\n       [0.5  ],\n       [0.75 ],\n       [0.875],\n       [1.   ]])\n\n\n\n\n\n Back to top"
+    "text": "Back to top"
   },
   {
-    "objectID": "tics411/notebooks/03-ex_kmeans.html",
-    "href": "tics411/notebooks/03-ex_kmeans.html",
-    "title": "Ejemplo K-Means",
+    "objectID": "tics411/notebooks/distancia.html",
+    "href": "tics411/notebooks/distancia.html",
+    "title": "Clases UAI",
     "section": "",
-    "text": "import seaborn as sns\n\n# Importamos el Dataset Iris\ndf = sns.load_dataset(\"iris\")\ndf\n\n\ndf[\"species\"].value_counts()\n\n\nSupongamos que utilizaremos sólo las variables numéricas… “Species”, es de hecho la respuesta correcta (la etiqueta).\n\n\n# Definimos X como una Matriz sin la variable Species.\nX = df.drop(columns=\"species\")\nX"
+    "text": "import pandas as pd\nimport numpy as np\n\ndf = pd.DataFrame(dict(x=[0, 2, 3, 5], y=[2, 0, 1, 1]))\ndf.index = [1, 2, 3, 4]\ndf\n\n\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n1\n0\n2\n\n\n2\n2\n0\n\n\n3\n3\n1\n\n\n4\n5\n1\n\n\n\n\n\n\n\n\n\nnp.zeros((4, 4))\n\narray([[0., 0., 0., 0.],\n       [0., 0., 0., 0.],\n       [0., 0., 0., 0.],\n       [0., 0., 0., 0.]])\n\n\n\ndef distancia_l1(p, q):\n    x1 = p[\"x\"]\n    x2 = q[\"x\"]\n    y1 = p[\"y\"]\n    y2 = q[\"y\"]\n\n    return np.abs(x1 - x2) + np.abs(y1 - y2)\n\n\ndef distancia_l2(p, q):\n    x1 = p[\"x\"]\n    x2 = q[\"x\"]\n    y1 = p[\"y\"]\n    y2 = q[\"y\"]\n    return np.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)\n\n\ndef distancia_linf(p, q):\n    x1 = p[\"x\"]\n    x2 = q[\"x\"]\n    y1 = p[\"y\"]\n    y2 = q[\"y\"]\n    d_x = np.abs(x1 - x2)\n    d_y = np.abs(y1 - y2)\n    return np.max([d_x, d_y])\n\n\ndef calculate_matrix(distance, n_puntos):\n    m = np.zeros((n_puntos, n_puntos))\n    for i in range(n_puntos):\n        for j in range(n_puntos):\n            p = df.iloc[i]\n            q = df.iloc[j]\n            m[i, j] = distance(p, q)\n\n    return m\n\n\nm_m = calculate_matrix(distancia_l1, 4)\nm_e = calculate_matrix(distancia_l2, 4)\nm_c = calculate_matrix(distancia_linf, 4)\n\n\nm_m\n\narray([[0., 4., 4., 6.],\n       [4., 0., 2., 4.],\n       [4., 2., 0., 2.],\n       [6., 4., 2., 0.]])\n\n\n\nm_e\n\narray([[0.        , 2.82842712, 3.16227766, 5.09901951],\n       [2.82842712, 0.        , 1.41421356, 3.16227766],\n       [3.16227766, 1.41421356, 0.        , 2.        ],\n       [5.09901951, 3.16227766, 2.        , 0.        ]])\n\n\n\nm_c\n\narray([[0., 2., 3., 5.],\n       [2., 0., 1., 3.],\n       [3., 1., 0., 2.],\n       [5., 3., 2., 0.]])\n\n\n\n\na = pd.Series(\n    [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0]\n)\nb = pd.Series(\n    [1.0, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0]\n)\n\na.var(ddof=0)  # Varianza Poblacional\n\n3.5\n\n\n\na.var(ddof=1)  # Varianza Muestral\n\n3.7916666666666665\n\n\n\nb.var(ddof=1)\n\n1.5916666666666668\n\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "tics411/notebooks/03-ex_kmeans.html#ejemplo-k-means",
-    "href": "tics411/notebooks/03-ex_kmeans.html#ejemplo-k-means",
-    "title": "Ejemplo K-Means",
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html",
+    "href": "tics411/notebooks/01-Preprocesamiento.html",
+    "title": "Clases UAI",
     "section": "",
-    "text": "import seaborn as sns\n\n# Importamos el Dataset Iris\ndf = sns.load_dataset(\"iris\")\ndf\n\n\ndf[\"species\"].value_counts()\n\n\nSupongamos que utilizaremos sólo las variables numéricas… “Species”, es de hecho la respuesta correcta (la etiqueta).\n\n\n# Definimos X como una Matriz sin la variable Species.\nX = df.drop(columns=\"species\")\nX"
+    "text": "%%capture\n## Ejecutar esta celda para instalar o actualizar Feature_Engine\n!pip install -U feature_engine\n## Chequear que la versión de Feature Engine sea al menos 1.7\nimport feature_engine\n\nfeature_engine.__version__\n\n'1.7.0'\nimport pandas as pd\nimport numpy as np\nimport seaborn as sns\nfrom sklearn import set_config\n\n## (Opcional) Este comando permite que el output de Scikit-Learn sean Pandas DataFrames.\n## Por dejecto, Scikit-Learn transforma todo a Numpy, ya que es más eficiente computacionalmente.\nset_config(transform_output=\"pandas\")\n\ndf = sns.load_dataset(\"titanic\")\ndf\n\n\n\n\n\n\n\n\n\nsurvived\npclass\nsex\nage\nsibsp\nparch\nfare\nembarked\nclass\nwho\nadult_male\ndeck\nembark_town\nalive\nalone\n\n\n\n\n0\n0\n3\nmale\n22.0\n1\n0\n7.2500\nS\nThird\nman\nTrue\nNaN\nSouthampton\nno\nFalse\n\n\n1\n1\n1\nfemale\n38.0\n1\n0\n71.2833\nC\nFirst\nwoman\nFalse\nC\nCherbourg\nyes\nFalse\n\n\n2\n1\n3\nfemale\n26.0\n0\n0\n7.9250\nS\nThird\nwoman\nFalse\nNaN\nSouthampton\nyes\nTrue\n\n\n3\n1\n1\nfemale\n35.0\n1\n0\n53.1000\nS\nFirst\nwoman\nFalse\nC\nSouthampton\nyes\nFalse\n\n\n4\n0\n3\nmale\n35.0\n0\n0\n8.0500\nS\nThird\nman\nTrue\nNaN\nSouthampton\nno\nTrue\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n886\n0\n2\nmale\n27.0\n0\n0\n13.0000\nS\nSecond\nman\nTrue\nNaN\nSouthampton\nno\nTrue\n\n\n887\n1\n1\nfemale\n19.0\n0\n0\n30.0000\nS\nFirst\nwoman\nFalse\nB\nSouthampton\nyes\nTrue\n\n\n888\n0\n3\nfemale\nNaN\n1\n2\n23.4500\nS\nThird\nwoman\nFalse\nNaN\nSouthampton\nno\nFalse\n\n\n889\n1\n1\nmale\n26.0\n0\n0\n30.0000\nC\nFirst\nman\nTrue\nC\nCherbourg\nyes\nTrue\n\n\n890\n0\n3\nmale\n32.0\n0\n0\n7.7500\nQ\nThird\nman\nTrue\nNaN\nQueenstown\nno\nTrue\n\n\n\n\n891 rows × 15 columns"
   },
   {
-    "objectID": "tics411/notebooks/03-ex_kmeans.html#ayuda-visual",
-    "href": "tics411/notebooks/03-ex_kmeans.html#ayuda-visual",
-    "title": "Ejemplo K-Means",
-    "section": "Ayuda Visual",
-    "text": "Ayuda Visual\nVamos a utilizar PCA para poder reducir las dimensiones a un tamaño el cual podamos visualizar: 2D.\n\nfrom sklearn.decomposition import PCA\nimport pandas as pd\n\n## Esto es sólo una ayuda para poder visualizar datos\n# que están en más dimensiones de las que podemos ver.\npca = PCA(n_components=2, random_state=1)\npca_X = pca.fit_transform(X)\n\n\nimport matplotlib.pyplot as plt\n\nplt.scatter(pca_X[:, 0], pca_X[:, 1])\nplt.title(\"Visualización de Iris en 2D.\")\nplt.tight_layout()\n\n\n## Esta es una función que nos permitirá visualizar nuestras etiquetas en un espacio reducido por PCA.\n## Además permite la visualización de los centroides de nuestro proceso...\n\n\ndef pca_viz(pca_X, pca_centroids, labels, title=None, cmap=\"viridis\"):\n    plt.scatter(pca_X[:, 0], pca_X[:, 1], c=labels, cmap=cmap)\n    plt.scatter(\n        pca_centroids[:, 0],\n        pca_centroids[:, 1],\n        marker=\"*\",\n        c=\"red\",\n        s=150,\n    )\n    plt.title(title)\n\n\nImplementación de K-Means\n\nfrom sklearn.cluster import KMeans\n\nkm = KMeans(n_clusters=2, n_init=10, random_state=1)\nlabels = km.fit_predict(X)\ncentroids = km.cluster_centers_\npca_centroids = pca.transform(centroids)\n\n\npca_viz(\n    pca_X,\n    pca_centroids,\n    labels=labels,\n    title=\"Visualización de K-Means en Iris 2D\",\n)\n\n\n\nEfecto del Escalamiento en K-Means\n\nfrom sklearn.preprocessing import StandardScaler\n\nsc = StandardScaler()\nX_sc = sc.fit_transform(X)\npca = PCA(n_components=2, random_state=1)\npca_X_sc = pca.fit_transform(X_sc)\nkm = KMeans(n_clusters=2, n_init=10, random_state=1)\nsc_labels = km.fit_predict(X_sc)\ncentroids = km.cluster_centers_\npca_centroids = pca.transform(centroids)\npca_viz(\n    pca_X_sc,\n    pca_centroids,\n    sc_labels,\n    title=\"K-Means de Iris en 2D luego de Estandarizar los datos. \",\n)\n\n\nfrom sklearn.preprocessing import MinMaxScaler\n\nmm = MinMaxScaler()\nX_mm = mm.fit_transform(X)\npca = PCA(n_components=2, random_state=1)\npca_X_mm = pca.fit_transform(X_mm)\nkm = KMeans(n_clusters=3, n_init=10, random_state=1)\nmm_labels = km.fit_predict(X_mm)\ncentroids = km.cluster_centers_\npca_centroids = pca.transform(centroids)\n\npca_viz(\n    pca_X_mm,\n    pca_centroids,\n    mm_labels,\n    title=\"K-Means de Iris en 2D luego de Normalizar los datos.\",\n)"
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#valores-faltantes",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#valores-faltantes",
+    "title": "Clases UAI",
+    "section": "Valores Faltantes",
+    "text": "Valores Faltantes\n\n## Para detectar valores faltantes se utiliza el siguiente comando.\ndf.isnull().sum()\n\nsurvived         0\npclass           0\nsex              0\nage            177\nsibsp            0\nparch            0\nfare             0\nembarked         2\nclass            0\nwho              0\nadult_male       0\ndeck           688\nembark_town      2\nalive            0\nalone            0\ndtype: int64\n\n\n\n## Opcionalmente se puede obtener el % o la fracción de nulos utilizando la siguiente variante.\ndf.isnull().mean()\n\nsurvived       0.000000\npclass         0.000000\nsex            0.000000\nage            0.198653\nsibsp          0.000000\nparch          0.000000\nfare           0.000000\nembarked       0.002245\nclass          0.000000\nwho            0.000000\nadult_male     0.000000\ndeck           0.772166\nembark_town    0.002245\nalive          0.000000\nalone          0.000000\ndtype: float64\n\n\nPandas: Es posible imputar valores usando Pandas con el comando .fillna().\n\nmedia = df[\"age\"].mean()\nmediana = df[\"age\"].median()\nprint(f\"Promedio de Edad: {media}\")\nprint(\n    f'Promedio de Edad con Imputación con Ceros: {df[\"age\"].fillna(0).mean()}'\n)\nprint(\n    f'Promedio de Edad con Imputación por Media: {df[\"age\"].fillna(media).mean()}'\n)\nprint(\n    f'Promedio de Edad con Imputación por Mediana: {df[\"age\"].fillna(mediana).mean()}'\n)\n\nPromedio de Edad: 29.69911764705882\nPromedio de Edad con Imputación con Ceros: 23.79929292929293\nPromedio de Edad con Imputación por Media: 29.69911764705882\nPromedio de Edad con Imputación por Mediana: 29.36158249158249\n\n\nScikit-Learn: Utiliza la clase SimpleImputer, el cual permite distintas estrategias de Imputación: \"mean\", \"median\", \"most_frequent\", \"constant\".\n\nfrom sklearn.impute import SimpleImputer\n\nsc = SimpleImputer(strategy=\"mean\")\n## En este caso uso [[]] ya que Scikit Learn espera Matrices o DataFrames.\n## Utilizar [[]] fuerza a que AGE sea un DataFrame de una Columna y no una Serie.\n\ndata_imputed = sc.fit_transform(df[[\"age\"]])\n## Se puede ver que los nuevos datos ya no poseen valores Perdidos.\ndata_imputed.isnull().sum()\n\nage    0\ndtype: int64"
   },
   {
-    "objectID": "tics411/notebooks/03-ex_kmeans.html#ejemplo-más-avanzado-sin-entrenar-con-todos-los-datos",
-    "href": "tics411/notebooks/03-ex_kmeans.html#ejemplo-más-avanzado-sin-entrenar-con-todos-los-datos",
-    "title": "Ejemplo K-Means",
-    "section": "Ejemplo más avanzado sin entrenar con todos los datos…",
-    "text": "Ejemplo más avanzado sin entrenar con todos los datos…\n\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test = train_test_split(X, test_size=0.25, random_state=1)\n\n\nEstamos dejando un 25% de los datos fuera para poder chequear cuál sería la predicción que se le dan a dichos datos.\n\n\npca = PCA(n_components=2)\nkm = KMeans(n_clusters=2, n_init=10)\nsc = StandardScaler()\n## Fit siempre se hace con datos de `Entrenamiento`.\n\n## Escalamos los datos...\nsc.fit(X_train)\nX_train_sc = sc.transform(X_train)\nX_test_sc = sc.transform(X_test)\n\n# Generamos las coordenadas del PCA para visualizar\npca.fit(X_train_sc)\npca_train = pca.transform(X_train_sc)\npca_test = pca.transform(X_test_sc)\n\ntrain_labels = km.fit_predict(X_train_sc)\ntest_labels = km.predict(X_test_sc)\ncentroids = km.cluster_centers_\npca_centroids = pca.transform(centroids)\n\npca_viz(pca_train, pca_centroids, train_labels)\npca_viz(pca_test, pca_centroids, test_labels, cmap=\"tab20b\")"
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#outliers",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#outliers",
+    "title": "Clases UAI",
+    "section": "Outliers",
+    "text": "Outliers\npandas: En Pandas se pueden acotar los outliers utilizando .clip()\n\nprint(f\"Promedio de Tarifas: {df.fare.mean()}\")\ndf[\"fare\"].agg([\"min\", \"max\"])\n\nPromedio de Tarifas: 32.204207968574636\n\n\nmin      0.0000\nmax    512.3292\nName: fare, dtype: float64\n\n\n\nlower: Define la cota inferior.\nupper: Define la cota superior.\n\n\nclipped_data = df[[\"fare\"]].clip(lower=10, upper=50)\nclipped_data.agg([\"min\", \"max\"])\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\nmin\n10.0\n\n\nmax\n50.0\n\n\n\n\n\n\n\n\n\ndf[[\"fare\"]]\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\n0\n7.2500\n\n\n1\n71.2833\n\n\n2\n7.9250\n\n\n3\n53.1000\n\n\n4\n8.0500\n\n\n...\n...\n\n\n886\n13.0000\n\n\n887\n30.0000\n\n\n888\n23.4500\n\n\n889\n30.0000\n\n\n890\n7.7500\n\n\n\n\n891 rows × 1 columns\n\n\n\n\n\n## Los valores menores a 10 fueron reemplazados por 10.\n## Los valores mayores a 50 fueron reemplazados por 50.\nclipped_data\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\n0\n10.00\n\n\n1\n50.00\n\n\n2\n10.00\n\n\n3\n50.00\n\n\n4\n10.00\n\n\n...\n...\n\n\n886\n13.00\n\n\n887\n30.00\n\n\n888\n23.45\n\n\n889\n30.00\n\n\n890\n10.00\n\n\n\n\n891 rows × 1 columns\n\n\n\n\nsklearn: Para este caso nos apoyaremos de la librería feature_engine la cual posee herramientas para acotar. feature_engine sigue exactamente la misma lógica de Scikit-Learn.\n\nfrom feature_engine.outliers import ArbitraryOutlierCapper, Winsorizer\n\ncapper = ArbitraryOutlierCapper(\n    max_capping_dict=dict(fare=50), min_capping_dict=dict(fare=10)\n)\ncapper.fit_transform(df[[\"fare\"]])\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\n0\n10.00\n\n\n1\n50.00\n\n\n2\n10.00\n\n\n3\n50.00\n\n\n4\n10.00\n\n\n...\n...\n\n\n886\n13.00\n\n\n887\n30.00\n\n\n888\n23.45\n\n\n889\n30.00\n\n\n890\n10.00\n\n\n\n\n891 rows × 1 columns\n\n\n\n\n\ncapping_method: Define la Estragegia a utilizar para el Winsorizer. Ver Docs.\n\n\n## \"gaussian\" permite acotar por mu +/- 3*std\n## \"iqr\" permite rellenar por Q1 - 3*iqr y Q3 + 3*iqr\nwin = Winsorizer(capping_method=\"gaussian\")\nwin.fit_transform(df[[\"fare\"]])\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\n0\n7.2500\n\n\n1\n71.2833\n\n\n2\n7.9250\n\n\n3\n53.1000\n\n\n4\n8.0500\n\n\n...\n...\n\n\n886\n13.0000\n\n\n887\n30.0000\n\n\n888\n23.4500\n\n\n889\n30.0000\n\n\n890\n7.7500\n\n\n\n\n891 rows × 1 columns"
   },
   {
-    "objectID": "tics411/notebooks/03-ex_kmeans.html#cuál-es-el-k-óptimo",
-    "href": "tics411/notebooks/03-ex_kmeans.html#cuál-es-el-k-óptimo",
-    "title": "Ejemplo K-Means",
-    "section": "Cuál es el K óptimo?",
-    "text": "Cuál es el K óptimo?\n\ndef elbow_curve(X, k_max=10, color=\"blue\", title=None):\n    wc = []\n    for k in range(1, k_max + 1):\n        km = KMeans(n_clusters=k, random_state=1)\n        km.fit(X)\n        wc.append(km.inertia_)\n\n    k = [*range(1, k_max + 1)]\n    plt.plot(k, wc, c=color, marker=\"*\")\n    plt.title(title)\n    plt.xlabel(\"Número de Clústers\")\n    plt.ylabel(\"Within Distance\")\n    return wc\n\n\nwc = elbow_curve(\n    X_train,\n    k_max=15,\n    color=\"red\",\n    title=\"Curva del Codo para el Dataset Iris, sólo con Train Set.\",\n)\n\n\nwc"
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#variables-categóricas",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#variables-categóricas",
+    "title": "Clases UAI",
+    "section": "Variables Categóricas",
+    "text": "Variables Categóricas\npandas:\n\nOne Hot Encoding\nPara la conversión de variables categóricas utilizamos pd.get_dummies(). * drop_first: Si es True se elimina la primera categoría.\n\npd.get_dummies(df[\"embark_town\"], drop_first=False)\n\n\n\n\n\n\n\n\n\nCherbourg\nQueenstown\nSouthampton\n\n\n\n\n0\nFalse\nFalse\nTrue\n\n\n1\nTrue\nFalse\nFalse\n\n\n2\nFalse\nFalse\nTrue\n\n\n3\nFalse\nFalse\nTrue\n\n\n4\nFalse\nFalse\nTrue\n\n\n...\n...\n...\n...\n\n\n886\nFalse\nFalse\nTrue\n\n\n887\nFalse\nFalse\nTrue\n\n\n888\nFalse\nFalse\nTrue\n\n\n889\nTrue\nFalse\nFalse\n\n\n890\nFalse\nTrue\nFalse\n\n\n\n\n891 rows × 3 columns\n\n\n\n\n\npd.get_dummies(df[\"embark_town\"], drop_first=True)\n# Una ventaja de este procedimiento es que no considera los Nulos como otra categoría...\n\n\n\n\n\n\n\n\n\nQueenstown\nSouthampton\n\n\n\n\n0\nFalse\nTrue\n\n\n1\nFalse\nFalse\n\n\n2\nFalse\nTrue\n\n\n3\nFalse\nTrue\n\n\n4\nFalse\nTrue\n\n\n...\n...\n...\n\n\n886\nFalse\nTrue\n\n\n887\nFalse\nTrue\n\n\n888\nFalse\nTrue\n\n\n889\nFalse\nFalse\n\n\n890\nTrue\nFalse\n\n\n\n\n891 rows × 2 columns\n\n\n\n\n\n\nOrdinal Encoder\nSe utiliza pd.factorize(). * sort: Usar True ya que coloca las categorías en orden. Además de esta manera se comporta igual que OrdinalEncoder de Scikit-Learn.\n\npd.DataFrame(\n    pd.factorize(df[\"embark_town\"], sort=True)[0], columns=[\"new_column\"]\n)\n\n\n\n\n\n\n\n\n\nnew_column\n\n\n\n\n0\n2\n\n\n1\n0\n\n\n2\n2\n\n\n3\n2\n\n\n4\n2\n\n\n...\n...\n\n\n886\n2\n\n\n887\n2\n\n\n888\n2\n\n\n889\n0\n\n\n890\n1\n\n\n\n\n891 rows × 1 columns\n\n\n\n\nScikit-Learn:\n\n\nOne Hot Encoding\n\nsparse_output: Se debe fijar como False para poder ver el output como Pandas\ndrop: Se debe colocar \"first\" o el nombre de una sóla categoría a eliminar.\n\n\nfrom sklearn.preprocessing import OneHotEncoder, OrdinalEncoder\n\nohe = OneHotEncoder(drop=\"first\", sparse_output=False)\nohe.fit_transform(df[[\"embark_town\"]])\n\n\n\n\n\n\n\n\n\nembark_town_Queenstown\nembark_town_Southampton\nembark_town_nan\n\n\n\n\n0\n0.0\n1.0\n0.0\n\n\n1\n0.0\n0.0\n0.0\n\n\n2\n0.0\n1.0\n0.0\n\n\n3\n0.0\n1.0\n0.0\n\n\n4\n0.0\n1.0\n0.0\n\n\n...\n...\n...\n...\n\n\n886\n0.0\n1.0\n0.0\n\n\n887\n0.0\n1.0\n0.0\n\n\n888\n0.0\n1.0\n0.0\n\n\n889\n0.0\n0.0\n0.0\n\n\n890\n1.0\n0.0\n0.0\n\n\n\n\n891 rows × 3 columns\n\n\n\n\n\n\nOrdinal Encoder\n\nohe = OneHotEncoder(\n    drop=[\"Queenstown\"], sparse_output=False\n)  # También se puede colocar np.nan.\nohe.fit_transform(df[[\"embark_town\"]])\n\n\n\n\n\n\n\n\n\nembark_town_Cherbourg\nembark_town_Southampton\nembark_town_nan\n\n\n\n\n0\n0.0\n1.0\n0.0\n\n\n1\n1.0\n0.0\n0.0\n\n\n2\n0.0\n1.0\n0.0\n\n\n3\n0.0\n1.0\n0.0\n\n\n4\n0.0\n1.0\n0.0\n\n\n...\n...\n...\n...\n\n\n886\n0.0\n1.0\n0.0\n\n\n887\n0.0\n1.0\n0.0\n\n\n888\n0.0\n1.0\n0.0\n\n\n889\n1.0\n0.0\n0.0\n\n\n890\n0.0\n0.0\n0.0\n\n\n\n\n891 rows × 3 columns\n\n\n\n\n\noe = OrdinalEncoder()\noe.fit_transform(df[[\"embark_town\"]])\n\n\n\n\n\n\n\n\n\nembark_town\n\n\n\n\n0\n2.0\n\n\n1\n0.0\n\n\n2\n2.0\n\n\n3\n2.0\n\n\n4\n2.0\n\n\n...\n...\n\n\n886\n2.0\n\n\n887\n2.0\n\n\n888\n2.0\n\n\n889\n0.0\n\n\n890\n1.0\n\n\n\n\n891 rows × 1 columns"
   },
   {
-    "objectID": "tics411/notebooks/06-ex-DBSCAN.html",
-    "href": "tics411/notebooks/06-ex-DBSCAN.html",
-    "title": "DBSCAN",
-    "section": "",
-    "text": "import numpy as np\nimport seaborn as sns\n\n\ndf = sns.load_dataset(\"iris\")\nX = df.drop(columns=\"species\")\nX\n\n\n\n\n\n\n\n\n\nsepal_length\nsepal_width\npetal_length\npetal_width\n\n\n\n\n0\n5.1\n3.5\n1.4\n0.2\n\n\n1\n4.9\n3.0\n1.4\n0.2\n\n\n2\n4.7\n3.2\n1.3\n0.2\n\n\n3\n4.6\n3.1\n1.5\n0.2\n\n\n4\n5.0\n3.6\n1.4\n0.2\n\n\n...\n...\n...\n...\n...\n\n\n145\n6.7\n3.0\n5.2\n2.3\n\n\n146\n6.3\n2.5\n5.0\n1.9\n\n\n147\n6.5\n3.0\n5.2\n2.0\n\n\n148\n6.2\n3.4\n5.4\n2.3\n\n\n149\n5.9\n3.0\n5.1\n1.8\n\n\n\n\n150 rows × 4 columns"
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#escalamiento",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#escalamiento",
+    "title": "Clases UAI",
+    "section": "Escalamiento",
+    "text": "Escalamiento\nEl escalamiento normalmente se realiza sólo en Scikit-Learn. Se mostrarán la Estandarización y Normalización.\n\nfrom sklearn.preprocessing import StandardScaler, MinMaxScaler\n\n## Llamaremos esto Estandarización... (sólo por convención del curso)\nsc = StandardScaler()\ndata = sc.fit_transform(df[[\"fare\"]])\ndata.agg([\"mean\", \"std\"])\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\nmean\n3.987333e-18\n\n\nstd\n1.000562e+00\n\n\n\n\n\n\n\n\n\n## Llamaremos esto Normalización... (sólo por convención del curso)\nmms = MinMaxScaler()\nmms.fit_transform(df[[\"fare\"]]).agg([\"min\", \"max\"])\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\nmin\n0.0\n\n\nmax\n1.0"
   },
   {
-    "objectID": "tics411/notebooks/06-ex-DBSCAN.html#dbscan",
-    "href": "tics411/notebooks/06-ex-DBSCAN.html#dbscan",
-    "title": "DBSCAN",
-    "section": "",
-    "text": "import numpy as np\nimport seaborn as sns\n\n\ndf = sns.load_dataset(\"iris\")\nX = df.drop(columns=\"species\")\nX\n\n\n\n\n\n\n\n\n\nsepal_length\nsepal_width\npetal_length\npetal_width\n\n\n\n\n0\n5.1\n3.5\n1.4\n0.2\n\n\n1\n4.9\n3.0\n1.4\n0.2\n\n\n2\n4.7\n3.2\n1.3\n0.2\n\n\n3\n4.6\n3.1\n1.5\n0.2\n\n\n4\n5.0\n3.6\n1.4\n0.2\n\n\n...\n...\n...\n...\n...\n\n\n145\n6.7\n3.0\n5.2\n2.3\n\n\n146\n6.3\n2.5\n5.0\n1.9\n\n\n147\n6.5\n3.0\n5.2\n2.0\n\n\n148\n6.2\n3.4\n5.4\n2.3\n\n\n149\n5.9\n3.0\n5.1\n1.8\n\n\n\n\n150 rows × 4 columns"
+    "objectID": "tics411/notebooks/01-Preprocesamiento.html#aplicar-preprocesamientos-sólo-a-algunas-variables.",
+    "href": "tics411/notebooks/01-Preprocesamiento.html#aplicar-preprocesamientos-sólo-a-algunas-variables.",
+    "title": "Clases UAI",
+    "section": "Aplicar Preprocesamientos sólo a algunas variables.",
+    "text": "Aplicar Preprocesamientos sólo a algunas variables.\nScikit-Learn fue diseñado para el entrenamiento eficiente de modelos. Para ello, se basó en Numpy, el cuál no cuenta con nombre de columnas, por lo que para poder aplicar pre-procesamientos a ciertas partes del Dataset utiliza lo que se llama el ColumnTransformer(), el cuál va más allá del alcance del curso.\nPara simplificar el proceso de elegir ciertas columnas, feature_engine posee una el SklearnTransformerWrapper que permite elegir qué variables queremos pasar por cierta transformación.\n\n## Sin SklearnTransformerWrapper\n\nohe = OneHotEncoder(sparse_output=False)\nohe.fit_transform(df[[\"age\", \"embark_town\"]])\n## Crea columnas dummies incluso para las variables numéricas.\n\n\n\n\n\n\n\n\n\nage_0.42\nage_0.67\nage_0.75\nage_0.83\nage_0.92\nage_1.0\nage_2.0\nage_3.0\nage_4.0\nage_5.0\n...\nage_70.0\nage_70.5\nage_71.0\nage_74.0\nage_80.0\nage_nan\nembark_town_Cherbourg\nembark_town_Queenstown\nembark_town_Southampton\nembark_town_nan\n\n\n\n\n0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n\n\n1\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n0.0\n0.0\n\n\n2\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n\n\n3\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n\n\n4\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n886\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n\n\n887\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n\n\n888\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n0.0\n1.0\n0.0\n\n\n889\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n0.0\n0.0\n\n\n890\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n0.0\n\n\n\n\n891 rows × 93 columns\n\n\n\n\n\n## Aplicar preprocesamientos a ciertas variables...\nfrom feature_engine.wrappers import SklearnTransformerWrapper\n\nohe_w = SklearnTransformerWrapper(\n    OneHotEncoder(sparse_output=False), variables=\"embark_town\"\n)\nohe_w.fit_transform(df[[\"age\", \"embark_town\"]])\n## Crea dummies sólo para la variable embark_town y deja age como estaba.\n\n\n\n\n\n\n\n\n\nage\nembark_town_Cherbourg\nembark_town_Queenstown\nembark_town_Southampton\nembark_town_nan\n\n\n\n\n0\n22.0\n0.0\n0.0\n1.0\n0.0\n\n\n1\n38.0\n1.0\n0.0\n0.0\n0.0\n\n\n2\n26.0\n0.0\n0.0\n1.0\n0.0\n\n\n3\n35.0\n0.0\n0.0\n1.0\n0.0\n\n\n4\n35.0\n0.0\n0.0\n1.0\n0.0\n\n\n...\n...\n...\n...\n...\n...\n\n\n886\n27.0\n0.0\n0.0\n1.0\n0.0\n\n\n887\n19.0\n0.0\n0.0\n1.0\n0.0\n\n\n888\nNaN\n0.0\n0.0\n1.0\n0.0\n\n\n889\n26.0\n1.0\n0.0\n0.0\n0.0\n\n\n890\n32.0\n0.0\n1.0\n0.0\n0.0\n\n\n\n\n891 rows × 5 columns"
   },
   {
-    "objectID": "tics411/notebooks/06-ex-DBSCAN.html#función-para-visualizar",
-    "href": "tics411/notebooks/06-ex-DBSCAN.html#función-para-visualizar",
-    "title": "DBSCAN",
-    "section": "Función para Visualizar",
-    "text": "Función para Visualizar\n\nimport matplotlib.pyplot as plt\n\n\n## Función ligeramente modificada para no requerir centroides en caso que no sea aplicable.\ndef pca_viz(pca_X, labels, pca_centroids=None, title=None, cmap=\"viridis\"):\n    plt.scatter(pca_X[:, 0], pca_X[:, 1], c=labels, cmap=cmap)\n    if pca_centroids is not None:\n        plt.scatter(\n            pca_centroids[:, 0],\n            pca_centroids[:, 1],\n            marker=\"*\",\n            c=\"red\",\n            s=150,\n        )\n    plt.title(title)\n\n\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.cluster import DBSCAN\n\nsc = StandardScaler()\ndbs = DBSCAN(min_samples=4, eps=3)\nX_sc = sc.fit_transform(X)\nlabels = dbs.fit_predict(X_sc)\nlabels\n\narray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])\n\n\n\nfrom sklearn.decomposition import PCA\n\n## Probar minPts = 4 y eps = 0.2\n## Probar minPts = 10 y eps = 0.5\n## Probar minPts = 13 y eps = 0.6\npca = PCA(n_components=2)\npca_X = pca.fit_transform(X_sc)\n\npca_viz(\n    pca_X,\n    labels=labels,\n    title=\"Visualización de DBSCAN para Iris en 2D\",\n)\n\n\n\n\n\n\n\n\n\nfrom sklearn.neighbors import NearestNeighbors\n\n\ndef dbscan_elbow_plot(X, k=5):\n    knn = NearestNeighbors(n_neighbors=k)\n    knn.fit(X)\n    distances, _ = knn.kneighbors(X)\n    distances = np.sort(distances[:, -1])\n    n_pts = distances.shape[0]\n\n    plt.plot(range(1, n_pts + 1), distances)\n    plt.xlabel(\n        f\"Puntos ordenados por Distancia al {k} vecino más cercano.\"\n    )\n    plt.ylabel(f\"Distancia al {k} vecino más cercano\")\n    plt.title(f\"Búsqueda de EPS para DBSCAN con k={k}\")\n\n\n# k = 5 escogido ya que tenemos 4 dimensiones.\ndbscan_elbow_plot(X_sc, k=5)"
+    "objectID": "tics411/clase-2.html#eda",
+    "href": "tics411/clase-2.html#eda",
+    "title": "TICS-411 Minería de Datos",
+    "section": "EDA",
+    "text": "EDA\n\nEl Analisis Exploratorio de Datos (EDA, por sus siglas en inglés) es procedimiento en el cual se analiza un dataset para explorar sus características principales.\n\n\nSu objetivo principal es poder familiarizarse con los datos además de encontrar potenciales problemas en su calidad.\nPrincipalmente hace uso de técnicas de manipulación de datos y visualizaciones.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos hallazgos importantes dentro del proceso se les denomina insights.\n\n\n\n\n\n\n\n\n\nEl uso de visualizaciones inadecuadas podría llevar a conclusiones erróneas.\n\n\n\n\n\n\n\n\n\n\nSummary.\nVisualización."
   },
   {
-    "objectID": "tics411/notebooks/06-ex-DBSCAN.html#modelo-entrenado-con-hiperparámetros-óptimos",
-    "href": "tics411/notebooks/06-ex-DBSCAN.html#modelo-entrenado-con-hiperparámetros-óptimos",
-    "title": "DBSCAN",
-    "section": "Modelo entrenado con Hiperparámetros Óptimos",
-    "text": "Modelo entrenado con Hiperparámetros Óptimos\n\nMIN_PTS = 5\nEPS = 0.75\nsc = StandardScaler()\ndbs = DBSCAN(min_samples=MIN_PTS, eps=EPS)\nX_sc = sc.fit_transform(X)\nlabels = dbs.fit_predict(X_sc)\npca_viz(\n    pca_X,\n    labels=labels,\n    title=f\"Visualización de DBSCAN para Iris en 2D con los mejores Hiperparámetros: MinPts: {MIN_PTS} y eps = {EPS}\",\n)"
+    "objectID": "tics411/clase-2.html#medidas-de-tendencia-central",
+    "href": "tics411/clase-2.html#medidas-de-tendencia-central",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Medidas de Tendencia Central",
+    "text": "Medidas de Tendencia Central"
+  },
+  {
+    "objectID": "tics411/clase-2.html#medidas-de-dispersión-y-asimetría",
+    "href": "tics411/clase-2.html#medidas-de-dispersión-y-asimetría",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Medidas de Dispersión y Asimetría",
+    "text": "Medidas de Dispersión y Asimetría"
+  },
+  {
+    "objectID": "tics411/clase-2.html#eda-visualización",
+    "href": "tics411/clase-2.html#eda-visualización",
+    "title": "TICS-411 Minería de Datos",
+    "section": "EDA: Visualización",
+    "text": "EDA: Visualización\n\nLa visualización de datos es la presentación de datos en forma gráfica. Permite simplificar conceptos más complejos en especial a altos mandos.\n\n\nGracias a la evolución del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la Visión.\n\n\n\n\n\n\n\n\nPuede ser difícil de aplicar si el tamaño de los datos es grande (sea en instancias o atributos). Por ejemplo, si los datos están en 4 dimensiones.\n\n\n\n\n\n\n\n\n\n\n\n\nSe suelen resumir los datos en estadísticas simples.\nGraficar datos en 1D, 2D y 3D (evitar dentro de lo posible).\nLa visualización debe ser comprensible ojalá sin ninguna explicación.\n\n\n\n\n\n\n\n\n\n\n\n\nEn caso de datos de alta dimensionalidad puede ser una buena idea reducir dimensiones mediante técnicas como:\n\nPCA\nUMAP\netc."
+  },
+  {
+    "objectID": "tics411/clase-2.html#caso-de-visualización",
+    "href": "tics411/clase-2.html#caso-de-visualización",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Caso de Visualización",
+    "text": "Caso de Visualización\n\n\n\n\n\n\n\nFiguras\nEscala de Colores.\nTamaño de los puntos.\nDemasiada información en un sólo gráfico.\nNo se entiende el mensaje."
+  },
+  {
+    "objectID": "tics411/clase-2.html#canales-visuales",
+    "href": "tics411/clase-2.html#canales-visuales",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Canales Visuales",
+    "text": "Canales Visuales\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSe les llama canales visuales a elementos visuales que pueden utilizarse para expresar información (Clase Visualizacion Andreas Mueller).\nLa idea es poder mapear cada uno de estos canales a valores que queremos visualizar.\n\n\n\n\n\n\n\n\n\n\n\nNo todos los canales son igual de útiles ni fáciles de entender."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones",
+    "href": "tics411/clase-2.html#visualizaciones-distribuciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Distribuciones",
+    "text": "Visualizaciones: Distribuciones\n\nHistograma\n\n\nEl histograma permite visualizar distribuciones univariadas acumulando los datos en rangos de igual tamaño (bins).\n\n\n\n\nPermite visualizar el centro, la extensión, la asimetría y outliers.\n\n\n\n\n\n\n\n\nEl histograma puede ser “engañoso” para conjuntos de datos pequeños.\nLa visualización puede resultar de manera muy distintas dependiendo del número de bins."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones-1",
+    "href": "tics411/clase-2.html#visualizaciones-distribuciones-1",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Distribuciones",
+    "text": "Visualizaciones: Distribuciones\n\nKernel Density\n\n\nCorresponde a un suavizamiento de un Histograma en el cuál se usa un Kernel (función no negativa que suma 1 y tiene media 0) para agrupar los puntos vecinos.\n\n\n\n\n\nLa función estimada es:\n\\[f(x) = \\frac{1}{n} = \\sum_{i=1}^n K \\left(\\frac{x - x(i)}{h}\\right)\\]\n\n\\(K(u)\\) es el Kernel.\n\\(h\\) es el ancho de banda."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones-2",
+    "href": "tics411/clase-2.html#visualizaciones-distribuciones-2",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Distribuciones",
+    "text": "Visualizaciones: Distribuciones\n\nBoxplot (Caja y Bigotes)\n\nEs un tipo de gráfico que muestra la distribución de manera univariada.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTiene la capacidad de mostrar varias distribuciones a la vez.\nAdemás presenta estadísticos de interés: Mediana, IQR y outliers.\nLos puntos fuera de los bigotes son considerados Outliers.\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos bigotes pueden representar:\n\nMínimo y Máximo. (En este caso no hay outliers).\n\\(\\mu \\pm 3\\sigma\\)\nPercentiles 5 y 95.\nOtros valores."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-barras",
+    "href": "tics411/clase-2.html#visualizaciones-barras",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Barras",
+    "text": "Visualizaciones: Barras\n\nBar Plot\n\n\nLa altura de la barra (normalmente Eje y) representa una agregación asociada a una categoría (normalmente Eje x).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOtras convenciones llaman a este gráfico Column Plot, mientras que el Bar Plot tiene las barras de manera horizontal."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-puntos",
+    "href": "tics411/clase-2.html#visualizaciones-puntos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Puntos",
+    "text": "Visualizaciones: Puntos\n\nScatter\n\n\nGráfico empleado para mostrar distribución de datos bivariados\n\n\n\n\nMuestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y).\nPermite mostrar relaciones lineales o no-lineales (Correlaciones).\nOutliers.\nSimplemente ubicación de Puntos en el Espacio."
+  },
+  {
+    "objectID": "tics411/clase-2.html#visualizaciones-líneas",
+    "href": "tics411/clase-2.html#visualizaciones-líneas",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Visualizaciones: Líneas",
+    "text": "Visualizaciones: Líneas\n\nLineplot\n\n\nGráfico empleado para visualizar tendencias y su evolución de una medida (Eje Y) en el tiempo (Eje X).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSi bien es posible utilizarlo para gráficar dos medidas continuas, las buenas prácticas indican que el eje X siempre debería contener una componente temporal."
+  },
+  {
+    "objectID": "tics411/clase-2.html#estadísticos-vs-visualizaciones",
+    "href": "tics411/clase-2.html#estadísticos-vs-visualizaciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Estadísticos vs Visualizaciones",
+    "text": "Estadísticos vs Visualizaciones"
+  },
+  {
+    "objectID": "tics411/clase-2.html#otras-visualizaciones",
+    "href": "tics411/clase-2.html#otras-visualizaciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "¿Otras Visualizaciones?",
+    "text": "¿Otras Visualizaciones?"
+  },
+  {
+    "objectID": "tics411/clase-4.html#definiciones",
+    "href": "tics411/clase-4.html#definiciones",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Definiciones",
+    "text": "Definiciones\n\nClustering Jerárquico\n\n\nEs un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender. Se basa en la construcción de Jerarquías para ir construyendo clusters.\n\n\nDendograma\n\n\nCorresponde a un diagrama en el que se muestran las distancias de atributos entre clases que son parte de un mismo cluster."
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-jerarquía",
+    "href": "tics411/clase-4.html#clustering-jerarquía",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering: Jerarquía",
+    "text": "Clustering: Jerarquía\n\nLos algoritmos basados en jerarquía pueden seguir 2 estrategias:\n\n\nAglomerativos: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. Para n objetos se realizan n-1 uniones.\nDivisionales: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad."
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-aglomerativo-algoritmo",
+    "href": "tics411/clase-4.html#clustering-aglomerativo-algoritmo",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Aglomerativo: Algoritmo",
+    "text": "Clustering Aglomerativo: Algoritmo\nAlgoritmo\n\nInicialmente se considera cada punto como un cluster.\nCalcula la matriz de proximidad/distancia entre cada cluster.\nRepetir (hasta que exista un solo cluster):\n\nUnir los cluster más cercanos.\nActualizar la matriz de proximidad/distancia.\n\n\n\n\n\n\n\n\nLo más importante de este proceso es el cálculo de la matriz de proximidad/distancia entre clusters\n\n\n\n\n\n\n\n\n\nDistintos enfoques de distancia entre clusters, segmentan los datos en forma distinta."
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-aglomerativo-ejemplo",
+    "href": "tics411/clase-4.html#clustering-aglomerativo-ejemplo",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Aglomerativo: Ejemplo",
+    "text": "Clustering Aglomerativo: Ejemplo\nSupongamos que tenemos cinco tipos de genes cuya expresión ha sido determinada por 3 caracteríticas. Las siguientes expresiones pueden ser vistas como la expresión dados los genes en tres experimentos. ​\n\nApliquemos un Clustering Jerárquico Aglomerativo utilizando como medida de similaridad la Distancia Euclideana.\n\n\n\n\n\n\n\nOtros tipos de distancia también son aplicables siguiendo un procedimiento análogo."
+  },
+  {
+    "objectID": "tics411/clase-4.html#algoritmo-1era-iteración",
+    "href": "tics411/clase-4.html#algoritmo-1era-iteración",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Algoritmo: 1era Iteración",
+    "text": "Algoritmo: 1era Iteración\n\n\n\n\n\n\nEl algoritmo considerará que todos los puntos inicialmente son un cluster. Por lo tanto, tratará de encontrar los 2 puntos más cercanos e intentará unirnos en un sólo cluster.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProblema: ¿Cómo actualizamos la matriz de Distancias?\n\n\n\n\n\n\n\n\n\n\n\nEntonces crearemos un nuevo cluster: bcl2-Caspade."
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-aglomerativo-single-linkage",
+    "href": "tics411/clase-4.html#clustering-aglomerativo-single-linkage",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Aglomerativo: Single Linkage",
+    "text": "Clustering Aglomerativo: Single Linkage\n\n\n\n\n\n\n\n\n\nDistancia entre clusters determinada por los puntos más similares entre los clusters.\n\n\n\n\n\n\n\n\n\n\n\n\n\\[D(C_i, C_j) = min\\{d(x,y) | x \\in C_i, y \\in C_j\\}\\]\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nGenera Clusters largos y delgados.\n\n\n\n\n\n\n\n\n\n\n\nLimitaciones\n\n\n\nAfectado por Outliers"
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-aglomerativo-complete-linkage",
+    "href": "tics411/clase-4.html#clustering-aglomerativo-complete-linkage",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Aglomerativo: Complete Linkage",
+    "text": "Clustering Aglomerativo: Complete Linkage\n\n\n\n\n\n\n\n\n\nDistancia determinada por la distancia ente los puntos más disímiles entre los clusters.\n\n\n\n\n\n\n\n\n\n\n\n\n\\[D(C_i, C_j) = max\\{d(x,y) | x \\in C_i, y \\in C_j\\}\\]\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nMenos suceptible a dato atípicos.\n\n\n\n\n\n\n\n\n\n\n\nLimitaciones\n\n\n\nTiende a quebrar Clusters Grandes.\nTiene tendencia a generar Clusters circulares."
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-aglomerativo-average-linkage",
+    "href": "tics411/clase-4.html#clustering-aglomerativo-average-linkage",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Aglomerativo: Average Linkage",
+    "text": "Clustering Aglomerativo: Average Linkage\n\n\n\n\n\n\n\n\n\nDistancia determinada por el promedio de las distancias que componen los clusters.\nPunto intermedio entre Single y Complete.\n\n\n\n\n\n\n\n\n\n\n\n\n\\[D(C_i, C_j) = avg\\{d(x,y) | x \\in C_i, y \\in C_j\\}\\]\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nMenos suceptible a datos atípicos.\n\n\n\n\n\n\n\n\n\n\n\nLimitaciones\n\n\n\nTiende a generar clusters circulares."
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-aglomerativo-ward-linkage",
+    "href": "tics411/clase-4.html#clustering-aglomerativo-ward-linkage",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Aglomerativo: Ward Linkage",
+    "text": "Clustering Aglomerativo: Ward Linkage\n\n\n\n\n\n\n\n\n\nDistancia determinada por el incremento del Within cluster distance.\nMinimiza la distancia intra cluster y maximiza la distancia entre clusters.\n\n\n\n\n\n\n\n\n\n\n\n\n\\[D(C_i, C_j) = wc(Cij) - wc(C_i) - wc(C_j) = \\frac{n_i\\cdot n_j}{n_i + n_j}||\\bar{C_i} - \\bar{C_j}||^2\\]\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nMenos suceptible a dato atípicos.\n\n\n\n\n\n\n\n\n\n\n\nLimitaciones\n\n\n\nTiende a generar clusters circulares."
+  },
+  {
+    "objectID": "tics411/clase-4.html#hiperparámetros",
+    "href": "tics411/clase-4.html#hiperparámetros",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Hiperparámetros",
+    "text": "Hiperparámetros\nLos Hiperparámetros de este modelo serán:\n\n\n\n\n\n\nNote\n\n\n\nlinkage: La forma de calcular la distancia entre clusters.\ndistancia: La distancia utilizada como similaridad entre los clusters.\n\n\n\n\n\n\n\n\n\n\nA diferencia de K-Means, este método no requiere definir el número de Clusters a priori."
+  },
+  {
+    "objectID": "tics411/clase-4.html#volvamos-a-la-iteración-1",
+    "href": "tics411/clase-4.html#volvamos-a-la-iteración-1",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Volvamos a la Iteración 1",
+    "text": "Volvamos a la Iteración 1\n\nSupongamos que por simplicidad utilizaremos Average Linkage. (El proceso para utilizar otro linkage es análogo).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVamos a extraer una Matriz entre los puntos a fusionar y los puntos de los clusters restantes.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDendograma: 1era Iteración"
+  },
+  {
+    "objectID": "tics411/clase-4.html#iteración-2",
+    "href": "tics411/clase-4.html#iteración-2",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Iteración 2",
+    "text": "Iteración 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDendograma: 2da Iteración"
+  },
+  {
+    "objectID": "tics411/clase-4.html#iteración-3",
+    "href": "tics411/clase-4.html#iteración-3",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Iteración 3",
+    "text": "Iteración 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDendograma: 3ra Iteración"
+  },
+  {
+    "objectID": "tics411/clase-4.html#dendograma-resultante",
+    "href": "tics411/clase-4.html#dendograma-resultante",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Dendograma Resultante",
+    "text": "Dendograma Resultante\n\n\n\n\n\n\nNo es necesario realizar la última iteración ya que se entiende que ambos clusters se unen.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n¿Cómo encontramos los clusters una vez que tenemos el Dendograma?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPodemos escoger un umbral de distancia y ver cuántos clusters se forman.\n\n\n\n\n\n\n\n\n\n\n\n\n\nComo regla general se deben escoger clusters más distanciados entre sí."
+  },
+  {
+    "objectID": "tics411/clase-4.html#efecto-del-linkage-escogido",
+    "href": "tics411/clase-4.html#efecto-del-linkage-escogido",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Efecto del Linkage Escogido",
+    "text": "Efecto del Linkage Escogido"
+  },
+  {
+    "objectID": "tics411/clase-4.html#clustering-jerárquico-detalles-técnicos",
+    "href": "tics411/clase-4.html#clustering-jerárquico-detalles-técnicos",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Clustering Jerárquico: Detalles Técnicos",
+    "text": "Clustering Jerárquico: Detalles Técnicos\n\n\n\n\n\n\nFortalezas\n\n\n\nNo requiere definir el número de Clusters a priori.\nAl tener distintas variantes es posible que los puntos sean agrupados de manera completamente distintas.\n\n\n\n\n\n\n\n\n\n\nDebilidades\n\n\n\nMuy ineficiente computacionalmente debido a que genera una nueva matriz de distancia en cada iteración lo que entrega una complejidad \\(O(n^2)\\) o \\(O(n^3)\\) dependiendo del linkage.\nUna vez que se decide combinar 2 clusters no es posible revertir esta decisión.\nNo tiene capacidad de generalización, ya que no es posible aplicarlo a datos nuevos."
+  },
+  {
+    "objectID": "tics411/clase-4.html#implementación-en-scikit-learn",
+    "href": "tics411/clase-4.html#implementación-en-scikit-learn",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Implementación en Scikit-Learn",
+    "text": "Implementación en Scikit-Learn\nfrom sklearn.cluster import AgglomerativeClustering\n\nac = AgglomerativeClustering(n_clusters=2, metric=\"euclidean\",linkage=\"ward\")\n\n## Se entrena y se genera la predicción\nac.fit_predict(X)\n\n\nn_clusters: Define el número de clusters a crear, por defecto 2.\nmetric: Permite distancias L1, L2 y coseno. Por defecto “euclidean”.\nlinkage: Permite single, complete, average y ward. Por defecto “ward”.\n.fit_predict(): Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento.\n\n\n\n\n\n\n\n\n\nSi bien el método de Aglomeración no requiere el número de clusters a generar, Scikit-Learn lo exige de modo de poder etiquetar cada elemento.\n\n\n\n\n\n\n\n\n\n\n\n¿Por qué no existen los métodos .fit() y .predict() por separado?"
+  },
+  {
+    "objectID": "tics411/clase-4.html#otras-implementaciones-dendograma",
+    "href": "tics411/clase-4.html#otras-implementaciones-dendograma",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Otras implementaciones (Dendograma)",
+    "text": "Otras implementaciones (Dendograma)\nfrom scipy.cluster.hierarchy import dendrogram, linkage\n\n# Genera los cálculos necesarios para construir el Histograma.\nZ = linkage(X, method='single', metric=\"euclidean\") \n\n# Graficar el Dendograma\nplt.figure(figsize=(10, 5)) # Define el tamaño del Gráfico\nplt.title('Dendograma Clustering Jerárquico') # Define un título para el dendograma\nplt.xlabel('Iris Samples')\nplt.ylabel('Distance')\ndendrogram(Z, leaf_rotation=90., leaf_font_size=8.)\nplt.show()\n\n\nPrincipalmente este código permite graficar el Dendograma completo.\nL4: Genera una instancia del Dendograma. (Sería equivalente al .fit() de Scikit-Learn).\nL5-L12: Corresponde al código necesario para graficar el Dendograma."
+  },
+  {
+    "objectID": "tics411/clase-4.html#sugerencias",
+    "href": "tics411/clase-4.html#sugerencias",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Sugerencias",
+    "text": "Sugerencias\n\n\n\n\n\n\nPre-procesamientos\n\n\nEs importante recordar que el clustering aglomerativo también es un Algoritmo basado en distancias, por lo tanto se ve afectado por Outliers y por Escala.\nSe recomienda preprocesar los datos con:\n\nWinsorizer() para eliminar Outliers.\nStandardScaler() o MinMaxScaler() para llevar a una escala común.\n\n\n\n\n\n\n\n\n\n\nOtras técnicas como merge y split, no aplican a este tipo de clustering debido a las limitaciones del algoritmo."
+  },
+  {
+    "objectID": "tics411/clase-4.html#variantes",
+    "href": "tics411/clase-4.html#variantes",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Variantes",
+    "text": "Variantes\n\nEn casos en los que no es posible calcular distancias debido a la presencia de datos categóricos, es posible utilizar el Gower Dissimilarity como medida de similitud.\n\n\n\n\n\n\n\n\n\nGower\n\nSe define como la proporción de variables que tienen distinto valor con respecto al total sin considerar donde ambos son ceros.\n\n\n\n\\[Gower(p1,p2) = \\frac{3}{9}\\]"
   },
   {
     "objectID": "tics411/clase-0.html#quién-soy",
@@ -521,291 +745,74 @@
     "text": "Etapas del Modelamiento: Metodología Propia"
   },
   {
-    "objectID": "tics411/clase-4.html#definiciones",
-    "href": "tics411/clase-4.html#definiciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Definiciones",
-    "text": "Definiciones\n\nClustering Jerárquico\n\n\nEs un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender. Se basa en la construcción de Jerarquías para ir construyendo clusters.\n\n\nDendograma\n\n\nCorresponde a un diagrama en el que se muestran las distancias de atributos entre clases que son parte de un mismo cluster."
+    "objectID": "tics411/notebooks/06-ex-DBSCAN.html",
+    "href": "tics411/notebooks/06-ex-DBSCAN.html",
+    "title": "DBSCAN",
+    "section": "",
+    "text": "import numpy as np\nimport seaborn as sns\n\n\ndf = sns.load_dataset(\"iris\")\nX = df.drop(columns=\"species\")\nX"
   },
   {
-    "objectID": "tics411/clase-4.html#clustering-jerarquía",
-    "href": "tics411/clase-4.html#clustering-jerarquía",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Clustering: Jerarquía",
-    "text": "Clustering: Jerarquía\n\nLos algoritmos basados en jerarquía pueden seguir 2 estrategias:\n\n\nAglomerativos: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. Para n objetos se realizan n-1 uniones.\nDivisionales: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad."
+    "objectID": "tics411/notebooks/06-ex-DBSCAN.html#dbscan",
+    "href": "tics411/notebooks/06-ex-DBSCAN.html#dbscan",
+    "title": "DBSCAN",
+    "section": "",
+    "text": "import numpy as np\nimport seaborn as sns\n\n\ndf = sns.load_dataset(\"iris\")\nX = df.drop(columns=\"species\")\nX"
   },
   {
-    "objectID": "tics411/clase-4.html#clustering-aglomerativo-algoritmo",
-    "href": "tics411/clase-4.html#clustering-aglomerativo-algoritmo",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Clustering Aglomerativo: Algoritmo",
-    "text": "Clustering Aglomerativo: Algoritmo\nAlgoritmo\n\nInicialmente se considera cada punto como un cluster.\nCalcula la matriz de proximidad/distancia entre cada cluster.\nRepetir (hasta que exista un solo cluster):\n\nUnir los cluster más cercanos.\nActualizar la matriz de proximidad/distancia.\n\n\n\n\n\n\n\n\nLo más importante de este proceso es el cálculo de la matriz de proximidad/distancia entre clusters\n\n\n\n\n\n\n\n\n\nDistintos enfoques de distancia entre clusters, segmentan los datos en forma distinta."
+    "objectID": "tics411/notebooks/06-ex-DBSCAN.html#función-para-visualizar",
+    "href": "tics411/notebooks/06-ex-DBSCAN.html#función-para-visualizar",
+    "title": "DBSCAN",
+    "section": "Función para Visualizar",
+    "text": "Función para Visualizar\n\nimport matplotlib.pyplot as plt\n\n\n## Función ligeramente modificada para no requerir centroides en caso que no sea aplicable.\ndef pca_viz(pca_X, labels, pca_centroids=None, title=None, cmap=\"viridis\"):\n    plt.scatter(pca_X[:, 0], pca_X[:, 1], c=labels, cmap=cmap)\n    if pca_centroids is not None:\n        plt.scatter(\n            pca_centroids[:, 0],\n            pca_centroids[:, 1],\n            marker=\"*\",\n            c=\"red\",\n            s=150,\n        )\n    plt.title(title)\n\n\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.cluster import DBSCAN\n\nsc = StandardScaler()\ndbs = DBSCAN(min_samples=4, eps=3)\nX_sc = sc.fit_transform(X)\nlabels = dbs.fit_predict(X_sc)\nlabels\n\n\nfrom sklearn.decomposition import PCA\n\n## Probar minPts = 4 y eps = 0.2\n## Probar minPts = 10 y eps = 0.5\n## Probar minPts = 13 y eps = 0.6\npca = PCA(n_components=2)\npca_X = pca.fit_transform(X_sc)\n\npca_viz(\n    pca_X,\n    labels=labels,\n    title=\"Visualización de DBSCAN para Iris en 2D\",\n)\n\n\nfrom sklearn.neighbors import NearestNeighbors\n\n\ndef dbscan_elbow_plot(X, k=5):\n    knn = NearestNeighbors(n_neighbors=k)\n    knn.fit(X)\n    distances, _ = knn.kneighbors(X)\n    distances = np.sort(distances[:, -1])\n    n_pts = distances.shape[0]\n\n    plt.plot(range(1, n_pts + 1), distances)\n    plt.xlabel(\n        f\"Puntos ordenados por Distancia al {k} vecino más cercano.\"\n    )\n    plt.ylabel(f\"Distancia al {k} vecino más cercano\")\n    plt.title(f\"Búsqueda de EPS para DBSCAN con k={k}\")\n\n\n# k = 5 escogido ya que tenemos 4 dimensiones.\ndbscan_elbow_plot(X_sc, k=5)"
   },
   {
-    "objectID": "tics411/clase-4.html#clustering-aglomerativo-ejemplo",
-    "href": "tics411/clase-4.html#clustering-aglomerativo-ejemplo",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Clustering Aglomerativo: Ejemplo",
-    "text": "Clustering Aglomerativo: Ejemplo\nSupongamos que tenemos cinco tipos de genes cuya expresión ha sido determinada por 3 caracteríticas. Las siguientes expresiones pueden ser vistas como la expresión dados los genes en tres experimentos. ​\n\nApliquemos un Clustering Jerárquico Aglomerativo utilizando como medida de similaridad la Distancia Euclideana.\n\n\n\n\n\n\n\nOtros tipos de distancia también son aplicables siguiendo un procedimiento análogo."
+    "objectID": "tics411/notebooks/06-ex-DBSCAN.html#modelo-entrenado-con-hiperparámetros-óptimos",
+    "href": "tics411/notebooks/06-ex-DBSCAN.html#modelo-entrenado-con-hiperparámetros-óptimos",
+    "title": "DBSCAN",
+    "section": "Modelo entrenado con Hiperparámetros Óptimos",
+    "text": "Modelo entrenado con Hiperparámetros Óptimos\n\nMIN_PTS = 5\nEPS = 0.75\nsc = StandardScaler()\ndbs = DBSCAN(min_samples=MIN_PTS, eps=EPS)\nX_sc = sc.fit_transform(X)\nlabels = dbs.fit_predict(X_sc)\npca_viz(\n    pca_X,\n    labels=labels,\n    title=f\"Visualización de DBSCAN para Iris en 2D con los mejores Hiperparámetros: MinPts: {MIN_PTS} y eps = {EPS}\",\n)"
   },
   {
-    "objectID": "tics411/clase-4.html#algoritmo-1era-iteración",
-    "href": "tics411/clase-4.html#algoritmo-1era-iteración",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Algoritmo: 1era Iteración",
-    "text": "Algoritmo: 1era Iteración\n\n\n\n\n\n\nEl algoritmo considerará que todos los puntos inicialmente son un cluster. Por lo tanto, tratará de encontrar los 2 puntos más cercanos e intentará unirnos en un sólo cluster.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProblema: ¿Cómo actualizamos la matriz de Distancias?\n\n\n\n\n\n\n\n\n\n\n\nEntonces crearemos un nuevo cluster: bcl2-Caspade."
+    "objectID": "tics411/notebooks/03-ex_kmeans.html",
+    "href": "tics411/notebooks/03-ex_kmeans.html",
+    "title": "Ejemplo K-Means",
+    "section": "",
+    "text": "import seaborn as sns\n\n# Importamos el Dataset Iris\ndf = sns.load_dataset(\"iris\")\ndf\n\n\ndf[\"species\"].value_counts()\n\n\nSupongamos que utilizaremos sólo las variables numéricas… “Species”, es de hecho la respuesta correcta (la etiqueta).\n\n\n# Definimos X como una Matriz sin la variable Species.\nX = df.drop(columns=\"species\")\nX"
   },
   {
-    "objectID": "tics411/clase-4.html#clustering-aglomerativo-single-linkage",
-    "href": "tics411/clase-4.html#clustering-aglomerativo-single-linkage",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Clustering Aglomerativo: Single Linkage",
-    "text": "Clustering Aglomerativo: Single Linkage\n\n\n\n\n\n\n\n\n\nDistancia entre clusters determinada por los puntos más similares entre los clusters.\n\n\n\n\n\n\n\n\n\n\n\n\n\\[D(C_i, C_j) = min\\{d(x,y) | x \\in C_i, y \\in C_j\\}\\]\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nGenera Clusters largos y delgados.\n\n\n\n\n\n\n\n\n\n\n\nLimitaciones\n\n\n\nAfectado por Outliers"
+    "objectID": "tics411/notebooks/03-ex_kmeans.html#ejemplo-k-means",
+    "href": "tics411/notebooks/03-ex_kmeans.html#ejemplo-k-means",
+    "title": "Ejemplo K-Means",
+    "section": "",
+    "text": "import seaborn as sns\n\n# Importamos el Dataset Iris\ndf = sns.load_dataset(\"iris\")\ndf\n\n\ndf[\"species\"].value_counts()\n\n\nSupongamos que utilizaremos sólo las variables numéricas… “Species”, es de hecho la respuesta correcta (la etiqueta).\n\n\n# Definimos X como una Matriz sin la variable Species.\nX = df.drop(columns=\"species\")\nX"
   },
   {
-    "objectID": "tics411/clase-4.html#clustering-aglomerativo-complete-linkage",
-    "href": "tics411/clase-4.html#clustering-aglomerativo-complete-linkage",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Clustering Aglomerativo: Complete Linkage",
-    "text": "Clustering Aglomerativo: Complete Linkage\n\n\n\n\n\n\n\n\n\nDistancia determinada por la distancia ente los puntos más disímiles entre los clusters.\n\n\n\n\n\n\n\n\n\n\n\n\n\\[D(C_i, C_j) = max\\{d(x,y) | x \\in C_i, y \\in C_j\\}\\]\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nMenos suceptible a dato atípicos.\n\n\n\n\n\n\n\n\n\n\n\nLimitaciones\n\n\n\nTiende a quebrar Clusters Grandes.\nTiene tendencia a generar Clusters circulares."
+    "objectID": "tics411/notebooks/03-ex_kmeans.html#ayuda-visual",
+    "href": "tics411/notebooks/03-ex_kmeans.html#ayuda-visual",
+    "title": "Ejemplo K-Means",
+    "section": "Ayuda Visual",
+    "text": "Ayuda Visual\nVamos a utilizar PCA para poder reducir las dimensiones a un tamaño el cual podamos visualizar: 2D.\n\nfrom sklearn.decomposition import PCA\nimport pandas as pd\n\n## Esto es sólo una ayuda para poder visualizar datos\n# que están en más dimensiones de las que podemos ver.\npca = PCA(n_components=2, random_state=1)\npca_X = pca.fit_transform(X)\n\n\nimport matplotlib.pyplot as plt\n\nplt.scatter(pca_X[:, 0], pca_X[:, 1])\nplt.title(\"Visualización de Iris en 2D.\")\nplt.tight_layout()\n\n\n## Esta es una función que nos permitirá visualizar nuestras etiquetas en un espacio reducido por PCA.\n## Además permite la visualización de los centroides de nuestro proceso...\n\n\ndef pca_viz(pca_X, pca_centroids, labels, title=None, cmap=\"viridis\"):\n    plt.scatter(pca_X[:, 0], pca_X[:, 1], c=labels, cmap=cmap)\n    plt.scatter(\n        pca_centroids[:, 0],\n        pca_centroids[:, 1],\n        marker=\"*\",\n        c=\"red\",\n        s=150,\n    )\n    plt.title(title)\n\n\nImplementación de K-Means\n\nfrom sklearn.cluster import KMeans\n\nkm = KMeans(n_clusters=2, n_init=10, random_state=1)\nlabels = km.fit_predict(X)\ncentroids = km.cluster_centers_\npca_centroids = pca.transform(centroids)\n\n\npca_viz(\n    pca_X,\n    pca_centroids,\n    labels=labels,\n    title=\"Visualización de K-Means en Iris 2D\",\n)\n\n\n\nEfecto del Escalamiento en K-Means\n\nfrom sklearn.preprocessing import StandardScaler\n\nsc = StandardScaler()\nX_sc = sc.fit_transform(X)\npca = PCA(n_components=2, random_state=1)\npca_X_sc = pca.fit_transform(X_sc)\nkm = KMeans(n_clusters=2, n_init=10, random_state=1)\nsc_labels = km.fit_predict(X_sc)\ncentroids = km.cluster_centers_\npca_centroids = pca.transform(centroids)\npca_viz(\n    pca_X_sc,\n    pca_centroids,\n    sc_labels,\n    title=\"K-Means de Iris en 2D luego de Estandarizar los datos. \",\n)\n\n\nfrom sklearn.preprocessing import MinMaxScaler\n\nmm = MinMaxScaler()\nX_mm = mm.fit_transform(X)\npca = PCA(n_components=2, random_state=1)\npca_X_mm = pca.fit_transform(X_mm)\nkm = KMeans(n_clusters=3, n_init=10, random_state=1)\nmm_labels = km.fit_predict(X_mm)\ncentroids = km.cluster_centers_\npca_centroids = pca.transform(centroids)\n\npca_viz(\n    pca_X_mm,\n    pca_centroids,\n    mm_labels,\n    title=\"K-Means de Iris en 2D luego de Normalizar los datos.\",\n)"
   },
   {
-    "objectID": "tics411/clase-4.html#clustering-aglomerativo-average-linkage",
-    "href": "tics411/clase-4.html#clustering-aglomerativo-average-linkage",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Clustering Aglomerativo: Average Linkage",
-    "text": "Clustering Aglomerativo: Average Linkage\n\n\n\n\n\n\n\n\n\nDistancia determinada por el promedio de las distancias que componen los clusters.\nPunto intermedio entre Single y Complete.\n\n\n\n\n\n\n\n\n\n\n\n\n\\[D(C_i, C_j) = avg\\{d(x,y) | x \\in C_i, y \\in C_j\\}\\]\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nMenos suceptible a datos atípicos.\n\n\n\n\n\n\n\n\n\n\n\nLimitaciones\n\n\n\nTiende a generar clusters circulares."
+    "objectID": "tics411/notebooks/03-ex_kmeans.html#ejemplo-más-avanzado-sin-entrenar-con-todos-los-datos",
+    "href": "tics411/notebooks/03-ex_kmeans.html#ejemplo-más-avanzado-sin-entrenar-con-todos-los-datos",
+    "title": "Ejemplo K-Means",
+    "section": "Ejemplo más avanzado sin entrenar con todos los datos…",
+    "text": "Ejemplo más avanzado sin entrenar con todos los datos…\n\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test = train_test_split(X, test_size=0.25, random_state=1)\n\n\nEstamos dejando un 25% de los datos fuera para poder chequear cuál sería la predicción que se le dan a dichos datos.\n\n\npca = PCA(n_components=2)\nkm = KMeans(n_clusters=2, n_init=10)\nsc = StandardScaler()\n## Fit siempre se hace con datos de `Entrenamiento`.\n\n## Escalamos los datos...\nsc.fit(X_train)\nX_train_sc = sc.transform(X_train)\nX_test_sc = sc.transform(X_test)\n\n# Generamos las coordenadas del PCA para visualizar\npca.fit(X_train_sc)\npca_train = pca.transform(X_train_sc)\npca_test = pca.transform(X_test_sc)\n\ntrain_labels = km.fit_predict(X_train_sc)\ntest_labels = km.predict(X_test_sc)\ncentroids = km.cluster_centers_\npca_centroids = pca.transform(centroids)\n\npca_viz(pca_train, pca_centroids, train_labels)\npca_viz(pca_test, pca_centroids, test_labels, cmap=\"tab20b\")"
   },
   {
-    "objectID": "tics411/clase-4.html#clustering-aglomerativo-ward-linkage",
-    "href": "tics411/clase-4.html#clustering-aglomerativo-ward-linkage",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Clustering Aglomerativo: Ward Linkage",
-    "text": "Clustering Aglomerativo: Ward Linkage\n\n\n\n\n\n\n\n\n\nDistancia determinada por el incremento del Within cluster distance.\nMinimiza la distancia intra cluster y maximiza la distancia entre clusters.\n\n\n\n\n\n\n\n\n\n\n\n\n\\[D(C_i, C_j) = wc(Cij) - wc(C_i) - wc(C_j) = \\frac{n_i\\cdot n_j}{n_i + n_j}||\\bar{C_i} - \\bar{C_j}||^2\\]\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nMenos suceptible a dato atípicos.\n\n\n\n\n\n\n\n\n\n\n\nLimitaciones\n\n\n\nTiende a generar clusters circulares."
+    "objectID": "tics411/notebooks/03-ex_kmeans.html#cuál-es-el-k-óptimo",
+    "href": "tics411/notebooks/03-ex_kmeans.html#cuál-es-el-k-óptimo",
+    "title": "Ejemplo K-Means",
+    "section": "Cuál es el K óptimo?",
+    "text": "Cuál es el K óptimo?\n\ndef elbow_curve(X, k_max=10, color=\"blue\", title=None):\n    wc = []\n    for k in range(1, k_max + 1):\n        km = KMeans(n_clusters=k, random_state=1)\n        km.fit(X)\n        wc.append(km.inertia_)\n\n    k = [*range(1, k_max + 1)]\n    plt.plot(k, wc, c=color, marker=\"*\")\n    plt.title(title)\n    plt.xlabel(\"Número de Clústers\")\n    plt.ylabel(\"Within Distance\")\n    return wc\n\n\nwc = elbow_curve(\n    X_train,\n    k_max=15,\n    color=\"red\",\n    title=\"Curva del Codo para el Dataset Iris, sólo con Train Set.\",\n)\n\n\nwc"
   },
   {
-    "objectID": "tics411/clase-4.html#hiperparámetros",
-    "href": "tics411/clase-4.html#hiperparámetros",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Hiperparámetros",
-    "text": "Hiperparámetros\nLos Hiperparámetros de este modelo serán:\n\n\n\n\n\n\nNote\n\n\n\nlinkage: La forma de calcular la distancia entre clusters.\ndistancia: La distancia utilizada como similaridad entre los clusters.\n\n\n\n\n\n\n\n\n\n\nA diferencia de K-Means, este método no requiere definir el número de Clusters a priori."
-  },
-  {
-    "objectID": "tics411/clase-4.html#volvamos-a-la-iteración-1",
-    "href": "tics411/clase-4.html#volvamos-a-la-iteración-1",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Volvamos a la Iteración 1",
-    "text": "Volvamos a la Iteración 1\n\nSupongamos que por simplicidad utilizaremos Average Linkage. (El proceso para utilizar otro linkage es análogo).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVamos a extraer una Matriz entre los puntos a fusionar y los puntos de los clusters restantes.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDendograma: 1era Iteración"
-  },
-  {
-    "objectID": "tics411/clase-4.html#iteración-2",
-    "href": "tics411/clase-4.html#iteración-2",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Iteración 2",
-    "text": "Iteración 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDendograma: 2da Iteración"
-  },
-  {
-    "objectID": "tics411/clase-4.html#iteración-3",
-    "href": "tics411/clase-4.html#iteración-3",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Iteración 3",
-    "text": "Iteración 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDendograma: 3ra Iteración"
-  },
-  {
-    "objectID": "tics411/clase-4.html#dendograma-resultante",
-    "href": "tics411/clase-4.html#dendograma-resultante",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Dendograma Resultante",
-    "text": "Dendograma Resultante\n\n\n\n\n\n\nNo es necesario realizar la última iteración ya que se entiende que ambos clusters se unen.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n¿Cómo encontramos los clusters una vez que tenemos el Dendograma?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPodemos escoger un umbral de distancia y ver cuántos clusters se forman.\n\n\n\n\n\n\n\n\n\n\n\n\n\nComo regla general se deben escoger clusters más distanciados entre sí."
-  },
-  {
-    "objectID": "tics411/clase-4.html#efecto-del-linkage-escogido",
-    "href": "tics411/clase-4.html#efecto-del-linkage-escogido",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Efecto del Linkage Escogido",
-    "text": "Efecto del Linkage Escogido"
-  },
-  {
-    "objectID": "tics411/clase-4.html#clustering-jerárquico-detalles-técnicos",
-    "href": "tics411/clase-4.html#clustering-jerárquico-detalles-técnicos",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Clustering Jerárquico: Detalles Técnicos",
-    "text": "Clustering Jerárquico: Detalles Técnicos\n\n\n\n\n\n\nFortalezas\n\n\n\nNo requiere definir el número de Clusters a priori.\nAl tener distintas variantes es posible que los puntos sean agrupados de manera completamente distintas.\n\n\n\n\n\n\n\n\n\n\nDebilidades\n\n\n\nMuy ineficiente computacionalmente debido a que genera una nueva matriz de distancia en cada iteración lo que entrega una complejidad \\(O(n^2)\\) o \\(O(n^3)\\) dependiendo del linkage.\nUna vez que se decide combinar 2 clusters no es posible revertir esta decisión.\nNo tiene capacidad de generalización, ya que no es posible aplicarlo a datos nuevos."
-  },
-  {
-    "objectID": "tics411/clase-4.html#implementación-en-scikit-learn",
-    "href": "tics411/clase-4.html#implementación-en-scikit-learn",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Implementación en Scikit-Learn",
-    "text": "Implementación en Scikit-Learn\nfrom sklearn.cluster import AgglomerativeClustering\n\nac = AgglomerativeClustering(n_clusters=2, metric=\"euclidean\",linkage=\"ward\")\n\n## Se entrena y se genera la predicción\nac.fit_predict(X)\n\n\nn_clusters: Define el número de clusters a crear, por defecto 2.\nmetric: Permite distancias L1, L2 y coseno.\nlinkage: Permite single, complete, average y ward.\n.fit_predict(): Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento.\n\n\n\n\n\n\n\n\n\nSi bien el método de Aglomeración no requiere el número de clusters a generar, Scikit-Learn lo exige de modo de poder etiquetar cada elemento.\n\n\n\n\n\n\n\n\n\n\n\n¿Por qué no existen los métodos .fit() y .predict() por separado?"
-  },
-  {
-    "objectID": "tics411/clase-4.html#otras-implementaciones-dendograma",
-    "href": "tics411/clase-4.html#otras-implementaciones-dendograma",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Otras implementaciones (Dendograma)",
-    "text": "Otras implementaciones (Dendograma)\nfrom scipy.cluster.hierarchy import dendrogram, linkage\n\n# Genera los cálculos necesarios para construir el Histograma.\nZ = linkage(X, method='single', metric=\"euclidean\") \n\n# Graficar el Dendograma\nplt.figure(figsize=(10, 5)) # Define el tamaño del Gráfico\nplt.title('Dendograma Clustering Jerárquico') # Define un título para el dendograma\nplt.xlabel('Iris Samples')\nplt.ylabel('Distance')\ndendrogram(Z, leaf_rotation=90., leaf_font_size=8.)\nplt.show()\n\n\nPrincipalmente este código permite graficar el Dendograma completo.\nL5-L12: Corresponde al código necesario para graficar el Dendograma."
-  },
-  {
-    "objectID": "tics411/clase-4.html#sugerencias",
-    "href": "tics411/clase-4.html#sugerencias",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Sugerencias",
-    "text": "Sugerencias\n\n\n\n\n\n\nPre-procesamientos\n\n\nEs importante recordar que el clustering aglomerativo también es un Algoritmo basado en distancias, por lo tanto se ve afectado por Outliers y por Escala.\nSe recomienda preprocesar los datos con:\n\nWinsorizer() para eliminar Outliers.\nStandardScaler() o MinMaxScaler() para llevar a una escala común.\n\n\n\n\n\n\n\n\n\n\nOtras técnicas como merge y split, no aplican a este tipo de clustering debido a las limitaciones del algoritmo."
-  },
-  {
-    "objectID": "tics411/clase-4.html#variantes",
-    "href": "tics411/clase-4.html#variantes",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Variantes",
-    "text": "Variantes\n\nEn casos en los que no es posible calcular distancias debido a la presencia de datos categóricos, es posible utilizar el Gower Dissimilarity como medida de similitud.\n\n\n\n\n\n\n\n\n\nGower\n\nSe define como la proporción de variables que tienen distinto valor con respecto al total sin considerar donde ambos son ceros.\n\n\n\n\\[Gower(p1,p2) = \\frac{3}{9}\\]"
-  },
-  {
-    "objectID": "tics411/clase-2.html#eda",
-    "href": "tics411/clase-2.html#eda",
-    "title": "TICS-411 Minería de Datos",
-    "section": "EDA",
-    "text": "EDA\n\nEl Analisis Exploratorio de Datos (EDA, por sus siglas en inglés) es procedimiento en el cual se analiza un dataset para explorar sus características principales.\n\n\nSu objetivo principal es poder familiarizarse con los datos además de encontrar potenciales problemas en su calidad.\nPrincipalmente hace uso de técnicas de manipulación de datos y visualizaciones.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos hallazgos importantes dentro del proceso se les denomina insights.\n\n\n\n\n\n\n\n\n\nEl uso de visualizaciones inadecuadas podría llevar a conclusiones erróneas.\n\n\n\n\n\n\n\n\n\n\nSummary.\nVisualización."
-  },
-  {
-    "objectID": "tics411/clase-2.html#medidas-de-tendencia-central",
-    "href": "tics411/clase-2.html#medidas-de-tendencia-central",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Medidas de Tendencia Central",
-    "text": "Medidas de Tendencia Central"
-  },
-  {
-    "objectID": "tics411/clase-2.html#medidas-de-dispersión-y-asimetría",
-    "href": "tics411/clase-2.html#medidas-de-dispersión-y-asimetría",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Medidas de Dispersión y Asimetría",
-    "text": "Medidas de Dispersión y Asimetría"
-  },
-  {
-    "objectID": "tics411/clase-2.html#eda-visualización",
-    "href": "tics411/clase-2.html#eda-visualización",
-    "title": "TICS-411 Minería de Datos",
-    "section": "EDA: Visualización",
-    "text": "EDA: Visualización\n\nLa visualización de datos es la presentación de datos en forma gráfica. Permite simplificar conceptos más complejos en especial a altos mandos.\n\n\nGracias a la evolución del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la Visión.\n\n\n\n\n\n\n\n\nPuede ser difícil de aplicar si el tamaño de los datos es grande (sea en instancias o atributos). Por ejemplo, si los datos están en 4 dimensiones.\n\n\n\n\n\n\n\n\n\n\n\n\nSe suelen resumir los datos en estadísticas simples.\nGraficar datos en 1D, 2D y 3D (evitar dentro de lo posible).\nLa visualización debe ser comprensible ojalá sin ninguna explicación.\n\n\n\n\n\n\n\n\n\n\n\n\nEn caso de datos de alta dimensionalidad puede ser una buena idea reducir dimensiones mediante técnicas como:\n\nPCA\nUMAP\netc."
-  },
-  {
-    "objectID": "tics411/clase-2.html#caso-de-visualización",
-    "href": "tics411/clase-2.html#caso-de-visualización",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Caso de Visualización",
-    "text": "Caso de Visualización\n\n\n\n\n\n\n\nFiguras\nEscala de Colores.\nTamaño de los puntos.\nDemasiada información en un sólo gráfico.\nNo se entiende el mensaje."
-  },
-  {
-    "objectID": "tics411/clase-2.html#canales-visuales",
-    "href": "tics411/clase-2.html#canales-visuales",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Canales Visuales",
-    "text": "Canales Visuales\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSe les llama canales visuales a elementos visuales que pueden utilizarse para expresar información (Clase Visualizacion Andreas Mueller).\nLa idea es poder mapear cada uno de estos canales a valores que queremos visualizar.\n\n\n\n\n\n\n\n\n\n\n\nNo todos los canales son igual de útiles ni fáciles de entender."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones",
-    "href": "tics411/clase-2.html#visualizaciones-distribuciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Distribuciones",
-    "text": "Visualizaciones: Distribuciones\n\nHistograma\n\n\nEl histograma permite visualizar distribuciones univariadas acumulando los datos en rangos de igual tamaño (bins).\n\n\n\n\nPermite visualizar el centro, la extensión, la asimetría y outliers.\n\n\n\n\n\n\n\n\nEl histograma puede ser “engañoso” para conjuntos de datos pequeños.\nLa visualización puede resultar de manera muy distintas dependiendo del número de bins."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones-1",
-    "href": "tics411/clase-2.html#visualizaciones-distribuciones-1",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Distribuciones",
-    "text": "Visualizaciones: Distribuciones\n\nKernel Density\n\n\nCorresponde a un suavizamiento de un Histograma en el cuál se usa un Kernel (función no negativa que suma 1 y tiene media 0) para agrupar los puntos vecinos.\n\n\n\n\n\nLa función estimada es:\n\\[f(x) = \\frac{1}{n} = \\sum_{i=1}^n K \\left(\\frac{x - x(i)}{h}\\right)\\]\n\n\\(K(u)\\) es el Kernel.\n\\(h\\) es el ancho de banda."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-distribuciones-2",
-    "href": "tics411/clase-2.html#visualizaciones-distribuciones-2",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Distribuciones",
-    "text": "Visualizaciones: Distribuciones\n\nBoxplot (Caja y Bigotes)\n\nEs un tipo de gráfico que muestra la distribución de manera univariada.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTiene la capacidad de mostrar varias distribuciones a la vez.\nAdemás presenta estadísticos de interés: Mediana, IQR y outliers.\nLos puntos fuera de los bigotes son considerados Outliers.\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos bigotes pueden representar:\n\nMínimo y Máximo. (En este caso no hay outliers).\n\\(\\mu \\pm 3\\sigma\\)\nPercentiles 5 y 95.\nOtros valores."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-barras",
-    "href": "tics411/clase-2.html#visualizaciones-barras",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Barras",
-    "text": "Visualizaciones: Barras\n\nBar Plot\n\n\nLa altura de la barra (normalmente Eje y) representa una agregación asociada a una categoría (normalmente Eje x).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOtras convenciones llaman a este gráfico Column Plot, mientras que el Bar Plot tiene las barras de manera horizontal."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-puntos",
-    "href": "tics411/clase-2.html#visualizaciones-puntos",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Puntos",
-    "text": "Visualizaciones: Puntos\n\nScatter\n\n\nGráfico empleado para mostrar distribución de datos bivariados\n\n\n\n\nMuestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y).\nPermite mostrar relaciones lineales o no-lineales (Correlaciones).\nOutliers.\nSimplemente ubicación de Puntos en el Espacio."
-  },
-  {
-    "objectID": "tics411/clase-2.html#visualizaciones-líneas",
-    "href": "tics411/clase-2.html#visualizaciones-líneas",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Visualizaciones: Líneas",
-    "text": "Visualizaciones: Líneas\n\nLineplot\n\n\nGráfico empleado para visualizar tendencias y su evolución de una medida (Eje Y) en el tiempo (Eje X).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSi bien es posible utilizarlo para gráficar dos medidas continuas, las buenas prácticas indican que el eje X siempre debería contener una componente temporal."
-  },
-  {
-    "objectID": "tics411/clase-2.html#estadísticos-vs-visualizaciones",
-    "href": "tics411/clase-2.html#estadísticos-vs-visualizaciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Estadísticos vs Visualizaciones",
-    "text": "Estadísticos vs Visualizaciones"
-  },
-  {
-    "objectID": "tics411/clase-2.html#otras-visualizaciones",
-    "href": "tics411/clase-2.html#otras-visualizaciones",
-    "title": "TICS-411 Minería de Datos",
-    "section": "¿Otras Visualizaciones?",
-    "text": "¿Otras Visualizaciones?"
-  },
-  {
-    "objectID": "tics411/notebooks/01-Preprocesamiento.html",
-    "href": "tics411/notebooks/01-Preprocesamiento.html",
+    "objectID": "tics411/notebooks/preguntas-prueba.html",
+    "href": "tics411/notebooks/preguntas-prueba.html",
     "title": "Clases UAI",
     "section": "",
-    "text": "%%capture\n## Ejecutar esta celda para instalar o actualizar Feature_Engine\n!pip install -U feature_engine\n## Chequear que la versión de Feature Engine sea al menos 1.7\nimport feature_engine\n\nfeature_engine.__version__\n\n'1.7.0'\nimport pandas as pd\nimport numpy as np\nimport seaborn as sns\nfrom sklearn import set_config\n\n## (Opcional) Este comando permite que el output de Scikit-Learn sean Pandas DataFrames.\n## Por dejecto, Scikit-Learn transforma todo a Numpy, ya que es más eficiente computacionalmente.\nset_config(transform_output=\"pandas\")\n\ndf = sns.load_dataset(\"titanic\")\ndf\n\n\n\n\n\n\n\n\n\nsurvived\npclass\nsex\nage\nsibsp\nparch\nfare\nembarked\nclass\nwho\nadult_male\ndeck\nembark_town\nalive\nalone\n\n\n\n\n0\n0\n3\nmale\n22.0\n1\n0\n7.2500\nS\nThird\nman\nTrue\nNaN\nSouthampton\nno\nFalse\n\n\n1\n1\n1\nfemale\n38.0\n1\n0\n71.2833\nC\nFirst\nwoman\nFalse\nC\nCherbourg\nyes\nFalse\n\n\n2\n1\n3\nfemale\n26.0\n0\n0\n7.9250\nS\nThird\nwoman\nFalse\nNaN\nSouthampton\nyes\nTrue\n\n\n3\n1\n1\nfemale\n35.0\n1\n0\n53.1000\nS\nFirst\nwoman\nFalse\nC\nSouthampton\nyes\nFalse\n\n\n4\n0\n3\nmale\n35.0\n0\n0\n8.0500\nS\nThird\nman\nTrue\nNaN\nSouthampton\nno\nTrue\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n886\n0\n2\nmale\n27.0\n0\n0\n13.0000\nS\nSecond\nman\nTrue\nNaN\nSouthampton\nno\nTrue\n\n\n887\n1\n1\nfemale\n19.0\n0\n0\n30.0000\nS\nFirst\nwoman\nFalse\nB\nSouthampton\nyes\nTrue\n\n\n888\n0\n3\nfemale\nNaN\n1\n2\n23.4500\nS\nThird\nwoman\nFalse\nNaN\nSouthampton\nno\nFalse\n\n\n889\n1\n1\nmale\n26.0\n0\n0\n30.0000\nC\nFirst\nman\nTrue\nC\nCherbourg\nyes\nTrue\n\n\n890\n0\n3\nmale\n32.0\n0\n0\n7.7500\nQ\nThird\nman\nTrue\nNaN\nQueenstown\nno\nTrue\n\n\n\n\n891 rows × 15 columns"
-  },
-  {
-    "objectID": "tics411/notebooks/01-Preprocesamiento.html#valores-faltantes",
-    "href": "tics411/notebooks/01-Preprocesamiento.html#valores-faltantes",
-    "title": "Clases UAI",
-    "section": "Valores Faltantes",
-    "text": "Valores Faltantes\n\n## Para detectar valores faltantes se utiliza el siguiente comando.\ndf.isnull().sum()\n\nsurvived         0\npclass           0\nsex              0\nage            177\nsibsp            0\nparch            0\nfare             0\nembarked         2\nclass            0\nwho              0\nadult_male       0\ndeck           688\nembark_town      2\nalive            0\nalone            0\ndtype: int64\n\n\n\n## Opcionalmente se puede obtener el % o la fracción de nulos utilizando la siguiente variante.\ndf.isnull().mean()\n\nsurvived       0.000000\npclass         0.000000\nsex            0.000000\nage            0.198653\nsibsp          0.000000\nparch          0.000000\nfare           0.000000\nembarked       0.002245\nclass          0.000000\nwho            0.000000\nadult_male     0.000000\ndeck           0.772166\nembark_town    0.002245\nalive          0.000000\nalone          0.000000\ndtype: float64\n\n\nPandas: Es posible imputar valores usando Pandas con el comando .fillna().\n\nmedia = df[\"age\"].mean()\nmediana = df[\"age\"].median()\nprint(f\"Promedio de Edad: {media}\")\nprint(\n    f'Promedio de Edad con Imputación con Ceros: {df[\"age\"].fillna(0).mean()}'\n)\nprint(\n    f'Promedio de Edad con Imputación por Media: {df[\"age\"].fillna(media).mean()}'\n)\nprint(\n    f'Promedio de Edad con Imputación por Mediana: {df[\"age\"].fillna(mediana).mean()}'\n)\n\nPromedio de Edad: 29.69911764705882\nPromedio de Edad con Imputación con Ceros: 23.79929292929293\nPromedio de Edad con Imputación por Media: 29.69911764705882\nPromedio de Edad con Imputación por Mediana: 29.36158249158249\n\n\nScikit-Learn: Utiliza la clase SimpleImputer, el cual permite distintas estrategias de Imputación: \"mean\", \"median\", \"most_frequent\", \"constant\".\n\nfrom sklearn.impute import SimpleImputer\n\nsc = SimpleImputer(strategy=\"mean\")\n## En este caso uso [[]] ya que Scikit Learn espera Matrices o DataFrames.\n## Utilizar [[]] fuerza a que AGE sea un DataFrame de una Columna y no una Serie.\n\ndata_imputed = sc.fit_transform(df[[\"age\"]])\n## Se puede ver que los nuevos datos ya no poseen valores Perdidos.\ndata_imputed.isnull().sum()\n\nage    0\ndtype: int64"
-  },
-  {
-    "objectID": "tics411/notebooks/01-Preprocesamiento.html#outliers",
-    "href": "tics411/notebooks/01-Preprocesamiento.html#outliers",
-    "title": "Clases UAI",
-    "section": "Outliers",
-    "text": "Outliers\npandas: En Pandas se pueden acotar los outliers utilizando .clip()\n\nprint(f\"Promedio de Tarifas: {df.fare.mean()}\")\ndf[\"fare\"].agg([\"min\", \"max\"])\n\nPromedio de Tarifas: 32.204207968574636\n\n\nmin      0.0000\nmax    512.3292\nName: fare, dtype: float64\n\n\n\nlower: Define la cota inferior.\nupper: Define la cota superior.\n\n\nclipped_data = df[[\"fare\"]].clip(lower=10, upper=50)\nclipped_data.agg([\"min\", \"max\"])\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\nmin\n10.0\n\n\nmax\n50.0\n\n\n\n\n\n\n\n\n\ndf[[\"fare\"]]\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\n0\n7.2500\n\n\n1\n71.2833\n\n\n2\n7.9250\n\n\n3\n53.1000\n\n\n4\n8.0500\n\n\n...\n...\n\n\n886\n13.0000\n\n\n887\n30.0000\n\n\n888\n23.4500\n\n\n889\n30.0000\n\n\n890\n7.7500\n\n\n\n\n891 rows × 1 columns\n\n\n\n\n\n## Los valores menores a 10 fueron reemplazados por 10.\n## Los valores mayores a 50 fueron reemplazados por 50.\nclipped_data\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\n0\n10.00\n\n\n1\n50.00\n\n\n2\n10.00\n\n\n3\n50.00\n\n\n4\n10.00\n\n\n...\n...\n\n\n886\n13.00\n\n\n887\n30.00\n\n\n888\n23.45\n\n\n889\n30.00\n\n\n890\n10.00\n\n\n\n\n891 rows × 1 columns\n\n\n\n\nsklearn: Para este caso nos apoyaremos de la librería feature_engine la cual posee herramientas para acotar. feature_engine sigue exactamente la misma lógica de Scikit-Learn.\n\nfrom feature_engine.outliers import ArbitraryOutlierCapper, Winsorizer\n\ncapper = ArbitraryOutlierCapper(\n    max_capping_dict=dict(fare=50), min_capping_dict=dict(fare=10)\n)\ncapper.fit_transform(df[[\"fare\"]])\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\n0\n10.00\n\n\n1\n50.00\n\n\n2\n10.00\n\n\n3\n50.00\n\n\n4\n10.00\n\n\n...\n...\n\n\n886\n13.00\n\n\n887\n30.00\n\n\n888\n23.45\n\n\n889\n30.00\n\n\n890\n10.00\n\n\n\n\n891 rows × 1 columns\n\n\n\n\n\ncapping_method: Define la Estragegia a utilizar para el Winsorizer. Ver Docs.\n\n\n## \"gaussian\" permite acotar por mu +/- 3*std\n## \"iqr\" permite rellenar por Q1 - 3*iqr y Q3 + 3*iqr\nwin = Winsorizer(capping_method=\"gaussian\")\nwin.fit_transform(df[[\"fare\"]])\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\n0\n7.2500\n\n\n1\n71.2833\n\n\n2\n7.9250\n\n\n3\n53.1000\n\n\n4\n8.0500\n\n\n...\n...\n\n\n886\n13.0000\n\n\n887\n30.0000\n\n\n888\n23.4500\n\n\n889\n30.0000\n\n\n890\n7.7500\n\n\n\n\n891 rows × 1 columns"
-  },
-  {
-    "objectID": "tics411/notebooks/01-Preprocesamiento.html#variables-categóricas",
-    "href": "tics411/notebooks/01-Preprocesamiento.html#variables-categóricas",
-    "title": "Clases UAI",
-    "section": "Variables Categóricas",
-    "text": "Variables Categóricas\npandas:\n\nOne Hot Encoding\nPara la conversión de variables categóricas utilizamos pd.get_dummies(). * drop_first: Si es True se elimina la primera categoría.\n\npd.get_dummies(df[\"embark_town\"], drop_first=False)\n\n\n\n\n\n\n\n\n\nCherbourg\nQueenstown\nSouthampton\n\n\n\n\n0\nFalse\nFalse\nTrue\n\n\n1\nTrue\nFalse\nFalse\n\n\n2\nFalse\nFalse\nTrue\n\n\n3\nFalse\nFalse\nTrue\n\n\n4\nFalse\nFalse\nTrue\n\n\n...\n...\n...\n...\n\n\n886\nFalse\nFalse\nTrue\n\n\n887\nFalse\nFalse\nTrue\n\n\n888\nFalse\nFalse\nTrue\n\n\n889\nTrue\nFalse\nFalse\n\n\n890\nFalse\nTrue\nFalse\n\n\n\n\n891 rows × 3 columns\n\n\n\n\n\npd.get_dummies(df[\"embark_town\"], drop_first=True)\n# Una ventaja de este procedimiento es que no considera los Nulos como otra categoría...\n\n\n\n\n\n\n\n\n\nQueenstown\nSouthampton\n\n\n\n\n0\nFalse\nTrue\n\n\n1\nFalse\nFalse\n\n\n2\nFalse\nTrue\n\n\n3\nFalse\nTrue\n\n\n4\nFalse\nTrue\n\n\n...\n...\n...\n\n\n886\nFalse\nTrue\n\n\n887\nFalse\nTrue\n\n\n888\nFalse\nTrue\n\n\n889\nFalse\nFalse\n\n\n890\nTrue\nFalse\n\n\n\n\n891 rows × 2 columns\n\n\n\n\n\n\nOrdinal Encoder\nSe utiliza pd.factorize(). * sort: Usar True ya que coloca las categorías en orden. Además de esta manera se comporta igual que OrdinalEncoder de Scikit-Learn.\n\npd.DataFrame(\n    pd.factorize(df[\"embark_town\"], sort=True)[0], columns=[\"new_column\"]\n)\n\n\n\n\n\n\n\n\n\nnew_column\n\n\n\n\n0\n2\n\n\n1\n0\n\n\n2\n2\n\n\n3\n2\n\n\n4\n2\n\n\n...\n...\n\n\n886\n2\n\n\n887\n2\n\n\n888\n2\n\n\n889\n0\n\n\n890\n1\n\n\n\n\n891 rows × 1 columns\n\n\n\n\nScikit-Learn:\n\n\nOne Hot Encoding\n\nsparse_output: Se debe fijar como False para poder ver el output como Pandas\ndrop: Se debe colocar \"first\" o el nombre de una sóla categoría a eliminar.\n\n\nfrom sklearn.preprocessing import OneHotEncoder, OrdinalEncoder\n\nohe = OneHotEncoder(drop=\"first\", sparse_output=False)\nohe.fit_transform(df[[\"embark_town\"]])\n\n\n\n\n\n\n\n\n\nembark_town_Queenstown\nembark_town_Southampton\nembark_town_nan\n\n\n\n\n0\n0.0\n1.0\n0.0\n\n\n1\n0.0\n0.0\n0.0\n\n\n2\n0.0\n1.0\n0.0\n\n\n3\n0.0\n1.0\n0.0\n\n\n4\n0.0\n1.0\n0.0\n\n\n...\n...\n...\n...\n\n\n886\n0.0\n1.0\n0.0\n\n\n887\n0.0\n1.0\n0.0\n\n\n888\n0.0\n1.0\n0.0\n\n\n889\n0.0\n0.0\n0.0\n\n\n890\n1.0\n0.0\n0.0\n\n\n\n\n891 rows × 3 columns\n\n\n\n\n\n\nOrdinal Encoder\n\nohe = OneHotEncoder(\n    drop=[\"Queenstown\"], sparse_output=False\n)  # También se puede colocar np.nan.\nohe.fit_transform(df[[\"embark_town\"]])\n\n\n\n\n\n\n\n\n\nembark_town_Cherbourg\nembark_town_Southampton\nembark_town_nan\n\n\n\n\n0\n0.0\n1.0\n0.0\n\n\n1\n1.0\n0.0\n0.0\n\n\n2\n0.0\n1.0\n0.0\n\n\n3\n0.0\n1.0\n0.0\n\n\n4\n0.0\n1.0\n0.0\n\n\n...\n...\n...\n...\n\n\n886\n0.0\n1.0\n0.0\n\n\n887\n0.0\n1.0\n0.0\n\n\n888\n0.0\n1.0\n0.0\n\n\n889\n1.0\n0.0\n0.0\n\n\n890\n0.0\n0.0\n0.0\n\n\n\n\n891 rows × 3 columns\n\n\n\n\n\noe = OrdinalEncoder()\noe.fit_transform(df[[\"embark_town\"]])\n\n\n\n\n\n\n\n\n\nembark_town\n\n\n\n\n0\n2.0\n\n\n1\n0.0\n\n\n2\n2.0\n\n\n3\n2.0\n\n\n4\n2.0\n\n\n...\n...\n\n\n886\n2.0\n\n\n887\n2.0\n\n\n888\n2.0\n\n\n889\n0.0\n\n\n890\n1.0\n\n\n\n\n891 rows × 1 columns"
-  },
-  {
-    "objectID": "tics411/notebooks/01-Preprocesamiento.html#escalamiento",
-    "href": "tics411/notebooks/01-Preprocesamiento.html#escalamiento",
-    "title": "Clases UAI",
-    "section": "Escalamiento",
-    "text": "Escalamiento\nEl escalamiento normalmente se realiza sólo en Scikit-Learn. Se mostrarán la Estandarización y Normalización.\n\nfrom sklearn.preprocessing import StandardScaler, MinMaxScaler\n\n## Llamaremos esto Estandarización... (sólo por convención del curso)\nsc = StandardScaler()\ndata = sc.fit_transform(df[[\"fare\"]])\ndata.agg([\"mean\", \"std\"])\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\nmean\n3.987333e-18\n\n\nstd\n1.000562e+00\n\n\n\n\n\n\n\n\n\n## Llamaremos esto Normalización... (sólo por convención del curso)\nmms = MinMaxScaler()\nmms.fit_transform(df[[\"fare\"]]).agg([\"min\", \"max\"])\n\n\n\n\n\n\n\n\n\nfare\n\n\n\n\nmin\n0.0\n\n\nmax\n1.0"
-  },
-  {
-    "objectID": "tics411/notebooks/01-Preprocesamiento.html#aplicar-preprocesamientos-sólo-a-algunas-variables.",
-    "href": "tics411/notebooks/01-Preprocesamiento.html#aplicar-preprocesamientos-sólo-a-algunas-variables.",
-    "title": "Clases UAI",
-    "section": "Aplicar Preprocesamientos sólo a algunas variables.",
-    "text": "Aplicar Preprocesamientos sólo a algunas variables.\nScikit-Learn fue diseñado para el entrenamiento eficiente de modelos. Para ello, se basó en Numpy, el cuál no cuenta con nombre de columnas, por lo que para poder aplicar pre-procesamientos a ciertas partes del Dataset utiliza lo que se llama el ColumnTransformer(), el cuál va más allá del alcance del curso.\nPara simplificar el proceso de elegir ciertas columnas, feature_engine posee una el SklearnTransformerWrapper que permite elegir qué variables queremos pasar por cierta transformación.\n\n## Sin SklearnTransformerWrapper\n\nohe = OneHotEncoder(sparse_output=False)\nohe.fit_transform(df[[\"age\", \"embark_town\"]])\n## Crea columnas dummies incluso para las variables numéricas.\n\n\n\n\n\n\n\n\n\nage_0.42\nage_0.67\nage_0.75\nage_0.83\nage_0.92\nage_1.0\nage_2.0\nage_3.0\nage_4.0\nage_5.0\n...\nage_70.0\nage_70.5\nage_71.0\nage_74.0\nage_80.0\nage_nan\nembark_town_Cherbourg\nembark_town_Queenstown\nembark_town_Southampton\nembark_town_nan\n\n\n\n\n0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n\n\n1\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n0.0\n0.0\n\n\n2\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n\n\n3\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n\n\n4\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n886\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n\n\n887\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n\n\n888\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n0.0\n1.0\n0.0\n\n\n889\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n0.0\n0.0\n\n\n890\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n1.0\n0.0\n0.0\n\n\n\n\n891 rows × 93 columns\n\n\n\n\n\n## Aplicar preprocesamientos a ciertas variables...\nfrom feature_engine.wrappers import SklearnTransformerWrapper\n\nohe_w = SklearnTransformerWrapper(\n    OneHotEncoder(sparse_output=False), variables=\"embark_town\"\n)\nohe_w.fit_transform(df[[\"age\", \"embark_town\"]])\n## Crea dummies sólo para la variable embark_town y deja age como estaba.\n\n\n\n\n\n\n\n\n\nage\nembark_town_Cherbourg\nembark_town_Queenstown\nembark_town_Southampton\nembark_town_nan\n\n\n\n\n0\n22.0\n0.0\n0.0\n1.0\n0.0\n\n\n1\n38.0\n1.0\n0.0\n0.0\n0.0\n\n\n2\n26.0\n0.0\n0.0\n1.0\n0.0\n\n\n3\n35.0\n0.0\n0.0\n1.0\n0.0\n\n\n4\n35.0\n0.0\n0.0\n1.0\n0.0\n\n\n...\n...\n...\n...\n...\n...\n\n\n886\n27.0\n0.0\n0.0\n1.0\n0.0\n\n\n887\n19.0\n0.0\n0.0\n1.0\n0.0\n\n\n888\nNaN\n0.0\n0.0\n1.0\n0.0\n\n\n889\n26.0\n1.0\n0.0\n0.0\n0.0\n\n\n890\n32.0\n0.0\n1.0\n0.0\n0.0\n\n\n\n\n891 rows × 5 columns"
-  },
-  {
-    "objectID": "tics411/notebooks/distancia.html",
-    "href": "tics411/notebooks/distancia.html",
-    "title": "Clases UAI",
-    "section": "",
-    "text": "import pandas as pd\nimport numpy as np\n\ndf = pd.DataFrame(dict(x=[0, 2, 3, 5], y=[2, 0, 1, 1]))\ndf.index = [1, 2, 3, 4]\ndf\n\n\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n1\n0\n2\n\n\n2\n2\n0\n\n\n3\n3\n1\n\n\n4\n5\n1\n\n\n\n\n\n\n\n\n\nnp.zeros((4, 4))\n\narray([[0., 0., 0., 0.],\n       [0., 0., 0., 0.],\n       [0., 0., 0., 0.],\n       [0., 0., 0., 0.]])\n\n\n\ndef distancia_l1(p, q):\n    x1 = p[\"x\"]\n    x2 = q[\"x\"]\n    y1 = p[\"y\"]\n    y2 = q[\"y\"]\n\n    return np.abs(x1 - x2) + np.abs(y1 - y2)\n\n\ndef distancia_l2(p, q):\n    x1 = p[\"x\"]\n    x2 = q[\"x\"]\n    y1 = p[\"y\"]\n    y2 = q[\"y\"]\n    return np.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)\n\n\ndef distancia_linf(p, q):\n    x1 = p[\"x\"]\n    x2 = q[\"x\"]\n    y1 = p[\"y\"]\n    y2 = q[\"y\"]\n    d_x = np.abs(x1 - x2)\n    d_y = np.abs(y1 - y2)\n    return np.max([d_x, d_y])\n\n\ndef calculate_matrix(distance, n_puntos):\n    m = np.zeros((n_puntos, n_puntos))\n    for i in range(n_puntos):\n        for j in range(n_puntos):\n            p = df.iloc[i]\n            q = df.iloc[j]\n            m[i, j] = distance(p, q)\n\n    return m\n\n\nm_m = calculate_matrix(distancia_l1, 4)\nm_e = calculate_matrix(distancia_l2, 4)\nm_c = calculate_matrix(distancia_linf, 4)\n\n\nm_m\n\narray([[0., 4., 4., 6.],\n       [4., 0., 2., 4.],\n       [4., 2., 0., 2.],\n       [6., 4., 2., 0.]])\n\n\n\nm_e\n\narray([[0.        , 2.82842712, 3.16227766, 5.09901951],\n       [2.82842712, 0.        , 1.41421356, 3.16227766],\n       [3.16227766, 1.41421356, 0.        , 2.        ],\n       [5.09901951, 3.16227766, 2.        , 0.        ]])\n\n\n\nm_c\n\narray([[0., 2., 3., 5.],\n       [2., 0., 1., 3.],\n       [3., 1., 0., 2.],\n       [5., 3., 2., 0.]])\n\n\n\n\na = pd.Series(\n    [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0]\n)\nb = pd.Series(\n    [1.0, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 7.0]\n)\n\na.var(ddof=0)  # Varianza Poblacional\n\n3.5\n\n\n\na.var(ddof=1)  # Varianza Muestral\n\n3.7916666666666665\n\n\n\nb.var(ddof=1)\n\n1.5916666666666668\n\n\n\n\n\n Back to top"
+    "text": "import pandas as pd\nimport numpy as np\n\ndf = pd.DataFrame(\n    dict(\n        x=[2, 8, 13, 16, 19, 2, 8, 13, 16, 19],\n        y=[7, 7, 7, 7, 7, 3, 3, 5, 5, 5],\n    )\n)\ndf\n\n\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n0\n2\n7\n\n\n1\n8\n7\n\n\n2\n13\n7\n\n\n3\n16\n7\n\n\n4\n19\n7\n\n\n5\n2\n3\n\n\n6\n8\n3\n\n\n7\n13\n5\n\n\n8\n16\n5\n\n\n9\n19\n5\n\n\n\n\n\n\n\n\n\nfrom scipy.spatial import distance_matrix\nimport numpy as np\n\nc1 = df.iloc[0]\nc2 = df.iloc[9]\n\nvals = np.arange(1, 11)\nd_m = distance_matrix(df.to_numpy(), df.to_numpy(), p=2)\nd_m = pd.DataFrame(d_m, index=vals, columns=vals).round(2)\nd_m\n\n\n\n\n\n\n\n\n\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n1\n0.00\n6.00\n11.00\n14.00\n17.00\n4.00\n7.21\n11.18\n14.14\n17.12\n\n\n2\n6.00\n0.00\n5.00\n8.00\n11.00\n7.21\n4.00\n5.39\n8.25\n11.18\n\n\n3\n11.00\n5.00\n0.00\n3.00\n6.00\n11.70\n6.40\n2.00\n3.61\n6.32\n\n\n4\n14.00\n8.00\n3.00\n0.00\n3.00\n14.56\n8.94\n3.61\n2.00\n3.61\n\n\n5\n17.00\n11.00\n6.00\n3.00\n0.00\n17.46\n11.70\n6.32\n3.61\n2.00\n\n\n6\n4.00\n7.21\n11.70\n14.56\n17.46\n0.00\n6.00\n11.18\n14.14\n17.12\n\n\n7\n7.21\n4.00\n6.40\n8.94\n11.70\n6.00\n0.00\n5.39\n8.25\n11.18\n\n\n8\n11.18\n5.39\n2.00\n3.61\n6.32\n11.18\n5.39\n0.00\n3.00\n6.00\n\n\n9\n14.14\n8.25\n3.61\n2.00\n3.61\n14.14\n8.25\n3.00\n0.00\n3.00\n\n\n10\n17.12\n11.18\n6.32\n3.61\n2.00\n17.12\n11.18\n6.00\n3.00\n0.00\n\n\n\n\n\n\n\n\n\nD = d_m.loc[[1, 10]]\nD\n\n\n\n\n\n\n\n\n\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n1\n0.00\n6.00\n11.00\n14.00\n17.0\n4.00\n7.21\n11.18\n14.14\n17.12\n\n\n10\n17.12\n11.18\n6.32\n3.61\n2.0\n17.12\n11.18\n6.00\n3.00\n0.00\n\n\n\n\n\n\n\n\n\nG = D == D.min()\nG.astype(\"int64\")\n\n\n\n\n\n\n\n\n\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n1\n1\n1\n0\n0\n0\n1\n1\n0\n0\n0\n\n\n10\n0\n0\n1\n1\n1\n0\n0\n1\n1\n1\n\n\n\n\n\n\n\n\n\nG\n\n\nA = np.array([-5, -1, 1, 2, 3])\nA.mean()\n\n0.0\n\n\n\nA.std(ddof=0)\n\n2.8284271247461903\n\n\n\nprint(A.mean())\n(A**2).sum()\n\n0.0\n\n\n40\n\n\n\nfrom sklearn.preprocessing import MinMaxScaler, StandardScaler\n\nsc = StandardScaler()\nmm = MinMaxScaler()\nsc.fit_transform(A.reshape(-1, 1))\n\narray([[-1.76776695],\n       [-0.35355339],\n       [ 0.35355339],\n       [ 0.70710678],\n       [ 1.06066017]])\n\n\n\nmm.fit_transform(A.reshape(-1, 1))\n\narray([[0.   ],\n       [0.5  ],\n       [0.75 ],\n       [0.875],\n       [1.   ]])\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "tics411/notebooks/jerarquico.html",
@@ -1400,7 +1407,7 @@
     "href": "tics411.html",
     "title": "Diapositivas",
     "section": "",
-    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nMar 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nCalidad de los Datos y Feature Engineering\n\n\n\nMar 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nExploratory Data Analysis (EDA)\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase Bonus\n\n\nIntroducción a Scikit-Learn\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\nModelación Descriptiva y K-Means\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 4\n\n\nClustering Jerárquico\n\n\n\nApr 4, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 5\n\n\nDBSCAN\n\n\n\nApr 11, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
+    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nMar 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nCalidad de los Datos y Feature Engineering\n\n\n\nMar 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nExploratory Data Analysis (EDA)\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase Bonus\n\n\nIntroducción a Scikit-Learn\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\nModelación Descriptiva y K-Means\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 4\n\n\nClustering Jerárquico\n\n\n\nApr 4, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 5\n\n\nDBSCAN\n\n\n\nApr 11, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 6\n\n\nEvaluación de Clusters\n\n\n\nApr 17, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
     "crumbs": [
       "Diapositivas del Curso"
     ]

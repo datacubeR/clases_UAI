@@ -924,8 +924,8 @@ Alfonso Tobar-Arancibia
 <span id="cb6-6"><a></a>dbs.fit_predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="columns" style="font-size: 70%;">
 <ul>
-<li><p><strong>min_samples</strong>: Corresponde a minPts.</p></li>
-<li><p><strong>eps</strong>: Corresponde al radio de la esfera en la que se buscan los puntos cercanos.</p></li>
+<li><p><strong>min_samples</strong>: Corresponde a minPts. Por defecto 5.</p></li>
+<li><p><strong>eps</strong>: Corresponde al radio de la esfera en la que se buscan los puntos cercanos. Por defecto 0.5.</p></li>
 <li><p><strong>metric</strong>: Corresponde a la distancia utilizada para medir la distancia. Permite todas las distancias mencionadas <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise_distances.html#sklearn.metrics.pairwise_distances">acá</a>.</p></li>
 <li><p><code>.fit_predict()</code>: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento. Adicionalmente los puntos ruidosos se etiquetarán como -1.</p></li>
 </ul>
@@ -1314,7 +1314,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
