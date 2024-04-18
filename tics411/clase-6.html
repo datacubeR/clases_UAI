@@ -32,6 +32,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../logo.css">
@@ -333,7 +398,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 2: Exploratory Data Analysis (EDA)</p>
+  <p class="subtitle">Clase 6: Evaluación de Clusters</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -348,213 +413,81 @@ Alfonso Tobar-Arancibia
 
 </section>
 <section>
-<section id="análisis-exploratorio" class="title-slide slide level1 center">
-<h1>Análisis Exploratorio</h1>
+<section id="evaluación-de-clusters" class="title-slide slide level1 center">
+<h1>Evaluación de Clusters</h1>
 
 </section>
-<section id="eda" class="slide level2 smaller">
-<h2>EDA</h2>
+<section id="evaluación" class="slide level2 smaller">
+<h2>Evaluación</h2>
 <blockquote>
-<p>El <code>Analisis Exploratorio de Datos</code> (EDA, por sus siglas en inglés) es procedimiento en el cual se analiza un dataset para explorar sus características principales.</p>
+<p>Pensemos en la Evaluación como una medida de desempeño el cuál <em>“evalúa”</em> qué tan bien realizado está el clustering. El objetivo principal del Clustering debe ser siempre la generación de:</p>
 </blockquote>
 <ul>
-<li>Su objetivo principal es poder familiarizarse con los datos además de encontrar potenciales problemas en su calidad.</li>
-<li>Principalmente hace uso de técnicas de manipulación de datos y visualizaciones.</li>
+<li>Clusters Compactos</li>
+<li>Clusters bien diferenciados unos de otros.</li>
 </ul>
 <div class="columns">
-<div class="column">
+<div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/eda_obj.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-2/eda_obj.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+<p><a href="img/clase-6/cluster_comparison.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-6/cluster_comparison.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div><div class="column fragment">
-<div class="callout callout-note callout-style-simple">
+</div><div class="column" style="width:40%;">
+<div class="fragment">
+<div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Los hallazgos importantes dentro del proceso se les denomina <code>insights</code>.</p>
+<p>¿Cuál es el Clustering que mejor describe el problema.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>El uso de visualizaciones inadecuadas podría llevar a <strong>conclusiones erróneas</strong>.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+</section>
+<section id="objetivos-de-la-evaluación" class="slide level2">
+<h2>Objetivos de la Evaluación</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/clustering_obj.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-6/clustering_obj.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
 </div>
-<div class="callout-content">
+</section>
+<section id="tendencia-hopkins" class="slide level2 smaller">
+<h2>Tendencia: Hopkins</h2>
+<dl>
+<dt>Estadístico Hopkins</dt>
+<dd>
+<blockquote>
+<p>Permite evaluar <code>a priori</code> si es que efectivamente existen clusters <code>antes de aplicar</code> un algoritmo.</p>
+</blockquote>
+</dd>
+</dl>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[H = \frac{\sum_{i = 1}^p w_i}{\sum_{i = 1}^p u_i + \sum_{i = 1}^p w_i}\]</span></p>
 <ul>
-<li>Summary.</li>
-<li>Visualización.</li>
+<li><span class="math inline">\(w_i\)</span>: corresponde a la distancia de un punto aleatorio al vecino más cercano en los datos originales.</li>
+<li><span class="math inline">\(u_i\)</span>: corresponde a la distancia de un punto del dataset al vecino más cercano.</li>
+<li><span class="math inline">\(p\)</span>: Número de puntos generados en el espacio del Dataset.</li>
 </ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section></section>
-<section>
-<section id="eda-summary" class="title-slide slide level1 center">
-<h1>EDA: Summary</h1>
-
-</section>
-<section id="medidas-de-tendencia-central" class="slide level2">
-<h2>Medidas de Tendencia Central</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/central_tend.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-2/central_tend.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</section>
-<section id="medidas-de-dispersión-y-asimetría" class="slide level2">
-<h2>Medidas de Dispersión y Asimetría</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/spread_meas.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-2/spread_meas.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
-</figure>
-</div>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/rangos.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-2/rangos.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
 </div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/skewness.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-2/skewness.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section></section>
-<section>
-<section id="visualizaciones" class="title-slide slide level1 center">
-<h1>Visualizaciones</h1>
-
-</section>
-<section id="eda-visualización" class="slide level2 smaller">
-<h2>EDA: Visualización</h2>
-<blockquote>
-<p>La visualización de datos es la presentación de datos en forma gráfica. Permite simplificar conceptos más complejos en especial a altos mandos.</p>
-</blockquote>
-<blockquote>
-<p>Gracias a la evolución del cerebro humano somos capaces de detectar patrones complejos en la naturaleza a partir de la <code>Visión</code>.</p>
-</blockquote>
-<div class="fragment">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Puede ser difícil de aplicar si el tamaño de los datos es grande (sea en instancias o atributos). Por ejemplo, si los datos están en 4 dimensiones.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Se suelen resumir los datos en <code>estadísticas simples</code>.</li>
-<li>Graficar datos en 1D, 2D y 3D (evitar dentro de lo posible).</li>
-<li>La visualización debe ser comprensible ojalá sin ninguna explicación.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> pyclustertend <span class="im">import</span> hopkins</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a><span class="dv">1</span><span class="op">-</span>hopkins(X, p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>En caso de datos de alta dimensionalidad puede ser una buena idea reducir dimensiones mediante técnicas como:</p>
 <ul>
-<li>PCA</li>
-<li>UMAP</li>
-<li>etc.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="caso-de-visualización" class="slide level2">
-<h2>Caso de Visualización</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/visual_problem.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-2/visual_problem.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-<aside class="notes">
-<ul>
-<li>Figuras</li>
-<li>Escala de Colores.</li>
-<li>Tamaño de los puntos.</li>
-<li>Demasiada información en un sólo gráfico.</li>
-<li>No se entiende el mensaje.</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="canales-visuales" class="slide level2">
-<h2>Canales Visuales</h2>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="fragment fade-out" data-fragment-index="2">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/visual_channels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-2/visual_channels.png" class="fragment quarto-figure quarto-figure-center" style="width:90.0%" data-fragment-index="1"></a></p>
-</figure>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/best_channels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-2/best_channels.png" class="fragment quarto-figure quarto-figure-center" style="width:70.0%" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column fragment" data-fragment-index="1">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Se les llama canales visuales a elementos visuales que pueden utilizarse para expresar información <strong>(Clase Visualizacion Andreas Mueller)</strong>.</li>
-<li>La idea es poder mapear cada uno de estos canales a valores que queremos visualizar.</li>
+<li>X: Dataset al cuál se le aplica el Estadístico.</li>
+<li>p: Número de Puntos para el cálculo.</li>
 </ul>
 </div>
 </div>
@@ -565,284 +498,303 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<ul>
-<li>No todos los canales son igual de útiles ni fáciles de entender.</li>
-</ul>
+<p><code>pyclustertend</code> entrega el valor 1-H.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="visualizaciones-distribuciones" class="slide level2 smaller">
-<h2>Visualizaciones: Distribuciones</h2>
-<dl>
-<dt>Histograma</dt>
-<dd>
-<blockquote>
-<p>El histograma permite visualizar distribuciones univariadas acumulando los datos en rangos de igual tamaño (<code>bins</code>).</p>
-</blockquote>
-</dd>
-</dl>
-<ul>
-<li>Permite visualizar el <code>centro</code>, la <code>extensión</code>, la <code>asimetría</code> y <code>outliers</code>.</li>
-</ul>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>El histograma puede ser “engañoso” para conjuntos de datos pequeños.</li>
-<li>La visualización puede resultar de manera muy distintas dependiendo del número de <code>bins</code>.</li>
-</ul>
-</div>
-</div>
-</div>
+<section id="tendencia-hopkins-1" class="slide level2 smaller">
+<h2>Tendencia: Hopkins</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/hist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-2/hist.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-6/hopkins.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-6/hopkins.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </section>
-<section id="visualizaciones-distribuciones-1" class="slide level2 smaller">
-<h2>Visualizaciones: Distribuciones</h2>
-<dl>
-<dt>Kernel Density</dt>
-<dd>
-<blockquote>
-<p>Corresponde a un suavizamiento de un Histograma en el cuál se usa un <code>Kernel</code> <strong>(función no negativa que suma 1 y tiene media 0)</strong> para agrupar los puntos vecinos.</p>
-</blockquote>
-</dd>
-</dl>
+<section id="cálculo-hopkins-ejemplo-p2" class="slide level2 smaller">
+<h2>Cálculo Hopkins: Ejemplo p=2</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/hopkins_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-6/hopkins_ex.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
 <div class="columns">
-<div class="column" style="width:50%;">
-<p>La función estimada es:</p>
-<p><span class="math display">\[f(x) = \frac{1}{n} = \sum_{i=1}^n K \left(\frac{x - x(i)}{h}\right)\]</span></p>
-<ul>
-<li><span class="math inline">\(K(u)\)</span> es el Kernel.</li>
-<li><span class="math inline">\(h\)</span> es el ancho de banda.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/kernel_type.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-2/kernel_type.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/kernel.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-2/kernel.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/kernel_07.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-2/kernel_07.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
-</figure>
-</div>
+<div class="column" style="width:30%;">
+<h5 id="puntos-obtenidos-de-los-datos">Puntos obtenidos de los Datos</h5>
+<p><span class="math display">\[u_1\approx 0\]</span></p>
+<p><span class="math display">\[u_2\approx 0\]</span></p>
+</div><div class="column" style="width:40%;">
+<h5 id="puntos-aleatorios-en-el-espacio-de-los-datos">Puntos Aleatorios en el Espacio de los Datos</h5>
+<p><span class="math display">\[w_1\approx 1.8\]</span></p>
+<p><span class="math display">\[w_2\approx 1.12\]</span></p>
+</div><div class="column" style="width:30%;">
+<h5 id="cálculo-hopkins">Cálculo Hopkins</h5>
+<p><span class="math display">\[ H = \frac{w_1 + w_2}{u_1 + u_2 + w_1 + w_2}\]</span> <span class="math display">\[ H = \frac{1.8 + 1.12}{0 + 0 + 1.8 + 1.8} = 1\]</span></p>
 </div>
 </div>
 </section>
-<section id="visualizaciones-distribuciones-2" class="slide level2 smaller">
-<h2>Visualizaciones: Distribuciones</h2>
-<dl>
-<dt>Boxplot (Caja y Bigotes)</dt>
-<dd>
-Es un tipo de gráfico que muestra la distribución de manera univariada.
-</dd>
-</dl>
+<section id="visual-assesment-of-tendency-vat" class="slide level2 smaller">
+<h2>Visual Assesment of Tendency (VAT)</h2>
+<blockquote>
+<p>Corresponde a una inspección visual de la distancia entre los puntos (matriz de distancia). Colores más oscuros indican menor distancias entre dichos puntos lo que indica mayor cohesión.</p>
+</blockquote>
 <div class="columns">
 <div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/box_def.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-2/box_def.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
-<div style="font-size: 70%;">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Tiene la capacidad de mostrar varias distribuciones a la vez.</li>
-<li>Además presenta estadísticos de interés: Mediana, IQR y outliers.</li>
-<li>Los puntos fuera de los bigotes son considerados Outliers.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div style="font-size: 70%;">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<ul>
-<li>Los bigotes pueden representar:
-<ul>
-<li>Mínimo y Máximo. (En este caso no hay outliers).</li>
-<li><span class="math inline">\(\mu \pm 3\sigma\)</span></li>
-<li>Percentiles 5 y 95.</li>
-<li>Otros valores.</li>
-</ul></li>
-</ul>
+<p>Se pueden ver claramente dos bloques.</p>
 </div>
 </div>
 </div>
-</div>
-</div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/boxplot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-2/boxplot.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="visualizaciones-barras" class="slide level2 smaller">
-<h2>Visualizaciones: Barras</h2>
-<dl>
-<dt>Bar Plot</dt>
-<dd>
-<blockquote>
-<p>La altura de la barra (normalmente Eje y) representa una agregación asociada a una categoría (normalmente Eje x).</p>
-</blockquote>
-</dd>
-</dl>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/bar_plot1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-2/bar_plot1.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></a></p>
+<p><a href="img/clase-6/vat_iris.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-6/vat_iris.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/bar_plot2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-2/bar_plot2.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Otras convenciones llaman a este gráfico <code>Column Plot</code>, mientras que el <code>Bar Plot</code> tiene las barras de manera horizontal.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="visualizaciones-puntos" class="slide level2 smaller">
-<h2>Visualizaciones: Puntos</h2>
-<dl>
-<dt>Scatter</dt>
-<dd>
-<blockquote>
-<p>Gráfico empleado para mostrar distribución de datos bivariados</p>
-</blockquote>
-</dd>
-</dl>
-<ul>
-<li>Muestra la relación entre una variable independiente (Eje X) y una variable dependiente (Eje Y).</li>
-<li>Permite mostrar relaciones lineales o no-lineales (Correlaciones).</li>
-<li>Outliers.</li>
-<li>Simplemente ubicación de Puntos en el Espacio.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/scatter.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-2/scatter.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></a></p>
-</figure>
-</div>
-</section>
-<section id="visualizaciones-líneas" class="slide level2 smaller">
-<h2>Visualizaciones: Líneas</h2>
-<dl>
-<dt>Lineplot</dt>
-<dd>
-<blockquote>
-<p>Gráfico empleado para visualizar tendencias y su evolución de una medida (Eje Y) en el tiempo (Eje X).</p>
-</blockquote>
-</dd>
-</dl>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/line.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-2/line.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/line_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-2/line_2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="fragment">
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<ul>
-<li>Si bien es posible utilizarlo para gráficar dos medidas continuas, las buenas prácticas indican que el eje X siempre debería contener una componente temporal.</li>
-</ul>
+<p>No es posible ver bloques importantes.</p>
 </div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/vat_random.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-6/vat_random.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> pyclustertend <span class="im">import</span> vat</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>vat(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="correlación" class="slide level2 smaller">
+<h2>Correlación</h2>
+<h4 id="procedimiento">Procedimiento:</h4>
+<ol type="1">
+<li>Construir una matriz de similaridad entre todos los puntos de la siguiente manera:</li>
+</ol>
+<p><span class="math display">\[s(i,j) = \frac{1}{d(i,j) + 1}\]</span></p>
+<ol start="2" type="1">
+<li><p>Construir una matriz de similaridad <em><code>"ideal"</code></em> basada en la pertenencia a un Cluster.</p>
+<p>Si <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> pertenecen al mismo cluster entonces <span class="math inline">\(s(i,j)=1\)</span>, en otro caso <span class="math inline">\(s(i,j) = 0\)</span></p></li>
+<li><p>Calcular la Correlación entre la matriz de similaridad y la matriz ideal (obtenidas en los pasos 1 y 2).</p></li>
+</ol>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Una correlación alta indica que los puntos que están en el mismo cluster son cercanos entre ellos.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="estadísticos-vs-visualizaciones" class="slide level2">
-<h2>Estadísticos vs Visualizaciones</h2>
+<section id="cohesión" class="slide level2 smaller">
+<h2>Cohesión</h2>
+<dl>
+<dt>Cohesión</dt>
+<dd>
+<blockquote>
+<p>Mide cuán cercanos están los objetos dentro de un mismo cluster. Se utiliza la Suma de los Errores al Cuadrado, que es equivalente a la Inercia de K-Means (o Within Cluster).</p>
+</blockquote>
+</dd>
+</dl>
+<p><span class="math display">\[ SSE_{total} = \sum_{k = 1}^K\sum_{x_i \in C_k} (x_i - \bar{C_k})^2\]</span></p>
+<ul>
+<li><span class="math inline">\(C_k\)</span> corresponde al Centroide del Cluster <span class="math inline">\(k\)</span>. Dicho centroide puede ser calculado como la media/mediana de todos los puntos del Centroide.</li>
+<li><span class="math inline">\(K\)</span> corresponde al Número de Clusters.</li>
+</ul>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>No me gusta mucho este nombre, porque en realidad es como un <code>inverso de la Cohesión</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="separación" class="slide level2 smaller">
+<h2>Separación</h2>
+<dl>
+<dt>Separación</dt>
+<dd>
+<blockquote>
+<p>Mide cuán distinto es un cluster de otro. Se usa la suma de las distancias al cuadrado entre los centroides hacia el promedio de todos los puntos. (Between groups sum squares, SSB).</p>
+</blockquote>
+</dd>
+</dl>
+<p><span class="math display">\[ SSB_{total} = \sum_{k = 1}^K |C_k|(\bar{X_k} - \bar{C_k})^2\]</span></p>
+<ul>
+<li><span class="math inline">\(|C_k|\)</span> corresponde al número de elementos (Cardinalidad) del Cluster <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(\bar{X_k}\)</span> corresponde al promedio de todos los puntos en el Cluster k.</li>
+</ul>
+</section>
+<section id="coeficiente-de-silhouette-coeficiente-de-silueta" class="slide level2">
+<h2>Coeficiente de Silhouette (Coeficiente de Silueta)</h2>
+<blockquote>
+<p>El coeficiente de Silhouette es otra medida que combina la cohesión y la separación. Los valores varían entre -1 y 1, donde valores cercanos a 1 representan una mejor agrupación.</p>
+</blockquote>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Valores cercanos a <span class="math inline">\(-1\)</span> representan que el punto está incorrectamente asignado a un cluster.</p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[S_i = \frac{b_i - a_i}{max\{a_i, b_i\}}\]</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
+<span id="cb3-2"><a></a></span>
+<span id="cb3-3"><a></a>silhouette_score(X, labels, sample_size <span class="op">=</span> <span class="va">None</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="coeficiente-de-silhouette-ejemplo" class="slide level2 smaller">
+<h2>Coeficiente de Silhouette: Ejemplo</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/silueta.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-6/silueta.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
 <div class="columns">
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/cuarteto_anscombe.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-2/cuarteto_anscombe.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-6/calculo_silueta.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-6/calculo_silueta.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
-<p><br></p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/anscombe_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-2/anscombe_data.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="otras-visualizaciones" class="slide level2">
-<h2>¿Otras Visualizaciones?</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/charts.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-2/charts.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</section></section>
-<section id="preguntas-para-terminar" class="title-slide slide level1 center">
-<h1>Preguntas para terminar</h1>
+<p><span class="math display">\[C_{silueta} = \sum_{i} s_i\]</span></p>
 <ul>
-<li>¿Por qué usar visualizaciones? ¿Qué son los canales visuales?</li>
-<li>¿Por qué es necesario el EDA?</li>
-<li>¿Por qué es necesario utilizar tanto Estadísticos como Visualizaciones?</li>
+<li><span class="math inline">\(a_i\)</span>: Distancia promedio del punto <span class="math inline">\(i\)</span> a todos los puntos del mismo cluster. (Cohesión)</li>
+<li><span class="math inline">\(b_{ij}\)</span>: Distancia promedio del punto <span class="math inline">\(i\)</span> a todos los puntos del cluster <span class="math inline">\(j\)</span> donde no pertenezca <span class="math inline">\(i\)</span>. (Separación)</li>
+<li><span class="math inline">\(b_j\)</span>: Mínimo de <span class="math inline">\(b_{ij}\)</span> tal que el punto i no pertenezca al cluster <span class="math inline">\(j\)</span>. (Menor Separación)</li>
 </ul>
+</div>
+</div>
 </section>
+<section id="ejercicio-propuesto" class="slide level2 smaller">
+<h2>Ejercicio Propuesto</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/ej_silueta_df.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-6/ej_silueta_df.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/ej_silueta_plot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-6/ej_silueta_plot.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Ejercicio Propuesto</strong></p>
+</div>
+<div class="callout-content">
+<p>Calcule el coeficiente de Silueta. Tabla de resultado al final de las Slides.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="curvas-de-silueta" class="slide level2 smaller">
+<h2>Curvas de Silueta</h2>
+<p>Es común mostrar los resultados del coeficiente de silueta como gráficos de este estilo:</p>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/sil_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-6/sil_1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/sil_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-6/sil_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Problemas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Siluetas negativas.</li>
+<li>Clusters bajo el promedio.</li>
+<li>Mucha variabilidad de Silueta en un sólo cluster.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="curvas-de-silueta-implementación" class="slide level2">
+<h2>Curvas de Silueta: Implementación</h2>
+<div class="sourceCode" id="cb4" data-code-line-numbers="|1-2|4-5|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> scikitplot <span class="im">as</span> skplt</span>
+<span id="cb4-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a>skplt.metrics.plot_silhouette(X, labels, metric<span class="op">=</span><span class="st">"euclidean"</span>, title<span class="op">=</span><span class="st">"Silhouette Analysis"</span>)</span>
+<span id="cb4-5"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><p>L1-2: Importación de Librerías Necesarias. Esta implementación está en la librería Scikit-plot. (Para instalar <code>pip install scikit-plot</code>)</p></li>
+<li><p><strong>X</strong>: Dataset usado para el clustering.</p></li>
+<li><p><strong>labels</strong> : etiquetas obtenidos de algún proceso de Clustering.</p></li>
+<li><p><strong>metric</strong>: Métrica a utilizar, por defecto usa <em>“euclidean”</em>.</p></li>
+<li><p><strong>title</strong>: Se puede agregar un Título personalizado a la curva.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="terminamos-clustering" class="title-slide slide level1 center">
+<h1>¡¡Terminamos Clustering!! 🎉🎉</h1>
 
-<section id="le-cours-est-terminé" class="title-slide slide level1 center">
-<h1>Le cours est terminé</h1>
+</section>
+<section id="resultados-ejercicio-propuesto" class="slide level2">
+<h2>Resultados Ejercicio Propuesto</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/resultados_sil_prop.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-6/resultados_sil_prop.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p>Coeficiente de Silhouette = 0.6148</p>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Comprobar utilizando Scikit-Learn</p>
+</div>
+</div>
+</div>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -856,7 +808,7 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -1223,7 +1175,7 @@ Es un tipo de gráfico que muestra la distribución de manera univariada.
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":false,"openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
