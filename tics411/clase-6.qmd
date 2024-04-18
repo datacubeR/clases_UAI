@@ -1,0 +1,301 @@
+---
+title: "TICS-411 Minería de Datos"
+subtitle: "Clase 6: Evaluación de Clusters"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs: 
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo.jpg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+---
+
+
+# Evaluación de Clusters
+
+## Evaluación {.smaller}
+
+> Pensemos en la Evaluación como una medida de desempeño el cuál *"evalúa"* qué tan bien realizado está el clustering.
+> El objetivo principal del Clustering debe ser siempre la generación de `clusters compactos` que estén `diferenciados` los unos a los otros.
+
+
+::: {.columns}
+::: {.column width="60%"}
+![](img/clase-6/cluster_comparison.png){.lightbox fig-align="center" }
+:::
+::: {.column width="40%"}
+::: {.callout-warning}
+
+¿Cuál es el Clustering que mejor describe el problema.
+:::
+:::
+::: 
+
+## Objetivos de la Evaluación
+
+![](img/clase-6/clustering_obj.png){.lightbox fig-align="center" }
+
+## Tendencia: Hopkins {.smaller}
+
+Estadístico Hopkins
+: > Permite evaluar `a priori` si es que efectivamente existen clusters `antes de aplicar` un algoritmo. 
+
+::: {.columns}
+::: {.column}
+$$H = \frac{\sum_{i = 1}^p w_i}{\sum_{i = 1}^p u_i + \sum_{i = 1}^p w_i}$$
+
+* $w_i$: corresponde a la distancia de un punto *aleatorio* al vecino más cercano en los datos originales.
+* $u_i$: corresponde a la distancia de un punto *real* del dataset al vecino más cercano.
+* $p$: Número de puntos generados en el espacio del Dataset.
+:::
+::: {.column}
+
+```{.python }
+from pyclustertend import hopkins
+
+1-hopkins(X, p)
+```
+::: {.callout-tip}
+
+* X: Dataset al cuál se le aplica el Estadístico.
+* p: Número de Puntos para el cálculo.
+:::
+::: {.callout-caution}
+`pyclustertend` entrega el valor 1-H.
+:::
+:::
+::: 
+
+
+
+## Tendencia: Hopkins {.smaller}
+
+![](img/clase-6/hopkins.png){.lightbox fig-align="center" width="70%" }
+
+![](img/clase-6/hopkins_range.png){.lightbox fig-align="center" }
+
+
+
+## Cálculo Hopkins: Ejemplo p=2{.smaller}
+
+
+![](img/clase-6/hopkins_ex.png){.lightbox fig-align="center" width="70%"}
+
+::: {.columns}
+::: {.column width="30%"}
+
+##### Puntos obtenidos de los Datos
+$$u_1\approx 0$$
+
+$$u_2\approx 0$$
+
+:::
+::: {.column width="40%"}
+
+##### Puntos Aleatorios en el Espacio de los Datos
+$$w_1\approx 1.8$$
+
+$$w_2\approx 1.12$$
+
+:::
+
+::: {.column width="30%"}
+
+##### Cálculo Hopkins
+
+$$ H = \frac{w_1 + w_2}{u_1 + u_2 + w_1 + w_2}$$
+$$ H = \frac{1.8 + 1.12}{0 + 0 + 1.8 + 1.8} = 1$$
+:::
+::: 
+
+## Visual Assesment of Tendency (VAT) {.smaller}
+
+> Corresponde a una inspección visual de la distancia entre los puntos (matriz de distancia). Colores más oscuros indican menor distancias entre dichos puntos lo que indica mayor cohesión. 
+
+::: {.columns}
+::: {.column}
+::: {.callout-tip}
+Se pueden ver claramente dos bloques.
+:::
+![](img/clase-6/vat_iris.png){.lightbox fig-align="center" width="50%"}
+
+:::
+::: {.column}
+::: {.callout-important}
+No es posible ver bloques importantes.
+:::
+![](img/clase-6/vat_random.png){.lightbox fig-align="center" width="50%"}
+
+:::
+::: 
+
+```{.python }
+from pyclustertend import vat
+
+vat(X)
+```
+
+## Correlación {.smaller}
+
+#### Procedimiento: 
+1. Construir una matriz de similaridad entre todos los puntos de la siguiente manera:
+
+$$s(i,j) = \frac{1}{d(i,j) + 1}$$
+
+2. Construir una matriz de similaridad *`"ideal"`* basada en la pertenencia a un Cluster.
+
+    Si $i$ y $j$ pertenecen al mismo cluster entonces $s(i,j)=1$, en otro caso $s(i,j) = 0$
+
+3. Calcular la Correlación entre la matriz de similaridad y la matriz ideal (obtenidas en los pasos 1 y 2). 
+
+::: {.callout-note}
+Una correlación alta indica que los puntos que están en el mismo cluster son cercanos entre ellos.
+:::
+
+## Cohesión {.smaller} 
+
+Cohesión
+: > Mide cuán cercanos están los objetos dentro de un mismo cluster. Se utiliza la Suma de los Errores al Cuadrado, que es equivalente a la Inercia de K-Means (o Within Cluster). 
+
+$$ SSE_{total} = \sum_{k = 1}^K\sum_{x_i \in C_k} (x_i - \bar{C_k})^2$$
+
+* $C_k$ corresponde al Centroide del Cluster $k$. Dicho centroide puede ser calculado como la media/mediana de todos los puntos del Centroide.
+* $K$ corresponde al Número de Clusters.
+
+::: {.callout-caution}
+
+* No me gusta mucho este nombre, porque en realidad es como un `inverso de la Cohesión`.
+
+:::
+
+
+## Separación {.smaller}
+
+Separación
+: > Mide cuán distinto es un cluster de otro. Se usa la suma de las distancias al cuadrado entre los centroides hacia el promedio de todos los puntos. (Between groups sum squares, SSB).
+
+$$ SSB_{total} = \sum_{k = 1}^K |C_k|(\bar{X_k} - \bar{C_k})^2$$
+
+* $|C_k|$ corresponde al número de elementos (Cardinalidad) del Cluster $i$.
+* $\bar{X_k}$ corresponde al promedio de todos los puntos en el Cluster k.
+
+## Coeficiente de Silhouette (Coeficiente de Silueta)
+
+> El coeficiente de Silhouette es otra medida que combina la cohesión y la separación. Los valores varían entre -1 y 1, donde valores cercanos a 1 representan una mejor agrupación.
+
+::: {.callout-caution}
+Valores cercanos a $-1$ representan que el punto está incorrectamente asignado a un cluster.
+:::
+
+$$S_i = \frac{b_i - a_i}{max\{a_i, b_i\}}$$
+
+```{.python }
+from sklearn.metrics import silhouette_score
+
+silhouette_score(X, labels, sample_size = None, metric="euclidean")
+```
+
+## Coeficiente de Silhouette: Ejemplo {.smaller}
+
+![](img/clase-6/silueta.png){.lightbox fig-align="center" width="60%"}
+
+::: {.columns}
+::: {.column}
+
+![](img/clase-6/calculo_silueta.png){.lightbox fig-align="center" width="70%"}
+:::
+::: {.column}
+
+$$C_{silueta} = \sum_{i} s_i$$
+
+* $a_i$: Distancia promedio del punto $i$ a todos los `otros` puntos del mismo cluster. (Cohesión)
+* $b_{ij}$: Distancia promedio del punto $i$ a todos los puntos del cluster $j$ donde no pertenezca $i$. (Separación)
+* $b_j$: Mínimo de $b_{ij}$ tal que el punto i no pertenezca al cluster $j$. (Menor Separación)
+
+:::
+::: 
+
+## Ejercicio Propuesto {.smaller}
+
+::: {.columns}
+::: {.column}
+![](img/clase-6/ej_silueta_df.png){.lightbox fig-align="center" }
+:::
+::: {.column}
+![](img/clase-6/ej_silueta_plot.png){.lightbox fig-align="center"}
+:::
+::: 
+
+::: {.callout-tip appearance="default"}
+## Ejercicio Propuesto
+Calcule el coeficiente de Silueta. Tabla de resultado al final de las Slides.
+:::
+
+## Curvas de Silueta {.smaller}
+
+Es común mostrar los resultados del coeficiente de silueta como gráficos de este estilo:
+
+::: {.columns}
+::: {.column}
+![](img/clase-6/sil_1.png){.lightbox fig-align="center" width="60%"}
+:::
+::: {.column}
+![](img/clase-6/sil_2.png){.lightbox fig-align="center" }
+:::
+::: 
+
+
+::: {.callout-caution appearance="default"}
+## Problemas
+* Siluetas negativas.
+* Clusters bajo el promedio.
+* Mucha variabilidad de Silueta en un sólo cluster.
+:::
+
+## Curvas de Silueta: Implementación 
+
+```{.python code-line-numbers="|1-2|4-5|"}
+import scikitplot as skplt
+import matplotlib.pyplot as plt
+
+skplt.metrics.plot_silhouette(X, labels, metric="euclidean", title="Silhouette Analysis")
+plt.show()
+```
+
+* L1-2: Importación de Librerías Necesarias. Esta implementación está en la librería Scikit-plot. (Para instalar `pip install scikit-plot`)
+
+* **X**: Dataset usado para el clustering. 
+* **labels** : etiquetas obtenidos de algún proceso de Clustering. 
+* **metric**: Métrica a utilizar, por defecto usa *"euclidean"*.
+* **title**: Se puede agregar un Título personalizado a la curva.
+
+# ¡Felicitaciones! 🎉🎉🎉🎉 Terminamos Clustering
+
+## Resultados Ejercicio Propuesto 
+
+![](img/clase-6/resultados_sil_prop.png){.lightbox fig-align="center"}
+
+Coeficiente de Silhouette = 0.6148
+
+::: {.callout-important}
+
+Comprobar utilizando Scikit-Learn
+:::
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::

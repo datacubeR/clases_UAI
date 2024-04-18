@@ -70,7 +70,9 @@ Noise Point/Punto Ruido
 
 ![](img/clase-5/dbscan_algo.png){.lightbox fig-align="center" width="50%"}
 
-## Ejemplo: Iteración 1
+## Ejemplo: Iteración 1 {.smaller}
+
+> Supongamos un ejemplo con $MinPts=4$.
 
 
 ::: {.columns}
