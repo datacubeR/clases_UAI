@@ -420,12 +420,8 @@ Alfonso Tobar-Arancibia
 <section id="evaluación" class="slide level2 smaller">
 <h2>Evaluación</h2>
 <blockquote>
-<p>Pensemos en la Evaluación como una medida de desempeño el cuál <em>“evalúa”</em> qué tan bien realizado está el clustering. El objetivo principal del Clustering debe ser siempre la generación de:</p>
+<p>Pensemos en la Evaluación como una medida de desempeño el cuál <em>“evalúa”</em> qué tan bien realizado está el clustering. El objetivo principal del Clustering debe ser siempre la generación de <code>clusters compactos</code> que estén <code>diferenciados</code> los unos a los otros.</p>
 </blockquote>
-<ul>
-<li>Clusters Compactos</li>
-<li>Clusters bien diferenciados unos de otros.</li>
-</ul>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
@@ -434,7 +430,6 @@ Alfonso Tobar-Arancibia
 </figure>
 </div>
 </div><div class="column" style="width:40%;">
-<div class="fragment">
 <div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -442,7 +437,6 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <p>¿Cuál es el Clustering que mejor describe el problema.</p>
-</div>
 </div>
 </div>
 </div>
@@ -1180,7 +1174,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":false,"closeEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

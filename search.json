@@ -1316,7 +1316,7 @@
     "href": "tics411/clase-6.html#evaluación",
     "title": "TICS-411 Minería de Datos",
     "section": "Evaluación",
-    "text": "Evaluación\n\nPensemos en la Evaluación como una medida de desempeño el cuál “evalúa” qué tan bien realizado está el clustering. El objetivo principal del Clustering debe ser siempre la generación de:\n\n\nClusters Compactos\nClusters bien diferenciados unos de otros.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n¿Cuál es el Clustering que mejor describe el problema."
+    "text": "Evaluación\n\nPensemos en la Evaluación como una medida de desempeño el cuál “evalúa” qué tan bien realizado está el clustering. El objetivo principal del Clustering debe ser siempre la generación de clusters compactos que estén diferenciados los unos a los otros.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n¿Cuál es el Clustering que mejor describe el problema."
   },
   {
     "objectID": "tics411/clase-6.html#objetivos-de-la-evaluación",
