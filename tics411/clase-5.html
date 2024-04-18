@@ -507,8 +507,11 @@ Alfonso Tobar-Arancibia
 </figure>
 </div>
 </section>
-<section id="ejemplo-iteración-1" class="slide level2">
+<section id="ejemplo-iteración-1" class="slide level2 smaller">
 <h2>Ejemplo: Iteración 1</h2>
+<blockquote>
+<p>Supongamos un ejemplo con <span class="math inline">\(MinPts=4\)</span>.</p>
+</blockquote>
 <div class="columns">
 <div class="column">
 <div class="r-stack">
@@ -1314,7 +1317,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
