@@ -412,8 +412,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>-7.422772</td>
 <td>3.293839</td>
 <td>0.558469</td>
-<td>0.0</td>
 <td>1.0</td>
+<td>0.0</td>
 <td>0.0</td>
 </tr>
 <tr class="odd">
@@ -428,8 +428,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>-10.066078</td>
 <td>0.224961</td>
 <td>0.0</td>
-<td>0.0</td>
 <td>1.0</td>
+<td>0.0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">6421</td>
@@ -442,9 +442,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>2.248149</td>
 <td>6.840680</td>
 <td>0.748647</td>
+<td>0.0</td>
+<td>0.0</td>
 <td>1.0</td>
-<td>0.0</td>
-<td>0.0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6422</td>
@@ -457,9 +457,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.343194</td>
 <td>-5.460592</td>
 <td>0.121518</td>
+<td>0.0</td>
+<td>0.0</td>
 <td>1.0</td>
-<td>0.0</td>
-<td>0.0</td>
 </tr>
 </tbody>
 </table>
@@ -549,7 +549,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>metricas[<span class="st">"km_10"</span>] <span class="op">=</span> s_km</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>metricas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>{'km_10': 0.39386606044364375}</code></pre>
+<pre><code>{'km_10': 0.3939694545420378}</code></pre>
 </div>
 </div>
 </section>
@@ -602,7 +602,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-18" class="cell" data-execution_count="23">
+<div id="cell-18" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_hierarchical(K_H, linkage):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    hc <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span>K_H, linkage<span class="op">=</span>linkage)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    labels_h <span class="op">=</span> hc.fit_predict(X)</span>
@@ -615,28 +615,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>labels_a9, s_a9 <span class="op">=</span> train_hierarchical(K_H<span class="op">=</span><span class="dv">9</span>, linkage<span class="op">=</span><span class="st">"average"</span>)</span>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>labels_w4, s_w4 <span class="op">=</span> train_hierarchical(K_H<span class="op">=</span><span class="dv">4</span>, linkage<span class="op">=</span><span class="st">"ward"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>El coeficiente de Silueta es 0.3777756279726289
-El coeficiente de Silueta es 0.38067328124008876
-El coeficiente de Silueta es 0.28536531287248157</code></pre>
+<pre><code>El coeficiente de Silueta es 0.375669914954985
+El coeficiente de Silueta es 0.38019115808227
+El coeficiente de Silueta es 0.28526636224404267</code></pre>
 </div>
 </div>
-<div id="cell-19" class="cell" data-execution_count="24">
+<div id="cell-19" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>metricas[<span class="st">"s_c9"</span>] <span class="op">=</span> s_c9</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>metricas[<span class="st">"s_a9"</span>] <span class="op">=</span> s_a9</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>metricas[<span class="st">"s_w4"</span>] <span class="op">=</span> s_w4</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>metricas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
-<pre><code>{'km_10': 0.39386606044364375,
- 's_c9': 0.3777756279726289,
- 's_a9': 0.38067328124008876,
- 's_w4': 0.28536531287248157,
- 's_dbs': 0.18142971155604654}</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>{'km_10': 0.3939694545420378,
+ 's_c9': 0.375669914954985,
+ 's_a9': 0.38019115808227,
+ 's_w4': 0.28526636224404267}</code></pre>
 </div>
 </div>
 </section>
 <section id="dbscan" class="level2">
 <h2 class="anchored" data-anchor-id="dbscan">DBSCAN</h2>
-<div id="cell-21" class="cell" data-execution_count="25">
+<div id="cell-21" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> NearestNeighbors</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>MIN_SAMPLES <span class="op">=</span> X.shape[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">1</span></span>
@@ -668,21 +667,21 @@ El coeficiente de Silueta es 0.28536531287248157</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-22" class="cell" data-execution_count="26">
+<div id="cell-22" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dbs <span class="op">=</span> DBSCAN(eps<span class="op">=</span>EPS, min_samples<span class="op">=</span>MIN_SAMPLES)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>labels_dbs <span class="op">=</span> dbs.fit_predict(X)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>s_dbs <span class="op">=</span> silhouette_score(X, labels_dbs)</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>metricas[<span class="st">"s_dbs"</span>] <span class="op">=</span> s_dbs</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>metricas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
-<pre><code>{'km_10': 0.39386606044364375,
- 's_c9': 0.3777756279726289,
- 's_a9': 0.38067328124008876,
- 's_w4': 0.28536531287248157,
- 's_dbs': 0.18142971155604654}</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>{'km_10': 0.3939694545420378,
+ 's_c9': 0.375669914954985,
+ 's_a9': 0.38019115808227,
+ 's_w4': 0.28526636224404267,
+ 's_dbs': 0.19017039002350858}</code></pre>
 </div>
 </div>
-<div id="cell-23" class="cell" data-execution_count="27">
+<div id="cell-23" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pd.Series(metricas.values(), index<span class="op">=</span>metricas.keys()).plot(</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>,</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    rot<span class="op">=</span><span class="dv">0</span>,</span>
@@ -698,13 +697,13 @@ El coeficiente de Silueta es 0.28536531287248157</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-24" class="cell" data-execution_count="28">
+<div id="cell-24" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>labels_km</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="28">
-<pre><code>array([2, 0, 4, ..., 4, 8, 1], dtype=int32)</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>array([5, 7, 4, ..., 4, 8, 2], dtype=int32)</code></pre>
 </div>
 </div>
-<div id="cell-25" class="cell" data-execution_count="29">
+<div id="cell-25" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mcolors</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -760,13 +759,26 @@ El coeficiente de Silueta es 0.28536531287248157</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-26" class="cell" data-execution_count="30">
+<div id="cell-26" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(pca_X[<span class="st">"pca0"</span>], pca_X[<span class="st">"pca1"</span>], c<span class="op">=</span>labels_c9)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="proyecto_clustering_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-27" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scikitplot <span class="im">as</span> skplt</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>skplt.metrics.plot_silhouette(X, labels_km)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proyecto_clustering_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>

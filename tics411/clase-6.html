@@ -465,8 +465,8 @@ Alfonso Tobar-Arancibia
 <div class="column">
 <p><span class="math display">\[H = \frac{\sum_{i = 1}^p w_i}{\sum_{i = 1}^p u_i + \sum_{i = 1}^p w_i}\]</span></p>
 <ul>
-<li><span class="math inline">\(w_i\)</span>: corresponde a la distancia de un punto aleatorio al vecino más cercano en los datos originales.</li>
-<li><span class="math inline">\(u_i\)</span>: corresponde a la distancia de un punto del dataset al vecino más cercano.</li>
+<li><span class="math inline">\(w_i\)</span>: corresponde a la distancia de un punto <em>aleatorio</em> al vecino más cercano en los datos originales.</li>
+<li><span class="math inline">\(u_i\)</span>: corresponde a la distancia de un punto <em>real</em> del dataset al vecino más cercano.</li>
 <li><span class="math inline">\(p\)</span>: Número de puntos generados en el espacio del Dataset.</li>
 </ul>
 </div><div class="column">
@@ -682,7 +682,7 @@ Alfonso Tobar-Arancibia
 </div><div class="column">
 <p><span class="math display">\[C_{silueta} = \sum_{i} s_i\]</span></p>
 <ul>
-<li><span class="math inline">\(a_i\)</span>: Distancia promedio del punto <span class="math inline">\(i\)</span> a todos los puntos del mismo cluster. (Cohesión)</li>
+<li><span class="math inline">\(a_i\)</span>: Distancia promedio del punto <span class="math inline">\(i\)</span> a todos los <code>otros</code> puntos del mismo cluster. (Cohesión)</li>
 <li><span class="math inline">\(b_{ij}\)</span>: Distancia promedio del punto <span class="math inline">\(i\)</span> a todos los puntos del cluster <span class="math inline">\(j\)</span> donde no pertenezca <span class="math inline">\(i\)</span>. (Separación)</li>
 <li><span class="math inline">\(b_j\)</span>: Mínimo de <span class="math inline">\(b_{ij}\)</span> tal que el punto i no pertenezca al cluster <span class="math inline">\(j\)</span>. (Menor Separación)</li>
 </ul>
@@ -1174,7 +1174,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":false,"closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
