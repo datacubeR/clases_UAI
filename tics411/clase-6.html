@@ -639,10 +639,10 @@ Alfonso Tobar-Arancibia
 </blockquote>
 </dd>
 </dl>
-<p><span class="math display">\[ SSB_{total} = \sum_{k = 1}^K |C_k|(\bar{X_k} - \bar{C_k})^2\]</span></p>
+<p><span class="math display">\[ SSB_{total} = \sum_{k = 1}^K |C_k|(\bar{X} - \bar{C_k})^2\]</span></p>
 <ul>
 <li><span class="math inline">\(|C_k|\)</span> corresponde al número de elementos (Cardinalidad) del Cluster <span class="math inline">\(i\)</span>.</li>
-<li><span class="math inline">\(\bar{X_k}\)</span> corresponde al promedio de todos los puntos en el Cluster k.</li>
+<li><span class="math inline">\(\bar{X}\)</span> corresponde al promedio de todos los puntos en el Cluster k.</li>
 </ul>
 </section>
 <section id="coeficiente-de-silhouette-coeficiente-de-silueta" class="slide level2">
@@ -680,7 +680,7 @@ Alfonso Tobar-Arancibia
 </figure>
 </div>
 </div><div class="column">
-<p><span class="math display">\[C_{silueta} = \sum_{i} s_i\]</span></p>
+<p><span class="math display">\[C_{silueta} = \frac{1}{n}\sum_{i} s_i\]</span></p>
 <ul>
 <li><span class="math inline">\(a_i\)</span>: Distancia promedio del punto <span class="math inline">\(i\)</span> a todos los <code>otros</code> puntos del mismo cluster. (Cohesión)</li>
 <li><span class="math inline">\(b_{ij}\)</span>: Distancia promedio del punto <span class="math inline">\(i\)</span> a todos los puntos del cluster <span class="math inline">\(j\)</span> donde no pertenezca <span class="math inline">\(i\)</span>. (Separación)</li>
@@ -1174,7 +1174,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox","openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
