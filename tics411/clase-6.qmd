@@ -186,10 +186,10 @@ $$ SSE_{total} = \sum_{k = 1}^K\sum_{x_i \in C_k} (x_i - \bar{C_k})^2$$
 Separación
 : > Mide cuán distinto es un cluster de otro. Se usa la suma de las distancias al cuadrado entre los centroides hacia el promedio de todos los puntos. (Between groups sum squares, SSB).
 
-$$ SSB_{total} = \sum_{k = 1}^K |C_k|(\bar{X_k} - \bar{C_k})^2$$
+$$ SSB_{total} = \sum_{k = 1}^K |C_k|(\bar{X} - \bar{C_k})^2$$
 
 * $|C_k|$ corresponde al número de elementos (Cardinalidad) del Cluster $i$.
-* $\bar{X_k}$ corresponde al promedio de todos los puntos en el Cluster k.
+* $\bar{X}$ corresponde al promedio de todos los puntos en el Cluster k.
 
 ## Coeficiente de Silhouette (Coeficiente de Silueta)
 
@@ -218,7 +218,7 @@ silhouette_score(X, labels, sample_size = None, metric="euclidean")
 :::
 ::: {.column}
 
-$$C_{silueta} = \sum_{i} s_i$$
+$$C_{silueta} = \frac{1}{n}\sum_{i} s_i$$
 
 * $a_i$: Distancia promedio del punto $i$ a todos los `otros` puntos del mismo cluster. (Cohesión)
 * $b_{ij}$: Distancia promedio del punto $i$ a todos los puntos del cluster $j$ donde no pertenezca $i$. (Separación)
