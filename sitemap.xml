@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411-labs.html</loc>
-    <lastmod>2024-04-22T16:52:07.580Z</lastmod>
+    <lastmod>2024-04-23T15:31:43.344Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-5.html</loc>
@@ -41,32 +41,36 @@
     <lastmod>2024-04-09T22:23:49.046Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/distancia.html</loc>
-    <lastmod>2024-03-23T03:07:44.822Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/hopkins.html</loc>
+    <lastmod>2024-04-23T15:31:14.553Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/01-Preprocesamiento.html</loc>
-    <lastmod>2024-03-28T15:05:14.743Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-2.html</loc>
-    <lastmod>2024-03-28T19:01:50.352Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-4.html</loc>
-    <lastmod>2024-04-11T19:25:48.380Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-0.html</loc>
-    <lastmod>2024-03-12T14:16:50.265Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/03-ex_kmeans.html</loc>
+    <lastmod>2024-04-09T21:17:28.135Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/06-ex-DBSCAN.html</loc>
     <lastmod>2024-04-11T21:35:33.273Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/03-ex_kmeans.html</loc>
-    <lastmod>2024-04-09T21:17:28.135Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-0.html</loc>
+    <lastmod>2024-03-12T14:16:50.265Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-4.html</loc>
+    <lastmod>2024-04-11T19:25:48.380Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-2.html</loc>
+    <lastmod>2024-03-28T19:01:50.352Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/01-Preprocesamiento.html</loc>
+    <lastmod>2024-03-28T15:05:14.743Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/distancia.html</loc>
+    <lastmod>2024-03-23T03:07:44.822Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/preguntas-prueba.html</loc>
