@@ -70,3 +70,12 @@
   path: tics411/clase-6.qmd
   categories:
    - slides
+
+- title: "Clase 7"
+  subtitle: "Algoritmo Apriori"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-04-25
+  image: tics411/thumbnails/clase-7.jpg
+  path: tics411/clase-7.qmd
+  categories:
+   - slides
