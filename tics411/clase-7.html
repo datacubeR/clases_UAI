@@ -838,7 +838,7 @@ Fracción de las Transacciones en las que aparece <span class="math inline">\(X\
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Conclusión:</strong></p>
+<p><strong>Insights:</strong></p>
 </div>
 <div class="callout-content">
 <ul>
@@ -847,6 +847,33 @@ Fracción de las Transacciones en las que aparece <span class="math inline">\(X\
 </ul>
 </div>
 </div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluar-reglas-de-asociación" class="slide level2 smaller">
+<h2>Evaluar Reglas de Asociación</h2>
+<dl>
+<dt>Lift</dt>
+<dd>
+Mide qué tan lejos de la independencia están <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>. Lift varía entre 0 y <span class="math inline">\(\infty\)</span>.
+</dd>
+</dl>
+<p><span class="math display">\[Lift(X,Y) = \frac{Conf(X \implies Y)}{s(Y)}\]</span></p>
+<ul>
+<li><span class="math inline">\(Lift(X,Y) \sim 1\)</span> implica independencia y la regla no es importante.</li>
+<li><span class="math inline">\(Lift(X,Y) &lt; 1\)</span> implica una asociación negativa de la regla.</li>
+<li><span class="math inline">\(Lift(X,Y) &gt; 1\)</span> implica una asociativa de la regla. Un mayor Lift implica que la regla es potencialmente útil para el futuro.</li>
+</ul>
+<h5 id="ejemplo">Ejemplo:</h5>
+<p><span class="math display">\[Lift(Cerveza, Pañales) = \frac{Conf(Cerveza \implies Pañales)}{Supp(Pañales)} = \frac{1}{0.6} = 1.67\]</span></p>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Una persona que compra <code>Cerveza</code> tiene <strong>1.67</strong> más <em><code>chances</code></em> de comprar <code>Pañales</code>.</p>
 </div>
 </div>
 </div>
@@ -1278,7 +1305,7 @@ Fracción de las Transacciones en las que aparece <span class="math inline">\(X\
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

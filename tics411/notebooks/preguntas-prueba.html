@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="cell-0" class="cell" data-execution_count="3">
+<div id="cell-0" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -176,7 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 <div>
 
@@ -247,7 +247,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-1" class="cell" data-execution_count="21">
+<div id="cell-1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial <span class="im">import</span> distance_matrix</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>d_m <span class="op">=</span> distance_matrix(df.to_numpy(), df.to_numpy(), p<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>d_m <span class="op">=</span> pd.DataFrame(d_m, index<span class="op">=</span>vals, columns<span class="op">=</span>vals).<span class="bu">round</span>(<span class="dv">2</span>)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>d_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <div>
 
@@ -417,9 +417,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-2" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> d_m.loc[[<span class="dv">1</span>, <span class="dv">10</span>]]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>D</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-2" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d_m.to_latex())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>\begin{tabular}{lrrrrrrrrrr}
+\toprule
+{} &amp;     1  &amp;     2  &amp;     3  &amp;     4  &amp;     5  &amp;     6  &amp;     7  &amp;     8  &amp;     9  &amp;     10 \\
+\midrule
+1  &amp;   0.00 &amp;   6.00 &amp;  11.00 &amp;  14.00 &amp;  17.00 &amp;   4.00 &amp;   7.21 &amp;  11.18 &amp;  14.14 &amp;  17.12 \\
+2  &amp;   6.00 &amp;   0.00 &amp;   5.00 &amp;   8.00 &amp;  11.00 &amp;   7.21 &amp;   4.00 &amp;   5.39 &amp;   8.25 &amp;  11.18 \\
+3  &amp;  11.00 &amp;   5.00 &amp;   0.00 &amp;   3.00 &amp;   6.00 &amp;  11.70 &amp;   6.40 &amp;   2.00 &amp;   3.61 &amp;   6.32 \\
+4  &amp;  14.00 &amp;   8.00 &amp;   3.00 &amp;   0.00 &amp;   3.00 &amp;  14.56 &amp;   8.94 &amp;   3.61 &amp;   2.00 &amp;   3.61 \\
+5  &amp;  17.00 &amp;  11.00 &amp;   6.00 &amp;   3.00 &amp;   0.00 &amp;  17.46 &amp;  11.70 &amp;   6.32 &amp;   3.61 &amp;   2.00 \\
+6  &amp;   4.00 &amp;   7.21 &amp;  11.70 &amp;  14.56 &amp;  17.46 &amp;   0.00 &amp;   6.00 &amp;  11.18 &amp;  14.14 &amp;  17.12 \\
+7  &amp;   7.21 &amp;   4.00 &amp;   6.40 &amp;   8.94 &amp;  11.70 &amp;   6.00 &amp;   0.00 &amp;   5.39 &amp;   8.25 &amp;  11.18 \\
+8  &amp;  11.18 &amp;   5.39 &amp;   2.00 &amp;   3.61 &amp;   6.32 &amp;  11.18 &amp;   5.39 &amp;   0.00 &amp;   3.00 &amp;   6.00 \\
+9  &amp;  14.14 &amp;   8.25 &amp;   3.61 &amp;   2.00 &amp;   3.61 &amp;  14.14 &amp;   8.25 &amp;   3.00 &amp;   0.00 &amp;   3.00 \\
+10 &amp;  17.12 &amp;  11.18 &amp;   6.32 &amp;   3.61 &amp;   2.00 &amp;  17.12 &amp;  11.18 &amp;   6.00 &amp;   3.00 &amp;   0.00 \\
+\bottomrule
+\end{tabular}
+</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_8516/2921418078.py:1: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(d_m.to_latex())</code></pre>
+</div>
+</div>
+<div id="cell-3" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> d_m.loc[[<span class="dv">1</span>, <span class="dv">10</span>]]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>D</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <div>
 <div>
@@ -475,9 +501,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-3" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> D <span class="op">==</span> D.<span class="bu">min</span>()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>G.astype(<span class="st">"int64"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-4" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> D <span class="op">==</span> D.<span class="bu">min</span>()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>G.astype(<span class="st">"int64"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <div>
 <div>
@@ -533,25 +559,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-4" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-5" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-5" class="cell" data-execution_count="85">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>A.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-6" class="cell" data-execution_count="85">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>A.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="85">
 <pre><code>0.0</code></pre>
 </div>
 </div>
-<div id="cell-6" class="cell" data-execution_count="86">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>A.std(ddof<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-7" class="cell" data-execution_count="86">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A.std(ddof<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="86">
 <pre><code>2.8284271247461903</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-execution_count="89">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A.mean())</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>(A<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-8" class="cell" data-execution_count="89">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A.mean())</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>(A<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.0</code></pre>
 </div>
@@ -559,12 +585,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>40</code></pre>
 </div>
 </div>
-<div id="cell-8" class="cell" data-execution_count="90">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler, StandardScaler</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> StandardScaler()</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>mm <span class="op">=</span> MinMaxScaler()</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>sc.fit_transform(A.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-9" class="cell" data-execution_count="90">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler, StandardScaler</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> StandardScaler()</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>mm <span class="op">=</span> MinMaxScaler()</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>sc.fit_transform(A.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="90">
 <pre><code>array([[-1.76776695],
        [-0.35355339],
@@ -573,14 +599,366 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
        [ 1.06066017]])</code></pre>
 </div>
 </div>
-<div id="cell-9" class="cell" data-execution_count="92">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mm.fit_transform(A.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-10" class="cell" data-execution_count="92">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mm.fit_transform(A.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="92">
 <pre><code>array([[0.   ],
        [0.5  ],
        [0.75 ],
        [0.875],
        [1.   ]])</code></pre>
+</div>
+</div>
+<div id="cell-11" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>        Item<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>],</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        Forma<span class="op">=</span>[</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"cuadrado"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"cuadrado"</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"circulo"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"circulo"</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"triangulo"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"cuadrado"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">"circulo"</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"circulo"</span>,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        Color<span class="op">=</span>[</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"rojo"</span>,</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"azul"</span>,</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">"rojo"</span>,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"verde"</span>,</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"rojo"</span>,</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"amarillo"</span>,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">"amarillo"</span>,</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">"verde"</span>,</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.to_latex(index<span class="op">=</span><span class="va">False</span>, caption<span class="op">=</span><span class="st">"Dataset"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>\begin{table}
+\centering
+\caption{Dataset}
+\begin{tabular}{rll}
+\toprule
+ Item &amp;     Forma &amp;    Color \\
+\midrule
+    1 &amp;  cuadrado &amp;     rojo \\
+    2 &amp;  cuadrado &amp;     azul \\
+    3 &amp;   circulo &amp;     rojo \\
+    4 &amp;   circulo &amp;    verde \\
+    5 &amp; triangulo &amp;     rojo \\
+    6 &amp;  cuadrado &amp; amarillo \\
+    7 &amp;   circulo &amp; amarillo \\
+    8 &amp;   circulo &amp;    verde \\
+\bottomrule
+\end{tabular}
+\end{table}
+</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_8516/3999806737.py:27: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(df.to_latex(index=False, caption="Dataset"))</code></pre>
+</div>
+</div>
+<div id="cell-12" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.6</span>, <span class="fl">0.8</span>, <span class="fl">1.3</span>, <span class="fl">3.6</span>, <span class="fl">3.6</span>, <span class="fl">4.3</span>, <span class="fl">4.5</span>, <span class="dv">5</span>, <span class="dv">4</span>],</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>, <span class="fl">1.4</span>, <span class="fl">3.5</span>, <span class="fl">3.3</span>, <span class="dv">4</span>, <span class="fl">4.2</span>, <span class="fl">4.7</span>, <span class="fl">4.2</span>],</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">1.3</span>, <span class="dv">3</span>, <span class="fl">2.8</span>, <span class="fl">3.5</span>, <span class="fl">3.7</span>, <span class="fl">4.2</span>, <span class="fl">4.1</span>],</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">1.6</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>, <span class="dv">0</span>, <span class="fl">1.6</span>, <span class="fl">2.1</span>, <span class="fl">3.4</span>, <span class="dv">3</span>, <span class="fl">3.7</span>, <span class="fl">3.8</span>, <span class="fl">4.4</span>, <span class="fl">4.8</span>],</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">1.6</span>, <span class="dv">0</span>, <span class="fl">0.6</span>, <span class="fl">2.9</span>, <span class="fl">2.9</span>, <span class="fl">3.6</span>, <span class="fl">3.8</span>, <span class="fl">4.3</span>, <span class="fl">3.4</span>],</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">1.3</span>, <span class="fl">1.4</span>, <span class="fl">1.3</span>, <span class="fl">2.1</span>, <span class="fl">0.6</span>, <span class="dv">0</span>, <span class="fl">2.5</span>, <span class="fl">2.7</span>, <span class="fl">3.3</span>, <span class="fl">3.6</span>, <span class="dv">4</span>, <span class="fl">2.8</span>],</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">3.6</span>, <span class="fl">3.5</span>, <span class="dv">3</span>, <span class="fl">3.4</span>, <span class="fl">2.9</span>, <span class="fl">2.5</span>, <span class="dv">0</span>, <span class="fl">0.9</span>, <span class="dv">1</span>, <span class="fl">1.4</span>, <span class="fl">1.6</span>, <span class="fl">2.7</span>],</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">3.6</span>, <span class="fl">3.3</span>, <span class="fl">2.8</span>, <span class="dv">3</span>, <span class="fl">2.9</span>, <span class="fl">2.7</span>, <span class="fl">0.9</span>, <span class="dv">0</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>, <span class="fl">1.4</span>, <span class="fl">3.6</span>],</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">4.3</span>, <span class="dv">4</span>, <span class="fl">3.5</span>, <span class="fl">3.7</span>, <span class="fl">3.6</span>, <span class="fl">3.3</span>, <span class="dv">1</span>, <span class="fl">0.7</span>, <span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.7</span>, <span class="fl">3.7</span>],</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">4.5</span>, <span class="fl">4.2</span>, <span class="fl">3.7</span>, <span class="fl">3.8</span>, <span class="fl">3.8</span>, <span class="fl">3.6</span>, <span class="fl">1.4</span>, <span class="fl">0.9</span>, <span class="fl">0.4</span>, <span class="dv">0</span>, <span class="fl">0.6</span>, <span class="fl">4.1</span>],</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">5</span>, <span class="fl">4.7</span>, <span class="fl">4.2</span>, <span class="fl">4.4</span>, <span class="fl">4.3</span>, <span class="dv">4</span>, <span class="fl">1.6</span>, <span class="fl">1.4</span>, <span class="fl">0.7</span>, <span class="fl">0.6</span>, <span class="dv">0</span>, <span class="fl">4.1</span>],</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">4</span>, <span class="fl">4.2</span>, <span class="fl">4.1</span>, <span class="fl">4.8</span>, <span class="fl">3.4</span>, <span class="fl">2.8</span>, <span class="fl">2.7</span>, <span class="fl">3.6</span>, <span class="fl">3.7</span>, <span class="fl">4.1</span>, <span class="fl">4.1</span>, <span class="dv">0</span>],</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>df.index <span class="op">=</span> [<span class="op">*</span><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>)]</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> [<span class="op">*</span><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>)]</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>display(df)</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.to_latex(caption<span class="op">=</span><span class="st">"DBSCAN"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">1</th>
+<th data-quarto-table-cell-role="th">2</th>
+<th data-quarto-table-cell-role="th">3</th>
+<th data-quarto-table-cell-role="th">4</th>
+<th data-quarto-table-cell-role="th">5</th>
+<th data-quarto-table-cell-role="th">6</th>
+<th data-quarto-table-cell-role="th">7</th>
+<th data-quarto-table-cell-role="th">8</th>
+<th data-quarto-table-cell-role="th">9</th>
+<th data-quarto-table-cell-role="th">10</th>
+<th data-quarto-table-cell-role="th">11</th>
+<th data-quarto-table-cell-role="th">12</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0.0</td>
+<td>0.5</td>
+<td>1.0</td>
+<td>1.6</td>
+<td>0.8</td>
+<td>1.3</td>
+<td>3.6</td>
+<td>3.6</td>
+<td>4.3</td>
+<td>4.5</td>
+<td>5.0</td>
+<td>4.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0.5</td>
+<td>0.0</td>
+<td>0.5</td>
+<td>1.1</td>
+<td>0.8</td>
+<td>1.4</td>
+<td>3.5</td>
+<td>3.3</td>
+<td>4.0</td>
+<td>4.2</td>
+<td>4.7</td>
+<td>4.2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1.0</td>
+<td>0.5</td>
+<td>0.0</td>
+<td>0.8</td>
+<td>0.8</td>
+<td>1.3</td>
+<td>3.0</td>
+<td>2.8</td>
+<td>3.5</td>
+<td>3.7</td>
+<td>4.2</td>
+<td>4.1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1.6</td>
+<td>1.1</td>
+<td>0.8</td>
+<td>0.0</td>
+<td>1.6</td>
+<td>2.1</td>
+<td>3.4</td>
+<td>3.0</td>
+<td>3.7</td>
+<td>3.8</td>
+<td>4.4</td>
+<td>4.8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5</td>
+<td>0.8</td>
+<td>0.8</td>
+<td>0.8</td>
+<td>1.6</td>
+<td>0.0</td>
+<td>0.6</td>
+<td>2.9</td>
+<td>2.9</td>
+<td>3.6</td>
+<td>3.8</td>
+<td>4.3</td>
+<td>3.4</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">6</td>
+<td>1.3</td>
+<td>1.4</td>
+<td>1.3</td>
+<td>2.1</td>
+<td>0.6</td>
+<td>0.0</td>
+<td>2.5</td>
+<td>2.7</td>
+<td>3.3</td>
+<td>3.6</td>
+<td>4.0</td>
+<td>2.8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">7</td>
+<td>3.6</td>
+<td>3.5</td>
+<td>3.0</td>
+<td>3.4</td>
+<td>2.9</td>
+<td>2.5</td>
+<td>0.0</td>
+<td>0.9</td>
+<td>1.0</td>
+<td>1.4</td>
+<td>1.6</td>
+<td>2.7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8</td>
+<td>3.6</td>
+<td>3.3</td>
+<td>2.8</td>
+<td>3.0</td>
+<td>2.9</td>
+<td>2.7</td>
+<td>0.9</td>
+<td>0.0</td>
+<td>0.7</td>
+<td>0.9</td>
+<td>1.4</td>
+<td>3.6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">9</td>
+<td>4.3</td>
+<td>4.0</td>
+<td>3.5</td>
+<td>3.7</td>
+<td>3.6</td>
+<td>3.3</td>
+<td>1.0</td>
+<td>0.7</td>
+<td>0.0</td>
+<td>0.4</td>
+<td>0.7</td>
+<td>3.7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10</td>
+<td>4.5</td>
+<td>4.2</td>
+<td>3.7</td>
+<td>3.8</td>
+<td>3.8</td>
+<td>3.6</td>
+<td>1.4</td>
+<td>0.9</td>
+<td>0.4</td>
+<td>0.0</td>
+<td>0.6</td>
+<td>4.1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">11</td>
+<td>5.0</td>
+<td>4.7</td>
+<td>4.2</td>
+<td>4.4</td>
+<td>4.3</td>
+<td>4.0</td>
+<td>1.6</td>
+<td>1.4</td>
+<td>0.7</td>
+<td>0.6</td>
+<td>0.0</td>
+<td>4.1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">12</td>
+<td>4.0</td>
+<td>4.2</td>
+<td>4.1</td>
+<td>4.8</td>
+<td>3.4</td>
+<td>2.8</td>
+<td>2.7</td>
+<td>3.6</td>
+<td>3.7</td>
+<td>4.1</td>
+<td>4.1</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>\begin{table}
+\centering
+\caption{DBSCAN}
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+{} &amp;   1  &amp;   2  &amp;   3  &amp;   4  &amp;   5  &amp;   6  &amp;   7  &amp;   8  &amp;   9  &amp;   10 &amp;   11 &amp;   12 \\
+\midrule
+1  &amp;  0.0 &amp;  0.5 &amp;  1.0 &amp;  1.6 &amp;  0.8 &amp;  1.3 &amp;  3.6 &amp;  3.6 &amp;  4.3 &amp;  4.5 &amp;  5.0 &amp;  4.0 \\
+2  &amp;  0.5 &amp;  0.0 &amp;  0.5 &amp;  1.1 &amp;  0.8 &amp;  1.4 &amp;  3.5 &amp;  3.3 &amp;  4.0 &amp;  4.2 &amp;  4.7 &amp;  4.2 \\
+3  &amp;  1.0 &amp;  0.5 &amp;  0.0 &amp;  0.8 &amp;  0.8 &amp;  1.3 &amp;  3.0 &amp;  2.8 &amp;  3.5 &amp;  3.7 &amp;  4.2 &amp;  4.1 \\
+4  &amp;  1.6 &amp;  1.1 &amp;  0.8 &amp;  0.0 &amp;  1.6 &amp;  2.1 &amp;  3.4 &amp;  3.0 &amp;  3.7 &amp;  3.8 &amp;  4.4 &amp;  4.8 \\
+5  &amp;  0.8 &amp;  0.8 &amp;  0.8 &amp;  1.6 &amp;  0.0 &amp;  0.6 &amp;  2.9 &amp;  2.9 &amp;  3.6 &amp;  3.8 &amp;  4.3 &amp;  3.4 \\
+6  &amp;  1.3 &amp;  1.4 &amp;  1.3 &amp;  2.1 &amp;  0.6 &amp;  0.0 &amp;  2.5 &amp;  2.7 &amp;  3.3 &amp;  3.6 &amp;  4.0 &amp;  2.8 \\
+7  &amp;  3.6 &amp;  3.5 &amp;  3.0 &amp;  3.4 &amp;  2.9 &amp;  2.5 &amp;  0.0 &amp;  0.9 &amp;  1.0 &amp;  1.4 &amp;  1.6 &amp;  2.7 \\
+8  &amp;  3.6 &amp;  3.3 &amp;  2.8 &amp;  3.0 &amp;  2.9 &amp;  2.7 &amp;  0.9 &amp;  0.0 &amp;  0.7 &amp;  0.9 &amp;  1.4 &amp;  3.6 \\
+9  &amp;  4.3 &amp;  4.0 &amp;  3.5 &amp;  3.7 &amp;  3.6 &amp;  3.3 &amp;  1.0 &amp;  0.7 &amp;  0.0 &amp;  0.4 &amp;  0.7 &amp;  3.7 \\
+10 &amp;  4.5 &amp;  4.2 &amp;  3.7 &amp;  3.8 &amp;  3.8 &amp;  3.6 &amp;  1.4 &amp;  0.9 &amp;  0.4 &amp;  0.0 &amp;  0.6 &amp;  4.1 \\
+11 &amp;  5.0 &amp;  4.7 &amp;  4.2 &amp;  4.4 &amp;  4.3 &amp;  4.0 &amp;  1.6 &amp;  1.4 &amp;  0.7 &amp;  0.6 &amp;  0.0 &amp;  4.1 \\
+12 &amp;  4.0 &amp;  4.2 &amp;  4.1 &amp;  4.8 &amp;  3.4 &amp;  2.8 &amp;  2.7 &amp;  3.6 &amp;  3.7 &amp;  4.1 &amp;  4.1 &amp;  0.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_8516/1107703924.py:21: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(df.to_latex(caption="DBSCAN"))</code></pre>
+</div>
+</div>
+<div id="cell-13" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        ai<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>        biA<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>        biB<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>        bi<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>        si<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.to_latex(caption<span class="op">=</span><span class="st">"Tabla Silhouette"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>\begin{table}
+\centering
+\caption{Tabla Silhouette}
+\begin{tabular}{lrrrrr}
+\toprule
+{} &amp;        ai &amp;       biA &amp;       biB &amp;        bi &amp;        si \\
+\midrule
+0 &amp;  0.096053 &amp;  0.128639 &amp;  0.841865 &amp;  0.942217 &amp;  0.000843 \\
+1 &amp;  0.856134 &amp;  0.549423 &amp;  0.721880 &amp;  0.292111 &amp;  0.063252 \\
+2 &amp;  0.436851 &amp;  0.914593 &amp;  0.261301 &amp;  0.486813 &amp;  0.830686 \\
+3 &amp;  0.877781 &amp;  0.886552 &amp;  0.762853 &amp;  0.487446 &amp;  0.127603 \\
+4 &amp;  0.667224 &amp;  0.334679 &amp;  0.423831 &amp;  0.758756 &amp;  0.887252 \\
+\bottomrule
+\end{tabular}
+\end{table}
+</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_8516/7425570.py:12: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(df.to_latex(caption="Tabla Silhouette"))</code></pre>
 </div>
 </div>
 
