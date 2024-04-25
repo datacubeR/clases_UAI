@@ -38,7 +38,7 @@ format:
 ::: {.callout-note appearance="default"}
 ## Market Basket Analysis
 
-Corresponde al estudio de nuestra canaste de compras. De modo que podamos entender qué cosas son las que como clientes preferimos y una empresa pueda *`Recomendar`* de manera más apropiadas.
+Corresponde al estudio de nuestra canasta de compras. De modo que podamos entender qué cosas son las que como clientes preferimos y una empresa pueda *`Recomendar`* de manera más apropiadas.
 
 :::
 
@@ -53,14 +53,14 @@ Tarea
 ##### Ejemplos
 
 * Datasets de supermercados:
-    * *10% de los clientes totales compran vino y quedo (patrón: si compro vino, también llevo queso)*. 
+    * *10% de los clientes totales compran vino y quedo (`patrón`: si compro vino, también llevo queso)*. 
 * Datasets de Alarmas:
     * *Si la alarma A y B suenan en un intervalo de 30 segundos, entonces la alarma C sonará dentro de un intervalo de 60 segundos con 50% de probabilidad*.
 
 ## Ejemplo: Datos Supermercado {.smaller}
 
 Datos Transaccionales
-: > Una transacción involucra un conjunto de elementos. Una bolet de supermercado muestra el conjunto de elementos comprados por un cliente. Los productos involucrados en una transacción se denominan `items`.
+: > Una transacción involucra un conjunto de elementos. Una boleta de supermercado muestra el conjunto de elementos comprados por un cliente. Los productos involucrados en una transacción se denominan `items`.
 
 ::: {.columns}
 ::: {.column}
@@ -102,7 +102,7 @@ Encontrar asociaciones entre elementos u objetos de bases de datos transacciones
 * Diágnostico y predicción de alarmas.
 :::
 
-## Medidas 
+## Definiciones: Medidas 
 
 ::: {.columns}
 ::: {.column}
@@ -141,6 +141,10 @@ $$Conf(X \implies Z) = \frac{SuppCount(X \cup Z)}{SuppCount(X)}$$
 :::
 ::: 
 
+::: {.callout-caution}
+Ojo con la Notación $\cup$. En este caso significa que tanto el producto X como el Producto Z sean parte de la transacción.
+:::
+
 ## Ejemplos: Support y Confidence {.smaller}
 
 ::: {.columns}
@@ -162,7 +166,7 @@ $$ Conf({Leche} \implies {Pan}) = \frac{Supp({Pan, Leche})}{Supp(Leche)} = \frac
 
 ## Problema 
 
-> En un dataset transaccional de n productos totales y $|U_i|$ transacciones para la Transacción $i$.
+> En un dataset transaccional de n productos totales y $|U_i|$ elementos para la Transacción $i$.
 
 Se pueden generar un total de $N_{reglas}$ de asociación:
 
@@ -194,10 +198,10 @@ Apriori
 #### Algoritmo
 
 1. Fijar $k=1$ y determinar lista de candidatos de tamaño $k$.
-2. Calcular la frecuencia del conjunto.
-3. Eliminar conjuntos con baja frecuencia (utilizando un `umbral de soporte`). 
-4. Unir los conjuntos frecuentes para generar conjuntos de tamaño $k+1$.
-5. Si existe algún conjunto nuevo, volver a 2. y repetir.
+    a. Calcular la frecuencia del conjunto.
+    b. Eliminar conjuntos con baja frecuencia (utilizando un `umbral de soporte`). 
+    c. Unir los conjuntos frecuentes para generar conjuntos de tamaño $k+1$.
+    d. Si existe la posibilidad de seguir creando combinaciones volver al `paso a` y repetir.
 6. Usar todos los conjuntos frecuentes para generar reglas.
 
 ## Ejemplo Apriori {.smaller}
@@ -207,7 +211,16 @@ Apriori
 Supongamos que queremos calcular las reglas de asociación que tengan un `MinSupp=40%` y un `MinConf=70%`.
 
 
+::: {.columns}
+::: {.column}
 ![](img/clase-7/apriori_ex.png){.lightbox fig-align="center"}
+:::
+::: {.column style="font-size: 130%;" }
+::: {.callout-tip}
+Podríamos pensar que `MinSupp` y `MinConf` son los `hiperparámetros` de este algoritmo.
+:::
+:::
+::: 
 
 ## Ejemplo Apriori: Iteración 1 {.smaller}
 
@@ -235,7 +248,7 @@ Galletas **NO CUMPLE** con el Soporte Mínimo solicitado. Por lo tanto, lo elimi
 ![](img/clase-7/apriori_ex.png){.lightbox fig-align="center"}
 
 ::: {.callout-warning}
-Acá **NO SE ELIMINA** ningún producto, ya que en los itemsets que sobrevivieron hay Pan, Mantequilla, Leche, Pañales y Cerveza.
+Acá **NO SE ELIMINA** ningún producto, ya que en los itemsets que sobrevivieron hay `Pan`, `Mantequilla`, `Leche`, `Pañales` y `Cerveza`.
 :::
 :::
 ::: {.column}
@@ -253,7 +266,7 @@ Acá **NO SE ELIMINA** ningún producto, ya que en los itemsets que sobreviviero
 ![](img/clase-7/apriori_ex.png){.lightbox fig-align="center"}
 
 ::: {.callout-tip}
-Se puede apreciar que los únicos 3 productos que sobreviven son Pan, Mantequilla y Leche. Por lo tanto, **NO ES POSIBLE** generar reglas con 4 productos.
+Se puede apreciar que los únicos 3 productos que sobreviven son `Pan`, `Mantequilla` y `Leche`. Por lo tanto, **NO ES POSIBLE** generar reglas con 4 productos.
 :::
 :::
 ::: {.column}
@@ -357,7 +370,7 @@ $$Leche \implies \{Pan, Mantequilla\}$$
 :::
 ::: 
 
-## Evaluar Reglas de Asociación {.smaller}
+## Evaluación de Reglas de Asociación {.smaller}
 
 Lift
 : Mide qué tan lejos de la independencia están $X$ e $Y$. Lift varía entre 0 y $\infty$.

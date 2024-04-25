@@ -351,6 +351,8 @@ Agregación
 
 ![](img/clase-1/f_sel.png){.lightbox fig-align="center" width="40%"}
 
+::: {.columns}
+::: {.column}
 ::: {.callout-tip}
 * Procesos Manuales. 
 * Procesos Automáticos:
@@ -359,6 +361,15 @@ Agregación
   * Recursive Feature Addition. 
   * Eliminación mediante alguna medida. 
 :::
+:::
+::: {.column}
+
+::: {.callout-note appearance="default"}
+## Objetivo
+* Puede ser una técnica apropiada para combatir la `Maldición de la Dimensionalidad` (Curse of Dimensionality).
+:::
+:::
+::: 
 
 # Medidas
 
