@@ -438,7 +438,7 @@ Alfonso Tobar-Arancibia
 <p><strong>Market Basket Analysis</strong></p>
 </div>
 <div class="callout-content">
-<p>Corresponde al estudio de nuestra canaste de compras. De modo que podamos entender qué cosas son las que como clientes preferimos y una empresa pueda <em><code>Recomendar</code></em> de manera más apropiadas.</p>
+<p>Corresponde al estudio de nuestra canasta de compras. De modo que podamos entender qué cosas son las que como clientes preferimos y una empresa pueda <em><code>Recomendar</code></em> de manera más apropiadas.</p>
 </div>
 </div>
 </div>
@@ -463,7 +463,7 @@ Alfonso Tobar-Arancibia
 <ul>
 <li>Datasets de supermercados:
 <ul>
-<li><em>10% de los clientes totales compran vino y quedo (patrón: si compro vino, también llevo queso)</em>.</li>
+<li><em>10% de los clientes totales compran vino y quedo (<code>patrón</code>: si compro vino, también llevo queso)</em>.</li>
 </ul></li>
 <li>Datasets de Alarmas:
 <ul>
@@ -477,7 +477,7 @@ Alfonso Tobar-Arancibia
 <dt>Datos Transaccionales</dt>
 <dd>
 <blockquote>
-<p>Una transacción involucra un conjunto de elementos. Una bolet de supermercado muestra el conjunto de elementos comprados por un cliente. Los productos involucrados en una transacción se denominan <code>items</code>.</p>
+<p>Una transacción involucra un conjunto de elementos. Una boleta de supermercado muestra el conjunto de elementos comprados por un cliente. Los productos involucrados en una transacción se denominan <code>items</code>.</p>
 </blockquote>
 </dd>
 </dl>
@@ -550,8 +550,8 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </section>
-<section id="medidas" class="slide level2">
-<h2>Medidas</h2>
+<section id="definiciones-medidas" class="slide level2">
+<h2>Definiciones: Medidas</h2>
 <div class="columns">
 <div class="column">
 <div class="callout callout-none no-icon callout-style-simple">
@@ -596,6 +596,16 @@ Fracción de las Transacciones en las que aparece <span class="math inline">\(X\
 </div>
 </div>
 </div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Ojo con la Notación <span class="math inline">\(\cup\)</span>. En este caso significa que tanto el producto X como el Producto Z sean parte de la transacción.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="ejemplos-support-y-confidence" class="slide level2 smaller">
 <h2>Ejemplos: Support y Confidence</h2>
@@ -616,7 +626,7 @@ Fracción de las Transacciones en las que aparece <span class="math inline">\(X\
 <section id="problema" class="slide level2">
 <h2>Problema</h2>
 <blockquote>
-<p>En un dataset transaccional de n productos totales y <span class="math inline">\(|U_i|\)</span> transacciones para la Transacción <span class="math inline">\(i\)</span>.</p>
+<p>En un dataset transaccional de n productos totales y <span class="math inline">\(|U_i|\)</span> elementos para la Transacción <span class="math inline">\(i\)</span>.</p>
 </blockquote>
 <p>Se pueden generar un total de <span class="math inline">\(N_{reglas}\)</span> de asociación:</p>
 <p><span class="math display">\[N_{reglas} = \sum_{i=1}^{2^{n}} \sum_{j=0}^{|U_i|}\binom{|U_i|}{j}\]</span></p>
@@ -656,11 +666,13 @@ Fracción de las Transacciones en las que aparece <span class="math inline">\(X\
 <p><br></p>
 <h4 id="algoritmo">Algoritmo</h4>
 <ol type="1">
-<li>Fijar <span class="math inline">\(k=1\)</span> y determinar lista de candidatos de tamaño <span class="math inline">\(k\)</span>.</li>
+<li>Fijar <span class="math inline">\(k=1\)</span> y determinar lista de candidatos de tamaño <span class="math inline">\(k\)</span>.
+<ol type="a">
 <li>Calcular la frecuencia del conjunto.</li>
 <li>Eliminar conjuntos con baja frecuencia (utilizando un <code>umbral de soporte</code>).</li>
 <li>Unir los conjuntos frecuentes para generar conjuntos de tamaño <span class="math inline">\(k+1\)</span>.</li>
-<li>Si existe algún conjunto nuevo, volver a 2. y repetir.</li>
+<li>Si existe la posibilidad de seguir creando combinaciones volver al <code>paso a</code> y repetir.</li>
+</ol></li>
 <li>Usar todos los conjuntos frecuentes para generar reglas.</li>
 </ol>
 </section>
@@ -670,10 +682,25 @@ Fracción de las Transacciones en las que aparece <span class="math inline">\(X\
 <p>Supongamos el siguiente dataset transaccional:</p>
 </blockquote>
 <p>Supongamos que queremos calcular las reglas de asociación que tengan un <code>MinSupp=40%</code> y un <code>MinConf=70%</code>.</p>
+<div class="columns">
+<div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="img/clase-7/apriori_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-7/apriori_ex.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
+</div>
+</div><div class="column" style="font-size: 130%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Podríamos pensar que <code>MinSupp</code> y <code>MinConf</code> son los <code>hiperparámetros</code> de este algoritmo.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="ejemplo-apriori-iteración-1" class="slide level2 smaller">
@@ -719,7 +746,7 @@ Fracción de las Transacciones en las que aparece <span class="math inline">\(X\
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Acá <strong>NO SE ELIMINA</strong> ningún producto, ya que en los itemsets que sobrevivieron hay Pan, Mantequilla, Leche, Pañales y Cerveza.</p>
+<p>Acá <strong>NO SE ELIMINA</strong> ningún producto, ya que en los itemsets que sobrevivieron hay <code>Pan</code>, <code>Mantequilla</code>, <code>Leche</code>, <code>Pañales</code> y <code>Cerveza</code>.</p>
 </div>
 </div>
 </div>
@@ -747,7 +774,7 @@ Fracción de las Transacciones en las que aparece <span class="math inline">\(X\
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Se puede apreciar que los únicos 3 productos que sobreviven son Pan, Mantequilla y Leche. Por lo tanto, <strong>NO ES POSIBLE</strong> generar reglas con 4 productos.</p>
+<p>Se puede apreciar que los únicos 3 productos que sobreviven son <code>Pan</code>, <code>Mantequilla</code> y <code>Leche</code>. Por lo tanto, <strong>NO ES POSIBLE</strong> generar reglas con 4 productos.</p>
 </div>
 </div>
 </div>
@@ -851,8 +878,8 @@ Fracción de las Transacciones en las que aparece <span class="math inline">\(X\
 </div>
 </div>
 </section>
-<section id="evaluar-reglas-de-asociación" class="slide level2 smaller">
-<h2>Evaluar Reglas de Asociación</h2>
+<section id="evaluación-de-reglas-de-asociación" class="slide level2 smaller">
+<h2>Evaluación de Reglas de Asociación</h2>
 <dl>
 <dt>Lift</dt>
 <dd>
@@ -1305,7 +1332,7 @@ Mide qué tan lejos de la independencia están <span class="math inline">\(X\)</
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

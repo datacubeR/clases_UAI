@@ -896,7 +896,7 @@
     "href": "tics411/clase-7.html#introducción",
     "title": "TICS-411 Minería de Datos",
     "section": "Introducción",
-    "text": "Introducción\n\nGracias a los planes de fidelización (juntar puntos, dar RUT, acumular millas, etc.) las empresas son capaces de detectar patrones:\n\n\nQué nos gusta,\nQué compramos,\nCon qué frecuencia lo compramos,\nJunto con qué lo compramos\netc.\n\n\n\n\n\n\n\nMarket Basket Analysis\n\n\nCorresponde al estudio de nuestra canaste de compras. De modo que podamos entender qué cosas son las que como clientes preferimos y una empresa pueda Recomendar de manera más apropiadas."
+    "text": "Introducción\n\nGracias a los planes de fidelización (juntar puntos, dar RUT, acumular millas, etc.) las empresas son capaces de detectar patrones:\n\n\nQué nos gusta,\nQué compramos,\nCon qué frecuencia lo compramos,\nJunto con qué lo compramos\netc.\n\n\n\n\n\n\n\nMarket Basket Analysis\n\n\nCorresponde al estudio de nuestra canasta de compras. De modo que podamos entender qué cosas son las que como clientes preferimos y una empresa pueda Recomendar de manera más apropiadas."
   },
   {
     "objectID": "tics411/clase-7.html#definiciones",
@@ -910,7 +910,7 @@
     "href": "tics411/clase-7.html#ejemplo-datos-supermercado",
     "title": "TICS-411 Minería de Datos",
     "section": "Ejemplo: Datos Supermercado",
-    "text": "Ejemplo: Datos Supermercado\n\nDatos Transaccionales\n\n\nUna transacción involucra un conjunto de elementos. Una bolet de supermercado muestra el conjunto de elementos comprados por un cliente. Los productos involucrados en una transacción se denominan items."
+    "text": "Ejemplo: Datos Supermercado\n\nDatos Transaccionales\n\n\nUna transacción involucra un conjunto de elementos. Una boleta de supermercado muestra el conjunto de elementos comprados por un cliente. Los productos involucrados en una transacción se denominan items."
   },
   {
     "objectID": "tics411/clase-7.html#ejemplo-datos-supermercado-1",
@@ -927,11 +927,11 @@
     "text": "Objetivo y Aplicaciones\n\n\n\n\n\n\nObjetivo\n\n\nEncontrar asociaciones entre elementos u objetos de bases de datos transaccionesles.\n\n\n\n\n\n\n\n\n\nAplicaciones\n\n\n\nApoyo a toma de decisiones.\nAnálisis de Información de Ventas.\nDistribución y ubicación de Mercaderías.\nSegmentación de Clientes en base de patrones de compra.\nDiágnostico y predicción de alarmas."
   },
   {
-    "objectID": "tics411/clase-7.html#medidas",
-    "href": "tics411/clase-7.html#medidas",
+    "objectID": "tics411/clase-7.html#definiciones-medidas",
+    "href": "tics411/clase-7.html#definiciones-medidas",
     "title": "TICS-411 Minería de Datos",
-    "section": "Medidas",
-    "text": "Medidas\n\n\n\n\n\n\nSupport (Soporte)\n\nFracción de Transacciones que contienen a \\(X\\). Probabilidad de que una transacción contenga a \\(X\\).\n\n\n\\[Supp(X) = P(X)\\]\n\n\n\n\n\n\n\nSupport Count\n\nNúmero de Transacciones que contienen a \\(X\\).\n\n\n\\[SuppCount(X) = Count(X)\\]\n\n\n\n\n\n\n\n\nConfidence (Confianza o Eficiencia)\n\nFracción de las Transacciones en las que aparece \\(X\\) que también incluyen \\(Z\\).\n\n\n\\[Conf(X \\implies Z) = \\frac{Supp(X \\cup Z)}{Supp(X)}\\] \\[Conf(X \\implies Z) = \\frac{SuppCount(X \\cup Z)}{SuppCount(X)}\\]"
+    "section": "Definiciones: Medidas",
+    "text": "Definiciones: Medidas\n\n\n\n\n\n\nSupport (Soporte)\n\nFracción de Transacciones que contienen a \\(X\\). Probabilidad de que una transacción contenga a \\(X\\).\n\n\n\\[Supp(X) = P(X)\\]\n\n\n\n\n\n\n\nSupport Count\n\nNúmero de Transacciones que contienen a \\(X\\).\n\n\n\\[SuppCount(X) = Count(X)\\]\n\n\n\n\n\n\n\n\nConfidence (Confianza o Eficiencia)\n\nFracción de las Transacciones en las que aparece \\(X\\) que también incluyen \\(Z\\).\n\n\n\\[Conf(X \\implies Z) = \\frac{Supp(X \\cup Z)}{Supp(X)}\\] \\[Conf(X \\implies Z) = \\frac{SuppCount(X \\cup Z)}{SuppCount(X)}\\]\n\n\n\n\n\n\n\n\n\n\n\nOjo con la Notación \\(\\cup\\). En este caso significa que tanto el producto X como el Producto Z sean parte de la transacción."
   },
   {
     "objectID": "tics411/clase-7.html#ejemplos-support-y-confidence",
@@ -945,21 +945,21 @@
     "href": "tics411/clase-7.html#problema",
     "title": "TICS-411 Minería de Datos",
     "section": "Problema",
-    "text": "Problema\n\nEn un dataset transaccional de n productos totales y \\(|U_i|\\) transacciones para la Transacción \\(i\\).\n\nSe pueden generar un total de \\(N_{reglas}\\) de asociación:\n\\[N_{reglas} = \\sum_{i=1}^{2^{n}} \\sum_{j=0}^{|U_i|}\\binom{|U_i|}{j}\\]\n\n\n\n\n\n\n\n\n\nSi suponemos un supermercado que tiene 1000 productos, y transacciones que pueden ir entre 1 y 50 productos. El problema es muy costoso, y se podrían eventualmente generar demasiadas combinaciones."
+    "text": "Problema\n\nEn un dataset transaccional de n productos totales y \\(|U_i|\\) elementos para la Transacción \\(i\\).\n\nSe pueden generar un total de \\(N_{reglas}\\) de asociación:\n\\[N_{reglas} = \\sum_{i=1}^{2^{n}} \\sum_{j=0}^{|U_i|}\\binom{|U_i|}{j}\\]\n\n\n\n\n\n\n\n\n\nSi suponemos un supermercado que tiene 1000 productos, y transacciones que pueden ir entre 1 y 50 productos. El problema es muy costoso, y se podrían eventualmente generar demasiadas combinaciones."
   },
   {
     "objectID": "tics411/clase-7.html#algoritmo-apriori",
     "href": "tics411/clase-7.html#algoritmo-apriori",
     "title": "TICS-411 Minería de Datos",
     "section": "Algoritmo Apriori",
-    "text": "Algoritmo Apriori\n\nApriori\n\n\nEs un algoritmo para aprender reglas de asociación que utiliza el principio Apriori para buscar de forma eficiente las reglas que satisfacen los límites de soporte y confianza.\n\n\n\n\nAlgoritmo\n\nFijar \\(k=1\\) y determinar lista de candidatos de tamaño \\(k\\).\nCalcular la frecuencia del conjunto.\nEliminar conjuntos con baja frecuencia (utilizando un umbral de soporte).\nUnir los conjuntos frecuentes para generar conjuntos de tamaño \\(k+1\\).\nSi existe algún conjunto nuevo, volver a 2. y repetir.\nUsar todos los conjuntos frecuentes para generar reglas."
+    "text": "Algoritmo Apriori\n\nApriori\n\n\nEs un algoritmo para aprender reglas de asociación que utiliza el principio Apriori para buscar de forma eficiente las reglas que satisfacen los límites de soporte y confianza.\n\n\n\n\nAlgoritmo\n\nFijar \\(k=1\\) y determinar lista de candidatos de tamaño \\(k\\).\n\nCalcular la frecuencia del conjunto.\nEliminar conjuntos con baja frecuencia (utilizando un umbral de soporte).\nUnir los conjuntos frecuentes para generar conjuntos de tamaño \\(k+1\\).\nSi existe la posibilidad de seguir creando combinaciones volver al paso a y repetir.\n\nUsar todos los conjuntos frecuentes para generar reglas."
   },
   {
     "objectID": "tics411/clase-7.html#ejemplo-apriori",
     "href": "tics411/clase-7.html#ejemplo-apriori",
     "title": "TICS-411 Minería de Datos",
     "section": "Ejemplo Apriori",
-    "text": "Ejemplo Apriori\n\nSupongamos el siguiente dataset transaccional:\n\nSupongamos que queremos calcular las reglas de asociación que tengan un MinSupp=40% y un MinConf=70%."
+    "text": "Ejemplo Apriori\n\nSupongamos el siguiente dataset transaccional:\n\nSupongamos que queremos calcular las reglas de asociación que tengan un MinSupp=40% y un MinConf=70%.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPodríamos pensar que MinSupp y MinConf son los hiperparámetros de este algoritmo."
   },
   {
     "objectID": "tics411/clase-7.html#ejemplo-apriori-iteración-1",
@@ -1004,11 +1004,11 @@
     "text": "Resultado Final\n\n\nItemset MinSupp = 40%\n\n\n\n\n\n\nReglas Finales MinConf = 70%\n\\[Pan \\implies Mantequilla\\] \\[Mantequilla \\implies Pan\\] \\[Leche \\implies Pan\\] \\[Leche \\implies Mantequilla\\] \\[Cerveza \\implies Pañales\\] \\[\\{Pan, Leche\\} \\implies Mantequilla\\]\n\\[\\{Mantequilla, Leche\\} \\implies Pan\\] \\[Leche \\implies \\{Pan, Mantequilla\\}\\]\n\n\n\n\n\n\nInsights:\n\n\n\nEl Pan, la Leche y la Mantequilla están relacionados.\nParece ser que si llevo Cervezas también llevo Pañales."
   },
   {
-    "objectID": "tics411/clase-7.html#evaluar-reglas-de-asociación",
-    "href": "tics411/clase-7.html#evaluar-reglas-de-asociación",
+    "objectID": "tics411/clase-7.html#evaluación-de-reglas-de-asociación",
+    "href": "tics411/clase-7.html#evaluación-de-reglas-de-asociación",
     "title": "TICS-411 Minería de Datos",
-    "section": "Evaluar Reglas de Asociación",
-    "text": "Evaluar Reglas de Asociación\n\nLift\n\nMide qué tan lejos de la independencia están \\(X\\) e \\(Y\\). Lift varía entre 0 y \\(\\infty\\).\n\n\n\\[Lift(X,Y) = \\frac{Conf(X \\implies Y)}{s(Y)}\\]\n\n\\(Lift(X,Y) \\sim 1\\) implica independencia y la regla no es importante.\n\\(Lift(X,Y) &lt; 1\\) implica una asociación negativa de la regla.\n\\(Lift(X,Y) &gt; 1\\) implica una asociativa de la regla. Un mayor Lift implica que la regla es potencialmente útil para el futuro.\n\nEjemplo:\n\\[Lift(Cerveza, Pañales) = \\frac{Conf(Cerveza \\implies Pañales)}{Supp(Pañales)} = \\frac{1}{0.6} = 1.67\\]\n\n\n\n\n\n\nUna persona que compra Cerveza tiene 1.67 más chances de comprar Pañales."
+    "section": "Evaluación de Reglas de Asociación",
+    "text": "Evaluación de Reglas de Asociación\n\nLift\n\nMide qué tan lejos de la independencia están \\(X\\) e \\(Y\\). Lift varía entre 0 y \\(\\infty\\).\n\n\n\\[Lift(X,Y) = \\frac{Conf(X \\implies Y)}{s(Y)}\\]\n\n\\(Lift(X,Y) \\sim 1\\) implica independencia y la regla no es importante.\n\\(Lift(X,Y) &lt; 1\\) implica una asociación negativa de la regla.\n\\(Lift(X,Y) &gt; 1\\) implica una asociativa de la regla. Un mayor Lift implica que la regla es potencialmente útil para el futuro.\n\nEjemplo:\n\\[Lift(Cerveza, Pañales) = \\frac{Conf(Cerveza \\implies Pañales)}{Supp(Pañales)} = \\frac{1}{0.6} = 1.67\\]\n\n\n\n\n\n\nUna persona que compra Cerveza tiene 1.67 más chances de comprar Pañales."
   },
   {
     "objectID": "tics411/clase-7.html#implementación-en-python-preprocesamiento",
