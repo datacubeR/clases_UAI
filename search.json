@@ -315,7 +315,7 @@
     "href": "tics411/clase-1.html#selección-de-variables",
     "title": "TICS-411 Minería de Datos",
     "section": "Selección de Variables",
-    "text": "Selección de Variables\n\nSe refiere al proceso de eliminar variables que pueden ser irrelevantes o poco significativas.\n\n\n\n\n\n\n\n\n\n\n\n\n\nProcesos Manuales.\nProcesos Automáticos:\n\nPCA (Principal Component Analysis).\nRecursive Feature Elimination.\nRecursive Feature Addition.\nEliminación mediante alguna medida."
+    "text": "Selección de Variables\n\nSe refiere al proceso de eliminar variables que pueden ser irrelevantes o poco significativas.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProcesos Manuales.\nProcesos Automáticos:\n\nPCA (Principal Component Analysis).\nRecursive Feature Elimination.\nRecursive Feature Addition.\nEliminación mediante alguna medida.\n\n\n\n\n\n\n\n\n\n\n\n\nObjetivo\n\n\n\nPuede ser una técnica apropiada para combatir la Maldición de la Dimensionalidad (Curse of Dimensionality)."
   },
   {
     "objectID": "tics411/clase-1.html#medidas-1",
