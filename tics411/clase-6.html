@@ -642,7 +642,7 @@ Alfonso Tobar-Arancibia
 <p><span class="math display">\[ SSB_{total} = \sum_{k = 1}^K |C_k|(\bar{X} - \bar{C_k})^2\]</span></p>
 <ul>
 <li><span class="math inline">\(|C_k|\)</span> corresponde al número de elementos (Cardinalidad) del Cluster <span class="math inline">\(i\)</span>.</li>
-<li><span class="math inline">\(\bar{X}\)</span> corresponde al promedio de todos los puntos en el Cluster k.</li>
+<li><span class="math inline">\(\bar{X}\)</span> corresponde al promedio de todos los puntos.</li>
 </ul>
 </section>
 <section id="coeficiente-de-silhouette-coeficiente-de-silueta" class="slide level2">
@@ -1174,7 +1174,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

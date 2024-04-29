@@ -398,7 +398,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 4: Clustering Jerárquico</p>
+  <p class="subtitle">Clase 8: Aprendizaje Supervisado</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -413,592 +413,190 @@ Alfonso Tobar-Arancibia
 
 </section>
 <section>
-<section id="clustering-jerárquico" class="title-slide slide level1 center">
-<h1>Clustering Jerárquico</h1>
+<section id="aprendizaje-supervisado" class="title-slide slide level1 center">
+<h1>Aprendizaje Supervisado</h1>
 
 </section>
-<section id="definiciones" class="slide level2 smaller">
-<h2>Definiciones</h2>
-<dl>
-<dt>Clustering Jerárquico</dt>
-<dd>
-<blockquote>
-<p>Es un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender. Se basa en la construcción de Jerarquías para ir construyendo clusters.</p>
-</blockquote>
-</dd>
-<dt>Dendograma</dt>
-<dd>
-<blockquote>
-<p>Corresponde a un diagrama en el que se muestran las distancias de atributos entre clases que son parte de un mismo cluster.</p>
-</blockquote>
-</dd>
-</dl>
-</section>
-<section id="clustering-jerarquía" class="slide level2 smaller">
-<h2>Clustering: Jerarquía</h2>
-<blockquote>
-<p>Los algoritmos basados en jerarquía pueden seguir 2 estrategias:</p>
-</blockquote>
+<section id="introducción-al-aprendizaje-supervisado" class="slide level2">
+<h2>Introducción al Aprendizaje Supervisado</h2>
+<p>Los modelos Predictivos/Supervisados tienen la capacidad de predecir valores en datos no vistos.</p>
+<p>Aprenden mediante un <code>train_set</code> y evalúan su performance utilizando un <code>test_set</code>.</p>
+<p>2 Tipos:</p>
 <ul>
-<li><p><strong>Aglomerativos</strong>: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. <code>Para n objetos se realizan n-1 uniones</code>.</p></li>
-<li><p><strong>Divisionales</strong>: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad.</p></li>
+<li>Clasificación</li>
+<li>Regresión</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-3/jerarquia.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-3/jerarquia.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</section></section>
-<section>
-<section id="clustering-aglomerativo" class="title-slide slide level1 center">
-<h1>Clustering Aglomerativo</h1>
-
 </section>
-<section id="clustering-aglomerativo-algoritmo" class="slide level2">
-<h2>Clustering Aglomerativo: Algoritmo</h2>
-<p>Algoritmo</p>
-<ol type="1">
-<li>Inicialmente se considera <strong>cada punto como un cluster</strong>.</li>
-<li>Calcula la matriz de <em><code>proximidad/distancia</code></em> entre cada cluster.</li>
-<li>Repetir <code>(hasta que exista un solo cluster)</code>:
-<ul>
-<li>Unir los cluster más cercanos.</li>
-<li>Actualizar la matriz de <em><code>proximidad/distancia</code></em>.</li>
-</ul></li>
-</ol>
-<div class="callout callout-note callout-style-simple">
+<section id="definiciones" class="slide level2">
+<h2>Definiciones</h2>
+<p>Features Labels o Etiquetas</p>
+</section>
+<section id="ejemplo-clasificación" class="slide level2">
+<h2>Ejemplo Clasificación</h2>
+<blockquote>
+<p>Queremos generar un algoritmo de aprendizaje tal que dado un cierto set de datos predigamos si es que a un niño se le dará o no permiso para jugar.</p>
+</blockquote>
+<div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Lo más importante de este proceso es el cálculo de la matriz de proximidad/distancia entre clusters</p>
+<p>Problema de Clasificación Binaria.</p>
 </div>
 </div>
 </div>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/dataset_sunny.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-8/dataset_sunny.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Distintos enfoques de distancia entre clusters, segmentan los datos en forma distinta.</p>
+<ul>
+<li>Llamaremos Features a la <code>Matriz</code> variables que intentarán predecir la etiqueta (con título morado).</li>
+<li>Llamaremos etiquetas al <code>vector</code> de valores a predecir (en azul).</li>
+</ul>
 </div>
 </div>
-</div>
-</section>
-<section id="clustering-aglomerativo-ejemplo" class="slide level2 smaller">
-<h2>Clustering Aglomerativo: Ejemplo</h2>
-<p>Supongamos que tenemos cinco tipos de genes cuya expresión ha sido determinada por 3 caracteríticas. Las siguientes expresiones pueden ser vistas como la expresión dados los genes en tres experimentos. ​</p>
-<blockquote>
-<p>Apliquemos un Clustering Jerárquico Aglomerativo utilizando como medida de similaridad la <code>Distancia Euclideana</code>.</p>
-</blockquote>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Otros tipos de distancia también son aplicables siguiendo un procedimiento análogo.</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/data_jerarquico.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-4/data_jerarquico.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/d_matrix_ejemplo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-4/d_matrix_ejemplo.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
 </div>
 </div>
 </div>
 </section>
-<section id="algoritmo-1era-iteración" class="slide level2">
-<h2>Algoritmo: 1era Iteración</h2>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>El algoritmo considerará que todos los puntos inicialmente son un cluster. Por lo tanto, tratará de encontrar los 2 puntos más cercanos e intentará unirnos en un sólo cluster.</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/d_matrix_ejemplo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-4/d_matrix_ejemplo.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/iter_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-4/iter_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong>Problema</strong>: ¿Cómo actualizamos la matriz de Distancias?</p>
-</div>
-</div>
-</div>
-</div>
-</div><div class="column fragment" data-fragment-index="2">
+<section id="definiciones-1" class="slide level2">
+<h2>Definiciones</h2>
+<p><span class="math display">\[h_\theta(X) = f(X, \theta)\]</span></p>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Entonces crearemos un nuevo cluster: <code>bcl2-Caspade.</code></p>
-</div>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-4/update.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="clustering-aglomerativo-single-linkage" class="slide level2">
-<h2>Clustering Aglomerativo: Single Linkage</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
 <ul>
-<li>Distancia entre clusters determinada por los puntos más <em><code>similares</code></em> entre los clusters.</li>
+<li>A <span class="math inline">\(h_\theta(\cdot)\)</span> la denominaremos <code>hipótesis</code> o simplemente <code>modelo</code>.</li>
+<li><span class="math inline">\(X\)</span> será nuestro set de <code>features</code> (<span class="math inline">\(n\times m\)</span> donde <span class="math inline">\(n\)</span> es el número de observaciones y <span class="math inline">\(m\)</span> el número de features).<br>
+</li>
+<li>Cada fila de <span class="math inline">\(X\)</span> corresponde a un vector <span class="math inline">\(x_i\)</span> que representa una observación de nuestro set de features.</li>
+<li><span class="math inline">\(\theta\)</span> corresponde a los parámetros del modelo <em>(existen modelos paramétricos y no paramétricos)</em>.</li>
+<li>Cada <code>algoritmo</code> tendrá su propio mapeo <span class="math inline">\(f(\cdot)\)</span> para tratar de <em>predecir</em> una etiqueta.</li>
 </ul>
 </div>
 </div>
 </div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/single.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-4/single.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="math display">\[D(C_i, C_j) = min\{d(x,y) | x \in C_i, y \in C_j\}\]</span></p>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ventajas</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Genera Clusters largos y delgados.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Limitaciones</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Afectado por Outliers</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="clustering-aglomerativo-complete-linkage" class="slide level2">
-<h2>Clustering Aglomerativo: Complete Linkage</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Distancia determinada por la distancia ente los puntos más <em><code>disímiles</code></em> entre los clusters.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/complete.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-4/complete.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="math display">\[D(C_i, C_j) = max\{d(x,y) | x \in C_i, y \in C_j\}\]</span></p>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ventajas</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Menos suceptible a dato atípicos.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Limitaciones</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Tiende a quebrar Clusters Grandes.</li>
-<li>Tiene tendencia a generar Clusters circulares.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="clustering-aglomerativo-average-linkage" class="slide level2">
-<h2>Clustering Aglomerativo: Average Linkage</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Distancia determinada por el promedio de las distancias que componen los clusters.</li>
-<li>Punto intermedio entre <em>Single</em> y <em>Complete</em>.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/average.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-4/average.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="math display">\[D(C_i, C_j) = avg\{d(x,y) | x \in C_i, y \in C_j\}\]</span></p>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ventajas</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Menos suceptible a datos atípicos.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Limitaciones</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Tiende a generar clusters circulares.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="clustering-aglomerativo-ward-linkage" class="slide level2">
-<h2>Clustering Aglomerativo: Ward Linkage</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Distancia determinada por el incremento del <code>Within cluster distance</code>.</li>
-<li>Minimiza la distancia intra cluster y maximiza la distancia entre clusters.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/ward.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-4/ward.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="math display">\[D(C_i, C_j) = wc(Cij) - wc(C_i) - wc(C_j) = \frac{n_i\cdot n_j}{n_i + n_j}||\bar{C_i} - \bar{C_j}||^2\]</span></p>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ventajas</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Menos suceptible a dato atípicos.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Limitaciones</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Tiende a generar clusters circulares.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="hiperparámetros" class="slide level2">
-<h2>Hiperparámetros</h2>
-<p>Los Hiperparámetros de este modelo serán:</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Note</strong></p>
+<p><strong>Tipos de Hipótesis</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li><code>linkage</code>: La forma de calcular la distancia entre clusters.</li>
-<li><code>distancia</code>: La distancia utilizada como similaridad entre los clusters.</li>
+<li>Si <span class="math inline">\(h_\theta(X)\)</span> devuelve valores discretos (o categóricos) hablaremos de un modelo de <code>Clasificación</code>.</li>
+<li>Si <span class="math inline">\(h_\theta(X)\)</span> devuelve valores continuos hablaremos de un modelo de <code>Regresión</code>.</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="callout callout-warning callout-style-simple">
+</section>
+<section id="definiciones-2" class="slide level2 smaller">
+<h2>Definiciones</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
+<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
+<p><strong>Clasificación:</strong></p>
+</div>
 <div class="callout-content">
-<p>A diferencia de K-Means, este método no requiere definir el número de Clusters a priori.</p>
+<ul>
+<li><strong>Binaria</strong>: La Clasificación es dicotómica, Perro o Gato, Sí o No, 1 o 0, Clase Positiva o Negativa.</li>
+<li><strong>Multiclase</strong>: La clasificación puede tener más de 2 clases, pero sólo una es posible.
+<ul>
+<li>Ej: Perro, Gato o Canario; 0, 1, 2, 3, 4.</li>
+</ul></li>
+<li><strong>Multilabel</strong>: La clasificación puede tener más de 2 clases, y más de una es posible a la vez.
+<ul>
+<li>Ej: Categorías de Libro: Puede ser Romance y Drama, Películas: Fantasía, Animación y Acción.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Regresión:</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong>Simple</strong>: Predigo sólo un valor. Ej: Predecir la Temperatura.</li>
+<li><strong>Multiple</strong>: Predigo varios valores continuos a la vez.
+<ul>
+<li>Ej: Modelo para intentar estimar Temperatura y Humedad a la vez.</li>
+</ul></li>
+<li><strong>Forecast</strong>: Donde se utilizan valores pasados para estimar valores futuros.
+<ul>
+<li>Dadas mis ganancias pasadas, estimar las futuras.</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
 </section>
-<section id="volvamos-a-la-iteración-1" class="slide level2 smaller">
-<h2>Volvamos a la Iteración 1</h2>
+<section id="clasificación-intuición" class="slide level2 smaller">
+<h2>Clasificación: Intuición</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/clf_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-8/clf_ex.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
 <blockquote>
-<p>Supongamos que por simplicidad utilizaremos <code>Average Linkage</code>. (El proceso para utilizar otro linkage es análogo).</p>
+<p>Supongamos el siguiente problema de clasificación. Tenemos un algoritmo, que dadas las variables <code>Largo</code> y <code>Peso</code> sean capaces de predecir si es que un Pez es una <em>Reineta</em> o una <em>Sardina</em>.</p>
 </blockquote>
-<div class="columns">
-<div class="column" style="width:40%;">
+</section>
+<section id="clasificación-intuición-1" class="slide level2">
+<h2>Clasificación: Intuición</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-4/update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-4/update.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-8/clf_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-8/clf_1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
-<div class="fragment" data-fragment-index="1">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Vamos a extraer una Matriz entre los puntos a fusionar y los puntos de los clusters restantes.</p>
-</div>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/up_11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-4/up_11.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/up_12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-4/up_12.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/up_13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-4/up_13.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="4"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="5">
-<!-- -->
-<h5 id="dendograma-1era-iteración">Dendograma: 1era Iteración</h5>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/dend_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-4/dend_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="5"></a></p>
-</figure>
+<p>Queremos encontrar una <code>Regla de Decisión</code> (Decision Rule) que permita clasificar correctamente un punto nuevo.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="iteración-2" class="slide level2 smaller">
-<h2>Iteración 2</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/iter_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-4/iter_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/iter_2_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-4/iter_2_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/update_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-4/update_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/up_21.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-4/up_21.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="4"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/up_22.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-4/up_22.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="5"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="6">
-<!-- -->
-<h5 id="dendograma-2da-iteración">Dendograma: 2da Iteración</h5>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/dend_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-4/dend_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="6"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="iteración-3" class="slide level2 smaller">
-<h2>Iteración 3</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/iter_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-4/iter_3.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/iter_3_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-4/iter_3_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/update_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-4/update_3.png" class="fragment quarto-figure quarto-figure-center" style="width:70.0%" data-fragment-index="3"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/up_31.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-4/up_31.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="4"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="5">
-<!-- -->
-<h5 id="dendograma-3ra-iteración">Dendograma: 3ra Iteración</h5>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/dend_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-4/dend_3.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="4"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="dendograma-resultante" class="slide level2">
-<h2>Dendograma Resultante</h2>
+<section id="k-nearest-neighbors" class="slide level2 smaller">
+<h2>K-Nearest Neighbors</h2>
+<blockquote>
+<p>El modelo de vecinos más cercanos, o KNN por sus siglas en Inglés es un modelo basado en <code>distancias</code>. Su <code>regla de decisión</code> se basa en imitar el comportamiento de sus <span class="math inline">\(K\)</span> vecinos más cercanos por votación (para clasificación) o la media (para regresión).</p>
+</blockquote>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>No es necesario realizar la última iteración ya que se entiende que ambos clusters se unen.</p>
+<p>K es un <code>hiperparámetro</code> de este modelo.</p>
 </div>
 </div>
 </div>
@@ -1006,7 +604,107 @@ Alfonso Tobar-Arancibia
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-4/dend_4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-4/dend_4.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-8/knn_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-8/knn_ex.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<ul>
+<li>Supongamos <span class="math inline">\(K = 3\)</span>.</li>
+<li>Es decir, tomaremos los 3 vecinos más cercanos.</li>
+</ul>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En general es una buena idea elegir vecinos impares. <strong>¿Por qué?</strong></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="knn-paso-1-training-time" class="slide level2">
+<h2>KNN: Paso 1 (Training Time)</h2>
+<dl>
+<dt>Training Time</dt>
+<dd>
+Corresponde al periodo donde el modelo aprende de los datos. Toma un patrón y ese modelo es utilizado para predecir.
+</dd>
+</dl>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En el caso de un KNN <strong>NO HAY APRENDIZAJE</strong> en esta etapa.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="knn-paso-2-test-time" class="slide level2 smaller">
+<h2>KNN: Paso 2 (Test Time)</h2>
+<dl>
+<dt>Inference Time</dt>
+<dd>
+Corresponde al periodo donde el modelo debe emitir una predicción.
+</dd>
+</dl>
+<p>En este caso, KNN calcula las distancias del punto a predecir (en verde) a todos los otros puntos existentes (proceso caro).</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/knn_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-8/knn_ex.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/knn_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-8/knn_dist.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/ord_dist_knn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-8/ord_dist_knn.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>La predicción corresponderá a la etiqueta mayoritaria por <code>votacioń</code></li>
+</ul>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>La predicción corresponderá a la etiqueta mayoritaria por <code>votacioń</code>.</li>
+<li><strong>¿Cuál sería una buena estrategia de predicción para un modelo de Regresión?</strong></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="fronteras-de-decisión" class="slide level2">
+<h2>Fronteras de Decisión</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/frontera_decision.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-8/frontera_decision.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
 </figure>
 </div>
 <div class="callout callout-note callout-style-simple">
@@ -1015,64 +713,62 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>¿Cómo encontramos los clusters una vez que tenemos el <strong>Dendograma</strong>?</p>
+<ul>
+<li>Implicitamente, todo modelo de Machine Learning generará lo que se llama una Frontera de Decisión.</li>
+<li>Si un punto no visto cae dentro de su frontera entonces se le asigna dicha etiqueta.</li>
+</ul>
 </div>
 </div>
 </div>
-</div><div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/d_cluster_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-4/d_cluster_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
+</section>
+<section id="implementación-clasificación-en-scikit-learn" class="slide level2">
+<h2>Implementación Clasificación en Scikit-Learn</h2>
+<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3-4|6-7|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a>knn_clf <span class="op">=</span> KNeighborsClasifier(n_neighbors <span class="op">=</span> <span class="dv">5</span>, metric<span class="op">=</span><span class="st">"minkowski"</span>, p<span class="op">=</span><span class="dv">2</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb1-4"><a></a>knn_clf.fit(X, y)</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a><span class="co"># Predicción...</span></span>
+<span id="cb1-7"><a></a>y_pred <span class="op">=</span> knn_clf.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div style="font-size: 75%;">
+<ul>
+<li><strong>n_neighbors</strong>: <span class="math inline">\(K\)</span> número de vecinos a utilizar. Por defecto 5.</li>
+<li><strong>metric</strong>: Métrica de distancia. Por defecto “Minkowski”.</li>
+<li><strong>p</strong>: Potencia de Minkowski: <span class="math inline">\(p=1\)</span>, Manhattan, <span class="math inline">\(p=2\)</span> Euclideana. Por defecto <span class="math inline">\(p=2\)</span>.</li>
+<li><strong>n_jobs</strong>: Corresponde a un parámetro interno para poder paralelizar los cálculos. Se recomienda utilizar -1 para utilizar todos sus cores.</li>
+</ul>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/d_cluster_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-4/d_cluster_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
+</section>
+<section id="implementación-regresión-en-scikit-learn" class="slide level2">
+<h2>Implementación Regresión en Scikit-Learn</h2>
+<div class="sourceCode" id="cb2" data-code-line-numbers="|1|3-4|6-7|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>knn_clf <span class="op">=</span> KNeighborsRegressor(n_neighbors <span class="op">=</span> <span class="dv">5</span>, metric<span class="op">=</span><span class="st">"minkowski"</span>, p<span class="op">=</span><span class="dv">2</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb2-4"><a></a>knn_clf.fit(X, y)</span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a><span class="co"># Predicción...</span></span>
+<span id="cb2-7"><a></a>y_pred <span class="op">=</span> knn_clf.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div style="font-size: 75%;">
+<ul>
+<li><strong>n_neighbors</strong>: <span class="math inline">\(K\)</span> número de vecinos a utilizar. Por defecto 5.</li>
+<li><strong>metric</strong>: Métrica de distancia. Por defecto “Minkowski”.</li>
+<li><strong>p</strong>: Potencia de Minkowski: <span class="math inline">\(p=1\)</span>, Manhattan, <span class="math inline">\(p=2\)</span> Euclideana. Por defecto <span class="math inline">\(p=2\)</span>.</li>
+<li><strong>n_jobs</strong>: Corresponde a un parámetro interno para poder paralelizar los cálculos. Se recomienda utilizar -1 para utilizar todos sus cores.</li>
+</ul>
 </div>
-</div>
-<div class="fragment" data-fragment-index="2" style="font-size: 85%;">
-<div class="callout callout-tip callout-style-simple">
+<div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<ul>
-<li>Podemos escoger un <em><code>umbral de distancia</code></em> y ver cuántos clusters se forman.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="2" style="font-size: 85%;">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Como regla general se deben escoger clusters más <em><code>distanciados</code></em> entre sí.</li>
-</ul>
-</div>
-</div>
-</div>
+<p>¿Cómo se encuentran las predicciones en un modelo de <strong>Regresión</strong>?</p>
 </div>
 </div>
 </div>
 </section>
-<section id="efecto-del-linkage-escogido" class="slide level2">
-<h2>Efecto del Linkage Escogido</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/linkage_types.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-4/linkage_types.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</section>
-<section id="clustering-jerárquico-detalles-técnicos" class="slide level2">
-<h2>Clustering Jerárquico: Detalles Técnicos</h2>
+<section id="knn-detalles-técnicos" class="slide level2">
+<h2>KNN: Detalles Técnicos</h2>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1083,8 +779,8 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <ul>
-<li>No requiere definir el número de Clusters a priori.</li>
-<li>Al tener distintas variantes es posible que los puntos sean agrupados de manera completamente distintas.</li>
+<li>Modelo muy simple de implementar y entender.</li>
+<li>Muy eficiente en el aprendizaje.</li>
 </ul>
 </div>
 </div>
@@ -1099,132 +795,15 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <ul>
-<li>Muy ineficiente computacionalmente debido a que genera una nueva matriz de distancia en cada iteración lo que entrega una complejidad <span class="math inline">\(O(n^2)\)</span> o <span class="math inline">\(O(n^3)\)</span> dependiendo del linkage.</li>
-<li>Una vez que se decide combinar 2 clusters no es posible revertir esta decisión.</li>
-<li>No tiene capacidad de generalización, ya que no es posible aplicarlo a datos nuevos.</li>
+<li>Inferencia ineficiente.</li>
+<li><code>Curse of Dimensionality</code>: A medida que el número de dimensiones del problema crece, se requiere un incremento exponencial en la cantidad de datos para asegurar que existen suficientes vecinos cercanos para cualquier punto.</li>
 </ul>
 </div>
-</div>
-</div>
-</section>
-<section id="implementación-en-scikit-learn" class="slide level2">
-<h2>Implementación en Scikit-Learn</h2>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3|5-6|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>ac <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span><span class="dv">2</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>,linkage<span class="op">=</span><span class="st">"ward"</span>)</span>
-<span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a><span class="co">## Se entrena y se genera la predicción</span></span>
-<span id="cb1-6"><a></a>ac.fit_predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="columns" style="font-size: 70%;">
-<ul>
-<li><p><strong>n_clusters</strong>: Define el número de clusters a crear, por defecto 2.</p></li>
-<li><p><strong>metric</strong>: Permite distancias L1, L2 y coseno. Por defecto “euclidean”.</p></li>
-<li><p><strong>linkage</strong>: Permite single, complete, average y ward. Por defecto “ward”.</p></li>
-<li><p><code>.fit_predict()</code>: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento.</p></li>
-</ul>
-</div>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Si bien el método de Aglomeración no requiere el número de clusters a generar, Scikit-Learn lo exige de modo de poder etiquetar cada elemento.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong>¿Por qué no existen los métodos <code>.fit()</code> y <code>.predict()</code> por separado?</strong></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="otras-implementaciones-dendograma" class="slide level2">
-<h2>Otras implementaciones (Dendograma)</h2>
-<div class="sourceCode" id="cb2" data-code-line-numbers="|1|3-4|5-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a><span class="co"># Genera los cálculos necesarios para construir el Histograma.</span></span>
-<span id="cb2-4"><a></a>Z <span class="op">=</span> linkage(X, method<span class="op">=</span><span class="st">'single'</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>) </span>
-<span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a><span class="co"># Graficar el Dendograma</span></span>
-<span id="cb2-7"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>)) <span class="co"># Define el tamaño del Gráfico</span></span>
-<span id="cb2-8"><a></a>plt.title(<span class="st">'Dendograma Clustering Jerárquico'</span>) <span class="co"># Define un título para el dendograma</span></span>
-<span id="cb2-9"><a></a>plt.xlabel(<span class="st">'Iris Samples'</span>)</span>
-<span id="cb2-10"><a></a>plt.ylabel(<span class="st">'Distance'</span>)</span>
-<span id="cb2-11"><a></a>dendrogram(Z, leaf_rotation<span class="op">=</span><span class="fl">90.</span>, leaf_font_size<span class="op">=</span><span class="fl">8.</span>)</span>
-<span id="cb2-12"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="columns" style="font-size: 70%;">
-<blockquote>
-<p>Principalmente este código permite graficar el Dendograma completo.</p>
-</blockquote><p>L4: Genera una instancia del Dendograma. (Sería equivalente al <code>.fit()</code> de <code>Scikit-Learn</code>).<br>
-L5-L12: Corresponde al código necesario para graficar el Dendograma.</p>
-</div>
-</section>
-<section id="sugerencias" class="slide level2">
-<h2>Sugerencias</h2>
-<div class="callout callout-important callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Pre-procesamientos</strong></p>
-</div>
-<div class="callout-content">
-<p>Es importante recordar que el clustering aglomerativo también es un Algoritmo basado en <code>distancias</code>, por lo tanto se ve afectado por Outliers y por Escala.</p>
-<p>Se recomienda preprocesar los datos con:</p>
-<ul>
-<li><code>Winsorizer()</code> para eliminar Outliers.</li>
-<li><code>StandardScaler()</code> o <code>MinMaxScaler()</code> para llevar a una escala común.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Otras técnicas como merge y split, no aplican a este tipo de clustering debido a las limitaciones del algoritmo.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="variantes" class="slide level2 smaller">
-<h2>Variantes</h2>
-<blockquote>
-<p>En casos en los que no es posible calcular distancias debido a la presencia de datos categóricos, es posible utilizar el <strong>Gower Dissimilarity</strong> como medida de similitud.</p>
-</blockquote>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/gower.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="img/clase-4/gower.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-<div class="columns">
-<div class="column">
-<dl>
-<dt>Gower</dt>
-<dd>
-Se define como la proporción de variables que tienen distinto valor con respecto al total sin considerar donde ambos son ceros.
-</dd>
-</dl>
-</div><div class="column">
-<p><span class="math display">\[Gower(p1,p2) = \frac{3}{9}\]</span></p>
 </div>
 </div>
 </section></section>
-<section id="cest-fini" class="title-slide slide level1 center">
-<h1>C’est fini</h1>
+<section id="saionara" class="title-slide slide level1 center">
+<h1>Saionara!</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -1266,7 +845,7 @@ Se define como la proporción de variables que tienen distinto valor con respect
       Reveal.initialize({
 'controlsAuto': false,
 'previewLinksAuto': false,
-'pdfSeparateFragments': false,
+'pdfSeparateFragments': true,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
@@ -1605,7 +1184,7 @@ Se define como la proporción de variables que tienen distinto valor con respect
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

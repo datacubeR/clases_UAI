@@ -6,47 +6,51 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-5.html</loc>
-    <lastmod>2024-04-25T15:14:10.321Z</lastmod>
+    <lastmod>2024-04-25T21:16:28.107Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/lab-0.html</loc>
     <lastmod>2024-04-23T18:53:30.470Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-1.html</loc>
-    <lastmod>2024-04-25T18:26:24.346Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-6.html</loc>
+    <lastmod>2024-04-29T20:36:56.301Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/pandas_basics.html</loc>
-    <lastmod>2024-03-23T05:20:02.626Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/10-resolucion_guia.html</loc>
+    <lastmod>2024-04-25T17:55:59.928Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/09-ex-apriori.html</loc>
-    <lastmod>2024-04-23T20:11:35.807Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/07-ex-evaluation.html</loc>
+    <lastmod>2024-04-29T16:12:41.674Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/02-EDA.html</loc>
-    <lastmod>2024-03-28T14:24:15.067Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/08-proyecto_clustering.html</loc>
+    <lastmod>2024-04-22T16:31:04.711Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/distancia_desarrollo.html</loc>
-    <lastmod>2024-03-23T04:41:21.444Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/legacy_code.html</loc>
+    <lastmod>2024-04-18T15:35:01.392Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/viz.html</loc>
-    <lastmod>2024-03-05T13:39:04.615Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/04-analisis_centros.html</loc>
+    <lastmod>2024-04-09T19:29:11.631Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/kmeans.html</loc>
-    <lastmod>2024-03-26T17:07:56.355Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/05-ex-jerarquico.html</loc>
+    <lastmod>2024-04-11T20:20:46.903Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/ex-kmeans-avanzado.html</loc>
-    <lastmod>2024-04-09T22:23:49.046Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/jerarquico.html</loc>
+    <lastmod>2024-04-04T01:27:41.468Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/hopkins.html</loc>
-    <lastmod>2024-04-23T15:31:14.553Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/preguntas-prueba.html</loc>
+    <lastmod>2024-04-24T16:22:26.909Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/11-ex-knn.html</loc>
+    <lastmod>2024-04-29T18:51:29.215Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/03-ex_kmeans.html</loc>
@@ -61,12 +65,16 @@
     <lastmod>2024-03-12T14:16:50.265Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-7.html</loc>
-    <lastmod>2024-04-25T18:12:49.394Z</lastmod>
-  </url>
-  <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-4.html</loc>
     <lastmod>2024-04-11T19:25:48.380Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-7.html</loc>
+    <lastmod>2024-04-25T19:32:36.548Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-8.html</loc>
+    <lastmod>2024-04-29T19:17:11.818Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-2.html</loc>
@@ -81,40 +89,44 @@
     <lastmod>2024-03-23T03:07:44.822Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/preguntas-prueba.html</loc>
-    <lastmod>2024-04-24T16:22:26.909Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/hopkins.html</loc>
+    <lastmod>2024-04-23T15:31:14.553Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/jerarquico.html</loc>
-    <lastmod>2024-04-04T01:27:41.468Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/ex-kmeans-avanzado.html</loc>
+    <lastmod>2024-04-09T22:23:49.046Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/05-ex-jerarquico.html</loc>
-    <lastmod>2024-04-11T20:20:46.903Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/kmeans.html</loc>
+    <lastmod>2024-03-26T17:07:56.355Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/04-analisis_centros.html</loc>
-    <lastmod>2024-04-09T19:29:11.631Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/viz.html</loc>
+    <lastmod>2024-03-05T13:39:04.615Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/legacy_code.html</loc>
-    <lastmod>2024-04-18T15:35:01.392Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/distancia_desarrollo.html</loc>
+    <lastmod>2024-03-23T04:41:21.444Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/08-proyecto_clustering.html</loc>
-    <lastmod>2024-04-22T16:31:04.711Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/02-EDA.html</loc>
+    <lastmod>2024-03-28T14:24:15.067Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/07-ex-evaluation.html</loc>
-    <lastmod>2024-04-22T16:39:45.481Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/09-ex-apriori.html</loc>
+    <lastmod>2024-04-23T20:11:35.807Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/10-resolucion_guia.html</loc>
-    <lastmod>2024-04-25T17:55:59.928Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/pandas_basics.html</loc>
+    <lastmod>2024-03-23T05:20:02.626Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-6.html</loc>
-    <lastmod>2024-04-22T16:44:02.383Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-1.html</loc>
+    <lastmod>2024-04-25T18:26:24.346Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-9.html</loc>
+    <lastmod>2024-04-29T20:34:30.617Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-3.html</loc>
