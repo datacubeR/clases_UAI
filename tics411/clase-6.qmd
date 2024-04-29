@@ -189,7 +189,7 @@ Separación
 $$ SSB_{total} = \sum_{k = 1}^K |C_k|(\bar{X} - \bar{C_k})^2$$
 
 * $|C_k|$ corresponde al número de elementos (Cardinalidad) del Cluster $i$.
-* $\bar{X}$ corresponde al promedio de todos los puntos en el Cluster k.
+* $\bar{X}$ corresponde al promedio de todos los puntos.
 
 ## Coeficiente de Silhouette (Coeficiente de Silueta)
 
