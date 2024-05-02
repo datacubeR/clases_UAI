@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411-labs.html</loc>
-    <lastmod>2024-04-25T17:56:41.417Z</lastmod>
+    <lastmod>2024-05-02T16:41:52.994Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-5.html</loc>
@@ -33,16 +33,12 @@
     <lastmod>2024-04-18T15:35:01.392Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/04-analisis_centros.html</loc>
-    <lastmod>2024-04-09T19:29:11.631Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/viz.html</loc>
+    <lastmod>2024-03-05T13:39:04.615Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/05-ex-jerarquico.html</loc>
-    <lastmod>2024-04-11T20:20:46.903Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/jerarquico.html</loc>
-    <lastmod>2024-04-04T01:27:41.468Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/kmeans.html</loc>
+    <lastmod>2024-03-26T17:07:56.355Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/preguntas-prueba.html</loc>
@@ -50,7 +46,7 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/11-ex-knn.html</loc>
-    <lastmod>2024-04-29T18:51:29.215Z</lastmod>
+    <lastmod>2024-05-02T15:42:52.382Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/03-ex_kmeans.html</loc>
@@ -70,11 +66,11 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-7.html</loc>
-    <lastmod>2024-04-25T19:32:36.548Z</lastmod>
+    <lastmod>2024-05-02T14:04:14.086Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-8.html</loc>
-    <lastmod>2024-04-29T19:17:11.818Z</lastmod>
+    <lastmod>2024-05-02T14:20:42.684Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-2.html</loc>
@@ -93,20 +89,16 @@
     <lastmod>2024-04-23T15:31:14.553Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/ex-kmeans-avanzado.html</loc>
-    <lastmod>2024-04-09T22:23:49.046Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/jerarquico.html</loc>
+    <lastmod>2024-04-04T01:27:41.468Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/kmeans.html</loc>
-    <lastmod>2024-03-26T17:07:56.355Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/05-ex-jerarquico.html</loc>
+    <lastmod>2024-04-11T20:20:46.903Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/viz.html</loc>
-    <lastmod>2024-03-05T13:39:04.615Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/distancia_desarrollo.html</loc>
-    <lastmod>2024-03-23T04:41:21.444Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/04-analisis_centros.html</loc>
+    <lastmod>2024-04-09T19:29:11.631Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/notebooks/02-EDA.html</loc>
@@ -126,7 +118,7 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-9.html</loc>
-    <lastmod>2024-04-29T20:34:30.617Z</lastmod>
+    <lastmod>2024-04-30T21:45:22.415Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-3.html</loc>
@@ -134,7 +126,7 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/index.html</loc>
-    <lastmod>2024-04-23T19:20:50.377Z</lastmod>
+    <lastmod>2024-05-02T16:42:01.878Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411.html</loc>

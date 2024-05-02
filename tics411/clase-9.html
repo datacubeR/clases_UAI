@@ -32,71 +32,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../logo.css">
@@ -417,6 +352,173 @@ Alfonso Tobar-Arancibia
 <h1>Evaluación de Modelos Supervisados</h1>
 
 </section>
+<section id="intuición" class="slide level2 smaller">
+<h2>Intuición</h2>
+<h4 id="si-tengo-que-estudiar-para-una-prueba-donde-tengo-que-calcular-el-coeficiente-de-silueta.">Si tengo que estudiar para una prueba donde tengo que calcular el Coeficiente de Silueta.</h4>
+<div>
+<ul>
+<li class="fragment">Qué pasa si sólo les entrego una pregunta para estudiar y no tiene respuesta.</li>
+<li class="fragment">¿Qué pasa si ahora les doy la respuesta?</li>
+<li class="fragment">¿Qué pasa si te doy más ejercicios?</li>
+<li class="fragment">¿Qué pasa luego de que haces muchos ejercicios?</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Voy <code>aprendiendo mejor</code> la <code>tarea</code> de calcular el coeficiente de Silueta. <strong>Lo mismo pasa con los modelos</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Pero no puedo medir qué tan bien aprendiste en los ejercicios que yo ya entregué para practicar. <strong>Tengo que hacer una prueba que tú no hayas visto, para ver si realmente aprendiste</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="uso-de-un-modelo" class="slide level2 smaller">
+<h2>Uso de un Modelo</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/model_usage.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-9/model_usage.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></a></p>
+</figure>
+</div>
+<div class="fragment">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>¿Cómo saber que el modelo está funcionando como esperamos?</strong></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="métricas" class="slide level2">
+<h2>Métricas</h2>
+<p>El Rendimieto de un Modelo de Clasificación permite evaluar el <code>error</code> asociado al proceso de predicción.</p>
+<dl>
+<dt>Clase Positiva</dt>
+<dd>
+Corresponde a la clase/evento de interés. Ej: Tiene cancer, va a pagar su deuda, es un gato. Normalmente se denota como la <code>Clase 1</code>.
+</dd>
+<dt>Clase Negativa</dt>
+<dd>
+Corresponde a la clase/evento contrario al de interés. Ej: No tiene cancer, no va a pagar su deuda, no es un gato. Normalmente se denota como la <code>Clase 0</code>.
+</dd>
+</dl>
+</section>
+<section id="métricas-matriz-de-confusión" class="slide level2 smaller">
+<h2>Métricas Matriz de Confusión</h2>
+<blockquote>
+<p>La Matriz de Confusión ordena los valores correctamente predichos y también los distintos errores que el modelo puede cometer.</p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/conf_mat.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-9/conf_mat.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<dl>
+<dt>TP (Verdaderos Positivos)</dt>
+<dd>
+Corresponde a valores reales de la clase 1 que fueron correctamente predichos como clase 1.
+</dd>
+<dt>TN (Verdaderos Negativos)</dt>
+<dd>
+Corresponde a valores reales de la clase 0 que fueron correctamente predichos como clase 0.
+</dd>
+<dt>FP (Falsos Positivos)</dt>
+<dd>
+Corresponde a valores reales de la clase 0 que fueron incorrectamente predichos como clase 1.
+</dd>
+<dt>FN (Falsos Negativos)</dt>
+<dd>
+Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos como clase 0.
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="métricas-a-partir-de-la-matriz-de-confusión" class="slide level2 smaller">
+<h2>Métricas: A partir de la Matriz de Confusión</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-none no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Accuracy</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\frac{TP + TN}{TP + TN + FP + FN}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-none no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Precision</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\frac{TP}{TP + FP}\]</span></p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-none no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Recall</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\frac{TP}{TP + FN}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-none no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>F1-Score</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\frac{2\cdot Precision \cdot Recall}{Precision + Recall} = \frac{2 \cdot TP}{2\cdot TP + FP + FN}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong>Accuracy</strong> es probablemente la métrica más sencilla y más utilizada.</li>
+<li><strong>Precision</strong> y <strong>Recall</strong> ponderarán distintos errores (FP y FN respectivamente) con mayor severidad. Ambas métricas son Antagonistas.</li>
+<li><strong>F1-Score</strong> corresponde a la media armónica del <strong>Precision</strong> y <strong>Recall,</strong> y tiende a ponderar los errores de manera más balanceada.</li>
+</ul>
+</div>
+</div>
+</div>
+<h3 id="cuándo-utilizar-cada-tipo-de-error-pendiente-de-ejemplos.">¿Cuándo utilizar cada tipo de error? (Pendiente de ejemplos).</h3>
+</section>
 <section id="evaluación" class="slide level2 smaller">
 <h2>Evaluación</h2>
 <blockquote>
@@ -450,391 +552,309 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </section>
-<section id="intuición" class="slide level2">
-<h2>Intuición</h2>
-<p>::: {.fragment} * Si tengo que estudiar para una prueba. Y sólo les entrego una pregunta para estudiar y no tiene respuesta. Ej: Calcule el coeficiente de Silueta. * Qué pasa si ahora les doy la respuesta. * Qu</p>
-</section>
-<section id="introducción-al-aprendizaje-supervisado" class="slide level2">
-<h2>Introducción al Aprendizaje Supervisado</h2>
-<p>Los modelos Predictivos/Supervisados tienen la capacidad de predecir valores en datos no vistos.</p>
-<p>Aprenden mediante un <code>train_set</code> y evalúan su performance utilizando un <code>test_set</code>.</p>
-<p>2 Tipos:</p>
-<ul>
-<li>Clasificación</li>
-<li>Regresión</li>
-</ul>
-</section>
-<section id="definiciones" class="slide level2">
-<h2>Definiciones</h2>
-<p>Features Labels o Etiquetas</p>
-</section>
-<section id="ejemplo-clasificación" class="slide level2">
-<h2>Ejemplo Clasificación</h2>
+<section id="validación-cruzada-holdout" class="slide level2 smaller">
+<h2>Validación Cruzada: Holdout</h2>
 <blockquote>
-<p>Queremos generar un algoritmo de aprendizaje tal que dado un cierto set de datos predigamos si es que a un niño se le dará o no permiso para jugar.</p>
+<p>También es conocido como <code>Train Test Split</code> o simplemente <code>Split</code>. Corresponde a la separacion de nuestra data cuando con el proposito de aislar observaciones que el modelo no vea para una correcta evaluación.</p>
 </blockquote>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Problema de Clasificación Binaria.</p>
-</div>
-</div>
-</div>
 <div class="columns">
-<div class="column" style="width:70%;">
+<div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/dataset_sunny.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-8/dataset_sunny.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-9/dataset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-9/dataset.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:30%;">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Llamaremos Features a la <code>Matriz</code> variables que intentarán predecir la etiqueta (con título morado).</li>
-<li>Llamaremos etiquetas al <code>vector</code> de valores a predecir (en azul).</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="definiciones-1" class="slide level2">
-<h2>Definiciones</h2>
-<p><span class="math display">\[h_\theta(X) = f(X, \theta)\]</span></p>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>A <span class="math inline">\(h_\theta(\cdot)\)</span> la denominaremos <code>hipótesis</code> o simplemente <code>modelo</code>.</li>
-<li><span class="math inline">\(X\)</span> será nuestro set de <code>features</code> (<span class="math inline">\(n\times m\)</span> donde <span class="math inline">\(n\)</span> es el número de observaciones y <span class="math inline">\(m\)</span> el número de features).<br>
-</li>
-<li>Cada fila de <span class="math inline">\(X\)</span> corresponde a un vector <span class="math inline">\(x_i\)</span> que representa una observación de nuestro set de features.</li>
-<li><span class="math inline">\(\theta\)</span> corresponde a los parámetros del modelo <em>(existen modelos paramétricos y no paramétricos)</em>.</li>
-<li>Cada <code>algoritmo</code> tendrá su propio mapeo <span class="math inline">\(f(\cdot)\)</span> para tratar de <em>predecir</em> una etiqueta.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tipos de Hipótesis</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Si <span class="math inline">\(h_\theta(X)\)</span> devuelve valores discretos (o categóricos) hablaremos de un modelo de <code>Clasificación</code>.</li>
-<li>Si <span class="math inline">\(h_\theta(X)\)</span> devuelve valores continuos hablaremos de un modelo de <code>Regresión</code>.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="definiciones-2" class="slide level2 smaller">
-<h2>Definiciones</h2>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Clasificación:</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><strong>Binaria</strong>: La Clasificación es dicotómica, Perro o Gato, Sí o No, 1 o 0, Clase Positiva o Negativa.</li>
-<li><strong>Multiclase</strong>: La clasificación puede tener más de 2 clases, pero sólo una es posible.
-<ul>
-<li>Ej: Perro, Gato o Canario; 0, 1, 2, 3, 4.</li>
-</ul></li>
-<li><strong>Multilabel</strong>: La clasificación puede tener más de 2 clases, y más de una es posible a la vez.
-<ul>
-<li>Ej: Categorías de Libro: Puede ser Romance y Drama, Películas: Fantasía, Animación y Acción.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Regresión:</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><strong>Simple</strong>: Predigo sólo un valor. Ej: Predecir la Temperatura.</li>
-<li><strong>Multiple</strong>: Predigo varios valores continuos a la vez.
-<ul>
-<li>Ej: Modelo para intentar estimar Temperatura y Humedad a la vez.</li>
-</ul></li>
-<li><strong>Forecast</strong>: Donde se utilizan valores pasados para estimar valores futuros.
-<ul>
-<li>Dadas mis ganancias pasadas, estimar las futuras.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="clasificación-intuición" class="slide level2 smaller">
-<h2>Clasificación: Intuición</h2>
+<div class="r-stack">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/clf_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-8/clf_ex.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="1"></a></p>
 </figure>
 </div>
-<blockquote>
-<p>Supongamos el siguiente problema de clasificación. Tenemos un algoritmo, que dadas las variables <code>Largo</code> y <code>Peso</code> sean capaces de predecir si es que un Pez es una <em>Reineta</em> o una <em>Sardina</em>.</p>
-</blockquote>
-</section>
-<section id="clasificación-intuición-1" class="slide level2">
-<h2>Clasificación: Intuición</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/clf_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-8/clf_1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Queremos encontrar una <code>Regla de Decisión</code> (Decision Rule) que permita clasificar correctamente un punto nuevo.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="k-nearest-neighbors" class="slide level2 smaller">
-<h2>K-Nearest Neighbors</h2>
-<blockquote>
-<p>El modelo de vecinos más cercanos, o KNN por sus siglas en Inglés es un modelo basado en <code>distancias</code>. Su <code>regla de decisión</code> se basa en imitar el comportamiento de sus <span class="math inline">\(K\)</span> vecinos más cercanos por votación (para clasificación) o la media (para regresión).</p>
-</blockquote>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>K es un <code>hiperparámetro</code> de este modelo.</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/knn_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-8/knn_ex.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<ul>
-<li>Supongamos <span class="math inline">\(K = 3\)</span>.</li>
-<li>Es decir, tomaremos los 3 vecinos más cercanos.</li>
-</ul>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En general es una buena idea elegir vecinos impares. <strong>¿Por qué?</strong></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="knn-paso-1-training-time" class="slide level2">
-<h2>KNN: Paso 1 (Training Time)</h2>
-<dl>
-<dt>Training Time</dt>
-<dd>
-Corresponde al periodo donde el modelo aprende de los datos. Toma un patrón y ese modelo es utilizado para predecir.
-</dd>
-</dl>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En el caso de un KNN <strong>NO HAY APRENDIZAJE</strong> en esta etapa.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="knn-paso-2-test-time" class="slide level2 smaller">
-<h2>KNN: Paso 2 (Test Time)</h2>
-<dl>
-<dt>Inference Time</dt>
-<dd>
-Corresponde al periodo donde el modelo debe emitir una predicción.
-</dd>
-</dl>
-<p>En este caso, KNN calcula las distancias del punto a predecir (en verde) a todos los otros puntos existentes (proceso caro).</p>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/knn_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-8/knn_ex.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/knn_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-8/knn_dist.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/ord_dist_knn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-8/ord_dist_knn.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+<p><a href="img/clase-9/split.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-9/split.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="2"></a></p>
 </figure>
 </div>
 </div>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>La predicción corresponderá a la etiqueta mayoritaria por <code>votacioń</code></li>
-</ul>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>La predicción corresponderá a la etiqueta mayoritaria por <code>votacioń</code>.</li>
-<li><strong>¿Cuál sería una buena estrategia de predicción para un modelo de Regresión?</strong></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="fronteras-de-decisión" class="slide level2">
-<h2>Fronteras de Decisión</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/frontera_decision.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-8/frontera_decision.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Implicitamente, todo modelo de Machine Learning generará lo que se llama una Frontera de Decisión.</li>
-<li>Si un punto no visto cae dentro de su frontera entonces se le asigna dicha etiqueta.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="implementación-clasificación-en-scikit-learn" class="slide level2">
-<h2>Implementación Clasificación en Scikit-Learn</h2>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3-4|6-7|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>knn_clf <span class="op">=</span> KNeighborsClasifier(n_neighbors <span class="op">=</span> <span class="dv">5</span>, metric<span class="op">=</span><span class="st">"minkowski"</span>, p<span class="op">=</span><span class="dv">2</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb1-4"><a></a>knn_clf.fit(X, y)</span>
-<span id="cb1-5"><a></a></span>
-<span id="cb1-6"><a></a><span class="co"># Predicción...</span></span>
-<span id="cb1-7"><a></a>y_pred <span class="op">=</span> knn_clf.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div style="font-size: 75%;">
-<ul>
-<li><strong>n_neighbors</strong>: <span class="math inline">\(K\)</span> número de vecinos a utilizar. Por defecto 5.</li>
-<li><strong>metric</strong>: Métrica de distancia. Por defecto “Minkowski”.</li>
-<li><strong>p</strong>: Potencia de Minkowski: <span class="math inline">\(p=1\)</span>, Manhattan, <span class="math inline">\(p=2\)</span> Euclideana. Por defecto <span class="math inline">\(p=2\)</span>.</li>
-<li><strong>n_jobs</strong>: Corresponde a un parámetro interno para poder paralelizar los cálculos. Se recomienda utilizar -1 para utilizar todos sus cores.</li>
-</ul>
-</div>
-</section>
-<section id="implementación-regresión-en-scikit-learn" class="slide level2">
-<h2>Implementación Regresión en Scikit-Learn</h2>
-<div class="sourceCode" id="cb2" data-code-line-numbers="|1|3-4|6-7|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a>knn_clf <span class="op">=</span> KNeighborsRegressor(n_neighbors <span class="op">=</span> <span class="dv">5</span>, metric<span class="op">=</span><span class="st">"minkowski"</span>, p<span class="op">=</span><span class="dv">2</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb2-4"><a></a>knn_clf.fit(X, y)</span>
-<span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a><span class="co"># Predicción...</span></span>
-<span id="cb2-7"><a></a>y_pred <span class="op">=</span> knn_clf.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div style="font-size: 75%;">
-<ul>
-<li><strong>n_neighbors</strong>: <span class="math inline">\(K\)</span> número de vecinos a utilizar. Por defecto 5.</li>
-<li><strong>metric</strong>: Métrica de distancia. Por defecto “Minkowski”.</li>
-<li><strong>p</strong>: Potencia de Minkowski: <span class="math inline">\(p=1\)</span>, Manhattan, <span class="math inline">\(p=2\)</span> Euclideana. Por defecto <span class="math inline">\(p=2\)</span>.</li>
-<li><strong>n_jobs</strong>: Corresponde a un parámetro interno para poder paralelizar los cálculos. Se recomienda utilizar -1 para utilizar todos sus cores.</li>
-</ul>
-</div>
+</div><div class="column" style="width:40%;">
+<div class="fragment" data-fragment-index="1">
 <div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>¿Cómo se encuentran las predicciones en un modelo de <strong>Regresión</strong>?</p>
+<ul>
+<li>El <code>train set</code> es la porción de los datos que se utilizará <code>exclusivamente</code> para entrenar los datos.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="2">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>El <code>test set</code> es la porción de los datos que se utilizará exclusivamente para validar los datos.</li>
+<li>El <code>test set</code> simula los datos que eventualmente entrarán el modelo para obtener una predicción.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="3">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Normalmente se utilizan splits del tipo 70/30, 80/20 o 90/10.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="4">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>¿Cuál es el problema con este tipo de validación?</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 </section>
-<section id="knn-detalles-técnicos" class="slide level2">
-<h2>KNN: Detalles Técnicos</h2>
-<div class="callout callout-note callout-titled callout-style-default">
+<section id="variante-holdout" class="slide level2">
+<h2>Variante Holdout</h2>
+<div class="columns">
+<div class="column">
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/train-val.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-9/train-val.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-9/full-holdout.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
+</figure>
+</div>
+</div>
+</div><div class="column">
+<div class="fragment" data-fragment-index="2">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Se agrega un <code>validation set</code> el cuál se utilizará para escoger los <code>hiperparámetros</code> que muestren un mejor poder de generalización.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="3">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>El <code>train set</code> y el <code>test set</code> cumplen la misma función que tenían antes.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="variante-holdout-procedimiento" class="slide level2 smaller">
+<h2>Variante Holdout: Procedimiento</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-9/full-holdout.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column fragment" style="width:70%;">
+<!-- -->
+<h4 id="procedimiento">Procedimiento</h4>
+<ul>
+<li>Repetir para cada <code>Modelo</code> a probar.</li>
+</ul>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Vamos a entender un modelo como la combinación de un <code>Algoritmo de Aprendizaje</code> + <code>Hiperparámetros</code> + <code>Preprocesamiento</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div>
+<ol type="1">
+<li class="fragment">Se entrena cada <code>Modelo</code> en el <code>train set</code>. Se mide una métrica de Evaluación apropiada utilizando el <code>Validation Set</code>. La llamaremos <strong><em>métrica de Validación</em></strong>.</li>
+<li class="fragment">Se escoge el mejor <code>Modelo</code> como el que tenga la mejor <strong><em>métrica de Validación</em></strong>.</li>
+<li class="fragment">Se reentrena el <strong><em>modelo escogido</em></strong> pero ahora en un <em>“nuevo set”</em> compuesto por el <code>Train set</code> + el <code>Validation set</code>.</li>
+<li class="fragment">Se reporta el rendimiento final del <strong><em>mejor modelo</em></strong> (al momento del diseño) utilizando métricas medidas en el <code>Test Set</code>.</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="k-fold-cv" class="slide level2 smaller">
+<h2>K-Fold CV</h2>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>El proceso de Holdout podría llevar a un proceso de overfitting del Test Set si el modelo no es lo suficientemente robusto.</li>
+<li>Definiremos la robustez más adelante.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El K-Fold CV se aplica sólo al <code>Train Set</code> y la métrica final que se reporta utilizando el <code>Test Set</code>.</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/K-Fold.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-9/K-Fold.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<dl>
+<dt>Fold</dt>
+<dd>
+Entenderemos Folds como divisiones que haremos a nuestro dataset. (En el ejemplo se divide el dataset en 5 Folds).
+</dd>
+<dt>Split</dt>
+<dd>
+Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold como <code>Validation Set</code> y todos los Folds restantes como <code>Train Set</code>.
+</dd>
+</dl>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>La métrica final se calculará como el promedio de las <strong><em>Métricas de Validación</em></strong> para cada <code>Split</code>.</li>
+<li>A veces la variabilidad (medido a través de la Desviación Estándar) también es usado como criterio para elegir el mejor modelo.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="bootstrap" class="slide level2 smaller">
+<h2>Bootstrap</h2>
+<p>Consiste en generar subgrupos aleatorios con repetición. Normalmente requiere específicar el tamaño de la muestra de entrenamiento. Y la cantidad de repeticiones que del proceso. Los sets de validación (en morado) acá se denominan <strong><em>out-of-bag</em></strong> samples.</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/data_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-9/data_boot.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>La métrica final a reportar se mide como el promedio de los <strong><em>out-of-bag</em></strong> samples.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/iter_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-9/iter_boot.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="variantes-y-consejos" class="slide level2 smaller">
+<h2>Variantes y Consejos</h2>
+<dl>
+<dt>Stratified K-Fold</dt>
+<dd>
+Es la variante más utilizada de K-Fold el cual genera los folds considerando que se mantenga la proporción de etiquetas en cada Fold.
+</dd>
+<dt>Leave One Out</dt>
+<dd>
+Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, el <code>Validation Set</code> tiene sólo una observación.
+</dd>
+</dl>
+<div style="font-size: 130%;">
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Fortalezas</strong></p>
+<p><strong>¿Cuando usar cada uno?</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Modelo muy simple de implementar y entender.</li>
-<li>Muy eficiente en el aprendizaje.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Debilidades</strong></p>
-</div>
-<div class="callout-content">
+<li>Si se tiene una cantidad de datos suficiente (normalmente tamaños muy grandes se prefiere) el Holdout.
 <ul>
-<li>Inferencia ineficiente.</li>
-<li><code>Curse of Dimensionality</code>: A medida que el número de dimensiones del problema crece, se requiere un incremento exponencial en la cantidad de datos para asegurar que existen suficientes vecinos cercanos para cualquier punto.</li>
+<li>Entre más registros, menos % de <code>Validation Set</code> se deja.</li>
+</ul></li>
+<li>Si se requiere robustez, o hay Test sets que son muy variables se prefiere K-Fold.
+<ul>
+<li>Si es que hay desbalance de clases, se prefiere la versión <strong>Stratified</strong>.<br>
+</li>
+</ul></li>
+<li>Si se tienen <strong><em>muy pocos</em></strong> datos, entonces utilizar Leave-One-Out.</li>
+<li>Bootstrap también es utilizado cuando se tengan pocos datos. Aunque suele ser un approach más estadístico.</li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -1221,7 +1241,7 @@ Corresponde al periodo donde el modelo debe emitir una predicción.
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
