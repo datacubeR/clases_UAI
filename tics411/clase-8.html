@@ -609,6 +609,28 @@ Corresponde a las respuestas que el modelo necesita mapear para poder descubrir 
 <li><strong>Hard Predictions</strong>: Es decir, la instancia a predecir es clase 0 o clase 1.</li>
 <li><strong>Soft Prediction</strong>: Es decir, la instancia a predecir tiene una probabilidad <span class="math inline">\(p\)</span> de pertenecer a la clase 1 y de <span class="math inline">\(1-p\)</span> de pertenecer a la clase 0.</li>
 </ul>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Cuando se hace predicción binaria, lo común es usar un Threshold de 0.5 para elegir la clase. Es decir si <span class="math inline">\(p&lt;0\)</span> entonces clase 0, si <span class="math inline">\(p \ge 0.5\)</span> entonces clase 1.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En el caso de predicción multiclase o multilabel. Se hace tiene la probabilidad para cada clase. Por lo tanto se se asigna la clase de mayor probabilidad.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="k-nearest-neighbors" class="slide level2 smaller">
 <h2>K-Nearest Neighbors</h2>
@@ -1209,7 +1231,7 @@ Corresponde al periodo donde el modelo debe emitir una predicción.
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

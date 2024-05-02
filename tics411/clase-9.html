@@ -411,6 +411,9 @@ Alfonso Tobar-Arancibia
 <section id="métricas" class="slide level2">
 <h2>Métricas</h2>
 <p>El Rendimieto de un Modelo de Clasificación permite evaluar el <code>error</code> asociado al proceso de predicción.</p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
 <dl>
 <dt>Clase Positiva</dt>
 <dd>
@@ -421,9 +424,12 @@ Corresponde a la clase/evento de interés. Ej: Tiene cancer, va a pagar su deuda
 Corresponde a la clase/evento contrario al de interés. Ej: No tiene cancer, no va a pagar su deuda, no es un gato. Normalmente se denota como la <code>Clase 0</code>.
 </dd>
 </dl>
+</div>
+</div>
+</div>
 </section>
 <section id="métricas-matriz-de-confusión" class="slide level2 smaller">
-<h2>Métricas Matriz de Confusión</h2>
+<h2>Métricas: Matriz de Confusión</h2>
 <blockquote>
 <p>La Matriz de Confusión ordena los valores correctamente predichos y también los distintos errores que el modelo puede cometer.</p>
 </blockquote>
@@ -519,6 +525,35 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 <h3 id="cuándo-utilizar-cada-tipo-de-error-pendiente-de-ejemplos.">¿Cuándo utilizar cada tipo de error? (Pendiente de ejemplos).</h3>
 </section>
+<section id="curva-roc" class="slide level2 smaller">
+<h2>Curva ROC</h2>
+<p>La curva ROC fue desarrollada en 1950 para analizar señales ruidosas. La curva ROC permite al operador contrapesar la tasa de verdaderos positivos (Eje <span class="math inline">\(y\)</span>) versus los falsos positivos (Eje x).</p>
+<blockquote>
+<p>El área bajo la curva representa la <code>calidad del modelo</code>. Una manera de interpretarla es como la probabilidad de que una predicción de la clase positiva tenga mayor probabilidad que una de clase negativa. En otras palabras, que las probabilidades se encuentren correctamente ordenadas. Por lo tanto varía entre 0.5 y 1.</p>
+</blockquote>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/roc.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-9/roc.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<h5 id="roc-sim-0.5">ROC <span class="math inline">\(\sim\)</span> 0.5</h5>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/roc_ex_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-9/roc_ex_1.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+</figure>
+</div>
+<h5 id="roc-sim-1">ROC <span class="math inline">\(\sim\)</span> 1</h5>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/roc_ex_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-9/roc_ex_2.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="evaluación" class="slide level2 smaller">
 <h2>Evaluación</h2>
 <blockquote>
@@ -561,19 +596,19 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/dataset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-9/dataset.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></a></p>
+<p><a href="img/clase-9/dataset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-9/dataset.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:30%;">
 <div class="r-stack">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="1"></a></p>
+<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="1"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/split.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-9/split.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="2"></a></p>
+<p><a href="img/clase-9/split.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-9/split.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="2"></a></p>
 </figure>
 </div>
 </div>
@@ -645,17 +680,17 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="r-stack">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
+<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/train-val.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-9/train-val.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
+<p><a href="img/clase-9/train-val.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-9/train-val.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-9/full-holdout.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
+<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-9/full-holdout.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
 </figure>
 </div>
 </div>
@@ -697,7 +732,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-9/full-holdout.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-9/full-holdout.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column fragment" style="width:70%;">
@@ -758,7 +793,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/K-Fold.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-9/K-Fold.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/K-Fold.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-9/K-Fold.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:60%;">
@@ -795,7 +830,7 @@ Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold c
 <div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/data_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-9/data_boot.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/data_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-9/data_boot.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-tip callout-style-simple">
@@ -813,7 +848,7 @@ Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold c
 </div><div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/iter_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-9/iter_boot.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-9/iter_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-9/iter_boot.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -842,25 +877,44 @@ Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, 
 </div>
 <div class="callout-content">
 <ul>
-<li>Si se tiene una cantidad de datos suficiente (normalmente tamaños muy grandes se prefiere) el Holdout.
+<li>Si se tiene una cantidad de datos suficiente (normalmente tamaños muy grandes se prefiere) el <strong>Holdout.</strong>
 <ul>
 <li>Entre más registros, menos % de <code>Validation Set</code> se deja.</li>
 </ul></li>
-<li>Si se requiere robustez, o hay Test sets que son muy variables se prefiere K-Fold.
+<li>Si se requiere robustez, o hay Test sets que son muy variables se prefiere <strong>K-Fold.</strong>
 <ul>
 <li>Si es que hay desbalance de clases, se prefiere la versión <strong>Stratified</strong>.<br>
 </li>
 </ul></li>
-<li>Si se tienen <strong><em>muy pocos</em></strong> datos, entonces utilizar Leave-One-Out.</li>
-<li>Bootstrap también es utilizado cuando se tengan pocos datos. Aunque suele ser un approach más estadístico.</li>
+<li>Si se tienen <strong><em>muy pocos</em></strong> datos, entonces utilizar <strong>Leave-One-Out</strong>.</li>
+<li><strong>Bootstrap</strong> también es utilizado cuando se tengan pocos datos. Aunque suele ser un approach más estadístico.</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
+</section>
+<section id="data-leakage" class="slide level2">
+<h2>Data Leakage</h2>
+<dl>
+<dt>Fuga de Datos</dt>
+<dd>
+Se refiere al proceso donde el modelo por alguna razón conoce información que no debería conocer. Puede ser información del <code>Test Set</code> o variables que revelan información primordial sobre la etiqueta.
+</dd>
+</dl>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Se recomienda siempre que sea posible utilizar <code>Pipelines</code> para poder evitar el <strong>Data Leakage</strong>.</p>
+</div>
+</div>
+</div>
 </section></section>
-<section id="saionara" class="title-slide slide level1 center">
-<h1>Saionara!</h1>
+<section id="arrivederci" class="title-slide slide level1 center">
+<h1>Arrivederci!</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -1241,7 +1295,7 @@ Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, 
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

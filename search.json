@@ -1141,7 +1141,7 @@
     "href": "tics411/clase-8.html#clasificación-detalles",
     "title": "TICS-411 Minería de Datos",
     "section": "Clasificación: Detalles",
-    "text": "Clasificación: Detalles\nEs importante mencionar que un modelo de clasificación puede generar:\n\nHard Predictions: Es decir, la instancia a predecir es clase 0 o clase 1.\nSoft Prediction: Es decir, la instancia a predecir tiene una probabilidad \\(p\\) de pertenecer a la clase 1 y de \\(1-p\\) de pertenecer a la clase 0."
+    "text": "Clasificación: Detalles\nEs importante mencionar que un modelo de clasificación puede generar:\n\nHard Predictions: Es decir, la instancia a predecir es clase 0 o clase 1.\nSoft Prediction: Es decir, la instancia a predecir tiene una probabilidad \\(p\\) de pertenecer a la clase 1 y de \\(1-p\\) de pertenecer a la clase 0.\n\n\n\n\n\n\n\n\nCuando se hace predicción binaria, lo común es usar un Threshold de 0.5 para elegir la clase. Es decir si \\(p&lt;0\\) entonces clase 0, si \\(p \\ge 0.5\\) entonces clase 1.\n\n\n\n\n\n\n\n\n\n\nEn el caso de predicción multiclase o multilabel. Se hace tiene la probabilidad para cada clase. Por lo tanto se se asigna la clase de mayor probabilidad."
   },
   {
     "objectID": "tics411/clase-8.html#k-nearest-neighbors",
@@ -1792,14 +1792,14 @@
     "href": "tics411/clase-9.html#métricas",
     "title": "TICS-411 Minería de Datos",
     "section": "Métricas",
-    "text": "Métricas\nEl Rendimieto de un Modelo de Clasificación permite evaluar el error asociado al proceso de predicción.\n\nClase Positiva\n\nCorresponde a la clase/evento de interés. Ej: Tiene cancer, va a pagar su deuda, es un gato. Normalmente se denota como la Clase 1.\n\nClase Negativa\n\nCorresponde a la clase/evento contrario al de interés. Ej: No tiene cancer, no va a pagar su deuda, no es un gato. Normalmente se denota como la Clase 0."
+    "text": "Métricas\nEl Rendimieto de un Modelo de Clasificación permite evaluar el error asociado al proceso de predicción.\n\n\n\n\nClase Positiva\n\nCorresponde a la clase/evento de interés. Ej: Tiene cancer, va a pagar su deuda, es un gato. Normalmente se denota como la Clase 1.\n\nClase Negativa\n\nCorresponde a la clase/evento contrario al de interés. Ej: No tiene cancer, no va a pagar su deuda, no es un gato. Normalmente se denota como la Clase 0."
   },
   {
     "objectID": "tics411/clase-9.html#métricas-matriz-de-confusión",
     "href": "tics411/clase-9.html#métricas-matriz-de-confusión",
     "title": "TICS-411 Minería de Datos",
-    "section": "Métricas Matriz de Confusión",
-    "text": "Métricas Matriz de Confusión\n\nLa Matriz de Confusión ordena los valores correctamente predichos y también los distintos errores que el modelo puede cometer.\n\n\n\n\n\n\n\n\n\n\nTP (Verdaderos Positivos)\n\nCorresponde a valores reales de la clase 1 que fueron correctamente predichos como clase 1.\n\nTN (Verdaderos Negativos)\n\nCorresponde a valores reales de la clase 0 que fueron correctamente predichos como clase 0.\n\nFP (Falsos Positivos)\n\nCorresponde a valores reales de la clase 0 que fueron incorrectamente predichos como clase 1.\n\nFN (Falsos Negativos)\n\nCorresponde a valores reales de la clase 1 que fueron incorrectamente predichos como clase 0."
+    "section": "Métricas: Matriz de Confusión",
+    "text": "Métricas: Matriz de Confusión\n\nLa Matriz de Confusión ordena los valores correctamente predichos y también los distintos errores que el modelo puede cometer.\n\n\n\n\n\n\n\n\n\n\nTP (Verdaderos Positivos)\n\nCorresponde a valores reales de la clase 1 que fueron correctamente predichos como clase 1.\n\nTN (Verdaderos Negativos)\n\nCorresponde a valores reales de la clase 0 que fueron correctamente predichos como clase 0.\n\nFP (Falsos Positivos)\n\nCorresponde a valores reales de la clase 0 que fueron incorrectamente predichos como clase 1.\n\nFN (Falsos Negativos)\n\nCorresponde a valores reales de la clase 1 que fueron incorrectamente predichos como clase 0."
   },
   {
     "objectID": "tics411/clase-9.html#métricas-a-partir-de-la-matriz-de-confusión",
@@ -1807,6 +1807,13 @@
     "title": "TICS-411 Minería de Datos",
     "section": "Métricas: A partir de la Matriz de Confusión",
     "text": "Métricas: A partir de la Matriz de Confusión\n\n\n\n\n\nAccuracy\n\n\n\\[\\frac{TP + TN}{TP + TN + FP + FN}\\]\n\n\n\n\n\n\nPrecision\n\n\n\\[\\frac{TP}{TP + FP}\\]\n\n\n\n\n\n\n\nRecall\n\n\n\\[\\frac{TP}{TP + FN}\\]\n\n\n\n\n\n\nF1-Score\n\n\n\\[\\frac{2\\cdot Precision \\cdot Recall}{Precision + Recall} = \\frac{2 \\cdot TP}{2\\cdot TP + FP + FN}\\]\n\n\n\n\n\n\n\n\n\n\n\n\nAccuracy es probablemente la métrica más sencilla y más utilizada.\nPrecision y Recall ponderarán distintos errores (FP y FN respectivamente) con mayor severidad. Ambas métricas son Antagonistas.\nF1-Score corresponde a la media armónica del Precision y Recall, y tiende a ponderar los errores de manera más balanceada.\n\n\n\n\n¿Cuándo utilizar cada tipo de error? (Pendiente de ejemplos)."
+  },
+  {
+    "objectID": "tics411/clase-9.html#curva-roc",
+    "href": "tics411/clase-9.html#curva-roc",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Curva ROC",
+    "text": "Curva ROC\nLa curva ROC fue desarrollada en 1950 para analizar señales ruidosas. La curva ROC permite al operador contrapesar la tasa de verdaderos positivos (Eje \\(y\\)) versus los falsos positivos (Eje x).\n\nEl área bajo la curva representa la calidad del modelo. Una manera de interpretarla es como la probabilidad de que una predicción de la clase positiva tenga mayor probabilidad que una de clase negativa. En otras palabras, que las probabilidades se encuentren correctamente ordenadas. Por lo tanto varía entre 0.5 y 1.\n\n\n\n\n\n\n\n\n\nROC \\(\\sim\\) 0.5\n\n\n\n\n\nROC \\(\\sim\\) 1"
   },
   {
     "objectID": "tics411/clase-9.html#evaluación",
@@ -1856,6 +1863,13 @@
     "title": "TICS-411 Minería de Datos",
     "section": "Variantes y Consejos",
     "text": "Variantes y Consejos\n\nStratified K-Fold\n\nEs la variante más utilizada de K-Fold el cual genera los folds considerando que se mantenga la proporción de etiquetas en cada Fold.\n\nLeave One Out\n\nSería una variante con \\(K=n\\). Por lo tanto, el Validation Set tiene sólo una observación.\n\n\n\n\n\n\n\n\n\n¿Cuando usar cada uno?\n\n\n\nSi se tiene una cantidad de datos suficiente (normalmente tamaños muy grandes se prefiere) el Holdout.\n\nEntre más registros, menos % de Validation Set se deja.\n\nSi se requiere robustez, o hay Test sets que son muy variables se prefiere K-Fold.\n\nSi es que hay desbalance de clases, se prefiere la versión Stratified.\n\n\nSi se tienen muy pocos datos, entonces utilizar Leave-One-Out.\nBootstrap también es utilizado cuando se tengan pocos datos. Aunque suele ser un approach más estadístico."
+  },
+  {
+    "objectID": "tics411/clase-9.html#data-leakage",
+    "href": "tics411/clase-9.html#data-leakage",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Data Leakage",
+    "text": "Data Leakage\n\nFuga de Datos\n\nSe refiere al proceso donde el modelo por alguna razón conoce información que no debería conocer. Puede ser información del Test Set o variables que revelan información primordial sobre la etiqueta.\n\n\n\n\n\n\n\n\nSe recomienda siempre que sea posible utilizar Pipelines para poder evitar el Data Leakage."
   },
   {
     "objectID": "tics411/clase-3.html#definiciones",
