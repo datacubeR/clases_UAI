@@ -421,10 +421,10 @@ Alfonso Tobar-Arancibia
 <h2>Introducción al Aprendizaje Supervisado</h2>
 <p>Los modelos Predictivos/Supervisados tienen la capacidad de predecir valores en datos no vistos.</p>
 <dl>
-<dt>Chip Huyen (Profesora de Stanford)</dt>
+<dt>Chip Huyen, Designing ML Systems (Profesora de Stanford)</dt>
 <dd>
 <blockquote>
-<p>“Models do not predict the future but encode the past…”</p>
+<p>“Machine Learning Algorithms do not predict the future but encode the past, thus perpetuating the biases in the data and mode…”</p>
 </blockquote>
 </dd>
 </dl>
@@ -436,12 +436,14 @@ Alfonso Tobar-Arancibia
 <dt>Features</dt>
 <dd>
 <blockquote>
-<p>También llamadas variables o atributos. Corresponden al Input del Modelo y con el cuál el modelo aprende y predice. Normalmente es representado mediante una Matriz denominada <span class="math inline">\(X\)</span>.</p>
+<p>También llamadas <code>variables</code> o <code>atributos</code>. Corresponden al <strong><em>input</em></strong> del Modelo y con el cuál el modelo <strong><em>aprende</em></strong> y <strong><em>predice</em></strong>. Normalmente es representado mediante una Matriz denominada <span class="math inline">\(X\)</span>.</p>
 </blockquote>
 </dd>
 <dt>Labels o Etiquetas</dt>
 <dd>
-Corresponde a las respuestas que el modelo necesita mapear para poder descubrir patrones de manera automática. Normalmente se representa mediante un vector denominado <span class="math inline">\(y\)</span>.
+<blockquote>
+<p>Corresponden a las <strong><em>respuestas</em></strong> que el modelo necesita mapear para poder descubrir patrones de manera automática. Normalmente se representa mediante un vector denominado <span class="math inline">\(y\)</span>.</p>
+</blockquote>
 </dd>
 </dl>
 </section>
@@ -460,28 +462,10 @@ Corresponde a las respuestas que el modelo necesita mapear para poder descubrir 
 </div>
 </div>
 </div>
-<div class="columns">
-<div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/dataset_sunny.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-8/dataset_sunny.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-8/dataset_sunny.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-8/dataset_sunny.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
-</div>
-</div><div class="column">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Llamaremos Features a la <code>Matriz</code> variables que intentarán predecir la etiqueta (con título morado).</li>
-<li>Llamaremos etiquetas al <code>vector</code> de valores a predecir (en azul).</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
 </div>
 </section>
 <section id="definición-del-problema" class="slide level2">
@@ -627,7 +611,7 @@ Corresponde a las respuestas que el modelo necesita mapear para poder descubrir 
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>En el caso de predicción multiclase o multilabel. Se hace tiene la probabilidad para cada clase. Por lo tanto se se asigna la clase de mayor probabilidad.</p>
+<p>En el caso de predicción multiclase o multilabel. Se calcula la probabilidad para cada clase. Por lo tanto se se asigna la clase de mayor probabilidad.</p>
 </div>
 </div>
 </div>
@@ -687,6 +671,16 @@ Corresponde al periodo donde el modelo aprende de los datos. Toma un patrón y e
 </div>
 <div class="callout-content">
 <p>En el caso de un KNN <strong>NO HAY APRENDIZAJE</strong> en esta etapa.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Es considerado un modelo <code>no-paramétrico</code> ya que no aprende parámetros para realizar su predicción.</p>
 </div>
 </div>
 </div>
@@ -827,7 +821,7 @@ Corresponde al periodo donde el modelo debe emitir una predicción.
 <div class="callout-content">
 <ul>
 <li>Modelo muy simple de implementar y entender.</li>
-<li>Muy eficiente en el aprendizaje.</li>
+<li>Muy eficiente en el <strong><em>aprendizaje</em></strong>.</li>
 </ul>
 </div>
 </div>
@@ -842,7 +836,7 @@ Corresponde al periodo donde el modelo debe emitir una predicción.
 </div>
 <div class="callout-content">
 <ul>
-<li>Inferencia ineficiente.</li>
+<li>Inferencia ineficiente: <span class="math inline">\(O(mn^2)\)</span>.</li>
 <li><code>Curse of Dimensionality</code>: A medida que el número de dimensiones del problema crece, se requiere un incremento exponencial en la cantidad de datos para asegurar que existen suficientes vecinos cercanos para cualquier punto.</li>
 </ul>
 </div>
@@ -1231,7 +1225,7 @@ Corresponde al periodo donde el modelo debe emitir una predicción.
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom"});
+    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"closeEffect":"zoom","openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

@@ -1092,21 +1092,21 @@
     "href": "tics411/clase-8.html#introducción-al-aprendizaje-supervisado",
     "title": "TICS-411 Minería de Datos",
     "section": "Introducción al Aprendizaje Supervisado",
-    "text": "Introducción al Aprendizaje Supervisado\nLos modelos Predictivos/Supervisados tienen la capacidad de predecir valores en datos no vistos.\n\nChip Huyen (Profesora de Stanford)\n\n\n“Models do not predict the future but encode the past…”\n\n\n\nAprenden mediante un proceso de entrenamiento en un train set y evalúan su performance/rendimiento utilizando un test set."
+    "text": "Introducción al Aprendizaje Supervisado\nLos modelos Predictivos/Supervisados tienen la capacidad de predecir valores en datos no vistos.\n\nChip Huyen, Designing ML Systems (Profesora de Stanford)\n\n\n“Machine Learning Algorithms do not predict the future but encode the past, thus perpetuating the biases in the data and mode…”\n\n\n\nAprenden mediante un proceso de entrenamiento en un train set y evalúan su performance/rendimiento utilizando un test set."
   },
   {
     "objectID": "tics411/clase-8.html#definiciones",
     "href": "tics411/clase-8.html#definiciones",
     "title": "TICS-411 Minería de Datos",
     "section": "Definiciones",
-    "text": "Definiciones\n\nFeatures\n\n\nTambién llamadas variables o atributos. Corresponden al Input del Modelo y con el cuál el modelo aprende y predice. Normalmente es representado mediante una Matriz denominada \\(X\\).\n\n\nLabels o Etiquetas\n\nCorresponde a las respuestas que el modelo necesita mapear para poder descubrir patrones de manera automática. Normalmente se representa mediante un vector denominado \\(y\\)."
+    "text": "Definiciones\n\nFeatures\n\n\nTambién llamadas variables o atributos. Corresponden al input del Modelo y con el cuál el modelo aprende y predice. Normalmente es representado mediante una Matriz denominada \\(X\\).\n\n\nLabels o Etiquetas\n\n\nCorresponden a las respuestas que el modelo necesita mapear para poder descubrir patrones de manera automática. Normalmente se representa mediante un vector denominado \\(y\\)."
   },
   {
     "objectID": "tics411/clase-8.html#ejemplo",
     "href": "tics411/clase-8.html#ejemplo",
     "title": "TICS-411 Minería de Datos",
     "section": "Ejemplo",
-    "text": "Ejemplo\n\nQueremos generar un algoritmo de aprendizaje tal que dado un cierto set de datos predigamos si es que a un niño se le dará o no permiso para jugar.\n\n\n\n\n\n\n\nProblema de Clasificación Binaria (Dos clases opuestas).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLlamaremos Features a la Matriz variables que intentarán predecir la etiqueta (con título morado).\nLlamaremos etiquetas al vector de valores a predecir (en azul)."
+    "text": "Ejemplo\n\nQueremos generar un algoritmo de aprendizaje tal que dado un cierto set de datos predigamos si es que a un niño se le dará o no permiso para jugar.\n\n\n\n\n\n\n\nProblema de Clasificación Binaria (Dos clases opuestas)."
   },
   {
     "objectID": "tics411/clase-8.html#definición-del-problema",
@@ -1141,7 +1141,7 @@
     "href": "tics411/clase-8.html#clasificación-detalles",
     "title": "TICS-411 Minería de Datos",
     "section": "Clasificación: Detalles",
-    "text": "Clasificación: Detalles\nEs importante mencionar que un modelo de clasificación puede generar:\n\nHard Predictions: Es decir, la instancia a predecir es clase 0 o clase 1.\nSoft Prediction: Es decir, la instancia a predecir tiene una probabilidad \\(p\\) de pertenecer a la clase 1 y de \\(1-p\\) de pertenecer a la clase 0.\n\n\n\n\n\n\n\n\nCuando se hace predicción binaria, lo común es usar un Threshold de 0.5 para elegir la clase. Es decir si \\(p&lt;0\\) entonces clase 0, si \\(p \\ge 0.5\\) entonces clase 1.\n\n\n\n\n\n\n\n\n\n\nEn el caso de predicción multiclase o multilabel. Se hace tiene la probabilidad para cada clase. Por lo tanto se se asigna la clase de mayor probabilidad."
+    "text": "Clasificación: Detalles\nEs importante mencionar que un modelo de clasificación puede generar:\n\nHard Predictions: Es decir, la instancia a predecir es clase 0 o clase 1.\nSoft Prediction: Es decir, la instancia a predecir tiene una probabilidad \\(p\\) de pertenecer a la clase 1 y de \\(1-p\\) de pertenecer a la clase 0.\n\n\n\n\n\n\n\n\nCuando se hace predicción binaria, lo común es usar un Threshold de 0.5 para elegir la clase. Es decir si \\(p&lt;0\\) entonces clase 0, si \\(p \\ge 0.5\\) entonces clase 1.\n\n\n\n\n\n\n\n\n\n\nEn el caso de predicción multiclase o multilabel. Se calcula la probabilidad para cada clase. Por lo tanto se se asigna la clase de mayor probabilidad."
   },
   {
     "objectID": "tics411/clase-8.html#k-nearest-neighbors",
@@ -1155,7 +1155,7 @@
     "href": "tics411/clase-8.html#knn-paso-1-training-time",
     "title": "TICS-411 Minería de Datos",
     "section": "KNN: Paso 1 (Training Time)",
-    "text": "KNN: Paso 1 (Training Time)\n\nTraining Time\n\nCorresponde al periodo donde el modelo aprende de los datos. Toma un patrón y ese modelo es utilizado para predecir.\n\n\n\n\n\n\n\n\nEn el caso de un KNN NO HAY APRENDIZAJE en esta etapa."
+    "text": "KNN: Paso 1 (Training Time)\n\nTraining Time\n\nCorresponde al periodo donde el modelo aprende de los datos. Toma un patrón y ese modelo es utilizado para predecir.\n\n\n\n\n\n\n\n\nEn el caso de un KNN NO HAY APRENDIZAJE en esta etapa.\n\n\n\n\n\n\n\n\n\nEs considerado un modelo no-paramétrico ya que no aprende parámetros para realizar su predicción."
   },
   {
     "objectID": "tics411/clase-8.html#knn-paso-2-test-time",
@@ -1190,7 +1190,7 @@
     "href": "tics411/clase-8.html#knn-detalles-técnicos",
     "title": "TICS-411 Minería de Datos",
     "section": "KNN: Detalles Técnicos",
-    "text": "KNN: Detalles Técnicos\n\n\n\n\n\n\nFortalezas\n\n\n\nModelo muy simple de implementar y entender.\nMuy eficiente en el aprendizaje.\n\n\n\n\n\n\n\n\n\n\nDebilidades\n\n\n\nInferencia ineficiente.\nCurse of Dimensionality: A medida que el número de dimensiones del problema crece, se requiere un incremento exponencial en la cantidad de datos para asegurar que existen suficientes vecinos cercanos para cualquier punto."
+    "text": "KNN: Detalles Técnicos\n\n\n\n\n\n\nFortalezas\n\n\n\nModelo muy simple de implementar y entender.\nMuy eficiente en el aprendizaje.\n\n\n\n\n\n\n\n\n\n\nDebilidades\n\n\n\nInferencia ineficiente: \\(O(mn^2)\\).\nCurse of Dimensionality: A medida que el número de dimensiones del problema crece, se requiere un incremento exponencial en la cantidad de datos para asegurar que existen suficientes vecinos cercanos para cualquier punto."
   },
   {
     "objectID": "tics411/clase-2.html#eda",
