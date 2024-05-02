@@ -88,7 +88,7 @@ Datos Transaccionales
 ::: {.callout-tip appearance="default"}
 ## Objetivo
 
-Encontrar asociaciones entre elementos u objetos de bases de datos transaccionesles. 
+Encontrar asociaciones entre elementos u objetos de bases de datos transaccionales. 
 
 :::
 

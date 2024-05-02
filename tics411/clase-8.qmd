@@ -1,6 +1,6 @@
 ---
 title: "TICS-411 Minería de Datos"
-subtitle: "Clase 8: Aprendizaje Supervisado"
+subtitle: "Clase 8: Introducción al Aprendizaje Supervisado"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -27,46 +27,38 @@ format:
 
 # Aprendizaje Supervisado
 
-## Introducción al Aprendizaje Supervisado
+## Introducción al Aprendizaje Supervisado 
 
 Los modelos Predictivos/Supervisados tienen la capacidad de predecir valores en datos no vistos.
 
-Aprenden mediante un `train_set` y evalúan su performance utilizando un `test_set`.
+Chip Huyen, Designing ML Systems (Profesora de Stanford)
+: > "Machine Learning Algorithms do not predict the future but encode the past, thus perpetuating the biases in the data and mode..."
 
-2 Tipos: 
 
-* Clasificación 
-* Regresión
+Aprenden mediante un proceso de `entrenamiento` en un `train set` y evalúan su performance/rendimiento utilizando un `test set`.
+
 
 ## Definiciones
 
 Features
-Labels o Etiquetas
+: > También llamadas `variables` o `atributos`. Corresponden al ***input*** del Modelo y con el cuál el modelo ***aprende*** y ***predice***. Normalmente es representado mediante una Matriz denominada $X$.
 
-## Ejemplo Clasificación
+Labels o Etiquetas
+: > Corresponden a las ***respuestas*** que el modelo necesita mapear para poder descubrir patrones de manera automática. Normalmente se representa mediante un vector denominado $y$.
+
+## Ejemplo
 
 > Queremos generar un algoritmo de aprendizaje tal que dado un cierto set de datos predigamos si es que a un niño se le dará o no permiso para jugar.
 
 ::: {.callout-tip}
-Problema de Clasificación Binaria.
+Problema de Clasificación Binaria (Dos clases opuestas).
 :::
 
-::: {.columns}
-::: {.column width="70%"}
-![](img/clase-8/dataset_sunny.png){.lightbox fig-align="center" width="80%"}
-:::
-::: {.column width="30%"}
-::: {.callout-important}
-* Llamaremos Features a la `Matriz` variables que intentarán predecir la etiqueta (con título morado). 
-* Llamaremos etiquetas al `vector` de valores a predecir (en azul). 
-:::
-:::
-::: 
+![](img/clase-8/dataset_sunny.png){.lightbox fig-align="center" width="60%"}
 
-## Definiciones 
+## Definición del Problema 
 
 $$h_\theta(X) = f(X, \theta)$$
-
 
 ::: {.callout-tip}
 * A $h_\theta(\cdot)$ la denominaremos `hipótesis` o simplemente `modelo`.
@@ -84,7 +76,7 @@ $$h_\theta(X) = f(X, \theta)$$
 * Si $h_\theta(X)$ devuelve valores continuos hablaremos de un modelo de `Regresión`. 
 :::
 
-## Definiciones {.smaller}
+## Tipos de Problemas {.smaller}
 
 ::: {.callout-tip appearance="default"}
 ## Clasificación:
@@ -115,7 +107,23 @@ $$h_\theta(X) = f(X, \theta)$$
 ![](img/clase-8/clf_1.png){.lightbox fig-align="center" width="60%"}
 
 ::: {.callout-tip}
-Queremos encontrar una `Regla de Decisión` (Decision Rule) que permita clasificar correctamente un punto nuevo.
+* Queremos encontrar una `Regla de Decisión` (Decision Rule) que permita clasificar correctamente un punto nuevo.
+* Distintos modelos son capaces de encontrar distintas reglas de decisión. Por lo tanto, sus predicciones pueden ser completamente distintas.
+:::
+
+## Clasificación: Detalles
+
+Es importante mencionar que un modelo de clasificación puede generar:
+
+* **Hard Predictions**: Es decir, la instancia a predecir es clase 0 o clase 1. 
+* **Soft Prediction**: Es decir, la instancia a predecir tiene una probabilidad $p$ de pertenecer a la clase 1 y de $1-p$ de pertenecer a la clase 0. 
+
+::: {.callout-tip}
+* Cuando se hace predicción binaria, lo común es usar un Threshold de 0.5 para elegir la clase. Es decir si $p<0$ entonces clase 0, si $p \ge 0.5$ entonces clase 1.
+:::
+
+::: {.callout-caution}
+En el caso de predicción multiclase o multilabel. Se calcula la probabilidad para cada clase. Por lo tanto se se asigna la clase de mayor probabilidad.
 :::
 
 ## K-Nearest Neighbors {.smaller}
@@ -148,6 +156,10 @@ Training Time
 
 ::: {.callout-important}
 En el caso de un KNN **NO HAY APRENDIZAJE** en esta etapa.
+:::
+
+::: {.callout-note}
+Es considerado un modelo `no-paramétrico` ya que no aprende parámetros para realizar su predicción.  
 :::
 
 ## KNN: Paso 2 (Test Time) {.smaller}
@@ -234,13 +246,13 @@ y_pred = knn_clf.predict(X)
 ::: {.callout-note appearance="default"}
 ## Fortalezas
 * Modelo muy simple de implementar y entender. 
-* Muy eficiente en el aprendizaje.
+* Muy eficiente en el ***aprendizaje***.
 :::
 
 ::: {.callout-warning appearance="default"}
 ## Debilidades
 
-* Inferencia ineficiente.
+* Inferencia ineficiente: $O(mn^2)$.
 * `Curse of Dimensionality`: A medida que el número de dimensiones del problema crece, se requiere un incremento exponencial en la cantidad de datos para asegurar que existen suficientes vecinos cercanos para cualquier punto.
 
 :::

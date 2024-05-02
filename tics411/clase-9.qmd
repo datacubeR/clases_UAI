@@ -26,6 +26,127 @@ format:
 
 # Evaluación de Modelos Supervisados 
 
+
+## Intuición {.smaller}
+
+#### Si tengo que estudiar para una prueba donde tengo que calcular el Coeficiente de Silueta.
+
+::: {.incremental}
+* Qué pasa si sólo les entrego una pregunta para estudiar y no tiene respuesta.
+* ¿Qué pasa si ahora les doy la respuesta?
+* ¿Qué pasa si te doy más ejercicios?
+* ¿Qué pasa luego de que haces muchos ejercicios?
+:::
+
+::: {.callout-tip .fragment}
+Voy `aprendiendo mejor` la `tarea` de calcular el coeficiente de Silueta. **Lo mismo pasa con los modelos**.
+:::
+
+::: {.callout-important .fragment}
+Pero no puedo medir qué tan bien aprendiste en los ejercicios que yo ya entregué para practicar. **Tengo que hacer una prueba que tú no hayas visto, para ver si realmente aprendiste**.
+:::
+
+## Uso de un Modelo {.smaller}
+
+![](img/clase-9/model_usage.png){.lightbox fig-align="center" width="85%"}
+
+
+::: {.callout-warning .fragment}
+**¿Cómo saber que el modelo está funcionando como esperamos?**
+:::
+
+## Métricas
+
+El Rendimieto de un Modelo de Clasificación permite evaluar el `error` asociado al proceso de predicción.
+
+::: {.callout}
+
+Clase Positiva
+: Corresponde a la clase/evento de interés. Ej: Tiene cancer, va a pagar su deuda, es un gato. Normalmente se denota como la `Clase 1`.
+
+Clase Negativa
+: Corresponde a la clase/evento contrario al de interés. Ej: No tiene cancer, no va a pagar su deuda, no es un gato. Normalmente se denota como la `Clase 0`. 
+:::
+
+## Métricas: Matriz de Confusión {.smaller}
+
+> La Matriz de Confusión ordena los valores correctamente predichos y también los distintos errores que el modelo puede cometer.
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-9/conf_mat.png){.lightbox fig-align="center"}
+:::
+::: {.column width="60%"}
+TP (Verdaderos Positivos)
+: Corresponde a valores reales de la clase 1 que fueron correctamente predichos como clase 1.
+
+TN (Verdaderos Negativos)
+: Corresponde a valores reales de la clase 0 que fueron correctamente predichos como clase 0.
+
+FP (Falsos Positivos)
+: Corresponde a valores reales de la clase 0 que fueron incorrectamente predichos como clase 1.
+
+FN (Falsos Negativos)
+: Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos como clase 0.
+:::
+::: 
+
+## Métricas: A partir de la Matriz de Confusión {.smaller}
+
+::: {.columns}
+::: {.column}
+::: {.callout appearance="default"}
+## Accuracy
+$$\frac{TP + TN}{TP + TN + FP + FN}$$
+:::
+
+::: {.callout appearance="default"}
+## Precision
+$$\frac{TP}{TP + FP}$$
+:::
+
+:::
+::: {.column}
+::: {.callout appearance="default"}
+## Recall
+$$\frac{TP}{TP + FN}$$
+:::
+::: {.callout appearance="default"}
+## F1-Score
+$$\frac{2\cdot Precision \cdot Recall}{Precision + Recall} = \frac{2 \cdot TP}{2\cdot TP + FP + FN}$$
+:::
+:::
+::: 
+
+::: {.callout-tip}
+* **Accuracy** es probablemente la métrica más sencilla y más utilizada.
+* **Precision** y **Recall** ponderarán distintos errores (FP y FN respectivamente) con mayor severidad. Ambas métricas son Antagonistas. 
+* **F1-Score** corresponde a la media armónica del **Precision** y **Recall,** y tiende a ponderar los errores de manera más balanceada. 
+:::
+
+### ¿Cuándo utilizar cada tipo de error? (Pendiente de ejemplos). 
+
+## Curva ROC {.smaller}
+
+La curva ROC fue desarrollada en 1950 para analizar señales ruidosas. La curva ROC permite al operador contrapesar la tasa de verdaderos positivos (Eje $y$) versus los falsos positivos (Eje x).
+
+> El área bajo la curva representa la `calidad del modelo`. Una manera de interpretarla es como la probabilidad de que una predicción de la clase positiva tenga mayor probabilidad que una de clase negativa. En otras palabras, que las probabilidades se encuentren correctamente ordenadas. Por lo tanto varía entre 0.5 y 1. 
+
+
+::: {.columns}
+::: {.column}
+![](img/clase-9/roc.png){.lightbox fig-align="center" width="80%"}
+:::
+::: {.column}
+
+##### ROC $\sim$ 0.5
+![](img/clase-9/roc_ex_1.png){.lightbox fig-align="center" width="90%"}
+
+##### ROC $\sim$ 1
+![](img/clase-9/roc_ex_2.png){.lightbox fig-align="center" width="90%"}
+:::
+::: 
+
 ## Evaluación {.smaller}
 
 > La evaluación de modelos supervisados es fundamental. De no hacerlo de forma correcta podemos quedarnos con una idea muy equivocada del rendimiento del modelo.
@@ -42,241 +163,174 @@ Generalización
 Para esto se asume que todos los datos son i.i.d (`idependent and identically distributed`). De no lograr esto, lograr buenos rendimientos es más difícil.
 :::
 
-## Intuición
+## Validación Cruzada: Holdout {.smaller}
 
-::: {.fragment}
-* Si tengo que estudiar para una prueba. Y sólo les entrego una pregunta para estudiar y no tiene respuesta.
-    Ej: Calcule el coeficiente de Silueta.
-* Qué pasa si ahora les doy la respuesta. 
-* Qu
-
-
-
-
-
-
-
-
-
-## Introducción al Aprendizaje Supervisado
-
-Los modelos Predictivos/Supervisados tienen la capacidad de predecir valores en datos no vistos.
-
-Aprenden mediante un `train_set` y evalúan su performance utilizando un `test_set`.
-
-2 Tipos: 
-
-* Clasificación 
-* Regresión
-
-## Definiciones
-
-Features
-Labels o Etiquetas
-
-## Ejemplo Clasificación
-
-> Queremos generar un algoritmo de aprendizaje tal que dado un cierto set de datos predigamos si es que a un niño se le dará o no permiso para jugar.
-
-::: {.callout-tip}
-Problema de Clasificación Binaria.
-:::
+> También es conocido como `Train Test Split` o simplemente `Split`. Corresponde a la separacion de nuestra data cuando con el proposito de aislar observaciones que el modelo no vea para una correcta evaluación.
 
 ::: {.columns}
-::: {.column width="70%"}
-![](img/clase-8/dataset_sunny.png){.lightbox fig-align="center" width="80%"}
+::: {.column width="30%"}
+![](img/clase-9/dataset.png){.lightbox fig-align="center" width="85%"}
 :::
 ::: {.column width="30%"}
-::: {.callout-important}
-* Llamaremos Features a la `Matriz` variables que intentarán predecir la etiqueta (con título morado). 
-* Llamaremos etiquetas al `vector` de valores a predecir (en azul). 
+
+::: {.r-stack}
+
+![](img/clase-9/trainset.png){.lightbox fig-align="center" width="85%" .fragment fragment-index=1}
+
+![](img/clase-9/split.png){.lightbox fig-align="center" width="85%" .fragment fragment-index=2}
+::: 
 :::
+::: {.column width="40%"}
+
+::: {.callout-caution .fragment fragment-index=1}
+* El `train set` es la porción de los datos que se utilizará `exclusivamente` para entrenar los datos. 
+:::
+
+::: {.callout-tip .fragment fragment-index=2}
+* El `test set` es la porción de los datos que se utilizará exclusivamente para validar los datos. 
+* El `test set` simula los datos que eventualmente entrarán el modelo para obtener una predicción. 
+:::
+
+::: {.callout-note .fragment fragment-index=3}
+* Normalmente se utilizan splits del tipo 70/30, 80/20 o 90/10.
+:::
+
+::: {.callout-important .fragment fragment-index=4}
+* ¿Cuál es el problema con este tipo de validación?
+:::
+
 :::
 ::: 
 
-## Definiciones 
-
-$$h_\theta(X) = f(X, \theta)$$
-
-
-::: {.callout-tip}
-* A $h_\theta(\cdot)$ la denominaremos `hipótesis` o simplemente `modelo`.
-* $X$ será nuestro set de `features` ($n\times m$ donde $n$ es el número de observaciones y $m$ el número de features).  
-* Cada fila de $X$ corresponde a un vector $x_i$ que representa una observación de nuestro set de features. 
-* $\theta$ corresponde a los parámetros del modelo *(existen modelos paramétricos y no paramétricos)*. 
-* Cada `algoritmo` tendrá su propio mapeo $f(\cdot)$ para tratar de *predecir* una etiqueta. 
-:::
-
-::: {.callout-note appearance="default"}
-
-## Tipos de Hipótesis
-
-* Si $h_\theta(X)$ devuelve valores discretos (o categóricos) hablaremos de un modelo de `Clasificación`. 
-* Si $h_\theta(X)$ devuelve valores continuos hablaremos de un modelo de `Regresión`. 
-:::
-
-## Definiciones {.smaller}
-
-::: {.callout-tip appearance="default"}
-## Clasificación:
-  * **Binaria**: La Clasificación es dicotómica, Perro o Gato, Sí o No, 1 o 0, Clase Positiva o Negativa.
-  * **Multiclase**: La clasificación puede tener más de 2 clases, pero sólo una es posible.
-    * Ej: Perro, Gato o Canario; 0, 1, 2, 3, 4.
-  * **Multilabel**: La clasificación puede tener más de 2 clases, y más de una es posible a la vez.
-    * Ej: Categorías de Libro: Puede ser Romance y Drama, Películas: Fantasía, Animación y Acción.
-:::
-
-::: {.callout-note appearance="default"}
-##### Regresión:
-  * **Simple**: Predigo sólo un valor. Ej: Predecir la Temperatura.
-  * **Multiple**: Predigo varios valores continuos a la vez. 
-    * Ej: Modelo para intentar estimar Temperatura y Humedad a la vez.
-  * **Forecast**: Donde se utilizan valores pasados para estimar valores futuros.
-    * Dadas mis ganancias pasadas, estimar las futuras. 
-:::
-
-## Clasificación: Intuición {.smaller}
-
-![](img/clase-8/clf_ex.png){.lightbox fig-align="center" width="60%"}
-
-> Supongamos el siguiente problema de clasificación. Tenemos un algoritmo, que dadas las variables `Largo` y `Peso` sean capaces de predecir si es que un Pez es una *Reineta* o una *Sardina*.
-
-## Clasificación: Intuición 
-
-![](img/clase-8/clf_1.png){.lightbox fig-align="center" width="60%"}
-
-::: {.callout-tip}
-Queremos encontrar una `Regla de Decisión` (Decision Rule) que permita clasificar correctamente un punto nuevo.
-:::
-
-## K-Nearest Neighbors {.smaller}
-
-> El modelo de vecinos más cercanos, o KNN por sus siglas en Inglés es un modelo basado en `distancias`. Su `regla de decisión` se basa en imitar el comportamiento de sus $K$ vecinos más cercanos por votación (para clasificación) o la media (para regresión).
-
-::: {.callout-tip}
-K es un `hiperparámetro` de este modelo. 
-:::
+## Variante Holdout
 
 ::: {.columns}
 ::: {.column}
-![](img/clase-8/knn_ex.png){.lightbox fig-align="center" width="60%"}
+::: {.r-stack}
+![](img/clase-9/trainset.png){.lightbox fig-align="center" .fragment fragment-index=1}
+
+![](img/clase-9/train-val.png){.lightbox fig-align="center" .fragment fragment-index=2}
+
+![](img/clase-9/full-holdout.png){.lightbox fig-align="center" .fragment fragment-index=3}
+:::
 :::
 ::: {.column}
-* Supongamos $K = 3$.
-* Es decir, tomaremos los 3 vecinos más cercanos. 
+::: {.callout-warning .fragment fragment-index=2}
+* Se agrega un `validation set` el cuál se utilizará para escoger los `hiperparámetros` que muestren un mejor poder de generalización.
+:::
 
-::: {.callout-note}
-En general es una buena idea elegir vecinos impares. **¿Por qué?**
+::: {.callout-tip .fragment fragment-index=3}
+* El `train set` y el `test set` cumplen la misma función que tenían antes.
 :::
 :::
 ::: 
 
+## Variante Holdout: Procedimiento {.smaller}
 
-## KNN: Paso 1 (Training Time)
+::: {.columns}
+::: {.column width="30%"}
+![](img/clase-9/full-holdout.png){.lightbox fig-align="center" }
+:::
+::: {.column width="70%" .fragment}
 
-Training Time
-: Corresponde al periodo donde el modelo aprende de los datos. Toma un patrón y ese modelo es utilizado para predecir. 
+#### Procedimiento
+
+* Repetir para cada `Modelo` a probar.
 
 ::: {.callout-important}
-En el caso de un KNN **NO HAY APRENDIZAJE** en esta etapa.
+* Vamos a entender un modelo como la combinación de un `Algoritmo de Aprendizaje` + `Hiperparámetros` + `Preprocesamiento`.
 :::
 
-## KNN: Paso 2 (Test Time) {.smaller}
+::: {.incremental}
+1. Se entrena cada `Modelo` en el `train set`. Se mide una métrica de Evaluación apropiada utilizando el `Validation Set`. La llamaremos ***métrica de Validación***.
+2. Se escoge el mejor `Modelo` como el que tenga la mejor ***métrica de Validación***.
+3. Se reentrena el ***modelo escogido*** pero ahora en un *"nuevo set"* compuesto por el `Train set` + el `Validation set`. 
+4. Se reporta el rendimiento final del ***mejor modelo*** (al momento del diseño) utilizando métricas medidas en el `Test Set`.
+:::
 
-Inference Time
-: Corresponde al periodo donde el modelo debe emitir una predicción. 
+:::
+::: 
 
-En este caso, KNN calcula las distancias del punto a predecir (en verde) a todos los otros puntos existentes (proceso caro). 
+## K-Fold CV {.smaller}
+
+::: {.callout-caution}
+* El proceso de Holdout podría llevar a un proceso de overfitting del Test Set si el modelo no es lo suficientemente robusto. 
+* Definiremos la robustez más adelante.
+:::
+
 
 ::: {.columns}
 ::: {.column width="40%"}
-![](img/clase-8/knn_ex.png){.lightbox fig-align="center" width="90%"}
+
+::: {.callout-note }
+El K-Fold CV se aplica sólo al `Train Set` y la métrica final que se reporta utilizando el `Test Set`.
 :::
-::: {.column width="30%"}
-![](img/clase-8/knn_dist.png){.lightbox fig-align="center" width="90%"}
+
+![](img/clase-9/K-Fold.png){.lightbox fig-align="center" }
 :::
-::: {.column width="30%"}
-![](img/clase-8/ord_dist_knn.png){.lightbox fig-align="center" width="100%"}
+::: {.column width="60%"}
+Fold
+: Entenderemos Folds como divisiones que haremos a nuestro dataset. (En el ejemplo se divide el dataset en 5 Folds). 
+
+Split
+: Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold como `Validation Set` y todos los Folds restantes como `Train Set`. 
+
+::: {.callout-important}
+* La métrica final se calculará como el promedio de las ***Métricas de Validación*** para cada `Split`. 
+* A veces la variabilidad (medido a través de la Desviación Estándar) también es usado como criterio para elegir el mejor modelo. 
+:::
+
 :::
 ::: 
 
-::: {.callout-note}
-* La predicción corresponderá a la etiqueta mayoritaria por `votacioń`
+## Bootstrap {.smaller}
 
-::: {.callout-note}
-* La predicción corresponderá a la etiqueta mayoritaria por `votacioń`. 
-* **¿Cuál sería una buena estrategia de predicción para un modelo de Regresión?**
+Consiste en generar subgrupos aleatorios con repetición. Normalmente requiere específicar el tamaño de la muestra de entrenamiento. Y la cantidad de repeticiones que del proceso. Los sets de validación (en morado) acá se denominan ***out-of-bag*** samples.
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-9/data_boot.png){.lightbox fig-align="center" }
+
+::: {.callout-tip}
+* La métrica final a reportar se mide como el promedio de los ***out-of-bag*** samples.
 :::
 :::
+::: {.column width="60%"}
+![](img/clase-9/iter_boot.png){.lightbox fig-align="center" width="50%"}
+:::
+::: 
 
-## Fronteras de Decisión
+## Variantes y Consejos {.smaller}
 
-![](img/clase-8/frontera_decision.png){.lightbox fig-align="center" width="40%"}
+Stratified K-Fold
+: Es la variante más utilizada de K-Fold el cual genera los folds considerando que se mantenga la proporción de etiquetas en cada Fold.
 
-::: {.callout-note}
-* Implicitamente, todo modelo de Machine Learning generará lo que se llama una Frontera de Decisión. 
-* Si un punto no visto cae dentro de su frontera entonces se le asigna dicha etiqueta.
+Leave One Out
+: Sería una variante con $K=n$. Por lo tanto, el `Validation Set` tiene sólo una observación. 
+
+::: {.callout-tip appearance="default" style="font-size: 130%;"}
+
+#### ¿Cuando usar cada uno?
+
+* Si se tiene una cantidad de datos suficiente (normalmente tamaños muy grandes se prefiere) el **Holdout.** 
+  * Entre más registros, menos % de `Validation Set` se deja.
+* Si se requiere robustez, o hay Test sets que son muy variables se prefiere **K-Fold.**
+  * Si es que hay desbalance de clases, se prefiere la versión **Stratified**.  
+* Si se tienen ***muy pocos*** datos, entonces utilizar **Leave-One-Out**.
+* **Bootstrap** también es utilizado cuando se tengan pocos datos. Aunque suele ser un approach más estadístico.
 :::
 
-## Implementación Clasificación en Scikit-Learn
+## Data Leakage
 
-```{.python code-line-numbers="|1|3-4|6-7|"}
-from sklearn.neighbors import KNeighborsClassifier
+Fuga de Datos
+: Se refiere al proceso donde el modelo por alguna razón conoce información que no debería conocer. Puede ser información del `Test Set` o variables que revelan información primordial sobre la etiqueta.
 
-knn_clf = KNeighborsClasifier(n_neighbors = 5, metric="minkowski", p=2, n_jobs=-1)
-knn_clf.fit(X, y)
-
-# Predicción...
-y_pred = knn_clf.predict(X)
-```
-::: {style="font-size: 75%;"}
-
-* **n_neighbors**: $K$ número de vecinos a utilizar. Por defecto 5.
-* **metric**: Métrica de distancia. Por defecto "Minkowski". 
-* **p**: Potencia de Minkowski: $p=1$, Manhattan, $p=2$ Euclideana. Por defecto $p=2$.
-* **n_jobs**: Corresponde a un parámetro interno para poder paralelizar los cálculos. Se recomienda utilizar -1 para utilizar todos sus cores. 
+::: {.callout-tip}
+Se recomienda siempre que sea posible utilizar `Pipelines` para poder evitar el **Data Leakage**. 
 :::
 
-## Implementación Regresión en Scikit-Learn
 
-```{.python code-line-numbers="|1|3-4|6-7|"}
-from sklearn.neighbors import KNeighborsRegressor
-
-knn_clf = KNeighborsRegressor(n_neighbors = 5, metric="minkowski", p=2, n_jobs=-1)
-knn_clf.fit(X, y)
-
-# Predicción...
-y_pred = knn_clf.predict(X)
-```
-::: {style="font-size: 75%;"}
-
-* **n_neighbors**: $K$ número de vecinos a utilizar. Por defecto 5.
-* **metric**: Métrica de distancia. Por defecto "Minkowski". 
-* **p**: Potencia de Minkowski: $p=1$, Manhattan, $p=2$ Euclideana. Por defecto $p=2$.
-* **n_jobs**: Corresponde a un parámetro interno para poder paralelizar los cálculos. Se recomienda utilizar -1 para utilizar todos sus cores. 
-:::
-
-::: {.callout-caution}
-¿Cómo se encuentran las predicciones en un modelo de **Regresión**?
-:::
-
-## KNN: Detalles Técnicos
-
-::: {.callout-note appearance="default"}
-## Fortalezas
-* Modelo muy simple de implementar y entender. 
-* Muy eficiente en el aprendizaje.
-:::
-
-::: {.callout-warning appearance="default"}
-## Debilidades
-
-* Inferencia ineficiente.
-* `Curse of Dimensionality`: A medida que el número de dimensiones del problema crece, se requiere un incremento exponencial en la cantidad de datos para asegurar que existen suficientes vecinos cercanos para cualquier punto.
-
-:::
-
-# Saionara!
+# Arrivederci!
 
 
 ::: {.footer}

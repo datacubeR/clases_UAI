@@ -25,3 +25,4 @@ Ejemplos Hopkins|[![](tics411/thumbnails/colab.svg)](https://colab.research.goog
 Proyecto Clustering|[![](tics411/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics411/notebooks/08-proyecto_clustering.ipynb)
 Apriori|[![](tics411/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics411/notebooks/09-ex-apriori.ipynb)
 Resolución Guía|[![](tics411/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics411/notebooks/10-resolucion_guia.ipynb)
+KNN|[![](tics411/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics411/notebooks/11-ex-knn.ipynb)

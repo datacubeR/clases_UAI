@@ -79,3 +79,13 @@
   path: tics411/clase-7.qmd
   categories:
    - slides
+
+
+- title: "Clase 8"
+  subtitle: "Introducción al Aprendizaje Supervisado"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-05-02
+  image: tics411/thumbnails/clase-8.png
+  path: tics411/clase-8.qmd
+  categories:
+   - slides
