@@ -476,7 +476,7 @@
     "href": "tics411/notebooks/11-ex-knn.html#eda",
     "title": "Clases UAI",
     "section": "EDA",
-    "text": "EDA\n\nnum_cols = X.select_dtypes(np.number).columns.tolist()\ncat_cols = [col for col in X.columns if col not in num_cols]\nprint(f\"Variables Numéricas: {num_cols}\")\nprint(f\"Variables Categóricas: {cat_cols}\")\n\n\nValores Faltantes (Nulos)\n\nX.isnull().sum().plot(\n    kind=\"bar\",\n    edgecolor=\"k\",\n    title=\"Cantidad de Valores Nulos en el Titanic\",\n)\nplt.tight_layout()"
+    "text": "EDA\n\nnum_cols = X.select_dtypes(np.number).columns.tolist()\ncat_cols = [col for col in X.columns if col not in num_cols]\nprint(f\"Variables Numéricas: {num_cols}\")\nprint(f\"Variables Categóricas: {cat_cols}\")\n\n\nValores Faltantes (Nulos)\n\nX.isnull().mean().plot(\n    kind=\"bar\",\n    edgecolor=\"k\",\n    title=\"Cantidad de Valores Nulos en el Titanic\",\n)\nplt.tight_layout()"
   },
   {
     "objectID": "tics411/notebooks/11-ex-knn.html#variables-numéricas",
