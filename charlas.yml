@@ -1,0 +1,28 @@
+- title: "Hate Speech UAI"
+  subtitle: "Presentación del HateStack"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-05-15
+  image: charlas/thumbnails/hatespeech_uai.png
+  path: https://docs.google.com/presentation/d/e/2PACX-1vR0pcDhzwO59TEpiMRsXY6592KoixS4yyRRGmhcPa33c-zQgC0Zgaslm4vO6mY0BDT2KOTDb0yfgm2C/pub?start=false&loop=false&delayms=3000
+  categories:
+   - slides
+
+
+- title: "Like a Needle in the HateStack"
+  subtitle: "Presentación final para la Datatón 2022"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2022-10-10
+  image: charlas/thumbnails/needle_hatestack.png
+  path: https://docs.google.com/presentation/d/e/2PACX-1vQLs7VopNRBIiK6ApqgO2nUk6WwN2Al0OusIWYpR-kgVdksbzAPk-YX8WZedpIPBPKHo1Ml55sgS3bm/pub?start=false&loop=false&delayms=3000
+  categories:
+   - slides
+
+
+- title: "RFM-Superlag"
+  subtitle: "Presentación Final del Desafío Itaú-Binnario"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2020-12-05
+  image: charlas/thumbnails/itau_binnario.png
+  path: https://docs.google.com/presentation/d/e/2PACX-1vS8M_rrDOHUBEXT6vRA1ne5-7-E565kwGUx9zKFy1zbQ5THvfwCAIIkbJtILQQreEXkvcrpAH2er07R/pub?start=false&loop=false&delayms=3000
+  categories:
+   - slides

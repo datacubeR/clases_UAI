@@ -1,0 +1,21 @@
+---
+title: "Charlas"
+description: |
+  Acá se pueden encontrar las slides a algunas de mis charlas.
+  
+listing:
+  contents:
+    - "charlas.yml"
+  type: grid
+  fields: [date, title, subtitle, image]
+  sort: "date desc"
+  image-height: 100%
+  #categories: unnumbered
+page-layout: full
+execute: 
+  freeze: false
+  warning: false
+  echo: false
+
+title-block-banner: false
+---

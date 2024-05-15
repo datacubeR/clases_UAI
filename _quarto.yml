@@ -16,6 +16,8 @@ website:
     right:
       - href: index.qmd
         text: Acerca de Mí
+      - href: charlas.qmd
+        text: Charlas
       - sidebar:tics411
   sidebar: 
     - id: tics411
