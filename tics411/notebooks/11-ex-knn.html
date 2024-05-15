@@ -57,7 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -100,6 +100,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -162,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="cell-0" class="cell">
+<div id="cell-0" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -172,133 +175,1184 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> sns.load_dataset(<span class="st">"titanic"</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">survived</th>
+<th data-quarto-table-cell-role="th">pclass</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">sibsp</th>
+<th data-quarto-table-cell-role="th">parch</th>
+<th data-quarto-table-cell-role="th">fare</th>
+<th data-quarto-table-cell-role="th">embarked</th>
+<th data-quarto-table-cell-role="th">class</th>
+<th data-quarto-table-cell-role="th">who</th>
+<th data-quarto-table-cell-role="th">adult_male</th>
+<th data-quarto-table-cell-role="th">deck</th>
+<th data-quarto-table-cell-role="th">embark_town</th>
+<th data-quarto-table-cell-role="th">alive</th>
+<th data-quarto-table-cell-role="th">alone</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0</td>
+<td>3</td>
+<td>male</td>
+<td>22.0</td>
+<td>1</td>
+<td>0</td>
+<td>7.2500</td>
+<td>S</td>
+<td>Third</td>
+<td>man</td>
+<td>True</td>
+<td>NaN</td>
+<td>Southampton</td>
+<td>no</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1</td>
+<td>1</td>
+<td>female</td>
+<td>38.0</td>
+<td>1</td>
+<td>0</td>
+<td>71.2833</td>
+<td>C</td>
+<td>First</td>
+<td>woman</td>
+<td>False</td>
+<td>C</td>
+<td>Cherbourg</td>
+<td>yes</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1</td>
+<td>3</td>
+<td>female</td>
+<td>26.0</td>
+<td>0</td>
+<td>0</td>
+<td>7.9250</td>
+<td>S</td>
+<td>Third</td>
+<td>woman</td>
+<td>False</td>
+<td>NaN</td>
+<td>Southampton</td>
+<td>yes</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1</td>
+<td>1</td>
+<td>female</td>
+<td>35.0</td>
+<td>1</td>
+<td>0</td>
+<td>53.1000</td>
+<td>S</td>
+<td>First</td>
+<td>woman</td>
+<td>False</td>
+<td>C</td>
+<td>Southampton</td>
+<td>yes</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>0</td>
+<td>3</td>
+<td>male</td>
+<td>35.0</td>
+<td>0</td>
+<td>0</td>
+<td>8.0500</td>
+<td>S</td>
+<td>Third</td>
+<td>man</td>
+<td>True</td>
+<td>NaN</td>
+<td>Southampton</td>
+<td>no</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">886</td>
+<td>0</td>
+<td>2</td>
+<td>male</td>
+<td>27.0</td>
+<td>0</td>
+<td>0</td>
+<td>13.0000</td>
+<td>S</td>
+<td>Second</td>
+<td>man</td>
+<td>True</td>
+<td>NaN</td>
+<td>Southampton</td>
+<td>no</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">887</td>
+<td>1</td>
+<td>1</td>
+<td>female</td>
+<td>19.0</td>
+<td>0</td>
+<td>0</td>
+<td>30.0000</td>
+<td>S</td>
+<td>First</td>
+<td>woman</td>
+<td>False</td>
+<td>B</td>
+<td>Southampton</td>
+<td>yes</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">888</td>
+<td>0</td>
+<td>3</td>
+<td>female</td>
+<td>NaN</td>
+<td>1</td>
+<td>2</td>
+<td>23.4500</td>
+<td>S</td>
+<td>Third</td>
+<td>woman</td>
+<td>False</td>
+<td>NaN</td>
+<td>Southampton</td>
+<td>no</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">889</td>
+<td>1</td>
+<td>1</td>
+<td>male</td>
+<td>26.0</td>
+<td>0</td>
+<td>0</td>
+<td>30.0000</td>
+<td>C</td>
+<td>First</td>
+<td>man</td>
+<td>True</td>
+<td>C</td>
+<td>Cherbourg</td>
+<td>yes</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">890</td>
+<td>0</td>
+<td>3</td>
+<td>male</td>
+<td>32.0</td>
+<td>0</td>
+<td>0</td>
+<td>7.7500</td>
+<td>Q</td>
+<td>Third</td>
+<td>man</td>
+<td>True</td>
+<td>NaN</td>
+<td>Queenstown</td>
+<td>no</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+
+<p>891 rows × 15 columns</p>
+</div>
+</div>
+</div>
 </div>
 <blockquote class="blockquote">
 <p>Supongamos que queremos predecir la posibilidad que un pasajero sobreviva o muera luego del accidente del Titanic.</p>
 </blockquote>
-<div id="cell-2" class="cell">
+<div id="cell-2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.dtypes.value_counts().plot(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"k"</span>,</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Tipos de Variable presente en Titanic"</span>,</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11-ex-knn_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 <section id="supongamos-que-utilizaremos-las-siguientes-variables" class="level2">
 <h2 class="anchored" data-anchor-id="supongamos-que-utilizaremos-las-siguientes-variables">Supongamos que utilizaremos las siguientes variables</h2>
-<div id="cell-4" class="cell">
+<div id="cell-4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[[<span class="st">"class"</span>, <span class="st">"sex"</span>, <span class="st">"embark_town"</span>, <span class="st">"fare"</span>, <span class="st">"age"</span>]]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df.alive</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X.shape, y.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>((891, 5), (891,))</code></pre>
+</div>
 </div>
 </section>
 <section id="eda" class="level2">
 <h2 class="anchored" data-anchor-id="eda">EDA</h2>
-<div id="cell-6" class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>num_cols <span class="op">=</span> X.select_dtypes(np.number).columns.tolist()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cat_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> X.columns <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> num_cols]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Variables Numéricas: </span><span class="sc">{</span>num_cols<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Variables Categóricas: </span><span class="sc">{</span>cat_cols<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-6" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>num_cols <span class="op">=</span> X.select_dtypes(np.number).columns.tolist()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cat_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> X.columns <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> num_cols]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Variables Numéricas: </span><span class="sc">{</span>num_cols<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Variables Categóricas: </span><span class="sc">{</span>cat_cols<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Variables Numéricas: ['fare', 'age']
+Variables Categóricas: ['class', 'sex', 'embark_town']</code></pre>
+</div>
 </div>
 <section id="valores-faltantes-nulos" class="level4">
 <h4 class="anchored" data-anchor-id="valores-faltantes-nulos">Valores Faltantes (Nulos)</h4>
-<div id="cell-8" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>X.isnull().mean().plot(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"k"</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Cantidad de Valores Nulos en el Titanic"</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-8" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>X.isnull().mean().plot(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"k"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Cantidad de Valores Nulos en el Titanic"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11-ex-knn_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 </section>
 <section id="variables-numéricas" class="level2">
 <h2 class="anchored" data-anchor-id="variables-numéricas">Variables Numéricas</h2>
-<div id="cell-10" class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>X.hist(grid<span class="op">=</span><span class="va">False</span>, edgecolor<span class="op">=</span><span class="st">"k"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Distribución de Variables Numéricas"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-10" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>X.hist(grid<span class="op">=</span><span class="va">False</span>, edgecolor<span class="op">=</span><span class="st">"k"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">"Distribución de Variables Numéricas"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11-ex-knn_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="variables-categóricas" class="level2">
 <h2 class="anchored" data-anchor-id="variables-categóricas">Variables Categóricas</h2>
-<div id="cell-12" class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> [<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cat, color <span class="kw">in</span> <span class="bu">zip</span>(cat_cols, color):</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    df[cat].value_counts().plot(</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        kind<span class="op">=</span><span class="st">"bar"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        edgecolor<span class="op">=</span><span class="st">"k"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>color,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="ss">f"Categorías para '</span><span class="sc">{</span>cat<span class="sc">}</span><span class="ss">'"</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-12" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> [<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cat, color <span class="kw">in</span> <span class="bu">zip</span>(cat_cols, color):</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    df[cat].value_counts().plot(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        kind<span class="op">=</span><span class="st">"bar"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        edgecolor<span class="op">=</span><span class="st">"k"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>color,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="ss">f"Categorías para '</span><span class="sc">{</span>cat<span class="sc">}</span><span class="ss">'"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11-ex-knn_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11-ex-knn_files/figure-html/cell-8-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11-ex-knn_files/figure-html/cell-8-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="preprocesamiento" class="level2">
 <h2 class="anchored" data-anchor-id="preprocesamiento">Preprocesamiento</h2>
-<div id="cell-14" class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> feature_engine.imputation <span class="im">import</span> CategoricalImputer</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ci <span class="op">=</span> CategoricalImputer(imputation_method<span class="op">=</span><span class="st">"frequent"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>X_imp <span class="op">=</span> ci.fit_transform(X)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>X_imp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-15" class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> feature_engine.imputation <span class="im">import</span> MeanMedianImputer</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mmi <span class="op">=</span> MeanMedianImputer(imputation_method<span class="op">=</span><span class="st">"mean"</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>X_imp <span class="op">=</span> mmi.fit_transform(X_imp)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>X_imp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-16" class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> feature_engine.encoding <span class="im">import</span> OneHotEncoder</span>
+<div id="cell-14" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> feature_engine.imputation <span class="im">import</span> CategoricalImputer</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ohe <span class="op">=</span> OneHotEncoder()</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>X_ohe <span class="op">=</span> ohe.fit_transform(X_imp)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>X_ohe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ci <span class="op">=</span> CategoricalImputer(imputation_method<span class="op">=</span><span class="st">"frequent"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>X_imp <span class="op">=</span> ci.fit_transform(X)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>X_imp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">class</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">embark_town</th>
+<th data-quarto-table-cell-role="th">fare</th>
+<th data-quarto-table-cell-role="th">age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Third</td>
+<td>male</td>
+<td>Southampton</td>
+<td>7.2500</td>
+<td>22.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>First</td>
+<td>female</td>
+<td>Cherbourg</td>
+<td>71.2833</td>
+<td>38.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Third</td>
+<td>female</td>
+<td>Southampton</td>
+<td>7.9250</td>
+<td>26.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>First</td>
+<td>female</td>
+<td>Southampton</td>
+<td>53.1000</td>
+<td>35.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Third</td>
+<td>male</td>
+<td>Southampton</td>
+<td>8.0500</td>
+<td>35.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">886</td>
+<td>Second</td>
+<td>male</td>
+<td>Southampton</td>
+<td>13.0000</td>
+<td>27.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">887</td>
+<td>First</td>
+<td>female</td>
+<td>Southampton</td>
+<td>30.0000</td>
+<td>19.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">888</td>
+<td>Third</td>
+<td>female</td>
+<td>Southampton</td>
+<td>23.4500</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">889</td>
+<td>First</td>
+<td>male</td>
+<td>Cherbourg</td>
+<td>30.0000</td>
+<td>26.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">890</td>
+<td>Third</td>
+<td>male</td>
+<td>Queenstown</td>
+<td>7.7500</td>
+<td>32.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>891 rows × 5 columns</p>
 </div>
-<div id="cell-17" class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+</div>
+</div>
+</div>
+<div id="cell-15" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> feature_engine.imputation <span class="im">import</span> MeanMedianImputer</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sc_all <span class="op">=</span> StandardScaler()</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>X_sc_all <span class="op">=</span> sc_all.fit_transform(X_ohe)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>X_sc_all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mmi <span class="op">=</span> MeanMedianImputer(imputation_method<span class="op">=</span><span class="st">"mean"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>X_imp <span class="op">=</span> mmi.fit_transform(X_imp)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>X_imp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">class</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">embark_town</th>
+<th data-quarto-table-cell-role="th">fare</th>
+<th data-quarto-table-cell-role="th">age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Third</td>
+<td>male</td>
+<td>Southampton</td>
+<td>7.2500</td>
+<td>22.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>First</td>
+<td>female</td>
+<td>Cherbourg</td>
+<td>71.2833</td>
+<td>38.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Third</td>
+<td>female</td>
+<td>Southampton</td>
+<td>7.9250</td>
+<td>26.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>First</td>
+<td>female</td>
+<td>Southampton</td>
+<td>53.1000</td>
+<td>35.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Third</td>
+<td>male</td>
+<td>Southampton</td>
+<td>8.0500</td>
+<td>35.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">886</td>
+<td>Second</td>
+<td>male</td>
+<td>Southampton</td>
+<td>13.0000</td>
+<td>27.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">887</td>
+<td>First</td>
+<td>female</td>
+<td>Southampton</td>
+<td>30.0000</td>
+<td>19.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">888</td>
+<td>Third</td>
+<td>female</td>
+<td>Southampton</td>
+<td>23.4500</td>
+<td>29.699118</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">889</td>
+<td>First</td>
+<td>male</td>
+<td>Cherbourg</td>
+<td>30.0000</td>
+<td>26.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">890</td>
+<td>Third</td>
+<td>male</td>
+<td>Queenstown</td>
+<td>7.7500</td>
+<td>32.000000</td>
+</tr>
+</tbody>
+</table>
+
+<p>891 rows × 5 columns</p>
 </div>
-<div id="cell-18" class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> feature_engine.wrappers <span class="im">import</span> SklearnTransformerWrapper</span>
+</div>
+</div>
+</div>
+<div id="cell-16" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> feature_engine.encoding <span class="im">import</span> OneHotEncoder</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> SklearnTransformerWrapper(StandardScaler(), variables<span class="op">=</span>[<span class="st">"fare"</span>, <span class="st">"age"</span>])</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>X_sc <span class="op">=</span> sc.fit_transform(X_ohe)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>X_sc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ohe <span class="op">=</span> OneHotEncoder()</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>X_ohe <span class="op">=</span> ohe.fit_transform(X_imp)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>X_ohe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">fare</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">class_Third</th>
+<th data-quarto-table-cell-role="th">class_First</th>
+<th data-quarto-table-cell-role="th">class_Second</th>
+<th data-quarto-table-cell-role="th">sex_male</th>
+<th data-quarto-table-cell-role="th">sex_female</th>
+<th data-quarto-table-cell-role="th">embark_town_Southampton</th>
+<th data-quarto-table-cell-role="th">embark_town_Cherbourg</th>
+<th data-quarto-table-cell-role="th">embark_town_Queenstown</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>7.2500</td>
+<td>22.000000</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>71.2833</td>
+<td>38.000000</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>7.9250</td>
+<td>26.000000</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>53.1000</td>
+<td>35.000000</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>8.0500</td>
+<td>35.000000</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">886</td>
+<td>13.0000</td>
+<td>27.000000</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">887</td>
+<td>30.0000</td>
+<td>19.000000</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">888</td>
+<td>23.4500</td>
+<td>29.699118</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">889</td>
+<td>30.0000</td>
+<td>26.000000</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">890</td>
+<td>7.7500</td>
+<td>32.000000</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+<p>891 rows × 10 columns</p>
+</div>
+</div>
+</div>
+</div>
+<div id="cell-17" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sc_all <span class="op">=</span> StandardScaler()</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>X_sc_all <span class="op">=</span> sc_all.fit_transform(X_ohe)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>X_sc_all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">fare</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">class_Third</th>
+<th data-quarto-table-cell-role="th">class_First</th>
+<th data-quarto-table-cell-role="th">class_Second</th>
+<th data-quarto-table-cell-role="th">sex_male</th>
+<th data-quarto-table-cell-role="th">sex_female</th>
+<th data-quarto-table-cell-role="th">embark_town_Southampton</th>
+<th data-quarto-table-cell-role="th">embark_town_Cherbourg</th>
+<th data-quarto-table-cell-role="th">embark_town_Queenstown</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>-0.502445</td>
+<td>-0.592481</td>
+<td>0.902587</td>
+<td>-0.565685</td>
+<td>-0.510152</td>
+<td>0.737695</td>
+<td>-0.737695</td>
+<td>0.615838</td>
+<td>-0.482043</td>
+<td>-0.307562</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0.786845</td>
+<td>0.638789</td>
+<td>-1.107926</td>
+<td>1.767767</td>
+<td>-0.510152</td>
+<td>-1.355574</td>
+<td>1.355574</td>
+<td>-1.623803</td>
+<td>2.074505</td>
+<td>-0.307562</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>-0.488854</td>
+<td>-0.284663</td>
+<td>0.902587</td>
+<td>-0.565685</td>
+<td>-0.510152</td>
+<td>-1.355574</td>
+<td>1.355574</td>
+<td>0.615838</td>
+<td>-0.482043</td>
+<td>-0.307562</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>0.420730</td>
+<td>0.407926</td>
+<td>-1.107926</td>
+<td>1.767767</td>
+<td>-0.510152</td>
+<td>-1.355574</td>
+<td>1.355574</td>
+<td>0.615838</td>
+<td>-0.482043</td>
+<td>-0.307562</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>-0.486337</td>
+<td>0.407926</td>
+<td>0.902587</td>
+<td>-0.565685</td>
+<td>-0.510152</td>
+<td>0.737695</td>
+<td>-0.737695</td>
+<td>0.615838</td>
+<td>-0.482043</td>
+<td>-0.307562</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">886</td>
+<td>-0.386671</td>
+<td>-0.207709</td>
+<td>-1.107926</td>
+<td>-0.565685</td>
+<td>1.960202</td>
+<td>0.737695</td>
+<td>-0.737695</td>
+<td>0.615838</td>
+<td>-0.482043</td>
+<td>-0.307562</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">887</td>
+<td>-0.044381</td>
+<td>-0.823344</td>
+<td>-1.107926</td>
+<td>1.767767</td>
+<td>-0.510152</td>
+<td>-1.355574</td>
+<td>1.355574</td>
+<td>0.615838</td>
+<td>-0.482043</td>
+<td>-0.307562</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">888</td>
+<td>-0.176263</td>
+<td>0.000000</td>
+<td>0.902587</td>
+<td>-0.565685</td>
+<td>-0.510152</td>
+<td>-1.355574</td>
+<td>1.355574</td>
+<td>0.615838</td>
+<td>-0.482043</td>
+<td>-0.307562</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">889</td>
+<td>-0.044381</td>
+<td>-0.284663</td>
+<td>-1.107926</td>
+<td>1.767767</td>
+<td>-0.510152</td>
+<td>0.737695</td>
+<td>-0.737695</td>
+<td>-1.623803</td>
+<td>2.074505</td>
+<td>-0.307562</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">890</td>
+<td>-0.492378</td>
+<td>0.177063</td>
+<td>0.902587</td>
+<td>-0.565685</td>
+<td>-0.510152</td>
+<td>0.737695</td>
+<td>-0.737695</td>
+<td>-1.623803</td>
+<td>-0.482043</td>
+<td>3.251373</td>
+</tr>
+</tbody>
+</table>
+
+<p>891 rows × 10 columns</p>
+</div>
+</div>
+</div>
+</div>
+<div id="cell-18" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> feature_engine.wrappers <span class="im">import</span> SklearnTransformerWrapper</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> SklearnTransformerWrapper(StandardScaler(), variables<span class="op">=</span>[<span class="st">"fare"</span>, <span class="st">"age"</span>])</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>X_sc <span class="op">=</span> sc.fit_transform(X_ohe)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>X_sc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">fare</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">class_Third</th>
+<th data-quarto-table-cell-role="th">class_First</th>
+<th data-quarto-table-cell-role="th">class_Second</th>
+<th data-quarto-table-cell-role="th">sex_male</th>
+<th data-quarto-table-cell-role="th">sex_female</th>
+<th data-quarto-table-cell-role="th">embark_town_Southampton</th>
+<th data-quarto-table-cell-role="th">embark_town_Cherbourg</th>
+<th data-quarto-table-cell-role="th">embark_town_Queenstown</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>-0.502445</td>
+<td>-0.592481</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0.786845</td>
+<td>0.638789</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>-0.488854</td>
+<td>-0.284663</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>0.420730</td>
+<td>0.407926</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>-0.486337</td>
+<td>0.407926</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">886</td>
+<td>-0.386671</td>
+<td>-0.207709</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">887</td>
+<td>-0.044381</td>
+<td>-0.823344</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">888</td>
+<td>-0.176263</td>
+<td>0.000000</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">889</td>
+<td>-0.044381</td>
+<td>-0.284663</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">890</td>
+<td>-0.492378</td>
+<td>0.177063</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+<p>891 rows × 10 columns</p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="entrenamiento-del-modelo" class="level2">
 <h2 class="anchored" data-anchor-id="entrenamiento-del-modelo">Entrenamiento del Modelo</h2>
-<div id="cell-20" class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> knn_clf(X, y, k<span class="op">=</span><span class="dv">5</span>, prep<span class="op">=</span><span class="st">""</span>):</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    knn <span class="op">=</span> KNeighborsClassifier(</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        n_neighbors<span class="op">=</span>k, metric<span class="op">=</span><span class="st">"euclidean"</span>, n_jobs<span class="op">=-</span><span class="dv">1</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Notar que es posible utilizar Variables categóricas como Etiquetas...</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    knn.fit(X, y)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> knn.predict(X)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Score k = </span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">, y Preprocesamiento: </span><span class="sc">{</span>prep<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>knn<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">"</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y_pred</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">15</span>]:</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"================================================================="</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    y_pred_sc <span class="op">=</span> knn_clf(X_sc, y, k<span class="op">=</span>k, prep<span class="op">=</span><span class="st">"StandardScaler Numérico"</span>)</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    y_pred_sc_all <span class="op">=</span> knn_clf(X_sc_all, y, k<span class="op">=</span>k, prep<span class="op">=</span><span class="st">"StandardScaler a todo"</span>)</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    y_pred_ohe <span class="op">=</span> knn_clf(X_ohe, y, k<span class="op">=</span>k, prep<span class="op">=</span><span class="st">"Sin Escalar"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-20" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> knn_clf(X, y, k<span class="op">=</span><span class="dv">5</span>, prep<span class="op">=</span><span class="st">""</span>):</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    knn <span class="op">=</span> KNeighborsClassifier(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        n_neighbors<span class="op">=</span>k, metric<span class="op">=</span><span class="st">"euclidean"</span>, n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Notar que es posible utilizar Variables categóricas como Etiquetas...</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    knn.fit(X, y)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> knn.predict(X)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Score k = </span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">, y Preprocesamiento: </span><span class="sc">{</span>prep<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>knn<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">"</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y_pred</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">15</span>]:</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"================================================================="</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    y_pred_sc <span class="op">=</span> knn_clf(X_sc, y, k<span class="op">=</span>k, prep<span class="op">=</span><span class="st">"StandardScaler Numérico"</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    y_pred_sc_all <span class="op">=</span> knn_clf(X_sc_all, y, k<span class="op">=</span>k, prep<span class="op">=</span><span class="st">"StandardScaler a todo"</span>)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    y_pred_ohe <span class="op">=</span> knn_clf(X_ohe, y, k<span class="op">=</span>k, prep<span class="op">=</span><span class="st">"Sin Escalar"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=================================================================
+Score k = 3, y Preprocesamiento: StandardScaler Numérico: 0.8844
+Score k = 3, y Preprocesamiento: StandardScaler a todo: 0.8855
+Score k = 3, y Preprocesamiento: Sin Escalar: 0.8384
+=================================================================
+Score k = 5, y Preprocesamiento: StandardScaler Numérico: 0.8698
+Score k = 5, y Preprocesamiento: StandardScaler a todo: 0.8698
+Score k = 5, y Preprocesamiento: Sin Escalar: 0.8204
+=================================================================
+Score k = 7, y Preprocesamiento: StandardScaler Numérico: 0.8608
+Score k = 7, y Preprocesamiento: StandardScaler a todo: 0.8575
+Score k = 7, y Preprocesamiento: Sin Escalar: 0.7834
+=================================================================
+Score k = 9, y Preprocesamiento: StandardScaler Numérico: 0.8418
+Score k = 9, y Preprocesamiento: StandardScaler a todo: 0.8406
+Score k = 9, y Preprocesamiento: Sin Escalar: 0.7733
+=================================================================
+Score k = 11, y Preprocesamiento: StandardScaler Numérico: 0.8373
+Score k = 11, y Preprocesamiento: StandardScaler a todo: 0.8361
+Score k = 11, y Preprocesamiento: Sin Escalar: 0.7643
+=================================================================
+Score k = 13, y Preprocesamiento: StandardScaler Numérico: 0.8272
+Score k = 13, y Preprocesamiento: StandardScaler a todo: 0.8283
+Score k = 13, y Preprocesamiento: Sin Escalar: 0.7587
+=================================================================
+Score k = 15, y Preprocesamiento: StandardScaler Numérico: 0.8215
+Score k = 15, y Preprocesamiento: StandardScaler a todo: 0.8249
+Score k = 15, y Preprocesamiento: Sin Escalar: 0.7486</code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
 <p>Conclusión: Los Preprocesamientos afectan de manera importante el entrenamiento de un modelo.</p>
@@ -306,34 +1360,540 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="uso-de-pipelines" class="level2">
 <h2 class="anchored" data-anchor-id="uso-de-pipelines">Uso de Pipelines</h2>
-<div id="cell-23" class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> model_pipeline(num_method, cat_method, k<span class="op">=</span><span class="dv">5</span>):</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    pipe <span class="op">=</span> Pipeline(</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        steps<span class="op">=</span>[</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"num_imp"</span>, MeanMedianImputer(imputation_method<span class="op">=</span>num_method)),</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"cat_imp"</span>, CategoricalImputer(imputation_method<span class="op">=</span>cat_method)),</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"ohe"</span>, OneHotEncoder()),</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"sc"</span>, StandardScaler()),</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"model"</span>, KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>)),</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pipe</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> model_pipeline(num_method<span class="op">=</span><span class="st">"mean"</span>, cat_method<span class="op">=</span><span class="st">"frequent"</span>, k<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>pipe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-23" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> model_pipeline(num_method, cat_method, k<span class="op">=</span><span class="dv">5</span>):</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    pipe <span class="op">=</span> Pipeline(</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        steps<span class="op">=</span>[</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"num_imp"</span>, MeanMedianImputer(imputation_method<span class="op">=</span>num_method)),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"cat_imp"</span>, CategoricalImputer(imputation_method<span class="op">=</span>cat_method)),</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"ohe"</span>, OneHotEncoder()),</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"sc"</span>, StandardScaler()),</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"model"</span>, KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>)),</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pipe</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> model_pipeline(num_method<span class="op">=</span><span class="st">"mean"</span>, cat_method<span class="op">=</span><span class="st">"frequent"</span>, k<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>pipe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: black;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 1ex;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</a></style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[('num_imp', MeanMedianImputer(imputation_method='mean')),
+                ('cat_imp', CategoricalImputer(imputation_method='frequent')),
+                ('ohe', OneHotEncoder()), ('sc', StandardScaler()),
+                ('model', KNeighborsClassifier(n_jobs=-1))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox"><label for="sk-estimator-id-1" class="sk-toggleable__label  sk-toggleable__label-arrow ">&nbsp;&nbsp;Pipeline<a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link ">i<span>Not fitted</span></span></label><div class="sk-toggleable__content "><pre>Pipeline(steps=[('num_imp', MeanMedianImputer(imputation_method='mean')),
+                ('cat_imp', CategoricalImputer(imputation_method='frequent')),
+                ('ohe', OneHotEncoder()), ('sc', StandardScaler()),
+                ('model', KNeighborsClassifier(n_jobs=-1))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox"><label for="sk-estimator-id-2" class="sk-toggleable__label  sk-toggleable__label-arrow ">MeanMedianImputer</label><div class="sk-toggleable__content "><pre>MeanMedianImputer(imputation_method='mean')</pre></div> </div></div><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox"><label for="sk-estimator-id-3" class="sk-toggleable__label  sk-toggleable__label-arrow ">CategoricalImputer</label><div class="sk-toggleable__content "><pre>CategoricalImputer(imputation_method='frequent')</pre></div> </div></div><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox"><label for="sk-estimator-id-4" class="sk-toggleable__label  sk-toggleable__label-arrow ">OneHotEncoder</label><div class="sk-toggleable__content "><pre>OneHotEncoder()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox"><label for="sk-estimator-id-5" class="sk-toggleable__label  sk-toggleable__label-arrow ">&nbsp;StandardScaler<a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></label><div class="sk-toggleable__content "><pre>StandardScaler()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator  sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox"><label for="sk-estimator-id-6" class="sk-toggleable__label  sk-toggleable__label-arrow ">&nbsp;KNeighborsClassifier<a class="sk-estimator-doc-link " rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.neighbors.KNeighborsClassifier.html">?<span>Documentation for KNeighborsClassifier</span></a></label><div class="sk-toggleable__content "><pre>KNeighborsClassifier(n_jobs=-1)</pre></div> </div></div></div></div></div></div>
 </div>
-<div id="cell-24" class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pipe.fit(X, y)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> pipe.predict(X)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>pipe.score(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-25" class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>y_pred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-24" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pipe.fit(X, y)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> pipe.predict(X)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>pipe.score(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>0.8698092031425365</code></pre>
+</div>
+</div>
+<div id="cell-25" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>y_pred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>array(['no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'yes',
+       'yes', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes', 'no',
+       'no', 'no', 'yes', 'yes', 'no', 'yes', 'no', 'no', 'yes', 'no',
+       'no', 'yes', 'yes', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes',
+       'no', 'yes', 'no', 'yes', 'yes', 'no', 'no', 'yes', 'no', 'no',
+       'no', 'no', 'yes', 'yes', 'no', 'yes', 'yes', 'no', 'yes', 'no',
+       'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'yes', 'no',
+       'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'yes',
+       'no', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'no', 'yes', 'no',
+       'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no',
+       'yes', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'yes',
+       'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no',
+       'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no',
+       'no', 'yes', 'no', 'no', 'yes', 'no', 'no', 'yes', 'no', 'yes',
+       'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no',
+       'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no',
+       'no', 'no', 'yes', 'yes', 'no', 'no', 'yes', 'no', 'no', 'yes',
+       'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'yes',
+       'yes', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'yes', 'yes',
+       'yes', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no',
+       'no', 'yes', 'no', 'no', 'yes', 'no', 'no', 'yes', 'no', 'no',
+       'no', 'yes', 'yes', 'no', 'yes', 'no', 'no', 'no', 'no', 'no',
+       'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no',
+       'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no',
+       'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes',
+       'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no',
+       'no', 'yes', 'yes', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'no',
+       'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no',
+       'no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'yes',
+       'yes', 'yes', 'yes', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'yes',
+       'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'yes', 'yes', 'no',
+       'yes', 'yes', 'no', 'yes', 'yes', 'yes', 'no', 'yes', 'no', 'yes',
+       'no', 'yes', 'yes', 'no', 'yes', 'no', 'yes', 'no', 'no', 'yes',
+       'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'yes',
+       'yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'yes',
+       'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no',
+       'yes', 'yes', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'no',
+       'yes', 'no', 'yes', 'yes', 'no', 'yes', 'no', 'no', 'no', 'yes',
+       'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no',
+       'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no',
+       'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no',
+       'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no',
+       'yes', 'yes', 'yes', 'no', 'no', 'yes', 'no', 'yes', 'no', 'no',
+       'yes', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'yes', 'yes', 'yes',
+       'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no',
+       'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'no',
+       'yes', 'yes', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no',
+       'no', 'no', 'yes', 'no', 'yes', 'no', 'no', 'yes', 'no', 'no',
+       'no', 'no', 'no', 'no', 'yes', 'no', 'yes', 'no', 'no', 'yes',
+       'yes', 'yes', 'yes', 'no', 'yes', 'no', 'no', 'yes', 'no', 'no',
+       'yes', 'yes', 'no', 'no', 'yes', 'no', 'yes', 'no', 'yes', 'no',
+       'no', 'yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no',
+       'no', 'yes', 'no', 'yes', 'no', 'yes', 'no', 'yes', 'yes', 'no',
+       'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'yes', 'no', 'no', 'no',
+       'no', 'yes', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'no', 'no',
+       'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'yes', 'yes',
+       'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes', 'yes', 'no',
+       'yes', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'yes', 'no',
+       'yes', 'no', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no',
+       'no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'yes',
+       'no', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'no', 'no', 'yes',
+       'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no',
+       'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'yes', 'no', 'yes',
+       'yes', 'yes', 'no', 'no', 'no', 'yes', 'no', 'yes', 'no', 'yes',
+       'yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no',
+       'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no',
+       'no', 'yes', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'no',
+       'no', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'no', 'no',
+       'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no',
+       'yes', 'no', 'yes', 'no', 'yes', 'no', 'no', 'no', 'no', 'no',
+       'yes', 'yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no',
+       'yes', 'yes', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no',
+       'no', 'yes', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'no',
+       'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes', 'yes',
+       'no', 'no', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'yes',
+       'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'yes', 'no',
+       'no', 'yes', 'no', 'yes', 'yes', 'yes', 'yes', 'no', 'no', 'no',
+       'yes', 'no', 'yes', 'yes', 'no', 'no', 'no', 'no', 'no', 'no',
+       'yes', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no', 'yes', 'no',
+       'no', 'yes', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no',
+       'yes', 'no', 'no', 'no', 'yes', 'yes', 'no', 'yes', 'no', 'no',
+       'yes', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'no', 'no', 'yes',
+       'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no',
+       'no', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'yes', 'yes', 'yes',
+       'yes', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'yes', 'yes',
+       'no', 'no', 'yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no',
+       'no', 'no', 'yes', 'yes', 'no', 'yes', 'no', 'no', 'yes', 'no',
+       'yes', 'no', 'no', 'no'], dtype=object)</code></pre>
+</div>
 </div>
 
 

@@ -590,7 +590,7 @@ Hopskins para p=50 es: 0.48048319214476964</code></pre>
 <pre><code>0.614855027897113</code></pre>
 </div>
 </div>
-<div id="cell-18" class="cell" data-execution_count="11">
+<div id="cell-18" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Esta función se hizo sólo para mostrar los pasos intermedios</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Usen esta función para revisar sus resultados cuando estudien para la prueba.</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -609,10 +609,10 @@ Hopskins para p=50 es: 0.48048319214476964</code></pre>
 <span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                val <span class="op">=</span> row[idx_cohesion[cl]]</span>
 <span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>                bj[i, cl] <span class="op">=</span> val.mean() <span class="cf">if</span> <span class="bu">len</span>(val) <span class="cf">else</span> <span class="dv">0</span></span>
 <span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> np.sort(bj, axis<span class="op">=</span><span class="dv">1</span>)[:, <span class="dv">1</span>]</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> np.sort(bj, axis<span class="op">=</span><span class="dv">1</span>)[:, <span class="op">-</span><span class="dv">1</span>]</span>
 <span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a, b, bj, n_clusters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-19" class="cell" data-execution_count="12">
+<div id="cell-19" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>a, b, bj, n_clusters <span class="op">=</span> silhouette_score_m(d_matrix, df.c.values)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -638,15 +638,15 @@ Hopskins para p=50 es: 0.48048319214476964</code></pre>
 <span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>s_score_table <span class="op">=</span> create_table_for_silhouette(a, b, bj, n_clusters)</span>
 <span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>s_score_table[<span class="st">"s"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<pre><code>0.6148550289904339</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>0.6395238095238095</code></pre>
 </div>
 </div>
 </section>
 </section>
 <section id="ejemplo-del-ppt" class="level1">
 <h1>Ejemplo del PPT</h1>
-<div id="cell-21" class="cell" data-execution_count="13">
+<div id="cell-21" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(<span class="bu">dict</span>(x<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>], c<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>]))</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>d_matrix <span class="op">=</span> distance_matrix(df[[<span class="st">"x"</span>]], df[[<span class="st">"x"</span>]], p<span class="op">=</span><span class="dv">1</span>)</span>

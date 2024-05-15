@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="cell-0" class="cell" data-execution_count="1">
+<div id="cell-0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -176,7 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <div>
 
@@ -247,7 +247,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-1" class="cell" data-execution_count="2">
+<div id="cell-1" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial <span class="im">import</span> distance_matrix</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>d_m <span class="op">=</span> distance_matrix(df.to_numpy(), df.to_numpy(), p<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>d_m <span class="op">=</span> pd.DataFrame(d_m, index<span class="op">=</span>vals, columns<span class="op">=</span>vals).<span class="bu">round</span>(<span class="dv">2</span>)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>d_m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 <div>
 
@@ -418,35 +418,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="cell-2" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d_m.to_latex())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>\begin{tabular}{lrrrrrrrrrr}
-\toprule
-{} &amp;     1  &amp;     2  &amp;     3  &amp;     4  &amp;     5  &amp;     6  &amp;     7  &amp;     8  &amp;     9  &amp;     10 \\
-\midrule
-1  &amp;   0.00 &amp;   6.00 &amp;  11.00 &amp;  14.00 &amp;  17.00 &amp;   4.00 &amp;   7.21 &amp;  11.18 &amp;  14.14 &amp;  17.12 \\
-2  &amp;   6.00 &amp;   0.00 &amp;   5.00 &amp;   8.00 &amp;  11.00 &amp;   7.21 &amp;   4.00 &amp;   5.39 &amp;   8.25 &amp;  11.18 \\
-3  &amp;  11.00 &amp;   5.00 &amp;   0.00 &amp;   3.00 &amp;   6.00 &amp;  11.70 &amp;   6.40 &amp;   2.00 &amp;   3.61 &amp;   6.32 \\
-4  &amp;  14.00 &amp;   8.00 &amp;   3.00 &amp;   0.00 &amp;   3.00 &amp;  14.56 &amp;   8.94 &amp;   3.61 &amp;   2.00 &amp;   3.61 \\
-5  &amp;  17.00 &amp;  11.00 &amp;   6.00 &amp;   3.00 &amp;   0.00 &amp;  17.46 &amp;  11.70 &amp;   6.32 &amp;   3.61 &amp;   2.00 \\
-6  &amp;   4.00 &amp;   7.21 &amp;  11.70 &amp;  14.56 &amp;  17.46 &amp;   0.00 &amp;   6.00 &amp;  11.18 &amp;  14.14 &amp;  17.12 \\
-7  &amp;   7.21 &amp;   4.00 &amp;   6.40 &amp;   8.94 &amp;  11.70 &amp;   6.00 &amp;   0.00 &amp;   5.39 &amp;   8.25 &amp;  11.18 \\
-8  &amp;  11.18 &amp;   5.39 &amp;   2.00 &amp;   3.61 &amp;   6.32 &amp;  11.18 &amp;   5.39 &amp;   0.00 &amp;   3.00 &amp;   6.00 \\
-9  &amp;  14.14 &amp;   8.25 &amp;   3.61 &amp;   2.00 &amp;   3.61 &amp;  14.14 &amp;   8.25 &amp;   3.00 &amp;   0.00 &amp;   3.00 \\
-10 &amp;  17.12 &amp;  11.18 &amp;   6.32 &amp;   3.61 &amp;   2.00 &amp;  17.12 &amp;  11.18 &amp;   6.00 &amp;   3.00 &amp;   0.00 \\
-\bottomrule
-\end{tabular}
-</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_8516/2921418078.py:1: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
-  print(d_m.to_latex())</code></pre>
-</div>
-</div>
-<div id="cell-3" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> d_m.loc[[<span class="dv">1</span>, <span class="dv">10</span>]]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>D</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> d_m.loc[[<span class="dv">1</span>, <span class="dv">10</span>]]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>D</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 <div>
 
@@ -501,10 +475,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-4" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> D <span class="op">==</span> D.<span class="bu">min</span>()</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>G.astype(<span class="st">"int64"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div id="cell-3" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> D <span class="op">==</span> D.<span class="bu">min</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>G.astype(<span class="st">"int64"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 <div>
 
@@ -559,25 +533,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-5" class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-4" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-6" class="cell" data-execution_count="85">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>A.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-5" class="cell" data-execution_count="85">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>A.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="85">
 <pre><code>0.0</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-execution_count="86">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A.std(ddof<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-6" class="cell" data-execution_count="86">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>A.std(ddof<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="86">
 <pre><code>2.8284271247461903</code></pre>
 </div>
 </div>
-<div id="cell-8" class="cell" data-execution_count="89">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A.mean())</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>(A<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-7" class="cell" data-execution_count="89">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A.mean())</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>(A<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.0</code></pre>
 </div>
@@ -585,12 +559,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>40</code></pre>
 </div>
 </div>
-<div id="cell-9" class="cell" data-execution_count="90">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler, StandardScaler</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> StandardScaler()</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>mm <span class="op">=</span> MinMaxScaler()</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>sc.fit_transform(A.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-8" class="cell" data-execution_count="90">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler, StandardScaler</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> StandardScaler()</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>mm <span class="op">=</span> MinMaxScaler()</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>sc.fit_transform(A.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="90">
 <pre><code>array([[-1.76776695],
        [-0.35355339],
@@ -599,8 +573,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
        [ 1.06066017]])</code></pre>
 </div>
 </div>
-<div id="cell-10" class="cell" data-execution_count="92">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mm.fit_transform(A.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-9" class="cell" data-execution_count="92">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mm.fit_transform(A.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="92">
 <pre><code>array([[0.   ],
        [0.5  ],
@@ -609,34 +583,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
        [1.   ]])</code></pre>
 </div>
 </div>
-<div id="cell-11" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>        Item<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>],</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        Forma<span class="op">=</span>[</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"cuadrado"</span>,</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"cuadrado"</span>,</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"circulo"</span>,</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"circulo"</span>,</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"triangulo"</span>,</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"cuadrado"</span>,</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">"circulo"</span>,</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"circulo"</span>,</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>        ],</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        Color<span class="op">=</span>[</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"rojo"</span>,</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"azul"</span>,</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">"rojo"</span>,</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"verde"</span>,</span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"rojo"</span>,</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"amarillo"</span>,</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">"amarillo"</span>,</span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">"verde"</span>,</span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>        ],</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.to_latex(index<span class="op">=</span><span class="va">False</span>, caption<span class="op">=</span><span class="st">"Dataset"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-10" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        Item<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>],</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        Forma<span class="op">=</span>[</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"cuadrado"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"cuadrado"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"circulo"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"circulo"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"triangulo"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"cuadrado"</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">"circulo"</span>,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"circulo"</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        Color<span class="op">=</span>[</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"rojo"</span>,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"azul"</span>,</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">"rojo"</span>,</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"verde"</span>,</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"rojo"</span>,</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"amarillo"</span>,</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">"amarillo"</span>,</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">"verde"</span>,</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.to_latex(index<span class="op">=</span><span class="va">False</span>, caption<span class="op">=</span><span class="st">"Dataset"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>\begin{table}
 \centering
@@ -663,28 +637,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   print(df.to_latex(index=False, caption="Dataset"))</code></pre>
 </div>
 </div>
-<div id="cell-12" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.6</span>, <span class="fl">0.8</span>, <span class="fl">1.3</span>, <span class="fl">3.6</span>, <span class="fl">3.6</span>, <span class="fl">4.3</span>, <span class="fl">4.5</span>, <span class="dv">5</span>, <span class="dv">4</span>],</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>, <span class="fl">1.4</span>, <span class="fl">3.5</span>, <span class="fl">3.3</span>, <span class="dv">4</span>, <span class="fl">4.2</span>, <span class="fl">4.7</span>, <span class="fl">4.2</span>],</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">1.3</span>, <span class="dv">3</span>, <span class="fl">2.8</span>, <span class="fl">3.5</span>, <span class="fl">3.7</span>, <span class="fl">4.2</span>, <span class="fl">4.1</span>],</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">1.6</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>, <span class="dv">0</span>, <span class="fl">1.6</span>, <span class="fl">2.1</span>, <span class="fl">3.4</span>, <span class="dv">3</span>, <span class="fl">3.7</span>, <span class="fl">3.8</span>, <span class="fl">4.4</span>, <span class="fl">4.8</span>],</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">1.6</span>, <span class="dv">0</span>, <span class="fl">0.6</span>, <span class="fl">2.9</span>, <span class="fl">2.9</span>, <span class="fl">3.6</span>, <span class="fl">3.8</span>, <span class="fl">4.3</span>, <span class="fl">3.4</span>],</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">1.3</span>, <span class="fl">1.4</span>, <span class="fl">1.3</span>, <span class="fl">2.1</span>, <span class="fl">0.6</span>, <span class="dv">0</span>, <span class="fl">2.5</span>, <span class="fl">2.7</span>, <span class="fl">3.3</span>, <span class="fl">3.6</span>, <span class="dv">4</span>, <span class="fl">2.8</span>],</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">3.6</span>, <span class="fl">3.5</span>, <span class="dv">3</span>, <span class="fl">3.4</span>, <span class="fl">2.9</span>, <span class="fl">2.5</span>, <span class="dv">0</span>, <span class="fl">0.9</span>, <span class="dv">1</span>, <span class="fl">1.4</span>, <span class="fl">1.6</span>, <span class="fl">2.7</span>],</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">3.6</span>, <span class="fl">3.3</span>, <span class="fl">2.8</span>, <span class="dv">3</span>, <span class="fl">2.9</span>, <span class="fl">2.7</span>, <span class="fl">0.9</span>, <span class="dv">0</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>, <span class="fl">1.4</span>, <span class="fl">3.6</span>],</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">4.3</span>, <span class="dv">4</span>, <span class="fl">3.5</span>, <span class="fl">3.7</span>, <span class="fl">3.6</span>, <span class="fl">3.3</span>, <span class="dv">1</span>, <span class="fl">0.7</span>, <span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.7</span>, <span class="fl">3.7</span>],</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">4.5</span>, <span class="fl">4.2</span>, <span class="fl">3.7</span>, <span class="fl">3.8</span>, <span class="fl">3.8</span>, <span class="fl">3.6</span>, <span class="fl">1.4</span>, <span class="fl">0.9</span>, <span class="fl">0.4</span>, <span class="dv">0</span>, <span class="fl">0.6</span>, <span class="fl">4.1</span>],</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">5</span>, <span class="fl">4.7</span>, <span class="fl">4.2</span>, <span class="fl">4.4</span>, <span class="fl">4.3</span>, <span class="dv">4</span>, <span class="fl">1.6</span>, <span class="fl">1.4</span>, <span class="fl">0.7</span>, <span class="fl">0.6</span>, <span class="dv">0</span>, <span class="fl">4.1</span>],</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">4</span>, <span class="fl">4.2</span>, <span class="fl">4.1</span>, <span class="fl">4.8</span>, <span class="fl">3.4</span>, <span class="fl">2.8</span>, <span class="fl">2.7</span>, <span class="fl">3.6</span>, <span class="fl">3.7</span>, <span class="fl">4.1</span>, <span class="fl">4.1</span>, <span class="dv">0</span>],</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>df.index <span class="op">=</span> [<span class="op">*</span><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>)]</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> [<span class="op">*</span><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>)]</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>display(df)</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.to_latex(caption<span class="op">=</span><span class="st">"DBSCAN"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-11" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.6</span>, <span class="fl">0.8</span>, <span class="fl">1.3</span>, <span class="fl">3.6</span>, <span class="fl">3.6</span>, <span class="fl">4.3</span>, <span class="fl">4.5</span>, <span class="dv">5</span>, <span class="dv">4</span>],</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>, <span class="fl">1.4</span>, <span class="fl">3.5</span>, <span class="fl">3.3</span>, <span class="dv">4</span>, <span class="fl">4.2</span>, <span class="fl">4.7</span>, <span class="fl">4.2</span>],</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">1.3</span>, <span class="dv">3</span>, <span class="fl">2.8</span>, <span class="fl">3.5</span>, <span class="fl">3.7</span>, <span class="fl">4.2</span>, <span class="fl">4.1</span>],</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">1.6</span>, <span class="fl">1.1</span>, <span class="fl">0.8</span>, <span class="dv">0</span>, <span class="fl">1.6</span>, <span class="fl">2.1</span>, <span class="fl">3.4</span>, <span class="dv">3</span>, <span class="fl">3.7</span>, <span class="fl">3.8</span>, <span class="fl">4.4</span>, <span class="fl">4.8</span>],</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">1.6</span>, <span class="dv">0</span>, <span class="fl">0.6</span>, <span class="fl">2.9</span>, <span class="fl">2.9</span>, <span class="fl">3.6</span>, <span class="fl">3.8</span>, <span class="fl">4.3</span>, <span class="fl">3.4</span>],</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">1.3</span>, <span class="fl">1.4</span>, <span class="fl">1.3</span>, <span class="fl">2.1</span>, <span class="fl">0.6</span>, <span class="dv">0</span>, <span class="fl">2.5</span>, <span class="fl">2.7</span>, <span class="fl">3.3</span>, <span class="fl">3.6</span>, <span class="dv">4</span>, <span class="fl">2.8</span>],</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">3.6</span>, <span class="fl">3.5</span>, <span class="dv">3</span>, <span class="fl">3.4</span>, <span class="fl">2.9</span>, <span class="fl">2.5</span>, <span class="dv">0</span>, <span class="fl">0.9</span>, <span class="dv">1</span>, <span class="fl">1.4</span>, <span class="fl">1.6</span>, <span class="fl">2.7</span>],</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">3.6</span>, <span class="fl">3.3</span>, <span class="fl">2.8</span>, <span class="dv">3</span>, <span class="fl">2.9</span>, <span class="fl">2.7</span>, <span class="fl">0.9</span>, <span class="dv">0</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>, <span class="fl">1.4</span>, <span class="fl">3.6</span>],</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">4.3</span>, <span class="dv">4</span>, <span class="fl">3.5</span>, <span class="fl">3.7</span>, <span class="fl">3.6</span>, <span class="fl">3.3</span>, <span class="dv">1</span>, <span class="fl">0.7</span>, <span class="dv">0</span>, <span class="fl">0.4</span>, <span class="fl">0.7</span>, <span class="fl">3.7</span>],</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">4.5</span>, <span class="fl">4.2</span>, <span class="fl">3.7</span>, <span class="fl">3.8</span>, <span class="fl">3.8</span>, <span class="fl">3.6</span>, <span class="fl">1.4</span>, <span class="fl">0.9</span>, <span class="fl">0.4</span>, <span class="dv">0</span>, <span class="fl">0.6</span>, <span class="fl">4.1</span>],</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">5</span>, <span class="fl">4.7</span>, <span class="fl">4.2</span>, <span class="fl">4.4</span>, <span class="fl">4.3</span>, <span class="dv">4</span>, <span class="fl">1.6</span>, <span class="fl">1.4</span>, <span class="fl">0.7</span>, <span class="fl">0.6</span>, <span class="dv">0</span>, <span class="fl">4.1</span>],</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">4</span>, <span class="fl">4.2</span>, <span class="fl">4.1</span>, <span class="fl">4.8</span>, <span class="fl">3.4</span>, <span class="fl">2.8</span>, <span class="fl">2.7</span>, <span class="fl">3.6</span>, <span class="fl">3.7</span>, <span class="fl">4.1</span>, <span class="fl">4.1</span>, <span class="dv">0</span>],</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>df.index <span class="op">=</span> [<span class="op">*</span><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>)]</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> [<span class="op">*</span><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>)]</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>display(df)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.to_latex(caption<span class="op">=</span><span class="st">"DBSCAN"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div>
@@ -925,19 +899,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   print(df.to_latex(caption="DBSCAN"))</code></pre>
 </div>
 </div>
-<div id="cell-13" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        ai<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>        biA<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>        biB<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>        bi<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>        si<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.to_latex(caption<span class="op">=</span><span class="st">"Tabla Silhouette"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-12" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        ai<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        biA<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        biB<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        bi<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        si<span class="op">=</span>np.random.rand(<span class="dv">5</span>),</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.to_latex(caption<span class="op">=</span><span class="st">"Tabla Silhouette"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>\begin{table}
 \centering
