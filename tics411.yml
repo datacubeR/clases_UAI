@@ -89,3 +89,13 @@
   path: tics411/clase-8.qmd
   categories:
    - slides
+
+
+- title: "Clase 9"
+  subtitle: "Evaluación de Modelos"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-05-16
+  image: tics411/thumbnails/clase-9.png
+  path: tics411/clase-9.qmd
+  categories:
+   - slides
