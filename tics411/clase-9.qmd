@@ -29,7 +29,7 @@ format:
 
 ## Intuición {.smaller}
 
-#### Si tengo que estudiar para una prueba donde tengo que calcular el Coeficiente de Silueta.
+#### Supongamos que tengo que estudiar para la prueba de `Minería de Datos` y tengo que aprender a calcular el Coeficiente de Silueta.
 
 ::: {.incremental}
 * Qué pasa si sólo les entrego una pregunta para estudiar y no tiene respuesta.
@@ -39,7 +39,7 @@ format:
 :::
 
 ::: {.callout-tip .fragment}
-Voy `aprendiendo mejor` la `tarea` de calcular el coeficiente de Silueta. **Lo mismo pasa con los modelos**.
+Voy `aprendiendo mejor la tarea` de calcular el coeficiente de Silueta. **Lo mismo pasa con los modelos**.
 :::
 
 ::: {.callout-important .fragment}
@@ -55,6 +55,8 @@ Pero no puedo medir qué tan bien aprendiste en los ejercicios que yo ya entregu
 **¿Cómo saber que el modelo está funcionando como esperamos?**
 :::
 
+# Evaluación de un Modelo
+
 ## Métricas
 
 El Rendimieto de un Modelo de Clasificación permite evaluar el `error` asociado al proceso de predicción.
@@ -66,6 +68,13 @@ Clase Positiva
 
 Clase Negativa
 : Corresponde a la clase/evento contrario al de interés. Ej: No tiene cancer, no va a pagar su deuda, no es un gato. Normalmente se denota como la `Clase 0`. 
+:::
+
+::: {.callout-tip}
+`Scikit-Learn` usa la siguiente convención:
+
+* Si se llama `*_score` un mayor puntaje es mejor.
+* Si se llama `*_error` o `*_loss` un mejor puntaje es mejor.
 :::
 
 ## Métricas: Matriz de Confusión {.smaller}
@@ -124,13 +133,13 @@ $$\frac{2\cdot Precision \cdot Recall}{Precision + Recall} = \frac{2 \cdot TP}{2
 * **F1-Score** corresponde a la media armónica del **Precision** y **Recall,** y tiende a ponderar los errores de manera más balanceada. 
 :::
 
-### ¿Cuándo utilizar cada tipo de error? (Pendiente de ejemplos). 
+### ¿Cuándo utilizar cada tipo de error?
 
 ## Curva ROC {.smaller}
 
 La curva ROC fue desarrollada en 1950 para analizar señales ruidosas. La curva ROC permite al operador contrapesar la tasa de verdaderos positivos (Eje $y$) versus los falsos positivos (Eje x).
 
-> El área bajo la curva representa la `calidad del modelo`. Una manera de interpretarla es como la probabilidad de que una predicción de la clase positiva tenga mayor probabilidad que una de clase negativa. En otras palabras, que las probabilidades se encuentren correctamente ordenadas. Por lo tanto varía entre 0.5 y 1. 
+> El área bajo la curva representa la `calidad del modelo`. Una manera de interpretarla es como la probabilidad de que una predicción de la clase positiva tenga mayor probabilidad que una de clase negativa. En otras palabras, **mide que las probabilidades se encuentren correctamente ordenadas**. Por lo tanto varía entre 0.5 y 1. 
 
 
 ::: {.columns}
@@ -147,11 +156,93 @@ La curva ROC fue desarrollada en 1950 para analizar señales ruidosas. La curva 
 :::
 ::: 
 
+## Implementación en Python
+
+```{.python code-line-numbers="|1|3-6|7|"}
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+
+accuracy_score(y_true, y_pred)
+precision_score(y_true, y_pred)
+recall_score(y_true, y_pred)
+f1_score(y_true, y_pred)
+roc_auc_score(y_true, y_proba)
+```
+
+* **y_true**: Corresponde a las etiquetas reales del Dataset.
+* **y_pred**: Corresponde a las predicciones realizadas por el modelo. 
+* **y_proba**: Corresponden a las probabilidades predichas por el modelo (si es que el modelo lo permite). 
+
+
+## Implementación en Python: Matriz de Confusión
+
+```{.python code-line-numbers="|1|3|"}
+from sklearn.metrics import ConfusionMatrixDisplay
+
+ConfusionMatrixDisplay.from_predictions(y_true, y_pred)
+```
+
+![](img/clase-9/conf_mat_sklearn.png){.lightbox fig-align="center" }
+
+## Implementación en Python: Curva ROC
+
+```{.python code-line-numbers="|1|3|"}
+from sklearn.metrics import RocCurveDisplay
+
+RocCurveDisplay.from_predictions(y_true, y_proba)
+```
+
+![](img/clase-9/roc_curve_sklearn.png){.lightbox fig-align="center" }
+
+
+# Sobre el aprendizaje de un Modelo
+
+## Curva de Aprendizaje: Training {.smaller}
+
+![](img/clase-9/training_curve.png){.lightbox fig-align="center"}
+
+::: {.callout-note}
+¿Qué sería la Complejidad del Modelo?
+:::
+
+## Curva de Aprendizaje: Validación {.smaller}
+
+![](img/clase-9/validation_curve.png){.lightbox fig-align="center"}
+
+::: {.callout-caution}
+¿Por qué el modelo pierde rendimiento cuando aumenta su Complejidad?
+:::
+
+## Curva de Aprendizaje: Mejor Ajuste {.smaller}
+
+::: {.columns}
+::: {.column width="65%"}
+![](img/clase-9/learning_curve.png){.lightbox fig-align="center"}
+:::
+::: {.column width="35%"}
+::: {.callout-important}
+## **Overfitting**: 
+Gran diferencia entre Training y Validation Score.
+
+:::
+::: {.callout-caution appearance="default"}
+## **Underfitting**: 
+Poca diferencia entre Training y Validation Score, pero con ambos puntajes *"relativamente bajos"*. 
+:::
+::: {.callout-note}
+## **Proper fitting**:
+Corresponde al mejor puntaje en el set de Validación. Donde también la distancia entre Train y Test es ***poca***.
+:::
+:::
+::: 
+
+
 ## Evaluación {.smaller}
 
 > La evaluación de modelos supervisados es fundamental. De no hacerlo de forma correcta podemos quedarnos con una idea muy equivocada del rendimiento del modelo.
 
-* Esto es importante ya que un modelo con un rendimiento incorrecto puede entregar predicciones completamente inútiles. 
+::: {.callout-caution}
+Un modelo con un rendimiento incorrecto puede entregar predicciones completamente inútiles. 
+:::
 
 Cross Validation (Validación Cruzada)
 : > Se debe evaluar el rendimiento de un modelo en un `dataset diferente` al que fue entrenado. Esta es la única manera en la que se puede medir el poder de generalización.
@@ -160,8 +251,35 @@ Generalización
 : > Corresponde a la habilidad de un modelo de adaptarse apropiadamente a datos no vistos previamente. 
 
 ::: {.callout-important}
-Para esto se asume que todos los datos son i.i.d (`idependent and identically distributed`). De no lograr esto, lograr buenos rendimientos es más difícil.
+Para esto se asume que todos los datos son i.i.d (`independent and identically distributed`). De no lograr esto, lograr buenos rendimientos es más difícil.
 :::
+
+## Complejidad de un Modelo
+
+#### ¿Qué modelo es un mejor clasificador?
+
+![](img/clase-9/overfitting.png){.lightbox fig-align="center" width="70%"}
+
+## Complejidad de un Modelo {.smaller}
+
+::: {.columns}
+::: {.column}
+
+### Overfitting
+![](img/clase-9/overf.png){.lightbox fig-align="center" width="80%"}
+:::
+::: {.column}
+
+### Underfitting
+![](img/clase-9/underf.png){.lightbox fig-align="center" width="80%"}
+:::
+::: 
+
+::: {.callout-tip .fragment}
+**Regularización**: Se refiere a una penalización que damos al modelo para que `disminuya su complejidad` de modo tal que evite el ***Overfitting***. En el caso de KNN, $K$ es un parámetro de regularización.
+:::
+
+# Esquemas de Validación
 
 ## Validación Cruzada: Holdout {.smaller}
 
@@ -320,18 +438,56 @@ Leave One Out
 * **Bootstrap** también es utilizado cuando se tengan pocos datos. Aunque suele ser un approach más estadístico.
 :::
 
-## Data Leakage
+## Baseline 
+
+> Un modelo `Baseline` es un modelo simple, normalmente sin aprendizaje asociado o con poder de aprendizaje más limitado, el cuál será utilizado como medida de referencia para ver si algoritmos más complejos efectivamente están aprendiendo.
+
+::: {.callout-note}
+Si estamos probando un nuevo modelo y éste es capaz de **superar el rendimiento de un Baseline**, se considera como que estamos aprendiendo algo nuevo.
+:::
+
+::: {.callout-caution}
+Modelos que **no superaron** el puntaje de un modelo Baseline normalmente son deshechados.
+:::
+
+## Implementación en Python: Baselines
+
+```{.python code-line-numbers="|1|3|4|5|"}
+from sklearn.dummy import DummyClassifier
+
+dc = DummyClassifier(strategy="prior", random_state = 42, constant=None)
+dc.fit(X_train,y_train)
+y_pred = dc.predict(X_test)
+```
+
+<br>
+
+::: {style="font-size: 75%;"}
+* **strategy**: Corresponde a estrategias *"dummy"* con las cuales generar predicciones.
+    * *"prior"*: predice siempre la clase más frecuente observada en el entrenamiento. Si se predice la probabilidad, se devuelve la probabilidad empírica. 
+    * *"constant"*: Devuelve un valor constante provisto por el usuario.
+    * *"uniform"*: Predice probabilidades aleatorios obtenidas mediante una distribución uniforme. 
+
+:::
+
+## Data Leakage {.smaller}
 
 Fuga de Datos
-: Se refiere al proceso donde el modelo por alguna razón conoce información que no debería conocer. Puede ser información del `Test Set` o variables que revelan información primordial sobre la etiqueta.
+: > Se refiere al proceso donde el modelo por alguna razón conoce información que no debería conocer. Puede ser información del `Test Set` o variables que revelan información primordial sobre la etiqueta.
 
-::: {.callout-tip}
+::: {.callout-important}
+Cuando existe `Data Leakage` es posible que los resultados del modelo no reflejen correctamente su rendimiento dando una falsa sensación de optimismo.
+:::
+
+### Ejemplos
+
+* Estandarizar o aplicar preprocesamientos antes del Split de la Data.
+* Utilizar variables que tienen directa relación con el Target. 
+
+::: {.callout-tip .fragment}
 Se recomienda siempre que sea posible utilizar `Pipelines` para poder evitar el **Data Leakage**. 
 :::
 
-
-## Baseline
-TODO: Crear baselines...
 # Arrivederci!
 
 
