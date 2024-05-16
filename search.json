@@ -238,7 +238,7 @@
     "href": "tics411/clase-9.html#métricas",
     "title": "TICS-411 Minería de Datos",
     "section": "Métricas",
-    "text": "Métricas\nEl Rendimieto de un Modelo de Clasificación permite evaluar el error asociado al proceso de predicción.\n\n\n\n\nClase Positiva\n\nCorresponde a la clase/evento de interés. Ej: Tiene cancer, va a pagar su deuda, es un gato. Normalmente se denota como la Clase 1.\n\nClase Negativa\n\nCorresponde a la clase/evento contrario al de interés. Ej: No tiene cancer, no va a pagar su deuda, no es un gato. Normalmente se denota como la Clase 0."
+    "text": "Métricas\nEl Rendimieto de un Modelo de Clasificación permite evaluar el error asociado al proceso de predicción.\n\n\n\n\nClase Positiva\n\nCorresponde a la clase/evento de interés. Ej: Tiene cancer, va a pagar su deuda, es un gato. Normalmente se denota como la Clase 1.\n\nClase Negativa\n\nCorresponde a la clase/evento contrario al de interés. Ej: No tiene cancer, no va a pagar su deuda, no es un gato. Normalmente se denota como la Clase 0.\n\n\n\n\n\n\n\n\n\n\n\nScikit-Learn usa la siguiente convención:\n\nSi se llama *_score un mayor puntaje es mejor.\nSi se llama *_error o *_loss un mejor puntaje es mejor."
   },
   {
     "objectID": "tics411/clase-9.html#métricas-matriz-de-confusión",
@@ -252,14 +252,14 @@
     "href": "tics411/clase-9.html#métricas-a-partir-de-la-matriz-de-confusión",
     "title": "TICS-411 Minería de Datos",
     "section": "Métricas: A partir de la Matriz de Confusión",
-    "text": "Métricas: A partir de la Matriz de Confusión\n\n\n\n\n\nAccuracy\n\n\n\\[\\frac{TP + TN}{TP + TN + FP + FN}\\]\n\n\n\n\n\n\nPrecision\n\n\n\\[\\frac{TP}{TP + FP}\\]\n\n\n\n\n\n\n\nRecall\n\n\n\\[\\frac{TP}{TP + FN}\\]\n\n\n\n\n\n\nF1-Score\n\n\n\\[\\frac{2\\cdot Precision \\cdot Recall}{Precision + Recall} = \\frac{2 \\cdot TP}{2\\cdot TP + FP + FN}\\]\n\n\n\n\n\n\n\n\n\n\n\n\nAccuracy es probablemente la métrica más sencilla y más utilizada.\nPrecision y Recall ponderarán distintos errores (FP y FN respectivamente) con mayor severidad. Ambas métricas son Antagonistas.\nF1-Score corresponde a la media armónica del Precision y Recall, y tiende a ponderar los errores de manera más balanceada.\n\n\n\n\n¿Cuándo utilizar cada tipo de error? (Pendiente de ejemplos)."
+    "text": "Métricas: A partir de la Matriz de Confusión\n\n\n\n\n\nAccuracy\n\n\n\\[\\frac{TP + TN}{TP + TN + FP + FN}\\]\n\n\n\n\n\n\nPrecision\n\n\n\\[\\frac{TP}{TP + FP}\\]\n\n\n\n\n\n\n\nRecall\n\n\n\\[\\frac{TP}{TP + FN}\\]\n\n\n\n\n\n\nF1-Score\n\n\n\\[\\frac{2\\cdot Precision \\cdot Recall}{Precision + Recall} = \\frac{2 \\cdot TP}{2\\cdot TP + FP + FN}\\]\n\n\n\n\n\n\n\n\n\n\n\n\nAccuracy es probablemente la métrica más sencilla y más utilizada.\nPrecision y Recall ponderarán distintos errores (FP y FN respectivamente) con mayor severidad. Ambas métricas son Antagonistas.\nF1-Score corresponde a la media armónica del Precision y Recall, y tiende a ponderar los errores de manera más balanceada.\n\n\n\n\n¿Cuándo utilizar cada tipo de error?"
   },
   {
     "objectID": "tics411/clase-9.html#curva-roc",
     "href": "tics411/clase-9.html#curva-roc",
     "title": "TICS-411 Minería de Datos",
     "section": "Curva ROC",
-    "text": "Curva ROC\nLa curva ROC fue desarrollada en 1950 para analizar señales ruidosas. La curva ROC permite al operador contrapesar la tasa de verdaderos positivos (Eje \\(y\\)) versus los falsos positivos (Eje x).\n\nEl área bajo la curva representa la calidad del modelo. Una manera de interpretarla es como la probabilidad de que una predicción de la clase positiva tenga mayor probabilidad que una de clase negativa. En otras palabras, que las probabilidades se encuentren correctamente ordenadas. Por lo tanto varía entre 0.5 y 1.\n\n\n\n\n\n\n\n\n\nROC \\(\\sim\\) 0.5\n\n\n\n\n\nROC \\(\\sim\\) 1"
+    "text": "Curva ROC\nLa curva ROC fue desarrollada en 1950 para analizar señales ruidosas. La curva ROC permite al operador contrapesar la tasa de verdaderos positivos (Eje \\(y\\)) versus los falsos positivos (Eje x).\n\nEl área bajo la curva representa la calidad del modelo. Una manera de interpretarla es como la probabilidad de que una predicción de la clase positiva tenga mayor probabilidad que una de clase negativa. En otras palabras, mide que las probabilidades se encuentren correctamente ordenadas. Por lo tanto varía entre 0.5 y 1.\n\n\n\n\n\n\n\n\n\nROC \\(\\sim\\) 0.5\n\n\n\n\n\nROC \\(\\sim\\) 1"
   },
   {
     "objectID": "tics411/clase-9.html#implementación-en-python",
@@ -283,11 +283,32 @@
     "text": "Implementación en Python: Curva ROC\nfrom sklearn.metrics import RocCurveDisplay\n\nRocCurveDisplay.from_predictions(y_true, y_proba)"
   },
   {
+    "objectID": "tics411/clase-9.html#curva-de-aprendizaje",
+    "href": "tics411/clase-9.html#curva-de-aprendizaje",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Curva de Aprendizaje",
+    "text": "Curva de Aprendizaje\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n¿Qué sería la Complejidad del Modelo?"
+  },
+  {
     "objectID": "tics411/clase-9.html#evaluación",
     "href": "tics411/clase-9.html#evaluación",
     "title": "TICS-411 Minería de Datos",
     "section": "Evaluación",
-    "text": "Evaluación\n\nLa evaluación de modelos supervisados es fundamental. De no hacerlo de forma correcta podemos quedarnos con una idea muy equivocada del rendimiento del modelo.\n\n\nEsto es importante ya que un modelo con un rendimiento incorrecto puede entregar predicciones completamente inútiles.\n\n\nCross Validation (Validación Cruzada)\n\n\nSe debe evaluar el rendimiento de un modelo en un dataset diferente al que fue entrenado. Esta es la única manera en la que se puede medir el poder de generalización.\n\n\nGeneralización\n\n\nCorresponde a la habilidad de un modelo de adaptarse apropiadamente a datos no vistos previamente.\n\n\n\n\n\n\n\n\n\nPara esto se asume que todos los datos son i.i.d (independent and identically distributed). De no lograr esto, lograr buenos rendimientos es más difícil."
+    "text": "Evaluación\n\nLa evaluación de modelos supervisados es fundamental. De no hacerlo de forma correcta podemos quedarnos con una idea muy equivocada del rendimiento del modelo.\n\n\n\n\n\n\n\nUn modelo con un rendimiento incorrecto puede entregar predicciones completamente inútiles.\n\n\n\n\nCross Validation (Validación Cruzada)\n\n\nSe debe evaluar el rendimiento de un modelo en un dataset diferente al que fue entrenado. Esta es la única manera en la que se puede medir el poder de generalización.\n\n\nGeneralización\n\n\nCorresponde a la habilidad de un modelo de adaptarse apropiadamente a datos no vistos previamente.\n\n\n\n\n\n\n\n\n\nPara esto se asume que todos los datos son i.i.d (independent and identically distributed). De no lograr esto, lograr buenos rendimientos es más difícil."
+  },
+  {
+    "objectID": "tics411/clase-9.html#complejidad-de-un-modelo",
+    "href": "tics411/clase-9.html#complejidad-de-un-modelo",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Complejidad de un Modelo",
+    "text": "Complejidad de un Modelo\n¿Qué modelo es un mejor clasificador?"
+  },
+  {
+    "objectID": "tics411/clase-9.html#complejidad-de-un-modelo-1",
+    "href": "tics411/clase-9.html#complejidad-de-un-modelo-1",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Complejidad de un Modelo",
+    "text": "Complejidad de un Modelo\n\n\nOverfitting\n\n\n\n\n\n\nUnderfitting\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegularización: Se refiere a una penalización que damos al modelo para que disminuya su complejidad de modo tal que evite el Overfitting. En el caso de KNN, \\(K\\) es un parámetro de regularización."
   },
   {
     "objectID": "tics411/clase-9.html#validación-cruzada-holdout",

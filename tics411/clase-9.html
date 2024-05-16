@@ -435,7 +435,7 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Voy <code>aprendiendo mejor</code> la <code>tarea</code> de calcular el coeficiente de Silueta. <strong>Lo mismo pasa con los modelos</strong>.</p>
+<p>Voy <code>aprendiendo mejor la tarea</code> de calcular el coeficiente de Silueta. <strong>Lo mismo pasa con los modelos</strong>.</p>
 </div>
 </div>
 </div>
@@ -472,6 +472,11 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
+</section></section>
+<section>
+<section id="evaluación-de-un-modelo" class="title-slide slide level1 center">
+<h1>Evaluación de un Modelo</h1>
+
 </section>
 <section id="métricas" class="slide level2">
 <h2>Métricas</h2>
@@ -489,6 +494,20 @@ Corresponde a la clase/evento de interés. Ej: Tiene cancer, va a pagar su deuda
 Corresponde a la clase/evento contrario al de interés. Ej: No tiene cancer, no va a pagar su deuda, no es un gato. Normalmente se denota como la <code>Clase 0</code>.
 </dd>
 </dl>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><code>Scikit-Learn</code> usa la siguiente convención:</p>
+<ul>
+<li>Si se llama <code>*_score</code> un mayor puntaje es mejor.</li>
+<li>Si se llama <code>*_error</code> o <code>*_loss</code> un mejor puntaje es mejor.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -588,13 +607,13 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 </div>
 </div>
-<h3 id="cuándo-utilizar-cada-tipo-de-error-pendiente-de-ejemplos.">¿Cuándo utilizar cada tipo de error? (Pendiente de ejemplos).</h3>
+<h3 id="cuándo-utilizar-cada-tipo-de-error">¿Cuándo utilizar cada tipo de error?</h3>
 </section>
 <section id="curva-roc" class="slide level2 smaller">
 <h2>Curva ROC</h2>
 <p>La curva ROC fue desarrollada en 1950 para analizar señales ruidosas. La curva ROC permite al operador contrapesar la tasa de verdaderos positivos (Eje <span class="math inline">\(y\)</span>) versus los falsos positivos (Eje x).</p>
 <blockquote>
-<p>El área bajo la curva representa la <code>calidad del modelo</code>. Una manera de interpretarla es como la probabilidad de que una predicción de la clase positiva tenga mayor probabilidad que una de clase negativa. En otras palabras, que las probabilidades se encuentren correctamente ordenadas. Por lo tanto varía entre 0.5 y 1.</p>
+<p>El área bajo la curva representa la <code>calidad del modelo</code>. Una manera de interpretarla es como la probabilidad de que una predicción de la clase positiva tenga mayor probabilidad que una de clase negativa. En otras palabras, <strong>mide que las probabilidades se encuentren correctamente ordenadas</strong>. Por lo tanto varía entre 0.5 y 1.</p>
 </blockquote>
 <div class="columns">
 <div class="column">
@@ -655,15 +674,59 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <p><a href="img/clase-9/roc_curve_sklearn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-9/roc_curve_sklearn.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
+</section></section>
+<section>
+<section id="sobre-el-aprendizaje-de-un-modelo" class="title-slide slide level1 center">
+<h1>Sobre el aprendizaje de un Modelo</h1>
+
+</section>
+<section id="curva-de-aprendizaje" class="slide level2">
+<h2>Curva de Aprendizaje</h2>
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/training_curve.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-9/training_curve.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/validation_curve.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-9/validation_curve.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/learning_curve.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-9/learning_curve.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
+</figure>
+</div>
+</div>
+<div class="fragment" data-fragment-index="1">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>¿Qué sería la Complejidad del Modelo?</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="evaluación" class="slide level2 smaller">
 <h2>Evaluación</h2>
 <blockquote>
 <p>La evaluación de modelos supervisados es fundamental. De no hacerlo de forma correcta podemos quedarnos con una idea muy equivocada del rendimiento del modelo.</p>
 </blockquote>
-<ul>
-<li>Esto es importante ya que un modelo con un rendimiento incorrecto puede entregar predicciones completamente inútiles.</li>
-</ul>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Un modelo con un rendimiento incorrecto puede entregar predicciones completamente inútiles.</p>
+</div>
+</div>
+</div>
 <dl>
 <dt>Cross Validation (Validación Cruzada)</dt>
 <dd>
@@ -689,6 +752,52 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 </div>
 </section>
+<section id="complejidad-de-un-modelo" class="slide level2">
+<h2>Complejidad de un Modelo</h2>
+<h4 id="qué-modelo-es-un-mejor-clasificador">¿Qué modelo es un mejor clasificador?</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/overfitting.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-9/overfitting.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="complejidad-de-un-modelo-1" class="slide level2 smaller">
+<h2>Complejidad de un Modelo</h2>
+<div class="columns">
+<div class="column">
+<h3 id="overfitting">Overfitting</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/overf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-9/overf.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<h3 id="underfitting">Underfitting</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/underf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-9/underf.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Regularización</strong>: Se refiere a una penalización que damos al modelo para que <code>disminuya su complejidad</code> de modo tal que evite el <strong><em>Overfitting</em></strong>. En el caso de KNN, <span class="math inline">\(K\)</span> es un parámetro de regularización.</p>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="esquemas-de-validación" class="title-slide slide level1 center">
+<h1>Esquemas de Validación</h1>
+
+</section>
 <section id="validación-cruzada-holdout" class="slide level2 smaller">
 <h2>Validación Cruzada: Holdout</h2>
 <blockquote>
@@ -698,19 +807,19 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/dataset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-9/dataset.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></a></p>
+<p><a href="img/clase-9/dataset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-9/dataset.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:30%;">
 <div class="r-stack">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="1"></a></p>
+<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="1"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/split.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-9/split.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="2"></a></p>
+<p><a href="img/clase-9/split.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-9/split.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="2"></a></p>
 </figure>
 </div>
 </div>
@@ -782,17 +891,17 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="r-stack">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
+<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/train-val.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-9/train-val.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
+<p><a href="img/clase-9/train-val.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-9/train-val.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-9/full-holdout.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
+<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-9/full-holdout.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
 </figure>
 </div>
 </div>
@@ -834,7 +943,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-9/full-holdout.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-9/full-holdout.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column fragment" style="width:70%;">
@@ -895,7 +1004,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/K-Fold.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-9/K-Fold.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/K-Fold.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-9/K-Fold.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:60%;">
@@ -932,7 +1041,7 @@ Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold c
 <div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/data_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-9/data_boot.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/data_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-9/data_boot.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-tip callout-style-simple">
@@ -950,7 +1059,7 @@ Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold c
 </div><div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/iter_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-9/iter_boot.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-9/iter_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-9/iter_boot.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -1461,7 +1570,7 @@ Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, 
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom","loop":false});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
