@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Clases UAI - Holdout</title>
+<title>Clases UAI - Holdout (Train Test Split)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Holdout</h1>
+<h1 class="title">Holdout (Train Test Split)</h1>
 </div>
 
 
@@ -446,8 +446,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>(['fare', 'age'], ['class', 'sex', 'embark_town'])</code></pre>
 </div>
 </div>
-<section id="holdout" class="level2">
-<h2 class="anchored" data-anchor-id="holdout">Holdout</h2>
+<section id="holdout-train-test-split" class="level2">
+<h2 class="anchored" data-anchor-id="holdout-train-test-split">Holdout (Train Test Split)</h2>
 <div id="cell-4" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -498,8 +498,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="way-holdout" class="level2">
-<h2 class="anchored" data-anchor-id="way-holdout">3-way Holdout</h2>
+<section id="way-holdout-train-validation-test-split" class="level2">
+<h2 class="anchored" data-anchor-id="way-holdout-train-validation-test-split">3-way Holdout (Train Validation Test Split)</h2>
 <div id="cell-7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>X_trainval, X_test, y_trainval, y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
@@ -656,7 +656,7 @@ Score for k = 11: 0.8156424581005587</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
-<p>Por qué?</p>
+<p>Pero, qué está ocurriendo acá?</p>
 </blockquote>
 
 
