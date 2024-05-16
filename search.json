@@ -283,11 +283,25 @@
     "text": "Implementación en Python: Curva ROC\nfrom sklearn.metrics import RocCurveDisplay\n\nRocCurveDisplay.from_predictions(y_true, y_proba)"
   },
   {
-    "objectID": "tics411/clase-9.html#curva-de-aprendizaje",
-    "href": "tics411/clase-9.html#curva-de-aprendizaje",
+    "objectID": "tics411/clase-9.html#curva-de-aprendizaje-training",
+    "href": "tics411/clase-9.html#curva-de-aprendizaje-training",
     "title": "TICS-411 Minería de Datos",
-    "section": "Curva de Aprendizaje",
-    "text": "Curva de Aprendizaje\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n¿Qué sería la Complejidad del Modelo?"
+    "section": "Curva de Aprendizaje: Training",
+    "text": "Curva de Aprendizaje: Training\n\n\n\n\n\n\n\n\n\n\n\n¿Qué sería la Complejidad del Modelo?"
+  },
+  {
+    "objectID": "tics411/clase-9.html#curva-de-aprendizaje-validación",
+    "href": "tics411/clase-9.html#curva-de-aprendizaje-validación",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Curva de Aprendizaje: Validación",
+    "text": "Curva de Aprendizaje: Validación\n\n\n\n\n\n\n\n\n\n\n\n¿Por qué el modelo pierde rendimiento cuando aumenta su Complejidad?"
+  },
+  {
+    "objectID": "tics411/clase-9.html#curva-de-aprendizaje-mejor-ajuste",
+    "href": "tics411/clase-9.html#curva-de-aprendizaje-mejor-ajuste",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Curva de Aprendizaje: Mejor Ajuste",
+    "text": "Curva de Aprendizaje: Mejor Ajuste\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOverfitting:\n\n\nGran diferencia entre Training y Validation Score.\n\n\n\n\n\n\n\n\n\nUnderfitting:\n\n\nPoca diferencia entre Training y Validation Score, pero con ambos puntajes “relativamente bajos”.\n\n\n\n\n\n\n\n\n\nProper fitting:\n\n\nCorresponde al mejor puntaje en el set de Validación. Donde también la distancia entre Train y Test es poca."
   },
   {
     "objectID": "tics411/clase-9.html#evaluación",

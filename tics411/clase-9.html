@@ -680,26 +680,13 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <h1>Sobre el aprendizaje de un Modelo</h1>
 
 </section>
-<section id="curva-de-aprendizaje" class="slide level2">
-<h2>Curva de Aprendizaje</h2>
-<div class="r-stack">
+<section id="curva-de-aprendizaje-training" class="slide level2 smaller">
+<h2>Curva de Aprendizaje: Training</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="img/clase-9/training_curve.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-9/training_curve.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/validation_curve.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-9/validation_curve.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/learning_curve.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-9/learning_curve.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
-</figure>
-</div>
-</div>
-<div class="fragment" data-fragment-index="1">
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -707,6 +694,75 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 <div class="callout-content">
 <p>¿Qué sería la Complejidad del Modelo?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="curva-de-aprendizaje-validación" class="slide level2 smaller">
+<h2>Curva de Aprendizaje: Validación</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/validation_curve.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-9/validation_curve.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>¿Por qué el modelo pierde rendimiento cuando aumenta su Complejidad?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="curva-de-aprendizaje-mejor-ajuste" class="slide level2 smaller">
+<h2>Curva de Aprendizaje: Mejor Ajuste</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/learning_curve.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-9/learning_curve.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:35%;">
+<div class="callout callout-important callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong><strong>Overfitting</strong>:</strong></p>
+</div>
+<div class="callout-content">
+<p>Gran diferencia entre Training y Validation Score.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong><strong>Underfitting</strong>:</strong></p>
+</div>
+<div class="callout-content">
+<p>Poca diferencia entre Training y Validation Score, pero con ambos puntajes <em>“relativamente bajos”</em>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong><strong>Proper fitting</strong>:</strong></p>
+</div>
+<div class="callout-content">
+<p>Corresponde al mejor puntaje en el set de Validación. Donde también la distancia entre Train y Test es <strong><em>poca</em></strong>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -765,14 +821,14 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <h2>Complejidad de un Modelo</h2>
 <div class="columns">
 <div class="column">
-<h3 id="overfitting">Overfitting</h3>
+<h3 id="overfitting-1">Overfitting</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="img/clase-9/overf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-9/overf.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
-<h3 id="underfitting">Underfitting</h3>
+<h3 id="underfitting-1">Underfitting</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="img/clase-9/underf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-9/underf.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
@@ -1570,7 +1626,7 @@ Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, 
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
