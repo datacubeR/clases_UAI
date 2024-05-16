@@ -224,7 +224,7 @@
     "href": "tics411/clase-9.html#intuición",
     "title": "TICS-411 Minería de Datos",
     "section": "Intuición",
-    "text": "Intuición\nSi tengo que estudiar para una prueba donde tengo que calcular el Coeficiente de Silueta.\n\n\nQué pasa si sólo les entrego una pregunta para estudiar y no tiene respuesta.\n¿Qué pasa si ahora les doy la respuesta?\n¿Qué pasa si te doy más ejercicios?\n¿Qué pasa luego de que haces muchos ejercicios?\n\n\n\n\n\n\n\n\n\nVoy aprendiendo mejor la tarea de calcular el coeficiente de Silueta. Lo mismo pasa con los modelos.\n\n\n\n\n\n\n\n\n\n\n\nPero no puedo medir qué tan bien aprendiste en los ejercicios que yo ya entregué para practicar. Tengo que hacer una prueba que tú no hayas visto, para ver si realmente aprendiste."
+    "text": "Intuición\nSupongamos que tengo que estudiar para la prueba de Minería de Datos y tengo que aprender a calcular el Coeficiente de Silueta.\n\n\nQué pasa si sólo les entrego una pregunta para estudiar y no tiene respuesta.\n¿Qué pasa si ahora les doy la respuesta?\n¿Qué pasa si te doy más ejercicios?\n¿Qué pasa luego de que haces muchos ejercicios?\n\n\n\n\n\n\n\n\n\nVoy aprendiendo mejor la tarea de calcular el coeficiente de Silueta. Lo mismo pasa con los modelos.\n\n\n\n\n\n\n\n\n\n\n\nPero no puedo medir qué tan bien aprendiste en los ejercicios que yo ya entregué para practicar. Tengo que hacer una prueba que tú no hayas visto, para ver si realmente aprendiste."
   },
   {
     "objectID": "tics411/clase-9.html#uso-de-un-modelo",
@@ -262,11 +262,32 @@
     "text": "Curva ROC\nLa curva ROC fue desarrollada en 1950 para analizar señales ruidosas. La curva ROC permite al operador contrapesar la tasa de verdaderos positivos (Eje \\(y\\)) versus los falsos positivos (Eje x).\n\nEl área bajo la curva representa la calidad del modelo. Una manera de interpretarla es como la probabilidad de que una predicción de la clase positiva tenga mayor probabilidad que una de clase negativa. En otras palabras, que las probabilidades se encuentren correctamente ordenadas. Por lo tanto varía entre 0.5 y 1.\n\n\n\n\n\n\n\n\n\nROC \\(\\sim\\) 0.5\n\n\n\n\n\nROC \\(\\sim\\) 1"
   },
   {
+    "objectID": "tics411/clase-9.html#implementación-en-python",
+    "href": "tics411/clase-9.html#implementación-en-python",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Implementación en Python",
+    "text": "Implementación en Python\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score\n\naccuracy_score(y_true, y_pred)\nprecision_score(y_true, y_pred)\nrecall_score(y_true, y_pred)\nf1_score(y_true, y_pred)\nroc_auc_score(y_true, y_proba)\n\ny_true: Corresponde a las etiquetas reales del Dataset.\ny_pred: Corresponde a las predicciones realizadas por el modelo.\ny_proba: Corresponden a las probabilidades predichas por el modelo (si es que el modelo lo permite)."
+  },
+  {
+    "objectID": "tics411/clase-9.html#implementación-en-python-matriz-de-confusión",
+    "href": "tics411/clase-9.html#implementación-en-python-matriz-de-confusión",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Implementación en Python: Matriz de Confusión",
+    "text": "Implementación en Python: Matriz de Confusión\nfrom sklearn.metrics import ConfusionMatrixDisplay\n\nConfusionMatrixDisplay.from_predictions(y_true, y_pred)"
+  },
+  {
+    "objectID": "tics411/clase-9.html#implementación-en-python-curva-roc",
+    "href": "tics411/clase-9.html#implementación-en-python-curva-roc",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Implementación en Python: Curva ROC",
+    "text": "Implementación en Python: Curva ROC\nfrom sklearn.metrics import RocCurveDisplay\n\nRocCurveDisplay.from_predictions(y_true, y_proba)"
+  },
+  {
     "objectID": "tics411/clase-9.html#evaluación",
     "href": "tics411/clase-9.html#evaluación",
     "title": "TICS-411 Minería de Datos",
     "section": "Evaluación",
-    "text": "Evaluación\n\nLa evaluación de modelos supervisados es fundamental. De no hacerlo de forma correcta podemos quedarnos con una idea muy equivocada del rendimiento del modelo.\n\n\nEsto es importante ya que un modelo con un rendimiento incorrecto puede entregar predicciones completamente inútiles.\n\n\nCross Validation (Validación Cruzada)\n\n\nSe debe evaluar el rendimiento de un modelo en un dataset diferente al que fue entrenado. Esta es la única manera en la que se puede medir el poder de generalización.\n\n\nGeneralización\n\n\nCorresponde a la habilidad de un modelo de adaptarse apropiadamente a datos no vistos previamente.\n\n\n\n\n\n\n\n\n\nPara esto se asume que todos los datos son i.i.d (idependent and identically distributed). De no lograr esto, lograr buenos rendimientos es más difícil."
+    "text": "Evaluación\n\nLa evaluación de modelos supervisados es fundamental. De no hacerlo de forma correcta podemos quedarnos con una idea muy equivocada del rendimiento del modelo.\n\n\nEsto es importante ya que un modelo con un rendimiento incorrecto puede entregar predicciones completamente inútiles.\n\n\nCross Validation (Validación Cruzada)\n\n\nSe debe evaluar el rendimiento de un modelo en un dataset diferente al que fue entrenado. Esta es la única manera en la que se puede medir el poder de generalización.\n\n\nGeneralización\n\n\nCorresponde a la habilidad de un modelo de adaptarse apropiadamente a datos no vistos previamente.\n\n\n\n\n\n\n\n\n\nPara esto se asume que todos los datos son i.i.d (independent and identically distributed). De no lograr esto, lograr buenos rendimientos es más difícil."
   },
   {
     "objectID": "tics411/clase-9.html#validación-cruzada-holdout",
@@ -311,18 +332,25 @@
     "text": "Variantes y Consejos\n\nStratified K-Fold\n\nEs la variante más utilizada de K-Fold el cual genera los folds considerando que se mantenga la proporción de etiquetas en cada Fold.\n\nLeave One Out\n\nSería una variante con \\(K=n\\). Por lo tanto, el Validation Set tiene sólo una observación.\n\n\n\n\n\n\n\n\n\n¿Cuando usar cada uno?\n\n\n\nSi se tiene una cantidad de datos suficiente (normalmente tamaños muy grandes se prefiere) el Holdout.\n\nEntre más registros, menos % de Validation Set se deja.\n\nSi se requiere robustez, o hay Test sets que son muy variables se prefiere K-Fold.\n\nSi es que hay desbalance de clases, se prefiere la versión Stratified.\n\n\nSi se tienen muy pocos datos, entonces utilizar Leave-One-Out.\nBootstrap también es utilizado cuando se tengan pocos datos. Aunque suele ser un approach más estadístico."
   },
   {
-    "objectID": "tics411/clase-9.html#data-leakage",
-    "href": "tics411/clase-9.html#data-leakage",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Data Leakage",
-    "text": "Data Leakage\n\nFuga de Datos\n\nSe refiere al proceso donde el modelo por alguna razón conoce información que no debería conocer. Puede ser información del Test Set o variables que revelan información primordial sobre la etiqueta.\n\n\n\n\n\n\n\n\nSe recomienda siempre que sea posible utilizar Pipelines para poder evitar el Data Leakage."
-  },
-  {
     "objectID": "tics411/clase-9.html#baseline",
     "href": "tics411/clase-9.html#baseline",
     "title": "TICS-411 Minería de Datos",
     "section": "Baseline",
-    "text": "Baseline\nTODO: Crear baselines… # Arrivederci!\n\n\nTics-411 Minería de Datos está licenciado bajo CC BY-NC-SA 4.0"
+    "text": "Baseline\n\nUn modelo Baseline es un modelo simple, normalmente sin aprendizaje asociado o con poder de aprendizaje más limitado, el cuál será utilizado como medida de referencia para ver si algoritmos más complejos efectivamente están aprendiendo.\n\n\n\n\n\n\n\nSi estamos probando un nuevo modelo y éste es capaz de superar el rendimiento de un Baseline, se considera como que estamos aprendiendo algo nuevo.\n\n\n\n\n\n\n\n\n\nModelos que no superaron el puntaje de un modelo Baseline normalmente son deshechados."
+  },
+  {
+    "objectID": "tics411/clase-9.html#implementación-en-python-baselines",
+    "href": "tics411/clase-9.html#implementación-en-python-baselines",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Implementación en Python: Baselines",
+    "text": "Implementación en Python: Baselines\nfrom sklearn.dummy import DummyClassifier\n\ndc = DummyClassifier(strategy=\"prior\", random_state = 42, constant=None)\ndc.fit(X_train,y_train)\ny_pred = dc.predict(X_test)\n\n\n\nstrategy: Corresponde a estrategias “dummy” con las cuales generar predicciones.\n\n“prior”: predice siempre la clase más frecuente observada en el entrenamiento. Si se predice la probabilidad, se devuelve la probabilidad empírica.\n“constant”: Devuelve un valor constante provisto por el usuario.\n“uniform”: Predice probabilidades aleatorios obtenidas mediante una distribución uniforme."
+  },
+  {
+    "objectID": "tics411/clase-9.html#data-leakage",
+    "href": "tics411/clase-9.html#data-leakage",
+    "title": "TICS-411 Minería de Datos",
+    "section": "Data Leakage",
+    "text": "Data Leakage\n\nFuga de Datos\n\n\nSe refiere al proceso donde el modelo por alguna razón conoce información que no debería conocer. Puede ser información del Test Set o variables que revelan información primordial sobre la etiqueta.\n\n\n\n\n\n\n\n\n\nCuando existe Data Leakage es posible que los resultados del modelo no reflejen correctamente su rendimiento dando una falsa sensación de optimismo.\n\n\n\nEjemplos\n\nEstandarizar o aplicar preprocesamientos antes del Split de la Data.\nUtilizar variables que tienen directa relación con el Target.\n\n\n\n\n\n\n\n\nSe recomienda siempre que sea posible utilizar Pipelines para poder evitar el Data Leakage."
   },
   {
     "objectID": "tics411/clase-1.html#avisos-1",
