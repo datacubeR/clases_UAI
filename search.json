@@ -1582,14 +1582,14 @@
     "href": "tics411/clase-10.html#regresión-logística",
     "title": "TICS-411 Minería de Datos",
     "section": "Regresión Logística:",
-    "text": "Regresión Logística:\nTraining Time\n\n\n\n\n\n\nEn este paso el modelo resuelve el problema de MLE y encuentra los parámetros .\n\n\n\n\n\n\n\n\n\nEste modelo se considera un modelo parámetrico, ya que los “parámetros” \\(\\theta\\) aprenderán la contribución de cada atributo/variable a la probabilidad predicha por el modelo.\n\n\n\n\\[ \\underset{\\theta}{\\operatorname{argmin}} -l(\\theta)\\]"
+    "text": "Regresión Logística:\nTraining Time\n\n\n\n\n\n\nEste modelo se considera un modelo parámetrico, ya que los parámetros \\(\\theta\\) aprenderán la contribución de cada atributo/variable a la probabilidad predicha por el modelo.\n\n\n\n\\[ \\underset{\\theta}{\\operatorname{argmin}} -l(\\theta)\\]\n\n\n\n\n\n\nEn este paso el modelo resuelve el problema de MLE y encuentra los parámetros \\(\\theta\\)."
   },
   {
     "objectID": "tics411/clase-10.html#inference-time",
     "href": "tics411/clase-10.html#inference-time",
     "title": "TICS-411 Minería de Datos",
     "section": "Inference Time",
-    "text": "Inference Time\nEn este caso se calcula: \\[h_\\theta(x^{(i)})=sigmoid(\\theta^t x^{(i)})\\]\n\n\\(\\theta\\): Corresponde a un vector con todos los parámetros calculados.\n\\(x^(i)\\): Corresponde a una instancia de \\(m\\) variables la cual generará una probabilidad.\n\\(h_\\theta(x^{(i)})\\): Generará un valor entre 0 y 1 al cuál se le aplica la Regla de Decisión."
+    "text": "Inference Time\nEn este caso se calcula: \\[h_\\theta(x^{(i)})=sigmoid(\\theta^t x^{(i)})\\]\n\n\\(\\theta\\): Corresponde a un vector con todos los parámetros calculados.\n\\(x^{(i)}\\): Corresponde a una instancia de \\(m\\) variables la cual generará una probabilidad.\n\n\\(\\theta^t x^{(i)}\\) corresponde al producto punto de dos vectores, que es equivalente a una “suma producto”.\n\n\\(h_\\theta(x^{(i)})\\): Generará un valor entre 0 y 1 al cuál se le aplica la Regla de Decisión."
   },
   {
     "objectID": "tics411/clase-10.html#implementación-en-python",
