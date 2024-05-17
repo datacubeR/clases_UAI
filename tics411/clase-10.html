@@ -398,7 +398,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 7: Algoritmo Apriori</p>
+  <p class="subtitle">Clase 10: Regresión Logística</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -412,546 +412,390 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section>
-<section id="market-basket-analysis" class="title-slide slide level1 center">
-<h1>Market Basket Analysis</h1>
-
-</section>
-<section id="introducción" class="slide level2 smaller">
-<h2>Introducción</h2>
-<blockquote>
-<p>Gracias a los planes de fidelización (juntar puntos, dar RUT, acumular millas, etc.) las empresas son capaces de detectar <code>patrones</code>:</p>
-</blockquote>
-<ul>
-<li>Qué nos gusta,</li>
-<li>Qué compramos,</li>
-<li>Con qué frecuencia lo compramos,</li>
-<li>Junto con qué lo compramos</li>
-<li>etc.</li>
-</ul>
-<div class="callout callout-note callout-titled callout-style-default">
+<section id="intuición" class="slide level2">
+<h2>Intuición</h2>
+<p>Supongamos el siguiente dataset:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-10/data.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
-<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Market Basket Analysis</strong></p>
+<div class="callout-content">
+<p>¿Cómo puedo separar ambas clases?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="intuición-1" class="slide level2">
+<h2>Intuición</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/frontera_0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-10/frontera_0.png" class="fade-in-then-out quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="intuición-2" class="slide level2">
+<h2>Intuición</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/frontera.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-10/frontera.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Corresponde al estudio de nuestra canasta de compras. De modo que podamos entender qué cosas son las que como clientes preferimos y una empresa pueda <em><code>Recomendar</code></em> de manera más apropiadas.</p>
+<p>La <code>frontera de decisión</code> se puede caracterizar como la <strong><em>ecuación de una recta</em></strong> (en forma general).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Además definiremos <span class="math inline">\(h_\theta(X) = \theta_0 + \theta_1 X_1 + \theta_2 X_2\)</span>.</p>
+</div>
 </div>
 </div>
 </div>
 </section>
-<section id="definiciones" class="slide level2 smaller">
-<h2>Definiciones</h2>
-<dl>
-<dt>Patrón</dt>
-<dd>
-<blockquote>
-<p>Predicado (output True/False) para verificar si una estructura buscada ocurre o no.</p>
-</blockquote>
-</dd>
-<dt>Tarea</dt>
-<dd>
-<blockquote>
-<p>Encontrar <code>reglas de asociación</code> basado en patrones.</p>
-</blockquote>
-</dd>
-</dl>
-<h5 id="ejemplos">Ejemplos</h5>
-<ul>
-<li>Datasets de supermercados:
-<ul>
-<li><em>10% de los clientes totales compran vino y quedo (<code>patrón</code>: si compro vino, también llevo queso)</em>.</li>
-</ul></li>
-<li>Datasets de Alarmas:
-<ul>
-<li><em>Si la alarma A y B suenan en un intervalo de 30 segundos, entonces la alarma C sonará dentro de un intervalo de 60 segundos con 50% de probabilidad</em>.</li>
-</ul></li>
-</ul>
+<section id="intuición-3" class="slide level2">
+<h2>Intuición</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/frontera_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-10/frontera_2.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Podríamos pensar que si <span class="math inline">\(h_\theta(X)\)</span> es positivo entonces pertenece a la clase 1 y si <span class="math inline">\(h_\theta(X)\)</span> es negativo pertenece a la clase 0.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="ejemplo-datos-supermercado" class="slide level2 smaller">
-<h2>Ejemplo: Datos Supermercado</h2>
-<dl>
-<dt>Datos Transaccionales</dt>
-<dd>
-<blockquote>
-<p>Una transacción involucra un conjunto de elementos. Una boleta de supermercado muestra el conjunto de elementos comprados por un cliente. Los productos involucrados en una transacción se denominan <code>items</code>.</p>
-</blockquote>
-</dd>
-</dl>
+<section id="la-función-sigmoide-o-logística" class="slide level2">
+<h2>La Función Sigmoide o Logística</h2>
+<p><span class="math display">\[ g(z) = \frac{1}{1 + e^{-z}}\]</span></p>
 <div class="columns">
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/items.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-7/items.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-10/sigmoide.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-10/sigmoide.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/super.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-7/super.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-datos-supermercado-1" class="slide level2 smaller">
-<h2>Ejemplo: Datos Supermercado</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/items.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-7/items.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/reglas.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-7/reglas.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="objetivo-y-aplicaciones" class="slide level2">
-<h2>Objetivo y Aplicaciones</h2>
-<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
-<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
-</div>
-<p><strong>Objetivo</strong></p>
-</div>
-<div class="callout-content">
-<p>Encontrar asociaciones entre elementos u objetos de bases de datos transaccionales.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Aplicaciones</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Apoyo a toma de decisiones.</li>
-<li>Análisis de Información de Ventas.</li>
-<li>Distribución y ubicación de Mercaderías.</li>
-<li>Segmentación de Clientes en base de patrones de compra.</li>
-<li>Diágnostico y predicción de alarmas.</li>
+<li>Función no lineal.</li>
+<li>Función acotada entre 0 y 1.</li>
+<li><span class="math inline">\(g(\varepsilon) = 0.5\)</span>, <span class="math inline">\(\varepsilon = 0\)</span></li>
 </ul>
 </div>
 </div>
 </div>
-</section>
-<section id="definiciones-medidas" class="slide level2">
-<h2>Definiciones: Medidas</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<dl>
-<dt>Support (Soporte)</dt>
-<dd>
-Fracción de Transacciones que contienen a <span class="math inline">\(X\)</span>. Probabilidad de que una transacción contenga a <span class="math inline">\(X\)</span>.
-</dd>
-</dl>
-<p><span class="math display">\[Supp(X) = P(X)\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<dl>
-<dt>Support Count</dt>
-<dd>
-Número de Transacciones que contienen a <span class="math inline">\(X\)</span>.
-</dd>
-</dl>
-<p><span class="math display">\[SuppCount(X) = Count(X)\]</span></p>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<dl>
-<dt>Confidence (Confianza o Eficiencia)</dt>
-<dd>
-Fracción de las Transacciones en las que aparece <span class="math inline">\(X\)</span> que también incluyen <span class="math inline">\(Z\)</span>.
-</dd>
-</dl>
-<p><span class="math display">\[Conf(X \implies Z) = \frac{Supp(X \cup Z)}{Supp(X)}\]</span> <span class="math display">\[Conf(X \implies Z) = \frac{SuppCount(X \cup Z)}{SuppCount(X)}\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<div class="fragment">
 <div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Ojo con la Notación <span class="math inline">\(\cup\)</span>. En este caso significa que tanto el producto X como el Producto Z sean parte de la transacción.</p>
+<p>De acá sale la noción del umbral 0.5 que hemos visto en clases anteriores.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="ejemplos-support-y-confidence" class="slide level2 smaller">
-<h2>Ejemplos: Support y Confidence</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/ex_support.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-7/ex_support.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<p><span class="math display">\[ Supp({Pan}) = 4/7\]</span> <span class="math display">\[ Supp({Leche}) = 3/7\]</span> <span class="math display">\[ Supp({Pan, Huevo}) = 2/7\]</span></p>
-<p><span class="math display">\[ Conf({Pan} \implies {Huevo}) = \frac{Supp({Pan, Huevo})}{Supp(Pan)} = \frac{2/7}{4/7}\]</span></p>
-<p><span class="math display">\[ Conf({Pan} \implies {Leche}) = \frac{Supp({Pan, Leche})}{Supp(Pan)} = \frac{1/7}{4/7}\]</span> <span class="math display">\[ Conf({Leche} \implies {Pan}) = \frac{Supp({Pan, Leche})}{Supp(Leche)} = \frac{1/7}{3/7}\]</span></p>
 </div>
 </div>
-</section>
-<section id="problema" class="slide level2">
-<h2>Problema</h2>
-<blockquote>
-<p>En un dataset transaccional de n productos totales y <span class="math inline">\(|U_i|\)</span> elementos para la Transacción <span class="math inline">\(i\)</span>.</p>
-</blockquote>
-<p>Se pueden generar un total de <span class="math inline">\(N_{reglas}\)</span> de asociación:</p>
-<p><span class="math display">\[N_{reglas} = \sum_{i=1}^{2^{n}} \sum_{j=0}^{|U_i|}\binom{|U_i|}{j}\]</span></p>
-<div style="font-size: 75%;">
-<div class="columns">
-<div class="column" style="width:70%;">
-<div class="callout callout-warning callout-style-simple">
+</div>
+<div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Si suponemos un supermercado que tiene 1000 productos, y transacciones que pueden ir entre 1 y 50 productos. El problema es muy costoso, y se podrían eventualmente generar <code>demasiadas</code> combinaciones.</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/cansado.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-7/cansado.gif" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
+<p>¿Qué pasaría si ahora decimos que <span class="math inline">\(z = \beta_0 + \beta_1 X_1 + \beta_2 X_2\)</span>?</p>
 </div>
 </div>
 </div>
 </section>
-<section id="algoritmo-apriori" class="slide level2 smaller">
-<h2>Algoritmo Apriori</h2>
-<dl>
-<dt>Apriori</dt>
-<dd>
-<blockquote>
-<p>Es un algoritmo para aprender reglas de asociación que utiliza el principio <code>Apriori</code> para buscar de forma eficiente las reglas que satisfacen los límites de soporte y confianza.</p>
-</blockquote>
-</dd>
-</dl>
-<p><br></p>
-<h4 id="algoritmo">Algoritmo</h4>
-<ol type="1">
-<li>Fijar <span class="math inline">\(k=1\)</span> y determinar lista de candidatos de tamaño <span class="math inline">\(k\)</span>.
-<ol type="a">
-<li>Calcular la frecuencia del conjunto.</li>
-<li>Eliminar conjuntos con baja frecuencia (utilizando un <code>umbral de soporte</code>).</li>
-<li>Unir los conjuntos frecuentes para generar conjuntos de tamaño <span class="math inline">\(k+1\)</span>.</li>
-<li>Si existe la posibilidad de seguir creando combinaciones volver al <code>paso a</code> y repetir.</li>
-</ol></li>
-<li>Usar todos los conjuntos frecuentes para generar reglas.</li>
-</ol>
-</section>
-<section id="ejemplo-apriori" class="slide level2 smaller">
-<h2>Ejemplo Apriori</h2>
-<blockquote>
-<p>Supongamos el siguiente dataset transaccional:</p>
-</blockquote>
-<p>Supongamos que queremos calcular las reglas de asociación que tengan un <code>MinSupp=40%</code> y un <code>MinConf=70%</code>.</p>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/apriori_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-7/apriori_ex.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="font-size: 130%;">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Podríamos pensar que <code>MinSupp</code> y <code>MinConf</code> son los <code>hiperparámetros</code> de este algoritmo.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-apriori-iteración-1" class="slide level2 smaller">
-<h2>Ejemplo Apriori: Iteración 1</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/apriori_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-7/apriori_ex.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/iter_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-7/iter_1.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Galletas <strong>NO CUMPLE</strong> con el Soporte Mínimo solicitado. Por lo tanto, lo elimino y genero relaciones de 2 productos sin considerar Galletas.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-apriori-iteración-2" class="slide level2 smaller">
-<h2>Ejemplo Apriori: Iteración 2</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/apriori_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-7/apriori_ex.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Acá <strong>NO SE ELIMINA</strong> ningún producto, ya que en los itemsets que sobrevivieron hay <code>Pan</code>, <code>Mantequilla</code>, <code>Leche</code>, <code>Pañales</code> y <code>Cerveza</code>.</p>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/iter_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-7/iter_2.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-apriori-iteración-3" class="slide level2 smaller">
-<h2>Ejemplo Apriori: Iteración 3</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/apriori_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-7/apriori_ex.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Se puede apreciar que los únicos 3 productos que sobreviven son <code>Pan</code>, <code>Mantequilla</code> y <code>Leche</code>. Por lo tanto, <strong>NO ES POSIBLE</strong> generar reglas con 4 productos.</p>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/iter_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-7/iter_3.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-apriori-generación-de-reglas" class="slide level2 smaller">
-<h2>Ejemplo Apriori: Generación de Reglas</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/final_itemset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-7/final_itemset.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:70%;">
+<section id="la-regresión-logística" class="slide level2">
+<h2>La Regresión Logística</h2>
+<p><span class="math display">\[P[y = 1|X, \theta] = g(\theta_0 + \theta_1 X_1 + \theta_2 X_2) = \frac{1}{1 + e^{-(\theta_0 + \theta_1 X_1 + \theta_2 X_2)}}\]</span></p>
 <div class="fragment">
-<ul>
-<li>Para <code>{Pan, Mantequilla}</code>:</li>
-</ul>
-<p><span class="math inline">\(Conf(Pan \implies Mantequilla) = \frac{Supp(Pan, Mantequilla)}{Supp(Pan)} = \frac{3}{3}\)</span>✅ <span class="math inline">\(Conf(Mantequilla \implies Pan) = \frac{Supp(Pan, Mantequilla)}{Supp(Mantequilla)} = \frac{3}{3}\)</span>✅</p>
-</div>
-<div class="fragment">
-<ul>
-<li>Para <code>{Pan, Leche}</code>:</li>
-</ul>
-<p><span class="math inline">\(Conf(Pan \implies Leche) = \frac{Supp(Pan, Leche)}{Supp(Pan)} = \frac{2}{3}\)</span> ❌ <span class="math inline">\(Conf(Leche \implies Pan) = \frac{Supp(Pan, Leche)}{Supp(Leche)} = \frac{2}{2}\)</span> ✅</p>
-</div>
-<div class="fragment">
-<ul>
-<li>Para <code>{Mantequilla, Leche}</code>:</li>
-</ul>
-<p><span class="math inline">\(Conf(Mantequilla \implies Leche) = \frac{Supp(Mantequilla, Leche)}{Supp(Mantequilla)} = \frac{2}{3}\)</span> ❌ <span class="math inline">\(Conf(Leche \implies Mantequilla) = \frac{Supp(Mantequilla, Leche)}{Supp(Leche)} = \frac{2}{2}\)</span> ✅</p>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-apriori-generación-de-reglas-1" class="slide level2 smaller">
-<h2>Ejemplo Apriori: Generación de Reglas</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/final_itemset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-7/final_itemset.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="font-size: 65%;">
-<div class="fragment">
-<ul>
-<li>Para <code>{Pañales, Cerveza}</code>:</li>
-</ul>
-<p><span class="math inline">\(Conf(Pañales \implies Cerveza) = \frac{Supp(Pañales, Cerveza)}{Supp(Pañales)} = \frac{2}{3}\)</span>❌ <span class="math inline">\(Conf(Cerveza \implies Pañales) = \frac{Supp(Pañales, Cerveza)}{Supp(Cerveza)} = \frac{2}{2}\)</span>✅</p>
-</div>
-<div class="fragment">
-<ul>
-<li>Para <code>{Pan, Mantequilla, Leche}</code>:</li>
-</ul>
-<p><span class="math inline">\(Conf({Pan, Mantequilla} \implies {Leche}) = \frac{Supp(Pan, Mantequilla, Leche)}{Supp(Pan, Mantequilla)} = \frac{2}{3}\)</span>❌ <span class="math inline">\(Conf({Pan, Leche} \implies {Mantequilla}) = \frac{Supp(Pan, Mantequilla, Leche)}{Supp(Pan, Leche)} = \frac{2}{2}\)</span>✅ <span class="math inline">\(Conf({Mantequilla, Leche} \implies {Pan}) = \frac{Supp(Pan, Mantequilla, Leche)}{Supp(Mantequilla, Leche)} = \frac{2}{2}\)</span>✅</p>
-<p><br></p>
-<p><span class="math inline">\(Conf({Leche} \implies {Pan, Mantequilla}) = \frac{Supp(Pan, Mantequilla, Leche)}{Supp(Leche)} = \frac{2}{2}\)</span>✅ <span class="math inline">\(Conf({Mantequilla} \implies {Pan, Leche}) = \frac{Supp(Pan, Mantequilla, Leche)}{Supp(Mantequilla)} = \frac{2}{3}\)</span>❌ <span class="math inline">\(Conf({Pan} \implies {Mantequilla, Leche}) = \frac{Supp(Pan, Mantequilla, Leche)}{Supp(Pan)} = \frac{2}{3}\)</span>❌</p>
-</div>
-</div>
-</div>
-</section>
-<section id="resultado-final" class="slide level2 smaller">
-<h2>Resultado Final</h2>
-<div class="columns">
-<div class="column">
-<h4 id="itemset-minsupp-40">Itemset MinSupp = 40%</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/final_itemset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-7/final_itemset.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<h4 id="reglas-finales-minconf-70">Reglas Finales MinConf = 70%</h4>
-<p><span class="math display">\[Pan \implies Mantequilla\]</span> <span class="math display">\[Mantequilla \implies Pan\]</span> <span class="math display">\[Leche \implies Pan\]</span> <span class="math display">\[Leche \implies Mantequilla\]</span> <span class="math display">\[Cerveza \implies Pañales\]</span> <span class="math display">\[\{Pan, Leche\} \implies Mantequilla\]</span></p>
-<p><span class="math display">\[\{Mantequilla, Leche\} \implies Pan\]</span> <span class="math display">\[Leche \implies \{Pan, Mantequilla\}\]</span></p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Insights:</strong></p>
+<p><strong>Regla de Decisión:</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>El Pan, la Leche y la Mantequilla están relacionados.</li>
-<li>Parece ser que si llevo Cervezas también llevo Pañales.</li>
+<li>Si <span class="math inline">\(g(z) \ge 0.5 \implies Clase \, 1\)</span>.</li>
+<li>Si <span class="math inline">\(g(z) &lt; 0.5 \implies Clase \, 0\)</span>.</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-</div>
-</section>
-<section id="evaluación-de-reglas-de-asociación" class="slide level2 smaller">
-<h2>Evaluación de Reglas de Asociación</h2>
-<dl>
-<dt>Lift</dt>
-<dd>
-Mide qué tan lejos de la independencia están <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>. Lift varía entre 0 y <span class="math inline">\(\infty\)</span>.
-</dd>
-</dl>
-<p><span class="math display">\[Lift(X,Y) = \frac{Conf(X \implies Y)}{s(Y)}\]</span></p>
-<ul>
-<li><span class="math inline">\(Lift(X,Y) \sim 1\)</span> implica independencia y la regla no es importante.</li>
-<li><span class="math inline">\(Lift(X,Y) &lt; 1\)</span> implica una asociación negativa de la regla.</li>
-<li><span class="math inline">\(Lift(X,Y) &gt; 1\)</span> implica una asociativa de la regla. Un mayor Lift implica que la regla es potencialmente útil para el futuro.</li>
-</ul>
-<h5 id="ejemplo">Ejemplo:</h5>
-<p><span class="math display">\[Lift(Cerveza, Pañales) = \frac{Conf(Cerveza \implies Pañales)}{Supp(Pañales)} = \frac{1}{0.6} = 1.67\]</span></p>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Una persona que compra <code>Cerveza</code> tiene <strong>1.67</strong> más <em><code>chances</code></em> de comprar <code>Pañales</code>.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="implementación-en-python-preprocesamiento" class="slide level2">
-<h2>Implementación en Python: Preprocesamiento</h2>
-<h4 id="pre-procesamiento">Pre-procesamiento</h4>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1-2|3|4-5|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a></a><span class="im">from</span> mlxtend.preprocessing <span class="im">import</span> TransactionEncoder</span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a>tre <span class="op">=</span> TransactionEncoder()</span>
-<span id="cb1-5"><a></a>df <span class="op">=</span> tre.fit_transform(transactions)</span>
-<span id="cb1-6"><a></a>df_encoded <span class="op">=</span> pd.DataFrame(df, columns <span class="op">=</span> tre.columns_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>L4: <code>transactions</code> debe ser una lista de listas. Cada fila, son distintas transacciones. Cada transaccion puede tener distinto número de elementos. L5: <code>tre.columns_</code> extrae los nombres de los productos para que el DataFrame sea más entendible.</p>
+<div class="fragment">
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p><code>df_encoded</code> es un DataFrame tipo OneHotEncoder pero con valores Booleanos (Esto es solicitado por la documentación).</p>
+<p><span class="math inline">\(g(z)\)</span> se puede interpretar como una <strong><em>probabilidad de pertenecer a la Clase 1</em></strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(1 -g(z)\)</span> se puede interpretar como una <strong><em>probabilidad de NO pertenecer a la Clase 1</em></strong>, es decir, <strong><em>pertenecer a la Clase 0</em></strong>.</p>
+</div>
 </div>
 </div>
 </div>
 </section>
-<section id="implementación-en-python-itemsets" class="slide level2">
-<h2>Implementación en Python: Itemsets</h2>
-<div class="sourceCode" id="cb2" data-code-line-numbers="|1|3|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> mlxtend.frequent_patterns <span class="im">import</span> apriori </span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a>itemset <span class="op">=</span> apriori(df_encoded, min_support<span class="op">=</span><span class="fl">0.5</span>, use_colnames <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>L3: <code>df_encoded</code> es el DataFrame preprocesado.</p>
+<section id="aprendizaje-del-modelo" class="slide level2">
+<h2>Aprendizaje del Modelo</h2>
+<p>Supongamos lo siguiente:</p>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[P(y = 1| X, \theta) = h_\theta(X)\]</span></p>
+</div><div class="column">
+<p><span class="math display">\[P(y = 0| X, \theta) = 1-h_\theta(x)\]</span></p>
+</div>
+</div>
+<p>Ambas ecuaciones pueden comprimirse en una sola de la siguiente manera: <span class="math display">\[ P(y|X,\theta) = h_\theta(X)^y (1 - h_\theta(X))^{1-y}\]</span></p>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Para encontrar los parámetros <span class="math inline">\(\theta\)</span> podemos utilizar una técnica llamada <strong>Maximum Likelihood Estimation</strong>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="maximum-likelihood-estimation" class="slide level2">
+<h2>Maximum Likelihood Estimation</h2>
+<p><span class="math display">\[\mathcal{L}(\theta) = \prod_{i=1}^n P(y^{(i)} | x^{(i)}, \theta)\]</span> <span class="math display">\[l(\theta) = log (\mathcal{L(\theta)}) = \sum_{i=1}^n y^{(i)} \cdot log(h_\theta(x^{(i)})) + (1-y^{(i)})\cdot log(1-h_\theta(x^{(i)}))\]</span></p>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Dado que no existe una solución analítica para maximizar esta ecuación, es que se busca minimizar el valor negativo, lo cual es equivalente.</p>
+<p>Esta ecuación se conoce como <strong>Entropía Cruzada</strong> o como <strong>Negative Log Loss (NLL)</strong> y tiene la gracia de que es una curva convexa lo que <strong><em>garantiza un valor único de los parámetros <span class="math inline">\(\theta\)</span></em></strong>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>La técnica más famosa para minimizar este tipo de problemas se conoce como <code>Stochastic Gradient Descent</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="frontera-de-decisión" class="slide level2">
+<h2>Frontera de Decisión</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/3d-sigmoid.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-10/3d-sigmoid.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="regresión-logística" class="slide level2">
+<h2>Regresión Logística:</h2>
+<h3 id="training-time">Training Time</h3>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En este paso el modelo resuelve el problema de <strong>MLE</strong> y encuentra los parámetros .</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Este modelo se considera un modelo parámetrico, ya que los <em>“parámetros”</em> <span class="math inline">\(\theta\)</span> aprenderán la contribución de cada atributo/variable a la probabilidad predicha por el modelo.</p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[ \underset{\theta}{\operatorname{argmin}} -l(\theta)\]</span></p>
+</section>
+<section id="inference-time" class="slide level2 smaller">
+<h2>Inference Time</h2>
+<p>En este caso se calcula: <span class="math display">\[h_\theta(x^{(i)})=sigmoid(\theta^t x^{(i)})\]</span></p>
 <ul>
-<li><p><strong>min_support</strong>: Corresponde al Soporte Mínimo para generar itemsets. Por defecto 0.5.</p></li>
-<li><p><strong>use_colnames</strong>: Permite que las reglas usen los nombres de las columnas para referirse a los productos. Por defecto es <code>False</code>, pero conviene usarlo como <code>True</code>.</p></li>
-<li><p><strong>itemset</strong> será un DataFrame con los itemsets generados.</p></li>
+<li><span class="math inline">\(\theta\)</span>: Corresponde a un vector con todos los parámetros calculados.</li>
+<li><span class="math inline">\(x^(i)\)</span>: Corresponde a una instancia de <span class="math inline">\(m\)</span> variables la cual generará una probabilidad.</li>
+<li><span class="math inline">\(h_\theta(x^{(i)})\)</span>: Generará un valor entre 0 y 1 al cuál se le aplica la Regla de Decisión.</li>
 </ul>
 </section>
-<section id="implementación-en-python-reglas" class="slide level2">
-<h2>Implementación en Python: Reglas</h2>
-<div class="sourceCode" id="cb3" data-code-line-numbers="|1|3|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">from</span> mlxtend.frequent_patterns <span class="im">import</span> association_rules</span>
-<span id="cb3-2"><a></a></span>
-<span id="cb3-3"><a></a>rules <span class="op">=</span> association_rules(itemsets, metric<span class="op">=</span><span class="st">"confidence"</span>, min_threshold<span class="op">=</span><span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>L3: <code>itemset</code> es el dataframe generado en el paso anterior.</p>
+<section id="implementación-en-python" class="slide level2">
+<h2>Implementación en Python</h2>
+<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3-4|6-7|9-11|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a>lr <span class="op">=</span> LogisticRegression(C<span class="op">=</span><span class="dv">1</span>, penalty<span class="op">=</span><span class="st">"l2"</span>, random_state <span class="op">=</span> <span class="dv">42</span>)</span>
+<span id="cb1-4"><a></a>lr.fit(X_train, y_train)</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a>y_pred <span class="op">=</span> lr.predict(X_test)</span>
+<span id="cb1-7"><a></a>y_proba <span class="op">=</span> lr.predict_proba(X_test)</span>
+<span id="cb1-8"><a></a></span>
+<span id="cb1-9"><a></a><span class="co">## Visualizacion de los Parámetros </span></span>
+<span id="cb1-10"><a></a>lr.coef_</span>
+<span id="cb1-11"><a></a>lr.intercept_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div style="font-size: 55%;">
 <ul>
-<li><p><strong>metric</strong>: Métrica para definir reglas, puede ser “confidence” y otras definidas <a href="https://rasbt.github.io/mlxtend/api_subpackages/mlxtend.frequent_patterns/#association_rules">acá</a></p></li>
-<li><p><strong>min_threshold</strong>: Corresponde al umbral de la métrica a utilizar. Por defecto 0.8.</p></li>
-<li><p><strong>rules</strong> corresponde a un Dataset que tiene las Reglas de Asociación detectadas y muchas métricas asociadas.</p></li>
+<li><strong>C</strong>: Corresponde a un parámetro de Regularización. Valores más pequeños implica mayor regularización. Por defecto 1.</li>
+<li>penalty: Corresponde al tipo de regularización. Por defecto <em>“l2”</em>.
+<ul>
+<li><strong><em>“l1”:</em></strong> Corresponde a la regularización Lasso. Genera que hayan parámetros cero, ayudando en la selección de variables.</li>
+<li><strong><em>“l2”:</em></strong> Corresponde a la regularización Ridge. Genera que todos los parámetros sean pequeños, entregando estabilidad y buena interpretabilidad.</li>
+<li><strong><em>“elasticnet”:</em></strong> Corresponde a la combinación de <em>“l1”</em> y <em>“l2”</em>.</li>
+<li><strong><em>None:</em></strong> No hay regularización.</li>
+</ul></li>
 </ul>
-</section></section>
-<section id="felicitaciones-aprendimos-apriori" class="title-slide slide level1 center">
-<h1>¡Felicitaciones! 🎉🎉🎉🎉 Aprendimos Apriori!!</h1>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Para cambiar la regularización, consultar la documentación de Scikit-Learn.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretabilidad" class="slide level2 smaller">
+<h2>Interpretabilidad</h2>
+<blockquote>
+<p>Una de las grandes ventajas que tiene la Regresión Logística es que sus predicciones son interpretables.</p>
+</blockquote>
+<ul>
+<li>Tenemos un dataset de 2 variables:
+<ul>
+<li>W: Corresponde al peso del Vehículo.</li>
+<li>qsec: Corresponde al tiempo en Segundos que lo toma en recorrer un cuarto de milla.</li>
+</ul></li>
+<li>Queremos predecir si el vehículo es Ecónomico o no (en términos de consumo de Bencina).</li>
+</ul>
+<p><span class="math display">\[h_\theta(x) = 0.5 - 3.5 \cdot W + 1.5 \cdot qsec \]</span></p>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment">Si el vehículo se demora más en el cuarto de milla (<strong>qsec</strong> aumenta) entonces el vehículo es más económico.
+<ul>
+<li class="fragment">Tiene menos potencia.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment">Si el vehículo es más pesado (<strong>W</strong> aumenta), entonces es menos económico.
+<ul>
+<li class="fragment">Requiere probablemente más combustible para mover dicho peso.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El valor del parámetro representa también la magnitud de la contribución.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sugerencias" class="slide level2">
+<h2>Sugerencias</h2>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong>Estandarización/Normalización de datos</strong>: Permite que la escala de los datos no afecte en la interpretabilidad.</li>
+<li><strong>One Hot Encoder</strong>: En general tiende a dar mejores resultados que el Ordinal.</li>
+<li><strong>Interacciones</strong>: Combinación de variables.</li>
+<li><strong>Variables no Lineales</strong>: Permite que la frontera de Decisión no sea necesariamente lineal (Regresión Polinómica).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/polinomial.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-10/polinomial.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="saionara" class="title-slide slide level1 center">
+<h1>Saionara</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -993,7 +837,7 @@ Mide qué tan lejos de la independencia están <span class="math inline">\(X\)</
       Reveal.initialize({
 'controlsAuto': false,
 'previewLinksAuto': false,
-'pdfSeparateFragments': false,
+'pdfSeparateFragments': true,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
@@ -1332,7 +1176,7 @@ Mide qué tan lejos de la independencia están <span class="math inline">\(X\)</
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
