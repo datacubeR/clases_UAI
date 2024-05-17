@@ -1,6 +1,6 @@
 ---
 title: "TICS-411 Minería de Datos"
-subtitle: "Clase 8: Evaluación de Modelos"
+subtitle: "Clase 9: Evaluación de Modelos"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:

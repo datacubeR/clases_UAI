@@ -1,0 +1,245 @@
+---
+title: "TICS-411 Minería de Datos"
+subtitle: "Clase 10: Regresión Logística"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs: 
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo.jpg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+    pdf-separate-fragments: true
+---
+
+
+## Intuición
+
+Supongamos el siguiente dataset:
+
+![](img/clase-10/data.png){.lightbox fig-align="center"}
+
+::: {.callout-warning}
+¿Cómo puedo separar ambas clases?
+:::
+
+## Intuición
+
+
+![](img/clase-10/frontera_0.png){.lightbox fig-align="center" .fade-in-then-out}
+
+## Intuición
+
+![](img/clase-10/frontera.png){.lightbox fig-align="center" width="50%"} 
+
+::: {.callout-note .fragment }
+La `frontera de decisión` se puede caracterizar como la ***ecuación de una recta*** (en forma general).
+:::
+::: {.callout-tip .fragment }
+Además definiremos $h_\theta(X) = \theta_0 + \theta_1 X_1 + \theta_2 X_2$.
+:::
+
+## Intuición
+
+![](img/clase-10/frontera_2.png){.lightbox fig-align="center" width="60%"}
+
+::: {.callout-important}
+Podríamos pensar que si $h_\theta(X)$ es positivo entonces pertenece a la clase 1 y si $h_\theta(X)$ es negativo pertenece a la clase 0.
+:::
+
+## La Función Sigmoide o Logística
+
+$$ g(z) = \frac{1}{1 + e^{-z}}$$
+
+::: {.columns}
+::: {.column}
+
+![](img/clase-10/sigmoide.png){.lightbox fig-align="center" }
+:::
+::: {.column}
+::: {.callout-tip}
+* Función no lineal.
+* Función acotada entre 0 y 1.
+* $g(\varepsilon) = 0.5$, $\varepsilon = 0$
+:::
+
+::: {.callout-caution .fragment}
+De acá sale la noción del umbral 0.5 que hemos visto en clases anteriores.
+:::
+:::
+:::
+
+::: {.callout-note}
+¿Qué pasaría si ahora decimos que $z = \beta_0 + \beta_1 X_1 + \beta_2 X_2$?
+:::
+
+
+## La Regresión Logística
+
+$$P[y = 1|X, \theta] = g(\theta_0 + \theta_1 X_1 + \theta_2 X_2) = \frac{1}{1 + e^{-(\theta_0 + \theta_1 X_1 + \theta_2 X_2)}}$$
+
+::: {.callout-note appearance="default" .fragment}
+## Regla de Decisión:
+
+* Si $g(z) \ge 0.5 \implies Clase \, 1$.
+* Si $g(z) < 0.5 \implies Clase \, 0$.
+:::
+
+::: {.callout-important .fragment}
+$g(z)$ se puede interpretar como una ***probabilidad de pertenecer a la Clase 1***.
+:::
+::: {.callout-important .fragment}
+$1 -g(z)$ se puede interpretar como una ***probabilidad de NO pertenecer a la Clase 1***, es decir, ***pertenecer a la Clase 0***.
+:::
+
+## Aprendizaje del Modelo 
+
+Supongamos lo siguiente: 
+
+::: {.columns}
+::: {.column}
+$$P(y = 1| X, \theta) = h_\theta(X)$$
+:::
+::: {.column}
+$$P(y = 0| X, \theta) = 1-h_\theta(x)$$
+:::
+::: 
+
+Ambas ecuaciones pueden comprimirse en una sola de la siguiente manera:
+$$ P(y|X,\theta) = h_\theta(X)^y (1 - h_\theta(X))^{1-y}$$
+
+
+::: {.callout-important}
+Para encontrar los parámetros $\theta$ podemos utilizar una técnica llamada **Maximum Likelihood Estimation**.
+:::
+
+## Maximum Likelihood Estimation
+
+$$\mathcal{L}(\theta) = \prod_{i=1}^n P(y^{(i)} | x^{(i)}, \theta)$$
+$$l(\theta) = log (\mathcal{L(\theta)}) = \sum_{i=1}^n y^{(i)} \cdot log(h_\theta(x^{(i)})) + (1-y^{(i)})\cdot log(1-h_\theta(x^{(i)}))$$
+
+::: {.callout-tip}
+Dado que no existe una solución analítica para maximizar esta ecuación, es que se busca minimizar el valor negativo, lo cual es equivalente.
+
+Esta ecuación se conoce como **Entropía Cruzada** o como **Negative Log Loss (NLL)** y tiene la gracia de que es una curva convexa lo que ***garantiza un valor único de los parámetros $\theta$***. 
+:::
+
+::: {.callout-important}
+La técnica más famosa para minimizar este tipo de problemas se conoce como `Stochastic Gradient Descent`.
+:::
+
+## Frontera de Decisión
+
+![](img/clase-10/3d-sigmoid.png){.lightbox fig-align="center" width="60%"}
+
+## Regresión Logística: 
+
+### Training Time
+
+::: {.callout-note}
+Este modelo se considera un modelo parámetrico, ya que los ***parámetros $\theta$*** aprenderán la contribución de cada atributo/variable a la probabilidad predicha por el modelo.
+:::
+
+$$ \underset{\theta}{\operatorname{argmin}} -l(\theta)$$
+
+::: {.callout-important}
+En este paso el modelo resuelve el problema de **MLE** y encuentra los parámetros $\theta$.
+:::
+
+## Inference Time {.smaller}
+
+En este caso se calcula:
+$$h_\theta(x^{(i)})=sigmoid(\theta^t x^{(i)})$$
+
+* $\theta$: Corresponde a un vector con todos los parámetros calculados.
+* $x^{(i)}$: Corresponde a una instancia de $m$ variables la cual generará una probabilidad.
+    * $\theta^t x^{(i)}$ corresponde al producto punto de dos vectores, que es equivalente a una ***"suma producto"***.
+* $h_\theta(x^{(i)})$: Generará un valor entre 0 y 1 al cuál se le aplica la Regla de Decisión.
+
+![](img/clase-10/h.png){.lightbox fig-align="center" width="40%" }
+
+## Implementación en Python
+
+```{.python code-line-numbers="|1|3-4|6-7|9-11|"}
+from sklearn.linear_model import LogisticRegression
+
+lr = LogisticRegression(C=1, penalty="l2", random_state = 42)
+lr.fit(X_train, y_train)
+
+y_pred = lr.predict(X_test)
+y_proba = lr.predict_proba(X_test)
+
+## Visualizacion de los Parámetros 
+lr.coef_
+lr.intercept_
+```
+
+::: {style="font-size: 55%;"}
+* **C**: Corresponde a un parámetro de Regularización. Valores más pequeños implica mayor regularización. Por defecto 1.
+* penalty: Corresponde al tipo de regularización. Por defecto *"l2"*.
+    * ***"l1":*** Corresponde a la regularización Lasso. Genera que hayan parámetros cero, ayudando en la selección de variables.
+    * ***"l2":*** Corresponde a la regularización Ridge. Genera que todos los parámetros sean pequeños, entregando estabilidad y buena interpretabilidad. 
+    * ***"elasticnet":*** Corresponde a la combinación de *"l1"* y *"l2"*. 
+    * ***None:*** No hay regularización.
+:::
+
+::: {.callout-important}
+Para cambiar la regularización, consultar la documentación de Scikit-Learn.
+:::
+
+## Interpretabilidad {.smaller}
+
+> Una de las grandes ventajas que tiene la Regresión Logística es que sus predicciones son interpretables. 
+
+* Tenemos un dataset de 2 variables:
+  * W: Corresponde al peso del Vehículo.
+  * qsec: Corresponde al tiempo en Segundos que lo toma en recorrer un cuarto de milla.
+* Queremos predecir si el vehículo es Ecónomico o no (en términos de consumo de Bencina). 
+
+$$h_\theta(x) = 0.5 - 3.5 \cdot W + 1.5 \cdot qsec $$
+
+::: {.callout-note .incremental .fragment}
+* Si el vehículo se demora más en el cuarto de milla (**qsec** aumenta) entonces el vehículo es más económico.
+  * Tiene menos potencia.
+:::
+
+::: {.callout-caution .incremental .fragment}
+* Si el vehículo es más pesado (**W** aumenta), entonces es menos económico.
+  * Requiere probablemente más combustible para mover dicho peso.
+:::
+
+::: {.callout-tip .fragment}
+El valor del parámetro representa también la magnitud de la contribución.
+:::
+
+## Sugerencias
+
+::: {.callout-tip}
+* **Estandarización/Normalización de datos**: Permite que la escala de los datos no afecte en la interpretabilidad.
+* **One Hot Encoder**: En general tiende a dar mejores resultados que el Ordinal.
+* **Interacciones**: Combinación de variables.
+* **Variables no Lineales**: Permite que la frontera de Decisión no sea necesariamente lineal (Regresión Polinómica).
+:::
+
+![](img/clase-10/polinomial.png){.lightbox fig-align="center" width="40%" }
+
+
+# Saionara
+
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::

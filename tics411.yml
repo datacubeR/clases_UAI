@@ -99,3 +99,12 @@
   path: tics411/clase-9.qmd
   categories:
    - slides
+
+- title: "Clase 10"
+  subtitle: "Regresión Logística"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-05-23
+  image: tics411/thumbnails/clase-10.jpg
+  path: tics411/clase-10.qmd
+  categories:
+   - slides
