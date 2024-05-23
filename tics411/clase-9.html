@@ -768,6 +768,150 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 </div>
 </section>
+<section id="complejidad-de-un-modelo" class="slide level2">
+<h2>Complejidad de un Modelo</h2>
+<h4 id="qué-modelo-es-un-mejor-clasificador">¿Qué modelo es un mejor clasificador?</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/overfitting.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-9/overfitting.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="bias-variance-tradeoff" class="slide level2">
+<h2>Bias Variance Tradeoff</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/dataset_bv.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-9/dataset_bv.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Los puntos Azules serán puntos que usaremos para <strong>entrenar</strong>.</li>
+<li>Los puntos verdes serán puntos que usaremos para <strong>validar</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="bias-variance-tradeoff-bias" class="slide level2 smaller">
+<h2>Bias Variance Tradeoff: Bias</h2>
+<dl>
+<dt>Bias</dt>
+<dd>
+<blockquote>
+<p>Se refiere a la incapacidad de un modelo de capturar la verdadera relación entre los datos.</p>
+</blockquote>
+</dd>
+</dl>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/bias_pic.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-9/bias_pic.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El modelo está <strong><em>“sesgado”</em></strong> a tomar una cierta relación que no necesariamente existe.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="bias-variance-tradeoff-variance" class="slide level2 smaller">
+<h2>Bias Variance Tradeoff: Variance</h2>
+<dl>
+<dt>Variance</dt>
+<dd>
+<blockquote>
+<p>Se refiere a la diferencia de ajuste entre datasets (Train y Validación).</p>
+</blockquote>
+</dd>
+</dl>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/train_error.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-9/train_error.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/test_error.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-9/test_error.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El modelo <strong><em>varía demasiado</em></strong> su comportamiento entre Training y Testing Time.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="complejidad-de-un-modelo-1" class="slide level2 smaller">
+<h2>Complejidad de un Modelo</h2>
+<div class="columns">
+<div class="column">
+<h3 id="overfitting-1">Overfitting</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/overf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-9/overf.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<div class="fragment" data-fragment-index="1">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Regularización</strong>: Se refiere a una penalización para <code>disminuir su complejidad</code>.</p>
+<ul>
+<li><p><strong>Modelos más simples</strong>: Utilizar modelos con una Frontera de Decisión más simple.</p></li>
+<li><p><strong><em>Más datos!!!</em></strong> Más datos más dificil aprender, por lo tanto, modelos complejos se ven más beneficiados de esto.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column">
+<h3 id="underfitting-1">Underfitting</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/underf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-9/underf.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<div class="fragment" data-fragment-index="2">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><p><strong>Quitar Regularización</strong></p></li>
+<li><p><strong>Modelos más complejos</strong></p></li>
+<li><p><strong><em>Más variabilidad en los datos!!!</em></strong> Podría ser que los datos no permitan aprender patrones más complejos.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="evaluación" class="slide level2 smaller">
 <h2>Evaluación</h2>
 <blockquote>
@@ -807,47 +951,6 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 </div>
 </div>
-</section>
-<section id="complejidad-de-un-modelo" class="slide level2">
-<h2>Complejidad de un Modelo</h2>
-<h4 id="qué-modelo-es-un-mejor-clasificador">¿Qué modelo es un mejor clasificador?</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/overfitting.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-9/overfitting.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</section>
-<section id="complejidad-de-un-modelo-1" class="slide level2 smaller">
-<h2>Complejidad de un Modelo</h2>
-<div class="columns">
-<div class="column">
-<h3 id="overfitting-1">Overfitting</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/overf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-9/overf.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<h3 id="underfitting-1">Underfitting</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/underf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-9/underf.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong>Regularización</strong>: Se refiere a una penalización que damos al modelo para que <code>disminuya su complejidad</code> de modo tal que evite el <strong><em>Overfitting</em></strong>. En el caso de KNN, <span class="math inline">\(K\)</span> es un parámetro de regularización.</p>
-</div>
-</div>
-</div>
-</div>
 </section></section>
 <section>
 <section id="esquemas-de-validación" class="title-slide slide level1 center">
@@ -863,19 +966,19 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/dataset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-9/dataset.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></a></p>
+<p><a href="img/clase-9/dataset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-9/dataset.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:30%;">
 <div class="r-stack">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="1"></a></p>
+<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="1"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/split.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-9/split.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="2"></a></p>
+<p><a href="img/clase-9/split.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-9/split.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="2"></a></p>
 </figure>
 </div>
 </div>
@@ -947,17 +1050,17 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="r-stack">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
+<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/train-val.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-9/train-val.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
+<p><a href="img/clase-9/train-val.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-9/train-val.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-9/full-holdout.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
+<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-9/full-holdout.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
 </figure>
 </div>
 </div>
@@ -999,7 +1102,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-9/full-holdout.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-9/full-holdout.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column fragment" style="width:70%;">
@@ -1060,7 +1163,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/K-Fold.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-9/K-Fold.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/K-Fold.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-9/K-Fold.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:60%;">
@@ -1097,7 +1200,7 @@ Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold c
 <div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/data_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-9/data_boot.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/data_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-9/data_boot.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-tip callout-style-simple">
@@ -1115,7 +1218,7 @@ Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold c
 </div><div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/iter_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-9/iter_boot.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-9/iter_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-9/iter_boot.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -1626,7 +1729,7 @@ Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, 
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"closeEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
