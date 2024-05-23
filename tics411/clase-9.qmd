@@ -221,38 +221,21 @@ RocCurveDisplay.from_predictions(y_true, y_proba)
 ::: {.column width="35%"}
 ::: {.callout-important}
 ## **Overfitting**: 
-Gran diferencia entre Training y Validation Score.
+Gran diferencia entre **Training** y **Validation** Score.
 
 :::
 ::: {.callout-caution appearance="default"}
 ## **Underfitting**: 
-Poca diferencia entre Training y Validation Score, pero con ambos puntajes *"relativamente bajos"*. 
+Poca diferencia entre **Training** y **Validation** Score, pero con ambos puntajes *"relativamente bajos"*. 
 :::
 ::: {.callout-note}
-## **Proper fitting**:
-Corresponde al mejor puntaje en el set de Validación. Donde también la distancia entre Train y Test es ***poca***.
+## **Proper fitting** o **Sweet Spot**:
+Corresponde al **mejor puntaje en el set de Validación**. Donde también la distancia entre Train y Test es ***poca***.
 :::
 :::
 ::: 
 
 
-## Evaluación {.smaller}
-
-> La evaluación de modelos supervisados es fundamental. De no hacerlo de forma correcta podemos quedarnos con una idea muy equivocada del rendimiento del modelo.
-
-::: {.callout-caution}
-Un modelo con un rendimiento incorrecto puede entregar predicciones completamente inútiles. 
-:::
-
-Cross Validation (Validación Cruzada)
-: > Se debe evaluar el rendimiento de un modelo en un `dataset diferente` al que fue entrenado. Esta es la única manera en la que se puede medir el poder de generalización.
-
-Generalización
-: > Corresponde a la habilidad de un modelo de adaptarse apropiadamente a datos no vistos previamente. 
-
-::: {.callout-important}
-Para esto se asume que todos los datos son i.i.d (`independent and identically distributed`). De no lograr esto, lograr buenos rendimientos es más difícil.
-:::
 
 ## Complejidad de un Modelo
 
@@ -260,26 +243,105 @@ Para esto se asume que todos los datos son i.i.d (`independent and identically d
 
 ![](img/clase-9/overfitting.png){.lightbox fig-align="center" width="70%"}
 
+## Bias Variance Tradeoff 
+
+::: {.r-stack}
+![](img/clase-9/data_pre-split.png){.lightbox fig-align="center" width="60%"} 
+
+![](img/clase-9/dataset_bv.png){.lightbox fig-align="center" width="80%" .fragment fragment-index=1} 
+:::
+
+::: {.callout-note .fragment fragment-index=1}
+* Los puntos azules serán puntos que usaremos para **entrenar**.
+* Los puntos verdes serán puntos que usaremos para **validar**.
+:::
+
+## Bias Variance Tradeoff: Bias {.smaller}
+
+Bias
+: > Se refiere a la incapacidad de un modelo de capturar la verdadera relación entre los datos.
+
+![](img/clase-9/bias_pic.png){.lightbox fig-align="center" width="50%"}
+
+::: {.callout-caution}
+El modelo está ***"sesgado"*** a tomar una cierta relación que no necesariamente existe.
+:::
+
+## Bias Variance Tradeoff: Variance {.smaller}
+
+Variance
+: > Se refiere a la diferencia de ajuste entre datasets (Train y Validación).
+
+::: {.columns}
+::: {.column}
+![](img/clase-9/train_error.png){.lightbox fig-align="center" width="90%"}
+:::
+::: {.column}
+![](img/clase-9/test_error.png){.lightbox fig-align="center" width="90%"}
+:::
+::: 
+
+::: {.callout-warning}
+El modelo ***varía demasiado*** su comportamiento entre Training y Testing Time.
+:::
+
 ## Complejidad de un Modelo {.smaller}
 
 ::: {.columns}
 ::: {.column}
 
-### Overfitting
-![](img/clase-9/overf.png){.lightbox fig-align="center" width="80%"}
+##### Overfitting
+
+![](img/clase-9/overf.png){.lightbox fig-align="center" width="70%"}
+
+::: {.callout-tip .fragment fragment-index=1}
+
+**Regularización**: Se refiere a una penalización para `disminuir su complejidad`.
+
+* **Modelos más simples**: Utilizar modelos con una Frontera de Decisión más simple.
+
+* ***Más datos!!!*** Más datos más dificil aprender, por lo tanto, modelos complejos se ven más beneficiados de esto.
+:::
 :::
 ::: {.column}
 
-### Underfitting
-![](img/clase-9/underf.png){.lightbox fig-align="center" width="80%"}
+##### Underfitting
+
+![](img/clase-9/underf.png){.lightbox fig-align="center" width="70%"}
+
+::: {.callout-tip .fragment fragment-index=2}
+
+* **Quitar Regularización** 
+
+* **Modelos más complejos** 
+
+* ***Más variabilidad en los datos!!!*** Podría ser que los datos no permitan aprender patrones más complejos.
+:::
 :::
 ::: 
 
-::: {.callout-tip .fragment}
-**Regularización**: Se refiere a una penalización que damos al modelo para que `disminuya su complejidad` de modo tal que evite el ***Overfitting***. En el caso de KNN, $K$ es un parámetro de regularización.
+# Esquemas de Validación
+
+## ¿Cómo generamos sets de Validación? {.smaller}
+
+> La evaluación de modelos supervisados es fundamental. De no hacerlo de forma correcta podemos quedarnos con una idea muy equivocada del rendimiento del modelo.
+
+
+Cross Validation (Validación Cruzada)
+: > Se debe evaluar el rendimiento de un modelo en un `dataset diferente` al que fue entrenado. Esta es la `única manera` en la que se puede medir el poder de `generalización` de un modelo.
+
+Generalización
+: > Corresponde a la habilidad de un modelo de adaptarse apropiadamente a datos no vistos previamente. 
+
+::: {.callout-caution}
+***Utilizar una estrategia incorrecta de Validación puede llevar a problemas de generalización.*** La estrategia de Validación **debe** ser lo más parecida posible a cómo se utilizará el modelo en Producción.
 :::
 
-# Esquemas de Validación
+::: {.callout-important}
+Para esto se asume que todos los datos son i.i.d (`independent and identically distributed`). De no lograr esto, lograr buenos rendimientos es más difícil.
+:::
+
+
 
 ## Validación Cruzada: Holdout {.smaller}
 
@@ -373,7 +435,6 @@ Para esto se asume que todos los datos son i.i.d (`independent and identically d
 
 ::: {.callout-caution}
 * El proceso de Holdout podría llevar a un proceso de overfitting del Test Set si el modelo no es lo suficientemente robusto. 
-* Definiremos la robustez más adelante.
 :::
 
 
@@ -400,6 +461,9 @@ Split
 
 :::
 ::: 
+::: {.callout-warning}
+En la práctica se le llama incorrectamente Cross Validation al K-Fold.
+:::
 
 ## Bootstrap {.smaller}
 
@@ -426,7 +490,7 @@ Stratified K-Fold
 Leave One Out
 : Sería una variante con $K=n$. Por lo tanto, el `Validation Set` tiene sólo una observación. 
 
-::: {.callout-tip appearance="default" style="font-size: 130%;"}
+::: {.callout-tip appearance="default" style="font-size: 110%;"}
 
 #### ¿Cuando usar cada uno?
 
@@ -438,7 +502,9 @@ Leave One Out
 * **Bootstrap** también es utilizado cuando se tengan pocos datos. Aunque suele ser un approach más estadístico.
 :::
 
-## Baseline 
+
+
+## Baseline {.smaller}
 
 > Un modelo `Baseline` es un modelo simple, normalmente sin aprendizaje asociado o con poder de aprendizaje más limitado, el cuál será utilizado como medida de referencia para ver si algoritmos más complejos efectivamente están aprendiendo.
 
