@@ -301,7 +301,7 @@
     "href": "tics411/clase-9.html#curva-de-aprendizaje-mejor-ajuste",
     "title": "TICS-411 Minería de Datos",
     "section": "Curva de Aprendizaje: Mejor Ajuste",
-    "text": "Curva de Aprendizaje: Mejor Ajuste\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOverfitting:\n\n\nGran diferencia entre Training y Validation Score.\n\n\n\n\n\n\n\n\n\nUnderfitting:\n\n\nPoca diferencia entre Training y Validation Score, pero con ambos puntajes “relativamente bajos”.\n\n\n\n\n\n\n\n\n\nProper fitting:\n\n\nCorresponde al mejor puntaje en el set de Validación. Donde también la distancia entre Train y Test es poca."
+    "text": "Curva de Aprendizaje: Mejor Ajuste\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOverfitting:\n\n\nGran diferencia entre Training y Validation Score.\n\n\n\n\n\n\n\n\n\nUnderfitting:\n\n\nPoca diferencia entre Training y Validation Score, pero con ambos puntajes “relativamente bajos”.\n\n\n\n\n\n\n\n\n\nProper fitting o Sweet Spot:\n\n\nCorresponde al mejor puntaje en el set de Validación. Donde también la distancia entre Train y Test es poca."
   },
   {
     "objectID": "tics411/clase-9.html#complejidad-de-un-modelo",
@@ -315,7 +315,7 @@
     "href": "tics411/clase-9.html#bias-variance-tradeoff",
     "title": "TICS-411 Minería de Datos",
     "section": "Bias Variance Tradeoff",
-    "text": "Bias Variance Tradeoff\n\n\n\n\n\n\n\n\n\n\n\n\nLos puntos Azules serán puntos que usaremos para entrenar.\nLos puntos verdes serán puntos que usaremos para validar."
+    "text": "Bias Variance Tradeoff\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos puntos azules serán puntos que usaremos para entrenar.\nLos puntos verdes serán puntos que usaremos para validar."
   },
   {
     "objectID": "tics411/clase-9.html#bias-variance-tradeoff-bias",
@@ -339,11 +339,11 @@
     "text": "Complejidad de un Modelo\n\n\nOverfitting\n\n\n\n\n\n\n\n\n\n\n\n\nRegularización: Se refiere a una penalización para disminuir su complejidad.\n\nModelos más simples: Utilizar modelos con una Frontera de Decisión más simple.\nMás datos!!! Más datos más dificil aprender, por lo tanto, modelos complejos se ven más beneficiados de esto.\n\n\n\n\n\n\nUnderfitting\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuitar Regularización\nModelos más complejos\nMás variabilidad en los datos!!! Podría ser que los datos no permitan aprender patrones más complejos."
   },
   {
-    "objectID": "tics411/clase-9.html#evaluación",
-    "href": "tics411/clase-9.html#evaluación",
+    "objectID": "tics411/clase-9.html#cómo-generamos-sets-de-validación",
+    "href": "tics411/clase-9.html#cómo-generamos-sets-de-validación",
     "title": "TICS-411 Minería de Datos",
-    "section": "Evaluación",
-    "text": "Evaluación\n\nLa evaluación de modelos supervisados es fundamental. De no hacerlo de forma correcta podemos quedarnos con una idea muy equivocada del rendimiento del modelo.\n\n\n\n\n\n\n\nUn modelo con un rendimiento incorrecto puede entregar predicciones completamente inútiles.\n\n\n\n\nCross Validation (Validación Cruzada)\n\n\nSe debe evaluar el rendimiento de un modelo en un dataset diferente al que fue entrenado. Esta es la única manera en la que se puede medir el poder de generalización.\n\n\nGeneralización\n\n\nCorresponde a la habilidad de un modelo de adaptarse apropiadamente a datos no vistos previamente.\n\n\n\n\n\n\n\n\n\nPara esto se asume que todos los datos son i.i.d (independent and identically distributed). De no lograr esto, lograr buenos rendimientos es más difícil."
+    "section": "¿Cómo generamos sets de Validación?",
+    "text": "¿Cómo generamos sets de Validación?\n\nLa evaluación de modelos supervisados es fundamental. De no hacerlo de forma correcta podemos quedarnos con una idea muy equivocada del rendimiento del modelo.\n\n\nCross Validation (Validación Cruzada)\n\n\nSe debe evaluar el rendimiento de un modelo en un dataset diferente al que fue entrenado. Esta es la única manera en la que se puede medir el poder de generalización de un modelo.\n\n\nGeneralización\n\n\nCorresponde a la habilidad de un modelo de adaptarse apropiadamente a datos no vistos previamente.\n\n\n\n\n\n\n\n\n\nUtilizar una estrategia incorrecta de Validación puede llevar a problemas de generalización. La estrategia de Validación debe ser lo más parecida posible a cómo se utilizará el modelo en Producción.\n\n\n\n\n\n\n\n\n\nPara esto se asume que todos los datos son i.i.d (independent and identically distributed). De no lograr esto, lograr buenos rendimientos es más difícil."
   },
   {
     "objectID": "tics411/clase-9.html#validación-cruzada-holdout",
@@ -371,7 +371,7 @@
     "href": "tics411/clase-9.html#k-fold-cv",
     "title": "TICS-411 Minería de Datos",
     "section": "K-Fold CV",
-    "text": "K-Fold CV\n\n\n\n\n\n\n\nEl proceso de Holdout podría llevar a un proceso de overfitting del Test Set si el modelo no es lo suficientemente robusto.\nDefiniremos la robustez más adelante.\n\n\n\n\n\n\n\n\n\n\n\n\nEl K-Fold CV se aplica sólo al Train Set y la métrica final que se reporta utilizando el Test Set.\n\n\n\n\n\n\n\n\n\n\nFold\n\nEntenderemos Folds como divisiones que haremos a nuestro dataset. (En el ejemplo se divide el dataset en 5 Folds).\n\nSplit\n\nEntenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold como Validation Set y todos los Folds restantes como Train Set.\n\n\n\n\n\n\n\n\n\nLa métrica final se calculará como el promedio de las Métricas de Validación para cada Split.\nA veces la variabilidad (medido a través de la Desviación Estándar) también es usado como criterio para elegir el mejor modelo."
+    "text": "K-Fold CV\n\n\n\n\n\n\n\nEl proceso de Holdout podría llevar a un proceso de overfitting del Test Set si el modelo no es lo suficientemente robusto.\n\n\n\n\n\n\n\n\n\n\n\n\nEl K-Fold CV se aplica sólo al Train Set y la métrica final que se reporta utilizando el Test Set.\n\n\n\n\n\n\n\n\n\n\nFold\n\nEntenderemos Folds como divisiones que haremos a nuestro dataset. (En el ejemplo se divide el dataset en 5 Folds).\n\nSplit\n\nEntenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold como Validation Set y todos los Folds restantes como Train Set.\n\n\n\n\n\n\n\n\n\nLa métrica final se calculará como el promedio de las Métricas de Validación para cada Split.\nA veces la variabilidad (medido a través de la Desviación Estándar) también es usado como criterio para elegir el mejor modelo.\n\n\n\n\n\n\n\n\n\n\n\n\nEn la práctica se le llama incorrectamente Cross Validation al K-Fold."
   },
   {
     "objectID": "tics411/clase-9.html#bootstrap",

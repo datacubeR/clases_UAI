@@ -735,7 +735,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <p><strong><strong>Overfitting</strong>:</strong></p>
 </div>
 <div class="callout-content">
-<p>Gran diferencia entre Training y Validation Score.</p>
+<p>Gran diferencia entre <strong>Training</strong> y <strong>Validation</strong> Score.</p>
 </div>
 </div>
 </div>
@@ -748,7 +748,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <p><strong><strong>Underfitting</strong>:</strong></p>
 </div>
 <div class="callout-content">
-<p>Poca diferencia entre Training y Validation Score, pero con ambos puntajes <em>“relativamente bajos”</em>.</p>
+<p>Poca diferencia entre <strong>Training</strong> y <strong>Validation</strong> Score, pero con ambos puntajes <em>“relativamente bajos”</em>.</p>
 </div>
 </div>
 </div>
@@ -758,10 +758,10 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong><strong>Proper fitting</strong>:</strong></p>
+<p><strong><strong>Proper fitting</strong> o <strong>Sweet Spot</strong>:</strong></p>
 </div>
 <div class="callout-content">
-<p>Corresponde al mejor puntaje en el set de Validación. Donde también la distancia entre Train y Test es <strong><em>poca</em></strong>.</p>
+<p>Corresponde al <strong>mejor puntaje en el set de Validación</strong>. Donde también la distancia entre Train y Test es <strong><em>poca</em></strong>.</p>
 </div>
 </div>
 </div>
@@ -779,11 +779,19 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </section>
 <section id="bias-variance-tradeoff" class="slide level2">
 <h2>Bias Variance Tradeoff</h2>
+<div class="r-stack">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/dataset_bv.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-9/dataset_bv.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-9/data_pre-split.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-9/data_pre-split.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/dataset_bv.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-9/dataset_bv.png" class="fragment quarto-figure quarto-figure-center" style="width:80.0%" data-fragment-index="1"></a></p>
+</figure>
+</div>
+</div>
+<div class="fragment" data-fragment-index="1">
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -791,9 +799,10 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 <div class="callout-content">
 <ul>
-<li>Los puntos Azules serán puntos que usaremos para <strong>entrenar</strong>.</li>
+<li>Los puntos azules serán puntos que usaremos para <strong>entrenar</strong>.</li>
 <li>Los puntos verdes serán puntos que usaremos para <strong>validar</strong>.</li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -810,7 +819,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </dl>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/bias_pic.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-9/bias_pic.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-9/bias_pic.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-9/bias_pic.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 <div class="callout callout-caution callout-style-simple">
@@ -838,13 +847,13 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/train_error.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-9/train_error.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+<p><a href="img/clase-9/train_error.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-9/train_error.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/test_error.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-9/test_error.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+<p><a href="img/clase-9/test_error.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-9/test_error.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -864,10 +873,10 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <h2>Complejidad de un Modelo</h2>
 <div class="columns">
 <div class="column">
-<h3 id="overfitting-1">Overfitting</h3>
+<h5 id="overfitting-1">Overfitting</h5>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/overf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-9/overf.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-9/overf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-9/overf.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 <div class="fragment" data-fragment-index="1">
@@ -887,10 +896,10 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 </div>
 </div><div class="column">
-<h3 id="underfitting-1">Underfitting</h3>
+<h5 id="underfitting-1">Underfitting</h5>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/underf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-9/underf.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-9/underf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-9/underf.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 <div class="fragment" data-fragment-index="2">
@@ -911,27 +920,22 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 </div>
 </div>
+</section></section>
+<section>
+<section id="esquemas-de-validación" class="title-slide slide level1 center">
+<h1>Esquemas de Validación</h1>
+
 </section>
-<section id="evaluación" class="slide level2 smaller">
-<h2>Evaluación</h2>
+<section id="cómo-generamos-sets-de-validación" class="slide level2 smaller">
+<h2>¿Cómo generamos sets de Validación?</h2>
 <blockquote>
 <p>La evaluación de modelos supervisados es fundamental. De no hacerlo de forma correcta podemos quedarnos con una idea muy equivocada del rendimiento del modelo.</p>
 </blockquote>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Un modelo con un rendimiento incorrecto puede entregar predicciones completamente inútiles.</p>
-</div>
-</div>
-</div>
 <dl>
 <dt>Cross Validation (Validación Cruzada)</dt>
 <dd>
 <blockquote>
-<p>Se debe evaluar el rendimiento de un modelo en un <code>dataset diferente</code> al que fue entrenado. Esta es la única manera en la que se puede medir el poder de generalización.</p>
+<p>Se debe evaluar el rendimiento de un modelo en un <code>dataset diferente</code> al que fue entrenado. Esta es la <code>única manera</code> en la que se puede medir el poder de <code>generalización</code> de un modelo.</p>
 </blockquote>
 </dd>
 <dt>Generalización</dt>
@@ -941,6 +945,16 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </blockquote>
 </dd>
 </dl>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong><em>Utilizar una estrategia incorrecta de Validación puede llevar a problemas de generalización.</em></strong> La estrategia de Validación <strong>debe</strong> ser lo más parecida posible a cómo se utilizará el modelo en Producción.</p>
+</div>
+</div>
+</div>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -951,11 +965,6 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="esquemas-de-validación" class="title-slide slide level1 center">
-<h1>Esquemas de Validación</h1>
-
 </section>
 <section id="validación-cruzada-holdout" class="slide level2 smaller">
 <h2>Validación Cruzada: Holdout</h2>
@@ -966,19 +975,19 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/dataset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-9/dataset.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></a></p>
+<p><a href="img/clase-9/dataset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-9/dataset.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:30%;">
 <div class="r-stack">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="1"></a></p>
+<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="1"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/split.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-9/split.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="2"></a></p>
+<p><a href="img/clase-9/split.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-9/split.png" class="fragment quarto-figure quarto-figure-center" style="width:85.0%" data-fragment-index="2"></a></p>
 </figure>
 </div>
 </div>
@@ -1050,17 +1059,17 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="r-stack">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
+<p><a href="img/clase-9/trainset.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-9/trainset.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/train-val.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-9/train-val.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
+<p><a href="img/clase-9/train-val.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-9/train-val.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-9/full-holdout.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
+<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-9/full-holdout.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
 </figure>
 </div>
 </div>
@@ -1102,7 +1111,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-9/full-holdout.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/full-holdout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-9/full-holdout.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column fragment" style="width:70%;">
@@ -1144,7 +1153,6 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <div class="callout-content">
 <ul>
 <li>El proceso de Holdout podría llevar a un proceso de overfitting del Test Set si el modelo no es lo suficientemente robusto.</li>
-<li>Definiremos la robustez más adelante.</li>
 </ul>
 </div>
 </div>
@@ -1163,7 +1171,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/K-Fold.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-9/K-Fold.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/K-Fold.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-9/K-Fold.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:60%;">
@@ -1192,6 +1200,16 @@ Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold c
 </div>
 </div>
 </div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En la práctica se le llama incorrectamente Cross Validation al K-Fold.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="bootstrap" class="slide level2 smaller">
 <h2>Bootstrap</h2>
@@ -1200,7 +1218,7 @@ Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold c
 <div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/data_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-9/data_boot.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/data_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-9/data_boot.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-tip callout-style-simple">
@@ -1218,7 +1236,7 @@ Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold c
 </div><div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/iter_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-9/iter_boot.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-9/iter_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-9/iter_boot.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -1236,7 +1254,7 @@ Es la variante más utilizada de K-Fold el cual genera los folds considerando qu
 Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, el <code>Validation Set</code> tiene sólo una observación.
 </dd>
 </dl>
-<div style="font-size: 130%;">
+<div style="font-size: 110%;">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1264,7 +1282,7 @@ Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, 
 </div>
 </div>
 </section>
-<section id="baseline" class="slide level2">
+<section id="baseline" class="slide level2 smaller">
 <h2>Baseline</h2>
 <blockquote>
 <p>Un modelo <code>Baseline</code> es un modelo simple, normalmente sin aprendizaje asociado o con poder de aprendizaje más limitado, el cuál será utilizado como medida de referencia para ver si algoritmos más complejos efectivamente están aprendiendo.</p>
@@ -1729,7 +1747,7 @@ Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, 
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
