@@ -609,25 +609,39 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="maximum-likelihood-estimation" class="slide level2">
 <h2>Maximum Likelihood Estimation</h2>
-<p><span class="math display">\[\mathcal{L}(\theta) = \prod_{i=1}^n P(y^{(i)} | x^{(i)}, \theta)\]</span> <span class="math display">\[l(\theta) = log (\mathcal{L(\theta)}) = \sum_{i=1}^n y^{(i)} \cdot log(h_\theta(x^{(i)})) + (1-y^{(i)})\cdot log(1-h_\theta(x^{(i)}))\]</span></p>
+<p><span class="math display">\[\mathcal{L}(\theta) = \prod_{i=1}^n P(y^{(i)} | x^{(i)}, \theta)\]</span></p>
+<p><span class="math display">\[ \underset{\theta}{argmin} \ -l(\theta)\]</span> <span class="math display">\[l(\theta) = log (\mathcal{L(\theta)}) = \sum_{i=1}^n y^{(i)} \cdot log(h_\theta(x^{(i)})) + (1-y^{(i)})\cdot log(1-h_\theta(x^{(i)}))\]</span></p>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Dado que no existe una solución analítica para maximizar esta ecuación, es que se busca minimizar el valor negativo, lo cual es equivalente.</p>
 <p>Esta ecuación se conoce como <strong>Entropía Cruzada</strong> o como <strong>Negative Log Loss (NLL)</strong> y tiene la gracia de que es una curva convexa lo que <strong><em>garantiza un valor único de los parámetros <span class="math inline">\(\theta\)</span></em></strong>.</p>
 </div>
 </div>
 </div>
+</section>
+<section id="cálculo-de-coeficientes" class="slide level2">
+<h2>Cálculo de Coeficientes</h2>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>La técnica más famosa para minimizar este tipo de problemas se conoce como <code>Stochastic Gradient Descent</code>.</p>
+<p>La técnica más famosa para minimizar este tipo de problemas se conoce como <code>Stochastic Gradient Descent</code>. Lo que genera la siguiente solución:</p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[\theta_j \leftarrow \theta_j - \alpha \frac{1}{m}\sum_{i=1}\left(h_\theta(x^{(i)})-y^{(i)}\right)x_j^{(i)}\]</span></p>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>A pesar de lo complicado que se ve la ecuación, implementarla en código es bastante sencillo.</p>
 </div>
 </div>
 </div>
@@ -638,31 +652,6 @@ Alfonso Tobar-Arancibia
 <figure>
 <p><a href="img/clase-10/3d-sigmoid.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-10/3d-sigmoid.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
-</div>
-</section>
-<section id="regresión-logística" class="slide level2">
-<h2>Regresión Logística:</h2>
-<h3 id="training-time">Training Time</h3>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Este modelo se considera un modelo parámetrico, ya que los <strong><em>parámetros <span class="math inline">\(\theta\)</span></em></strong> aprenderán la contribución de cada atributo/variable a la probabilidad predicha por el modelo.</p>
-</div>
-</div>
-</div>
-<p><span class="math display">\[ \underset{\theta}{\operatorname{argmin}} -l(\theta)\]</span></p>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En este paso el modelo resuelve el problema de <strong>MLE</strong> y encuentra los parámetros <span class="math inline">\(\theta\)</span>.</p>
-</div>
-</div>
 </div>
 </section>
 <section id="inference-time" class="slide level2 smaller">
@@ -802,8 +791,8 @@ Alfonso Tobar-Arancibia
 </figure>
 </div>
 </section>
-<section id="saionara" class="title-slide slide level1 center">
-<h1>Saionara</h1>
+<section id="мы-сделали" class="title-slide slide level1 center">
+<h1>мы сделали</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -1184,7 +1173,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false,"closeEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

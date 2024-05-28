@@ -398,7 +398,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 5: DBSCAN</p>
+  <p class="subtitle">Clase 11: Árboles de Decisión</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -412,531 +412,803 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section>
-<section id="clustering-por-densidad" class="title-slide slide level1 center">
-<h1>Clustering por Densidad</h1>
-
-</section>
-<section id="clustering-densidad" class="slide level2">
-<h2>Clustering: Densidad</h2>
+<section id="árboles-de-decisión" class="slide level2">
+<h2>Árboles de Decisión</h2>
 <blockquote>
-<p>Se basan en la idea de continuar el crecimiento de un cluster a medida que la densidad (número de objetos o puntos) en el vecindario sobrepase algún umbral.</p>
+<p>Técnica de clasificación supervisada que genera una decisión basada en <code>árboles de decisión</code> para clasificar instancias no conocidas.</p>
 </blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-3/densidad.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-3/densidad.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-11/dt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-11/dt.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En nuestro caso utilizaremos <strong>DBSCAN</strong> (Density-Based Spatial Clustering Applications with Noise).</p>
-</div>
-</div>
-</div>
 </section>
-<section id="dbscan-definiciones" class="slide level2 smaller">
-<h2>DBSCAN: Definiciones</h2>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Hiperparámetros del Modelo</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><code>eps</code>: Radio de análisis</li>
-<li><code>MinPts</code>: Corresponde al mínimo de puntos necesarios en un Radio <code>eps</code>.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<dl>
-<dt>Densidad</dt>
-<dd>
+<section id="árboles-de-decisión-ejemplo" class="slide level2 smaller">
+<h2>Árboles de Decisión: Ejemplo</h2>
 <blockquote>
-<p>Densidad es el número de puntos dentro del radio <code>eps</code>.</p>
+<p>Visualmente, un árbol de decisión segmenta el espacio separando los datos en subgrupos.</p>
 </blockquote>
-</dd>
-<dt>Core Point/Punto Central</dt>
-<dd>
-<blockquote>
-<p>Un punto central/core es aquel que tiene al menos <code>MinPts</code> puntos dentro de la esfera definida por <code>eps</code> (se incluye él mismo).</p>
-</blockquote>
-</dd>
-</dl>
-</div><div class="column">
-<dl>
-<dt>Border Point/Punto Borde</dt>
-<dd>
-<blockquote>
-<p>Un punto de borde tiene menos puntos que <code>MinPts</code> del <code>eps</code>, pero está dentro de la esfera de un punto central.</p>
-</blockquote>
-</dd>
-<dt>Noise Point/Punto Ruido</dt>
-<dd>
-<blockquote>
-<p>Un punto de ruido es todo aquel que no es punto central ni de borde.</p>
-</blockquote>
-</dd>
-</dl>
-</div>
-</div>
-</section>
-<section id="dbscan-algoritmo-categorización-de-puntos" class="slide level2 smaller">
-<h2>DBSCAN: Algoritmo categorización de puntos</h2>
-<blockquote>
-<p>Primeramente se aplica un algoritmo para categorizar cada punto de acuerdo a las definiciones anteriores.</p>
-</blockquote>
-<ul>
-<li>Para cada punto en el espacio:
-<ul>
-<li>Calcular su densidad en EPS y aplicar el siguiente algoritmo:</li>
-</ul></li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/dbscan_algo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-5/dbscan_algo.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
-</section>
-<section id="ejemplo-iteración-1" class="slide level2 smaller">
-<h2>Ejemplo: Iteración 1</h2>
-<blockquote>
-<p>Supongamos un ejemplo con <span class="math inline">\(MinPts=4\)</span>.</p>
-</blockquote>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/ejemplo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-5/ejemplo.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/ejemplo_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-5/ejemplo_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/ejemplo_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-5/ejemplo_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/iter_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-5/iter_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Este punto corresponde a un <strong>Core Point</strong>.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-iteración-2" class="slide level2">
-<h2>Ejemplo: Iteración 2</h2>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/border_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-5/border_1.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/border_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-5/border_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/border_algo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-5/border_algo.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="1">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Este punto corresponde a un <strong>Border Point</strong>.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-iteración-3" class="slide level2">
-<h2>Ejemplo: Iteración 3</h2>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/noise_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-5/noise_1.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/noise_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-5/noise_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/noise_algo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-5/noise_algo.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="1">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Este punto corresponde a un <strong>Noise Point</strong>.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-iteración-final" class="slide level2">
-<h2>Ejemplo: Iteración Final</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/iter_final.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-5/iter_final.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Ahora, <strong>¿Cómo definimos que partes son clusters o no?</strong></p>
-</div>
-</div>
-</div>
-</section>
-<section id="algoritmo-de-clustering" class="slide level2">
-<h2>Algoritmo de Clustering</h2>
-<p>Se aplica el siguiente algoritmo para calcular clusterings.</p>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Antes de aplicar se desechan los Noise Points ya que no serán considerados. <strong>(Veremos luego que ocurre con estos puntos)</strong>.</p>
-</div>
-</div>
-</div>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|2|3-5|6|7-8|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>label<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb1-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb1-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb1-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb1-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb1-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb1-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="iteración-1" class="slide level2">
-<h2>Iteración 1</h2>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c1_0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-5/c1_0.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-5/c1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c1_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-5/c1_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="r-stack">
-<div class="fragment fade-in-then-out" data-fragment-index="1">
-<div class="sourceCode" id="cb2" data-code-line-numbers="2-5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>label<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb2-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb2-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb2-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb2-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb2-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb2-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb2-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="fragment" data-fragment-index="2">
-<div class="sourceCode" id="cb3" data-code-line-numbers="6-8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>label<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb3-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb3-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb3-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb3-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb3-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb3-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb3-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Todos los puntos cercanos a un Core reciben la misma etiqueta.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="iteración-2" class="slide level2">
-<h2>Iteración 2</h2>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c2_0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-5/c2_0.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-5/c2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c2_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-5/c2_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="r-stack">
-<div class="fragment fade-in-then-out" data-fragment-index="1">
-<div class="sourceCode" id="cb4" data-code-line-numbers="2-5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>label<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb4-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb4-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb4-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb4-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb4-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb4-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb4-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="fragment" data-fragment-index="2">
-<div class="sourceCode" id="cb5" data-code-line-numbers="6-8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co">## label ya está en 1</span></span>
-<span id="cb5-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb5-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb5-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb5-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb5-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb5-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb5-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En este caso obtuvimos 2 clusters, e indirectamente un 3er de puntos ruido.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="dbscan" class="slide level2">
-<h2>DBSCAN</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/dbscan.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-5/dbscan.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="fragment">
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong>¿Sería posible replicar un proceso de Clustering similar utilizando K-Means?</strong> <strong>¿Por qué?</strong></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="dbscan-detalles-técnicos" class="slide level2">
-<h2>DBSCAN: Detalles Técnicos</h2>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Fortalezas</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Resistente al ruido.</li>
-<li>Puede lidiar con clusters de diferentes formas y tamaños.</li>
-<li>No es necesario especificar cuántos clusters encontrar.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Debilidades</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Algoritmo de alta complejidad computacional que puede llegar <span class="math inline">\(O(n^2)\)</span> en el peor caso.</li>
-<li>Se ve afectado por densidad de los datos y por datos con una alta dimensionalidad.</li>
-<li>Su óptimo resultado depende específicamente de sus Hiperparámetros.</li>
-<li>No puede generalizar en datos no usados en entrenamiento.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="cómo-encontrar-los-hiperparámetros" class="slide level2">
-<h2>¿Cómo encontrar los Hiperparámetros?</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>minPts</strong></p>
-</div>
-<div class="callout-content">
-<p>Para datasets multidimensionales grandes, la regla es:</p>
-<p><span class="math display">\[minPts \ge dim + 1\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Otras recomendaciones:</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Para dos dimensiones: <span class="math inline">\(minPts=4\)</span> (Ester et al., 1996)</li>
-<li>Para más de 2 dimensiones: <span class="math inline">\(minPts = 2 \cdot dim\)</span> (Sander et al., 1998)</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:30%;">
-<p><br> <br> <br></p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/hp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-5/hp.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="cómo-encontrar-los-hiperparámetros-1" class="slide level2 smaller">
-<h2>¿Cómo encontrar los Hiperparámetros?</h2>
-<blockquote>
-<p>Para encontrar EPS se suele utilizar el método de Vecinos más cercanos.</p>
-</blockquote>
-<div class="columns">
-<div class="column">
-<h4 id="idea">Idea</h4>
-<ul>
-<li><p>La distancia de los puntos dentro de un cluster a su k-ésimo vecino deberían ser similares.</p></li>
-<li><p>Luego, los puntos atípicos (o ruidosos) tienen el k-ésimo vecino a una mayor distancia.</p></li>
-</ul>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>💡 Podemos plotear la distancia ordenada de cada punto a su k-ésimo vecino y seleccionar un <code>eps</code> cercano al crecimiento exponencial (codo).</p>
+<p>Esto permite la generacion de fronteras de decisión sumamente complejas.</p>
 </div>
 </div>
+</div>
+<p>Supongamos el siguiente ejemplo:</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/dt_problem.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-11/dt_problem.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column fragment" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/dt_solution.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-11/dt_solution.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="árboles-de-decisión-frontera-de-decisión" class="slide level2">
+<h2>Árboles de Decisión: Frontera de Decisión</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/dt_solution.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-11/dt_solution.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/dt_viz.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-11/dt_viz.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="árboles-de-decisión-inferencia" class="slide level2">
+<h2>Árboles de Decisión: Inferencia</h2>
+<p>Una vez construido el <code>árbol de decisión</code> basta con recorrerlo para poder generar la predicción para una instancia dada:</p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/dt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-11/dt.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/dt_clf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-11/dt_clf.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="características-de-árboles" class="slide level2">
+<h2>Características de Árboles</h2>
+<ul>
+<li>Pueden trabajar con valores discretos o continuos. Además pueden ser usados como modelos de <code>Clasificación</code> o <code>Regresíon</code>.</li>
+<li>Una vez seleccionado un atributo no es posible devolverse (backtracking).</li>
+<li>Debido al poder de un árbol de Decisión la mayoría de las veces tienden al Overfitting. Una forma de evitar esto es usar técnicas de <code>Pruning</code>.</li>
+<li>Es preferible usar árboles cortos (Principio de Parsimonia o <code>Occam's razor</code>).</li>
+</ul>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El principio de Parsimonia recomienda encontrar soluciones a problemas utilizando la menor cantidad de elementos/parámetros.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="tipos-de-árboles-de-decisión" class="slide level2 smaller">
+<h2>Tipos de Árboles de Decisión</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/binary_trees.png" class="lightbox" data-glightbox="description: .lightbox-desc-8" data-gallery="quarto-lightbox-gallery-8" title="Binary Split"><img data-src="img/clase-11/binary_trees.png" class="quarto-figure quarto-figure-center" alt="Binary Split"></a></p>
+<figcaption><strong>Binary Split</strong></figcaption>
+</figure>
 </div>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-5/codo_dbscan.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-5/codo_dbscan.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-11/multiple_trees.png" class="lightbox" data-glightbox="description: .lightbox-desc-9" data-gallery="quarto-lightbox-gallery-9" title="Multi-way Split"><img data-src="img/clase-11/multiple_trees.png" class="quarto-figure quarto-figure-center" alt="Multi-way Split"></a></p>
+<figcaption><strong>Multi-way Split</strong></figcaption>
 </figure>
+</div>
+</div>
+</div>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<ul>
+<li>Hunt’s Algorithm <span class="math inline">\(\implies\)</span> Primer Método.</li>
+<li>ID3 <span class="math inline">\(\implies\)</span> Sólo utiliza variables categóricas.</li>
+<li>C4.5 <span class="math inline">\(\implies\)</span> incluye variables continuas.</li>
+<li>C5.0 <span class="math inline">\(\implies\)</span> Permite separación en Múltiples Splits (No ha sido implementado en Sklearn).</li>
+<li>CART (Classification and Regression Trees) <span class="math inline">\(\implies\)</span> Permite que el output sea continuo pero solo utilizando Splits binarios.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Los CARTs son por lejos los árboles más utilizados en las librerías más famosas y potentes: <code>Scikit-Learn</code>, <code>XGboost</code>, <code>LightGBM</code>, <code>Catboost</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="creación-de-un-árbol-de-decisión" class="slide level2">
+<h2>Creación de un Árbol de Decisión</h2>
+<dl>
+<dt>Pureza</dt>
+<dd>
+Corresponde a la probabilidad de no sacar dos registros de un Nodo que pertenezcan a la misma clase.
+</dd>
+</dl>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El árbol de Decisión busca crear Nodos los más puro posible. Para ello puede utilizar las siguentes métricas:</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<h5 id="índice-gini">Índice Gini</h5>
+<p><span class="math display">\[Gini(X) = 1 - \sum_{x_i}p(x_i)^2\]</span></p>
+</div><div class="column">
+<h5 id="entropía">Entropía</h5>
+<p><span class="math display">\[H(X) = -\sum_{x_i}p(x_i)log_2p(x_i)\]</span></p>
+</div>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>A mayor valor, mayor nivel de impureza. 0 implica Nodo completamente puro.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-ejemplo" class="slide level2 smaller">
+<h2>Árbol de Decisión: Ejemplo</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/data_avengers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-11/data_avengers.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Cálculo de Impureza en Hoja</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(leaf)} = 1 - p(Yes)^2 - p(No)^2\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Cálculo de Impureza en Split</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[ Gini_{(split)} = \frac{n_{(yes)}}{n} Gini_{(yes)} + \frac{n_{(no)}}{n} Gini_{(no)}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-definición-de-nodo-raíz" class="slide level2 smaller">
+<h2>Árbol de Decisión: Definición de Nodo Raíz</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/data_avengers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-11/data_avengers.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/popcorn_root.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-11/popcorn_root.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - (\frac{1}{4})^2 - (\frac{3}{4})^2 = 0.375\]</span> <span class="math display">\[Gini_{(no)} = 1 - (\frac{2}{3})^2 - (\frac{1}{3})^2 = 0.444\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = \frac{4}{7}\cdot 0.375 + \frac{3}{7} \cdot 0.444 = 0.405\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-raíz-popcorn" class="slide level2 smaller">
+<h2>Árbol de Decisión: Raíz Popcorn</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/data_avengers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-11/data_avengers.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/soda_root.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-11/soda_root.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{1}{4}\right)^2 - \left(\frac{3}{4}\right)^2 = 0.375\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = \frac{4}{7}\cdot 0.375 = 0.214\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-raíz-soda" class="slide level2 smaller">
+<h2>Árbol de Decisión: Raíz Soda</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/data_avengers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-11/data_avengers.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/soda_root.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-11/soda_root.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{1}{4}\right)^2 - \left(\frac{3}{4}\right)^2 = 0.375\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = \frac{4}{7}\cdot 0.375 = 0.214\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-raíz-age" class="slide level2 smaller">
+<h2>Árbol de Decisión: Raíz Age</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/cont_splits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-11/cont_splits.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Los cortes de posibles Splits se calculan como el <code>promedio de los valores adyacentes</code> una vez que han sidos <code>ordenados de mayor a menor</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/age_9.5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-11/age_9.5.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{1}{1}\right)^2 - \left(\frac{0}{1}\right)^2 = 0\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{3}{6}\right)^2 - \left(\frac{3}{6}\right)^2 = 0.5\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = \frac{6}{7}\cdot 0.5 = 0.429\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-raíz-age-1" class="slide level2 smaller">
+<h2>Árbol de Decisión: Raíz Age</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/cont_splits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-11/cont_splits.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Los cortes de posibles Splits se calculan como el <code>promedio de los valores adyacentes</code> una vez que han sidos <code>ordenados de mayor a menor</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/age_15.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-11/age_15.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{2}{2}\right)^2 - \left(\frac{0}{2}\right)^2 = 0\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{3}{5}\right)^2 - \left(\frac{2}{5}\right)^2 = 0.48\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = \frac{5}{7}\cdot 0.48 = 0.343\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-raíz-age-2" class="slide level2 smaller">
+<h2>Árbol de Decisión: Raíz Age</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/cont_splits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-11/cont_splits.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Los cortes de posibles Splits se calculan como el <code>promedio de los valores adyacentes</code> una vez que han sidos <code>ordenados de mayor a menor</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/age_26.5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-11/age_26.5.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{1}{3}\right)^2 - \left(\frac{2}{3}\right)^2 = 0.444\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{2}{4}\right)^2 - \left(\frac{2}{4}\right)^2 = 0.5\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = \frac{3}{7}\cdot 0.444 + \frac{4}{7} \cdot 0.5 = 0.476\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-raíz-age-3" class="slide level2 smaller">
+<h2>Árbol de Decisión: Raíz Age</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/cont_splits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-11/cont_splits.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Los cortes de posibles Splits se calculan como el <code>promedio de los valores adyacentes</code> una vez que han sidos <code>ordenados de mayor a menor</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/age_36.5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-11/age_36.5.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{2}{4}\right)^2 - \left(\frac{2}{4}\right)^2 = 0.5\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{1}{3}\right)^2 - \left(\frac{2}{3}\right)^2 = 0.444\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = \frac{4}{7}\cdot 0.5 + \frac{3}{7} \cdot 0.444 = 0.476\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-raíz-age-4" class="slide level2 smaller">
+<h2>Árbol de Decisión: Raíz Age</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/cont_splits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-11/cont_splits.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Los cortes de posibles Splits se calculan como el <code>promedio de los valores adyacentes</code> una vez que han sidos <code>ordenados de mayor a menor</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/age_44.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-11/age_44.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{3}{2}\right)^2 - \left(\frac{2}{5}\right)^2 = 0.48\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{0}{2}\right)^2 - \left(\frac{2}{2}\right)^2 = 0\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = \frac{5}{7}\cdot 0.48 = 0.343\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-raíz-age-5" class="slide level2 smaller">
+<h2>Árbol de Decisión: Raíz Age</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/cont_splits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-11/cont_splits.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Los cortes de posibles Splits se calculan como el <code>promedio de los valores adyacentes</code> una vez que han sidos <code>ordenados de mayor a menor</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/age_66.5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-11/age_66.5.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{3}{6}\right)^2 - \left(\frac{3}{6}\right)^2 = 0.5\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{0}{1}\right)^2 - \left(\frac{1}{1}\right)^2 = 0\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = \frac{6}{7}\cdot 0.5 = 0.429\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="qué-split-elegiremos" class="slide level2 smaller">
+<h2>¿Qué Split elegiremos?</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/gini_iter1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-11/gini_iter1.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:70%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/soda_root.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-11/soda_root.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/split_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="img/clase-11/split_2.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Escogeremos el Split más pequeño que representa el que genera más pureza.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El nodo que no le gusta la Soda quedó completamente puro. Por lo tanto, no puede seguir dividiéndose. Seguiremos trabajando sólo con aquellos <code>que sí les gusta la Soda</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-2do-nivel" class="slide level2 smaller">
+<h2>Árbol de Decisión: 2do Nivel</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/split_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32"><img data-src="img/clase-11/split_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/popcorn_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-33"><img data-src="img/clase-11/popcorn_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{1}{2}\right)^2 - \left(\frac{1}{2}\right)^2 = 0.5\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = \frac{2}{4}\cdot 0.5 = 0.25\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-2do-nivel-1" class="slide level2 smaller">
+<h2>Árbol de Decisión: 2do Nivel</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/split_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-34"><img data-src="img/clase-11/split_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/age_12.5_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-35"><img data-src="img/clase-11/age_12.5_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{0}{1}\right)^2 - \left(\frac{1}{1}\right)^2 = 0\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{3}{3}\right)^2 - \left(\frac{0}{3}\right)^2 = 0\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = 0\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-2do-nivel-2" class="slide level2 smaller">
+<h2>Árbol de Decisión: 2do Nivel</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/split_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-36"><img data-src="img/clase-11/split_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/age_26.5_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-37"><img data-src="img/clase-11/age_26.5_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{1}{2}\right)^2 - \left(\frac{1}{2}\right)^2 = 0.5\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{2}{2}\right)^2 - \left(\frac{0}{2}\right)^2 = 0\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = \frac{2}{4} \cdot 0.5 = 0.25\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión-2do-nivel-3" class="slide level2 smaller">
+<h2>Árbol de Decisión: 2do Nivel</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/split_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-38"><img data-src="img/clase-11/split_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/age_36.5_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-39"><img data-src="img/clase-11/age_36.5_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{2}{3}\right)^2 - \left(\frac{1}{3}\right)^2 = 0.444\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{1}{1}\right)^2 - \left(\frac{0}{1}\right)^2 = 0\]</span></p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[Gini_{(split)} = \frac{3}{4} \cdot 0.444 = 0.333\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="árbol-de-decisión" class="slide level2 smaller">
+<h2>Árbol de Decisión</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/gini_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40"><img data-src="img/clase-11/gini_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column fragment" data-fragment-index="1" style="width:70%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/arbol_final.png" class="lightbox" data-gallery="quarto-lightbox-gallery-41"><img data-src="img/clase-11/arbol_final.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="fragment" data-fragment-index="2">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong><em>¿Cuál sería la predicción?</em></strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/pred.png" class="lightbox" data-gallery="quarto-lightbox-gallery-42"><img data-src="img/clase-11/pred.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="crecimiento-de-un-árbol" class="slide level2">
+<h2>Crecimiento de un Árbol</h2>
+<ul>
+<li>Un árbol sólo parará de crecer si:
+<ul>
+<li>Todas las muestras de un nodo pertenecen a la misma clase.</li>
+<li>No hay más variables a separar.</li>
+<li>No hay más puntos a separar.</li>
+</ul></li>
+</ul>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Esto normalmente termina en <code>Overfitting</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Para solucionar esto se aplica regularización. En el caso de Árboles esto se denomina <code>prunning</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="pruning" class="slide level2">
+<h2>Pruning</h2>
+<h3 id="prepruning-defineevita-que-el-árbol-crezca-hasta">Prepruning: Define/Evita que el árbol crezca hasta:</h3>
+<ul>
+<li>Un cierto nivel o número de hojas.</li>
+<li>Aplicar un test estadístico (normalmente un proceso muy costoso).</li>
+<li>Usar medidas de complejidad para penalizar árboles de gran tamaño.</li>
+</ul>
+<h3 id="postpruning-decide-eliminar-nodos-luego-de-que-el-árbol-crezca.">Postpruning: Decide eliminar nodos, luego de que el árbol crezca.</h3>
+<ul>
+<li>Usar un parámetro de Costo de Impureza.</li>
+</ul>
+</section>
+<section id="hiperparámetros" class="slide level2">
+<h2>Hiperparámetros</h2>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong>criterion</strong>: Elegir bajo qué criterio se mide la impureza.</li>
+<li><strong>max_depth</strong>: El nivel es la altura que tendrá el árbol. Niveles más bajos generan árboles más simples.</li>
+<li><strong>min_samples_split</strong>: Número de instancias necesarias para generar un split. Un mayor número o proporción generará árboles más simples.</li>
+<li><strong>min_samples_leaf</strong>: Número mínimo de instancias necesarias para que un nodo sea hoja. Un número o proporción más alta generará árboles más simples.</li>
+<li><strong>ccp_alpha</strong>: Está asociado a la pureza total del árbol. Para más información ver <a href="https://scikit-learn.org/stable/auto_examples/tree/plot_cost_complexity_pruning.html#sphx-glr-auto-examples-tree-plot-cost-complexity-pruning-py">acá</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong><em>¿Cómo se ve la complejidad/simplicidad en un árbol de Decisión?</em></strong></p>
 </div>
 </div>
 </div>
 </section>
 <section id="implementación-en-scikit-learn" class="slide level2">
 <h2>Implementación en Scikit-Learn</h2>
-<div class="sourceCode" id="cb6" data-code-line-numbers="|1|3|5-6|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
-<span id="cb6-2"><a></a></span>
-<span id="cb6-3"><a></a>dbs <span class="op">=</span> DBSCAN(min_samples <span class="op">=</span> <span class="dv">5</span>, eps <span class="op">=</span> <span class="fl">0.5</span>, metric <span class="op">=</span> <span class="st">"euclidean"</span>)</span>
-<span id="cb6-4"><a></a></span>
-<span id="cb6-5"><a></a><span class="co">## Se entrena y se genera la predicción</span></span>
-<span id="cb6-6"><a></a>dbs.fit_predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="columns" style="font-size: 70%;">
+<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3-5|6|7-9|11-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier, plot_tree</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a>dt <span class="op">=</span> DecisionTreeClassifier(criterion<span class="op">=</span><span class="st">"gini"</span>, max_depth<span class="op">=</span><span class="va">None</span>, min_sample_split<span class="op">=</span><span class="dv">2</span>, </span>
+<span id="cb1-4"><a></a>                            min_samples_leaf<span class="op">=</span><span class="dv">1</span>,min_impurity_decrease<span class="op">=</span><span class="dv">0</span>, </span>
+<span id="cb1-5"><a></a>                            ccp_alpha<span class="op">=</span><span class="dv">0</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb1-6"><a></a>dt.fit(X_train, y_train)</span>
+<span id="cb1-7"><a></a></span>
+<span id="cb1-8"><a></a>y_pred <span class="op">=</span> dt.predict(X_test)</span>
+<span id="cb1-9"><a></a>y_proba <span class="op">=</span> dt.predict_proba(X_test)</span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a><span class="co">## Permite Visualizar el Árbol de </span></span>
+<span id="cb1-12"><a></a>plt_tree(dt, filled <span class="op">=</span> <span class="va">True</span>, impurity<span class="op">=</span><span class="va">True</span>, node_ids <span class="op">=</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div style="font-size: 60%;">
 <ul>
-<li><p><strong>min_samples</strong>: Corresponde a minPts. Por defecto 5.</p></li>
-<li><p><strong>eps</strong>: Corresponde al radio de la esfera en la que se buscan los puntos cercanos. Por defecto 0.5.</p></li>
-<li><p><strong>metric</strong>: Corresponde a la distancia utilizada para medir la distancia. Permite todas las distancias mencionadas <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise_distances.html#sklearn.metrics.pairwise_distances">acá</a>.</p></li>
-<li><p><code>.fit_predict()</code>: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento. Adicionalmente los puntos ruidosos se etiquetarán como -1.</p></li>
+<li><strong>criterion</strong>: Puede ser gini o entropía. Por defecto <code>"gini"</code>.</li>
+<li><strong>max_depth</strong>: Número de niveles que se permita que crezca el nivel, por defecto <code>None</code>, significa todos los que pueda.</li>
+<li><strong>min_samples_split</strong>: El número mínimo de elementos dentro de un nodo para permitir el split. Por defecto 2.</li>
+<li><strong>min_samples_leaf</strong>: El número mínimo de elementos para que un nodo pueda ser considerado hoja. Por defecto 1.</li>
+<li><strong>min_impurity_decreased</strong>: Decrecimiento mínimo de la impureza. Si no se cumple, no hay Split. Por defecto 0.</li>
+<li><strong>ccp_alpha</strong>: Parámetro de Post-Pruning. Valores más altos genera la poda de más nodos.</li>
 </ul>
 </div>
-<p>👀 Veamos un ejemplo.</p>
-</section></section>
-<section id="its-over" class="title-slide slide level1 center">
-<h1>It’s over!!</h1>
+</section>
+<section id="لقد-إنتهينا" class="title-slide slide level1 center">
+<h1>لقد إنتهينا</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -949,6 +1221,10 @@ Alfonso Tobar-Arancibia
 <div class="footer footer-default">
 
 </div>
+</div>
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-8"><strong>Binary Split</strong></span>
+<span class="glightbox-desc lightbox-desc-9"><strong>Multi-way Split</strong></span>
 </div>
 </section>
     </div>
@@ -978,7 +1254,7 @@ Alfonso Tobar-Arancibia
       Reveal.initialize({
 'controlsAuto': false,
 'previewLinksAuto': false,
-'pdfSeparateFragments': false,
+'pdfSeparateFragments': true,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
@@ -1317,7 +1593,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
