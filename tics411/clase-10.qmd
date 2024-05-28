@@ -23,7 +23,6 @@ format:
     pdf-separate-fragments: true
 ---
 
-
 ## Intuición
 
 Supongamos el siguiente dataset:
@@ -127,35 +126,32 @@ Para encontrar los parámetros $\theta$ podemos utilizar una técnica llamada **
 ## Maximum Likelihood Estimation
 
 $$\mathcal{L}(\theta) = \prod_{i=1}^n P(y^{(i)} | x^{(i)}, \theta)$$
+
+
+$$ \underset{\theta}{argmin} \ -l(\theta)$$
 $$l(\theta) = log (\mathcal{L(\theta)}) = \sum_{i=1}^n y^{(i)} \cdot log(h_\theta(x^{(i)})) + (1-y^{(i)})\cdot log(1-h_\theta(x^{(i)}))$$
 
 ::: {.callout-tip}
-Dado que no existe una solución analítica para maximizar esta ecuación, es que se busca minimizar el valor negativo, lo cual es equivalente.
-
 Esta ecuación se conoce como **Entropía Cruzada** o como **Negative Log Loss (NLL)** y tiene la gracia de que es una curva convexa lo que ***garantiza un valor único de los parámetros $\theta$***. 
 :::
 
+## Cálculo de Coeficientes
+
 ::: {.callout-important}
-La técnica más famosa para minimizar este tipo de problemas se conoce como `Stochastic Gradient Descent`.
+La técnica más famosa para minimizar este tipo de problemas se conoce como `Stochastic Gradient Descent`. Lo que genera la siguiente solución:
 :::
+
+$$\theta_j \leftarrow \theta_j - \alpha \frac{1}{m}\sum_{i=1}\left(h_\theta(x^{(i)})-y^{(i)}\right)x_j^{(i)}$$
+
+::: {.callout-warning}
+A pesar de lo complicado que se ve la ecuación, implementarla en código es bastante sencillo.
+:::
+
 
 ## Frontera de Decisión
 
 ![](img/clase-10/3d-sigmoid.png){.lightbox fig-align="center" width="60%"}
 
-## Regresión Logística: 
-
-### Training Time
-
-::: {.callout-note}
-Este modelo se considera un modelo parámetrico, ya que los ***parámetros $\theta$*** aprenderán la contribución de cada atributo/variable a la probabilidad predicha por el modelo.
-:::
-
-$$ \underset{\theta}{\operatorname{argmin}} -l(\theta)$$
-
-::: {.callout-important}
-En este paso el modelo resuelve el problema de **MLE** y encuentra los parámetros $\theta$.
-:::
 
 ## Inference Time {.smaller}
 
@@ -235,7 +231,7 @@ El valor del parámetro representa también la magnitud de la contribución.
 ![](img/clase-10/polinomial.png){.lightbox fig-align="center" width="40%" }
 
 
-# Saionara
+# мы сделали
 
 
 ::: {.footer}

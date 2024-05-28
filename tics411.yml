@@ -103,8 +103,18 @@
 - title: "Clase 10"
   subtitle: "Regresión Logística"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-05-23
+  date: 2024-05-28
   image: tics411/thumbnails/clase-10.jpg
   path: tics411/clase-10.qmd
+  categories:
+   - slides
+
+
+- title: "Clase 11"
+  subtitle: "Árboles de Decisión"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-05-28
+  image: tics411/thumbnails/clase-11.png
+  path: tics411/clase-11.qmd
   categories:
    - slides
