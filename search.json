@@ -966,7 +966,7 @@
     "href": "tics411/clase-10.html#características-de-árboles",
     "title": "TICS-411 Minería de Datos",
     "section": "Características de Árboles",
-    "text": "Características de Árboles\n\nPueden trabajar con valores discretos o continuos. Además pueden ser usados como modelos de Clasificación o Regresíon.\nUna vez seleccionado un atributo no es posible devolverse (backtracking).\nDebido al poder de un árbol de Decisión la mayoría de las veces tienden al Overfitting. Una forma de evitar esto es usar técnicas de Pruning.\nEs preferible usar árboles cortos (Principio de Parsimonia o Occam's razor).\n\n\n\n\n\n\n\nEl principio de Parsimonia recomienda encontrar soluciones a problemas utilizando la menor cantidad de elementos/parámetros."
+    "text": "Características de Árboles\n\nPueden trabajar con valores discretos o continuos. Además pueden ser usados como modelos de Clasificación o Regresíon.\nUna vez seleccionado un atributo no es posible devolverse (backtracking).\nDebido al poder de un árbol de Decisión la mayoría de las veces tienden al Overfitting. Una forma de evitar esto es usar técnicas de Pruning.\nEs preferible usar árboles cortos (Principio de Parsimonia o Occam's Razor).\n\n\n\n\n\n\n\nEl principio de Parsimonia recomienda encontrar soluciones a problemas utilizando la menor cantidad de elementos/parámetros."
   },
   {
     "objectID": "tics411/clase-10.html#tipos-de-árboles-de-decisión",
@@ -980,7 +980,7 @@
     "href": "tics411/clase-10.html#creación-de-un-árbol-de-decisión",
     "title": "TICS-411 Minería de Datos",
     "section": "Creación de un Árbol de Decisión",
-    "text": "Creación de un Árbol de Decisión\n\nPureza\n\nCorresponde a la probabilidad de no sacar dos registros de un Nodo que pertenezcan a la misma clase.\n\n\n\n\n\n\n\n\nEl árbol de Decisión busca crear Nodos los más puro posible. Para ello puede utilizar las siguentes métricas:\n\n\n\n\n\nÍndice Gini\n\\[Gini(X) = 1 - \\sum_{x_i}p(x_i)^2\\]\n\nEntropía\n\\[H(X) = -\\sum_{x_i}p(x_i)log_2p(x_i)\\]\n\n\n\n\n\n\n\n\nA mayor valor, mayor nivel de impureza. 0 implica Nodo completamente puro."
+    "text": "Creación de un Árbol de Decisión\n\nPureza\n\nCorresponde a la probabilidad de no sacar dos registros de un Nodo que pertenezcan a la misma clase.\n\n\n\n\n\n\n\n\nEl árbol de Decisión busca crear Nodos lo más puro posible. Para ello puede utilizar las siguentes métricas:\n\n\n\n\n\nÍndice Gini\n\\[Gini(X) = 1 - \\sum_{x_i}p(x_i)^2\\]\n\nEntropía\n\\[H(X) = -\\sum_{x_i}p(x_i)log_2p(x_i)\\]\n\n\n\n\n\n\n\n\nA mayor valor, mayor nivel de impureza. 0 implica Nodo completamente puro."
   },
   {
     "objectID": "tics411/clase-10.html#árbol-de-decisión-ejemplo",
@@ -988,13 +988,6 @@
     "title": "TICS-411 Minería de Datos",
     "section": "Árbol de Decisión: Ejemplo",
     "text": "Árbol de Decisión: Ejemplo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCálculo de Impureza en Hoja\n\n\n\\[Gini_{(leaf)} = 1 - p(Yes)^2 - p(No)^2\\]\n\n\n\n\n\n\n\n\n\nCálculo de Impureza en Split\n\n\n\\[ Gini_{(split)} = \\frac{n_{(yes)}}{n} Gini_{(yes)} + \\frac{n_{(no)}}{n} Gini_{(no)}\\]"
-  },
-  {
-    "objectID": "tics411/clase-10.html#árbol-de-decisión-definición-de-nodo-raíz",
-    "href": "tics411/clase-10.html#árbol-de-decisión-definición-de-nodo-raíz",
-    "title": "TICS-411 Minería de Datos",
-    "section": "Árbol de Decisión: Definición de Nodo Raíz",
-    "text": "Árbol de Decisión: Definición de Nodo Raíz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[Gini_{(yes)} = 1 - (\\frac{1}{4})^2 - (\\frac{3}{4})^2 = 0.375\\] \\[Gini_{(no)} = 1 - (\\frac{2}{3})^2 - (\\frac{1}{3})^2 = 0.444\\]\n\n\n\n\\[Gini_{(split)} = \\frac{4}{7}\\cdot 0.375 + \\frac{3}{7} \\cdot 0.444 = 0.405\\]"
   },
   {
     "objectID": "tics411/clase-10.html#árbol-de-decisión-raíz-popcorn",
@@ -1057,7 +1050,7 @@
     "href": "tics411/clase-10.html#qué-split-elegiremos",
     "title": "TICS-411 Minería de Datos",
     "section": "¿Qué Split elegiremos?",
-    "text": "¿Qué Split elegiremos?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEscogeremos el Split más pequeño que representa el que genera más pureza.\n\n\n\n\n\n\n\n\n\nEl nodo que no le gusta la Soda quedó completamente puro. Por lo tanto, no puede seguir dividiéndose. Seguiremos trabajando sólo con aquellos que sí les gusta la Soda."
+    "text": "¿Qué Split elegiremos?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEscogeremos el Split más pequeño que representa el que genera más pureza.\n\n\n\n\n\n\n\n\n\n\n\nEl nodo que no le gusta la Soda quedó completamente puro. Por lo tanto, no puede seguir dividiéndose. Seguiremos trabajando sólo con aquellos que sí les gusta la Soda."
   },
   {
     "objectID": "tics411/clase-10.html#árbol-de-decisión-2do-nivel",
