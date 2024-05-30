@@ -398,7 +398,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 11: Árboles de Decisión</p>
+  <p class="subtitle">Clase 11: Naive Bayes</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -412,803 +412,429 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="árboles-de-decisión" class="slide level2">
-<h2>Árboles de Decisión</h2>
+<section id="naive-bayes-preliminares" class="slide level2 smaller">
+<h2>Naive Bayes: Preliminares</h2>
 <blockquote>
-<p>Técnica de clasificación supervisada que genera una decisión basada en <code>árboles de decisión</code> para clasificar instancias no conocidas.</p>
+<p>También conocido como <code>Clasificador Inexperto de Bayes</code>, es uno de los clasificadores más conocidos y sencillos.</p>
 </blockquote>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/dt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-11/dt.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</section>
-<section id="árboles-de-decisión-ejemplo" class="slide level2 smaller">
-<h2>Árboles de Decisión: Ejemplo</h2>
-<blockquote>
-<p>Visualmente, un árbol de decisión segmenta el espacio separando los datos en subgrupos.</p>
-</blockquote>
-<div class="callout callout-tip callout-style-simple">
+<div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Esto permite la generacion de fronteras de decisión sumamente complejas.</p>
+<p>Se hizo particularmente conocido como uno de los primeros algoritmos en funcionar como Clasificador de Spam de manera efectiva.</p>
 </div>
 </div>
 </div>
-<p>Supongamos el siguiente ejemplo:</p>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/dt_problem.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-11/dt_problem.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column fragment" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/dt_solution.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-11/dt_solution.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="árboles-de-decisión-frontera-de-decisión" class="slide level2">
-<h2>Árboles de Decisión: Frontera de Decisión</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/dt_solution.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-11/dt_solution.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/dt_viz.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-11/dt_viz.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="árboles-de-decisión-inferencia" class="slide level2">
-<h2>Árboles de Decisión: Inferencia</h2>
-<p>Una vez construido el <code>árbol de decisión</code> basta con recorrerlo para poder generar la predicción para una instancia dada:</p>
-<div class="columns">
-<div class="column" style="width:70%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/dt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-11/dt.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/dt_clf.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-11/dt_clf.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="características-de-árboles" class="slide level2">
-<h2>Características de Árboles</h2>
 <ul>
-<li>Pueden trabajar con valores discretos o continuos. Además pueden ser usados como modelos de <code>Clasificación</code> o <code>Regresíon</code>.</li>
-<li>Una vez seleccionado un atributo no es posible devolverse (backtracking).</li>
-<li>Debido al poder de un árbol de Decisión la mayoría de las veces tienden al Overfitting. Una forma de evitar esto es usar técnicas de <code>Pruning</code>.</li>
-<li>Es preferible usar árboles cortos (Principio de Parsimonia o <code>Occam's razor</code>).</li>
+<li>Es un modelo netamente probabilístico basado en el <code>Teorema de Bayes</code>.
+<ul>
+<li>Aprende una distribucional de Probabilidad Condicional.</li>
+<li>Dado un punto <span class="math inline">\(x_i\)</span>, el modelo retorna la “probabilidad” de que <span class="math inline">\(x_i\)</span> pertenezca a una clase específica.</li>
+</ul></li>
 </ul>
+</section>
+<section id="definiciones" class="slide level2 smaller">
+<h2>Definiciones</h2>
+<div class="columns">
+<div class="column">
+<dl>
+<dt>Probabilidad Condicional</dt>
+<dd>
+<span class="math display">\[P(X|C) = \frac{P(X \cap C)}{P(C)}\]</span>
+</dd>
+<dt>Teorema de Bayes</dt>
+<dd>
+<span class="math display">\[P(C|X) = \frac{P(X|C)P(C)}{P(X)}\]</span>
+</dd>
+<dt>Independencia Condicional</dt>
+<dd>
+<span class="math display">\[P(X_1, X_2, ..., X_k|C) = \prod_{i=1}^k P(X_i|C)\]</span>
+</dd>
+</dl>
+</div><div class="column">
+<p><br></p>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Se lee como la Probabilidad de que Ocurra <span class="math inline">\(X\)</span> dado que tenemos <span class="math inline">\(C\)</span>.</p>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>La <code>probabilidad a posteriori</code> (LHS), depende de el <strong><em>Likelihood</em></strong>, la <strong><em>probabilidad a priori</em></strong> y la <strong><em>evidencia</em></strong> (RHS).</p>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Si asumimos <strong><em>independencia</em></strong>, entonces la probabilidad conjunta de <span class="math inline">\(k\)</span> eventos, se calcula como la <strong><em>productoria de las probabilidades condicionales independientes</em></strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-básico" class="slide level2">
+<h2>Ejemplo básico</h2>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Supongamos que:</p>
+<ul>
+<li>Sabemos que la Meningitis produce Tortícolis el 50% de las veces.</li>
+<li>La probabilidad de tener meningitis es: <span class="math inline">\(1/50000\)</span>.</li>
+<li>La probabilidad de tener Tortícolis: <span class="math inline">\(1/20\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<p>Si su paciente tiene tortícolis, ¿Cuál es la probabilidad de que tenga Meningitis?</p>
+<p><span class="math display">\[P(M|T) = \frac{P(T|M)P(M)}{P(T)}=\frac{0.5 \cdot 1/50000}{1/20} = 0.0002\]</span></p>
+</section>
+<section id="modelo-naive-bayes-aprendizaje" class="slide level2 smaller">
+<h2>Modelo Naive Bayes: Aprendizaje</h2>
+<p><span class="math display">\[P(y = C_j|X_1, X_2, ..., X_k) = \frac{P(X_1,X_2,..., X_k|y=C_j)P(y=C_j)}{P(X_1, X_2, ..., X_k)}\]</span></p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li><span class="math inline">\(P(y=C_j|X)\)</span> sería la probabilidad de que la predicción del modelo sea <span class="math inline">\(C_j\)</span> dado que lo alimentamos con las variables <span class="math inline">\(X\)</span>.</li>
+<li>Luego <span class="math inline">\(P(y=C_j)\)</span> es la probabilidad <em>a priori</em> de que la clase sea <span class="math inline">\(C_j\)</span>.</li>
+<li><span class="math inline">\(P(X|y=C_j)\)</span> es el likelihood (verosimilitud). Corresponde a la distribución de probabilidad de las variables X cuando la clase es <span class="math inline">\(C_j\)</span>.</li>
+<li><span class="math inline">\(P(X)\)</span> es la evidencia, y normalmente es muy complejo de calcular.</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Por simplicidad reduciremos <span class="math inline">\(X_1, X_2, ..., X_k\)</span> a <span class="math inline">\(X\)</span>.</p>
+</div>
+</div>
+</div>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>El principio de Parsimonia recomienda encontrar soluciones a problemas utilizando la menor cantidad de elementos/parámetros.</p>
+<p><span class="math inline">\(P(X)\)</span> tiene como única función la de normalizar la probabilidad para que vaya en un rango entre 0 y 1.</p>
 </div>
 </div>
-</div>
-</section>
-<section id="tipos-de-árboles-de-decisión" class="slide level2 smaller">
-<h2>Tipos de Árboles de Decisión</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/binary_trees.png" class="lightbox" data-glightbox="description: .lightbox-desc-8" data-gallery="quarto-lightbox-gallery-8" title="Binary Split"><img data-src="img/clase-11/binary_trees.png" class="quarto-figure quarto-figure-center" alt="Binary Split"></a></p>
-<figcaption><strong>Binary Split</strong></figcaption>
-</figure>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/multiple_trees.png" class="lightbox" data-glightbox="description: .lightbox-desc-9" data-gallery="quarto-lightbox-gallery-9" title="Multi-way Split"><img data-src="img/clase-11/multiple_trees.png" class="quarto-figure quarto-figure-center" alt="Multi-way Split"></a></p>
-<figcaption><strong>Multi-way Split</strong></figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<ul>
-<li>Hunt’s Algorithm <span class="math inline">\(\implies\)</span> Primer Método.</li>
-<li>ID3 <span class="math inline">\(\implies\)</span> Sólo utiliza variables categóricas.</li>
-<li>C4.5 <span class="math inline">\(\implies\)</span> incluye variables continuas.</li>
-<li>C5.0 <span class="math inline">\(\implies\)</span> Permite separación en Múltiples Splits (No ha sido implementado en Sklearn).</li>
-<li>CART (Classification and Regression Trees) <span class="math inline">\(\implies\)</span> Permite que el output sea continuo pero solo utilizando Splits binarios.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Los CARTs son por lejos los árboles más utilizados en las librerías más famosas y potentes: <code>Scikit-Learn</code>, <code>XGboost</code>, <code>LightGBM</code>, <code>Catboost</code>.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="creación-de-un-árbol-de-decisión" class="slide level2">
-<h2>Creación de un Árbol de Decisión</h2>
-<dl>
-<dt>Pureza</dt>
-<dd>
-Corresponde a la probabilidad de no sacar dos registros de un Nodo que pertenezcan a la misma clase.
-</dd>
-</dl>
+<section id="modelo-naive-bayes-predicción" class="slide level2">
+<h2>Modelo Naive Bayes: Predicción</h2>
+<p><span class="math display">\[\hat{y_i} = \underset{C_j}{argmax} \: P(y=C_j|X) \]</span></p>
+<p>donde, <span class="math display">\[P(y = C_j|X) \propto \prod_{i=1}^k P(X|y=C_j)P(y=C_j)\]</span></p>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>El árbol de Decisión busca crear Nodos los más puro posible. Para ello puede utilizar las siguentes métricas:</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<h5 id="índice-gini">Índice Gini</h5>
-<p><span class="math display">\[Gini(X) = 1 - \sum_{x_i}p(x_i)^2\]</span></p>
-</div><div class="column">
-<h5 id="entropía">Entropía</h5>
-<p><span class="math display">\[H(X) = -\sum_{x_i}p(x_i)log_2p(x_i)\]</span></p>
-</div>
-</div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>A mayor valor, mayor nivel de impureza. 0 implica Nodo completamente puro.</p>
+<p>La predicción de <code>Naive Bayes</code> corresponde a la clase que entrega <strong><em>[un estimado de]</em></strong> la <code>Probabilidad a Posteriori</code> más grande.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="árbol-de-decisión-ejemplo" class="slide level2 smaller">
-<h2>Árbol de Decisión: Ejemplo</h2>
+<section id="ejemplo" class="slide level2 smaller">
+<h2>Ejemplo</h2>
 <div class="columns">
-<div class="column" style="width:60%;">
+<div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-11/data_avengers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-11/data_avengers.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-11/naive_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-11/naive_data.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
-</div><div class="column" style="width:40%;">
-<div class="callout callout-note callout-titled callout-style-default">
+</div><div class="column" style="width:50%;">
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>¿Cómo clasificamos el siguiente punto?</p>
+<p><span class="math display">\[ X = [C=Soleado,T=Media,H=Alta,V=Débil]\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
+<p><strong>Probabilidad de Sí</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[P(y = Sí|X) = P(X|y=Sí)P(y=Sí)\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Probabilidad de No</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[ P(y = No|X) = P(X|y=No)P(y=No)\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-1" class="slide level2 smaller">
+<h2>Ejemplo</h2>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[ P(y = Sí|X) = P(C=Soleado|y=Sí)P(T=Media|y=Sí)P(H=Alta|y=Sí)P(V=Débil|y=Sí)P(y=Sí)\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[ P(y = No|X) = P(C=Soleado|y=No)P(T=Media|y=No)P(H=Alta|y=No)P(V=Débil|y=No)P(y=No)\]</span></p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<h4 id="probabilidad-condicional-para-clase-sí">Probabilidad Condicional para clase Sí</h4>
+<p><span class="math display">\[\small P(C = Soleado|y = Sí) = 2/9\]</span> <span class="math display">\[\small P(T = Media|y = Sí) = 4/9\]</span></p>
+<p><span class="math display">\[\small P(H = Alta|y = Sí) = 3/9\]</span> <span class="math display">\[\small P(V=Débil|y = Sí) = 6/9\]</span></p>
+</div><div class="column" style="width:40%;">
+<h4 id="probabilidad-condicional-para-clase-no">Probabilidad Condicional para clase No</h4>
+<p><span class="math display">\[\small P(C = Soleado|y = No) = 3/5\]</span> <span class="math display">\[\small P(T = Media|y = No) = 2/5\]</span></p>
+<p><span class="math display">\[\small P(H = Alta|y = No) = 4/5\]</span> <span class="math display">\[\small P(V=Débil|y = No) = 2/5\]</span></p>
+</div><div class="column" style="width:20%;">
+<h5 id="probabilidad-a-priori">Probabilidad a priori</h5>
+<p><span class="math display">\[P(y = Sí) = \frac{9}{14} = 0.642\]</span> <span class="math display">\[P(y = No) = \frac{5}{14} = 0.357\]</span></p>
+</div>
+</div>
+</section>
+<section id="predicción" class="slide level2">
+<h2>Predicción</h2>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[\scriptsize P(y = Sí|X) = P(C=Soleado|y=Sí)P(T=Media|y=Sí)P(H=Alta|y=Sí)P(V=Débil|y=Sí)P(y=Sí)\]</span> <span class="math display">\[\small P(y = Sí|X) = \frac{2}{9} \cdot \frac{4}{9} \cdot \frac{3}{9} \cdot \frac{6}{9} \cdot \frac{9}{14} = 0.0141\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[\scriptsize P(y = No|X) = P(C=Soleado|y=No)P(T=Media|y=No)P(H=Alta|y=No)P(V=Débil|y=No)P(y=No)\]</span> <span class="math display">\[\small P(y = No|X) = \frac{3}{5} \cdot \frac{2}{5} \cdot \frac{4}{5} \cdot \frac{2}{5} \cdot \frac{5}{14} = 0.0274\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Cálculo de Impureza en Hoja</strong></p>
+<div class="callout-content">
+<p><span class="math display">\[\hat{y} = argmax \{0.0141, 0.0274\} = No\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="smoothing" class="slide level2 smaller">
+<h2>Smoothing</h2>
+<p>Supongamos otro dataset más pequeño:</p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/laplace_smoothing.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-11/laplace_smoothing.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:70%;">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[Gini_{(leaf)} = 1 - p(Yes)^2 - p(No)^2\]</span></p>
+<p>Dado que <code>Naive Bayes</code> se calcula como una Productoria, al tener probabilidades 0 inmediatamente la <strong><em>Probabilidad a Posteriori es 0</em></strong>.</p>
 </div>
 </div>
 </div>
+<p><span class="math display">\[ P(Clima = Soleado|y = Sí) = \frac{0}{6}\]</span> <span class="math display">\[ P(Clima = Soleado|y = No) = \frac{5}{8}\]</span></p>
+<div style="font-size: 80%;">
+<p><span class="math display">\[P(X_j|C = i) = \frac{N_{yj} + \alpha}{N_y + M\alpha}\]</span></p>
+<ul>
+<li><strong><span class="math inline">\(\alpha\)</span></strong>: Es un Hiperparámetro. Si <span class="math inline">\(\alpha = 1\)</span> se le llama Laplace Smoothing, si <span class="math inline">\(\alpha &lt;1\)</span> entonces se le llama Lidstone Smoothing.</li>
+<li><strong>M</strong>: Corresponde al número de posibles valores que puede tomar <span class="math inline">\(X_j\)</span></li>
+<li><strong><span class="math inline">\(N_{yj}\)</span></strong>: Corresponde a la cantidad de registros que toman el valor de la variable <span class="math inline">\(X_j\)</span> solicitado en la clase <span class="math inline">\(y\)</span>.</li>
+<li><strong><span class="math inline">\(N_{y}\)</span></strong>: Corresponde a la cantidad de registros totales que tienen la clase <span class="math inline">\(y\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="laplace-smoothing" class="slide level2">
+<h2>Laplace Smoothing</h2>
+<div class="columns">
+<div class="column">
+<h4 id="sin-laplace">Sin Laplace</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/sin_laplace.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-11/sin_laplace.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<h4 id="con-laplace">Con Laplace</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/con_laplace.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-11/con_laplace.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En este caso <span class="math inline">\(\alpha = 1\)</span> y <span class="math inline">\(M=3\)</span> ya que Clima puede tomar 3 valores: Soleado, Cubierto y Lluvia.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="variables-continuas" class="slide level2">
+<h2>Variables Continuas</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/variable_continua.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-11/variable_continua.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:70%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Podemos calcular el Likelihood como una PDF <strong><em>(Probability Density Function)</em></strong>. La más común: Distribución Normal <strong><em>(Gaussian Naive Bayes)</em></strong>.</p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/gaussian_nb.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-11/gaussian_nb.png" class="quarto-figure quarto-figure-center" style="width:35.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="variables-continuas-predicción" class="slide level2">
+<h2>Variables Continuas: Predicción</h2>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[P(humedad=74|y = Sí) = \frac{1}{\sqrt{2\pi \cdot 10.2^2}}e^{-\frac{(74-79.1)^2}{2\cdot 10.2^2}} = 0.0345 \]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[P(humedad=74|y = No) = \frac{1}{\sqrt{2\pi \cdot 9.7^2}}e^{-\frac{(74-86.2)^2}{2\cdot 9.7^2}} = 0.01865 \]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Luego la predicción es Sí.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="detalles-técnicos" class="slide level2">
+<h2>Detalles Técnicos</h2>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Cálculo de Impureza en Split</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[ Gini_{(split)} = \frac{n_{(yes)}}{n} Gini_{(yes)} + \frac{n_{(no)}}{n} Gini_{(no)}\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-definición-de-nodo-raíz" class="slide level2 smaller">
-<h2>Árbol de Decisión: Definición de Nodo Raíz</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/data_avengers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-11/data_avengers.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/popcorn_root.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-11/popcorn_root.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - (\frac{1}{4})^2 - (\frac{3}{4})^2 = 0.375\]</span> <span class="math display">\[Gini_{(no)} = 1 - (\frac{2}{3})^2 - (\frac{1}{3})^2 = 0.444\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = \frac{4}{7}\cdot 0.375 + \frac{3}{7} \cdot 0.444 = 0.405\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-raíz-popcorn" class="slide level2 smaller">
-<h2>Árbol de Decisión: Raíz Popcorn</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/data_avengers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-11/data_avengers.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/soda_root.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-11/soda_root.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{1}{4}\right)^2 - \left(\frac{3}{4}\right)^2 = 0.375\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = \frac{4}{7}\cdot 0.375 = 0.214\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-raíz-soda" class="slide level2 smaller">
-<h2>Árbol de Decisión: Raíz Soda</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/data_avengers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-11/data_avengers.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/soda_root.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-11/soda_root.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{1}{4}\right)^2 - \left(\frac{3}{4}\right)^2 = 0.375\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = \frac{4}{7}\cdot 0.375 = 0.214\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-raíz-age" class="slide level2 smaller">
-<h2>Árbol de Decisión: Raíz Age</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/cont_splits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-11/cont_splits.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Los cortes de posibles Splits se calculan como el <code>promedio de los valores adyacentes</code> una vez que han sidos <code>ordenados de mayor a menor</code>.</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/age_9.5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-11/age_9.5.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{1}{1}\right)^2 - \left(\frac{0}{1}\right)^2 = 0\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{3}{6}\right)^2 - \left(\frac{3}{6}\right)^2 = 0.5\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = \frac{6}{7}\cdot 0.5 = 0.429\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-raíz-age-1" class="slide level2 smaller">
-<h2>Árbol de Decisión: Raíz Age</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/cont_splits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-11/cont_splits.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Los cortes de posibles Splits se calculan como el <code>promedio de los valores adyacentes</code> una vez que han sidos <code>ordenados de mayor a menor</code>.</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/age_15.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-11/age_15.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{2}{2}\right)^2 - \left(\frac{0}{2}\right)^2 = 0\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{3}{5}\right)^2 - \left(\frac{2}{5}\right)^2 = 0.48\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = \frac{5}{7}\cdot 0.48 = 0.343\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-raíz-age-2" class="slide level2 smaller">
-<h2>Árbol de Decisión: Raíz Age</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/cont_splits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-11/cont_splits.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Los cortes de posibles Splits se calculan como el <code>promedio de los valores adyacentes</code> una vez que han sidos <code>ordenados de mayor a menor</code>.</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/age_26.5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-11/age_26.5.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{1}{3}\right)^2 - \left(\frac{2}{3}\right)^2 = 0.444\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{2}{4}\right)^2 - \left(\frac{2}{4}\right)^2 = 0.5\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = \frac{3}{7}\cdot 0.444 + \frac{4}{7} \cdot 0.5 = 0.476\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-raíz-age-3" class="slide level2 smaller">
-<h2>Árbol de Decisión: Raíz Age</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/cont_splits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-11/cont_splits.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Los cortes de posibles Splits se calculan como el <code>promedio de los valores adyacentes</code> una vez que han sidos <code>ordenados de mayor a menor</code>.</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/age_36.5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-11/age_36.5.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{2}{4}\right)^2 - \left(\frac{2}{4}\right)^2 = 0.5\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{1}{3}\right)^2 - \left(\frac{2}{3}\right)^2 = 0.444\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = \frac{4}{7}\cdot 0.5 + \frac{3}{7} \cdot 0.444 = 0.476\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-raíz-age-4" class="slide level2 smaller">
-<h2>Árbol de Decisión: Raíz Age</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/cont_splits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-11/cont_splits.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Los cortes de posibles Splits se calculan como el <code>promedio de los valores adyacentes</code> una vez que han sidos <code>ordenados de mayor a menor</code>.</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/age_44.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-11/age_44.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{3}{2}\right)^2 - \left(\frac{2}{5}\right)^2 = 0.48\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{0}{2}\right)^2 - \left(\frac{2}{2}\right)^2 = 0\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = \frac{5}{7}\cdot 0.48 = 0.343\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-raíz-age-5" class="slide level2 smaller">
-<h2>Árbol de Decisión: Raíz Age</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/cont_splits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-11/cont_splits.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Los cortes de posibles Splits se calculan como el <code>promedio de los valores adyacentes</code> una vez que han sidos <code>ordenados de mayor a menor</code>.</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/age_66.5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-11/age_66.5.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{3}{6}\right)^2 - \left(\frac{3}{6}\right)^2 = 0.5\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{0}{1}\right)^2 - \left(\frac{1}{1}\right)^2 = 0\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = \frac{6}{7}\cdot 0.5 = 0.429\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="qué-split-elegiremos" class="slide level2 smaller">
-<h2>¿Qué Split elegiremos?</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/gini_iter1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-11/gini_iter1.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:70%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/soda_root.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-11/soda_root.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/split_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="img/clase-11/split_2.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Escogeremos el Split más pequeño que representa el que genera más pureza.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>El nodo que no le gusta la Soda quedó completamente puro. Por lo tanto, no puede seguir dividiéndose. Seguiremos trabajando sólo con aquellos <code>que sí les gusta la Soda</code>.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-2do-nivel" class="slide level2 smaller">
-<h2>Árbol de Decisión: 2do Nivel</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/split_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32"><img data-src="img/clase-11/split_2.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/popcorn_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-33"><img data-src="img/clase-11/popcorn_2.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{1}{2}\right)^2 - \left(\frac{1}{2}\right)^2 = 0.5\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = \frac{2}{4}\cdot 0.5 = 0.25\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-2do-nivel-1" class="slide level2 smaller">
-<h2>Árbol de Decisión: 2do Nivel</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/split_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-34"><img data-src="img/clase-11/split_2.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/age_12.5_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-35"><img data-src="img/clase-11/age_12.5_2.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{0}{1}\right)^2 - \left(\frac{1}{1}\right)^2 = 0\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{3}{3}\right)^2 - \left(\frac{0}{3}\right)^2 = 0\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = 0\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-2do-nivel-2" class="slide level2 smaller">
-<h2>Árbol de Decisión: 2do Nivel</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/split_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-36"><img data-src="img/clase-11/split_2.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/age_26.5_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-37"><img data-src="img/clase-11/age_26.5_2.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{1}{2}\right)^2 - \left(\frac{1}{2}\right)^2 = 0.5\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{2}{2}\right)^2 - \left(\frac{0}{2}\right)^2 = 0\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = \frac{2}{4} \cdot 0.5 = 0.25\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión-2do-nivel-3" class="slide level2 smaller">
-<h2>Árbol de Decisión: 2do Nivel</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/split_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-38"><img data-src="img/clase-11/split_2.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/age_36.5_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-39"><img data-src="img/clase-11/age_36.5_2.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<p><span class="math display">\[Gini_{(yes)} = 1 - \left(\frac{2}{3}\right)^2 - \left(\frac{1}{3}\right)^2 = 0.444\]</span> <span class="math display">\[Gini_{(no)} = 1 - \left(\frac{1}{1}\right)^2 - \left(\frac{0}{1}\right)^2 = 0\]</span></p>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[Gini_{(split)} = \frac{3}{4} \cdot 0.444 = 0.333\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="árbol-de-decisión" class="slide level2 smaller">
-<h2>Árbol de Decisión</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/gini_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40"><img data-src="img/clase-11/gini_2.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column fragment" data-fragment-index="1" style="width:70%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/arbol_final.png" class="lightbox" data-gallery="quarto-lightbox-gallery-41"><img data-src="img/clase-11/arbol_final.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="2">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong><em>¿Cuál sería la predicción?</em></strong></p>
-</div>
-</div>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-11/pred.png" class="lightbox" data-gallery="quarto-lightbox-gallery-42"><img data-src="img/clase-11/pred.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="crecimiento-de-un-árbol" class="slide level2">
-<h2>Crecimiento de un Árbol</h2>
-<ul>
-<li>Un árbol sólo parará de crecer si:
-<ul>
-<li>Todas las muestras de un nodo pertenecen a la misma clase.</li>
-<li>No hay más variables a separar.</li>
-<li>No hay más puntos a separar.</li>
-</ul></li>
-</ul>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p><strong>Fortalezas</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Esto normalmente termina en <code>Overfitting</code>.</li>
+<li>Fácil de Implementar</li>
+<li>A menudo tiene un rendimiento decente a pesar de que las variables pueden no ser independientes.</li>
+<li>Puede aprender de forma incremental.</li>
+<li>Valores faltantes son ignorados en el proceso de Aprendizaje.</li>
+<li>Modelo robusto frente a datos atípicos y/o irrelevantes.</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="callout callout-tip callout-style-simple">
+<div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
+<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-content">
-<p>Para solucionar esto se aplica regularización. En el caso de Árboles esto se denomina <code>prunning</code>.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="pruning" class="slide level2">
-<h2>Pruning</h2>
-<h3 id="prepruning-defineevita-que-el-árbol-crezca-hasta">Prepruning: Define/Evita que el árbol crezca hasta:</h3>
-<ul>
-<li>Un cierto nivel o número de hojas.</li>
-<li>Aplicar un test estadístico (normalmente un proceso muy costoso).</li>
-<li>Usar medidas de complejidad para penalizar árboles de gran tamaño.</li>
-</ul>
-<h3 id="postpruning-decide-eliminar-nodos-luego-de-que-el-árbol-crezca.">Postpruning: Decide eliminar nodos, luego de que el árbol crezca.</h3>
-<ul>
-<li>Usar un parámetro de Costo de Impureza.</li>
-</ul>
-</section>
-<section id="hiperparámetros" class="slide level2">
-<h2>Hiperparámetros</h2>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p><strong>Debilidades</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li><strong>criterion</strong>: Elegir bajo qué criterio se mide la impureza.</li>
-<li><strong>max_depth</strong>: El nivel es la altura que tendrá el árbol. Niveles más bajos generan árboles más simples.</li>
-<li><strong>min_samples_split</strong>: Número de instancias necesarias para generar un split. Un mayor número o proporción generará árboles más simples.</li>
-<li><strong>min_samples_leaf</strong>: Número mínimo de instancias necesarias para que un nodo sea hoja. Un número o proporción más alta generará árboles más simples.</li>
-<li><strong>ccp_alpha</strong>: Está asociado a la pureza total del árbol. Para más información ver <a href="https://scikit-learn.org/stable/auto_examples/tree/plot_cost_complexity_pruning.html#sphx-glr-auto-examples-tree-plot-cost-complexity-pruning-py">acá</a>.</li>
+<li>Asumir clases condicionadas produce probabilidades sesgadas.</li>
+<li>Dependencias entre las variables no pueden ser modeladas.</li>
 </ul>
-</div>
-</div>
-</div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong><em>¿Cómo se ve la complejidad/simplicidad en un árbol de Decisión?</em></strong></p>
 </div>
 </div>
 </div>
 </section>
 <section id="implementación-en-scikit-learn" class="slide level2">
 <h2>Implementación en Scikit-Learn</h2>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3-5|6|7-9|11-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier, plot_tree</span>
+<h4 id="multinomial-naive-bayes-normal">Multinomial Naive Bayes (Normal)</h4>
+<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3-5|6|7-9|11-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> MultinomialNB</span>
 <span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>dt <span class="op">=</span> DecisionTreeClassifier(criterion<span class="op">=</span><span class="st">"gini"</span>, max_depth<span class="op">=</span><span class="va">None</span>, min_sample_split<span class="op">=</span><span class="dv">2</span>, </span>
-<span id="cb1-4"><a></a>                            min_samples_leaf<span class="op">=</span><span class="dv">1</span>,min_impurity_decrease<span class="op">=</span><span class="dv">0</span>, </span>
-<span id="cb1-5"><a></a>                            ccp_alpha<span class="op">=</span><span class="dv">0</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb1-6"><a></a>dt.fit(X_train, y_train)</span>
-<span id="cb1-7"><a></a></span>
-<span id="cb1-8"><a></a>y_pred <span class="op">=</span> dt.predict(X_test)</span>
-<span id="cb1-9"><a></a>y_proba <span class="op">=</span> dt.predict_proba(X_test)</span>
-<span id="cb1-10"><a></a></span>
-<span id="cb1-11"><a></a><span class="co">## Permite Visualizar el Árbol de </span></span>
-<span id="cb1-12"><a></a>plt_tree(dt, filled <span class="op">=</span> <span class="va">True</span>, impurity<span class="op">=</span><span class="va">True</span>, node_ids <span class="op">=</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div style="font-size: 60%;">
-<ul>
-<li><strong>criterion</strong>: Puede ser gini o entropía. Por defecto <code>"gini"</code>.</li>
-<li><strong>max_depth</strong>: Número de niveles que se permita que crezca el nivel, por defecto <code>None</code>, significa todos los que pueda.</li>
-<li><strong>min_samples_split</strong>: El número mínimo de elementos dentro de un nodo para permitir el split. Por defecto 2.</li>
-<li><strong>min_samples_leaf</strong>: El número mínimo de elementos para que un nodo pueda ser considerado hoja. Por defecto 1.</li>
-<li><strong>min_impurity_decreased</strong>: Decrecimiento mínimo de la impureza. Si no se cumple, no hay Split. Por defecto 0.</li>
-<li><strong>ccp_alpha</strong>: Parámetro de Post-Pruning. Valores más altos genera la poda de más nodos.</li>
-</ul>
-</div>
+<span id="cb1-3"><a></a>nb <span class="op">=</span> MultinomialNB(alpha <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb1-4"><a></a>nb.fit(X_train, y_train)</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a>y_pred <span class="op">=</span> nb.predict(X_test)</span>
+<span id="cb1-7"><a></a>y_proba <span class="op">=</span> nb.predict_proba(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<h4 id="gaussian-naive-bayes">Gaussian Naive Bayes</h4>
+<div class="sourceCode" id="cb2" data-code-line-numbers="|1|3-5|6|7-9|11-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> GaussianNB</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>gb <span class="op">=</span> GaussianNB()</span>
+<span id="cb2-4"><a></a>gb.fit(X_train, y_train)</span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a>y_pred <span class="op">=</span> gb.predict(X_test)</span>
+<span id="cb2-7"><a></a>y_proba <span class="op">=</span> gb.predict_proba(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="لقد-إنتهينا" class="title-slide slide level1 center">
-<h1>لقد إنتهينا</h1>
+<section id="adeus" class="title-slide slide level1 center">
+<h1>Adeus</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -1221,10 +847,6 @@ Corresponde a la probabilidad de no sacar dos registros de un Nodo que pertenezc
 <div class="footer footer-default">
 
 </div>
-</div>
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-8"><strong>Binary Split</strong></span>
-<span class="glightbox-desc lightbox-desc-9"><strong>Multi-way Split</strong></span>
 </div>
 </section>
     </div>
@@ -1593,7 +1215,7 @@ Corresponde a la probabilidad de no sacar dos registros de un Nodo que pertenezc
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

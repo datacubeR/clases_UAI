@@ -398,7 +398,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 12: Naive Bayes</p>
+  <p class="subtitle">Clase 12: Regresión Logística</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -412,302 +412,71 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="naive-bayes-preliminares" class="slide level2 smaller">
-<h2>Naive Bayes: Preliminares</h2>
-<blockquote>
-<p>También conocido como <code>Clasificador Inexperto de Bayes</code>, es uno de los clasificadores más conocidos y sencillos.</p>
-</blockquote>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Se hizo particularmente conocido como uno de los primeros algoritmos en funcionar como Clasificador de Spam de manera efectiva.</p>
-</div>
-</div>
-</div>
-<ul>
-<li>Es un modelo netamente probabilístico basado en el <code>Teorema de Bayes</code>.
-<ul>
-<li>Aprende una distribucional de Probabilidad Condicional.</li>
-<li>Dado un punto <span class="math inline">\(x_i\)</span>, el modelo retorna la “probabilidad” de que <span class="math inline">\(x_i\)</span> pertenezca a una clase específica.</li>
-</ul></li>
-</ul>
-</section>
-<section id="definiciones" class="slide level2 smaller">
-<h2>Definiciones</h2>
-<div class="columns">
-<div class="column">
-<dl>
-<dt>Probabilidad Condicional</dt>
-<dd>
-<span class="math display">\[P(X|C) = \frac{P(X \cap C)}{P(C)}\]</span>
-</dd>
-<dt>Teorema de Bayes</dt>
-<dd>
-<span class="math display">\[P(C|X) = \frac{P(X|C)P(C)}{P(X)}\]</span>
-</dd>
-<dt>Independencia Condicional</dt>
-<dd>
-<span class="math display">\[P(X_1, X_2, ..., X_k|C) = \prod_{i=1}^k P(X_i|C)\]</span>
-</dd>
-</dl>
-</div><div class="column">
-<p><br></p>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Se lee como la Probabilidad de que Ocurra <span class="math inline">\(X\)</span> dado que tenemos <span class="math inline">\(C\)</span>.</p>
-</div>
-</div>
-</div>
-<p><br></p>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>La <code>probabilidad a posteriori</code> (LHS), depende de el <strong><em>Likelihood</em></strong>, la <strong><em>probabilidad a priori</em></strong> y la <strong><em>evidencia</em></strong> (RHS).</p>
-</div>
-</div>
-</div>
-<p><br></p>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Si asumimos <strong><em>independencia</em></strong>, entonces la probabilidad conjunta de <span class="math inline">\(k\)</span> eventos, se calcula como la <strong><em>productoria de las probabilidades condicionales independientes</em></strong>.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-básico" class="slide level2">
-<h2>Ejemplo básico</h2>
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p>Supongamos que:</p>
-<ul>
-<li>Sabemos que la Meningitis produce Tortícolis el 50% de las veces.</li>
-<li>La probabilidad de tener meningitis es: <span class="math inline">\(1/50000\)</span>.</li>
-<li>La probabilidad de tener Tortícolis: <span class="math inline">\(1/20\)</span>.</li>
-</ul>
-</div>
-</div>
-</div>
-<p>Si su paciente tiene tortícolis, ¿Cuál es la probabilidad de que tenga Meningitis?</p>
-<p><span class="math display">\[P(M|T) = \frac{P(T|M)P(M)}{P(T)}=\frac{0.5 \cdot 1/50000}{1/20} = 0.0002\]</span></p>
-</section>
-<section id="modelo-naive-bayes-aprendizaje" class="slide level2 smaller">
-<h2>Modelo Naive Bayes: Aprendizaje</h2>
-<p><span class="math display">\[P(y = C_j|X_1, X_2, ..., X_k) = \frac{P(X_1,X_2,..., X_k|y=C_j)P(y=C_j)}{P(X_1, X_2, ..., X_k)}\]</span></p>
-<div class="columns">
-<div class="column" style="width:60%;">
-<ul>
-<li><span class="math inline">\(P(y=C_j|X)\)</span> sería la probabilidad de que la predicción del modelo sea <span class="math inline">\(C_j\)</span> dado que lo alimentamos con las variables <span class="math inline">\(X\)</span>.</li>
-<li>Luego <span class="math inline">\(P(y=C_j)\)</span> es la probabilidad <em>a priori</em> de que la clase sea <span class="math inline">\(C_j\)</span>.</li>
-<li><span class="math inline">\(P(X|y=C_j)\)</span> es el likelihood (verosimilitud). Corresponde a la distribución de probabilidad de las variables X cuando la clase es <span class="math inline">\(C_j\)</span>.</li>
-<li><span class="math inline">\(P(X)\)</span> es la evidencia, y normalmente es muy complejo de calcular.</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Por simplicidad reduciremos <span class="math inline">\(X_1, X_2, ..., X_k\)</span> a <span class="math inline">\(X\)</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><span class="math inline">\(P(X)\)</span> tiene como única función la de normalizar la probabilidad para que vaya en un rango entre 0 y 1.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="modelo-naive-bayes-predicción" class="slide level2">
-<h2>Modelo Naive Bayes: Predicción</h2>
-<p><span class="math display">\[\hat{y_i} = \underset{C_j}{argmax} \: P(y=C_j|X) \]</span></p>
-<p>donde, <span class="math display">\[P(y = C_j|X) \propto \prod_{i=1}^k P(X|y=C_j)P(y=C_j)\]</span></p>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>La predicción de <code>Naive Bayes</code> corresponde a la clase que entrega <strong><em>[un estimado de]</em></strong> la <code>Probabilidad a Posteriori</code> más grande.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo" class="slide level2 smaller">
-<h2>Ejemplo</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
+<section id="intuición" class="slide level2">
+<h2>Intuición</h2>
+<p>Supongamos el siguiente dataset:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-12/naive_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-12/naive_data.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-12/data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-12/data.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div><div class="column" style="width:50%;">
-<div class="callout callout-none no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p>¿Cómo clasificamos el siguiente punto?</p>
-<p><span class="math display">\[ X = [C=Soleado,T=Media,H=Alta,V=Débil]\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Probabilidad de Sí</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[P(y = Sí|X) = P(X|y=Sí)P(y=Sí)\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Probabilidad de No</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[ P(y = No|X) = P(X|y=No)P(y=No)\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-1" class="slide level2 smaller">
-<h2>Ejemplo</h2>
-<div class="callout callout-note no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[ P(y = Sí|X) = P(C=Soleado|y=Sí)P(T=Media|y=Sí)P(H=Alta|y=Sí)P(V=Débil|y=Sí)P(y=Sí)\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[ P(y = No|X) = P(C=Soleado|y=No)P(T=Media|y=No)P(H=Alta|y=No)P(V=Débil|y=No)P(y=No)\]</span></p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:40%;">
-<h4 id="probabilidad-condicional-para-clase-sí">Probabilidad Condicional para clase Sí</h4>
-<p><span class="math display">\[\small P(C = Soleado|y = Sí) = 2/9\]</span> <span class="math display">\[\small P(T = Media|y = Sí) = 4/9\]</span></p>
-<p><span class="math display">\[\small P(H = Alta|y = Sí) = 3/9\]</span> <span class="math display">\[\small P(V=Débil|y = Sí) = 6/9\]</span></p>
-</div><div class="column" style="width:40%;">
-<h4 id="probabilidad-condicional-para-clase-no">Probabilidad Condicional para clase No</h4>
-<p><span class="math display">\[\small P(C = Soleado|y = No) = 3/5\]</span> <span class="math display">\[\small P(T = Media|y = No) = 2/5\]</span></p>
-<p><span class="math display">\[\small P(H = Alta|y = No) = 4/5\]</span> <span class="math display">\[\small P(V=Débil|y = No) = 2/5\]</span></p>
-</div><div class="column" style="width:20%;">
-<h5 id="probabilidad-a-priori">Probabilidad a priori</h5>
-<p><span class="math display">\[P(y = Sí) = \frac{9}{14} = 0.642\]</span> <span class="math display">\[P(y = No) = \frac{5}{14} = 0.357\]</span></p>
-</div>
-</div>
-</section>
-<section id="predicción" class="slide level2">
-<h2>Predicción</h2>
-<div class="callout callout-note no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[\scriptsize P(y = Sí|X) = P(C=Soleado|y=Sí)P(T=Media|y=Sí)P(H=Alta|y=Sí)P(V=Débil|y=Sí)P(y=Sí)\]</span> <span class="math display">\[\small P(y = Sí|X) = \frac{2}{9} \cdot \frac{4}{9} \cdot \frac{3}{9} \cdot \frac{6}{9} \cdot \frac{9}{14} = 0.0141\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p><span class="math display">\[\scriptsize P(y = No|X) = P(C=Soleado|y=No)P(T=Media|y=No)P(H=Alta|y=No)P(V=Débil|y=No)P(y=No)\]</span> <span class="math display">\[\small P(y = No|X) = \frac{3}{5} \cdot \frac{2}{5} \cdot \frac{4}{5} \cdot \frac{2}{5} \cdot \frac{5}{14} = 0.0274\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[\hat{y} = argmax \{0.0141, 0.0274\} = No\]</span></p>
-</div>
-</div>
-</div>
-</section>
-<section id="smoothing" class="slide level2 smaller">
-<h2>Smoothing</h2>
-<p>Supongamos otro dataset más pequeño:</p>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-12/laplace_smoothing.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-12/laplace_smoothing.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:70%;">
 <div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Dado que <code>Naive Bayes</code> se calcula como una Productoria, al tener probabilidades 0 inmediatamente la <strong><em>Probabilidad a Posteriori es 0</em></strong>.</p>
-</div>
-</div>
-</div>
-<p><span class="math display">\[ P(Clima = Soleado|y = Sí) = \frac{0}{6}\]</span> <span class="math display">\[ P(Clima = Soleado|y = No) = \frac{5}{8}\]</span></p>
-<div style="font-size: 80%;">
-<p><span class="math display">\[P(X_j|C = i) = \frac{N_{yj} + \alpha}{N_y + M\alpha}\]</span></p>
-<ul>
-<li><strong><span class="math inline">\(\alpha\)</span></strong>: Es un Hiperparámetro. Si <span class="math inline">\(\alpha = 1\)</span> se le llama Laplace Smoothing, si <span class="math inline">\(\alpha &lt;1\)</span> entonces se le llama Lidstone Smoothing.</li>
-<li><strong>M</strong>: Corresponde al número de posibles valores que puede tomar <span class="math inline">\(X_j\)</span></li>
-<li><strong><span class="math inline">\(N_{yj}\)</span></strong>: Corresponde a la cantidad de registros que toman el valor de la variable <span class="math inline">\(X_j\)</span> solicitado en la clase <span class="math inline">\(y\)</span>.</li>
-<li><strong><span class="math inline">\(N_{y}\)</span></strong>: Corresponde a la cantidad de registros totales que tienen la clase <span class="math inline">\(y\)</span>.</li>
-</ul>
+<p>¿Cómo puedo separar ambas clases?</p>
 </div>
 </div>
 </div>
 </section>
-<section id="laplace-smoothing" class="slide level2">
-<h2>Laplace Smoothing</h2>
-<div class="columns">
-<div class="column">
-<h4 id="sin-laplace">Sin Laplace</h4>
+<section id="intuición-1" class="slide level2">
+<h2>Intuición</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-12/sin_laplace.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-12/sin_laplace.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-12/frontera_0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-12/frontera_0.png" class="fade-in-then-out quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div><div class="column">
-<h4 id="con-laplace">Con Laplace</h4>
+</section>
+<section id="intuición-2" class="slide level2">
+<h2>Intuición</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-12/con_laplace.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-12/con_laplace.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-12/frontera.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-12/frontera.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-content">
+<p>La <code>frontera de decisión</code> se puede caracterizar como la <strong><em>ecuación de una recta</em></strong> (en forma general).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Además definiremos <span class="math inline">\(h_\theta(X) = \theta_0 + \theta_1 X_1 + \theta_2 X_2\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="intuición-3" class="slide level2">
+<h2>Intuición</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-12/frontera_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-12/frontera_2.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
 </div>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
@@ -715,124 +484,315 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>En este caso <span class="math inline">\(\alpha = 1\)</span> y <span class="math inline">\(M=3\)</span> ya que Clima puede tomar 3 valores: Soleado, Cubierto y Lluvia.</p>
+<p>Podríamos pensar que si <span class="math inline">\(h_\theta(X)\)</span> es positivo entonces pertenece a la clase 1 y si <span class="math inline">\(h_\theta(X)\)</span> es negativo pertenece a la clase 0.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="variables-continuas" class="slide level2">
-<h2>Variables Continuas</h2>
+<section id="la-función-sigmoide-o-logística" class="slide level2">
+<h2>La Función Sigmoide o Logística</h2>
+<p><span class="math display">\[ g(z) = \frac{1}{1 + e^{-z}}\]</span></p>
 <div class="columns">
-<div class="column" style="width:30%;">
+<div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-12/variable_continua.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-12/variable_continua.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></a></p>
+<p><a href="img/clase-12/sigmoide.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-12/sigmoide.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div><div class="column" style="width:70%;">
+</div><div class="column">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Podemos calcular el Likelihood como una PDF <strong><em>(Probability Density Function)</em></strong>. La más común: Distribución Normal <strong><em>(Gaussian Naive Bayes)</em></strong>.</p>
+<ul>
+<li>Función no lineal.</li>
+<li>Función acotada entre 0 y 1.</li>
+<li><span class="math inline">\(g(\varepsilon) = 0.5\)</span>, <span class="math inline">\(\varepsilon = 0\)</span></li>
+</ul>
 </div>
 </div>
 </div>
-<p><span class="math display">\[f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-12/gaussian_nb.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-12/gaussian_nb.png" class="quarto-figure quarto-figure-center" style="width:35.0%"></a></p>
-</figure>
+<div class="fragment">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>De acá sale la noción del umbral 0.5 que hemos visto en clases anteriores.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>¿Qué pasaría si ahora decimos que <span class="math inline">\(z = \beta_0 + \beta_1 X_1 + \beta_2 X_2\)</span>?</p>
 </div>
 </div>
 </div>
 </section>
-<section id="variables-continuas-predicción" class="slide level2">
-<h2>Variables Continuas: Predicción</h2>
-<div class="callout callout-note no-icon callout-style-simple">
+<section id="la-regresión-logística" class="slide level2">
+<h2>La Regresión Logística</h2>
+<p><span class="math display">\[P[y = 1|X, \theta] = g(\theta_0 + \theta_1 X_1 + \theta_2 X_2) = \frac{1}{1 + e^{-(\theta_0 + \theta_1 X_1 + \theta_2 X_2)}}\]</span></p>
+<div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Regla de Decisión:</strong></p>
+</div>
 <div class="callout-content">
-<p><span class="math display">\[P(humedad=74|y = Sí) = \frac{1}{\sqrt{2\pi \cdot 10.2^2}}e^{-\frac{(74-79.1)^2}{2\cdot 10.2^2}} = 0.0345 \]</span></p>
+<ul>
+<li>Si <span class="math inline">\(g(z) \ge 0.5 \implies Clase \, 1\)</span>.</li>
+<li>Si <span class="math inline">\(g(z) &lt; 0.5 \implies Clase \, 0\)</span>.</li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-important no-icon callout-style-simple">
+</div>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
 <div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
 <div class="callout-content">
-<p><span class="math display">\[P(humedad=74|y = No) = \frac{1}{\sqrt{2\pi \cdot 9.7^2}}e^{-\frac{(74-86.2)^2}{2\cdot 9.7^2}} = 0.01865 \]</span></p>
+<p><span class="math inline">\(g(z)\)</span> se puede interpretar como una <strong><em>probabilidad de pertenecer a la Clase 1</em></strong>.</p>
 </div>
 </div>
 </div>
+</div>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(1 -g(z)\)</span> se puede interpretar como una <strong><em>probabilidad de NO pertenecer a la Clase 1</em></strong>, es decir, <strong><em>pertenecer a la Clase 0</em></strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="aprendizaje-del-modelo" class="slide level2">
+<h2>Aprendizaje del Modelo</h2>
+<p>Supongamos lo siguiente:</p>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[P(y = 1| X, \theta) = h_\theta(X)\]</span></p>
+</div><div class="column">
+<p><span class="math display">\[P(y = 0| X, \theta) = 1-h_\theta(x)\]</span></p>
+</div>
+</div>
+<p>Ambas ecuaciones pueden comprimirse en una sola de la siguiente manera: <span class="math display">\[ P(y|X,\theta) = h_\theta(X)^y (1 - h_\theta(X))^{1-y}\]</span></p>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Para encontrar los parámetros <span class="math inline">\(\theta\)</span> podemos utilizar una técnica llamada <strong>Maximum Likelihood Estimation</strong>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="maximum-likelihood-estimation" class="slide level2">
+<h2>Maximum Likelihood Estimation</h2>
+<p><span class="math display">\[\mathcal{L}(\theta) = \prod_{i=1}^n P(y^{(i)} | x^{(i)}, \theta)\]</span></p>
+<p><span class="math display">\[ \underset{\theta}{argmin} \ -l(\theta)\]</span> <span class="math display">\[l(\theta) = log (\mathcal{L(\theta)}) = \sum_{i=1}^n y^{(i)} \cdot log(h_\theta(x^{(i)})) + (1-y^{(i)})\cdot log(1-h_\theta(x^{(i)}))\]</span></p>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Luego la predicción es Sí.</p>
+<p>Esta ecuación se conoce como <strong>Entropía Cruzada</strong> o como <strong>Negative Log Loss (NLL)</strong> y tiene la gracia de que es una curva convexa lo que <strong><em>garantiza un valor único de los parámetros <span class="math inline">\(\theta\)</span></em></strong>.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="detalles-técnicos" class="slide level2">
-<h2>Detalles Técnicos</h2>
-<div class="callout callout-tip callout-titled callout-style-default">
+<section id="cálculo-de-coeficientes" class="slide level2">
+<h2>Cálculo de Coeficientes</h2>
+<div class="callout callout-important callout-style-simple">
 <div class="callout-body">
-<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Fortalezas</strong></p>
-</div>
 <div class="callout-content">
-<ul>
-<li>Fácil de Implementar</li>
-<li>A menudo tiene un rendimiento decente a pesar de que las variables pueden no ser independientes.</li>
-<li>Puede aprender de forma incremental.</li>
-<li>Valores faltantes son ignorados en el proceso de Aprendizaje.</li>
-<li>Modelo robusto frente a datos atípicos y/o irrelevantes.</li>
-</ul>
+<p>La técnica más famosa para minimizar este tipo de problemas se conoce como <code>Stochastic Gradient Descent</code>. Lo que genera la siguiente solución:</p>
 </div>
 </div>
 </div>
-<div class="callout callout-important callout-titled callout-style-default">
+<p><span class="math display">\[\theta_j \leftarrow \theta_j - \alpha \frac{1}{m}\sum_{i=1}\left(h_\theta(x^{(i)})-y^{(i)}\right)x_j^{(i)}\]</span></p>
+<div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
-<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Debilidades</strong></p>
-</div>
 <div class="callout-content">
-<ul>
-<li>Asumir clases condicionadas produce probabilidades sesgadas.</li>
-<li>Dependencias entre las variables no pueden ser modeladas.</li>
-</ul>
+<p>A pesar de lo complicado que se ve la ecuación, implementarla en código es bastante sencillo.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="implementación-en-scikit-learn" class="slide level2">
-<h2>Implementación en Scikit-Learn</h2>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3-5|6|7-9|11-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> MultinomialNB</span>
+<section id="frontera-de-decisión" class="slide level2">
+<h2>Frontera de Decisión</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-12/3d-sigmoid.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-12/3d-sigmoid.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="inference-time" class="slide level2 smaller">
+<h2>Inference Time</h2>
+<p>En este caso se calcula: <span class="math display">\[h_\theta(x^{(i)})=sigmoid(\theta^t x^{(i)})\]</span></p>
+<ul>
+<li><span class="math inline">\(\theta\)</span>: Corresponde a un vector con todos los parámetros calculados.</li>
+<li><span class="math inline">\(x^{(i)}\)</span>: Corresponde a una instancia de <span class="math inline">\(m\)</span> variables la cual generará una probabilidad.
+<ul>
+<li><span class="math inline">\(\theta^t x^{(i)}\)</span> corresponde al producto punto de dos vectores, que es equivalente a una <strong><em>“suma producto”</em></strong>.</li>
+</ul></li>
+<li><span class="math inline">\(h_\theta(x^{(i)})\)</span>: Generará un valor entre 0 y 1 al cuál se le aplica la Regla de Decisión.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-12/h.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-12/h.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="implementación-en-python" class="slide level2">
+<h2>Implementación en Python</h2>
+<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3-4|6-7|9-11|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>nb <span class="op">=</span> MultinomialNB(alpha <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb1-4"><a></a>nb.fit(X_train, y_train)</span>
+<span id="cb1-3"><a></a>lr <span class="op">=</span> LogisticRegression(C<span class="op">=</span><span class="dv">1</span>, penalty<span class="op">=</span><span class="st">"l2"</span>, random_state <span class="op">=</span> <span class="dv">42</span>)</span>
+<span id="cb1-4"><a></a>lr.fit(X_train, y_train)</span>
 <span id="cb1-5"><a></a></span>
-<span id="cb1-6"><a></a>y_pred <span class="op">=</span> nb.predict(X_test)</span>
-<span id="cb1-7"><a></a>y_proba <span class="op">=</span> nb.predict_proba(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb2" data-code-line-numbers="|1|3-5|6|7-9|11-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> GaussianNB</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a>gb <span class="op">=</span> MultinomialNB(alpha <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb2-4"><a></a>gb.fit(X_train, y_train)</span>
-<span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a>y_pred <span class="op">=</span> gb.predict(X_test)</span>
-<span id="cb2-7"><a></a>y_proba <span class="op">=</span> gb.predict_proba(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a></a>y_pred <span class="op">=</span> lr.predict(X_test)</span>
+<span id="cb1-7"><a></a>y_proba <span class="op">=</span> lr.predict_proba(X_test)</span>
+<span id="cb1-8"><a></a></span>
+<span id="cb1-9"><a></a><span class="co">## Visualizacion de los Parámetros </span></span>
+<span id="cb1-10"><a></a>lr.coef_</span>
+<span id="cb1-11"><a></a>lr.intercept_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div style="font-size: 55%;">
+<ul>
+<li><strong>C</strong>: Corresponde a un parámetro de Regularización. Valores más pequeños implica mayor regularización. Por defecto 1.</li>
+<li>penalty: Corresponde al tipo de regularización. Por defecto <em>“l2”</em>.
+<ul>
+<li><strong><em>“l1”:</em></strong> Corresponde a la regularización Lasso. Genera que hayan parámetros cero, ayudando en la selección de variables.</li>
+<li><strong><em>“l2”:</em></strong> Corresponde a la regularización Ridge. Genera que todos los parámetros sean pequeños, entregando estabilidad y buena interpretabilidad.</li>
+<li><strong><em>“elasticnet”:</em></strong> Corresponde a la combinación de <em>“l1”</em> y <em>“l2”</em>.</li>
+<li><strong><em>None:</em></strong> No hay regularización.</li>
+</ul></li>
+</ul>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Para cambiar la regularización, consultar la documentación de Scikit-Learn.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="لقد-إنتهينا" class="title-slide slide level1 center">
-<h1>لقد إنتهينا</h1>
+<section id="interpretabilidad" class="slide level2 smaller">
+<h2>Interpretabilidad</h2>
+<blockquote>
+<p>Una de las grandes ventajas que tiene la Regresión Logística es que sus predicciones son interpretables.</p>
+</blockquote>
+<ul>
+<li>Tenemos un dataset de 2 variables:
+<ul>
+<li>W: Corresponde al peso del Vehículo.</li>
+<li>qsec: Corresponde al tiempo en Segundos que lo toma en recorrer un cuarto de milla.</li>
+</ul></li>
+<li>Queremos predecir si el vehículo es Ecónomico o no (en términos de consumo de Bencina).</li>
+</ul>
+<p><span class="math display">\[h_\theta(x) = 0.5 - 3.5 \cdot W + 1.5 \cdot qsec \]</span></p>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment">Si el vehículo se demora más en el cuarto de milla (<strong>qsec</strong> aumenta) entonces el vehículo es más económico.
+<ul>
+<li class="fragment">Tiene menos potencia.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment">Si el vehículo es más pesado (<strong>W</strong> aumenta), entonces es menos económico.
+<ul>
+<li class="fragment">Requiere probablemente más combustible para mover dicho peso.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El valor del parámetro representa también la magnitud de la contribución.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sugerencias" class="slide level2">
+<h2>Sugerencias</h2>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong>Estandarización/Normalización de datos</strong>: Permite que la escala de los datos no afecte en la interpretabilidad.</li>
+<li><strong>One Hot Encoder</strong>: En general tiende a dar mejores resultados que el Ordinal.</li>
+<li><strong>Interacciones</strong>: Combinación de variables.</li>
+<li><strong>Variables no Lineales</strong>: Permite que la frontera de Decisión no sea necesariamente lineal (Regresión Polinómica).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-12/polinomial.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-12/polinomial.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="мы-сделали" class="title-slide slide level1 center">
+<h1>мы сделали</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -1213,7 +1173,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","loop":false});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
