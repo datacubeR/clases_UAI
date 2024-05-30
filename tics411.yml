@@ -113,7 +113,7 @@
 - title: "Clase 11"
   subtitle: "Naive Bayes"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-06-30
+  date: 2024-05-30
   image: tics411/thumbnails/clase-11.jpg
   path: tics411/clase-11.qmd
   categories:
@@ -122,7 +122,7 @@
 - title: "Clase 12"
   subtitle: "Regresión Logística"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-06-30
+  date: 2024-06-06
   image: tics411/thumbnails/clase-12.jpg
   path: tics411/clase-12.qmd
   categories:
