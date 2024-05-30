@@ -420,7 +420,7 @@
     "href": "tics411/clase-11.html#definiciones",
     "title": "TICS-411 Minería de Datos",
     "section": "Definiciones",
-    "text": "Definiciones\n\n\n\nProbabilidad Condicional\n\n\\[P(X|C) = \\frac{P(X \\cap C)}{P(C)}\\]\n\nTeorema de Bayes\n\n\\[P(C|X) = \\frac{P(X|C)P(C)}{P(X)}\\]\n\nIndependencia Condicional\n\n\\[P(X_1, X_2, ..., X_k|C) = \\prod_{i=1}^k P(X_i|C)\\]\n\n\n\n\n\n\n\n\n\n\nSe lee como la Probabilidad de que Ocurra \\(X\\) dado que tenemos \\(C\\).\n\n\n\n\n\n\n\n\n\n\nLa probabilidad a posteriori (LHS), depende de el Likelihood, la probabilidad a priori y la evidencia (RHS).\n\n\n\n\n\n\n\n\n\n\nSi asumimos independencia, entonces la probabilidad conjunta de \\(k\\) eventos, se calcula como la productoria de las probabilidades condicionales independientes."
+    "text": "Definiciones\n\n\n\nProbabilidad Condicional\n\n\\[P(X|C) = \\frac{P(X \\cap C)}{P(C)}\\]\n\nTeorema de Bayes\n\n\\[P(C|X) = \\frac{P(X|C)P(C)}{P(X)}\\]\n\nIndependencia Condicional\n\n\\[P(X_1, X_2, ..., X_k|C) = \\prod_{i=1}^k P(X_i|C)\\]\n\n\n\n\n\n\n\n\n\n\nSe lee como la Probabilidad de que Ocurra \\(X\\) dado que tenemos \\(C\\).\n\n\n\n\n\n\n\n\n\n\nLa probabilidad a posteriori (LHS), depende de el Likelihood, la probabilidad a priori y la evidencia (RHS).\n\n\n\n\n\n\n\n\n\n\nSi asumimos independencia, entonces la probabilidad conjunta de \\(k\\) eventos condicionados, se calcula como la productoria de las probabilidades condicionales independientes."
   },
   {
     "objectID": "tics411/clase-11.html#ejemplo-básico",
@@ -1092,7 +1092,7 @@
     "href": "tics411/clase-10.html#crecimiento-de-un-árbol",
     "title": "TICS-411 Minería de Datos",
     "section": "Crecimiento de un Árbol",
-    "text": "Crecimiento de un Árbol\n\nUn árbol sólo parará de crecer si:\n\nTodas las muestras de un nodo pertenecen a la misma clase.\nNo hay más variables a separar.\nNo hay más puntos a separar.\n\n\n\n\n\n\n\n\n\nEsto normalmente termina en Overfitting.\n\n\n\n\n\n\n\n\n\n\nPara solucionar esto se aplica regularización. En el caso de Árboles esto se denomina prunning."
+    "text": "Crecimiento de un Árbol\n\nUn árbol sólo dejará de crecer si:\n\nNo hay más puntos a separar.\n\nTodas las muestras de un nodo pertenecen a la misma clase.\n\nNo hay más variables a separar.\n\n\n\n\n\n\n\n\n\nEsto normalmente termina en Overfitting.\n\n\n\n\n\n\n\n\n\n\nPara solucionar esto se aplica regularización. En el caso de Árboles esto se denomina prunning."
   },
   {
     "objectID": "tics411/clase-10.html#pruning",
