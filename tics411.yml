@@ -101,30 +101,29 @@
    - slides
 
 - title: "Clase 10"
-  subtitle: "Regresión Logística"
+  subtitle: "Árboles de Decisión"
   author: "Alfonso Tobar-Arancibia"
   date: 2024-05-30
-  image: tics411/thumbnails/clase-10.jpg
+  image: tics411/thumbnails/clase-10.png
   path: tics411/clase-10.qmd
   categories:
    - slides
 
 
 - title: "Clase 11"
-  subtitle: "Árboles de Decisión"
+  subtitle: "Naive Bayes"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-05-30
-  image: tics411/thumbnails/clase-11.png
+  date: 2024-06-30
+  image: tics411/thumbnails/clase-11.jpg
   path: tics411/clase-11.qmd
   categories:
    - slides
 
-
 - title: "Clase 12"
-  subtitle: "Naive Bayes"
+  subtitle: "Regresión Logística"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-06-06
+  date: 2024-06-30
   image: tics411/thumbnails/clase-12.jpg
-  path: tics411/clase-11.qmd
+  path: tics411/clase-12.qmd
   categories:
    - slides

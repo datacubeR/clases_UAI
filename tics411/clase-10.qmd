@@ -1,6 +1,6 @@
 ---
 title: "TICS-411 Minería de Datos"
-subtitle: "Clase 10: Regresión Logística"
+subtitle: "Clase 10: Árboles de Decisión"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -23,215 +23,552 @@ format:
     pdf-separate-fragments: true
 ---
 
-## Intuición
 
-Supongamos el siguiente dataset:
+## Árboles de Decisión
 
-![](img/clase-10/data.png){.lightbox fig-align="center"}
-
-::: {.callout-warning}
-¿Cómo puedo separar ambas clases?
-:::
-
-## Intuición
+> Técnica de clasificación supervisada que genera una decisión basada en `árboles de decisión` para clasificar instancias no conocidas.
 
 
-![](img/clase-10/frontera_0.png){.lightbox fig-align="center" .fade-in-then-out}
+![](img/clase-10/dt.png){.lightbox fig-align="center"}
 
-## Intuición
+## Árboles de Decisión: Ejemplo {.smaller}
 
-![](img/clase-10/frontera.png){.lightbox fig-align="center" width="50%"} 
+> Visualmente, un árbol de decisión segmenta el espacio separando los datos en subgrupos.
 
-::: {.callout-note .fragment }
-La `frontera de decisión` se puede caracterizar como la ***ecuación de una recta*** (en forma general).
-:::
-::: {.callout-tip .fragment }
-Además definiremos $h_\theta(X) = \theta_0 + \theta_1 X_1 + \theta_2 X_2$.
-:::
-
-## Intuición
-
-![](img/clase-10/frontera_2.png){.lightbox fig-align="center" width="60%"}
-
-::: {.callout-important}
-Podríamos pensar que si $h_\theta(X)$ es positivo entonces pertenece a la clase 1 y si $h_\theta(X)$ es negativo pertenece a la clase 0.
-:::
-
-## La Función Sigmoide o Logística
-
-$$ g(z) = \frac{1}{1 + e^{-z}}$$
-
-::: {.columns}
-::: {.column}
-
-![](img/clase-10/sigmoide.png){.lightbox fig-align="center" }
-:::
-::: {.column}
 ::: {.callout-tip}
-* Función no lineal.
-* Función acotada entre 0 y 1.
-* $g(\varepsilon) = 0.5$, $\varepsilon = 0$
+Esto permite la generacion de fronteras de decisión sumamente complejas. 
 :::
 
-::: {.callout-caution .fragment}
-De acá sale la noción del umbral 0.5 que hemos visto en clases anteriores.
-:::
-:::
-:::
-
-::: {.callout-note}
-¿Qué pasaría si ahora decimos que $z = \beta_0 + \beta_1 X_1 + \beta_2 X_2$?
-:::
-
-
-## La Regresión Logística
-
-$$P[y = 1|X, \theta] = g(\theta_0 + \theta_1 X_1 + \theta_2 X_2) = \frac{1}{1 + e^{-(\theta_0 + \theta_1 X_1 + \theta_2 X_2)}}$$
-
-::: {.callout-note appearance="default" .fragment}
-## Regla de Decisión:
-
-* Si $g(z) \ge 0.5 \implies Clase \, 1$.
-* Si $g(z) < 0.5 \implies Clase \, 0$.
-:::
-
-::: {.callout-important .fragment}
-$g(z)$ se puede interpretar como una ***probabilidad de pertenecer a la Clase 1***.
-:::
-::: {.callout-important .fragment}
-$1 -g(z)$ se puede interpretar como una ***probabilidad de NO pertenecer a la Clase 1***, es decir, ***pertenecer a la Clase 0***.
-:::
-
-## Aprendizaje del Modelo 
-
-Supongamos lo siguiente: 
+Supongamos el siguiente ejemplo:
 
 ::: {.columns}
-::: {.column}
-$$P(y = 1| X, \theta) = h_\theta(X)$$
+::: {.column width="40%"}
+![](img/clase-10/dt_problem.png){.lightbox fig-align="center"}
 :::
-::: {.column}
-$$P(y = 0| X, \theta) = 1-h_\theta(x)$$
+::: {.column width="60%" .fragment}
+
+![](img/clase-10/dt_solution.png){.lightbox fig-align="center"}
 :::
 ::: 
 
-Ambas ecuaciones pueden comprimirse en una sola de la siguiente manera:
-$$ P(y|X,\theta) = h_\theta(X)^y (1 - h_\theta(X))^{1-y}$$
+## Árboles de Decisión: Frontera de Decisión
 
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-10/dt_solution.png){.lightbox fig-align="center"}
+:::
+::: {.column width="60%"}
+![](img/clase-10/dt_viz.png){.lightbox fig-align="center"} 
+:::
+::: 
+
+## Árboles de Decisión: Inferencia
+
+Una vez construido el `árbol de decisión` basta con recorrerlo para poder generar la predicción para una instancia dada:
+
+::: {.columns}
+::: {.column width="70%"}
+![](img/clase-10/dt.png){.lightbox fig-align="center"}
+:::
+::: {.column width="30%"}
+![](img/clase-10/dt_clf.png){.lightbox fig-align="center"} 
+:::
+::: 
+
+## Características de Árboles
+
+* Pueden trabajar con valores discretos o continuos. Además pueden ser usados como modelos de `Clasificación` o `Regresíon`.
+* Una vez seleccionado un atributo no es posible devolverse (backtracking).
+* Debido al poder de un árbol de Decisión la mayoría de las veces tienden al Overfitting. Una forma de evitar esto es usar técnicas de `Pruning`. 
+* Es preferible usar árboles cortos (Principio de Parsimonia o `Occam's razor`).  
 
 ::: {.callout-important}
-Para encontrar los parámetros $\theta$ podemos utilizar una técnica llamada **Maximum Likelihood Estimation**.
+El principio de Parsimonia recomienda encontrar soluciones a problemas utilizando la menor cantidad de elementos/parámetros.
 :::
 
-## Maximum Likelihood Estimation
+## Tipos de Árboles de Decisión {.smaller}
 
-$$\mathcal{L}(\theta) = \prod_{i=1}^n P(y^{(i)} | x^{(i)}, \theta)$$
+::: {.columns}
+::: {.column}
 
+![**Binary Split**](img/clase-10/binary_trees.png){.lightbox fig-align="center"}
+:::
+::: {.column}
+![**Multi-way Split**](img/clase-10/multiple_trees.png){.lightbox fig-align="center"}
+:::
+::: 
 
-$$ \underset{\theta}{argmin} \ -l(\theta)$$
-$$l(\theta) = log (\mathcal{L(\theta)}) = \sum_{i=1}^n y^{(i)} \cdot log(h_\theta(x^{(i)})) + (1-y^{(i)})\cdot log(1-h_\theta(x^{(i)}))$$
+::: {.callout}
+
+* Hunt's Algorithm $\implies$ Primer Método.
+* ID3 $\implies$ Sólo utiliza variables categóricas.
+* C4.5 $\implies$ incluye variables continuas.
+* C5.0 $\implies$ Permite separación en Múltiples Splits (No ha sido implementado en Sklearn). 
+* CART (Classification and Regression Trees) $\implies$ Permite que el output sea continuo pero solo utilizando Splits binarios.
+:::
+
+::: {.callout-caution}
+Los CARTs son por lejos los árboles más utilizados en las librerías más famosas y potentes: `Scikit-Learn`, `XGboost`, `LightGBM`, `Catboost`. 
+:::
+
+## Creación de un Árbol de Decisión 
+
+Pureza
+: Corresponde a la probabilidad de no sacar dos registros de un Nodo que pertenezcan a la misma clase.
 
 ::: {.callout-tip}
-Esta ecuación se conoce como **Entropía Cruzada** o como **Negative Log Loss (NLL)** y tiene la gracia de que es una curva convexa lo que ***garantiza un valor único de los parámetros $\theta$***. 
+
+El árbol de Decisión busca crear Nodos los más puro posible. Para ello puede utilizar las siguentes métricas: 
 :::
 
-## Cálculo de Coeficientes
+::: {.columns}
+::: {.column}
+##### Índice Gini 
+$$Gini(X) = 1 - \sum_{x_i}p(x_i)^2$$
+:::
+::: {.column}
 
-::: {.callout-important}
-La técnica más famosa para minimizar este tipo de problemas se conoce como `Stochastic Gradient Descent`. Lo que genera la siguiente solución:
+##### Entropía 
+$$H(X) = -\sum_{x_i}p(x_i)log_2p(x_i)$$
+:::
+::: 
+::: {.callout-caution}
+A mayor valor, mayor nivel de impureza. 0 implica Nodo completamente puro.
 :::
 
-$$\theta_j \leftarrow \theta_j - \alpha \frac{1}{m}\sum_{i=1}\left(h_\theta(x^{(i)})-y^{(i)}\right)x_j^{(i)}$$
 
-::: {.callout-warning}
-A pesar de lo complicado que se ve la ecuación, implementarla en código es bastante sencillo.
+
+## Árbol de Decisión: Ejemplo {.smaller}
+
+
+::: {.columns}
+::: {.column width="60%"}
+
+![](img/clase-10/data_avengers.png){.lightbox fig-align="center"} 
+
+:::
+::: {.column width="40%"}
+
+::: {.callout-note appearance="default"}
+## Cálculo de Impureza en Hoja
+$$Gini_{(leaf)} = 1 - p(Yes)^2 - p(No)^2$$
+
+:::
+::: {.callout-tip appearance="default"}
+## Cálculo de Impureza en Split
+$$ Gini_{(split)} = \frac{n_{(yes)}}{n} Gini_{(yes)} + \frac{n_{(no)}}{n} Gini_{(no)}$$
+
+:::
+:::
+::: 
+
+## Árbol de Decisión: Definición de Nodo Raíz {.smaller}
+
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-10/data_avengers.png){.lightbox fig-align="center"} 
+:::
+::: {.column width="60%"}
+![](img/clase-10/popcorn_root.png){.lightbox fig-align="center"} 
+
+$$Gini_{(yes)} = 1 - (\frac{1}{4})^2 - (\frac{3}{4})^2 = 0.375$$
+$$Gini_{(no)} = 1 - (\frac{2}{3})^2 - (\frac{1}{3})^2 = 0.444$$
+
+::: {.callout}
+
+$$Gini_{(split)} = \frac{4}{7}\cdot 0.375 + \frac{3}{7} \cdot 0.444 = 0.405$$
+:::
+:::
+::: 
+
+
+## Árbol de Decisión: Raíz Popcorn {.smaller}
+
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-10/data_avengers.png){.lightbox fig-align="center"} 
+:::
+::: {.column width="60%"}
+![](img/clase-10/soda_root.png){.lightbox fig-align="center"} 
+
+$$Gini_{(yes)} = 1 - \left(\frac{1}{4}\right)^2 - \left(\frac{3}{4}\right)^2 = 0.375$$
+$$Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0$$
+
+::: {.callout}
+
+$$Gini_{(split)} = \frac{4}{7}\cdot 0.375 = 0.214$$
+:::
+:::
+::: 
+
+## Árbol de Decisión: Raíz Soda {.smaller}
+
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-10/data_avengers.png){.lightbox fig-align="center"} 
+:::
+::: {.column width="60%"}
+![](img/clase-10/soda_root.png){.lightbox fig-align="center"} 
+
+$$Gini_{(yes)} = 1 - \left(\frac{1}{4}\right)^2 - \left(\frac{3}{4}\right)^2 = 0.375$$
+$$Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0$$
+
+::: {.callout}
+
+$$Gini_{(split)} = \frac{4}{7}\cdot 0.375 = 0.214$$
+:::
+:::
+::: 
+
+## Árbol de Decisión: Raíz Age {.smaller}
+
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-10/cont_splits.png){.lightbox fig-align="center"} 
+
+::: {.callout-note}
+Los cortes de posibles Splits se calculan como el `promedio de los valores adyacentes` una vez que han sidos `ordenados de mayor a menor`. 
+
+:::
+:::
+::: {.column width="60%"}
+![](img/clase-10/age_9.5.png){.lightbox fig-align="center"} 
+
+$$Gini_{(yes)} = 1 - \left(\frac{1}{1}\right)^2 - \left(\frac{0}{1}\right)^2 = 0$$
+$$Gini_{(no)} = 1 - \left(\frac{3}{6}\right)^2 - \left(\frac{3}{6}\right)^2 = 0.5$$
+
+::: {.callout}
+
+$$Gini_{(split)} = \frac{6}{7}\cdot 0.5 = 0.429$$
+:::
+:::
+::: 
+
+
+## Árbol de Decisión: Raíz Age {.smaller}
+
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-10/cont_splits.png){.lightbox fig-align="center"} 
+
+::: {.callout-note}
+Los cortes de posibles Splits se calculan como el `promedio de los valores adyacentes` una vez que han sidos `ordenados de mayor a menor`. 
+
+:::
+:::
+::: {.column width="60%"}
+![](img/clase-10/age_15.png){.lightbox fig-align="center"} 
+
+$$Gini_{(yes)} = 1 - \left(\frac{2}{2}\right)^2 - \left(\frac{0}{2}\right)^2 = 0$$
+$$Gini_{(no)} = 1 - \left(\frac{3}{5}\right)^2 - \left(\frac{2}{5}\right)^2 = 0.48$$
+
+::: {.callout}
+
+$$Gini_{(split)} = \frac{5}{7}\cdot 0.48 = 0.343$$
+:::
+:::
+::: 
+
+## Árbol de Decisión: Raíz Age {.smaller}
+
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-10/cont_splits.png){.lightbox fig-align="center"} 
+
+::: {.callout-note}
+Los cortes de posibles Splits se calculan como el `promedio de los valores adyacentes` una vez que han sidos `ordenados de mayor a menor`. 
+
+:::
+:::
+::: {.column width="60%"}
+![](img/clase-10/age_26.5.png){.lightbox fig-align="center"} 
+
+$$Gini_{(yes)} = 1 - \left(\frac{1}{3}\right)^2 - \left(\frac{2}{3}\right)^2 = 0.444$$
+$$Gini_{(no)} = 1 - \left(\frac{2}{4}\right)^2 - \left(\frac{2}{4}\right)^2 = 0.5$$
+
+::: {.callout}
+
+$$Gini_{(split)} = \frac{3}{7}\cdot 0.444 + \frac{4}{7} \cdot 0.5 = 0.476$$
+:::
+:::
+::: 
+
+## Árbol de Decisión: Raíz Age {.smaller}
+
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-10/cont_splits.png){.lightbox fig-align="center"} 
+
+::: {.callout-note}
+Los cortes de posibles Splits se calculan como el `promedio de los valores adyacentes` una vez que han sidos `ordenados de mayor a menor`. 
+
+:::
+:::
+::: {.column width="60%"}
+![](img/clase-10/age_36.5.png){.lightbox fig-align="center"} 
+
+$$Gini_{(yes)} = 1 - \left(\frac{2}{4}\right)^2 - \left(\frac{2}{4}\right)^2 = 0.5$$
+$$Gini_{(no)} = 1 - \left(\frac{1}{3}\right)^2 - \left(\frac{2}{3}\right)^2 = 0.444$$
+
+::: {.callout}
+
+$$Gini_{(split)} = \frac{4}{7}\cdot 0.5 + \frac{3}{7} \cdot 0.444 = 0.476$$
+:::
+:::
+::: 
+
+## Árbol de Decisión: Raíz Age {.smaller}
+
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-10/cont_splits.png){.lightbox fig-align="center"} 
+
+::: {.callout-note}
+Los cortes de posibles Splits se calculan como el `promedio de los valores adyacentes` una vez que han sidos `ordenados de mayor a menor`. 
+
+:::
+:::
+::: {.column width="60%"}
+![](img/clase-10/age_44.png){.lightbox fig-align="center"} 
+
+$$Gini_{(yes)} = 1 - \left(\frac{3}{2}\right)^2 - \left(\frac{2}{5}\right)^2 = 0.48$$
+$$Gini_{(no)} = 1 - \left(\frac{0}{2}\right)^2 - \left(\frac{2}{2}\right)^2 = 0$$
+
+::: {.callout}
+
+$$Gini_{(split)} = \frac{5}{7}\cdot 0.48 = 0.343$$
+:::
+:::
+::: 
+
+## Árbol de Decisión: Raíz Age {.smaller}
+
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-10/cont_splits.png){.lightbox fig-align="center"} 
+
+::: {.callout-note}
+Los cortes de posibles Splits se calculan como el `promedio de los valores adyacentes` una vez que han sidos `ordenados de mayor a menor`. 
+
+:::
+:::
+::: {.column width="60%"}
+![](img/clase-10/age_66.5.png){.lightbox fig-align="center"} 
+
+$$Gini_{(yes)} = 1 - \left(\frac{3}{6}\right)^2 - \left(\frac{3}{6}\right)^2 = 0.5$$
+$$Gini_{(no)} = 1 - \left(\frac{0}{1}\right)^2 - \left(\frac{1}{1}\right)^2 = 0$$
+
+::: {.callout}
+
+$$Gini_{(split)} = \frac{6}{7}\cdot 0.5 = 0.429$$
+:::
+:::
+::: 
+
+## ¿Qué Split elegiremos? {.smaller}
+
+
+::: {.columns}
+::: {.column width="30%"}
+![](img/clase-10/gini_iter1.png){.lightbox fig-align="center" width="50%"} 
+:::
+::: {.column width="70%"}
+![](img/clase-10/soda_root.png){.lightbox fig-align="center" width="50%"} 
+
+![](img/clase-10/split_2.png){.lightbox fig-align="center" width="50%"} 
+:::
+::: 
+
+::: {.callout-tip}
+Escogeremos el Split más pequeño que representa el que genera más pureza.
 :::
 
+::: {.callout-caution}
+El nodo que no le gusta la Soda quedó completamente puro. Por lo tanto, no puede seguir dividiéndose. Seguiremos trabajando sólo con aquellos `que sí les gusta la Soda`.
+:::
 
-## Frontera de Decisión
-
-![](img/clase-10/3d-sigmoid.png){.lightbox fig-align="center" width="60%"}
+## Árbol de Decisión: 2do Nivel {.smaller}
 
 
-## Inference Time {.smaller}
+::: {.columns}
+::: {.column }
+![](img/clase-10/split_2.png){.lightbox fig-align="center"} 
 
-En este caso se calcula:
-$$h_\theta(x^{(i)})=sigmoid(\theta^t x^{(i)})$$
+:::
+::: {.column }
+![](img/clase-10/popcorn_2.png){.lightbox fig-align="center"} 
 
-* $\theta$: Corresponde a un vector con todos los parámetros calculados.
-* $x^{(i)}$: Corresponde a una instancia de $m$ variables la cual generará una probabilidad.
-    * $\theta^t x^{(i)}$ corresponde al producto punto de dos vectores, que es equivalente a una ***"suma producto"***.
-* $h_\theta(x^{(i)})$: Generará un valor entre 0 y 1 al cuál se le aplica la Regla de Decisión.
+$$Gini_{(yes)} = 1 - \left(\frac{1}{2}\right)^2 - \left(\frac{1}{2}\right)^2 = 0.5$$
+$$Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0$$
 
-![](img/clase-10/h.png){.lightbox fig-align="center" width="40%" }
+::: {.callout}
 
-## Implementación en Python
+$$Gini_{(split)} = \frac{2}{4}\cdot 0.5 = 0.25$$
+:::
+:::
+::: 
 
-```{.python code-line-numbers="|1|3-4|6-7|9-11|"}
-from sklearn.linear_model import LogisticRegression
 
-lr = LogisticRegression(C=1, penalty="l2", random_state = 42)
-lr.fit(X_train, y_train)
+## Árbol de Decisión: 2do Nivel {.smaller}
 
-y_pred = lr.predict(X_test)
-y_proba = lr.predict_proba(X_test)
 
-## Visualizacion de los Parámetros 
-lr.coef_
-lr.intercept_
+::: {.columns}
+::: {.column }
+![](img/clase-10/split_2.png){.lightbox fig-align="center"} 
+
+:::
+::: {.column }
+![](img/clase-10/age_12.5_2.png){.lightbox fig-align="center"} 
+
+$$Gini_{(yes)} = 1 - \left(\frac{0}{1}\right)^2 - \left(\frac{1}{1}\right)^2 = 0$$
+$$Gini_{(no)} = 1 - \left(\frac{3}{3}\right)^2 - \left(\frac{0}{3}\right)^2 = 0$$
+
+::: {.callout}
+
+$$Gini_{(split)} = 0$$
+:::
+:::
+::: 
+
+## Árbol de Decisión: 2do Nivel {.smaller}
+
+
+::: {.columns}
+::: {.column }
+![](img/clase-10/split_2.png){.lightbox fig-align="center"} 
+
+:::
+::: {.column }
+![](img/clase-10/age_26.5_2.png){.lightbox fig-align="center"} 
+
+$$Gini_{(yes)} = 1 - \left(\frac{1}{2}\right)^2 - \left(\frac{1}{2}\right)^2 = 0.5$$
+$$Gini_{(no)} = 1 - \left(\frac{2}{2}\right)^2 - \left(\frac{0}{2}\right)^2 = 0$$
+
+::: {.callout}
+
+$$Gini_{(split)} = \frac{2}{4} \cdot 0.5 = 0.25$$
+:::
+:::
+::: 
+
+## Árbol de Decisión: 2do Nivel {.smaller}
+
+
+::: {.columns}
+::: {.column }
+![](img/clase-10/split_2.png){.lightbox fig-align="center"} 
+
+:::
+::: {.column }
+![](img/clase-10/age_36.5_2.png){.lightbox fig-align="center"} 
+
+$$Gini_{(yes)} = 1 - \left(\frac{2}{3}\right)^2 - \left(\frac{1}{3}\right)^2 = 0.444$$
+$$Gini_{(no)} = 1 - \left(\frac{1}{1}\right)^2 - \left(\frac{0}{1}\right)^2 = 0$$
+
+::: {.callout}
+
+$$Gini_{(split)} = \frac{3}{4} \cdot 0.444 = 0.333$$
+:::
+:::
+::: 
+
+## Árbol de Decisión {.smaller}
+
+::: {.columns}
+::: {.column width="30%"}
+![](img/clase-10/gini_2.png){.lightbox fig-align="center"} 
+:::
+::: {.column width="70%" .fragment fragment-index=1}
+![](img/clase-10/arbol_final.png){.lightbox fig-align="center"} 
+
+::: {.callout-note .fragment fragment-index=2}
+***¿Cuál sería la predicción?***
+:::
+
+![](img/clase-10/pred.png){.lightbox fig-align="center" .fragment fragment-index=2} 
+:::
+::: 
+
+## Crecimiento de un Árbol
+
+* Un árbol sólo parará de crecer si:
+  * Todas las muestras de un nodo pertenecen a la misma clase.
+  * No hay más variables a separar.
+  * No hay más puntos a separar.
+
+::: {.callout-caution}
+* Esto normalmente termina en `Overfitting`. 
+:::
+
+::: {.callout-tip}
+Para solucionar esto se aplica regularización. En el caso de Árboles esto se denomina `prunning`.
+:::
+
+## Pruning
+
+### Prepruning: Define/Evita que el árbol crezca hasta: 
+
+* Un cierto nivel o número de hojas.
+* Aplicar un test estadístico (normalmente un proceso muy costoso).
+* Usar medidas de complejidad para penalizar árboles de gran tamaño.
+
+### Postpruning: Decide eliminar nodos, luego de que el árbol crezca.
+
+* Usar un parámetro de Costo de Impureza.
+
+## Hiperparámetros 
+
+::: {.callout-tip}
+
+* **criterion**: Elegir bajo qué criterio se mide la impureza.
+* **max_depth**: El nivel es la altura que tendrá el árbol. Niveles más bajos generan árboles más simples.
+* **min_samples_split**: Número de instancias necesarias para generar un split. Un mayor número o proporción generará árboles más simples. 
+* **min_samples_leaf**: Número mínimo de instancias necesarias para que un nodo sea hoja. Un número o proporción más alta generará árboles más simples. 
+* **ccp_alpha**: Está asociado a la pureza total del árbol. Para más información ver [acá](https://scikit-learn.org/stable/auto_examples/tree/plot_cost_complexity_pruning.html#sphx-glr-auto-examples-tree-plot-cost-complexity-pruning-py).
+
+:::
+::: {.callout-caution}
+***¿Cómo se ve la complejidad/simplicidad en un árbol de Decisión?***
+:::
+
+## Implementación en Scikit-Learn
+
+```{.python code-line-numbers="|1|3-5|6|7-9|11-12|"}
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+
+dt = DecisionTreeClassifier(criterion="gini", max_depth=None, min_sample_split=2, 
+                            min_samples_leaf=1,min_impurity_decrease=0, 
+                            ccp_alpha=0, random_state=42)
+dt.fit(X_train, y_train)
+
+y_pred = dt.predict(X_test)
+y_proba = dt.predict_proba(X_test)
+
+## Permite Visualizar el Árbol de 
+plt_tree(dt, filled = True, impurity=True, node_ids = )
+
 ```
 
-::: {style="font-size: 55%;"}
-* **C**: Corresponde a un parámetro de Regularización. Valores más pequeños implica mayor regularización. Por defecto 1.
-* penalty: Corresponde al tipo de regularización. Por defecto *"l2"*.
-    * ***"l1":*** Corresponde a la regularización Lasso. Genera que hayan parámetros cero, ayudando en la selección de variables.
-    * ***"l2":*** Corresponde a la regularización Ridge. Genera que todos los parámetros sean pequeños, entregando estabilidad y buena interpretabilidad. 
-    * ***"elasticnet":*** Corresponde a la combinación de *"l1"* y *"l2"*. 
-    * ***None:*** No hay regularización.
+::: {style="font-size: 60%;"}
+* **criterion**: Puede ser gini o entropía. Por defecto `"gini"`.
+* **max_depth**: Número de niveles que se permita que crezca el nivel, por defecto `None`, significa todos los que pueda.
+* **min_samples_split**: El número mínimo de elementos dentro de un nodo para permitir el split. Por defecto 2.
+* **min_samples_leaf**: El número mínimo de elementos para que un nodo pueda ser considerado hoja. Por defecto 1.
+* **min_impurity_decreased**: Decrecimiento mínimo de la impureza. Si no se cumple, no hay Split. Por defecto 0.
+* **ccp_alpha**: Parámetro de Post-Pruning. Valores más altos genera la poda de más nodos.
 :::
 
-::: {.callout-important}
-Para cambiar la regularización, consultar la documentación de Scikit-Learn.
-:::
-
-## Interpretabilidad {.smaller}
-
-> Una de las grandes ventajas que tiene la Regresión Logística es que sus predicciones son interpretables. 
-
-* Tenemos un dataset de 2 variables:
-  * W: Corresponde al peso del Vehículo.
-  * qsec: Corresponde al tiempo en Segundos que lo toma en recorrer un cuarto de milla.
-* Queremos predecir si el vehículo es Ecónomico o no (en términos de consumo de Bencina). 
-
-$$h_\theta(x) = 0.5 - 3.5 \cdot W + 1.5 \cdot qsec $$
-
-::: {.callout-note .incremental .fragment}
-* Si el vehículo se demora más en el cuarto de milla (**qsec** aumenta) entonces el vehículo es más económico.
-  * Tiene menos potencia.
-:::
-
-::: {.callout-caution .incremental .fragment}
-* Si el vehículo es más pesado (**W** aumenta), entonces es menos económico.
-  * Requiere probablemente más combustible para mover dicho peso.
-:::
-
-::: {.callout-tip .fragment}
-El valor del parámetro representa también la magnitud de la contribución.
-:::
-
-## Sugerencias
-
-::: {.callout-tip}
-* **Estandarización/Normalización de datos**: Permite que la escala de los datos no afecte en la interpretabilidad.
-* **One Hot Encoder**: En general tiende a dar mejores resultados que el Ordinal.
-* **Interacciones**: Combinación de variables.
-* **Variables no Lineales**: Permite que la frontera de Decisión no sea necesariamente lineal (Regresión Polinómica).
-:::
-
-![](img/clase-10/polinomial.png){.lightbox fig-align="center" width="40%" }
-
-
-# мы сделали
+# لقد إنتهينا
 
 
 ::: {.footer}

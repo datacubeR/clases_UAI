@@ -1,6 +1,6 @@
 ---
 title: "TICS-411 Minería de Datos"
-subtitle: "Clase 11: Árboles de Decisión"
+subtitle: "Clase 11: Naive Bayes"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -23,553 +23,306 @@ format:
     pdf-separate-fragments: true
 ---
 
+## Naive Bayes: Preliminares {.smaller}
 
-## Árboles de Decisión
+> También conocido como `Clasificador Inexperto de Bayes`, es uno de los clasificadores más conocidos y sencillos. 
 
-> Técnica de clasificación supervisada que genera una decisión basada en `árboles de decisión` para clasificar instancias no conocidas.
-
-
-![](img/clase-11/dt.png){.lightbox fig-align="center"}
-
-## Árboles de Decisión: Ejemplo {.smaller}
-
-> Visualmente, un árbol de decisión segmenta el espacio separando los datos en subgrupos.
-
-::: {.callout-tip}
-Esto permite la generacion de fronteras de decisión sumamente complejas. 
+::: {.callout-note}
+Se hizo particularmente conocido como uno de los primeros algoritmos en funcionar como Clasificador de Spam de manera efectiva.
 :::
 
-Supongamos el siguiente ejemplo:
+* Es un modelo netamente probabilístico basado en el `Teorema de Bayes`.
+    * Aprende una distribucional de Probabilidad Condicional.
+    * Dado un punto $x_i$, el modelo retorna la "probabilidad" de que $x_i$ pertenezca a una clase específica.
+
+## Definiciones {.smaller}
 
 ::: {.columns}
-::: {.column width="40%"}
-![](img/clase-11/dt_problem.png){.lightbox fig-align="center"}
-:::
-::: {.column width="60%" .fragment}
+::: {.column}
+Probabilidad Condicional
+: $$P(X|C) = \frac{P(X \cap C)}{P(C)}$$
 
-![](img/clase-11/dt_solution.png){.lightbox fig-align="center"}
+Teorema de Bayes
+: $$P(C|X) = \frac{P(X|C)P(C)}{P(X)}$$
+
+Independencia Condicional
+: $$P(X_1, X_2, ..., X_k|C) = \prod_{i=1}^k P(X_i|C)$$
+:::
+::: {.column}
+
+<br>
+
+::: {.callout-note}
+Se lee como la Probabilidad de que Ocurra $X$ dado que tenemos $C$.
+:::
+<br>
+
+::: {.callout-note}
+La `probabilidad a posteriori` (LHS), depende de el ***Likelihood***, la ***probabilidad a priori*** y la ***evidencia*** (RHS). 
+:::
+<br>
+
+::: {.callout-note}
+Si asumimos ***independencia***, entonces la probabilidad conjunta de $k$ eventos, se calcula como la ***productoria de las probabilidades condicionales independientes***.
+:::
 :::
 ::: 
 
-## Árboles de Decisión: Frontera de Decisión
+## Ejemplo básico
 
+::: {.callout}
+Supongamos que:
+
+* Sabemos que la Meningitis produce Tortícolis el 50% de las veces.
+* La probabilidad de tener meningitis es: $1/50000$.
+* La probabilidad de tener Tortícolis: $1/20$.
+:::
+
+Si su paciente tiene tortícolis, ¿Cuál es la probabilidad de que tenga Meningitis?
+
+$$P(M|T) = \frac{P(T|M)P(M)}{P(T)}=\frac{0.5 \cdot 1/50000}{1/20} = 0.0002$$
+
+## Modelo Naive Bayes: Aprendizaje {.smaller}
+
+$$P(y = C_j|X_1, X_2, ..., X_k) = \frac{P(X_1,X_2,..., X_k|y=C_j)P(y=C_j)}{P(X_1, X_2, ..., X_k)}$$
 
 ::: {.columns}
-::: {.column width="40%"}
-![](img/clase-11/dt_solution.png){.lightbox fig-align="center"}
-:::
 ::: {.column width="60%"}
-![](img/clase-11/dt_viz.png){.lightbox fig-align="center"} 
+
+* $P(y=C_j|X)$ sería la probabilidad de que la predicción del modelo sea $C_j$ dado que lo alimentamos con las variables $X$.
+* Luego $P(y=C_j)$ es la probabilidad *a priori* de que la clase sea $C_j$.
+* $P(X|y=C_j)$ es el likelihood (verosimilitud). Corresponde a la distribución de probabilidad de las variables X cuando la clase es $C_j$.
+* $P(X)$ es la evidencia, y normalmente es muy complejo de calcular.
 :::
-::: 
-
-## Árboles de Decisión: Inferencia
-
-Una vez construido el `árbol de decisión` basta con recorrerlo para poder generar la predicción para una instancia dada:
-
-::: {.columns}
-::: {.column width="70%"}
-![](img/clase-11/dt.png){.lightbox fig-align="center"}
+::: {.column width="40%"}
+::: {.callout-caution}
+Por simplicidad reduciremos $X_1, X_2, ..., X_k$ a $X$.
 :::
-::: {.column width="30%"}
-![](img/clase-11/dt_clf.png){.lightbox fig-align="center"} 
-:::
-::: 
-
-## Características de Árboles
-
-* Pueden trabajar con valores discretos o continuos. Además pueden ser usados como modelos de `Clasificación` o `Regresíon`.
-* Una vez seleccionado un atributo no es posible devolverse (backtracking).
-* Debido al poder de un árbol de Decisión la mayoría de las veces tienden al Overfitting. Una forma de evitar esto es usar técnicas de `Pruning`. 
-* Es preferible usar árboles cortos (Principio de Parsimonia o `Occam's razor`).  
 
 ::: {.callout-important}
-El principio de Parsimonia recomienda encontrar soluciones a problemas utilizando la menor cantidad de elementos/parámetros.
+$P(X)$ tiene como única función la de normalizar la probabilidad para que vaya en un rango entre 0 y 1. 
 :::
-
-## Tipos de Árboles de Decisión {.smaller}
-
-::: {.columns}
-::: {.column}
-
-![**Binary Split**](img/clase-11/binary_trees.png){.lightbox fig-align="center"}
-:::
-::: {.column}
-![**Multi-way Split**](img/clase-11/multiple_trees.png){.lightbox fig-align="center"}
 :::
 ::: 
 
-::: {.callout}
 
-* Hunt's Algorithm $\implies$ Primer Método.
-* ID3 $\implies$ Sólo utiliza variables categóricas.
-* C4.5 $\implies$ incluye variables continuas.
-* C5.0 $\implies$ Permite separación en Múltiples Splits (No ha sido implementado en Sklearn). 
-* CART (Classification and Regression Trees) $\implies$ Permite que el output sea continuo pero solo utilizando Splits binarios.
-:::
+## Modelo Naive Bayes: Predicción 
 
-::: {.callout-caution}
-Los CARTs son por lejos los árboles más utilizados en las librerías más famosas y potentes: `Scikit-Learn`, `XGboost`, `LightGBM`, `Catboost`. 
-:::
 
-## Creación de un Árbol de Decisión 
+$$\hat{y_i} = \underset{C_j}{argmax} \: P(y=C_j|X) $$
 
-Pureza
-: Corresponde a la probabilidad de no sacar dos registros de un Nodo que pertenezcan a la misma clase.
+donde, 
+$$P(y = C_j|X) \propto \prod_{i=1}^k P(X|y=C_j)P(y=C_j)$$
 
 ::: {.callout-tip}
-
-El árbol de Decisión busca crear Nodos los más puro posible. Para ello puede utilizar las siguentes métricas: 
+La predicción de `Naive Bayes` corresponde a la clase que entrega ***[un estimado de]*** la `Probabilidad a Posteriori` más grande.
 :::
+
+## Ejemplo {.smaller}
 
 ::: {.columns}
-::: {.column}
-##### Índice Gini 
-$$Gini(X) = 1 - \sum_{x_i}p(x_i)^2$$
+::: {.column width="50%"}
+![](img/clase-11/naive_data.png){.lightbox fig-align="center" width="70%"}
 :::
-::: {.column}
-
-##### Entropía 
-$$H(X) = -\sum_{x_i}p(x_i)log_2p(x_i)$$
-:::
-::: 
-::: {.callout-caution}
-A mayor valor, mayor nivel de impureza. 0 implica Nodo completamente puro.
-:::
-
-
-
-## Árbol de Decisión: Ejemplo {.smaller}
-
-
-::: {.columns}
-::: {.column width="60%"}
-
-![](img/clase-11/data_avengers.png){.lightbox fig-align="center"} 
-
-:::
-::: {.column width="40%"}
-
-::: {.callout-note appearance="default"}
-## Cálculo de Impureza en Hoja
-$$Gini_{(leaf)} = 1 - p(Yes)^2 - p(No)^2$$
-
-:::
-::: {.callout-tip appearance="default"}
-## Cálculo de Impureza en Split
-$$ Gini_{(split)} = \frac{n_{(yes)}}{n} Gini_{(yes)} + \frac{n_{(no)}}{n} Gini_{(no)}$$
-
-:::
-:::
-::: 
-
-## Árbol de Decisión: Definición de Nodo Raíz {.smaller}
-
-
-::: {.columns}
-::: {.column width="40%"}
-![](img/clase-11/data_avengers.png){.lightbox fig-align="center"} 
-:::
-::: {.column width="60%"}
-![](img/clase-11/popcorn_root.png){.lightbox fig-align="center"} 
-
-$$Gini_{(yes)} = 1 - (\frac{1}{4})^2 - (\frac{3}{4})^2 = 0.375$$
-$$Gini_{(no)} = 1 - (\frac{2}{3})^2 - (\frac{1}{3})^2 = 0.444$$
+::: {.column width="50%"}
 
 ::: {.callout}
+¿Cómo clasificamos el siguiente punto?
 
-$$Gini_{(split)} = \frac{4}{7}\cdot 0.375 + \frac{3}{7} \cdot 0.444 = 0.405$$
+$$ X = [C=Soleado,T=Media,H=Alta,V=Débil]$$
+:::
+
+::: {.callout-note appearance="default" icon="false"}
+## Probabilidad de Sí
+$$P(y = Sí|X) = P(X|y=Sí)P(y=Sí)$$
+:::
+
+::: {.callout-important appearance="default" icon="false"}
+## Probabilidad de No
+
+$$ P(y = No|X) = P(X|y=No)P(y=No)$$
 :::
 :::
 ::: 
 
 
-## Árbol de Decisión: Raíz Popcorn {.smaller}
+
+
+## Ejemplo {.smaller}
+
+::: {.callout-note icon="false"}
+$$ P(y = Sí|X) = P(C=Soleado|y=Sí)P(T=Media|y=Sí)P(H=Alta|y=Sí)P(V=Débil|y=Sí)P(y=Sí)$$
+:::
+
+::: {.callout-important icon="false"}
+$$ P(y = No|X) = P(C=Soleado|y=No)P(T=Media|y=No)P(H=Alta|y=No)P(V=Débil|y=No)P(y=No)$$
+:::
 
 
 ::: {.columns}
 ::: {.column width="40%"}
-![](img/clase-11/data_avengers.png){.lightbox fig-align="center"} 
+#### Probabilidad Condicional para clase Sí
+$$\small P(C = Soleado|y = Sí) = 2/9$$
+$$\small P(T = Media|y = Sí) = 4/9$$
+
+$$\small P(H = Alta|y = Sí) = 3/9$$
+$$\small P(V=Débil|y = Sí) = 6/9$$
 :::
-::: {.column width="60%"}
-![](img/clase-11/soda_root.png){.lightbox fig-align="center"} 
-
-$$Gini_{(yes)} = 1 - \left(\frac{1}{4}\right)^2 - \left(\frac{3}{4}\right)^2 = 0.375$$
-$$Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0$$
-
-::: {.callout}
-
-$$Gini_{(split)} = \frac{4}{7}\cdot 0.375 = 0.214$$
-:::
-:::
-::: 
-
-## Árbol de Decisión: Raíz Soda {.smaller}
-
-
-::: {.columns}
 ::: {.column width="40%"}
-![](img/clase-11/data_avengers.png){.lightbox fig-align="center"} 
+#### Probabilidad Condicional para clase No
+$$\small P(C = Soleado|y = No) = 3/5$$
+$$\small P(T = Media|y = No) = 2/5$$
+
+$$\small P(H = Alta|y = No) = 4/5$$
+$$\small P(V=Débil|y = No) = 2/5$$
 :::
-::: {.column width="60%"}
-![](img/clase-11/soda_root.png){.lightbox fig-align="center"} 
+::: {.column width="20%"}
+##### Probabilidad a priori
 
-$$Gini_{(yes)} = 1 - \left(\frac{1}{4}\right)^2 - \left(\frac{3}{4}\right)^2 = 0.375$$
-$$Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0$$
-
-::: {.callout}
-
-$$Gini_{(split)} = \frac{4}{7}\cdot 0.375 = 0.214$$
-:::
-:::
-::: 
-
-## Árbol de Decisión: Raíz Age {.smaller}
-
-
-::: {.columns}
-::: {.column width="40%"}
-![](img/clase-11/cont_splits.png){.lightbox fig-align="center"} 
-
-::: {.callout-note}
-Los cortes de posibles Splits se calculan como el `promedio de los valores adyacentes` una vez que han sidos `ordenados de mayor a menor`. 
-
-:::
-:::
-::: {.column width="60%"}
-![](img/clase-11/age_9.5.png){.lightbox fig-align="center"} 
-
-$$Gini_{(yes)} = 1 - \left(\frac{1}{1}\right)^2 - \left(\frac{0}{1}\right)^2 = 0$$
-$$Gini_{(no)} = 1 - \left(\frac{3}{6}\right)^2 - \left(\frac{3}{6}\right)^2 = 0.5$$
-
-::: {.callout}
-
-$$Gini_{(split)} = \frac{6}{7}\cdot 0.5 = 0.429$$
-:::
+$$P(y = Sí) = \frac{9}{14} = 0.642$$
+$$P(y = No) = \frac{5}{14} = 0.357$$
 :::
 ::: 
 
+## Predicción
 
-## Árbol de Decisión: Raíz Age {.smaller}
-
-
-::: {.columns}
-::: {.column width="40%"}
-![](img/clase-11/cont_splits.png){.lightbox fig-align="center"} 
-
-::: {.callout-note}
-Los cortes de posibles Splits se calculan como el `promedio de los valores adyacentes` una vez que han sidos `ordenados de mayor a menor`. 
-
+::: {.callout-note icon="false"}
+$$\scriptsize P(y = Sí|X) = P(C=Soleado|y=Sí)P(T=Media|y=Sí)P(H=Alta|y=Sí)P(V=Débil|y=Sí)P(y=Sí)$$
+$$\small P(y = Sí|X) = \frac{2}{9} \cdot \frac{4}{9} \cdot \frac{3}{9} \cdot \frac{6}{9} \cdot \frac{9}{14} = 0.0141$$
 :::
+
+
+::: {.callout-important icon="false"}
+$$\scriptsize P(y = No|X) = P(C=Soleado|y=No)P(T=Media|y=No)P(H=Alta|y=No)P(V=Débil|y=No)P(y=No)$$
+$$\small P(y = No|X) = \frac{3}{5} \cdot \frac{2}{5} \cdot \frac{4}{5} \cdot \frac{2}{5} \cdot \frac{5}{14} = 0.0274$$
 :::
-::: {.column width="60%"}
-![](img/clase-11/age_15.png){.lightbox fig-align="center"} 
 
-$$Gini_{(yes)} = 1 - \left(\frac{2}{2}\right)^2 - \left(\frac{0}{2}\right)^2 = 0$$
-$$Gini_{(no)} = 1 - \left(\frac{3}{5}\right)^2 - \left(\frac{2}{5}\right)^2 = 0.48$$
-
-::: {.callout}
-
-$$Gini_{(split)} = \frac{5}{7}\cdot 0.48 = 0.343$$
+::: {.callout-tip}
+$$\hat{y} = argmax \{0.0141, 0.0274\} = No$$
 :::
-:::
-::: 
 
-## Árbol de Decisión: Raíz Age {.smaller}
+## Smoothing {.smaller}
 
-
-::: {.columns}
-::: {.column width="40%"}
-![](img/clase-11/cont_splits.png){.lightbox fig-align="center"} 
-
-::: {.callout-note}
-Los cortes de posibles Splits se calculan como el `promedio de los valores adyacentes` una vez que han sidos `ordenados de mayor a menor`. 
-
-:::
-:::
-::: {.column width="60%"}
-![](img/clase-11/age_26.5.png){.lightbox fig-align="center"} 
-
-$$Gini_{(yes)} = 1 - \left(\frac{1}{3}\right)^2 - \left(\frac{2}{3}\right)^2 = 0.444$$
-$$Gini_{(no)} = 1 - \left(\frac{2}{4}\right)^2 - \left(\frac{2}{4}\right)^2 = 0.5$$
-
-::: {.callout}
-
-$$Gini_{(split)} = \frac{3}{7}\cdot 0.444 + \frac{4}{7} \cdot 0.5 = 0.476$$
-:::
-:::
-::: 
-
-## Árbol de Decisión: Raíz Age {.smaller}
-
-
-::: {.columns}
-::: {.column width="40%"}
-![](img/clase-11/cont_splits.png){.lightbox fig-align="center"} 
-
-::: {.callout-note}
-Los cortes de posibles Splits se calculan como el `promedio de los valores adyacentes` una vez que han sidos `ordenados de mayor a menor`. 
-
-:::
-:::
-::: {.column width="60%"}
-![](img/clase-11/age_36.5.png){.lightbox fig-align="center"} 
-
-$$Gini_{(yes)} = 1 - \left(\frac{2}{4}\right)^2 - \left(\frac{2}{4}\right)^2 = 0.5$$
-$$Gini_{(no)} = 1 - \left(\frac{1}{3}\right)^2 - \left(\frac{2}{3}\right)^2 = 0.444$$
-
-::: {.callout}
-
-$$Gini_{(split)} = \frac{4}{7}\cdot 0.5 + \frac{3}{7} \cdot 0.444 = 0.476$$
-:::
-:::
-::: 
-
-## Árbol de Decisión: Raíz Age {.smaller}
-
-
-::: {.columns}
-::: {.column width="40%"}
-![](img/clase-11/cont_splits.png){.lightbox fig-align="center"} 
-
-::: {.callout-note}
-Los cortes de posibles Splits se calculan como el `promedio de los valores adyacentes` una vez que han sidos `ordenados de mayor a menor`. 
-
-:::
-:::
-::: {.column width="60%"}
-![](img/clase-11/age_44.png){.lightbox fig-align="center"} 
-
-$$Gini_{(yes)} = 1 - \left(\frac{3}{2}\right)^2 - \left(\frac{2}{5}\right)^2 = 0.48$$
-$$Gini_{(no)} = 1 - \left(\frac{0}{2}\right)^2 - \left(\frac{2}{2}\right)^2 = 0$$
-
-::: {.callout}
-
-$$Gini_{(split)} = \frac{5}{7}\cdot 0.48 = 0.343$$
-:::
-:::
-::: 
-
-## Árbol de Decisión: Raíz Age {.smaller}
-
-
-::: {.columns}
-::: {.column width="40%"}
-![](img/clase-11/cont_splits.png){.lightbox fig-align="center"} 
-
-::: {.callout-note}
-Los cortes de posibles Splits se calculan como el `promedio de los valores adyacentes` una vez que han sidos `ordenados de mayor a menor`. 
-
-:::
-:::
-::: {.column width="60%"}
-![](img/clase-11/age_66.5.png){.lightbox fig-align="center"} 
-
-$$Gini_{(yes)} = 1 - \left(\frac{3}{6}\right)^2 - \left(\frac{3}{6}\right)^2 = 0.5$$
-$$Gini_{(no)} = 1 - \left(\frac{0}{1}\right)^2 - \left(\frac{1}{1}\right)^2 = 0$$
-
-::: {.callout}
-
-$$Gini_{(split)} = \frac{6}{7}\cdot 0.5 = 0.429$$
-:::
-:::
-::: 
-
-## ¿Qué Split elegiremos? {.smaller}
+Supongamos otro dataset más pequeño:
 
 
 ::: {.columns}
 ::: {.column width="30%"}
-![](img/clase-11/gini_iter1.png){.lightbox fig-align="center" width="50%"} 
+![](img/clase-11/laplace_smoothing.png){.lightbox fig-align="center" width="60%"} 
 :::
 ::: {.column width="70%"}
-![](img/clase-11/soda_root.png){.lightbox fig-align="center" width="50%"} 
 
-![](img/clase-11/split_2.png){.lightbox fig-align="center" width="50%"} 
+::: {.callout-warning}
+Dado que `Naive Bayes` se calcula como una Productoria, al tener probabilidades 0 inmediatamente la ***Probabilidad a Posteriori es 0***.
+:::
+$$ P(Clima = Soleado|y = Sí) = \frac{0}{6}$$
+$$ P(Clima = Soleado|y = No) = \frac{5}{8}$$
+
+
+::: {style="font-size: 80%;"}
+$$P(X_j|C = i) = \frac{N_{yj} + \alpha}{N_y + M\alpha}$$
+
+* **$\alpha$**: Es un Hiperparámetro. Si $\alpha = 1$ se le llama Laplace Smoothing, si $\alpha <1$ entonces se le llama Lidstone Smoothing.
+* **M**: Corresponde al número de posibles valores que puede tomar $X_j$
+* **$N_{yj}$**: Corresponde a la cantidad de registros que toman el valor de la variable $X_j$ solicitado en la clase $y$.
+* **$N_{y}$**: Corresponde a la cantidad de registros totales que tienen la clase $y$.
+:::
+
 :::
 ::: 
 
-::: {.callout-tip}
-Escogeremos el Split más pequeño que representa el que genera más pureza.
-:::
-
-::: {.callout-caution}
-El nodo que no le gusta la Soda quedó completamente puro. Por lo tanto, no puede seguir dividiéndose. Seguiremos trabajando sólo con aquellos `que sí les gusta la Soda`.
-:::
-
-## Árbol de Decisión: 2do Nivel {.smaller}
-
+## Laplace Smoothing
 
 ::: {.columns}
-::: {.column }
-![](img/clase-11/split_2.png){.lightbox fig-align="center"} 
-
+::: {.column}
+#### Sin Laplace
+![](img/clase-11/sin_laplace.png){.lightbox fig-align="center" width="60%"} 
 :::
-::: {.column }
-![](img/clase-11/popcorn_2.png){.lightbox fig-align="center"} 
+::: {.column}
 
-$$Gini_{(yes)} = 1 - \left(\frac{1}{2}\right)^2 - \left(\frac{1}{2}\right)^2 = 0.5$$
-$$Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0$$
-
-::: {.callout}
-
-$$Gini_{(split)} = \frac{2}{4}\cdot 0.5 = 0.25$$
-:::
+#### Con Laplace
+![](img/clase-11/con_laplace.png){.lightbox fig-align="center" width="60%"} 
 :::
 ::: 
 
-
-## Árbol de Decisión: 2do Nivel {.smaller}
-
-
-::: {.columns}
-::: {.column }
-![](img/clase-11/split_2.png){.lightbox fig-align="center"} 
-
+::: {.callout-important}
+En este caso $\alpha = 1$ y $M=3$ ya que Clima puede tomar 3 valores: Soleado, Cubierto y Lluvia.
 :::
-::: {.column }
-![](img/clase-11/age_12.5_2.png){.lightbox fig-align="center"} 
 
-$$Gini_{(yes)} = 1 - \left(\frac{0}{1}\right)^2 - \left(\frac{1}{1}\right)^2 = 0$$
-$$Gini_{(no)} = 1 - \left(\frac{3}{3}\right)^2 - \left(\frac{0}{3}\right)^2 = 0$$
-
-::: {.callout}
-
-$$Gini_{(split)} = 0$$
-:::
-:::
-::: 
-
-## Árbol de Decisión: 2do Nivel {.smaller}
-
-
-::: {.columns}
-::: {.column }
-![](img/clase-11/split_2.png){.lightbox fig-align="center"} 
-
-:::
-::: {.column }
-![](img/clase-11/age_26.5_2.png){.lightbox fig-align="center"} 
-
-$$Gini_{(yes)} = 1 - \left(\frac{1}{2}\right)^2 - \left(\frac{1}{2}\right)^2 = 0.5$$
-$$Gini_{(no)} = 1 - \left(\frac{2}{2}\right)^2 - \left(\frac{0}{2}\right)^2 = 0$$
-
-::: {.callout}
-
-$$Gini_{(split)} = \frac{2}{4} \cdot 0.5 = 0.25$$
-:::
-:::
-::: 
-
-## Árbol de Decisión: 2do Nivel {.smaller}
-
-
-::: {.columns}
-::: {.column }
-![](img/clase-11/split_2.png){.lightbox fig-align="center"} 
-
-:::
-::: {.column }
-![](img/clase-11/age_36.5_2.png){.lightbox fig-align="center"} 
-
-$$Gini_{(yes)} = 1 - \left(\frac{2}{3}\right)^2 - \left(\frac{1}{3}\right)^2 = 0.444$$
-$$Gini_{(no)} = 1 - \left(\frac{1}{1}\right)^2 - \left(\frac{0}{1}\right)^2 = 0$$
-
-::: {.callout}
-
-$$Gini_{(split)} = \frac{3}{4} \cdot 0.444 = 0.333$$
-:::
-:::
-::: 
-
-## Árbol de Decisión {.smaller}
+## Variables Continuas
 
 ::: {.columns}
 ::: {.column width="30%"}
-![](img/clase-11/gini_2.png){.lightbox fig-align="center"} 
+![](img/clase-11/variable_continua.png){.lightbox fig-align="center" width="65%"} 
 :::
-::: {.column width="70%" .fragment fragment-index=1}
-![](img/clase-11/arbol_final.png){.lightbox fig-align="center"} 
-
-::: {.callout-note .fragment fragment-index=2}
-***¿Cuál sería la predicción?***
+::: {.column width="70%"}
+::: {.callout-tip}
+Podemos calcular el Likelihood como una PDF ***(Probability Density Function)***. La más común: Distribución Normal ***(Gaussian Naive Bayes)***. 
 :::
 
-![](img/clase-11/pred.png){.lightbox fig-align="center" .fragment fragment-index=2} 
+$$f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
+
+![](img/clase-11/gaussian_nb.png){.lightbox fig-align="center" width="35%"} 
 :::
 ::: 
 
-## Crecimiento de un Árbol
+## Variables Continuas: Predicción
 
-* Un árbol sólo parará de crecer si:
-  * Todas las muestras de un nodo pertenecen a la misma clase.
-  * No hay más variables a separar.
-  * No hay más puntos a separar.
 
-::: {.callout-caution}
-* Esto normalmente termina en `Overfitting`. 
+::: {.callout-note icon="false"}
+$$P(humedad=74|y = Sí) = \frac{1}{\sqrt{2\pi \cdot 10.2^2}}e^{-\frac{(74-79.1)^2}{2\cdot 10.2^2}} = 0.0345 $$
+:::
+
+::: {.callout-important icon="false"}
+$$P(humedad=74|y = No) = \frac{1}{\sqrt{2\pi \cdot 9.7^2}}e^{-\frac{(74-86.2)^2}{2\cdot 9.7^2}} = 0.01865 $$
 :::
 
 ::: {.callout-tip}
-Para solucionar esto se aplica regularización. En el caso de Árboles esto se denomina `prunning`.
+Luego la predicción es Sí.
 :::
 
-## Pruning
+## Detalles Técnicos
 
-### Prepruning: Define/Evita que el árbol crezca hasta: 
+::: {.callout-tip appearance="default"}
+## Fortalezas
 
-* Un cierto nivel o número de hojas.
-* Aplicar un test estadístico (normalmente un proceso muy costoso).
-* Usar medidas de complejidad para penalizar árboles de gran tamaño.
-
-### Postpruning: Decide eliminar nodos, luego de que el árbol crezca.
-
-* Usar un parámetro de Costo de Impureza.
-
-## Hiperparámetros 
-
-::: {.callout-tip}
-
-* **criterion**: Elegir bajo qué criterio se mide la impureza.
-* **max_depth**: El nivel es la altura que tendrá el árbol. Niveles más bajos generan árboles más simples.
-* **min_samples_split**: Número de instancias necesarias para generar un split. Un mayor número o proporción generará árboles más simples. 
-* **min_samples_leaf**: Número mínimo de instancias necesarias para que un nodo sea hoja. Un número o proporción más alta generará árboles más simples. 
-* **ccp_alpha**: Está asociado a la pureza total del árbol. Para más información ver [acá](https://scikit-learn.org/stable/auto_examples/tree/plot_cost_complexity_pruning.html#sphx-glr-auto-examples-tree-plot-cost-complexity-pruning-py).
+* Fácil de Implementar
+* A menudo tiene un rendimiento decente a pesar de que las variables pueden no ser independientes.
+* Puede aprender de forma incremental.
+* Valores faltantes son ignorados en el proceso de Aprendizaje.
+* Modelo robusto frente a datos atípicos y/o irrelevantes.
 
 :::
-::: {.callout-caution}
-***¿Cómo se ve la complejidad/simplicidad en un árbol de Decisión?***
+::: {.callout-important appearance="default"}
+## Debilidades
+
+* Asumir clases condicionadas produce probabilidades sesgadas.
+* Dependencias entre las variables no pueden ser modeladas.
 :::
 
 ## Implementación en Scikit-Learn
 
 ```{.python code-line-numbers="|1|3-5|6|7-9|11-12|"}
-from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.naive_bayes import MultinomialNB
 
-dt = DecisionTreeClassifier(criterion="gini", max_depth=None, min_sample_split=2, 
-                            min_samples_leaf=1,min_impurity_decrease=0, 
-                            ccp_alpha=0, random_state=42)
-dt.fit(X_train, y_train)
+nb = MultinomialNB(alpha = 1)
+nb.fit(X_train, y_train)
 
-y_pred = dt.predict(X_test)
-y_proba = dt.predict_proba(X_test)
-
-## Permite Visualizar el Árbol de 
-plt_tree(dt, filled = True, impurity=True, node_ids = )
-
+y_pred = nb.predict(X_test)
+y_proba = nb.predict_proba(X_test)
 ```
 
-::: {style="font-size: 60%;"}
-* **criterion**: Puede ser gini o entropía. Por defecto `"gini"`.
-* **max_depth**: Número de niveles que se permita que crezca el nivel, por defecto `None`, significa todos los que pueda.
-* **min_samples_split**: El número mínimo de elementos dentro de un nodo para permitir el split. Por defecto 2.
-* **min_samples_leaf**: El número mínimo de elementos para que un nodo pueda ser considerado hoja. Por defecto 1.
-* **min_impurity_decreased**: Decrecimiento mínimo de la impureza. Si no se cumple, no hay Split. Por defecto 0.
-* **ccp_alpha**: Parámetro de Post-Pruning. Valores más altos genera la poda de más nodos.
-:::
+```{.python code-line-numbers="|1|3-5|6|7-9|11-12|"}
+from sklearn.naive_bayes import GaussianNB
 
-# لقد إنتهينا
+gb = MultinomialNB(alpha = 1)
+gb.fit(X_train, y_train)
 
+y_pred = gb.predict(X_test)
+y_proba = gb.predict_proba(X_test)
+```
+
+# Adeus
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
