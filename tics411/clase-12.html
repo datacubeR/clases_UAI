@@ -398,7 +398,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 5: DBSCAN</p>
+  <p class="subtitle">Clase 12: Naive Bayes</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -412,401 +412,373 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section>
-<section id="clustering-por-densidad" class="title-slide slide level1 center">
-<h1>Clustering por Densidad</h1>
-
-</section>
-<section id="clustering-densidad" class="slide level2">
-<h2>Clustering: Densidad</h2>
+<section id="naive-bayes-preliminares" class="slide level2 smaller">
+<h2>Naive Bayes: Preliminares</h2>
 <blockquote>
-<p>Se basan en la idea de continuar el crecimiento de un cluster a medida que la densidad (número de objetos o puntos) en el vecindario sobrepase algún umbral.</p>
+<p>También conocido como <code>Clasificador Inexperto de Bayes</code>, es uno de los clasificadores más conocidos y sencillos.</p>
 </blockquote>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-3/densidad.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-3/densidad.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>En nuestro caso utilizaremos <strong>DBSCAN</strong> (Density-Based Spatial Clustering Applications with Noise).</p>
+<p>Se hizo particularmente conocido como uno de los primeros algoritmos en funcionar como Clasificador de Spam de manera efectiva.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="dbscan-definiciones" class="slide level2 smaller">
-<h2>DBSCAN: Definiciones</h2>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Hiperparámetros del Modelo</strong></p>
-</div>
-<div class="callout-content">
 <ul>
-<li><code>eps</code>: Radio de análisis</li>
-<li><code>MinPts</code>: Corresponde al mínimo de puntos necesarios en un Radio <code>eps</code>.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<dl>
-<dt>Densidad</dt>
-<dd>
-<blockquote>
-<p>Densidad es el número de puntos dentro del radio <code>eps</code>.</p>
-</blockquote>
-</dd>
-<dt>Core Point/Punto Central</dt>
-<dd>
-<blockquote>
-<p>Un punto central/core es aquel que tiene al menos <code>MinPts</code> puntos dentro de la esfera definida por <code>eps</code> (se incluye él mismo).</p>
-</blockquote>
-</dd>
-</dl>
-</div><div class="column">
-<dl>
-<dt>Border Point/Punto Borde</dt>
-<dd>
-<blockquote>
-<p>Un punto de borde tiene menos puntos que <code>MinPts</code> del <code>eps</code>, pero está dentro de la esfera de un punto central.</p>
-</blockquote>
-</dd>
-<dt>Noise Point/Punto Ruido</dt>
-<dd>
-<blockquote>
-<p>Un punto de ruido es todo aquel que no es punto central ni de borde.</p>
-</blockquote>
-</dd>
-</dl>
-</div>
-</div>
-</section>
-<section id="dbscan-algoritmo-categorización-de-puntos" class="slide level2 smaller">
-<h2>DBSCAN: Algoritmo categorización de puntos</h2>
-<blockquote>
-<p>Primeramente se aplica un algoritmo para categorizar cada punto de acuerdo a las definiciones anteriores.</p>
-</blockquote>
+<li>Es un modelo netamente probabilístico basado en el <code>Teorema de Bayes</code>.
 <ul>
-<li>Para cada punto en el espacio:
-<ul>
-<li>Calcular su densidad en EPS y aplicar el siguiente algoritmo:</li>
+<li>Aprende una distribucional de Probabilidad Condicional.</li>
+<li>Dado un punto <span class="math inline">\(x_i\)</span>, el modelo retorna la “probabilidad” de que <span class="math inline">\(x_i\)</span> pertenezca a una clase específica.</li>
 </ul></li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/dbscan_algo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-5/dbscan_algo.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
 </section>
-<section id="ejemplo-iteración-1" class="slide level2 smaller">
-<h2>Ejemplo: Iteración 1</h2>
-<blockquote>
-<p>Supongamos un ejemplo con <span class="math inline">\(MinPts=4\)</span>.</p>
-</blockquote>
+<section id="definiciones" class="slide level2 smaller">
+<h2>Definiciones</h2>
 <div class="columns">
 <div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/ejemplo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-5/ejemplo.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/ejemplo_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-5/ejemplo_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/ejemplo_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-5/ejemplo_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
-</figure>
-</div>
-</div>
+<dl>
+<dt>Probabilidad Condicional</dt>
+<dd>
+<span class="math display">\[P(X|C) = \frac{P(X \cap C)}{P(C)}\]</span>
+</dd>
+<dt>Teorema de Bayes</dt>
+<dd>
+<span class="math display">\[P(C|X) = \frac{P(X|C)P(C)}{P(X)}\]</span>
+</dd>
+<dt>Independencia Condicional</dt>
+<dd>
+<span class="math display">\[P(X_1, X_2, ..., X_k|C) = \prod_{i=1}^k P(X_i|C)\]</span>
+</dd>
+</dl>
 </div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/iter_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-5/iter_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="3">
+<p><br></p>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Este punto corresponde a un <strong>Core Point</strong>.</p>
+<p>Se lee como la Probabilidad de que Ocurra <span class="math inline">\(X\)</span> dado que tenemos <span class="math inline">\(C\)</span>.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-iteración-2" class="slide level2">
-<h2>Ejemplo: Iteración 2</h2>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/border_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-5/border_1.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/border_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-5/border_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/border_algo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-5/border_algo.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="1">
+<p><br></p>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Este punto corresponde a un <strong>Border Point</strong>.</p>
+<p>La <code>probabilidad a posteriori</code> (LHS), depende de el <strong><em>Likelihood</em></strong>, la <strong><em>probabilidad a priori</em></strong> y la <strong><em>evidencia</em></strong> (RHS).</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-iteración-3" class="slide level2">
-<h2>Ejemplo: Iteración 3</h2>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/noise_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-5/noise_1.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/noise_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-5/noise_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/noise_algo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-5/noise_algo.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="1">
+<p><br></p>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Este punto corresponde a un <strong>Noise Point</strong>.</p>
-</div>
+<p>Si asumimos <strong><em>independencia</em></strong>, entonces la probabilidad conjunta de <span class="math inline">\(k\)</span> eventos, se calcula como la <strong><em>productoria de las probabilidades condicionales independientes</em></strong>.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="ejemplo-iteración-final" class="slide level2">
-<h2>Ejemplo: Iteración Final</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/iter_final.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-5/iter_final.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-important callout-style-simple">
+<section id="ejemplo-básico" class="slide level2">
+<h2>Ejemplo básico</h2>
+<div class="callout callout-none no-icon callout-style-simple">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
 <div class="callout-content">
-<p>Ahora, <strong>¿Cómo definimos que partes son clusters o no?</strong></p>
+<p>Supongamos que:</p>
+<ul>
+<li>Sabemos que la Meningitis produce Tortícolis el 50% de las veces.</li>
+<li>La probabilidad de tener meningitis es: <span class="math inline">\(1/50000\)</span>.</li>
+<li>La probabilidad de tener Tortícolis: <span class="math inline">\(1/20\)</span>.</li>
+</ul>
 </div>
 </div>
 </div>
+<p>Si su paciente tiene tortícolis, ¿Cuál es la probabilidad de que tenga Meningitis?</p>
+<p><span class="math display">\[P(M|T) = \frac{P(T|M)P(M)}{P(T)}=\frac{0.5 \cdot 1/50000}{1/20} = 0.0002\]</span></p>
 </section>
-<section id="algoritmo-de-clustering" class="slide level2">
-<h2>Algoritmo de Clustering</h2>
-<p>Se aplica el siguiente algoritmo para calcular clusterings.</p>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Antes de aplicar se desechan los Noise Points ya que no serán considerados. <strong>(Veremos luego que ocurre con estos puntos)</strong>.</p>
-</div>
-</div>
-</div>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|2|3-5|6|7-8|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>label<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb1-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb1-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb1-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb1-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb1-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb1-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="iteración-1" class="slide level2">
-<h2>Iteración 1</h2>
+<section id="modelo-naive-bayes-aprendizaje" class="slide level2 smaller">
+<h2>Modelo Naive Bayes: Aprendizaje</h2>
+<p><span class="math display">\[P(y = C_j|X_1, X_2, ..., X_k) = \frac{P(X_1,X_2,..., X_k|y=C_j)P(y=C_j)}{P(X_1, X_2, ..., X_k)}\]</span></p>
 <div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c1_0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-5/c1_0.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-5/c1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c1_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-5/c1_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="r-stack">
-<div class="fragment fade-in-then-out" data-fragment-index="1">
-<div class="sourceCode" id="cb2" data-code-line-numbers="2-5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>label<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb2-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb2-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb2-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb2-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb2-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb2-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb2-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="fragment" data-fragment-index="2">
-<div class="sourceCode" id="cb3" data-code-line-numbers="6-8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>label<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb3-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb3-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb3-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb3-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb3-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb3-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb3-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Todos los puntos cercanos a un Core reciben la misma etiqueta.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="iteración-2" class="slide level2">
-<h2>Iteración 2</h2>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c2_0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-5/c2_0.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-5/c2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c2_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-5/c2_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="r-stack">
-<div class="fragment fade-in-then-out" data-fragment-index="1">
-<div class="sourceCode" id="cb4" data-code-line-numbers="2-5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>label<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb4-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb4-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb4-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb4-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb4-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb4-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb4-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="fragment" data-fragment-index="2">
-<div class="sourceCode" id="cb5" data-code-line-numbers="6-8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co">## label ya está en 1</span></span>
-<span id="cb5-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb5-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb5-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb5-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb5-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb5-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb5-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En este caso obtuvimos 2 clusters, e indirectamente un 3er de puntos ruido.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="dbscan" class="slide level2">
-<h2>DBSCAN</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/dbscan.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-5/dbscan.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="fragment">
+<div class="column" style="width:60%;">
+<ul>
+<li><span class="math inline">\(P(y=C_j|X)\)</span> sería la probabilidad de que la predicción del modelo sea <span class="math inline">\(C_j\)</span> dado que lo alimentamos con las variables <span class="math inline">\(X\)</span>.</li>
+<li>Luego <span class="math inline">\(P(y=C_j)\)</span> es la probabilidad <em>a priori</em> de que la clase sea <span class="math inline">\(C_j\)</span>.</li>
+<li><span class="math inline">\(P(X|y=C_j)\)</span> es el likelihood (verosimilitud). Corresponde a la distribución de probabilidad de las variables X cuando la clase es <span class="math inline">\(C_j\)</span>.</li>
+<li><span class="math inline">\(P(X)\)</span> es la evidencia, y normalmente es muy complejo de calcular.</li>
+</ul>
+</div><div class="column" style="width:40%;">
 <div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p><strong>¿Sería posible replicar un proceso de Clustering similar utilizando K-Means?</strong> <strong>¿Por qué?</strong></p>
+<p>Por simplicidad reduciremos <span class="math inline">\(X_1, X_2, ..., X_k\)</span> a <span class="math inline">\(X\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(P(X)\)</span> tiene como única función la de normalizar la probabilidad para que vaya en un rango entre 0 y 1.</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="dbscan-detalles-técnicos" class="slide level2">
-<h2>DBSCAN: Detalles Técnicos</h2>
-<div class="callout callout-note callout-titled callout-style-default">
+<section id="modelo-naive-bayes-predicción" class="slide level2">
+<h2>Modelo Naive Bayes: Predicción</h2>
+<p><span class="math display">\[\hat{y_i} = \underset{C_j}{argmax} \: P(y=C_j|X) \]</span></p>
+<p>donde, <span class="math display">\[P(y = C_j|X) \propto \prod_{i=1}^k P(X|y=C_j)P(y=C_j)\]</span></p>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>La predicción de <code>Naive Bayes</code> corresponde a la clase que entrega <strong><em>[un estimado de]</em></strong> la <code>Probabilidad a Posteriori</code> más grande.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo" class="slide level2 smaller">
+<h2>Ejemplo</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-12/naive_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-12/naive_data.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>¿Cómo clasificamos el siguiente punto?</p>
+<p><span class="math display">\[ X = [C=Soleado,T=Media,H=Alta,V=Débil]\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Probabilidad de Sí</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[P(y = Sí|X) = P(X|y=Sí)P(y=Sí)\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Probabilidad de No</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[ P(y = No|X) = P(X|y=No)P(y=No)\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-1" class="slide level2 smaller">
+<h2>Ejemplo</h2>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[ P(y = Sí|X) = P(C=Soleado|y=Sí)P(T=Media|y=Sí)P(H=Alta|y=Sí)P(V=Débil|y=Sí)P(y=Sí)\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[ P(y = No|X) = P(C=Soleado|y=No)P(T=Media|y=No)P(H=Alta|y=No)P(V=Débil|y=No)P(y=No)\]</span></p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<h4 id="probabilidad-condicional-para-clase-sí">Probabilidad Condicional para clase Sí</h4>
+<p><span class="math display">\[\small P(C = Soleado|y = Sí) = 2/9\]</span> <span class="math display">\[\small P(T = Media|y = Sí) = 4/9\]</span></p>
+<p><span class="math display">\[\small P(H = Alta|y = Sí) = 3/9\]</span> <span class="math display">\[\small P(V=Débil|y = Sí) = 6/9\]</span></p>
+</div><div class="column" style="width:40%;">
+<h4 id="probabilidad-condicional-para-clase-no">Probabilidad Condicional para clase No</h4>
+<p><span class="math display">\[\small P(C = Soleado|y = No) = 3/5\]</span> <span class="math display">\[\small P(T = Media|y = No) = 2/5\]</span></p>
+<p><span class="math display">\[\small P(H = Alta|y = No) = 4/5\]</span> <span class="math display">\[\small P(V=Débil|y = No) = 2/5\]</span></p>
+</div><div class="column" style="width:20%;">
+<h5 id="probabilidad-a-priori">Probabilidad a priori</h5>
+<p><span class="math display">\[P(y = Sí) = \frac{9}{14} = 0.642\]</span> <span class="math display">\[P(y = No) = \frac{5}{14} = 0.357\]</span></p>
+</div>
+</div>
+</section>
+<section id="predicción" class="slide level2">
+<h2>Predicción</h2>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[\scriptsize P(y = Sí|X) = P(C=Soleado|y=Sí)P(T=Media|y=Sí)P(H=Alta|y=Sí)P(V=Débil|y=Sí)P(y=Sí)\]</span> <span class="math display">\[\small P(y = Sí|X) = \frac{2}{9} \cdot \frac{4}{9} \cdot \frac{3}{9} \cdot \frac{6}{9} \cdot \frac{9}{14} = 0.0141\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[\scriptsize P(y = No|X) = P(C=Soleado|y=No)P(T=Media|y=No)P(H=Alta|y=No)P(V=Débil|y=No)P(y=No)\]</span> <span class="math display">\[\small P(y = No|X) = \frac{3}{5} \cdot \frac{2}{5} \cdot \frac{4}{5} \cdot \frac{2}{5} \cdot \frac{5}{14} = 0.0274\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\hat{y} = argmax \{0.0141, 0.0274\} = No\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="smoothing" class="slide level2 smaller">
+<h2>Smoothing</h2>
+<p>Supongamos otro dataset más pequeño:</p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-12/laplace_smoothing.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-12/laplace_smoothing.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:70%;">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Dado que <code>Naive Bayes</code> se calcula como una Productoria, al tener probabilidades 0 inmediatamente la <strong><em>Probabilidad a Posteriori es 0</em></strong>.</p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[ P(Clima = Soleado|y = Sí) = \frac{0}{6}\]</span> <span class="math display">\[ P(Clima = Soleado|y = No) = \frac{5}{8}\]</span></p>
+<div style="font-size: 80%;">
+<p><span class="math display">\[P(X_j|C = i) = \frac{N_{yj} + \alpha}{N_y + M\alpha}\]</span></p>
+<ul>
+<li><strong><span class="math inline">\(\alpha\)</span></strong>: Es un Hiperparámetro. Si <span class="math inline">\(\alpha = 1\)</span> se le llama Laplace Smoothing, si <span class="math inline">\(\alpha &lt;1\)</span> entonces se le llama Lidstone Smoothing.</li>
+<li><strong>M</strong>: Corresponde al número de posibles valores que puede tomar <span class="math inline">\(X_j\)</span></li>
+<li><strong><span class="math inline">\(N_{yj}\)</span></strong>: Corresponde a la cantidad de registros que toman el valor de la variable <span class="math inline">\(X_j\)</span> solicitado en la clase <span class="math inline">\(y\)</span>.</li>
+<li><strong><span class="math inline">\(N_{y}\)</span></strong>: Corresponde a la cantidad de registros totales que tienen la clase <span class="math inline">\(y\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="laplace-smoothing" class="slide level2">
+<h2>Laplace Smoothing</h2>
+<div class="columns">
+<div class="column">
+<h4 id="sin-laplace">Sin Laplace</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-12/sin_laplace.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-12/sin_laplace.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<h4 id="con-laplace">Con Laplace</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-12/con_laplace.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-12/con_laplace.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En este caso <span class="math inline">\(\alpha = 1\)</span> y <span class="math inline">\(M=3\)</span> ya que Clima puede tomar 3 valores: Soleado, Cubierto y Lluvia.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="variables-continuas" class="slide level2">
+<h2>Variables Continuas</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-12/variable_continua.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-12/variable_continua.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:70%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Podemos calcular el Likelihood como una PDF <strong><em>(Probability Density Function)</em></strong>. La más común: Distribución Normal <strong><em>(Gaussian Naive Bayes)</em></strong>.</p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-12/gaussian_nb.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-12/gaussian_nb.png" class="quarto-figure quarto-figure-center" style="width:35.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="variables-continuas-predicción" class="slide level2">
+<h2>Variables Continuas: Predicción</h2>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[P(humedad=74|y = Sí) = \frac{1}{\sqrt{2\pi \cdot 10.2^2}}e^{-\frac{(74-79.1)^2}{2\cdot 10.2^2}} = 0.0345 \]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math display">\[P(humedad=74|y = No) = \frac{1}{\sqrt{2\pi \cdot 9.7^2}}e^{-\frac{(74-86.2)^2}{2\cdot 9.7^2}} = 0.01865 \]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Luego la predicción es Sí.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="detalles-técnicos" class="slide level2">
+<h2>Detalles Técnicos</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
@@ -816,14 +788,16 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <ul>
-<li>Resistente al ruido.</li>
-<li>Puede lidiar con clusters de diferentes formas y tamaños.</li>
-<li>No es necesario especificar cuántos clusters encontrar.</li>
+<li>Fácil de Implementar</li>
+<li>A menudo tiene un rendimiento decente a pesar de que las variables pueden no ser independientes.</li>
+<li>Puede aprender de forma incremental.</li>
+<li>Valores faltantes son ignorados en el proceso de Aprendizaje.</li>
+<li>Modelo robusto frente a datos atípicos y/o irrelevantes.</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
@@ -833,110 +807,32 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <ul>
-<li>Algoritmo de alta complejidad computacional que puede llegar <span class="math inline">\(O(n^2)\)</span> en el peor caso.</li>
-<li>Se ve afectado por densidad de los datos y por datos con una alta dimensionalidad.</li>
-<li>Su óptimo resultado depende específicamente de sus Hiperparámetros.</li>
-<li>No puede generalizar en datos no usados en entrenamiento.</li>
+<li>Asumir clases condicionadas produce probabilidades sesgadas.</li>
+<li>Dependencias entre las variables no pueden ser modeladas.</li>
 </ul>
-</div>
-</div>
-</div>
-</section>
-<section id="cómo-encontrar-los-hiperparámetros" class="slide level2">
-<h2>¿Cómo encontrar los Hiperparámetros?</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>minPts</strong></p>
-</div>
-<div class="callout-content">
-<p>Para datasets multidimensionales grandes, la regla es:</p>
-<p><span class="math display">\[minPts \ge dim + 1\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Otras recomendaciones:</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Para dos dimensiones: <span class="math inline">\(minPts=4\)</span> (Ester et al., 1996)</li>
-<li>Para más de 2 dimensiones: <span class="math inline">\(minPts = 2 \cdot dim\)</span> (Sander et al., 1998)</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:30%;">
-<p><br> <br> <br></p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/hp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-5/hp.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="cómo-encontrar-los-hiperparámetros-1" class="slide level2 smaller">
-<h2>¿Cómo encontrar los Hiperparámetros?</h2>
-<blockquote>
-<p>Para encontrar EPS se suele utilizar el método de Vecinos más cercanos.</p>
-</blockquote>
-<div class="columns">
-<div class="column">
-<h4 id="idea">Idea</h4>
-<ul>
-<li><p>La distancia de los puntos dentro de un cluster a su k-ésimo vecino deberían ser similares.</p></li>
-<li><p>Luego, los puntos atípicos (o ruidosos) tienen el k-ésimo vecino a una mayor distancia.</p></li>
-</ul>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>💡 Podemos plotear la distancia ordenada de cada punto a su k-ésimo vecino y seleccionar un <code>eps</code> cercano al crecimiento exponencial (codo).</p>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/codo_dbscan.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-5/codo_dbscan.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
 </div>
 </div>
 </div>
 </section>
 <section id="implementación-en-scikit-learn" class="slide level2">
 <h2>Implementación en Scikit-Learn</h2>
-<div class="sourceCode" id="cb6" data-code-line-numbers="|1|3|5-6|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
-<span id="cb6-2"><a></a></span>
-<span id="cb6-3"><a></a>dbs <span class="op">=</span> DBSCAN(min_samples <span class="op">=</span> <span class="dv">5</span>, eps <span class="op">=</span> <span class="fl">0.5</span>, metric <span class="op">=</span> <span class="st">"euclidean"</span>)</span>
-<span id="cb6-4"><a></a></span>
-<span id="cb6-5"><a></a><span class="co">## Se entrena y se genera la predicción</span></span>
-<span id="cb6-6"><a></a>dbs.fit_predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="columns" style="font-size: 70%;">
-<ul>
-<li><p><strong>min_samples</strong>: Corresponde a minPts. Por defecto 5.</p></li>
-<li><p><strong>eps</strong>: Corresponde al radio de la esfera en la que se buscan los puntos cercanos. Por defecto 0.5.</p></li>
-<li><p><strong>metric</strong>: Corresponde a la distancia utilizada para medir la distancia. Permite todas las distancias mencionadas <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise_distances.html#sklearn.metrics.pairwise_distances">acá</a>.</p></li>
-<li><p><code>.fit_predict()</code>: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento. Adicionalmente los puntos ruidosos se etiquetarán como -1.</p></li>
-</ul>
-</div>
-<p>👀 Veamos un ejemplo.</p>
-</section></section>
-<section id="its-over" class="title-slide slide level1 center">
-<h1>It’s over!!</h1>
+<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3-5|6|7-9|11-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> MultinomialNB</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a>nb <span class="op">=</span> MultinomialNB(alpha <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb1-4"><a></a>nb.fit(X_train, y_train)</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a>y_pred <span class="op">=</span> nb.predict(X_test)</span>
+<span id="cb1-7"><a></a>y_proba <span class="op">=</span> nb.predict_proba(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2" data-code-line-numbers="|1|3-5|6|7-9|11-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> GaussianNB</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>gb <span class="op">=</span> MultinomialNB(alpha <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb2-4"><a></a>gb.fit(X_train, y_train)</span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a>y_pred <span class="op">=</span> gb.predict(X_test)</span>
+<span id="cb2-7"><a></a>y_proba <span class="op">=</span> gb.predict_proba(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="لقد-إنتهينا" class="title-slide slide level1 center">
+<h1>لقد إنتهينا</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -978,7 +874,7 @@ Alfonso Tobar-Arancibia
       Reveal.initialize({
 'controlsAuto': false,
 'previewLinksAuto': false,
-'pdfSeparateFragments': false,
+'pdfSeparateFragments': true,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
@@ -1317,7 +1213,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","loop":false,"closeEffect":"zoom","selector":".lightbox"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
