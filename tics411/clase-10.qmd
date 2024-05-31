@@ -186,14 +186,14 @@ $$ Gini_{(split)} = \frac{n_{(yes)}}{n} Gini_{(yes)} + \frac{n_{(no)}}{n} Gini_{
 ![](img/clase-10/data_avengers.png){.lightbox fig-align="center"} 
 :::
 ::: {.column width="60%"}
-![](img/clase-10/soda_root.png){.lightbox fig-align="center"} 
+![](img/clase-10/popcorn_root.png){.lightbox fig-align="center"} 
 
 $$Gini_{(yes)} = 1 - \left(\frac{1}{4}\right)^2 - \left(\frac{3}{4}\right)^2 = 0.375$$
-$$Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0$$
+$$Gini_{(no)} = 1 - \left(\frac{2}{3}\right)^2 - \left(\frac{1}{3}\right)^2 = 0.444$$
 
 ::: {.callout}
 
-$$Gini_{(split)} = \frac{4}{7}\cdot 0.375 = 0.214$$
+$$Gini_{(split)} = \frac{4}{7}\cdot 0.375 + \frac{3}{7} \cdot 0.444 = 0.405$$
 :::
 :::
 ::: 
@@ -208,7 +208,7 @@ $$Gini_{(split)} = \frac{4}{7}\cdot 0.375 = 0.214$$
 ::: {.column width="60%"}
 ![](img/clase-10/soda_root.png){.lightbox fig-align="center"} 
 
-$$Gini_{(yes)} = 1 - \left(\frac{1}{4}\right)^2 - \left(\frac{3}{4}\right)^2 = 0.375$$
+$$Gini_{(yes)} = 1 - \left(\frac{3}{4}\right)^2 - \left(\frac{1}{4}\right)^2 = 0.375$$
 $$Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0$$
 
 ::: {.callout}
@@ -233,7 +233,7 @@ Los cortes de posibles Splits se calculan como el `promedio de los valores adyac
 ::: {.column width="60%"}
 ![](img/clase-10/age_9.5.png){.lightbox fig-align="center"} 
 
-$$Gini_{(yes)} = 1 - \left(\frac{1}{1}\right)^2 - \left(\frac{0}{1}\right)^2 = 0$$
+$$Gini_{(yes)} = 1 - \left(\frac{0}{1}\right)^2 - \left(\frac{1}{1}\right)^2 = 0$$
 $$Gini_{(no)} = 1 - \left(\frac{3}{6}\right)^2 - \left(\frac{3}{6}\right)^2 = 0.5$$
 
 ::: {.callout}
@@ -259,7 +259,7 @@ Los cortes de posibles Splits se calculan como el `promedio de los valores adyac
 ::: {.column width="60%"}
 ![](img/clase-10/age_15.png){.lightbox fig-align="center"} 
 
-$$Gini_{(yes)} = 1 - \left(\frac{2}{2}\right)^2 - \left(\frac{0}{2}\right)^2 = 0$$
+$$Gini_{(yes)} = 1 - \left(\frac{0}{2}\right)^2 - \left(\frac{2}{2}\right)^2 = 0$$
 $$Gini_{(no)} = 1 - \left(\frac{3}{5}\right)^2 - \left(\frac{2}{5}\right)^2 = 0.48$$
 
 ::: {.callout}
@@ -403,7 +403,7 @@ El nodo que no le gusta la Soda quedó completamente puro. Por lo tanto, no pued
 ![](img/clase-10/popcorn_2.png){.lightbox fig-align="center"} 
 
 $$Gini_{(yes)} = 1 - \left(\frac{1}{2}\right)^2 - \left(\frac{1}{2}\right)^2 = 0.5$$
-$$Gini_{(no)} = 1 - \left(\frac{0}{3}\right)^2 - \left(\frac{3}{3}\right)^2 = 0$$
+$$Gini_{(no)} = 1 - \left(\frac{2}{2}\right)^2 - \left(\frac{0}{2}\right)^2 = 0$$
 
 ::: {.callout}
 
