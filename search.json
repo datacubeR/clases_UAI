@@ -994,28 +994,28 @@
     "href": "tics411/clase-10.html#árbol-de-decisión-raíz-popcorn",
     "title": "TICS-411 Minería de Datos",
     "section": "Árbol de Decisión: Raíz Popcorn",
-    "text": "Árbol de Decisión: Raíz Popcorn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[Gini_{(yes)} = 1 - \\left(\\frac{1}{4}\\right)^2 - \\left(\\frac{3}{4}\\right)^2 = 0.375\\] \\[Gini_{(no)} = 1 - \\left(\\frac{0}{3}\\right)^2 - \\left(\\frac{3}{3}\\right)^2 = 0\\]\n\n\n\n\\[Gini_{(split)} = \\frac{4}{7}\\cdot 0.375 = 0.214\\]"
+    "text": "Árbol de Decisión: Raíz Popcorn\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[Gini_{(yes)} = 1 - \\left(\\frac{1}{4}\\right)^2 - \\left(\\frac{3}{4}\\right)^2 = 0.375\\] \\[Gini_{(no)} = 1 - \\left(\\frac{2}{3}\\right)^2 - \\left(\\frac{1}{3}\\right)^2 = 0.444\\]\n\n\n\n\\[Gini_{(split)} = \\frac{4}{7}\\cdot 0.375 + \\frac{3}{7} \\cdot 0.444 = 0.405\\]"
   },
   {
     "objectID": "tics411/clase-10.html#árbol-de-decisión-raíz-soda",
     "href": "tics411/clase-10.html#árbol-de-decisión-raíz-soda",
     "title": "TICS-411 Minería de Datos",
     "section": "Árbol de Decisión: Raíz Soda",
-    "text": "Árbol de Decisión: Raíz Soda\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[Gini_{(yes)} = 1 - \\left(\\frac{1}{4}\\right)^2 - \\left(\\frac{3}{4}\\right)^2 = 0.375\\] \\[Gini_{(no)} = 1 - \\left(\\frac{0}{3}\\right)^2 - \\left(\\frac{3}{3}\\right)^2 = 0\\]\n\n\n\n\\[Gini_{(split)} = \\frac{4}{7}\\cdot 0.375 = 0.214\\]"
+    "text": "Árbol de Decisión: Raíz Soda\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[Gini_{(yes)} = 1 - \\left(\\frac{3}{4}\\right)^2 - \\left(\\frac{1}{4}\\right)^2 = 0.375\\] \\[Gini_{(no)} = 1 - \\left(\\frac{0}{3}\\right)^2 - \\left(\\frac{3}{3}\\right)^2 = 0\\]\n\n\n\n\\[Gini_{(split)} = \\frac{4}{7}\\cdot 0.375 = 0.214\\]"
   },
   {
     "objectID": "tics411/clase-10.html#árbol-de-decisión-raíz-age",
     "href": "tics411/clase-10.html#árbol-de-decisión-raíz-age",
     "title": "TICS-411 Minería de Datos",
     "section": "Árbol de Decisión: Raíz Age",
-    "text": "Árbol de Decisión: Raíz Age\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos cortes de posibles Splits se calculan como el promedio de los valores adyacentes una vez que han sidos ordenados de mayor a menor.\n\n\n\n\n\n\n\n\n\n\\[Gini_{(yes)} = 1 - \\left(\\frac{1}{1}\\right)^2 - \\left(\\frac{0}{1}\\right)^2 = 0\\] \\[Gini_{(no)} = 1 - \\left(\\frac{3}{6}\\right)^2 - \\left(\\frac{3}{6}\\right)^2 = 0.5\\]\n\n\n\n\\[Gini_{(split)} = \\frac{6}{7}\\cdot 0.5 = 0.429\\]"
+    "text": "Árbol de Decisión: Raíz Age\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos cortes de posibles Splits se calculan como el promedio de los valores adyacentes una vez que han sidos ordenados de mayor a menor.\n\n\n\n\n\n\n\n\n\n\\[Gini_{(yes)} = 1 - \\left(\\frac{0}{1}\\right)^2 - \\left(\\frac{1}{1}\\right)^2 = 0\\] \\[Gini_{(no)} = 1 - \\left(\\frac{3}{6}\\right)^2 - \\left(\\frac{3}{6}\\right)^2 = 0.5\\]\n\n\n\n\\[Gini_{(split)} = \\frac{6}{7}\\cdot 0.5 = 0.429\\]"
   },
   {
     "objectID": "tics411/clase-10.html#árbol-de-decisión-raíz-age-1",
     "href": "tics411/clase-10.html#árbol-de-decisión-raíz-age-1",
     "title": "TICS-411 Minería de Datos",
     "section": "Árbol de Decisión: Raíz Age",
-    "text": "Árbol de Decisión: Raíz Age\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos cortes de posibles Splits se calculan como el promedio de los valores adyacentes una vez que han sidos ordenados de mayor a menor.\n\n\n\n\n\n\n\n\n\n\\[Gini_{(yes)} = 1 - \\left(\\frac{2}{2}\\right)^2 - \\left(\\frac{0}{2}\\right)^2 = 0\\] \\[Gini_{(no)} = 1 - \\left(\\frac{3}{5}\\right)^2 - \\left(\\frac{2}{5}\\right)^2 = 0.48\\]\n\n\n\n\\[Gini_{(split)} = \\frac{5}{7}\\cdot 0.48 = 0.343\\]"
+    "text": "Árbol de Decisión: Raíz Age\n\n\n\n\n\n\n\n\n\n\n\n\n\nLos cortes de posibles Splits se calculan como el promedio de los valores adyacentes una vez que han sidos ordenados de mayor a menor.\n\n\n\n\n\n\n\n\n\n\\[Gini_{(yes)} = 1 - \\left(\\frac{0}{2}\\right)^2 - \\left(\\frac{2}{2}\\right)^2 = 0\\] \\[Gini_{(no)} = 1 - \\left(\\frac{3}{5}\\right)^2 - \\left(\\frac{2}{5}\\right)^2 = 0.48\\]\n\n\n\n\\[Gini_{(split)} = \\frac{5}{7}\\cdot 0.48 = 0.343\\]"
   },
   {
     "objectID": "tics411/clase-10.html#árbol-de-decisión-raíz-age-2",
@@ -1057,7 +1057,7 @@
     "href": "tics411/clase-10.html#árbol-de-decisión-2do-nivel",
     "title": "TICS-411 Minería de Datos",
     "section": "Árbol de Decisión: 2do Nivel",
-    "text": "Árbol de Decisión: 2do Nivel\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[Gini_{(yes)} = 1 - \\left(\\frac{1}{2}\\right)^2 - \\left(\\frac{1}{2}\\right)^2 = 0.5\\] \\[Gini_{(no)} = 1 - \\left(\\frac{0}{3}\\right)^2 - \\left(\\frac{3}{3}\\right)^2 = 0\\]\n\n\n\n\\[Gini_{(split)} = \\frac{2}{4}\\cdot 0.5 = 0.25\\]"
+    "text": "Árbol de Decisión: 2do Nivel\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[Gini_{(yes)} = 1 - \\left(\\frac{1}{2}\\right)^2 - \\left(\\frac{1}{2}\\right)^2 = 0.5\\] \\[Gini_{(no)} = 1 - \\left(\\frac{2}{2}\\right)^2 - \\left(\\frac{0}{2}\\right)^2 = 0\\]\n\n\n\n\\[Gini_{(split)} = \\frac{2}{4}\\cdot 0.5 = 0.25\\]"
   },
   {
     "objectID": "tics411/clase-10.html#árbol-de-decisión-2do-nivel-1",
