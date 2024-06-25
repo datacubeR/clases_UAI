@@ -80,7 +80,7 @@ De acá sale la noción del umbral 0.5 que hemos visto en clases anteriores.
 :::
 
 ::: {.callout-note}
-¿Qué pasaría si ahora decimos que $z = \beta_0 + \beta_1 X_1 + \beta_2 X_2$?
+¿Qué pasaría si ahora decimos que $z = \theta_0 + \theta_1 X_1 + \theta_2 X_2$?
 :::
 
 
@@ -108,15 +108,15 @@ Supongamos lo siguiente:
 
 ::: {.columns}
 ::: {.column}
-$$P(y = 1| X, \theta) = h_\theta(X)$$
+$$P(y = 1| X, \theta) = g(z)$$
 :::
 ::: {.column}
-$$P(y = 0| X, \theta) = 1-h_\theta(x)$$
+$$P(y = 0| X, \theta) = 1-g(z)$$
 :::
 ::: 
 
 Ambas ecuaciones pueden comprimirse en una sola de la siguiente manera:
-$$ P(y|X,\theta) = h_\theta(X)^y (1 - h_\theta(X))^{1-y}$$
+$$ P(y|X,\theta) = g(z)^y (1 - g(z))^{1-y}$$
 
 
 ::: {.callout-important}
@@ -129,7 +129,7 @@ $$\mathcal{L}(\theta) = \prod_{i=1}^n P(y^{(i)} | x^{(i)}, \theta)$$
 
 
 $$ \underset{\theta}{argmin} \ -l(\theta)$$
-$$l(\theta) = log (\mathcal{L(\theta)}) = \sum_{i=1}^n y^{(i)} \cdot log(h_\theta(x^{(i)})) + (1-y^{(i)})\cdot log(1-h_\theta(x^{(i)}))$$
+$$l(\theta) = log (\mathcal{L(\theta)}) = \sum_{i=1}^n y^{(i)} \cdot log(g(z)) + (1-y^{(i)})\cdot log(1-g(z))$$
 
 ::: {.callout-tip}
 Esta ecuación se conoce como **Entropía Cruzada** o como **Negative Log Loss (NLL)** y tiene la gracia de que es una curva convexa lo que ***garantiza un valor único de los parámetros $\theta$***. 
@@ -141,7 +141,7 @@ Esta ecuación se conoce como **Entropía Cruzada** o como **Negative Log Loss (
 La técnica más famosa para minimizar este tipo de problemas se conoce como `Stochastic Gradient Descent`. Lo que genera la siguiente solución:
 :::
 
-$$\theta_j \leftarrow \theta_j - \alpha \frac{1}{m}\sum_{i=1}\left(h_\theta(x^{(i)})-y^{(i)}\right)x_j^{(i)}$$
+$$\theta_j \leftarrow \theta_j - \alpha \frac{1}{n}\sum_{i=1}^n\left(g(z)-y^{(i)}\right)x_j^{(i)}$$
 
 ::: {.callout-warning}
 A pesar de lo complicado que se ve la ecuación, implementarla en código es bastante sencillo.
@@ -156,12 +156,12 @@ A pesar de lo complicado que se ve la ecuación, implementarla en código es bas
 ## Inference Time {.smaller}
 
 En este caso se calcula:
-$$h_\theta(x^{(i)})=sigmoid(\theta^t x^{(i)})$$
+$$g_\theta(x^{(i)})=sigmoid(\theta^t x^{(i)})$$
 
 * $\theta$: Corresponde a un vector con todos los parámetros calculados.
 * $x^{(i)}$: Corresponde a una instancia de $m$ variables la cual generará una probabilidad.
     * $\theta^t x^{(i)}$ corresponde al producto punto de dos vectores, que es equivalente a una ***"suma producto"***.
-* $h_\theta(x^{(i)})$: Generará un valor entre 0 y 1 al cuál se le aplica la Regla de Decisión.
+* $g_\theta(x^{(i)})$: Generará un valor entre 0 y 1 al cuál se le aplica la Regla de Decisión.
 
 ![](img/clase-12/h.png){.lightbox fig-align="center" width="40%" }
 
@@ -203,7 +203,7 @@ Para cambiar la regularización, consultar la documentación de Scikit-Learn.
   * qsec: Corresponde al tiempo en Segundos que lo toma en recorrer un cuarto de milla.
 * Queremos predecir si el vehículo es Ecónomico o no (en términos de consumo de Bencina). 
 
-$$h_\theta(x) = 0.5 - 3.5 \cdot W + 1.5 \cdot qsec $$
+$$g_\theta(x) = 0.5 - 3.5 \cdot W + 1.5 \cdot qsec $$
 
 ::: {.callout-note .incremental .fragment}
 * Si el vehículo se demora más en el cuarto de milla (**qsec** aumenta) entonces el vehículo es más económico.
