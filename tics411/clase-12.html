@@ -534,7 +534,7 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>¿Qué pasaría si ahora decimos que <span class="math inline">\(z = \beta_0 + \beta_1 X_1 + \beta_2 X_2\)</span>?</p>
+<p>¿Qué pasaría si ahora decimos que <span class="math inline">\(z = \theta_0 + \theta_1 X_1 + \theta_2 X_2\)</span>?</p>
 </div>
 </div>
 </div>
@@ -590,12 +590,12 @@ Alfonso Tobar-Arancibia
 <p>Supongamos lo siguiente:</p>
 <div class="columns">
 <div class="column">
-<p><span class="math display">\[P(y = 1| X, \theta) = h_\theta(X)\]</span></p>
+<p><span class="math display">\[P(y = 1| X, \theta) = g(z)\]</span></p>
 </div><div class="column">
-<p><span class="math display">\[P(y = 0| X, \theta) = 1-h_\theta(x)\]</span></p>
+<p><span class="math display">\[P(y = 0| X, \theta) = 1-g(z)\]</span></p>
 </div>
 </div>
-<p>Ambas ecuaciones pueden comprimirse en una sola de la siguiente manera: <span class="math display">\[ P(y|X,\theta) = h_\theta(X)^y (1 - h_\theta(X))^{1-y}\]</span></p>
+<p>Ambas ecuaciones pueden comprimirse en una sola de la siguiente manera: <span class="math display">\[ P(y|X,\theta) = g(z)^y (1 - g(z))^{1-y}\]</span></p>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -610,7 +610,7 @@ Alfonso Tobar-Arancibia
 <section id="maximum-likelihood-estimation" class="slide level2">
 <h2>Maximum Likelihood Estimation</h2>
 <p><span class="math display">\[\mathcal{L}(\theta) = \prod_{i=1}^n P(y^{(i)} | x^{(i)}, \theta)\]</span></p>
-<p><span class="math display">\[ \underset{\theta}{argmin} \ -l(\theta)\]</span> <span class="math display">\[l(\theta) = log (\mathcal{L(\theta)}) = \sum_{i=1}^n y^{(i)} \cdot log(h_\theta(x^{(i)})) + (1-y^{(i)})\cdot log(1-h_\theta(x^{(i)}))\]</span></p>
+<p><span class="math display">\[ \underset{\theta}{argmin} \ -l(\theta)\]</span> <span class="math display">\[l(\theta) = log (\mathcal{L(\theta)}) = \sum_{i=1}^n y^{(i)} \cdot log(g(z)) + (1-y^{(i)})\cdot log(1-g(z))\]</span></p>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -634,7 +634,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-<p><span class="math display">\[\theta_j \leftarrow \theta_j - \alpha \frac{1}{m}\sum_{i=1}\left(h_\theta(x^{(i)})-y^{(i)}\right)x_j^{(i)}\]</span></p>
+<p><span class="math display">\[\theta_j \leftarrow \theta_j - \alpha \frac{1}{n}\sum_{i=1}^n\left(g(z)-y^{(i)}\right)x_j^{(i)}\]</span></p>
 <div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -656,14 +656,14 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="inference-time" class="slide level2 smaller">
 <h2>Inference Time</h2>
-<p>En este caso se calcula: <span class="math display">\[h_\theta(x^{(i)})=sigmoid(\theta^t x^{(i)})\]</span></p>
+<p>En este caso se calcula: <span class="math display">\[g_\theta(x^{(i)})=sigmoid(\theta^t x^{(i)})\]</span></p>
 <ul>
 <li><span class="math inline">\(\theta\)</span>: Corresponde a un vector con todos los parámetros calculados.</li>
 <li><span class="math inline">\(x^{(i)}\)</span>: Corresponde a una instancia de <span class="math inline">\(m\)</span> variables la cual generará una probabilidad.
 <ul>
 <li><span class="math inline">\(\theta^t x^{(i)}\)</span> corresponde al producto punto de dos vectores, que es equivalente a una <strong><em>“suma producto”</em></strong>.</li>
 </ul></li>
-<li><span class="math inline">\(h_\theta(x^{(i)})\)</span>: Generará un valor entre 0 y 1 al cuál se le aplica la Regla de Decisión.</li>
+<li><span class="math inline">\(g_\theta(x^{(i)})\)</span>: Generará un valor entre 0 y 1 al cuál se le aplica la Regla de Decisión.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -720,7 +720,7 @@ Alfonso Tobar-Arancibia
 </ul></li>
 <li>Queremos predecir si el vehículo es Ecónomico o no (en términos de consumo de Bencina).</li>
 </ul>
-<p><span class="math display">\[h_\theta(x) = 0.5 - 3.5 \cdot W + 1.5 \cdot qsec \]</span></p>
+<p><span class="math display">\[g_\theta(x) = 0.5 - 3.5 \cdot W + 1.5 \cdot qsec \]</span></p>
 <div class="fragment">
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
@@ -1173,7 +1173,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
