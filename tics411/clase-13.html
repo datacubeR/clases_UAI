@@ -398,7 +398,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 8: Introducción al Aprendizaje Supervisado</p>
+  <p class="subtitle">Clase 13: Detección de Anomalías</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -413,389 +413,344 @@ Alfonso Tobar-Arancibia
 
 </section>
 <section>
-<section id="aprendizaje-supervisado" class="title-slide slide level1 center">
-<h1>Aprendizaje Supervisado</h1>
+<section id="qué-son-las-anomalías" class="title-slide slide level1 center">
+<h1>¿Qué son las Anomalías?</h1>
 
 </section>
-<section id="introducción-al-aprendizaje-supervisado" class="slide level2">
-<h2>Introducción al Aprendizaje Supervisado</h2>
-<p>Los modelos Predictivos/Supervisados tienen la capacidad de predecir valores en datos no vistos.</p>
+<section id="definición" class="slide level2 smaller">
+<h2>Definición</h2>
 <dl>
-<dt>Chip Huyen, Designing ML Systems (Profesora de Stanford)</dt>
+<dt>Anomalías</dt>
 <dd>
 <blockquote>
-<p>“Machine Learning Algorithms do not predict the future but encode the past, thus perpetuating the biases in the data and mode…”</p>
+<p>Conjunto de puntos que son considerablemente diferentes al resto.</p>
 </blockquote>
 </dd>
 </dl>
-<p>Aprenden mediante un proceso de <code>entrenamiento</code> en un <code>train set</code> y evalúan su performance/rendimiento utilizando un <code>test set</code>.</p>
-</section>
-<section id="definiciones" class="slide level2">
-<h2>Definiciones</h2>
-<dl>
-<dt>Features</dt>
-<dd>
-<blockquote>
-<p>También llamadas <code>variables</code> o <code>atributos</code>. Corresponden al <strong><em>input</em></strong> del Modelo y con el cuál el modelo <strong><em>aprende</em></strong> y <strong><em>predice</em></strong>. Normalmente es representado mediante una Matriz denominada <span class="math inline">\(X\)</span>.</p>
-</blockquote>
-</dd>
-<dt>Labels o Etiquetas</dt>
-<dd>
-<blockquote>
-<p>Corresponden a las <strong><em>respuestas</em></strong> que el modelo necesita mapear para poder descubrir patrones de manera automática. Normalmente se representa mediante un vector denominado <span class="math inline">\(y\)</span>.</p>
-</blockquote>
-</dd>
-</dl>
-</section>
-<section id="ejemplo" class="slide level2">
-<h2>Ejemplo</h2>
-<blockquote>
-<p>Queremos generar un algoritmo de aprendizaje tal que dado un cierto set de datos predigamos si es que a un niño se le dará o no permiso para jugar.</p>
-</blockquote>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Problema de Clasificación Binaria (Dos clases opuestas).</p>
-</div>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/dataset_sunny.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-8/dataset_sunny.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</section>
-<section id="definición-del-problema" class="slide level2">
-<h2>Definición del Problema</h2>
-<p><span class="math display">\[h_\theta(X) = f(X, \theta)\]</span></p>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>A <span class="math inline">\(h_\theta(\cdot)\)</span> la denominaremos <code>hipótesis</code> o simplemente <code>modelo</code>.</li>
-<li><span class="math inline">\(X\)</span> será nuestro set de <code>features</code> (<span class="math inline">\(n\times m\)</span> donde <span class="math inline">\(n\)</span> es el número de observaciones y <span class="math inline">\(m\)</span> el número de features).<br>
-</li>
-<li>Cada fila de <span class="math inline">\(X\)</span> corresponde a un vector <span class="math inline">\(x_i\)</span> que representa una observación de nuestro set de features.</li>
-<li><span class="math inline">\(\theta\)</span> corresponde a los parámetros del modelo <em>(existen modelos paramétricos y no paramétricos)</em>.</li>
-<li>Cada <code>algoritmo</code> tendrá su propio mapeo <span class="math inline">\(f(\cdot)\)</span> para tratar de <em>predecir</em> una etiqueta.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tipos de Hipótesis</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Si <span class="math inline">\(h_\theta(X)\)</span> devuelve valores discretos (o categóricos) hablaremos de un modelo de <code>Clasificación</code>.</li>
-<li>Si <span class="math inline">\(h_\theta(X)\)</span> devuelve valores continuos hablaremos de un modelo de <code>Regresión</code>.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="tipos-de-problemas" class="slide level2 smaller">
-<h2>Tipos de Problemas</h2>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Clasificación:</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><strong>Binaria</strong>: La Clasificación es dicotómica, Perro o Gato, Sí o No, 1 o 0, Clase Positiva o Negativa.</li>
-<li><strong>Multiclase</strong>: La clasificación puede tener más de 2 clases, pero sólo una es posible.
-<ul>
-<li>Ej: Perro, Gato o Canario; 0, 1, 2, 3, 4.</li>
-</ul></li>
-<li><strong>Multilabel</strong>: La clasificación puede tener más de 2 clases, y más de una es posible a la vez.
-<ul>
-<li>Ej: Categorías de Libro: Puede ser Romance y Drama, Películas: Fantasía, Animación y Acción.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Regresión:</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><strong>Simple</strong>: Predigo sólo un valor. Ej: Predecir la Temperatura.</li>
-<li><strong>Multiple</strong>: Predigo varios valores continuos a la vez.
-<ul>
-<li>Ej: Modelo para intentar estimar Temperatura y Humedad a la vez.</li>
-</ul></li>
-<li><strong>Forecast</strong>: Donde se utilizan valores pasados para estimar valores futuros.
-<ul>
-<li>Dadas mis ganancias pasadas, estimar las futuras.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="clasificación-intuición" class="slide level2 smaller">
-<h2>Clasificación: Intuición</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/clf_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-8/clf_ex.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-<blockquote>
-<p>Supongamos el siguiente problema de clasificación. Tenemos un algoritmo, que dadas las variables <code>Largo</code> y <code>Peso</code> sean capaces de predecir si es que un Pez es una <em>Reineta</em> o una <em>Sardina</em>.</p>
-</blockquote>
-</section>
-<section id="clasificación-intuición-1" class="slide level2">
-<h2>Clasificación: Intuición</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/clf_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-8/clf_1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Queremos encontrar una <code>Regla de Decisión</code> (Decision Rule) que permita clasificar correctamente un punto nuevo.</li>
-<li>Distintos modelos son capaces de encontrar distintas reglas de decisión. Por lo tanto, sus predicciones pueden ser completamente distintas.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="clasificación-detalles" class="slide level2">
-<h2>Clasificación: Detalles</h2>
-<p>Es importante mencionar que un modelo de clasificación puede generar:</p>
-<ul>
-<li><strong>Hard Predictions</strong>: Es decir, la instancia a predecir es clase 0 o clase 1.</li>
-<li><strong>Soft Prediction</strong>: Es decir, la instancia a predecir tiene una probabilidad <span class="math inline">\(p\)</span> de pertenecer a la clase 1 y de <span class="math inline">\(1-p\)</span> de pertenecer a la clase 0.</li>
-</ul>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Cuando se hace predicción binaria, lo común es usar un Threshold de 0.5 para elegir la clase. Es decir si <span class="math inline">\(p&lt;0\)</span> entonces clase 0, si <span class="math inline">\(p \ge 0.5\)</span> entonces clase 1.</li>
-</ul>
-</div>
-</div>
-</div>
 <div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>En el caso de predicción multiclase o multilabel. Se calcula la probabilidad para cada clase. Por lo tanto se se asigna la clase de mayor probabilidad.</p>
+<p>Por definición las Anomalías son relativamente raras. * Pueden ocurrir en proporciones extremadamente bajas en los datos. Ej: 1 entre mil. * El contexto es importante. Ej: Temperaturas bajo cero en Verano.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="k-nearest-neighbors" class="slide level2 smaller">
-<h2>K-Nearest Neighbors</h2>
-<blockquote>
-<p>El modelo de vecinos más cercanos, o KNN por sus siglas en Inglés es un modelo basado en <code>distancias</code>. Su <code>regla de decisión</code> se basa en imitar el comportamiento de sus <span class="math inline">\(K\)</span> vecinos más cercanos por votación (para clasificación) o la media (para regresión).</p>
-</blockquote>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>K es un <code>hiperparámetro</code> de este modelo.</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/knn_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-8/knn_ex.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
+<h5 id="ejemplos">Ejemplos:</h5>
 <ul>
-<li>Supongamos <span class="math inline">\(K = 3\)</span>.</li>
-<li>Es decir, tomaremos los 3 vecinos más cercanos.</li>
+<li>Telecomunicaciones: Detección de Abusos de Roaming.</li>
+<li>Banca: Compras/Ventas inusualmente elevados.</li>
+<li>Finanzas y Seguros: Detectar y prevenir patrones de gastos fraudulentos.</li>
+<li>Mantención: Predicción de comportamiento irregular/fallas.</li>
+<li>Smart Homes: Detecciones de fugas de Energía</li>
+<li>etc.</li>
 </ul>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En general es una buena idea elegir vecinos impares. <strong>¿Por qué?</strong></p>
-</div>
-</div>
-</div>
-</div>
-</div>
 </section>
-<section id="knn-paso-1-training-time" class="slide level2">
-<h2>KNN: Paso 1 (Training Time)</h2>
-<dl>
-<dt>Training Time</dt>
-<dd>
-Corresponde al periodo donde el modelo aprende de los datos. Toma un patrón y ese modelo es utilizado para predecir.
-</dd>
-</dl>
+<section id="más-ejemplos" class="slide level2 smaller">
+<h2>Más ejemplos</h2>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>En el caso de un KNN <strong>NO HAY APRENDIZAJE</strong> en esta etapa.</p>
+<p>La definición de Anomalía es <strong><em>altamente subjetiva</em></strong> y depende mucho del Dominio en el cuál se está trabajando.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/anomalia_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-13/anomalia_1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
 </div>
-<div class="callout-content">
-<p>Es considerado un modelo <code>no-paramétrico</code> ya que no aprende parámetros para realizar su predicción.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="knn-paso-2-test-time" class="slide level2 smaller">
-<h2>KNN: Paso 2 (Test Time)</h2>
-<dl>
-<dt>Inference Time</dt>
-<dd>
-Corresponde al periodo donde el modelo debe emitir una predicción.
-</dd>
-</dl>
-<p>En este caso, KNN calcula las distancias del punto a predecir (en verde) a todos los otros puntos existentes (proceso caro).</p>
 <div class="columns">
-<div class="column" style="width:40%;">
+<div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/knn_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-8/knn_ex.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+<p><a href="img/clase-13/anomalia_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-13/anomalia_2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
-</div><div class="column" style="width:30%;">
+</div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/knn_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-8/knn_dist.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/ord_dist_knn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-8/ord_dist_knn.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+<p><a href="img/clase-13/anomalia_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-13/anomalia_3.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div>
 </div>
+</section>
+<section id="tipos-de-anomalías-series-de-tiempo" class="slide level2">
+<h2>Tipos de Anomalías (Series de Tiempo)</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/concept_drift.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-13/concept_drift.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/change_detection.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-13/change_detection.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<p><a href="img/clase-13/point_anomalies.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-13/point_anomalies.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a> <a href="img/clase-13/contextual_anomaly.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-13/contextual_anomaly.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a> <a href="img/clase-13/collective_anomaly.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-13/collective_anomaly.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</div>
+</div>
+</section>
+<section id="desafíos" class="slide level2">
+<h2>Desafíos</h2>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Desafíos</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>¿Cuántos Atributos/Variables usamos para definir un Outlier?</li>
+<li>¿Cuántos Outliers existen?</li>
+<li>Este tipo de problema suele ser complicado de Etiquetar, por lo que es difícil resolverlo como un problema supervisado.</li>
+<li>Puede ser como “Encontrar una aguja en un pajar”.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="enfoques" class="slide level2">
+<h2>Enfoques</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/enfoques.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-13/enfoques.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</section></section>
+<section>
+<section id="técnicas-de-detección-de-outliers" class="title-slide slide level1 center">
+<h1>Técnicas de Detección de Outliers</h1>
+
+</section>
+<section id="técnicas-visuales" class="slide level2 smaller">
+<h2>Técnicas Visuales</h2>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Estas técnicas son muy subjetivas ya que dependen del criterio/apreciación del usuario.</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<h3 id="box-plots">Box Plots</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/boxplot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-13/boxplot.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<h3 id="scatter-plots">Scatter Plots</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/scatterplot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-13/scatterplot.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="técnicas-estadísticas-test-de-grubbs" class="slide level2 smaller">
+<h2>Técnicas Estadísticas: Test de Grubbs</h2>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
+<p>El test de Grubbs detecta si algún dato es un outlier sobre una variable asumiendo que se distribuyen de manera normal.</p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[G = \frac{\underset{i = 1,2,...,n}{max}|x_i - \bar{X}|}{S_x}\]</span></p>
+<p>donde <span class="math inline">\(\bar{X}\)</span> y <span class="math inline">\(S_x\)</span> corresponden a la media y Desviación Estándar Muestral.</p>
 <ul>
-<li>La predicción corresponderá a la etiqueta mayoritaria por <code>votacioń</code></li>
+<li>Eso implica que <span class="math inline">\(G\)</span> se distribuye como una <strong>t-student</strong> de <span class="math inline">\(n-2\)</span> grados de libertad, por lo tanto si:</li>
 </ul>
+<p><span class="math display">\[ G_{critico} = \frac{n-1}{\sqrt{n}}\sqrt{\frac{t^2_{(\alpha/n, n-2)}}{n-2+t_{(\alpha/n, n-2)^2}}}\]</span></p>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Si <span class="math inline">\(G &gt; G_{critico}\)</span>, <span class="math inline">\(x_i\)</span> es considerado un outlier con una significancia <span class="math inline">\(\alpha/n\)</span> para una <strong>t-student</strong> con <span class="math inline">\(n-2\)</span> grados de libertad.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="test-de-grubs-en-python" class="slide level2">
+<h2>Test de Grubs en Python</h2>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<ul>
-<li>La predicción corresponderá a la etiqueta mayoritaria por <code>votacioń</code>.</li>
-<li><strong>¿Cuál sería una buena estrategia de predicción para un modelo de Regresión?</strong></li>
-</ul>
+<p>Este código debiera entregar una lista de todos los puntos que son considerados outliers.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
+<div class="sourceCode" id="cb1" data-code-line-numbers="|1-2|4-5|7-8|10-11|13-14|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb1-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a>n <span class="op">=</span> <span class="dv">16</span> <span class="co"># Número de Datos</span></span>
+<span id="cb1-5"><a></a>alpha <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># nivel de confianza</span></span>
+<span id="cb1-6"><a></a></span>
+<span id="cb1-7"><a></a>t_crit <span class="op">=</span> stats.t.ppf(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span>n, n<span class="op">-</span><span class="dv">2</span>)</span>
+<span id="cb1-8"><a></a>G_crit <span class="op">=</span> (n<span class="op">-</span><span class="dv">1</span>)<span class="op">/</span>np.sqrt(n)<span class="op">*</span>np.sqrt(t_crit<span class="op">**</span><span class="dv">2</span><span class="op">/</span>(n<span class="op">-</span><span class="dv">2</span> <span class="op">+</span> t_crit<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a>data <span class="op">=</span> np.array([<span class="dv">5</span>,<span class="dv">14</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">19</span>,<span class="dv">17</span>,<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">22</span>,<span class="dv">8</span>,<span class="dv">21</span>,<span class="dv">28</span>,<span class="dv">11</span>,<span class="dv">9</span>,<span class="dv">29</span>,<span class="dv">40</span>])</span>
+<span id="cb1-11"><a></a>G_test <span class="op">=</span> np.<span class="bu">abs</span>(data<span class="op">-</span>np.mean(data)<span class="op">/</span>np.std(data))</span>
+<span id="cb1-12"><a></a></span>
+<span id="cb1-13"><a></a>test_grubbs <span class="op">=</span> np.where(G_test<span class="op">&gt;</span>G_crit)</span>
+<span id="cb1-14"><a></a><span class="bu">print</span>(<span class="ss">f"Outliers: </span><span class="sc">{</span>data[test_grubbs]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="fronteras-de-decisión" class="slide level2">
-<h2>Fronteras de Decisión</h2>
+<section id="caso-multivariado" class="slide level2">
+<h2>Caso Multivariado</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/frontera_decision.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-8/frontera_decision.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+<p><a href="img/clase-13/anomalia_multivariada_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-13/anomalia_multivariada_data.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-<div class="callout callout-note callout-style-simple">
+<div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<ul>
-<li>Implicitamente, todo modelo de Machine Learning generará lo que se llama una Frontera de Decisión.</li>
-<li>Si un punto no visto cae dentro de su frontera entonces se le asigna dicha etiqueta.</li>
-</ul>
+<p>La idea es calcular la distancia de cada punto al centro tomando en consideración la covarianza.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="implementación-clasificación-en-scikit-learn" class="slide level2">
-<h2>Implementación Clasificación en Scikit-Learn</h2>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3-4|6-7|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>knn_clf <span class="op">=</span> KNeighborsClasifier(n_neighbors <span class="op">=</span> <span class="dv">5</span>, metric<span class="op">=</span><span class="st">"minkowski"</span>, p<span class="op">=</span><span class="dv">2</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb1-4"><a></a>knn_clf.fit(X, y)</span>
-<span id="cb1-5"><a></a></span>
-<span id="cb1-6"><a></a><span class="co"># Predicción...</span></span>
-<span id="cb1-7"><a></a>y_pred <span class="op">=</span> knn_clf.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div style="font-size: 75%;">
+<section id="caso-multivariado-1" class="slide level2 smaller">
+<h2>Caso Multivariado</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/centroide.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-13/centroide.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:70%;">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Paso 1</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li><strong>n_neighbors</strong>: <span class="math inline">\(K\)</span> número de vecinos a utilizar. Por defecto 5.</li>
-<li><strong>metric</strong>: Métrica de distancia. Por defecto “Minkowski”.</li>
-<li><strong>p</strong>: Potencia de Minkowski: <span class="math inline">\(p=1\)</span>, Manhattan, <span class="math inline">\(p=2\)</span> Euclideana. Por defecto <span class="math inline">\(p=2\)</span>.</li>
-<li><strong>n_jobs</strong>: Corresponde a un parámetro interno para poder paralelizar los cálculos. Se recomienda utilizar -1 para utilizar todos sus cores.</li>
+<li>Calcular el punto central de todos los puntos (Promedio) <span class="math display">\[\mu = (3.16, 3.16)\]</span></li>
 </ul>
 </div>
-</section>
-<section id="implementación-regresión-en-scikit-learn" class="slide level2">
-<h2>Implementación Regresión en Scikit-Learn</h2>
-<div class="sourceCode" id="cb2" data-code-line-numbers="|1|3-4|6-7|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a>knn_clf <span class="op">=</span> KNeighborsRegressor(n_neighbors <span class="op">=</span> <span class="dv">5</span>, metric<span class="op">=</span><span class="st">"minkowski"</span>, p<span class="op">=</span><span class="dv">2</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb2-4"><a></a>knn_clf.fit(X, y)</span>
-<span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a><span class="co"># Predicción...</span></span>
-<span id="cb2-7"><a></a>y_pred <span class="op">=</span> knn_clf.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div style="font-size: 75%;">
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Paso 2</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li><strong>n_neighbors</strong>: <span class="math inline">\(K\)</span> número de vecinos a utilizar. Por defecto 5.</li>
-<li><strong>metric</strong>: Métrica de distancia. Por defecto “Minkowski”.</li>
-<li><strong>p</strong>: Potencia de Minkowski: <span class="math inline">\(p=1\)</span>, Manhattan, <span class="math inline">\(p=2\)</span> Euclideana. Por defecto <span class="math inline">\(p=2\)</span>.</li>
-<li><strong>n_jobs</strong>: Corresponde a un parámetro interno para poder paralelizar los cálculos. Se recomienda utilizar -1 para utilizar todos sus cores.</li>
+<li>Calcular la Inversa de la Matriz de Covarianza:</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/paso_2_cov_mat.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-13/paso_2_cov_mat.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="caso-multivariado-continuación" class="slide level2 smaller">
+<h2>Caso Multivariado: Continuación</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Paso 3</strong></p>
+</div>
+<div class="callout-content">
+<p>Calcular la distancia de cada punto con respecto a la media y la inversa de la Covarianza.</p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[d_i = (p_i - \mu)^T \Sigma^{-1}(p_i - \mu)\]</span></p>
+<p><span class="math display">\[d_1 = (p_1 - \mu)^T \sigma^{-1}(p_1 - \mu)\]</span></p>
+<p><span class="math display">\[d_1 = ([0,0] - [3.16, 3.16])^T \begin{bmatrix}
+                            0.147 &amp; -0.147  \\
+                            -0.147 &amp; 1.911  \\
+                            \end{bmatrix}
+                            ([0,0] - [3.16, 3.16])\]</span></p>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Se debe repetir este procedimiento para cada punto.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="caso-multivariado-continuación-1" class="slide level2 smaller">
+<h2>Caso Multivariado: Continuación</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Paso 4:</strong></p>
+</div>
+<div class="callout-content">
+<p>Se debe calcular el punto crítico según t-student con 95% confianza, y orden de magnitud <span class="math inline">\(m\)</span> dimensiones.</p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[t_{(\alpha = 0.95,2)} = 5.99\]</span></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Paso 5</strong></p>
+</div>
+<div class="callout-content">
+<p>Comparar, Si <span class="math inline">\(d_i&gt;t_{crit}\)</span> entonces <span class="math inline">\(d_i\)</span> es Outlier.</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/tabla_puntos.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-13/tabla_puntos.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
 </div>
 <div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
@@ -803,48 +758,336 @@ Corresponde al periodo donde el modelo debe emitir una predicción.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>¿Cómo se encuentran las predicciones en un modelo de <strong>Regresión</strong>?</p>
+<p>En este caso ningún valor de <span class="math inline">\(d_i\)</span> es mayor al $t_{(crit)}, por lo tanto, no hay outliers.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="knn-detalles-técnicos" class="slide level2">
-<h2>KNN: Detalles Técnicos</h2>
-<div class="callout callout-note callout-titled callout-style-default">
+<section id="distancia-de-mahalanobis" class="slide level2">
+<h2>Distancia de Mahalanobis</h2>
+<p>La distancia de Mahalanobis corresponde a:</p>
+<p><span class="math display">\[d_i = \sqrt{(p_i - \mu)^T \Sigma^{-1}(p_i - \mu)}\]</span></p>
+<div class="callout callout-note callout-style-simple">
 <div class="callout-body">
-<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Fortalezas</strong></p>
+<div class="callout-content">
+<p>Se puede repetir el mismo procedimiento anterior, sólo que se define una Distancia de Mahalonobis umbral. Las que superen dicho umbral son considerados como Outliers.</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/mahalanobis_distance.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-13/mahalanobis_distance.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section></section>
+<section>
+<section id="técnicas-de-detección-basadas-en-modelos" class="title-slide slide level1 center">
+<h1>Técnicas de Detección basadas en Modelos</h1>
+
+</section>
+<section id="dbscan" class="slide level2 smaller">
+<h2>DBSCAN</h2>
+<p>Podemos utilizar el procedimiento que aprendimos de DBSCAN. Todos los puntos Noise serán considerados como Anomalías.</p>
+<div class="columns">
+<div class="column">
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-5/noise_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-5/noise_1.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-5/noise_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-5/noise_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
+</figure>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-5/noise_algo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-5/noise_algo.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="fragment" data-fragment-index="1">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
 <div class="callout-content">
+<p>Este punto corresponde a un <strong>Noise Point</strong>. Lo cuál en nuestro caso particular se considerará una <strong><em>Anomalía</em></strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="k-nearest-neighbor" class="slide level2 smaller">
+<h2>K-Nearest Neighbor</h2>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Se puede utilizar los modelos de vecinos más cercanos para determinar outliers siguiendo el siguiente procedimiento:</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/anomalia_multivariada_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-13/anomalia_multivariada_data.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/coordenadas.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-13/coordenadas.png" class="quarto-figure quarto-figure-center" style="width:32.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<h4 id="paso-1-definir-el-valor-de-k-para-encontrar-los-vecinos-más-cercanos.">Paso 1: Definir el valor de <span class="math inline">\(k\)</span> para encontrar los vecinos más cercanos.</h4>
+<p>Ej: Sea <span class="math inline">\(k=3\)</span></p>
+<h4 id="paso-2-calcular-la-matriz-de-distancias-y-determinar-los-vecinos-más-cercanos.">Paso 2: Calcular la Matriz de Distancias y determinar los vecinos más cercanos.</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/distance_knn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-13/distance_knn.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="k-nearest-neighbor-continuación" class="slide level2 smaller">
+<h2>K-Nearest Neighbor: Continuación</h2>
+<p><br></p>
+<div class="columns">
+<div class="column">
+<h4 id="paso-3-calcular-la-distancias-promedio.">Paso 3: Calcular la distancias Promedio.</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/distancia_promedio_knn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-13/distancia_promedio_knn.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<h4 id="paso-4-escoger-un-umbral.-si-es-que-la-distancia-es-mayor-al-umbral-entonces-es-un-outlier.-ej-dist_crit-3">Paso 4: Escoger un Umbral. Si es que la distancia es mayor al Umbral entonces es un Outlier. Ej: <span class="math inline">\(Dist_crit: 3\)</span></h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/outliers_knn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-13/outliers_knn.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="local-outlier-factor-lof" class="slide level2 smaller">
+<h2>Local Outlier Factor (LOF)</h2>
 <ul>
-<li>Modelo muy simple de implementar y entender.</li>
-<li>Muy eficiente en el <strong><em>aprendizaje</em></strong>.</li>
+<li>Local Outlier Factor (LOF) detecta anomalías con sus vecindarios locales, en lugar de la distribución glocal de los datos.</li>
 </ul>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En la Figura, <span class="math inline">\(O1\)</span> y <span class="math inline">\(O2\)</span> son anomalías locales en comparación con <span class="math inline">\(C1\)</span>, <span class="math inline">\(O3\)</span> es una anomalía global, y <span class="math inline">\(O4\)</span> no es una anomalía.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-warning callout-titled callout-style-default">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/lof_intro.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-13/lof_intro.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="algoritmo" class="slide level2 smaller">
+<h2>Algoritmo</h2>
+<ol type="1">
+<li>Determinar <span class="math inline">\(N(x,k)\)</span>, los k-vecinos más cercanos de cada punto x.</li>
+<li>Para todo punto <span class="math inline">\(y\)</span>, calcular la distancia a su k-ésimo vecino más cercano.</li>
+<li>Calcular la reach-distance entre todos los puntos: <span class="math display">\[reach-distance_k(x,y) = max\{k-distance(y), d(x,y)\}\]</span></li>
+<li>Calcule la densidad del vecindario local sobre sus <span class="math inline">\(k\)</span> vecinos, donde <span class="math inline">\(|N(x,k)| = k\)</span>.</li>
+</ol>
+<p><span class="math display">\[density(x,k) = lrd_k(x) = \left(\frac{\sum_{y \in N(x,k)} reach-distance_k(x,y)}{|N(x,k)|}\right)^{-1}\]</span></p>
+<ol start="5" type="1">
+<li>Calcule el <code>Local Outlier Factor</code> para el punto x como la proporción de la densidad de sus <span class="math inline">\(k\)</span> vecinos más cercanos, con respecto a la densidad del punto <span class="math inline">\(x\)</span>.</li>
+</ol>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[ LOF(x) = \frac{\sum_{y \in N(x,k) density(y,k)}}{|N(x,k)|density(x,k)} \]</span></p>
+</div><div class="column">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>LOF(X) &gt;&gt; 1 implica anomalía.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-local-outlier-factor" class="slide level2 smaller">
+<h2>Ejemplo Local Outlier Factor</h2>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Consideremos los siguientes 4 puntos de datos: a(0,0), b(0,1), c(1,1), d(3,0). Calcular el LOF para cada punto y mostrar la anomalía principal.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Utilizar <span class="math inline">\(K = 2\)</span> y Distancia Manhattan.</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<h4 id="paso-1-calcular-distancias"><strong><em>Paso 1</em></strong>: Calcular Distancias</h4>
+<ul>
+<li>dist(a,b) = 1</li>
+<li>dist(a,c) = 2</li>
+<li>dist(a,d) = 3</li>
+<li>dist(b,c) = 1</li>
+<li>dist(b,d) = 4</li>
+<li>dist(c,d) = 3</li>
+</ul>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/distancias_lof.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-13/distancias_lof.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-local-outlier-factor-continuación" class="slide level2 smaller">
+<h2>Ejemplo Local Outlier Factor: Continuación</h2>
+<h4 id="paso-2-para-todo-punto-y-calcule-la-distancia-a-su-k-ésimo-vecino-más-cercano."><strong><em>Paso 2</em></strong>: Para todo punto <span class="math inline">\(y\)</span>, calcule la distancia a su k-ésimo vecino más cercano.</h4>
+<ul>
+<li><span class="math inline">\(dist_2(a) = dist(a,c) = 2\)</span> (c es el 2do vecino más cercano)</li>
+<li><span class="math inline">\(dist_2(b) = dist(b,a) = 1\)</span> (a/c es el 2do vecino más cercano)</li>
+<li><span class="math inline">\(dist_2(c) = dist(c,a) = 2\)</span> (a es el 2do vecino más cercano)</li>
+<li><span class="math inline">\(dist_2(d) = dist(d,a) = 3\)</span> (a/c es el 2do vecino más cercano)</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/distancias_lof.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-13/distancias_lof.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="ejemplo-local-outlier-factor-continuación-1" class="slide level2 smaller">
+<h2>Ejemplo Local Outlier Factor: Continuación</h2>
+<h4 id="paso-3-calcular-la-reach-distance-entre-todos-los-puntos-es-decir-los-puntos-vecindarios-a-una-distancia-k."><strong><em>Paso 3</em></strong>: Calcular la reach-distance entre todos los puntos, es decir, los puntos vecindarios a una distancia k.</h4>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><span class="math inline">\(N_k(o)\)</span>: Vecindario de <span class="math inline">\(k\)</span>-distancia de <span class="math inline">\(o\)</span>, <span class="math inline">\(N_k(o)=\{o'\|o' \in D, dist(o,o') \le dist_k(o)\}\)</span></p>
+</div>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(N_2(a) = \{b,c\}\)</span></li>
+<li><span class="math inline">\(N_2(b) = \{a,c\}\)</span></li>
+<li><span class="math inline">\(N_2(c) = \{b,a\}\)</span></li>
+<li><span class="math inline">\(N_2(d) = \{a,c\}\)</span></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/distancias_lof.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-13/distancias_lof.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="ejemplo-local-outlier-factor-continuación-2" class="slide level2 smaller">
+<h2>Ejemplo Local Outlier Factor: Continuación</h2>
+<div class="columns">
+<div class="column">
+<h4 id="paso-4-calcular-la-densidad-del-vecinadario-local-sobre-sus-k-vecinos."><strong><em>Paso 4</em></strong>: Calcular la densidad del vecinadario local sobre sus <span class="math inline">\(k\)</span> vecinos.</h4>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/distancias_lof.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-13/distancias_lof.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(reach-dist_2(b \leftarrow a) = max\{dist_2(b), dist(b,a)\} = max\{1,1\} = 1\)</span></li>
+<li><span class="math inline">\(reach-dist_2(c \leftarrow a) = max\{dist_2(c), dist(c,a)\} = max\{2,2\} = 2\)</span></li>
+</ul>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Calcular el resto de manera análoga.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-local-outlier-factor-continuación-3" class="slide level2 smaller">
+<h2>Ejemplo Local Outlier Factor: Continuación</h2>
+<p>Entonces, <span class="math inline">\(lrd_k(o)\)</span>: Densidad de alcanzabilidad local de <span class="math inline">\(o\)</span>.</p>
+<p><span class="math display">\[lrd_2(a) = \frac{|\mathcal{N}(a)|}{reach-dist_2(b\leftarrow a) + reach-dist_2(c \leftarrow a)} = \frac{2}{1 + 2} = 0.667\]</span> <span class="math display">\[lrd_2(b) = \frac{|\mathcal{N}(b)|}{reach-dist_2(a\leftarrow b) + reach-dist_2(b \leftarrow b)} = \frac{2}{2 + 2} = 0.5\]</span> <span class="math display">\[lrd_2(c) = \frac{|\mathcal{N}(c)|}{reach-dist_2(b\leftarrow c) + reach-dist_2(a \leftarrow c)} = \frac{2}{1 + 2} = 0.667\]</span> <span class="math display">\[lrd_2(d) = \frac{|\mathcal{N}(d)|}{reach-dist_2(a\leftarrow d) + reach-dist_2(c \leftarrow d)} = \frac{2}{1 + 2} = 0.33\]</span></p>
+</section>
+<section id="ejemplo-local-outlier-factor-continuación-4" class="slide level2 smaller">
+<h2>Ejemplo Local Outlier Factor: Continuación</h2>
+<h4 id="paso-5-calcular-el-local-outlier-factor-para-el-punto-x-como-la-proporción-de-la-densidad-de-sus-k-vecinos-más-cercanos-con-respecto-a-la-densidad-del-punto-x.">Paso 5: Calcular el Local Outlier Factor para el punto <span class="math inline">\(x\)</span> como la proporción de la densidad de sus <span class="math inline">\(k\)</span> vecinos más cercanos, con respecto a la densidad del punto <span class="math inline">\(x\)</span>.</h4>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p><span class="math display">\[LOF(x) = \frac{\sum_{y \in N(x,k)} density(y,k)}{|N(x,k)|density(x,k)}\]</span></p>
+<p><span class="math display">\[LOF_2(a) = \frac{lrd_2(b) + lrd_2(c)}{N_2(a) \cdot lrd_2(a)} = \frac{0.5 + 0.667}{2 \cdot 0.667} = 0.87\]</span> <span class="math display">\[LOF_2(b) = \frac{lrd_2(a) + lrd_2(c)}{N_2(b) \cdot lrd_2(b)} = \frac{0.667 + 0.667}{2 \cdot 0.5} = 1.334\]</span> <span class="math display">\[LOF_2(c) = \frac{lrd_2(b) + lrd_2(a)}{N_2(c) \cdot lrd_2(c)} = \frac{0.5 + 0.667}{2 \cdot 0.667} = 0.87\]</span> <span class="math display">\[LOF_2(d) = \frac{lrd_2(a) + lrd_2(c)}{N_2(d) \cdot lrd_2(d)} = \frac{0.667 + 0.667}{2 \cdot 0.33} = 2\]</span></p>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-13/vecindarios.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-13/vecindarios.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-local-outlier-factor-continuación-5" class="slide level2 smaller">
+<h2>Ejemplo Local Outlier Factor: Continuación</h2>
+<h4 id="paso-6-ordena-todas-las-lof_ko">Paso 6: Ordena todas las LOF_k(o)</h4>
+<ul>
+<li>LOF_2(d) = 2 <span class="math inline">\(\implies\)</span> el punto paraecer una anomalía (LOF &gt;&gt; 1)</li>
+<li>LOF_2(b) = 1.334</li>
+<li>LOF_2(a) = 0.87</li>
+<li>LOF_2(c) = 0.87</li>
+</ul>
+<div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Debilidades</strong></p>
+<p><strong>Detalles Técnicos</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Inferencia ineficiente: <span class="math inline">\(O(mn^2)\)</span>.</li>
-<li><code>Curse of Dimensionality</code>: A medida que el número de dimensiones del problema crece, se requiere un incremento exponencial en la cantidad de datos para asegurar que existen suficientes vecinos cercanos para cualquier punto.</li>
+<li>Dado que esto sigue un enfoque local, la resolución depende de la elección del usuario para <span class="math inline">\(k\)</span>.</li>
+<li>Genera una puntuación (Anomaly Score) para cada punto.</li>
+<li>Como <span class="math inline">\(LOF\)</span> es una razón, es difícil de interpretar. No existe un valor umbral específico por encima del cual un punto se define como un valor atípico. La identificación de un valor atípico depende del problema y del usuario</li>
+<li>Como <span class="math inline">\(LOF\)</span> es una razón, es difícil de interpretar. No existe un valor umbral específico por encima del cual un punto se define como un valor atípico. La identificación de un valor atípico depende del problema y del usuario.</li>
 </ul>
 </div>
 </div>
 </div>
 </section></section>
-<section id="saionara" class="title-slide slide level1 center">
-<h1>Saionara!</h1>
+<section id="ありがとうございました-arigato-gozaimasu" class="title-slide slide level1 center">
+<h1>ありがとうございました <br> (Arigato Gozaimasu)</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -1225,7 +1468,7 @@ Corresponde al periodo donde el modelo debe emitir una predicción.
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
