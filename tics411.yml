@@ -127,3 +127,12 @@
   path: tics411/clase-12.qmd
   categories:
    - slides
+
+- title: "Clase 13"
+  subtitle: "Detección de Anomalías"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-06-27
+  image: tics411/thumbnails/clase-13.jpg
+  path: tics411/clase-13.qmd
+  categories:
+   - slides

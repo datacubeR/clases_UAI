@@ -1,0 +1,477 @@
+---
+title: "TICS-411 Minería de Datos"
+subtitle: "Clase 13: Detección de Anomalías"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs: 
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo.jpg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+    pdf-separate-fragments: true
+---
+
+# ¿Qué son las Anomalías?
+
+## Definición {.smaller}
+
+Anomalías
+: > Conjunto de puntos que son considerablemente diferentes al resto.
+
+::: {.callout-caution}
+Por definición las Anomalías son relativamente raras. 
+    * Pueden ocurrir en proporciones extremadamente bajas en los datos. Ej: 1 entre mil.
+    * El contexto es importante. Ej: Temperaturas bajo cero en Verano.
+:::
+
+##### Ejemplos: 
+
+* Telecomunicaciones: Detección de Abusos de Roaming.
+* Banca: Compras/Ventas inusualmente elevados.
+* Finanzas y Seguros: Detectar y prevenir patrones de gastos fraudulentos.
+* Mantención: Predicción de comportamiento irregular/fallas.
+* Smart Homes: Detecciones de fugas de Energía
+* etc.
+
+## Más ejemplos {.smaller}
+
+::: {.callout-important}
+La definición de Anomalía es ***altamente subjetiva*** y depende mucho del Dominio en el cuál se está trabajando.
+:::
+
+![](img/clase-13/anomalia_1.png){.lightbox fig-align="center" width="60%" }
+
+::: {.columns}
+::: {.column}
+![](img/clase-13/anomalia_2.png){.lightbox fig-align="center" width="70%"}
+:::
+::: {.column}
+![](img/clase-13/anomalia_3.png){.lightbox fig-align="center" width="70%"}
+:::
+::: 
+
+## Tipos de Anomalías (Series de Tiempo)
+
+
+::: {.columns}
+::: {.column}
+![](img/clase-13/concept_drift.png){.lightbox fig-align="center" width="70%"}
+
+![](img/clase-13/change_detection.png){.lightbox fig-align="center" width="70%"}
+:::
+::: {.column}
+![](img/clase-13/point_anomalies.png){.lightbox fig-align="center" width="70%"}
+![](img/clase-13/contextual_anomaly.png){.lightbox fig-align="center" width="70%"}
+![](img/clase-13/collective_anomaly.png){.lightbox fig-align="center" width="70%"}
+:::
+::: 
+
+## Desafíos
+
+::: {.callout-warning appearance="default"}
+## Desafíos
+
+* ¿Cuántos Atributos/Variables usamos para definir un Outlier?
+* ¿Cuántos Outliers existen?
+* Este tipo de problema suele ser complicado de Etiquetar, por lo que es difícil resolverlo como un problema supervisado.
+* Puede ser como "Encontrar una aguja en un pajar". 
+:::
+
+## Enfoques
+
+![](img/clase-13/enfoques.png){.lightbox fig-align="center" width="70%"}
+
+# Técnicas de Detección de Outliers
+
+## Técnicas Visuales {.smaller}
+
+::: {.callout-warning}
+Estas técnicas son muy subjetivas ya que dependen del criterio/apreciación del usuario.
+:::
+
+
+::: {.columns}
+::: {.column}
+### Box Plots
+
+![](img/clase-13/boxplot.png){.lightbox fig-align="center" width="70%"}
+:::
+::: {.column}
+### Scatter Plots
+![](img/clase-13/scatterplot.png){.lightbox fig-align="center" width="70%"}
+:::
+::: 
+
+## Técnicas Estadísticas: Test de Grubbs {.smaller}
+
+::: {.callout-note}
+El test de Grubbs detecta si algún dato es un outlier sobre una variable asumiendo que se distribuyen de manera normal.
+:::
+
+$$G = \frac{\underset{i = 1,2,...,n}{max}|x_i - \bar{X}|}{S_x}$$
+
+donde $\bar{X}$ y $S_x$ corresponden a la media y Desviación Estándar Muestral.
+
+* Eso implica que $G$ se distribuye como una **t-student** de $n-2$ grados de libertad, por lo tanto si:
+
+$$ G_{critico} = \frac{n-1}{\sqrt{n}}\sqrt{\frac{t^2_{(\alpha/n, n-2)}}{n-2+t_{(\alpha/n, n-2)^2}}}$$
+
+::: {.callout-important}
+Si $G > G_{critico}$, $x_i$ es considerado un outlier con una significancia $\alpha/n$ para una **t-student** con $n-2$ grados de libertad.
+:::
+
+## Test de Grubs en Python
+
+::: {.callout-note}
+Este código debiera entregar una lista de todos los puntos que son considerados outliers.
+:::
+
+```{.python code-line-numbers="|1-2|4-5|7-8|10-11|13-14|"}
+from scipy import stats
+import numpy as np
+
+n = 16 # Número de Datos
+alpha = 0.05 # nivel de confianza
+
+t_crit = stats.t.ppf(1-alpha/n, n-2)
+G_crit = (n-1)/np.sqrt(n)*np.sqrt(t_crit**2/(n-2 + t_crit**2))
+
+data = np.array([5,14,15,15,19,17,16,20,22,8,21,28,11,9,29,40])
+G_test = np.abs(data-np.mean(data)/np.std(data))
+
+test_grubbs = np.where(G_test>G_crit)
+print(f"Outliers: {data[test_grubbs]}")
+
+```
+
+## Caso Multivariado
+
+
+![](img/clase-13/anomalia_multivariada_data.png){.lightbox fig-align="center"} 
+
+::: {.callout-tip}
+La idea es calcular la distancia de cada punto al centro tomando en consideración la covarianza.
+:::
+
+
+## Caso Multivariado {.smaller}
+
+::: {.columns}
+::: {.column width="30%"}
+![](img/clase-13/centroide.png){.lightbox fig-align="center"} 
+:::
+::: {.column width="70%"}
+
+::: {.callout-note appearance="default"}
+## Paso 1
+* Calcular el punto central de todos los puntos (Promedio)
+$$\mu = (3.16, 3.16)$$
+:::
+
+:::
+::: 
+
+::: {.callout-note appearance="default"}
+## Paso 2
+* Calcular la Inversa de la Matriz de Covarianza:
+:::
+
+![](img/clase-13/paso_2_cov_mat.png){.lightbox fig-align="center"} 
+
+## Caso Multivariado: Continuación {.smaller}
+
+::: {.callout-note appearance="default"}
+## Paso 3
+Calcular la distancia de cada punto con respecto a la media y la inversa de la Covarianza.
+:::
+$$d_i = (p_i - \mu)^T \Sigma^{-1}(p_i - \mu)$$
+
+$$d_1 = (p_1 - \mu)^T \sigma^{-1}(p_1 - \mu)$$
+
+$$d_1 = ([0,0] - [3.16, 3.16])^T \begin{bmatrix}
+                            0.147 & -0.147  \\
+                            -0.147 & 1.911  \\
+                            \end{bmatrix}
+                            ([0,0] - [3.16, 3.16])$$
+
+::: {.callout-tip}
+Se debe repetir este procedimiento para cada punto.
+:::
+
+## Caso Multivariado: Continuación {.smaller}
+
+::: {.callout-note appearance="default"}
+## Paso 4: 
+Se debe calcular el punto crítico según t-student con 95% confianza, y orden de magnitud $m$ dimensiones.
+:::
+
+$$t_{(\alpha = 0.95,2)} = 5.99$$
+
+::: {.callout-note appearance="default"}
+## Paso 5
+Comparar, Si $d_i>t_{crit}$ entonces $d_i$ es Outlier.
+:::
+
+![](img/clase-13/tabla_puntos.png){.lightbox fig-align="center"} 
+
+::: {.callout-caution}
+En este caso ningún valor de $d_i$ es mayor al $t_{(crit)}, por lo tanto, no hay outliers. 
+:::
+
+## Distancia de Mahalanobis
+
+La distancia de Mahalanobis corresponde a: 
+
+$$d_i = \sqrt{(p_i - \mu)^T \Sigma^{-1}(p_i - \mu)}$$
+
+::: {.callout-note}
+Se puede repetir el mismo procedimiento anterior, sólo que se define una Distancia de Mahalonobis umbral. Las que superen dicho umbral son considerados como Outliers.
+:::
+
+![](img/clase-13/mahalanobis_distance.png){.lightbox fig-align="center"} 
+
+# Técnicas de Detección basadas en Modelos
+
+## DBSCAN {.smaller}
+
+Podemos utilizar el procedimiento que aprendimos de DBSCAN. Todos los puntos Noise serán considerados como Anomalías.
+
+::: {.columns}
+::: {.column}
+
+::: {.r-stack}
+![](img/clase-5/noise_1.png){.lightbox fig-align="center" }
+
+![](img/clase-5/noise_2.png){.lightbox fig-align="center" .fragment fragment-index=1}
+
+:::
+:::
+
+::: {.column}
+
+![](img/clase-5/noise_algo.png){.lightbox fig-align="center" }
+
+::: {.callout-note .fragment fragment-index=1}
+Este punto corresponde a un **Noise Point**. Lo cuál en nuestro caso particular se considerará una ***Anomalía***.
+:::
+:::
+::: 
+
+## K-Nearest Neighbor {.smaller}
+
+::: {.callout-note}
+Se puede utilizar los modelos de vecinos más cercanos para determinar outliers siguiendo el siguiente procedimiento:
+:::
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-13/anomalia_multivariada_data.png){.lightbox fig-align="center" width="70%"} 
+
+![](img/clase-13/coordenadas.png){.lightbox fig-align="center" width="32%"} 
+:::
+::: {.column width="60%"}
+#### Paso 1: Definir el valor de $k$ para encontrar los vecinos más cercanos.
+
+Ej: Sea $k=3$
+
+#### Paso 2: Calcular la Matriz de Distancias y determinar los vecinos más cercanos.
+
+![](img/clase-13/distance_knn.png){.lightbox fig-align="center" width="70%"} 
+:::
+::: 
+
+## K-Nearest Neighbor: Continuación {.smaller}
+
+
+<br>
+
+::: {.columns}
+::: {.column}
+#### Paso 3: Calcular la distancias Promedio.
+
+![](img/clase-13/distancia_promedio_knn.png){.lightbox fig-align="center"}  
+:::
+::: {.column}
+#### Paso 4: Escoger un Umbral. Si es que la distancia es mayor al Umbral entonces es un Outlier. Ej: $Dist_crit: 3$
+
+![](img/clase-13/outliers_knn.png){.lightbox fig-align="center"}  
+:::
+::: 
+
+## Local Outlier Factor (LOF) {.smaller}
+
+* Local Outlier Factor (LOF) detecta anomalías con sus vecindarios locales, en lugar de la distribución glocal de los datos.
+
+::: {.callout-important}
+En la Figura, $O1$ y $O2$ son anomalías locales en comparación con $C1$, $O3$ es una anomalía global, y $O4$ no es una anomalía. 
+:::
+
+![](img/clase-13/lof_intro.png){.lightbox fig-align="center"}  
+
+## Algoritmo {.smaller}
+
+1. Determinar $N(x,k)$, los k-vecinos más cercanos de cada punto x.
+2. Para todo punto $y$, calcular la distancia a su k-ésimo vecino más cercano.
+3. Calcular la reach-distance entre todos los puntos:
+$$reach-distance_k(x,y) = max\{k-distance(y), d(x,y)\}$$
+4. Calcule la densidad del vecindario local sobre sus $k$ vecinos, donde $|N(x,k)| = k$.
+
+$$density(x,k) = lrd_k(x) = \left(\frac{\sum_{y \in N(x,k)} reach-distance_k(x,y)}{|N(x,k)|}\right)^{-1}$$
+
+5. Calcule el `Local Outlier Factor` para el punto x como la proporción de la densidad de sus $k$ vecinos más cercanos, con respecto a la densidad del punto $x$. 
+
+::: {.columns}
+::: {.column}
+$$ LOF(x) = \frac{\sum_{y \in N(x,k) density(y,k)}}{|N(x,k)|density(x,k)} $$
+:::
+::: {.column}
+
+::: {.callout-tip}
+LOF(X) >> 1 implica anomalía.
+:::
+:::
+::: 
+
+
+## Ejemplo Local Outlier Factor {.smaller}
+
+::: {.callout}
+Consideremos los siguientes 4 puntos de datos: a(0,0), b(0,1), c(1,1), d(3,0). Calcular el LOF para cada punto y mostrar la anomalía principal.
+
+:::
+
+::: {.callout-tip}
+Utilizar $K = 2$ y Distancia Manhattan.
+:::
+
+
+::: {.columns}
+::: {.column}
+
+#### ***Paso 1***: Calcular Distancias
+
+* dist(a,b) = 1
+* dist(a,c) = 2
+* dist(a,d) = 3
+* dist(b,c) = 1
+* dist(b,d) = 4
+* dist(c,d) = 3
+
+:::
+
+::: {.column}
+![](img/clase-13/distancias_lof.png){.lightbox fig-align="center"}  
+:::
+::: 
+
+
+## Ejemplo Local Outlier Factor: Continuación {.smaller}
+
+#### ***Paso 2***: Para todo punto $y$, calcule la distancia a su k-ésimo vecino más cercano.
+
+* $dist_2(a) = dist(a,c) = 2$ (c es el 2do vecino más cercano)
+* $dist_2(b) = dist(b,a) = 1$ (a/c es el 2do vecino más cercano)
+* $dist_2(c) = dist(c,a) = 2$ (a es el 2do vecino más cercano)
+* $dist_2(d) = dist(d,a) = 3$ (a/c es el 2do vecino más cercano)
+
+![](img/clase-13/distancias_lof.png){.lightbox fig-align="center"}  
+
+## Ejemplo Local Outlier Factor: Continuación {.smaller}
+
+#### ***Paso 3***: Calcular la reach-distance entre todos los puntos, es decir, los puntos vecindarios a una distancia k.
+
+::: {.callout}
+
+$N_k(o)$: Vecindario de $k$-distancia de $o$, $N_k(o)=\{o'\|o' \in D, dist(o,o') \le dist_k(o)\}$
+:::
+
+* $N_2(a) = \{b,c\}$
+* $N_2(b) = \{a,c\}$
+* $N_2(c) = \{b,a\}$
+* $N_2(d) = \{a,c\}$
+
+![](img/clase-13/distancias_lof.png){.lightbox fig-align="center"}  
+
+## Ejemplo Local Outlier Factor: Continuación {.smaller}
+
+::: {.columns}
+::: {.column}
+#### ***Paso 4***: Calcular la densidad del vecinadario local sobre sus $k$ vecinos.
+:::
+::: {.column}
+![](img/clase-13/distancias_lof.png){.lightbox fig-align="center" width="70%"}  
+:::
+::: 
+
+
+* $reach-dist_2(b \leftarrow a) = max\{dist_2(b), dist(b,a)\} = max\{1,1\} = 1$
+* $reach-dist_2(c \leftarrow a) = max\{dist_2(c), dist(c,a)\} = max\{2,2\} = 2$
+
+::: {.callout-note}
+Calcular el resto de manera análoga.
+:::
+## Ejemplo Local Outlier Factor: Continuación {.smaller}
+
+Entonces, 
+$lrd_k(o)$: Densidad de alcanzabilidad local de $o$.
+
+$$lrd_2(a) = \frac{|\mathcal{N}(a)|}{reach-dist_2(b\leftarrow a) + reach-dist_2(c \leftarrow a)} = \frac{2}{1 + 2} = 0.667$$
+$$lrd_2(b) = \frac{|\mathcal{N}(b)|}{reach-dist_2(a\leftarrow b) + reach-dist_2(b \leftarrow b)} = \frac{2}{2 + 2} = 0.5$$
+$$lrd_2(c) = \frac{|\mathcal{N}(c)|}{reach-dist_2(b\leftarrow c) + reach-dist_2(a \leftarrow c)} = \frac{2}{1 + 2} = 0.667$$
+$$lrd_2(d) = \frac{|\mathcal{N}(d)|}{reach-dist_2(a\leftarrow d) + reach-dist_2(c \leftarrow d)} = \frac{2}{1 + 2} = 0.33$$
+
+## Ejemplo Local Outlier Factor: Continuación {.smaller}
+
+#### Paso 5: Calcular el Local Outlier Factor para el punto $x$ como la proporción de la densidad de sus $k$ vecinos más cercanos, con respecto a la densidad del punto $x$.
+
+::: {.columns}
+::: {.column width=70%}
+$$LOF(x) = \frac{\sum_{y \in N(x,k)} density(y,k)}{|N(x,k)|density(x,k)}$$
+
+$$LOF_2(a) = \frac{lrd_2(b) + lrd_2(c)}{N_2(a) \cdot lrd_2(a)} = \frac{0.5 + 0.667}{2 \cdot 0.667} = 0.87$$
+$$LOF_2(b) = \frac{lrd_2(a) + lrd_2(c)}{N_2(b) \cdot lrd_2(b)} = \frac{0.667 + 0.667}{2 \cdot 0.5} = 1.334$$
+$$LOF_2(c) = \frac{lrd_2(b) + lrd_2(a)}{N_2(c) \cdot lrd_2(c)} = \frac{0.5 + 0.667}{2 \cdot 0.667} = 0.87$$
+$$LOF_2(d) = \frac{lrd_2(a) + lrd_2(c)}{N_2(d) \cdot lrd_2(d)} = \frac{0.667 + 0.667}{2 \cdot 0.33} = 2$$
+:::
+::: {.column width=30%}
+![](img/clase-13/vecindarios.png){.lightbox fig-align="center"}  
+
+:::
+::: 
+
+## Ejemplo Local Outlier Factor: Continuación {.smaller}
+
+#### Paso 6: Ordena todas las LOF_k(o)
+
+* LOF_2(d) = 2 $\implies$ el punto paraecer una anomalía (LOF >> 1)
+* LOF_2(b) = 1.334
+* LOF_2(a) = 0.87
+* LOF_2(c) = 0.87
+
+::: {.callout-important appearance="default"}
+## Detalles Técnicos
+* Dado que esto sigue un enfoque local, la resolución depende de la elección del usuario para $k$.
+* Genera una puntuación (Anomaly Score) para cada punto.
+* Como $LOF$ es una razón, es difícil de interpretar. No existe un valor umbral específico por encima del cual un punto se define como un valor atípico. La identificación de un valor atípico depende del problema y del usuario
+* Como $LOF$ es una razón, es difícil de interpretar. No existe un valor umbral específico por encima del cual un punto se define como un valor atípico. La identificación de un valor atípico depende del problema y del usuario.
+:::
+
+# ありがとうございました <br> (Arigato Gozaimasu)
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::
