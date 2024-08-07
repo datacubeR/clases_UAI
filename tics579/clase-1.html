@@ -333,7 +333,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-579-Deep Learning</h1>
-  <p class="subtitle">Clase 1: Introducción a las Redes Neuronales</p>
+  <p class="subtitle">Clase 1: Preliminares</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -486,8 +486,18 @@ Alfonso Tobar-Arancibia
 <div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/neuron_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-1/neuron_2.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-1/neuron_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-1/neuron_2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Este tipo de nomenclatura está sumamente pasada de moda.</p>
+</div>
+</div>
 </div>
 </div><div class="column fragment" style="width:40%;">
 <ul>
@@ -503,8 +513,23 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <ul>
-<li>¿Qué pasa si <span class="math inline">\(\phi(.)\)</span> vale la función <strong><em>identidad</em></strong>?</li>
-<li>¿Qué pasa si <span class="math inline">\(\phi(.)\)</span> vale la función <strong><em>sigmoide</em></strong>?</li>
+<li class="fragment">¿Qué pasa si <span class="math inline">\(\phi(.)\)</span> vale la función <strong><em>identidad</em></strong>?</li>
+<li class="fragment">Tenemos una <strong>Regresión Lineal</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment">¿Qué pasa si <span class="math inline">\(\phi(.)\)</span> vale la función <strong><em>sigmoide</em></strong>?</li>
+<li class="fragment">Tenemos una <strong>Regresión Logística</strong>.</li>
 </ul>
 </div>
 </div>
@@ -515,15 +540,56 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="arquitectura-de-una-red" class="slide level2 smaller">
 <h2>Arquitectura de una Red</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/nn_arq.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-1/nn_arq.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<h3 id="estructura-más-común">Estructura más común</h3>
+<h6 id="probablemente-tampoco-seguiremos-esta-nomenclatura"><em>(Probablemente tampoco seguiremos esta nomenclatura)</em></h6>
+<ul>
+<li>Nodos o Neuronas</li>
+<li>Edges o Conexiones</li>
+<li>Capas</li>
+</ul>
+<div class="fragment" style="font-size:150%;">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong><em>¿Cuántas capas tiene esta red?</em></strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" style="font-size:150%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong><em>Depende</em></strong></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <ul>
 <li>Normalmente todas las neuronas de una capa anterior se conectan con las de una capa posterior (Hay excepciones).</li>
 <li>Dependiendo de la forma en la que se conecten, cada <strong>Arquitectura</strong> recibe un nombre.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/nn_arq.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-1/nn_arq.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
+</section></section>
+<section>
+<section id="intuición-y-conceptos-iniciales" class="title-slide slide level1 center">
+<h1>Intuición y conceptos iniciales</h1>
+
 </section>
 <section id="los-ingredientes-de-un-algoritmo-de-aprendizaje" class="slide level2 smaller">
 <h2>Los Ingredientes de un Algoritmo de Aprendizaje</h2>
@@ -537,13 +603,13 @@ Alfonso Tobar-Arancibia
 <dt>Loss Function</dt>
 <dd>
 <blockquote>
-<p>Una función que especifica cuanta información se pierde. Mayor pérdida más error de estimación.</p>
+<p>Una función que especifica cuanta información se pierde. Mayor pérdida implica más error de estimación.</p>
 </blockquote>
 </dd>
 <dt>Método de Optimización</dt>
 <dd>
 <blockquote>
-<p>Un procedimiento para determinar los parámetros de la hipótesis, minimizando la suma de las pérdidas en un set de entrenamiento.</p>
+<p>Es el responsable de combinar la <code>hipótesis</code> y la <code>loss function</code>. Corresponde a un procedimiento para determinar los parámetros de la hipótesis, minimizando la suma de las pérdidas en un set de entrenamiento.</p>
 </blockquote>
 </dd>
 </dl>
@@ -554,7 +620,7 @@ Alfonso Tobar-Arancibia
 <dt>Softmax Regression</dt>
 <dd>
 <blockquote>
-<p>Corresponde la versión multiclase de una Regresión Logística.</p>
+<p>Corresponde la versión multiclase de una Regresión Logística. También se le llama una <code>Shallow Network</code>.</p>
 </blockquote>
 </dd>
 </dl>
@@ -614,7 +680,7 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>En este caso usamos una hipótesis lineal, ya que se usa una multiplicación matricial (o producto punto) para relacionar <span class="math inline">\(\theta\)</span> y <span class="math inline">\(x\)</span>.</p>
+<p>En este caso usamos una <code>hipótesis lineal</code>, ya que se usa una multiplicación matricial (o producto punto) para relacionar <span class="math inline">\(\theta\)</span> y <span class="math inline">\(x\)</span>.</p>
 </div>
 </div>
 </div>
@@ -694,17 +760,79 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="loss-function-softmaxcross-entropy-loss" class="slide level2 smaller">
 <h2>Loss Function: Softmax/Cross-Entropy Loss</h2>
-<p>Para normalizar la salida de nuestra hipótesis, vamos a convertirla en una “probabilidad”. Pra ello usaremos la función Softmax tal que:</p>
+<p>La salida de nuestra <code>Shallow Network</code> retornará valores reales. Para poder tener una mejor interpretación del significado de cada una aplicaremos la función <code>Softmax</code> lo cual permitirá <em>normalizar</em> los resultados y llevará los resultados a una <strong><em>“distribución de probabilidad”</em></strong> (valores positivos que sumen 1).</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/softmax_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-1/softmax_example.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<p><br></p>
+<p>Formalmente definiremos la función Softmax como:</p>
 <p><span class="math display">\[z_i = p(label = i) = \frac{exp(h_i(x))}{\sum_{j=1}^k exp(h_j(x))}\]</span></p>
-<p>Para optimizar este proceso normalmente se usa MLE aplicado al Negative Log Loss, también llamado <code>Cross Entropy Loss</code>.</p>
-<p><span class="math display">\[l_{ce}(h(x), y) = -log \, p(label = y) = - h_{(i=y)}(x) + log\left(\sum_{j = 1}^k exp(h_j(x))\right)\]</span></p>
+<p><span class="math display">\[Z = \begin{bmatrix}
+&amp;z_1&amp;\\
+&amp; \vdots &amp; \\
+&amp;z_k&amp;\\
+\end{bmatrix}\]</span></p>
+</div>
+</div>
+</section>
+<section id="loss-function-softmaxcross-entropy-loss-1" class="slide level2 smaller">
+<h2>Loss Function: Softmax/Cross-Entropy Loss</h2>
+<p>Para medir el error, o la pérdida de información de un punto utilizaremos el Negative Log Loss, también llamado <code>Cross Entropy Loss</code>.</p>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Para garantizar el éxito de nuestro modelo, básicamente queremos maximizar la probabilidad de encontrar la etiqueta correcta, es decir, que <span class="math inline">\(p(label = y)\)</span> sea lo más alto posible.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Normalmente en los problemas de optimización no se suele maximizar sino minimizar. Minimizar el valor negativo es equivalente a maximizar. Esto sería equivalente a minimizar el error del modelo.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Finalmente por razones de estabilidad numérica, minimizamos el logaritmo de la probabilidad que es una técnica bien conocida en Estadística.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><span class="math display">\[\begin{align}
+l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
+&amp;= -log \left(\frac{exp(h_{(i = y)}(x))}{\sum_{j=1}^k exp(h_j(x))}\right) \\
+&amp;= - h_{(i=y)}(x) + log\left(\sum_{j = 1}^k exp(h_j(x))\right)\end{align}\]</span></p>
+</div>
 </section>
 <section id="método-de-optimización" class="slide level2 smaller">
 <h2>Método de Optimización</h2>
 <blockquote>
-<p>El último ingrediente de un algoritmo de aprendizaje es el método de optimización. Es necesario minimizar la pérdida promedio asociada al set de entrenamiento. Para ello definimos esto formalmente como:</p>
+<p>El último ingrediente de un algoritmo de aprendizaje es el método de optimización. Es necesario minimizar la pérdida promedio asociada a todos los puntos de un cierto set de entrenamiento. Para ello definimos esto formalmente como:</p>
 </blockquote>
-<p><span class="math display">\[\underset{\theta}{minimize} = \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}, y^{(i)}))\]</span></p>
+<p><span class="math display">\[\underset{\theta}{minimize} = \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}), y^{(i)}) =\frac{1}{m} \sum_{i=1}^m l(\theta^Tx^{(i)}, y^{(i)})\]</span></p>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -729,15 +857,25 @@ Alfonso Tobar-Arancibia
 <div class="columns">
 <div class="column" style="width:60%;">
 <p>Se define el gradiente como la matriz que contiene las derivadas parciales de una función <span class="math inline">\(f\)</span>. Se denota como:</p>
-<p><span class="math display">\[\nabla_\theta f(\theta) \in \mathbb{R}^{n \times k} = h_\theta(X) = \begin{bmatrix}
+<p><span class="math display">\[\nabla_\theta f(\theta) \in \mathbb{R}^{n \times k} =  \begin{bmatrix}
 \frac{\partial f(\theta)}{\partial \theta_{11}} &amp; \cdots &amp; \frac{\partial f(\theta)}{\partial \theta_{1k}} \\
 \cdots &amp; \ddots &amp; \cdots \\
 \frac{\partial f(\theta)}{\partial \theta_{n1}} &amp; \cdots &amp; \frac{\partial f(\theta)}{\partial \theta_{nk}}
 \end{bmatrix}\]</span></p>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\theta_{ij}\)</span> corresponde al parámetro que une el nodo/feature <span class="math inline">\(i\)</span> con el nodo/predicción <span class="math inline">\(j\)</span>.</p>
+</div>
+</div>
+</div>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/gradient.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-1/gradient.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/gradient.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-1/gradient.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div>
@@ -758,11 +896,11 @@ Alfonso Tobar-Arancibia
 <section id="gradient-descent-regla-de-actualización" class="slide level2 smaller">
 <h2>Gradient Descent: Regla de Actualización</h2>
 <p>Para minimizar la función, la idea es descender iterativamente por el trayecto <strong>en contra</strong> del gradiente. La regla de actualización se define como:</p>
-<p><span class="math display">\[\theta := \theta - \alpha \nabla_\theta f(\theta)\]</span></p>
-<p>donde <span class="math inline">\(\alpha &gt; 0\)</span> corresponde al <em>step size</em> o <em>learning rate</em>.</p>
+<p><span class="math display">\[\theta := \theta - \alpha \nabla_\theta f(\theta) = \theta - \alpha \nabla_\theta l_{ce}(X\theta,y)\]</span></p>
+<p>con <span class="math inline">\(\theta \in \mathbb{R}^{n \times k}\)</span> y <span class="math inline">\(\alpha &gt; 0\)</span> corresponde al <em>step size</em> o <code>learning rate</code>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/lr_effect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-1/lr_effect.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-1/lr_effect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-1/lr_effect.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
 <div class="callout callout-tip callout-style-simple">
@@ -776,10 +914,13 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </section>
-<section id="calculando-el-gradiente-a-mano" class="slide level2">
+<section id="calculando-el-gradiente-a-mano" class="slide level2 smaller">
 <h2>Calculando el Gradiente a mano</h2>
-<p>Necesitamos calcular:</p>
-<p><span class="math display">\[\theta := \theta - \alpha \nabla_\theta l_{ce}(\theta^Tx,y)\]</span></p>
+<div style="font-size: 130%;">
+<p>Simplifiquemos el problema a calcular para un sólo vector <span class="math inline">\(x\)</span>.</p>
+<p><span class="math display">\[\theta := \theta - \alpha \nabla_\theta l_{ce}(\theta^Tx,y) \]</span></p>
+</div>
+<div style="font-size: 120%;">
 <div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -794,11 +935,35 @@ Alfonso Tobar-Arancibia
 <ul>
 <li><strong>SPOILER</strong>: Yo tampoco lo he visto en ningún curso.</li>
 </ul></li>
-<li>Usaremos un truco (sumamente hacky) que jamás deben revelar 😱 y que nos debería avergonzar.
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="columns fragment">
+<div class="column" style="width:70%;">
+<div style="font-size: 120%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Usaremos un truco (sumamente hacky 😱) que jamás deben revelar y que avergonzaría a cualquier profesor de Cálculo.
 <ul>
 <li>Pretenderemos que todos los valores son escalares y corregiremos las dimensiones al final.</li>
 </ul></li>
 </ul>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/fuenzi.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-1/fuenzi.jpeg" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
 </div>
 </div>
 </div>
@@ -809,7 +974,7 @@ Alfonso Tobar-Arancibia
 <p>Simplifiquemos el problema pensando que calcularemos el Gradiente para un sólo vector <span class="math inline">\(x\)</span>.</p>
 </blockquote>
 <blockquote>
-<p>Es decir, <span class="math inline">\(x \in n\times1\)</span>.</p>
+<p>Es decir, <span class="math inline">\(x \in \mathbb{R}^{n\times1}\)</span>.</p>
 </blockquote>
 <p>Además sabemos que <span class="math inline">\(\nabla_\theta l_{ce}(\theta^Tx, y)\)</span> debe tener dimensiones <span class="math inline">\(n \times k\)</span>.</p>
 <div class="columns">
@@ -823,7 +988,7 @@ Alfonso Tobar-Arancibia
 \end{bmatrix}\]</span></p>
 </div>
 </div>
-<div style="font-size: 130%;">
+<div class="fragment" style="font-size: 130%;">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -859,7 +1024,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-<p>Finalmente:</p>
+<p>Finalmente en forma vectorial quedaría como:</p>
 <div class="columns">
 <div class="column">
 <p><span class="math display">\[\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = z - e_y\]</span></p>
@@ -889,7 +1054,7 @@ Alfonso Tobar-Arancibia
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>OJO con las dimensiones</strong></p>
+<p><strong>Ojo con las dimensiones</strong></p>
 </div>
 <div class="callout-content">
 <ul>
@@ -954,23 +1119,45 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Aplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.</p>
+<ul>
+<li>Aplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.</li>
+<li>Se puede programar en pocas líneas en Python.</li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-important callout-style-simple">
+</section>
+<section id="qué-pasa-con-arquitecturas-más-complejas" class="slide level2">
+<h2>¿Qué pasa con arquitecturas más complejas?</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/nn_arq_full.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-1/nn_arq_full.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
+<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
+<p><strong>Próxima Clase</strong></p>
+</div>
 <div class="callout-content">
-<p>Próxima clase vamos a hacer lo mismo para una Red Neuronal. La única diferencia es que la hipótesis que utilizaremos es un poco más <code>fancy</code>.</p>
+<ul>
+<li>Vamos a hacer lo mismo para una Red Neuronal.</li>
+<li>La única diferencia es que la hipótesis que utilizaremos es un poco más <code>fancy</code>.</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 </div>
 </section></section>
-<section id="nos-vemos" class="title-slide slide level1 center">
-<h1>Nos vemos</h1>
+<section id="nos-vemos-próxima-semana-no-hay-clases" class="title-slide slide level1 center">
+<h1>Nos vemos <br> (Próxima semana no hay clases)</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -990,7 +1177,7 @@ Alfonso Tobar-Arancibia
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/mat_mat_mul.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-1/mat_mat_mul.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/mat_mat_mul.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-1/mat_mat_mul.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column">
@@ -1377,7 +1564,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

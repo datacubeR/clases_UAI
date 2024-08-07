@@ -14,7 +14,7 @@
   <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Alfonso Tobar-Arancibia">
-  <title>Clases UAI - TICS-411 Minería de Datos</title>
+  <title>Clases UAI - TICS-579-Deep Learning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -32,71 +32,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../logo.css">
@@ -397,8 +332,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 4: Clustering Jerárquico</p>
+  <h1 class="title">TICS-579-Deep Learning</h1>
+  <p class="subtitle">Clase 2: Introducción a las Redes Neuronales</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -412,67 +347,303 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section>
-<section id="clustering-jerárquico" class="title-slide slide level1 center">
-<h1>Clustering Jerárquico</h1>
-
+<section id="problemas-de-una-hipótesis-lineal" class="slide level2">
+<h2>Problemas de una Hipótesis Lineal</h2>
 </section>
-<section id="definiciones" class="slide level2 smaller">
-<h2>Definiciones</h2>
-<dl>
-<dt>Clustering Jerárquico</dt>
-<dd>
-<blockquote>
-<p>Es un tipo de aprendizaje que no requiere de etiquetas (las respuestas correctas) para poder aprender. Se basa en la construcción de Jerarquías para ir construyendo clusters.</p>
-</blockquote>
-</dd>
-<dt>Dendograma</dt>
-<dd>
-<blockquote>
-<p>Corresponde a un diagrama en el que se muestran las distancias de atributos entre clases que son parte de un mismo cluster.</p>
-</blockquote>
-</dd>
-</dl>
+<section id="problema-xor" class="slide level2">
+<h2>Problema XOR</h2>
 </section>
-<section id="clustering-jerarquía" class="slide level2 smaller">
-<h2>Clustering: Jerarquía</h2>
+<section id="por-qué-estudiar-deep-learning" class="slide level2 smaller">
+<h2>¿Por qué estudiar Deep Learning?</h2>
 <blockquote>
-<p>Los algoritmos basados en jerarquía pueden seguir 2 estrategias:</p>
+<p>Principalmente porque es el Estado del Arte en las aplicaciones más Impresionantes en la Inteligencia Artificial.</p>
 </blockquote>
-<ul>
-<li><p><strong>Aglomerativos</strong>: Comienzan con cada objeto como un grupo (bottom-up). Estos grupos se van combinando sucesivamente a través de una métrica de similaridad. <code>Para n objetos se realizan n-1 uniones</code>.</p></li>
-<li><p><strong>Divisionales</strong>: Comienzan con un solo gran cluster (bottom-down). Posteriormente este mega-cluster es dividido sucesivamente de acuerdo a una métrica de similaridad.</p></li>
-</ul>
+<div class="columns">
+<div class="column fragment" style="width:25%;">
+<!-- -->
+<h4 id="alexnet-2012">Alexnet (2012)</h4>
+<p><a href="img/clase-1/alexnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-1/alexnet.png"></a></p>
+</div><div class="column fragment" style="width:25%;">
+<!-- -->
+<h4 id="alphago-2016">AlphaGo (2016)</h4>
+<p><a href="img/clase-1/alphago.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-1/alphago.png"></a></p>
+</div><div class="column fragment" style="width:25%;">
+<!-- -->
+<h4 id="transformers-2017">Transformers (2017)</h4>
+<p><a href="img/clase-1/transformer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-1/transformer.png"></a></p>
+</div><div class="column fragment" style="width:25%;">
+<!-- -->
+<h4 id="gpt-2019">GPT (2019)</h4>
+<p><a href="img/clase-1/gpt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-1/gpt.png"></a></p>
+</div>
+</div>
+</section>
+<section id="por-qué-estudiar-deep-learning-1" class="slide level2 smaller">
+<h2>¿Por qué estudiar Deep Learning?</h2>
+<blockquote>
+<p>Principalmente porque es el Estado del Arte en las aplicaciones más Impresionantes en la Inteligencia Artificial.</p>
+</blockquote>
+<div class="columns">
+<div class="column fragment" style="width:25%;">
+<!-- -->
+<h4 id="gpt-3-2021">GPT-3 (2021)</h4>
+<p><a href="img/clase-1/gpt3.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-1/gpt3.jpeg"></a></p>
+</div><div class="column fragment" style="width:25%;">
+<!-- -->
+<h4 id="alphafold-2021">AlphaFold (2021)</h4>
+<p><a href="img/clase-1/alphafold.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-1/alphafold.jpg"></a></p>
+</div><div class="column fragment" style="width:25%;">
+<!-- -->
+<h4 id="stable-diffussiondalle-2022">Stable Diffussion/Dalle (2022)</h4>
+<p><a href="img/clase-1/stable-diffusion-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-1/stable-diffusion-3.png"></a></p>
+</div><div class="column fragment" style="width:25%;">
+<!-- -->
+<h4 id="llms-2023-chatgptllama">LLMs (2023) (ChatGPT/Llama)</h4>
+<p><a href="img/clase-1/llms.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-1/llms.jpg"></a></p>
+</div>
+</div>
+</section>
+<section id="por-qué-estudiar-deep-learning-2" class="slide level2 smaller">
+<h2>¿Por qué estudiar Deep Learning?</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-3/jerarquia.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-3/jerarquia.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-1/google_trends.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-glightbox="description: .lightbox-desc-9" title="Imágen tomada de la Clase de Zico Colter"><img data-src="img/clase-1/google_trends.png" class="quarto-figure quarto-figure-center" style="width:70.0%" alt="Imágen tomada de la Clase de Zico Colter"></a></p>
+<figcaption>Imágen tomada de la Clase de Zico Colter</figcaption>
 </figure>
 </div>
-</section></section>
-<section>
-<section id="clustering-aglomerativo" class="title-slide slide level1 center">
-<h1>Clustering Aglomerativo</h1>
-
 </section>
-<section id="clustering-aglomerativo-algoritmo" class="slide level2">
-<h2>Clustering Aglomerativo: Algoritmo</h2>
-<p>Algoritmo</p>
-<ol type="1">
-<li>Inicialmente se considera <strong>cada punto como un cluster</strong>.</li>
-<li>Calcula la matriz de <em><code>proximidad/distancia</code></em> entre cada cluster.</li>
-<li>Repetir <code>(hasta que exista un solo cluster)</code>:
+<section id="por-qué-estudiar-deep-learning-3" class="slide level2 smaller">
+<h2>¿Por qué estudiar Deep Learning?</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Facilidad y Autograd</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li>Unir los cluster más cercanos.</li>
-<li>Actualizar la matriz de <em><code>proximidad/distancia</code></em>.</li>
+<li>Frameworks como Tensorflow, Pytorch o Jax permiten realizar esto de manera mucho más sencilla.
+<ul>
+<li>Frameworks permiten calcular gradientes de manera automática.</li>
+<li>Antigua mente trabajar en Torch, Caffe o Theano podía tomar cerca de 50K líneas de código.</li>
 </ul></li>
-</ol>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Cómputo</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Proliferación de las GPUs, TPUs, HPUs, IPUs, como sistemas masivos de Cómputos.
+<ul>
+<li><a href="https://www.nytimes.com/2012/06/26/technology/in-a-big-network-of-computers-evidence-of-machine-learning.html">How many computers to identify a cat? 16,000</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Estado del Arte</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Modelos de Deep Learning pueden generar sistemas que entiendan imágenes, textos, audios, videos, grafos, etc.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="el-nacimiento-de-las-redes-neuronales" class="slide level2 smaller">
+<h2>El nacimiento de las Redes Neuronales</h2>
+<blockquote>
+<p>Las redes neuronales artificiales (ANN), son modelos inspirados en el mecanismo cerebral de sinapsis. Su unidad más básica es una Neurona.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/neuron_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-1/neuron_1.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="el-nacimiento-de-las-redes-neuronales-1" class="slide level2 smaller">
+<h2>El nacimiento de las Redes Neuronales</h2>
+<blockquote>
+<p>Las redes neuronales artificiales (ANN), son modelos inspirados en el mecanismo cerebral de sinapsis. Su unidad más básica es una Neurona.</p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/neuron_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-1/neuron_2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Lo más importante de este proceso es el cálculo de la matriz de proximidad/distancia entre clusters</p>
+<p>Este tipo de nomenclatura está sumamente pasada de moda.</p>
+</div>
+</div>
+</div>
+</div><div class="column fragment" style="width:40%;">
+<ul>
+<li>Este cálculo se puede representar como:</li>
+</ul>
+<p><span class="math display">\[ y = \phi(w_1 \cdot x_1 + w_2 \cdot x_2 + ... + w_5 \cdot x_5)\]</span> <span class="math display">\[ y = \phi(w^T \cdot x)\]</span></p>
+<p>donde <span class="math inline">\(w = [w_1, w_2, w_3, w_4, w_5]\)</span> y <span class="math inline">\(x = [x_1, x_2, x_3, x_4, x_5]\)</span>.</p>
+<div class="fragment">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment">¿Qué pasa si <span class="math inline">\(\phi(.)\)</span> vale la función <strong><em>identidad</em></strong>?</li>
+<li class="fragment">Tenemos una <strong>Regresión Lineal</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment">¿Qué pasa si <span class="math inline">\(\phi(.)\)</span> vale la función <strong><em>sigmoide</em></strong>?</li>
+<li class="fragment">Tenemos una <strong>Regresión Logística</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="arquitectura-de-una-red" class="slide level2 smaller">
+<h2>Arquitectura de una Red</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/nn_arq.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-1/nn_arq.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<h3 id="estructura-más-común">Estructura más común</h3>
+<h6 id="probablemente-tampoco-seguiremos-esta-nomenclatura"><em>(Probablemente tampoco seguiremos esta nomenclatura)</em></h6>
+<ul>
+<li>Nodos o Neuronas</li>
+<li>Edges o Conexiones</li>
+<li>Capas</li>
+</ul>
+<div class="fragment" style="font-size:150%;">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong><em>¿Cuántas capas tiene esta red?</em></strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" style="font-size:150%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong><em>Depende</em></strong></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Normalmente todas las neuronas de una capa anterior se conectan con las de una capa posterior (Hay excepciones).</li>
+<li>Dependiendo de la forma en la que se conecten, cada <strong>Arquitectura</strong> recibe un nombre.</li>
+</ul>
+</section>
+<section>
+<section id="intuición-y-conceptos-iniciales" class="title-slide slide level1 center">
+<h1>Intuición y conceptos iniciales</h1>
+
+</section>
+<section id="los-ingredientes-de-un-algoritmo-de-aprendizaje" class="slide level2 smaller">
+<h2>Los Ingredientes de un Algoritmo de Aprendizaje</h2>
+<dl>
+<dt>Hipótesis</dt>
+<dd>
+<blockquote>
+<p>Una función que describe como mapear inputs (features) con outputs (labels) por medio de parámetros.</p>
+</blockquote>
+</dd>
+<dt>Loss Function</dt>
+<dd>
+<blockquote>
+<p>Una función que especifica cuanta información se pierde. Mayor pérdida implica más error de estimación.</p>
+</blockquote>
+</dd>
+<dt>Método de Optimización</dt>
+<dd>
+<blockquote>
+<p>Es el responsable de combinar la <code>hipótesis</code> y la <code>loss function</code>. Corresponde a un procedimiento para determinar los parámetros de la hipótesis, minimizando la suma de las pérdidas en un set de entrenamiento.</p>
+</blockquote>
+</dd>
+</dl>
+</section>
+<section id="ejemplo-softmax-regression" class="slide level2">
+<h2>Ejemplo: Softmax Regression</h2>
+<dl>
+<dt>Softmax Regression</dt>
+<dd>
+<blockquote>
+<p>Corresponde la versión multiclase de una Regresión Logística. También se le llama una <code>Shallow Network</code>.</p>
+</blockquote>
+</dd>
+</dl>
+<div class="columns">
+<div class="column" style="font-size: 80%;">
+<div class="callout callout-tip callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Consideremos un problema de clasificación multiclase de <span class="math inline">\(k\)</span> clases tal que:</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Datos de Entrenamiento: <span class="math inline">\(x^{(i)}, y^{(i)} \in {1,...,k}\)</span> para <span class="math inline">\(i=1,...,m\)</span>.
+<ul>
+<li><span class="math inline">\(n\)</span>: Es el número de Features.</li>
+<li><span class="math inline">\(m\)</span>: Es el número de puntos en el training set.</li>
+<li><span class="math inline">\(k\)</span>: Es el número de clases del problema.</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
@@ -482,365 +653,27 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Distintos enfoques de distancia entre clusters, segmentan los datos en forma distinta.</p>
+<p>Vamos a tener en total <span class="math inline">\(n \times k\)</span> parámetros o pesos que actualizar.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="clustering-aglomerativo-ejemplo" class="slide level2 smaller">
-<h2>Clustering Aglomerativo: Ejemplo</h2>
-<p>Supongamos que tenemos cinco tipos de genes cuya expresión ha sido determinada por 3 caracteríticas. Las siguientes expresiones pueden ser vistas como la expresión dados los genes en tres experimentos. ​</p>
-<blockquote>
-<p>Apliquemos un Clustering Jerárquico Aglomerativo utilizando como medida de similaridad la <code>Distancia Euclideana</code>.</p>
-</blockquote>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Otros tipos de distancia también son aplicables siguiendo un procedimiento análogo.</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-4/data_jerarquico.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-4/data_jerarquico.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/d_matrix_ejemplo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-4/d_matrix_ejemplo.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/softmax_reg.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-1/softmax_reg.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="algoritmo-1era-iteración" class="slide level2">
-<h2>Algoritmo: 1era Iteración</h2>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>El algoritmo considerará que todos los puntos inicialmente son un cluster. Por lo tanto, tratará de encontrar los 2 puntos más cercanos e intentará unirnos en un sólo cluster.</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/d_matrix_ejemplo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-4/d_matrix_ejemplo.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/iter_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-4/iter_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong>Problema</strong>: ¿Cómo actualizamos la matriz de Distancias?</p>
-</div>
-</div>
-</div>
-</div>
-</div><div class="column fragment" data-fragment-index="2">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Entonces crearemos un nuevo cluster: <code>bcl2-Caspade.</code></p>
-</div>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-4/update.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="clustering-aglomerativo-single-linkage" class="slide level2">
-<h2>Clustering Aglomerativo: Single Linkage</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Distancia entre clusters determinada por los puntos más <em><code>similares</code></em> entre los clusters.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/single.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-4/single.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="math display">\[D(C_i, C_j) = min\{d(x,y) | x \in C_i, y \in C_j\}\]</span></p>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ventajas</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Genera Clusters largos y delgados.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Limitaciones</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Afectado por Outliers</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="clustering-aglomerativo-complete-linkage" class="slide level2">
-<h2>Clustering Aglomerativo: Complete Linkage</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Distancia determinada por la distancia ente los puntos más <em><code>disímiles</code></em> entre los clusters.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/complete.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-4/complete.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="math display">\[D(C_i, C_j) = max\{d(x,y) | x \in C_i, y \in C_j\}\]</span></p>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ventajas</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Menos suceptible a dato atípicos.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Limitaciones</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Tiende a quebrar Clusters Grandes.</li>
-<li>Tiene tendencia a generar Clusters circulares.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="clustering-aglomerativo-average-linkage" class="slide level2">
-<h2>Clustering Aglomerativo: Average Linkage</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Distancia determinada por el promedio de las distancias que componen los clusters.</li>
-<li>Punto intermedio entre <em>Single</em> y <em>Complete</em>.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/average.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-4/average.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="math display">\[D(C_i, C_j) = avg\{d(x,y) | x \in C_i, y \in C_j\}\]</span></p>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ventajas</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Menos suceptible a datos atípicos.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Limitaciones</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Tiende a generar clusters circulares.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="clustering-aglomerativo-ward-linkage" class="slide level2">
-<h2>Clustering Aglomerativo: Ward Linkage</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Distancia determinada por el incremento del <code>Within cluster distance</code>.</li>
-<li>Minimiza la distancia intra cluster y maximiza la distancia entre clusters.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/ward.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-4/ward.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="math display">\[D(C_i, C_j) = wc(Cij) - wc(C_i) - wc(C_j) = \frac{n_i\cdot n_j}{n_i + n_j}||\bar{C_i} - \bar{C_j}||^2\]</span></p>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ventajas</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Menos suceptible a dato atípicos.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Limitaciones</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Tiende a generar clusters circulares.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="hiperparámetros" class="slide level2">
-<h2>Hiperparámetros</h2>
-<p>Los Hiperparámetros de este modelo serán:</p>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><code>linkage</code>: La forma de calcular la distancia entre clusters.</li>
-<li><code>distancia</code>: La distancia utilizada como similaridad entre los clusters.</li>
-</ul>
-</div>
-</div>
+<section id="softmax-regression-hipótesis" class="slide level2">
+<h2>Softmax Regression: Hipótesis</h2>
+<div style="font-size: 80%;">
+<p>Vamos a definir una función que mapea valores de <span class="math inline">\(x \in \mathbb{R}\)</span> a vectores de <span class="math inline">\(k\)</span> dimensiones.</p>
+</div>
+<p><span class="math display">\[ h: \mathbb{R}^n \rightarrow \mathbb{R}^k\]</span> <span class="math display">\[ x \rightarrow h_\theta(x) = \theta^T x\]</span></p>
+<div style="font-size: 80%;">
+<p>donde <span class="math inline">\(\theta \in \mathbb{R}^{n \times k}\)</span> y <span class="math inline">\(x \in \mathbb{R}^{n\times 1}\)</span></p>
 </div>
 <div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
@@ -848,166 +681,9 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>A diferencia de K-Means, este método no requiere definir el número de Clusters a priori.</p>
+<p>En este caso usamos una hipótesis lineal, ya que se usa una multiplicación matricial (o producto punto) para relacionar <span class="math inline">\(\theta\)</span> y <span class="math inline">\(x\)</span>.</p>
 </div>
 </div>
-</div>
-</section>
-<section id="volvamos-a-la-iteración-1" class="slide level2 smaller">
-<h2>Volvamos a la Iteración 1</h2>
-<blockquote>
-<p>Supongamos que por simplicidad utilizaremos <code>Average Linkage</code>. (El proceso para utilizar otro linkage es análogo).</p>
-</blockquote>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-4/update.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="1">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Vamos a extraer una Matriz entre los puntos a fusionar y los puntos de los clusters restantes.</p>
-</div>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/up_11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-4/up_11.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/up_12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-4/up_12.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/up_13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-4/up_13.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="4"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="5">
-<!-- -->
-<h5 id="dendograma-1era-iteración">Dendograma: 1era Iteración</h5>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/dend_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-4/dend_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="5"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="iteración-2" class="slide level2 smaller">
-<h2>Iteración 2</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/iter_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-4/iter_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/iter_2_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-4/iter_2_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/update_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-4/update_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/up_21.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-4/up_21.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="4"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/up_22.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-4/up_22.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="5"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="6">
-<!-- -->
-<h5 id="dendograma-2da-iteración">Dendograma: 2da Iteración</h5>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/dend_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-4/dend_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="6"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="iteración-3" class="slide level2 smaller">
-<h2>Iteración 3</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/iter_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-4/iter_3.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/iter_3_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-4/iter_3_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/update_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-4/update_3.png" class="fragment quarto-figure quarto-figure-center" style="width:70.0%" data-fragment-index="3"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/up_31.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-4/up_31.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="4"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="5">
-<!-- -->
-<h5 id="dendograma-3ra-iteración">Dendograma: 3ra Iteración</h5>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/dend_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-4/dend_3.png" class="fragment quarto-figure quarto-figure-center" style="width:50.0%" data-fragment-index="4"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="dendograma-resultante" class="slide level2">
-<h2>Dendograma Resultante</h2>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>No es necesario realizar la última iteración ya que se entiende que ambos clusters se unen.</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/dend_4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-4/dend_4.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
 </div>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
@@ -1015,123 +691,7 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>¿Cómo encontramos los clusters una vez que tenemos el <strong>Dendograma</strong>?</p>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/d_cluster_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-4/d_cluster_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/d_cluster_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-4/d_cluster_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-<div class="fragment" data-fragment-index="2" style="font-size: 85%;">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Podemos escoger un <em><code>umbral de distancia</code></em> y ver cuántos clusters se forman.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="2" style="font-size: 85%;">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Como regla general se deben escoger clusters más <em><code>distanciados</code></em> entre sí.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="efecto-del-linkage-escogido" class="slide level2">
-<h2>Efecto del Linkage Escogido</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/linkage_types.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-4/linkage_types.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</section>
-<section id="clustering-jerárquico-detalles-técnicos" class="slide level2">
-<h2>Clustering Jerárquico: Detalles Técnicos</h2>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Fortalezas</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>No requiere definir el número de Clusters a priori.</li>
-<li>Al tener distintas variantes es posible que los puntos sean agrupados de manera completamente distintas.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Debilidades</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Muy ineficiente computacionalmente debido a que genera una nueva matriz de distancia en cada iteración lo que entrega una complejidad <span class="math inline">\(O(n^2)\)</span> o <span class="math inline">\(O(n^3)\)</span> dependiendo del linkage.</li>
-<li>Una vez que se decide combinar 2 clusters no es posible revertir esta decisión.</li>
-<li>No tiene capacidad de generalización, ya que no es posible aplicarlo a datos nuevos.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="implementación-en-scikit-learn" class="slide level2">
-<h2>Implementación en Scikit-Learn</h2>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3|5-6|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>ac <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span><span class="dv">2</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>,linkage<span class="op">=</span><span class="st">"ward"</span>)</span>
-<span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a><span class="co">## Se entrena y se genera la predicción</span></span>
-<span id="cb1-6"><a></a>ac.fit_predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="columns" style="font-size: 70%;">
-<ul>
-<li><p><strong>n_clusters</strong>: Define el número de clusters a crear, por defecto 2.</p></li>
-<li><p><strong>metric</strong>: Permite distancias L1, L2 y coseno. Por defecto “euclidean”.</p></li>
-<li><p><strong>linkage</strong>: Permite single, complete, average y ward. Por defecto “ward”.</p></li>
-<li><p><code>.fit_predict()</code>: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento.</p></li>
-</ul>
-</div>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Si bien el método de Aglomeración no requiere el número de clusters a generar, Scikit-Learn lo exige de modo de poder etiquetar cada elemento.</li>
-</ul>
+<p>En este caso el output de <span class="math inline">\(h_i(x)\)</span> devolverá la probabilidad de pertenecer a una cierta clase <span class="math inline">\(i\)</span>.</p>
 </div>
 </div>
 </div>
@@ -1142,103 +702,503 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p><strong>¿Por qué no existen los métodos <code>.fit()</code> y <code>.predict()</code> por separado?</strong></p>
+<p><strong><em>¿Cuál es el tamaño/dimensión de <span class="math inline">\(h_\theta(x)\)</span>?</em></strong></p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="otras-implementaciones-dendograma" class="slide level2">
-<h2>Otras implementaciones (Dendograma)</h2>
-<div class="sourceCode" id="cb2" data-code-line-numbers="|1|3-4|5-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a><span class="co"># Genera los cálculos necesarios para construir el Histograma.</span></span>
-<span id="cb2-4"><a></a>Z <span class="op">=</span> linkage(X, method<span class="op">=</span><span class="st">'single'</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>) </span>
-<span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a><span class="co"># Graficar el Dendograma</span></span>
-<span id="cb2-7"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>)) <span class="co"># Define el tamaño del Gráfico</span></span>
-<span id="cb2-8"><a></a>plt.title(<span class="st">'Dendograma Clustering Jerárquico'</span>) <span class="co"># Define un título para el dendograma</span></span>
-<span id="cb2-9"><a></a>plt.xlabel(<span class="st">'Iris Samples'</span>)</span>
-<span id="cb2-10"><a></a>plt.ylabel(<span class="st">'Distance'</span>)</span>
-<span id="cb2-11"><a></a>dendrogram(Z, leaf_rotation<span class="op">=</span><span class="fl">90.</span>, leaf_font_size<span class="op">=</span><span class="fl">8.</span>)</span>
-<span id="cb2-12"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="columns" style="font-size: 70%;">
+<section id="notación-matricial" class="slide level2 smaller">
+<h2>Notación Matricial</h2>
 <blockquote>
-<p>Principalmente este código permite graficar el Dendograma completo.</p>
-</blockquote><p>L4: Genera una instancia del Dendograma. (Sería equivalente al <code>.fit()</code> de <code>Scikit-Learn</code>).<br>
-L5-L12: Corresponde al código necesario para graficar el Dendograma.</p>
+<p>Una manera más conveniente de escribir estas operaciones es utilizar <strong><em>(Matrix Batch Form)</em></strong>.</p>
+</blockquote>
+<div class="columns">
+<div class="column">
+<h5 id="design-matrix">Design Matrix</h5>
+<p><span class="math display">\[X \in \mathbb{R}^{m \times n} = \begin{bmatrix}
+&amp;-x^{(1)T}-\\
+&amp; \vdots &amp; \\
+&amp;-x^{(m)T}- &amp;\\
+\end{bmatrix}\]</span></p>
+</div><div class="column">
+<h5 id="labels-vector">Labels Vector</h5>
+<p><span class="math display">\[y \in {1,...,k} = \begin{bmatrix}
+&amp;-y^{(1)}-\\
+&amp; \vdots &amp; \\
+&amp;-y^{(m)}- &amp;\\
+\end{bmatrix}\]</span></p>
 </div>
-</section>
-<section id="sugerencias" class="slide level2">
-<h2>Sugerencias</h2>
-<div class="callout callout-important callout-titled callout-style-default">
+</div>
+<p>La hipótesis también se puede reescribir de manera matricial como:</p>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[h_\theta(X) = \begin{bmatrix}
+&amp;-h_\theta(x^{(1)})^T-\\
+&amp; \vdots &amp; \\
+&amp;-h_\theta(x^{(m)})^T-\\
+\end{bmatrix}\]</span></p>
+</div><div class="column">
+<p><span class="math display">\[h_\theta(X)= \begin{bmatrix}
+&amp;-x^{(1)T} \theta-\\
+&amp; \vdots &amp; \\
+&amp;-x^{(m)T} \theta-\\
+\end{bmatrix} = X  \theta\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
 <div class="callout-body">
-<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Pre-procesamientos</strong></p>
+<div class="callout-content">
+<p>Normalmente este tipo de operaciones son las que utilizaremos para hacer nuestro código.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="loss-function-softmaxcross-entropy-loss" class="slide level2 smaller">
+<h2>Loss Function: Softmax/Cross-Entropy Loss</h2>
+<p>La salida de nuestra <code>Shallow Network</code> retornará valores reales. Para poder tener una mejor interpretación del significado de cada una aplicaremos la función <code>Softmax</code> lo cual permitirá <em>normalizar</em> los resultados y llevará los resultados a una <strong><em>“distribución de probabilidad”</em></strong> (valores positivos que sumen 1).</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/softmax_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-1/softmax_example.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<p><br></p>
+<p>Formalmente definiremos la función Softmax como:</p>
+<p><span class="math display">\[z_i = p(label = i) = \frac{exp(h_i(x))}{\sum_{j=1}^k exp(h_j(x))}\]</span></p>
+<p><span class="math display">\[Z = \begin{bmatrix}
+&amp;z_1&amp;\\
+&amp; \vdots &amp; \\
+&amp;z_k&amp;\\
+\end{bmatrix}\]</span></p>
+</div>
+</div>
+</section>
+<section id="loss-function-softmaxcross-entropy-loss-1" class="slide level2 smaller">
+<h2>Loss Function: Softmax/Cross-Entropy Loss</h2>
+<p>Para medir el error, o la pérdida de información de un punto utilizaremos el Negative Log Loss, también llamado <code>Cross Entropy Loss</code>.</p>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Es importante recordar que el clustering aglomerativo también es un Algoritmo basado en <code>distancias</code>, por lo tanto se ve afectado por Outliers y por Escala.</p>
-<p>Se recomienda preprocesar los datos con:</p>
-<ul>
-<li><code>Winsorizer()</code> para eliminar Outliers.</li>
-<li><code>StandardScaler()</code> o <code>MinMaxScaler()</code> para llevar a una escala común.</li>
-</ul>
+<p>Para garantizar el éxito de nuestro modelo, básicamente queremos maximizar la probabilidad de encontrar la etiqueta correcta, es decir, que <span class="math inline">\(p(label = y)\)</span> sea lo más alto posible.</p>
 </div>
 </div>
 </div>
+</div>
+<div class="fragment">
 <div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Otras técnicas como merge y split, no aplican a este tipo de clustering debido a las limitaciones del algoritmo.</p>
+<p>Normalmente en los problemas de optimización no se suele maximizar sino minimizar. Minimizar el valor negativo es equivalente a maximizar. Esto sería equivalente a minimizar el error del modelo.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Finalmente por razones de estabilidad numérica, minimizamos el logaritmo de la probabilidad que es una técnica bien conocida en Estadística.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><span class="math display">\[\begin{align}
+l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
+&amp;= -log \left(\frac{exp(h_{(i = y)}(x))}{\sum_{j=1}^k exp(h_j(x))}\right) \\
+&amp;= - h_{(i=y)}(x) + log\left(\sum_{j = 1}^k exp(h_j(x))\right)\end{align}\]</span></p>
+</div>
+</section>
+<section id="método-de-optimización" class="slide level2 smaller">
+<h2>Método de Optimización</h2>
+<blockquote>
+<p>El último ingrediente de un algoritmo de aprendizaje es el método de optimización. Es necesario minimizar la pérdida promedio asociada a todos los puntos de un cierto set de entrenamiento. Para ello definimos esto formalmente como:</p>
+</blockquote>
+<p><span class="math display">\[\underset{\theta}{minimize} = \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}), y^{(i)}) =\frac{1}{m} \sum_{i=1}^m l(\theta^Tx^{(i)}, y^{(i)})\]</span></p>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong><em>¿Cómo encontramos los parámetros <span class="math inline">\(\theta\)</span> que minimizan la pérdida de información/error de estimación?</em></strong></p>
+</div>
+</div>
+</div>
+<dl>
+<dt>Gradient Descent</dt>
+<dd>
+<blockquote>
+<p>Es un método numérico que permite minimizar funciones moviéndose en dirección contraria al Gradiente. Es computacionalmente muy eficiente y fácil de implementar en código.</p>
+</blockquote>
+</dd>
+</dl>
+</section>
+<section id="gradient-descent" class="slide level2 smaller">
+<h2>Gradient Descent</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>Se define el gradiente como la matriz que contiene las derivadas parciales de una función <span class="math inline">\(f\)</span>. Se denota como:</p>
+<p><span class="math display">\[\nabla_\theta f(\theta) \in \mathbb{R}^{n \times k} =  \begin{bmatrix}
+\frac{\partial f(\theta)}{\partial \theta_{11}} &amp; \cdots &amp; \frac{\partial f(\theta)}{\partial \theta_{1k}} \\
+\cdots &amp; \ddots &amp; \cdots \\
+\frac{\partial f(\theta)}{\partial \theta_{n1}} &amp; \cdots &amp; \frac{\partial f(\theta)}{\partial \theta_{nk}}
+\end{bmatrix}\]</span></p>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\theta_{ij}\)</span> corresponde al parámetro que une el nodo/feature <span class="math inline">\(i\)</span> con el nodo/predicción <span class="math inline">\(j\)</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/gradient.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-1/gradient.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="font-size: 130%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El gradiente apunta a la dirección de máximo crecimiento de la función <span class="math inline">\(f\)</span>.</p>
+</div>
 </div>
 </div>
 </div>
 </section>
-<section id="variantes" class="slide level2 smaller">
-<h2>Variantes</h2>
-<blockquote>
-<p>En casos en los que no es posible calcular distancias debido a la presencia de datos categóricos, es posible utilizar el <strong>Gower Dissimilarity</strong> como medida de similitud.</p>
-</blockquote>
+<section id="gradient-descent-regla-de-actualización" class="slide level2 smaller">
+<h2>Gradient Descent: Regla de Actualización</h2>
+<p>Para minimizar la función, la idea es descender iterativamente por el trayecto <strong>en contra</strong> del gradiente. La regla de actualización se define como:</p>
+<p><span class="math display">\[\theta := \theta - \alpha \nabla_\theta f(\theta) = \theta - \alpha \nabla_\theta l_{ce}(X\theta,y)\]</span></p>
+<p>con <span class="math inline">\(\theta \in \mathbb{R}^{n \times k}\)</span> y <span class="math inline">\(\alpha &gt; 0\)</span> corresponde al <em>step size</em> o <code>learning rate</code>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-4/gower.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="img/clase-4/gower.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-1/lr_effect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-1/lr_effect.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En nuestro caso <span class="math inline">\(f\)</span> corresponderá a nuestro <span class="math inline">\(l_{ce}\)</span> calculado anteriormente. El problema es, ¿cuánto vale el gradiente del <code>Cross Entropy Loss</code>?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="calculando-el-gradiente-a-mano" class="slide level2 smaller">
+<h2>Calculando el Gradiente a mano</h2>
+<div style="font-size: 130%;">
+<p>Simplifiquemos el problema a calcular para un sólo vector <span class="math inline">\(x\)</span>.</p>
+<p><span class="math display">\[\theta := \theta - \alpha \nabla_\theta l_{ce}(\theta^Tx,y) \]</span></p>
+</div>
+<div style="font-size: 120%;">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>¿Cuánto vale el Gradiente?</p>
+<ul>
+<li>No es tan sencillo, ya que derivamos respecto a <span class="math inline">\(\theta\)</span> que es una matriz.</li>
+<li>Pero derivamos a <span class="math inline">\(\theta^T x\)</span> que es un vector.</li>
+<li>Para ello, lo correcto es utilizar Calculo Diferencial Matricial, Jacobianos y Productos de Kroenecker (que probablemente no han visto en ningún curso).
+<ul>
+<li><strong>SPOILER</strong>: Yo tampoco lo he visto en ningún curso.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="columns fragment">
+<div class="column" style="width:70%;">
+<div style="font-size: 120%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Usaremos un truco (sumamente hacky 😱) que jamás deben revelar y que avergonzaría a cualquier profesor de Cálculo.
+<ul>
+<li>Pretenderemos que todos los valores son escalares y corregiremos las dimensiones al final.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/fuenzi.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-1/fuenzi.jpeg" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="calculando-el-gradiente-a-mano-1" class="slide level2 smaller">
+<h2>Calculando el Gradiente a mano</h2>
+<blockquote>
+<p>Simplifiquemos el problema pensando que calcularemos el Gradiente para un sólo vector <span class="math inline">\(x\)</span>.</p>
+</blockquote>
+<blockquote>
+<p>Es decir, <span class="math inline">\(x \in \mathbb{R}^{n\times1}\)</span>.</p>
+</blockquote>
+<p>Además sabemos que <span class="math inline">\(\nabla_\theta l_{ce}(\theta^Tx, y)\)</span> debe tener dimensiones <span class="math inline">\(n \times k\)</span>.</p>
 <div class="columns">
 <div class="column">
-<dl>
-<dt>Gower</dt>
-<dd>
-Se define como la proporción de variables que tienen distinto valor con respecto al total sin considerar donde ambos son ceros.
-</dd>
-</dl>
+<p><span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}\]</span></p>
 </div><div class="column">
-<p><span class="math display">\[Gower(p1,p2) = \frac{3}{9}\]</span></p>
+<p><span class="math display">\[\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = \frac{\partial l_{ce}(\theta^Tx, y)}{\partial h} = \begin{bmatrix}
+\frac{\partial l_{ce}(h,y)}{\partial h_1} \\
+\vdots\\
+\frac{\partial l_{ce}(h,y)}{\partial h_k} \\
+\end{bmatrix}\]</span></p>
+</div>
+</div>
+<div class="fragment" style="font-size: 130%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Luego el gradiente de <span class="math inline">\(l_{ce}\)</span> respecto a <span class="math inline">\(h\)</span> tiene dimensiones <span class="math inline">\(k \times 1\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculando-el-gradiente-a-mano-2" class="slide level2 smaller">
+<h2>Calculando el Gradiente a mano</h2>
+<p><span class="math display">\[\begin{align}
+\frac{\partial l_{ce}(h,y)}{\partial h_i} &amp;= \frac{\partial }{\partial h_i}\left(-h_{(i = y)} + log \sum_{j = 1}^k exp(h_j)\right) \\
+&amp;= -\frac{\partial h_{(i = y)}}{\partial h_i}+ \frac{1}{\sum_{j = 1}^k exp(h_j)} \cdot \frac{\partial}{\partial h_i}\left(\sum_{j=1}^k exp(h_j)\right) \\
+&amp;= -\frac{\partial h_{(i = y)}}{\partial h_i}+ \frac{exp(h_i)}{\sum_{j = 1}^k exp(h_j)} \\
+&amp;= - 1\{i=y\} + z_i = z_i - 1\{i=y\}
+\end{align}
+\]</span></p>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[1\{i = y\} = \begin{cases}
+1,  &amp; \text{i = y} \\
+0, &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+</div>
+</div>
+</div>
+<p>Finalmente en forma vectorial quedaría como:</p>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = z - e_y\]</span></p>
+</div><div class="column">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Donde <span class="math inline">\(z\)</span>, es el vector de Softmax y <span class="math inline">\(e_y\)</span> es un vector con un 1 en la posición <span class="math inline">\(y\)</span> y 0 en el resto.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculando-el-gradiente-a-mano-3" class="slide level2 smaller">
+<h2>Calculando el Gradiente a mano</h2>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}\]</span> <span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = (z-e_y)\cdot x \]</span></p>
+</div><div class="column fragment">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Ojo con las dimensiones</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(Z-e_y \in \mathbb{R}^{k \times 1}\)</span></li>
+<li><span class="math inline">\(x \in \mathbb{R}^{n \times 1}\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Luego:</p>
+<p><span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = x (z-e_y)^T\]</span></p>
+</div>
+</section>
+<section id="calculando-el-gradiente-matrix-batch-form" class="slide level2 smaller">
+<h2>Calculando el Gradiente Matrix Batch Form</h2>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[\begin{align}\nabla_\theta l_{ce}(X\theta,y) \in \mathbb{R}^{n\times k} &amp;= \frac{\partial l_{ce}(X\theta,y)}{\partial X\theta} \cdot \frac{\partial X\theta}{\partial \theta}\\
+&amp;= (Z - I_y) \cdot X \\
+&amp;= X^T \cdot (Z - I_y)
+\end{align}\]</span></p>
+</div><div class="column">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Ojo con las dimensiones</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(Z - I_y \in \mathbb{R}^{m \times k}\)</span></li>
+<li><span class="math inline">\(X \in \mathbb{R}^{m \times n}\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(Z\)</span> corresponde al Softmax de <span class="math inline">\(X\theta\)</span> aplicado por filas.</li>
+<li><span class="math inline">\(I_y\)</span> corresponde al One Hot Encoder de las etiquetas.</li>
+</ul>
+</div>
+</div>
+</div>
+<p>Finalmente la regla de actualización de parámetros usando Gradient Descent queda como:</p>
+<p><span class="math display">\[\theta := \theta - \alpha X^T (Z - I_y)\]</span></p>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Aplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.</li>
+<li>Se puede programar en pocas líneas en Python.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="qué-pasa-con-arquitecturas-más-complejas" class="slide level2">
+<h2>¿Qué pasa con arquitecturas más complejas?</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/nn_arq_full.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-1/nn_arq_full.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Próxima Clase</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Vamos a hacer lo mismo para una Red Neuronal.</li>
+<li>La única diferencia es que la hipótesis que utilizaremos es un poco más <code>fancy</code>.</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 </section></section>
-<section id="cest-fini" class="title-slide slide level1 center">
-<h1>C’est fini</h1>
+<section id="nos-vemos-próxima-semana-no-hay-clases" class="title-slide slide level1 center">
+<h1>Nos vemos <br> (Próxima semana no hay clases)</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
-</p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+</p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a>
 <p></p>
 </div>
+</section>
+
+<section>
+<section id="anexos" class="title-slide slide level1 center">
+<h1>Anexos</h1>
+
+</section>
+<section id="multiplicación-matricial" class="slide level2 smaller">
+<h2>Multiplicación Matricial</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/mat_mat_mul.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-1/mat_mat_mul.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<ul>
+<li>Donde <span class="math inline">\(B_{*,i}\)</span> corresponde a la columna <span class="math inline">\(i\)</span> de B.</li>
+<li>Donde <span class="math inline">\(A_{i,*}\)</span> corresponde a la fila <span class="math inline">\(i\)</span> de A.</li>
+</ul>
+</div>
+</div>
 
 <div class="quarto-auto-generated-content">
-<p><img src="../logo.jpg" class="slide-logo"></p>
+<p><img src="../logo-uai-blanco.jpeg" class="slide-logo"></p>
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-9">Imágen tomada de la Clase de Zico Colter</span>
+</div>
+</section></section>
     </div>
   </div>
 
@@ -1266,7 +1226,7 @@ Se define como la proporción de variables que tienen distinto valor con respect
       Reveal.initialize({
 'controlsAuto': false,
 'previewLinksAuto': false,
-'pdfSeparateFragments': false,
+'pdfSeparateFragments': true,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
@@ -1605,7 +1565,7 @@ Se define como la proporción de variables que tienen distinto valor con respect
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;

@@ -1,7 +1,11 @@
 [
   {
-    "listing": "/charlas.html",
-    "items": []
+    "listing": "/tics579.html",
+    "items": [
+      "tics579/clase-0.html",
+      "tics579/clase-1.html",
+      "tics579/clase-2.html"
+    ]
   },
   {
     "listing": "/tics411.html",
@@ -24,10 +28,7 @@
     ]
   },
   {
-    "listing": "/tics579.html",
-    "items": [
-      "tics579/clase-0.html",
-      "tics579/clase-1.html"
-    ]
+    "listing": "/charlas.html",
+    "items": []
   }
 ]
