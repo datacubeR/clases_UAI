@@ -1,6 +1,6 @@
 ---
 title: "TICS-579-Deep Learning"
-subtitle: "Clase 1: Preliminares"
+subtitle: "Clase 2: Introducción a las Redes Neuronales"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -23,7 +23,11 @@ format:
     pdf-separate-fragments: true
 ---
 
-# Introducción al Curso
+## Problemas de una Hipótesis Lineal
+
+## Problema XOR
+
+
 
 ## ¿Por qué estudiar Deep Learning? {.smaller}
 
@@ -225,7 +229,7 @@ donde $\theta \in \mathbb{R}^{n \times k}$ y $x \in \mathbb{R}^{n\times 1}$
 :::
 
 ::: {.callout-warning}
-En este caso usamos una `hipótesis lineal`, ya que se usa una multiplicación matricial (o producto punto) para relacionar $\theta$ y $x$. 
+En este caso usamos una hipótesis lineal, ya que se usa una multiplicación matricial (o producto punto) para relacionar $\theta$ y $x$. 
 :::
 
 ::: {.callout-note}

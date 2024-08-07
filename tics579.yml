@@ -8,10 +8,20 @@
    - slides
 
 - title: "Clase 1"
-  subtitle: "Introducción a las Redes Neuronales"
+  subtitle: "Preliminares"
   author: "Alfonso Tobar-Arancibia"
   date: 2024-08-08
   image: tics579/thumbnails/clase-1.png
   path: tics579/clase-1.qmd
+  categories:
+   - slides
+
+
+- title: "Clase 2"
+  subtitle: "Introducción a las Redes Neuronales"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-08-22
+  image: tics579/thumbnails/clase-2.png
+  path: tics579/clase-2.qmd
   categories:
    - slides
