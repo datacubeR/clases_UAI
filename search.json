@@ -3019,42 +3019,49 @@
     "href": "tics579/clase-0.html#quién-soy",
     "title": "TICS-579-Deep Learning",
     "section": "¿Quién soy?",
-    "text": "¿Quién soy?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\nEstudié Ingeniería Civil pero llevo 10 años trabajando como:\n\nData Analyst.\nData Scientist.\nML Engineer.\nData Engineer.\n\nSoy Msc. en Data Science y cursando el PhD. en la UAI especificamente en Deep Learning.\nMe gusta mucho programar (en vivo).\nContribuyo a HuggingFace y Feature Engine.\nHe ganado 2 competencias de Machine Learning.\nPubliqué mi primer paper el año pasado sobre Hate Speech en Español.\nJuego Tenis de Mesa, hago Agility con mi perrita Kira y escribo en mi Blog."
+    "text": "¿Quién soy?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\nEstudié Ingeniería Civil pero llevo 10 años trabajando como:\n\nData Analyst.\nData Scientist.\nML Engineer.\nData Engineer.\n\nSoy Msc. en Data Science y estoy cursando el PhD. en la UAI especificamente en Deep Learning.\nMe gusta mucho programar (en vivo).\nContribuyo a HuggingFace y Feature Engine.\nHe ganado 2 competencias de Machine Learning.\nPubliqué mi primer paper el año pasado sobre Hate Speech en Español.\nJuego Tenis de Mesa, hago Agility con mi perrita Kira y escribo en mi Blog."
   },
   {
     "objectID": "tics579/clase-0.html#disclaimer",
     "href": "tics579/clase-0.html#disclaimer",
     "title": "TICS-579-Deep Learning",
     "section": "Disclaimer",
-    "text": "Disclaimer\n\n\n\n\n\n\n\nMucho del contenido de este curso será una mezcla entre inglés y español. Esto debido a que el contenido del curso está en constante desarrollo y casi no existen libros o artículos en español al respecto.\n\n\n\n\n\n\n\n\n\n\n\nEste curso se considera altamente teórico y con una fuerte componente en programación. Por lo que no se recomienda cursarlo a quien no se sienta cómodo con mátemática técnica y programando.\n\n\n\n\n\n\n\n\n\n\n\nEstá completamente prohibido copiar y pegar código de algún modelo de IA. Hablaremos más adelante cómo trataremos de mitigar esto ya que gran parte del curso requiere programación fuerte."
+    "text": "Disclaimer\n\n\n\n\n\n\n\nMucho del contenido de este curso será una mezcla entre inglés y español. Esto debido a que el contenido del curso está en constante desarrollo y casi no existen libros o artículos en español al respecto.\n\n\n\n\n\n\n\n\n\n\n\nEste curso se considera altamente teórico y con una fuerte componente en programación.\n\n\n\n\n\n\n\n\n\n\n\n¡Están advertidos!\n\n\n\n\n\n\n\n\n\n\n\nEstá completamente prohibido copiar y pegar código de algún modelo de IA. Hablaremos más adelante cómo trataremos de mitigar esto ya que gran parte del curso requiere programación fuerte."
   },
   {
-    "objectID": "tics579/clase-0.html#course-goals",
-    "href": "tics579/clase-0.html#course-goals",
+    "objectID": "tics579/clase-0.html#objetivos-del-curso",
+    "href": "tics579/clase-0.html#objetivos-del-curso",
     "title": "TICS-579-Deep Learning",
-    "section": "Course Goals",
-    "text": "Course Goals\n\n\n\n\n\n\nIdentificar elementos claves de las Redes Neuronales.\nEntender conceptos básicos como el Training Loop, Gradient Propagation, Optimización, etc.\nIdentificar los distintos tipos de Redes Neuronales:\n\nFeed Fordward Networks,\nConvolutional Neural Networks,\nRecurrent Neural Networks,\nTransformers.\n\nEntender las Arquitecturas Estado del Arte en diferentes dominios: Datos Tabulares, Computer Vision, Natural Language Processing.\nImplementar, entrenar y evaluar Deep Neural Networks utilizando Pytorch."
+    "section": "Objetivos del Curso",
+    "text": "Objetivos del Curso\n\n\n\n\n\n\n\n\nSer el curso más completo y exhaustivo de Deep Learning del país.\n\n\n\n\n\n\nIdentificar elementos claves de las Redes Neuronales.\nEntender conceptos básicos como el Training Loop, Gradient Propagation, Optimización, etc.\nIdentificar los distintos tipos de Redes Neuronales:\n\nFeed Fordward Networks,\nConvolutional Neural Networks,\nRecurrent Neural Networks,\nTransformers.\n\nEntender las Arquitecturas Estado del Arte en diferentes dominios: Datos Tabulares, Computer Vision, Natural Language Processing.\nImplementar, entrenar y evaluar Deep Neural Networks utilizando Pytorch."
   },
   {
-    "objectID": "tics579/clase-0.html#course-topics",
-    "href": "tics579/clase-0.html#course-topics",
+    "objectID": "tics579/clase-0.html#tópicos-del-curso",
+    "href": "tics579/clase-0.html#tópicos-del-curso",
     "title": "TICS-579-Deep Learning",
-    "section": "Course Topics",
-    "text": "Course Topics\n\n\n\n\n\n\n\nShallow Models (Logistic and Softmax Regression)\nEl Perceptron\nEntrenamiento y Evaluación de Modelos\nCómo construir distintas arquitecturas de Redes Neuronales\nAplicación de estas redes a distintos dominios."
+    "section": "Tópicos del Curso",
+    "text": "Tópicos del Curso\n\n\n\nShallow Models\nEl Perceptron\nTensores\nEntrenamiento y Evaluación de Modelos\nArquitecturas de Redes Neuronales\nAplicación de estas redes a distintos dominios.\n\n\n\n\n\n\n\nImplementación en librerías SOTA como Pytorch y HuggingFace."
   },
   {
-    "objectID": "tics579/clase-0.html#course-logistics",
-    "href": "tics579/clase-0.html#course-logistics",
+    "objectID": "tics579/clase-0.html#logística",
+    "href": "tics579/clase-0.html#logística",
     "title": "TICS-579-Deep Learning",
-    "section": "Course Logistics",
-    "text": "Course Logistics\n\nClases todos los Jueves de 8:45 a 11:25 de manera presencial.\n\nSala: Por Confirmar.\n\nInstructor: Alfonso Tobar-Arancibia\n\nalfonso.tobar.a@edu.uai.cl\nOffice Hours: Miercoles por la mañana en la A-220.\n\nAyudantías Online, sólo en algunas semanas.\n\nAyudante: María Alejandra Bravo\nmariaabravo@alumnos.uai.cl\n\nPrerequisitos:\n\nMinería de Datos\n\nEntrenamiento de un Modelo\nEvaluación y Validación\nRegresión Logística"
+    "section": "Logística",
+    "text": "Logística\n\nClases todos los Jueves de 8:45 a 11:25 de manera presencial.\n\nSala: Por Confirmar.\n\nInstructor: Alfonso Tobar-Arancibia (alfonso.tobar.a@edu.uai.cl)\n\nOffice Hours: Miercoles por la mañana en la A-220.\n\nAyudantías Online, sólo en algunas semanas.*\n\nAyudante: María Alejandra Bravo (mariaabravo@alumnos.uai.cl)\n\n\n\n\n\n\n\n\n\nHorarios Posibles:\n\n\n\nMartes de 17:00 a 18:10 hrs.\nMiércoles de 8:45 a 09:55 hrs.\nMiércoles de 10:15 a 11:25 hrs.\nMiércoles de 17:00 a 18:10 hrs."
   },
   {
-    "objectID": "tics579/clase-0.html#class-materials",
-    "href": "tics579/clase-0.html#class-materials",
+    "objectID": "tics579/clase-0.html#prerequisitos",
+    "href": "tics579/clase-0.html#prerequisitos",
     "title": "TICS-579-Deep Learning",
-    "section": "Class Materials",
-    "text": "Class Materials\n\nSlides\nNotebooks\n\n\n\nDiapositivas Interactivas creadas en Quarto (links van a estar disponibles en Webcursos)\n\nPermite copiar y pegar código directamente.\nImágenes se pueden ver en tamaño completo al clickearlas.\nSe puede buscar contenido específico de cualquier Slide utilizando la Search Bar.\nSe puede obtener una copia en PDF presionando la tecla E para luego guardarlas para tomar notas."
+    "section": "Prerequisitos",
+    "text": "Prerequisitos\n\n\n\n\n\n\n\nHaber cursado Minería de Datos (no es excluyente pero es necesario saber de Machine Learning).\n\nEntrenamiento de un Modelo\nEvaluación y Validación\nRegresión Logística\n\n\n\n\n\n\n\n\n\n\n\n\nTener conocimientos de Algebra Lineal (poner mucha atención al curso de Algebra Lineal del MSDS).\n\nNotación Matricial\nMultiplicaciones Matriciales\nTransformaciones Lineales\n\n\n\n\n\n\n\n\n\n\n\n\nEntender Inglés\n\nMucho del material adicional serán lecturas o videos en inglés."
+  },
+  {
+    "objectID": "tics579/clase-0.html#recursos",
+    "href": "tics579/clase-0.html#recursos",
+    "title": "TICS-579-Deep Learning",
+    "section": "Recursos",
+    "text": "Recursos\n\nSlides\nNotebooks\nForo de Dudas\n\n\n\nDiapositivas Interactivas creadas en Quarto (links van a estar disponibles en Webcursos)\n\nContiene un índice de todas las slides.\nPermite copiar y pegar código directamente.\nImágenes se pueden ver en tamaño completo al clickearlas.\nSe puede buscar contenido específico de cualquier Slide utilizando la Search Bar.\nSe puede obtener una copia en PDF presionando la tecla E para luego guardarlas para tomar notas."
   },
   {
     "objectID": "tics579/clase-0.html#herramientas",
@@ -3083,5 +3090,12 @@
     "title": "TICS-579-Deep Learning",
     "section": "Tareas",
     "text": "Tareas\n\n\n\n\n\n\n\nReglas\n\n\n\nSe deben entregar en Jupyter Notebook.\nSe realizarán en parejas o un grupo de 3 (sólo en caso de número impar) previa inscripción.\nLas partes teóricas que necesiten notación matemática se deben realizar dentro del Jupyter Notebook pero usando simbología Latex (Dudas de cómo hacerlo a la ayudante).\n\n\n\n\n\n\n\n\n\n\nDefensa de Código\n\n\n\nEl código presentado en las tareas se defenderá mediante interrogación oral en horarios a convenir (normalmente de ayudantía).\n3 preguntas aleatorias a cualquier miembro del grupo.\nEn caso de no defender el código correctamente se penalizará de la siguiente manera:\n\n3 preguntas buenas: 100% del puntaje.\n2 preguntas buenas: 70% del puntaje.\n1 preguntas buenas: 40% del puntaje.\n0 preguntas buenas: 20% del puntaje."
+  },
+  {
+    "objectID": "tics579/clase-0.html#fechas-tareas",
+    "href": "tics579/clase-0.html#fechas-tareas",
+    "title": "TICS-579-Deep Learning",
+    "section": "Fechas Tareas",
+    "text": "Fechas Tareas\n\n\n\n\n\n\n\n\nTarea 1\n\n\n15 de Septiembre (23:59 hrs)\n\n\n\n\n\n\n\n\n\nTarea 2\n\n\n13 de Octubre (23:59 hrs)\n\n\n\n\n\n\n\n\n\n\nTarea 3\n\n\n3 de Noviembre (23:59 hrs)\n\n\n\n\n\n\n\n\n\nTarea 4\n\n\n24 de Noviembre (23:59 hrs)\n\n\n\n\n\n\n\n\n\n\n\nTarea 5 (Opcional, pero recomendada)\n\n\n15 de Diciembre (23:59 hrs)"
   }
 ]
