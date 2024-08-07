@@ -1,5 +1,152 @@
 [
   {
+    "objectID": "tics579/clase-1.html#por-qué-estudiar-deep-learning",
+    "href": "tics579/clase-1.html#por-qué-estudiar-deep-learning",
+    "title": "TICS-579-Deep Learning",
+    "section": "¿Por qué estudiar Deep Learning?",
+    "text": "¿Por qué estudiar Deep Learning?\n\nPrincipalmente porque es el Estado del Arte en las aplicaciones más Impresionantes en la Inteligencia Artificial.\n\n\n\n\nAlexnet (2012)\n\n\n\nAlphaGo (2016)\n\n\n\nTransformers (2017)\n\n\n\nGPT (2019)"
+  },
+  {
+    "objectID": "tics579/clase-1.html#por-qué-estudiar-deep-learning-1",
+    "href": "tics579/clase-1.html#por-qué-estudiar-deep-learning-1",
+    "title": "TICS-579-Deep Learning",
+    "section": "¿Por qué estudiar Deep Learning?",
+    "text": "¿Por qué estudiar Deep Learning?\n\nPrincipalmente porque es el Estado del Arte en las aplicaciones más Impresionantes en la Inteligencia Artificial.\n\n\n\n\nGPT-3 (2021)\n\n\n\nAlphaFold (2021)\n\n\n\nStable Diffussion/Dalle (2022)\n\n\n\nLLMs (2023) (ChatGPT/Llama)"
+  },
+  {
+    "objectID": "tics579/clase-1.html#por-qué-estudiar-deep-learning-2",
+    "href": "tics579/clase-1.html#por-qué-estudiar-deep-learning-2",
+    "title": "TICS-579-Deep Learning",
+    "section": "¿Por qué estudiar Deep Learning?",
+    "text": "¿Por qué estudiar Deep Learning?\n\n\n\nImágen tomada de la Clase de Zico Colter"
+  },
+  {
+    "objectID": "tics579/clase-1.html#por-qué-estudiar-deep-learning-3",
+    "href": "tics579/clase-1.html#por-qué-estudiar-deep-learning-3",
+    "title": "TICS-579-Deep Learning",
+    "section": "¿Por qué estudiar Deep Learning?",
+    "text": "¿Por qué estudiar Deep Learning?\n\n\n\n\n\n\nFacilidad y Autograd\n\n\n\nFrameworks como Tensorflow, Pytorch o Jax permiten realizar esto de manera mucho más sencilla.\n\nFrameworks permiten calcular gradientes de manera automática.\nAntigua mente trabajar en Torch, Caffe o Theano podía tomar cerca de 50K líneas de código.\n\n\n\n\n\n\n\n\n\n\n\nCómputo\n\n\n\nProliferación de las GPUs, TPUs, HPUs, IPUs, como sistemas masivos de Cómputos.\n\nHow many computers to identify a cat? 16,000\n\n\n\n\n\n\n\n\n\n\n\nEstado del Arte\n\n\n\nModelos de Deep Learning pueden generar sistemas que entiendan imágenes, textos, audios, videos, grafos, etc."
+  },
+  {
+    "objectID": "tics579/clase-1.html#el-nacimiento-de-las-redes-neuronales",
+    "href": "tics579/clase-1.html#el-nacimiento-de-las-redes-neuronales",
+    "title": "TICS-579-Deep Learning",
+    "section": "El nacimiento de las Redes Neuronales",
+    "text": "El nacimiento de las Redes Neuronales\n\nLas redes neuronales artificiales (ANN), son modelos inspirados en el mecanismo cerebral de sinapsis. Su unidad más básica es una Neurona."
+  },
+  {
+    "objectID": "tics579/clase-1.html#el-nacimiento-de-las-redes-neuronales-1",
+    "href": "tics579/clase-1.html#el-nacimiento-de-las-redes-neuronales-1",
+    "title": "TICS-579-Deep Learning",
+    "section": "El nacimiento de las Redes Neuronales",
+    "text": "El nacimiento de las Redes Neuronales\n\nLas redes neuronales artificiales (ANN), son modelos inspirados en el mecanismo cerebral de sinapsis. Su unidad más básica es una Neurona.\n\n\n\n\n\n\n\n\n\n\nEste cálculo se puede representar como:\n\n\\[ y = \\phi(w_1 \\cdot x_1 + w_2 \\cdot x_2 + ... + w_5 \\cdot x_5)\\] \\[ y = \\phi(w^T \\cdot x)\\]\ndonde \\(w = [w_1, w_2, w_3, w_4, w_5]\\) y \\(x = [x_1, x_2, x_3, x_4, x_5]\\).\n\n\n\n\n\n\n\n\n¿Qué pasa si \\(\\phi(.)\\) vale la función identidad?\n¿Qué pasa si \\(\\phi(.)\\) vale la función sigmoide?"
+  },
+  {
+    "objectID": "tics579/clase-1.html#arquitectura-de-una-red",
+    "href": "tics579/clase-1.html#arquitectura-de-una-red",
+    "title": "TICS-579-Deep Learning",
+    "section": "Arquitectura de una Red",
+    "text": "Arquitectura de una Red\n\nNormalmente todas las neuronas de una capa anterior se conectan con las de una capa posterior (Hay excepciones).\nDependiendo de la forma en la que se conecten, cada Arquitectura recibe un nombre."
+  },
+  {
+    "objectID": "tics579/clase-1.html#los-ingredientes-de-un-algoritmo-de-aprendizaje",
+    "href": "tics579/clase-1.html#los-ingredientes-de-un-algoritmo-de-aprendizaje",
+    "title": "TICS-579-Deep Learning",
+    "section": "Los Ingredientes de un Algoritmo de Aprendizaje",
+    "text": "Los Ingredientes de un Algoritmo de Aprendizaje\n\nHipótesis\n\n\nUna función que describe como mapear inputs (features) con outputs (labels) por medio de parámetros.\n\n\nLoss Function\n\n\nUna función que especifica cuanta información se pierde. Mayor pérdida más error de estimación.\n\n\nMétodo de Optimización\n\n\nUn procedimiento para determinar los parámetros de la hipótesis, minimizando la suma de las pérdidas en un set de entrenamiento."
+  },
+  {
+    "objectID": "tics579/clase-1.html#ejemplo-softmax-regression",
+    "href": "tics579/clase-1.html#ejemplo-softmax-regression",
+    "title": "TICS-579-Deep Learning",
+    "section": "Ejemplo: Softmax Regression",
+    "text": "Ejemplo: Softmax Regression\n\nSoftmax Regression\n\n\nCorresponde la versión multiclase de una Regresión Logística.\n\n\n\n\n\n\n\n\n\n\n\nConsideremos un problema de clasificación multiclase de \\(k\\) clases tal que:\n\n\n\nDatos de Entrenamiento: \\(x^{(i)}, y^{(i)} \\in {1,...,k}\\) para \\(i=1,...,m\\).\n\n\\(n\\): Es el número de Features.\n\\(m\\): Es el número de puntos en el training set.\n\\(k\\): Es el número de clases del problema.\n\n\n\n\n\n\n\n\n\n\n\nVamos a tener en total \\(n \\times k\\) parámetros o pesos que actualizar."
+  },
+  {
+    "objectID": "tics579/clase-1.html#softmax-regression-hipótesis",
+    "href": "tics579/clase-1.html#softmax-regression-hipótesis",
+    "title": "TICS-579-Deep Learning",
+    "section": "Softmax Regression: Hipótesis",
+    "text": "Softmax Regression: Hipótesis\n\nVamos a definir una función que mapea valores de \\(x \\in \\mathbb{R}\\) a vectores de \\(k\\) dimensiones.\n\n\\[ h: \\mathbb{R}^n \\rightarrow \\mathbb{R}^k\\] \\[ x \\rightarrow h_\\theta(x) = \\theta^T x\\]\n\ndonde \\(\\theta \\in \\mathbb{R}^{n \\times k}\\) y \\(x \\in \\mathbb{R}^{n\\times 1}\\)\n\n\n\n\n\n\n\nEn este caso usamos una hipótesis lineal, ya que se usa una multiplicación matricial (o producto punto) para relacionar \\(\\theta\\) y \\(x\\).\n\n\n\n\n\n\n\n\n\nEn este caso el output de \\(h_i(x)\\) devolverá la probabilidad de pertenecer a una cierta clase \\(i\\).\n\n\n\n\n\n\n\n\n\n\n¿Cuál es el tamaño/dimensión de \\(h_\\theta(x)\\)?"
+  },
+  {
+    "objectID": "tics579/clase-1.html#notación-matricial",
+    "href": "tics579/clase-1.html#notación-matricial",
+    "title": "TICS-579-Deep Learning",
+    "section": "Notación Matricial",
+    "text": "Notación Matricial\n\nUna manera más conveniente de escribir estas operaciones es utilizar (Matrix Batch Form).\n\n\n\nDesign Matrix\n\\[X \\in \\mathbb{R}^{m \\times n} = \\begin{bmatrix}\n&-x^{(1)T}-\\\\\n& \\vdots & \\\\\n&-x^{(m)T}- &\\\\\n\\end{bmatrix}\\]\n\nLabels Vector\n\\[y \\in {1,...,k} = \\begin{bmatrix}\n&-y^{(1)}-\\\\\n& \\vdots & \\\\\n&-y^{(m)}- &\\\\\n\\end{bmatrix}\\]\n\n\nLa hipótesis también se puede reescribir de manera matricial como:\n\n\n\\[h_\\theta(X) = \\begin{bmatrix}\n&-h_\\theta(x^{(1)})^T-\\\\\n& \\vdots & \\\\\n&-h_\\theta(x^{(m)})^T-\\\\\n\\end{bmatrix}\\]\n\n\\[h_\\theta(X)= \\begin{bmatrix}\n&-x^{(1)T} \\theta-\\\\\n& \\vdots & \\\\\n&-x^{(m)T} \\theta-\\\\\n\\end{bmatrix} = X  \\theta\\]\n\n\n\n\n\n\n\n\n\nNormalmente este tipo de operaciones son las que utilizaremos para hacer nuestro código."
+  },
+  {
+    "objectID": "tics579/clase-1.html#loss-function-softmaxcross-entropy-loss",
+    "href": "tics579/clase-1.html#loss-function-softmaxcross-entropy-loss",
+    "title": "TICS-579-Deep Learning",
+    "section": "Loss Function: Softmax/Cross-Entropy Loss",
+    "text": "Loss Function: Softmax/Cross-Entropy Loss\nPara normalizar la salida de nuestra hipótesis, vamos a convertirla en una “probabilidad”. Pra ello usaremos la función Softmax tal que:\n\\[z_i = p(label = i) = \\frac{exp(h_i(x))}{\\sum_{j=1}^k exp(h_j(x))}\\]\nPara optimizar este proceso normalmente se usa MLE aplicado al Negative Log Loss, también llamado Cross Entropy Loss.\n\\[l_{ce}(h(x), y) = -log \\, p(label = y) = - h_{(i=y)}(x) + log\\left(\\sum_{j = 1}^k exp(h_j(x))\\right)\\]"
+  },
+  {
+    "objectID": "tics579/clase-1.html#método-de-optimización",
+    "href": "tics579/clase-1.html#método-de-optimización",
+    "title": "TICS-579-Deep Learning",
+    "section": "Método de Optimización",
+    "text": "Método de Optimización\n\nEl último ingrediente de un algoritmo de aprendizaje es el método de optimización. Es necesario minimizar la pérdida promedio asociada al set de entrenamiento. Para ello definimos esto formalmente como:\n\n\\[\\underset{\\theta}{minimize} = \\frac{1}{m} \\sum_{i=1}^m l(h_\\theta(x^{(i)}, y^{(i)}))\\]\n\n\n\n\n\n\n¿Cómo encontramos los parámetros \\(\\theta\\) que minimizan la pérdida de información/error de estimación?\n\n\n\n\nGradient Descent\n\n\nEs un método numérico que permite minimizar funciones moviéndose en dirección contraria al Gradiente. Es computacionalmente muy eficiente y fácil de implementar en código."
+  },
+  {
+    "objectID": "tics579/clase-1.html#gradient-descent",
+    "href": "tics579/clase-1.html#gradient-descent",
+    "title": "TICS-579-Deep Learning",
+    "section": "Gradient Descent",
+    "text": "Gradient Descent\n\n\nSe define el gradiente como la matriz que contiene las derivadas parciales de una función \\(f\\). Se denota como:\n\\[\\nabla_\\theta f(\\theta) \\in \\mathbb{R}^{n \\times k} = h_\\theta(X) = \\begin{bmatrix}\n\\frac{\\partial f(\\theta)}{\\partial \\theta_{11}} & \\cdots & \\frac{\\partial f(\\theta)}{\\partial \\theta_{1k}} \\\\\n\\cdots & \\ddots & \\cdots \\\\\n\\frac{\\partial f(\\theta)}{\\partial \\theta_{n1}} & \\cdots & \\frac{\\partial f(\\theta)}{\\partial \\theta_{nk}}\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEl gradiente apunta a la dirección de máximo crecimiento de la función \\(f\\)."
+  },
+  {
+    "objectID": "tics579/clase-1.html#gradient-descent-regla-de-actualización",
+    "href": "tics579/clase-1.html#gradient-descent-regla-de-actualización",
+    "title": "TICS-579-Deep Learning",
+    "section": "Gradient Descent: Regla de Actualización",
+    "text": "Gradient Descent: Regla de Actualización\nPara minimizar la función, la idea es descender iterativamente por el trayecto en contra del gradiente. La regla de actualización se define como:\n\\[\\theta := \\theta - \\alpha \\nabla_\\theta f(\\theta)\\]\ndonde \\(\\alpha &gt; 0\\) corresponde al step size o learning rate.\n\n\n\n\n\n\n\n\n\n\n\nEn nuestro caso \\(f\\) corresponderá a nuestro \\(l_{ce}\\) calculado anteriormente. El problema es, ¿cuánto vale el gradiente del Cross Entropy Loss?"
+  },
+  {
+    "objectID": "tics579/clase-1.html#calculando-el-gradiente-a-mano",
+    "href": "tics579/clase-1.html#calculando-el-gradiente-a-mano",
+    "title": "TICS-579-Deep Learning",
+    "section": "Calculando el Gradiente a mano",
+    "text": "Calculando el Gradiente a mano\nNecesitamos calcular:\n\\[\\theta := \\theta - \\alpha \\nabla_\\theta l_{ce}(\\theta^Tx,y)\\]\n\n\n\n\n\n\n¿Cuánto vale el Gradiente?\n\nNo es tan sencillo, ya que derivamos respecto a \\(\\theta\\) que es una matriz.\nPero derivamos a \\(\\theta^T x\\) que es un vector.\nPara ello, lo correcto es utilizar Calculo Diferencial Matricial, Jacobianos y Productos de Kroenecker (que probablemente no han visto en ningún curso).\n\nSPOILER: Yo tampoco lo he visto en ningún curso.\n\nUsaremos un truco (sumamente hacky) que jamás deben revelar 😱 y que nos debería avergonzar.\n\nPretenderemos que todos los valores son escalares y corregiremos las dimensiones al final."
+  },
+  {
+    "objectID": "tics579/clase-1.html#calculando-el-gradiente-a-mano-1",
+    "href": "tics579/clase-1.html#calculando-el-gradiente-a-mano-1",
+    "title": "TICS-579-Deep Learning",
+    "section": "Calculando el Gradiente a mano",
+    "text": "Calculando el Gradiente a mano\n\nSimplifiquemos el problema pensando que calcularemos el Gradiente para un sólo vector \\(x\\).\n\n\nEs decir, \\(x \\in n\\times1\\).\n\nAdemás sabemos que \\(\\nabla_\\theta l_{ce}(\\theta^Tx, y)\\) debe tener dimensiones \\(n \\times k\\).\n\n\n\\[\\nabla_\\theta l_{ce}(\\theta^T x,y) = \\frac{\\partial l_{ce}(\\theta^T x,y)}{\\partial \\theta^T x} \\cdot \\frac{\\partial \\theta^Tx}{\\partial \\theta}\\]\n\n\\[\\frac{\\partial l_{ce}(\\theta^T x,y)}{\\partial \\theta^T x} = \\frac{\\partial l_{ce}(\\theta^Tx, y)}{\\partial h} = \\begin{bmatrix}\n\\frac{\\partial l_{ce}(h,y)}{\\partial h_1} \\\\\n\\vdots\\\\\n\\frac{\\partial l_{ce}(h,y)}{\\partial h_k} \\\\\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\n\nLuego el gradiente de \\(l_{ce}\\) respecto a \\(h\\) tiene dimensiones \\(k \\times 1\\)."
+  },
+  {
+    "objectID": "tics579/clase-1.html#calculando-el-gradiente-a-mano-2",
+    "href": "tics579/clase-1.html#calculando-el-gradiente-a-mano-2",
+    "title": "TICS-579-Deep Learning",
+    "section": "Calculando el Gradiente a mano",
+    "text": "Calculando el Gradiente a mano\n\\[\\begin{align}\n\\frac{\\partial l_{ce}(h,y)}{\\partial h_i} &= \\frac{\\partial }{\\partial h_i}\\left(-h_{(i = y)} + log \\sum_{j = 1}^k exp(h_j)\\right) \\\\\n&= -\\frac{\\partial h_{(i = y)}}{\\partial h_i}+ \\frac{1}{\\sum_{j = 1}^k exp(h_j)} \\cdot \\frac{\\partial}{\\partial h_i}\\left(\\sum_{j=1}^k exp(h_j)\\right) \\\\\n&= -\\frac{\\partial h_{(i = y)}}{\\partial h_i}+ \\frac{exp(h_i)}{\\sum_{j = 1}^k exp(h_j)} \\\\\n&= - 1\\{i=y\\} + z_i = z_i - 1\\{i=y\\}\n\\end{align}\n\\]\n\n\n\n\n\n\n\\[1\\{i = y\\} = \\begin{cases}\n1,  & \\text{i = y} \\\\\n0, & \\text{otherwise}\n\\end{cases}\n\\]\n\n\n\nFinalmente:\n\n\n\\[\\frac{\\partial l_{ce}(\\theta^T x,y)}{\\partial \\theta^T x} = z - e_y\\]\n\n\n\n\n\n\n\nDonde \\(z\\), es el vector de Softmax y \\(e_y\\) es un vector con un 1 en la posición \\(y\\) y 0 en el resto."
+  },
+  {
+    "objectID": "tics579/clase-1.html#calculando-el-gradiente-a-mano-3",
+    "href": "tics579/clase-1.html#calculando-el-gradiente-a-mano-3",
+    "title": "TICS-579-Deep Learning",
+    "section": "Calculando el Gradiente a mano",
+    "text": "Calculando el Gradiente a mano\n\n\n\\[\\nabla_\\theta l_{ce}(\\theta^T x,y) = \\frac{\\partial l_{ce}(\\theta^T x,y)}{\\partial \\theta^T x} \\cdot \\frac{\\partial \\theta^Tx}{\\partial \\theta}\\] \\[\\nabla_\\theta l_{ce}(\\theta^T x,y) = (z-e_y)\\cdot x \\]\n\n\n\n\n\n\n\nOJO con las dimensiones\n\n\n\n\\(Z-e_y \\in \\mathbb{R}^{k \\times 1}\\)\n\\(x \\in \\mathbb{R}^{n \\times 1}\\)\n\n\n\n\n\n\n\nLuego:\n\\[\\nabla_\\theta l_{ce}(\\theta^T x,y) = x (z-e_y)^T\\]"
+  },
+  {
+    "objectID": "tics579/clase-1.html#calculando-el-gradiente-matrix-batch-form",
+    "href": "tics579/clase-1.html#calculando-el-gradiente-matrix-batch-form",
+    "title": "TICS-579-Deep Learning",
+    "section": "Calculando el Gradiente Matrix Batch Form",
+    "text": "Calculando el Gradiente Matrix Batch Form\n\n\n\\[\\begin{align}\\nabla_\\theta l_{ce}(X\\theta,y) \\in \\mathbb{R}^{n\\times k} &= \\frac{\\partial l_{ce}(X\\theta,y)}{\\partial X\\theta} \\cdot \\frac{\\partial X\\theta}{\\partial \\theta}\\\\\n&= (Z - I_y) \\cdot X \\\\\n&= X^T \\cdot (Z - I_y)\n\\end{align}\\]\n\n\n\n\n\n\n\nOjo con las dimensiones\n\n\n\n\\(Z - I_y \\in \\mathbb{R}^{m \\times k}\\)\n\\(X \\in \\mathbb{R}^{m \\times n}\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(Z\\) corresponde al Softmax de \\(X\\theta\\) aplicado por filas.\n\\(I_y\\) corresponde al One Hot Encoder de las etiquetas.\n\n\n\n\nFinalmente la regla de actualización de parámetros usando Gradient Descent queda como:\n\\[\\theta := \\theta - \\alpha X^T (Z - I_y)\\]\n\n\n\n\n\n\nAplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.\n\n\n\n\n\n\n\n\n\nPróxima clase vamos a hacer lo mismo para una Red Neuronal. La única diferencia es que la hipótesis que utilizaremos es un poco más fancy."
+  },
+  {
+    "objectID": "tics579/clase-1.html#multiplicación-matricial",
+    "href": "tics579/clase-1.html#multiplicación-matricial",
+    "title": "TICS-579-Deep Learning",
+    "section": "Multiplicación Matricial",
+    "text": "Multiplicación Matricial\n\n\n\n\n\n\n\n\n\nDonde \\(B_{*,i}\\) corresponde a la columna \\(i\\) de B.\nDonde \\(A_{i,*}\\) corresponde a la fila \\(i\\) de A.\n\n\n\n\n\n\n\n\n\n\n\nImágen tomada de la Clase de Zico Colter"
+  },
+  {
     "objectID": "charlas.html",
     "href": "charlas.html",
     "title": "Charlas",
@@ -17,23 +164,33 @@
     ]
   },
   {
+    "objectID": "tics579-labs.html",
+    "href": "tics579-labs.html",
+    "title": "Prácticos",
+    "section": "",
+    "text": "Práctico\nColab\n\n\n\n\nPreprocesamiento\n\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Notebooks"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Alfonso Tobar",
+    "title": "Alfonso Tobar, Msc.",
     "section": "",
-    "text": "LinkedIn\n  \n  \n    \n     Github\n  \n  \n    \n     datacuber.cl\n  \n\n      \nSoy Alfonso y he trabajado como Científico de Datos por los últimos 9 años. Además me gusta el Machine Learning Competitivo y hasta el momento he ganado 2 competencias.\nActualmente me encuentro a punto de terminar mi Msc. y además comencé a cursar mi PhD. en Data Science. Mis intereses de investigación tienen que ver con Machine Learning y Deep Learning enfocándome principalmente en la aplicación de Transformers.\nEn mi tiempo libre practico Tenis de Mesa y escribo sobre Machine Learning en mi blog: datacuber.cl.\n\n\nUniversidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026\nUniversidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023\nUniversidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013\nPuedes ver más detalles de mi carrera acá.\n\n\n\n\nHate Speech Recognition in Chilean Tweets"
+    "text": "LinkedIn\n  \n  \n    \n     Github\n  \n  \n    \n     datacuber.cl\n  \n\n  \n  \nSoy Alfonso y he trabajado como Científico de Datos por los últimos 10 años. Además me gusta el Machine Learning Competitivo y hasta el momento he ganado 2 competencias.\nActualmente me encuentro cursando mi PhD. en Data Science. Mis intereses de investigación tienen que ver con Machine Learning y Deep Learning enfocándome principalmente en la aplicación de Transformers.\nEn mi tiempo libre practico Tenis de Mesa y escribo sobre Machine Learning en mi blog: datacuber.cl.\n\n\nUniversidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026\nUniversidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2024\nUniversidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013\nPuedes ver más detalles de mi carrera acá.\n\n\n\n\nHate Speech Recognition in Chilean Tweets"
   },
   {
     "objectID": "index.html#educación",
     "href": "index.html#educación",
-    "title": "Alfonso Tobar",
+    "title": "Alfonso Tobar, Msc.",
     "section": "",
-    "text": "Universidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026\nUniversidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023\nUniversidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013\nPuedes ver más detalles de mi carrera acá."
+    "text": "Universidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026\nUniversidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2024\nUniversidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013\nPuedes ver más detalles de mi carrera acá."
   },
   {
     "objectID": "index.html#publicaciones",
     "href": "index.html#publicaciones",
-    "title": "Alfonso Tobar",
+    "title": "Alfonso Tobar, Msc.",
     "section": "",
     "text": "Hate Speech Recognition in Chilean Tweets"
   },
@@ -2838,6 +2995,16 @@
     "text": "Implementación en Scikit-Learn\nfrom sklearn.cluster import DBSCAN\n\ndbs = DBSCAN(min_samples = 5, eps = 0.5, metric = \"euclidean\")\n\n## Se entrena y se genera la predicción\ndbs.fit_predict(X)\n\n\nmin_samples: Corresponde a minPts. Por defecto 5.\neps: Corresponde al radio de la esfera en la que se buscan los puntos cercanos. Por defecto 0.5.\nmetric: Corresponde a la distancia utilizada para medir la distancia. Permite todas las distancias mencionadas acá.\n.fit_predict(): Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento. Adicionalmente los puntos ruidosos se etiquetarán como -1.\n\n\n👀 Veamos un ejemplo."
   },
   {
+    "objectID": "tics579.html",
+    "href": "tics579.html",
+    "title": "Diapositivas",
+    "section": "",
+    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nIntroducción a las Redes Neuronales\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
+    "crumbs": [
+      "Diapositivas del Curso"
+    ]
+  },
+  {
     "objectID": "tics411-labs.html",
     "href": "tics411-labs.html",
     "title": "Prácticos",
@@ -2846,5 +3013,75 @@
     "crumbs": [
       "Notebooks"
     ]
+  },
+  {
+    "objectID": "tics579/clase-0.html#quién-soy",
+    "href": "tics579/clase-0.html#quién-soy",
+    "title": "TICS-579-Deep Learning",
+    "section": "¿Quién soy?",
+    "text": "¿Quién soy?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAlfonso Tobar-Arancibia\nEstudié Ingeniería Civil pero llevo 10 años trabajando como:\n\nData Analyst.\nData Scientist.\nML Engineer.\nData Engineer.\n\nSoy Msc. en Data Science y cursando el PhD. en la UAI especificamente en Deep Learning.\nMe gusta mucho programar (en vivo).\nContribuyo a HuggingFace y Feature Engine.\nHe ganado 2 competencias de Machine Learning.\nPubliqué mi primer paper el año pasado sobre Hate Speech en Español.\nJuego Tenis de Mesa, hago Agility con mi perrita Kira y escribo en mi Blog."
+  },
+  {
+    "objectID": "tics579/clase-0.html#disclaimer",
+    "href": "tics579/clase-0.html#disclaimer",
+    "title": "TICS-579-Deep Learning",
+    "section": "Disclaimer",
+    "text": "Disclaimer\n\n\n\n\n\n\n\nMucho del contenido de este curso será una mezcla entre inglés y español. Esto debido a que el contenido del curso está en constante desarrollo y casi no existen libros o artículos en español al respecto.\n\n\n\n\n\n\n\n\n\n\n\nEste curso se considera altamente teórico y con una fuerte componente en programación. Por lo que no se recomienda cursarlo a quien no se sienta cómodo con mátemática técnica y programando.\n\n\n\n\n\n\n\n\n\n\n\nEstá completamente prohibido copiar y pegar código de algún modelo de IA. Hablaremos más adelante cómo trataremos de mitigar esto ya que gran parte del curso requiere programación fuerte."
+  },
+  {
+    "objectID": "tics579/clase-0.html#course-goals",
+    "href": "tics579/clase-0.html#course-goals",
+    "title": "TICS-579-Deep Learning",
+    "section": "Course Goals",
+    "text": "Course Goals\n\n\n\n\n\n\nIdentificar elementos claves de las Redes Neuronales.\nEntender conceptos básicos como el Training Loop, Gradient Propagation, Optimización, etc.\nIdentificar los distintos tipos de Redes Neuronales:\n\nFeed Fordward Networks,\nConvolutional Neural Networks,\nRecurrent Neural Networks,\nTransformers.\n\nEntender las Arquitecturas Estado del Arte en diferentes dominios: Datos Tabulares, Computer Vision, Natural Language Processing.\nImplementar, entrenar y evaluar Deep Neural Networks utilizando Pytorch."
+  },
+  {
+    "objectID": "tics579/clase-0.html#course-topics",
+    "href": "tics579/clase-0.html#course-topics",
+    "title": "TICS-579-Deep Learning",
+    "section": "Course Topics",
+    "text": "Course Topics\n\n\n\n\n\n\n\nShallow Models (Logistic and Softmax Regression)\nEl Perceptron\nEntrenamiento y Evaluación de Modelos\nCómo construir distintas arquitecturas de Redes Neuronales\nAplicación de estas redes a distintos dominios."
+  },
+  {
+    "objectID": "tics579/clase-0.html#course-logistics",
+    "href": "tics579/clase-0.html#course-logistics",
+    "title": "TICS-579-Deep Learning",
+    "section": "Course Logistics",
+    "text": "Course Logistics\n\nClases todos los Jueves de 8:45 a 11:25 de manera presencial.\n\nSala: Por Confirmar.\n\nInstructor: Alfonso Tobar-Arancibia\n\nalfonso.tobar.a@edu.uai.cl\nOffice Hours: Miercoles por la mañana en la A-220.\n\nAyudantías Online, sólo en algunas semanas.\n\nAyudante: María Alejandra Bravo\nmariaabravo@alumnos.uai.cl\n\nPrerequisitos:\n\nMinería de Datos\n\nEntrenamiento de un Modelo\nEvaluación y Validación\nRegresión Logística"
+  },
+  {
+    "objectID": "tics579/clase-0.html#class-materials",
+    "href": "tics579/clase-0.html#class-materials",
+    "title": "TICS-579-Deep Learning",
+    "section": "Class Materials",
+    "text": "Class Materials\n\nSlides\nNotebooks\n\n\n\nDiapositivas Interactivas creadas en Quarto (links van a estar disponibles en Webcursos)\n\nPermite copiar y pegar código directamente.\nImágenes se pueden ver en tamaño completo al clickearlas.\nSe puede buscar contenido específico de cualquier Slide utilizando la Search Bar.\nSe puede obtener una copia en PDF presionando la tecla E para luego guardarlas para tomar notas."
+  },
+  {
+    "objectID": "tics579/clase-0.html#herramientas",
+    "href": "tics579/clase-0.html#herramientas",
+    "title": "TICS-579-Deep Learning",
+    "section": "Herramientas",
+    "text": "Herramientas\n\n\n\n\n\n\nSe espera que los estudiantes dominen las siguientes herramientas:\n\nPython\nPandas/Numpy\nGoogle Colab\n\n\n\n\n\n\n\n\n\n\n\nA lo largo del curso utilizaremos otras librerías que se enseñaran a lo largo del curso:\n\nPytorch\nTransformers\nAlbumentations\netc."
+  },
+  {
+    "objectID": "tics579/clase-0.html#material-complementario",
+    "href": "tics579/clase-0.html#material-complementario",
+    "title": "TICS-579-Deep Learning",
+    "section": "Material Complementario",
+    "text": "Material Complementario\n\nNo hay un texto guía para este curso. La mayoría de las cosas aparecen día a día o las podemos encontrar en Papers, los cuales irán siendo mencionados a medida que sea necesario.\n\nLectura Recomendada\n\n\n\n\n\n\n\n\n\nDocs Pytorch nn\nDocs Pytorch functional\nTutorial Colab\nAgregar Datos Externos a Colab"
+  },
+  {
+    "objectID": "tics579/clase-0.html#reglas-del-curso",
+    "href": "tics579/clase-0.html#reglas-del-curso",
+    "title": "TICS-579-Deep Learning",
+    "section": "Reglas del Curso",
+    "text": "Reglas del Curso\n\n\n\n\n\n\nNota Final\n\n\n\\[NF = NT + 0.3 \\cdot NQ\\]\n\n\n\n\n\n\n\n\n\nTareas\n\n\n\nSe realizarán 5 Tareas. T5 es opcional y reemplaza la peor nota.\n\n\\[NT = 0.1 \\cdot T1 + 0.15 \\cdot T2 + 0.20 \\cdot T3 + 0.25 \\cdot T4\\]\n\n\n\n\n\n\n\n\n\nQuizes\n\n\n\nSe realizarán controles cortos al inicio de clases (previo aviso).\nSe realizarán suficientes controles para eliminar algunos al final del semestre.\nNo hay controles recuperativos.\n\n\\[NQ = \\frac{1}{n}\\sum_{i=1}^n Q_i\\]"
+  },
+  {
+    "objectID": "tics579/clase-0.html#tareas-1",
+    "href": "tics579/clase-0.html#tareas-1",
+    "title": "TICS-579-Deep Learning",
+    "section": "Tareas",
+    "text": "Tareas\n\n\n\n\n\n\n\nReglas\n\n\n\nSe deben entregar en Jupyter Notebook.\nSe realizarán en parejas o un grupo de 3 (sólo en caso de número impar) previa inscripción.\nLas partes teóricas que necesiten notación matemática se deben realizar dentro del Jupyter Notebook pero usando simbología Latex (Dudas de cómo hacerlo a la ayudante).\n\n\n\n\n\n\n\n\n\n\nDefensa de Código\n\n\n\nEl código presentado en las tareas se defenderá mediante interrogación oral en horarios a convenir (normalmente de ayudantía).\n3 preguntas aleatorias a cualquier miembro del grupo.\nEn caso de no defender el código correctamente se penalizará de la siguiente manera:\n\n3 preguntas buenas: 100% del puntaje.\n2 preguntas buenas: 70% del puntaje.\n1 preguntas buenas: 40% del puntaje.\n0 preguntas buenas: 20% del puntaje."
   }
 ]
