@@ -46,7 +46,7 @@ format:
   * Data Scientist.
   * ML Engineer.
   * Data Engineer.
-* Soy Msc. en Data Science y cursando el PhD. en la UAI especificamente en Deep Learning.
+* Soy Msc. en Data Science y estoy cursando el PhD. en la UAI especificamente en Deep Learning.
 * Me gusta mucho programar (en vivo).
 * Contribuyo a **HuggingFace** y **Feature Engine**.
 * He ganado 2 competencias de Machine Learning.
@@ -61,19 +61,23 @@ format:
 
 ## Disclaimer
 
-::: {.callout-caution .fragment}
+::: {.callout-caution .fragment fragment-index=1}
 Mucho del contenido de este curso será una mezcla entre **inglés** y **español**. Esto debido a que el contenido del curso está en constante desarrollo y casi no existen libros o artículos en español al respecto.
 :::
 
-::: {.callout-warning .fragment}
-Este curso se considera altamente teórico y con una fuerte componente en programación. Por lo que no se recomienda cursarlo a quien no se sienta cómodo con mátemática técnica y programando.
+::: {.callout-warning .fragment fragment-index=2}
+Este curso se considera **altamente teórico** y con una **fuerte componente en programación**. 
 :::
 
-::: {.callout-caution .fragment}
+::: {.callout-important .fragment fragment-index=2}
+¡Están advertidos!
+:::
+
+::: {.callout-caution .fragment fragment-index=3}
 Está completamente prohibido ***copiar y pegar*** código de algún modelo de IA. Hablaremos más adelante cómo trataremos de mitigar esto ya que gran parte del curso requiere programación fuerte.
 :::
 
-## Course Goals {.smaller}
+## Objetivos del Curso {.smaller}
 
 :::: {.columns}
 ::: {.column width="20%"}
@@ -81,6 +85,10 @@ Está completamente prohibido ***copiar y pegar*** código de algún modelo de I
 :::
 
 ::: {.column width="80%"}
+
+::: {.callout .center style="font-size: 150%;"}
+Ser el curso más **completo** y **exhaustivo** de Deep Learning del país.
+:::
 :::{ .incremental}
 
 * Identificar elementos claves de las Redes Neuronales. 
@@ -91,47 +99,85 @@ Está completamente prohibido ***copiar y pegar*** código de algún modelo de I
   * Recurrent Neural Networks,
   * Transformers. 
 * Entender las Arquitecturas Estado del Arte en diferentes dominios: Datos Tabulares, Computer Vision, Natural Language Processing. 
-* Implementar, entrenar y evaluar Deep Neural Networks utilizando Pytorch. 
+* Implementar, entrenar y evaluar `Deep Neural Networks` utilizando Pytorch. 
 :::
 :::
 ::::
 ---
 
-## Course Topics
+## Tópicos del Curso
 
-::: {.callout-note}
-* Shallow Models (Logistic and Softmax Regression)
+::: {.columns}
+::: {.column width="60%"}
+* Shallow Models 
 * El Perceptron
+* Tensores
 * Entrenamiento y Evaluación de Modelos
-* Cómo construir distintas arquitecturas de Redes Neuronales
+* Arquitecturas de Redes Neuronales
 * Aplicación de estas redes a distintos dominios. 
+
+::: {.callout-important}
+Implementación en librerías ***SOTA*** como Pytorch y HuggingFace.
 :::
 
-## Course Logistics {.smaller}
+:::
+::: {.column width="40%"}
+![](img/clase-0/pytorch.png){fig-align="center"}
 
-* Clases todos los Jueves de 8:45 a 11:25 de manera presencial.
-  * Sala: Por Confirmar.
-* Instructor: Alfonso Tobar-Arancibia
-    * alfonso.tobar.a@edu.uai.cl
-    * Office Hours: Miercoles por la mañana en la A-220.
-* Ayudantías Online, sólo en algunas semanas. 
-    * Ayudante: María Alejandra Bravo
-    *   `mariaabravo@alumnos.uai.cl`
-*   Prerequisitos: 
-    *   Minería de Datos
-        * Entrenamiento de un Modelo
-        * Evaluación y Validación
-        * Regresión Logística
+![](img/clase-0/hf.png){fig-align="center"}
+:::
+::: 
 
-## Class Materials 
+## Logística {.smaller}
+
+* Clases todos los **Jueves de 8:45 a 11:25** de manera **presencial**.
+  * **Sala**: Por Confirmar.
+* **Instructor**: Alfonso Tobar-Arancibia (`alfonso.tobar.a@edu.uai.cl`)
+    * **Office Hours**: Miercoles por la mañana en la A-220.
+* Ayudantías Online, sólo en algunas semanas.* 
+    * **Ayudante**: María Alejandra Bravo (`mariaabravo@alumnos.uai.cl`)
+
+::: {.callout-note style="font-size: 120%;" appearance="default"}
+## Horarios Posibles: 
+
+* Martes de 17:00 a 18:10 hrs.
+* Miércoles de 8:45 a 09:55 hrs.
+* Miércoles de 10:15 a 11:25 hrs.
+* Miércoles de 17:00 a 18:10 hrs.
+:::
+
+
+## Prerequisitos 
+
+::: {.callout-note}
+* Haber cursado Minería de Datos (no es excluyente pero es necesario saber de Machine Learning).
+    * Entrenamiento de un Modelo
+    * Evaluación y Validación
+    * Regresión Logística
+:::
+::: {.callout-tip}
+* Tener conocimientos de Algebra Lineal (poner mucha atención al curso de Algebra Lineal del MSDS).
+    * Notación Matricial
+    * Multiplicaciones Matriciales
+    * Transformaciones Lineales
+:::
+::: {.callout-warning}
+* Entender Inglés
+    * Mucho del material adicional serán lecturas o videos en inglés. 
+:::
+
+
+## Recursos
 
 * [Slides](https://datacuber.cl/clases_UAI/tics579.html)
 * [Notebooks](https://datacuber.cl/clases_UAI/tics579-labs.html)
+* [Foro de Dudas](https://webcursos.uai.cl/mod/forum/view.php?id=2269196)
 
 
 ::: {style="font-size: 75%;"}
 
 * Diapositivas Interactivas creadas en Quarto (links van a estar disponibles en `Webcursos`)
+    * Contiene un índice de todas las slides.
     * Permite copiar y pegar código directamente. 
     * Imágenes se pueden ver en tamaño completo al clickearlas. 
     * Se puede buscar contenido específico de cualquier Slide utilizando la **Search Bar**.
@@ -215,7 +261,7 @@ $$NT = 0.1 \cdot T1 + 0.15 \cdot T2 + 0.20 \cdot T3 + 0.25 \cdot T4$$
 $$NQ = \frac{1}{n}\sum_{i=1}^n Q_i$$
 :::
 
-## Tareas 
+## Tareas
 
 ::: {style="font-size: 80%;"}
 ::: {.callout-tip appearance="default"}
@@ -236,6 +282,39 @@ $$NQ = \frac{1}{n}\sum_{i=1}^n Q_i$$
     * 0 preguntas buenas: 20% del puntaje.
 :::
 :::
+
+## Fechas Tareas 
+
+::: {.columns}
+::: {.column}
+::: {.callout-note appearance="default"}
+## Tarea 1
+15 de Septiembre (23:59 hrs)
+:::
+
+::: {.callout-tip appearance="default"}
+## Tarea 2
+13 de Octubre (23:59 hrs)
+:::
+:::
+::: {.column}
+::: {.callout-warning appearance="default"}
+## Tarea 3
+3 de Noviembre (23:59 hrs)
+:::
+
+::: {.callout-caution appearance="default"}
+## Tarea 4
+24 de Noviembre (23:59 hrs)
+:::
+:::
+::: 
+
+::: {.callout-important appearance="default"}
+## Tarea 5 (Opcional, pero recomendada)
+15 de Diciembre (23:59 hrs)
+:::
+
 
 # Gracias
 
