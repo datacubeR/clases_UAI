@@ -1,0 +1,246 @@
+---
+title: "TICS-579-Deep Learning"
+subtitle: "Clase 0: Presentación del Curso"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs: 
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo-uai-blanco.jpeg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+    pdf-separate-fragments: true
+---
+
+## ¿Quién soy? {.smaller}
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+![](../me.jpeg){width="70%" fig-align="center"}
+
+![](img/clase-0/chiquis.jpeg){width="50%" fig-align="center"}
+
+:::
+
+
+::: {.column width="60%"}
+
+::: {.incremental .smaller}
+
+* ***Alfonso Tobar-Arancibia*** 
+* Estudié **Ingeniería Civil** pero llevo 10 años trabajando como:
+  * Data Analyst.
+  * Data Scientist.
+  * ML Engineer.
+  * Data Engineer.
+* Soy Msc. en Data Science y cursando el PhD. en la UAI especificamente en Deep Learning.
+* Me gusta mucho programar (en vivo).
+* Contribuyo a **HuggingFace** y **Feature Engine**.
+* He ganado 2 competencias de Machine Learning.
+* Publiqué mi primer [paper](https://ieeexplore.ieee.org/abstract/document/10315748) el año pasado sobre Hate Speech en Español.
+* Juego **Tenis de Mesa**, hago **Agility** con mi perrita Kira y escribo en mi Blog. 
+:::
+:::
+
+::::
+
+# ¡¡Cuéntenme de ustedes!!
+
+## Disclaimer
+
+::: {.callout-caution .fragment}
+Mucho del contenido de este curso será una mezcla entre **inglés** y **español**. Esto debido a que el contenido del curso está en constante desarrollo y casi no existen libros o artículos en español al respecto.
+:::
+
+::: {.callout-warning .fragment}
+Este curso se considera altamente teórico y con una fuerte componente en programación. Por lo que no se recomienda cursarlo a quien no se sienta cómodo con mátemática técnica y programando.
+:::
+
+::: {.callout-caution .fragment}
+Está completamente prohibido ***copiar y pegar*** código de algún modelo de IA. Hablaremos más adelante cómo trataremos de mitigar esto ya que gran parte del curso requiere programación fuerte.
+:::
+
+## Course Goals {.smaller}
+
+:::: {.columns}
+::: {.column width="20%"}
+![](img/clase-0/objetivos.jpg)
+:::
+
+::: {.column width="80%"}
+:::{ .incremental}
+
+* Identificar elementos claves de las Redes Neuronales. 
+* Entender conceptos básicos como el `Training Loop`, `Gradient Propagation`, `Optimización`, etc. 
+* Identificar los distintos tipos de Redes Neuronales: 
+  * Feed Fordward Networks,
+  * Convolutional Neural Networks,
+  * Recurrent Neural Networks,
+  * Transformers. 
+* Entender las Arquitecturas Estado del Arte en diferentes dominios: Datos Tabulares, Computer Vision, Natural Language Processing. 
+* Implementar, entrenar y evaluar Deep Neural Networks utilizando Pytorch. 
+:::
+:::
+::::
+---
+
+## Course Topics
+
+::: {.callout-note}
+* Shallow Models (Logistic and Softmax Regression)
+* El Perceptron
+* Entrenamiento y Evaluación de Modelos
+* Cómo construir distintas arquitecturas de Redes Neuronales
+* Aplicación de estas redes a distintos dominios. 
+:::
+
+## Course Logistics {.smaller}
+
+* Clases todos los Jueves de 8:45 a 11:25 de manera presencial.
+  * Sala: Por Confirmar.
+* Instructor: Alfonso Tobar-Arancibia
+    * alfonso.tobar.a@edu.uai.cl
+    * Office Hours: Miercoles por la mañana en la A-220.
+* Ayudantías Online, sólo en algunas semanas. 
+    * Ayudante: María Alejandra Bravo
+    *   `mariaabravo@alumnos.uai.cl`
+*   Prerequisitos: 
+    *   Minería de Datos
+        * Entrenamiento de un Modelo
+        * Evaluación y Validación
+        * Regresión Logística
+
+## Class Materials 
+
+* [Slides](https://datacuber.cl/clases_UAI/tics579.html)
+* [Notebooks](https://datacuber.cl/clases_UAI/tics579-labs.html)
+
+
+::: {style="font-size: 75%;"}
+
+* Diapositivas Interactivas creadas en Quarto (links van a estar disponibles en `Webcursos`)
+    * Permite copiar y pegar código directamente. 
+    * Imágenes se pueden ver en tamaño completo al clickearlas. 
+    * Se puede buscar contenido específico de cualquier Slide utilizando la **Search Bar**.
+    * Se puede obtener una copia en PDF presionando la tecla `E` para luego guardarlas para tomar notas. 
+:::
+
+## Herramientas
+::: {.callout-tip}
+Se espera que los estudiantes dominen las siguientes herramientas: 
+
+* [Python](https://www.python.org/)
+* [Pandas](https://pandas.pydata.org/docs/user_guide/10min.html)/[Numpy](https://numpy.org/doc/stable/user/absolute_beginners.html)
+* [Google Colab](https://colab.research.google.com/?hl=es#scrollTo=zwFnJsE6vjf8)
+
+:::
+
+::: {.callout-important}
+
+* A lo largo del curso utilizaremos otras librerías que se enseñaran a lo largo del curso:
+    * [Pytorch](https://pytorch.org/docs/stable/index.html) 
+    * [Transformers](https://huggingface.co/docs/transformers/es/index)
+    * [Albumentations](https://albumentations.ai/)
+    * etc.
+:::
+
+## Material Complementario {.smaller}
+
+> No hay un texto guía para este curso. La mayoría de las cosas aparecen día a día o las podemos encontrar en Papers, los cuales irán siendo mencionados a medida que sea necesario. 
+
+### Lectura Recomendada
+
+:::: {.columns}
+::: {.column width="25%"}
+
+![](img/clase-0/book_1.png){.lightbox}
+:::
+
+::: {.column width="25%"}
+
+![](img/clase-0/book_2.png){.lightbox}
+
+:::
+::: {.column width="25%"}
+
+![](img/clase-0/book_3.png){.lightbox}
+
+:::
+::: {.column width="25%"}
+
+* [Docs Pytorch nn](https://pytorch.org/docs/stable/nn.html)
+* [Docs Pytorch functional](https://pytorch.org/docs/stable/nn.functional.html)
+
+* [Tutorial Colab](https://www.youtube.com/watch?v=RLYoEyIHL6A)
+
+* [Agregar Datos Externos a Colab](https://www.youtube.com/watch?v=z1pBdycYCGY)
+:::
+::::
+
+## Reglas del Curso {.smaller}
+
+::: {.callout-warning appearance="default"}
+## Nota Final
+$$NF = NT + 0.3 \cdot NQ$$
+:::
+
+::: {.callout-note appearance="default"}
+## Tareas
+
+* Se realizarán 5 Tareas. T5 es opcional y reemplaza la peor nota. 
+
+$$NT = 0.1 \cdot T1 + 0.15 \cdot T2 + 0.20 \cdot T3 + 0.25 \cdot T4$$ 
+:::
+
+::: {.callout-tip appearance="default"}
+## Quizes
+
+* Se realizarán controles cortos al inicio de clases (previo aviso). 
+* Se realizarán `suficientes` controles para eliminar algunos al final del semestre.
+* No hay controles recuperativos. 
+
+$$NQ = \frac{1}{n}\sum_{i=1}^n Q_i$$
+:::
+
+## Tareas 
+
+::: {style="font-size: 80%;"}
+::: {.callout-tip appearance="default"}
+## Reglas
+* Se deben entregar en Jupyter Notebook.
+* Se realizarán en parejas o un grupo de 3 (sólo en caso de número impar) previa inscripción.
+* Las partes teóricas que necesiten notación matemática se deben realizar dentro del Jupyter Notebook pero usando simbología Latex (Dudas de cómo hacerlo a la ayudante).
+:::
+
+::: {.callout-important appearance="default"}
+## Defensa de Código
+* El código presentado en las tareas se defenderá mediante **interrogación oral** en horarios a convenir (normalmente de ayudantía).
+* **3 preguntas aleatorias** a ***cualquier*** miembro del grupo.
+* En caso de no defender el código correctamente se penalizará de la siguiente manera:
+    * 3 preguntas buenas: 100% del puntaje.
+    * 2 preguntas buenas: 70% del puntaje.
+    * 1 preguntas buenas: 40% del puntaje.
+    * 0 preguntas buenas: 20% del puntaje.
+:::
+:::
+
+# Gracias
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::

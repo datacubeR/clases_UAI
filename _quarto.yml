@@ -19,6 +19,7 @@ website:
       - href: charlas.qmd
         text: Charlas
       - sidebar:tics411
+      - sidebar:tics579
   sidebar: 
     - id: tics411
       title: Tics411-Minería de Datos
@@ -27,6 +28,13 @@ website:
           href: tics411.qmd
         - text: Notebooks
           href: tics411-labs.qmd
+    - id: tics579
+      title: Tics579-Deep Learning
+      contents: 
+        - text: Diapositivas del Curso
+          href: tics579.qmd
+        - text: Notebooks
+          href: tics579-labs.qmd
 format:
   html:
     theme: default

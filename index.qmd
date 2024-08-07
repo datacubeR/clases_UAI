@@ -1,9 +1,9 @@
 ---
-title: "Alfonso Tobar"
+title: "Alfonso Tobar, Msc."
 about:
   id: hero-heading
-  template: solana
-  image: me.jpg
+  template: trestles
+  image: me.jpeg
   links:
     - icon: linkedin
       text: LinkedIn
@@ -19,9 +19,9 @@ about:
 
 :::{#hero-heading}
 
-Soy Alfonso y he trabajado como Científico de Datos por los últimos 9 años. Además me gusta el **Machine Learning Competitivo** y hasta el momento he ganado 2 competencias. 
+Soy Alfonso y he trabajado como Científico de Datos por los últimos 10 años. Además me gusta el **Machine Learning Competitivo** y hasta el momento he ganado 2 competencias. 
 
-Actualmente me encuentro a punto de terminar mi Msc. y además comencé a cursar mi PhD. en Data Science. Mis intereses de investigación tienen que ver con **Machine Learning** y **Deep Learning** enfocándome principalmente en la aplicación de **Transformers**.
+Actualmente me encuentro cursando mi PhD. en Data Science. Mis intereses de investigación tienen que ver con **Machine Learning** y **Deep Learning** enfocándome principalmente en la aplicación de **Transformers**.
 
 En mi tiempo libre practico Tenis de Mesa y escribo sobre Machine Learning en mi blog: [datacuber.cl](https://datacuber.cl).
 
@@ -29,7 +29,7 @@ En mi tiempo libre practico Tenis de Mesa y escribo sobre Machine Learning en mi
 
 Universidad Adolfo Ibañez, Viña del Mar | PhD. in Data Science | 2023 - 2026
 
-Universidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2023
+Universidad Adolfo Ibañez, Viña del Mar | Msc. in Data Science | 2022 - 2024
 
 Universidad Técnica Federico Santa María | Ingeniería Civil | 2005 - 2013
 

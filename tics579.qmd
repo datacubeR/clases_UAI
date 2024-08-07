@@ -1,0 +1,21 @@
+---
+title: "Diapositivas"
+description: |
+  Acá se pueden encontrar las slides correspondientes al curso de Deep Learning.
+  
+listing:
+  contents:
+    - "tics579.yml"
+  type: grid
+  fields: [date, title, subtitle, image]
+  sort: "date asc"
+  image-height: 100%
+  #categories: unnumbered
+page-layout: full
+execute: 
+  freeze: false
+  warning: false
+  echo: false
+
+title-block-banner: false
+---
