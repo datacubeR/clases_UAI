@@ -315,6 +315,23 @@ $$NQ = \frac{1}{n}\sum_{i=1}^n Q_i$$
 15 de Diciembre (23:59 hrs)
 :::
 
+## Garantías
+
+::: {.callout-caution}
+Vamos a sufrir harto al menos las primeras semanas (yo al menos he sufrido harto preparando las clases), pero les aseguro que va a valer la pena.
+
+**Bare with me!!**
+:::
+::: {.callout-tip}
+Vamos a aprender conceptos muy avanzados que no muchos cursos consideran. Lo siento, pero van a ser mis conejillos de indias.
+:::
+::: {.callout-note}
+Vamos a pasarla bien mal, estudiando harto, demorándonos harto en las tareas, pero vamos a pasar todos.
+:::
+::: {.callout-warning}
+Eso **NO SIGNIFICA** que las notas van a ser regaladas.
+:::
+
 
 # Gracias
 

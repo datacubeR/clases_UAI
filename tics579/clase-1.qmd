@@ -286,18 +286,21 @@ Normalmente este tipo de operaciones son las que utilizaremos para hacer nuestro
 ## Loss Function: Softmax/Cross-Entropy Loss {.smaller}
 
 
-La salida de nuestra `Shallow Network` retornará valores reales. Para poder tener una mejor interpretación del significado de cada una aplicaremos la función `Softmax` lo cual permitirá *normalizar* los resultados y llevará los resultados a una ***"distribución de probabilidad"*** (valores positivos que sumen 1).
+::: {.callout-warning style="font-size: 130%;"}
+La salida de nuestra `Shallow Network` retornará valores reales.
+:::
+::: {.callout-tip style="font-size: 130%;"}
+Para poder tener una mejor interpretación del significado de cada una aplicaremos la función `Softmax` lo cual permitirá *normalizar* los resultados y llevará los resultados a una ***"distribución de probabilidad"*** (valores positivos que sumen 1).
+:::
 
 ::: {.columns}
 ::: {.column width="60%"}
 
-<br>
 
 ![](img/clase-1/softmax_example.png){.lightbox fig-align="center"} 
 :::
 ::: {.column width="40%"}
 
-<br>
 
 Formalmente definiremos la función Softmax como: 
 
@@ -316,20 +319,21 @@ $$Z = \begin{bmatrix}
 
 Para medir el error, o la pérdida de información de un punto utilizaremos el Negative Log Loss, también llamado `Cross Entropy Loss`.
 
-::: {.callout-tip .fragment}
+$$l_{ce}(h(x), y) = -log\left(p(label = y)\right)$$
+
+::: {.callout-tip style="font-size: 120%;" .fragment}
 Para garantizar el éxito de nuestro modelo, básicamente queremos maximizar la probabilidad de encontrar la etiqueta correcta, es decir, que $p(label = y)$ sea lo más alto posible.
 :::
-::: {.callout-caution .fragment}
+::: {.callout-caution style="font-size: 120%;" .fragment}
 Normalmente en los problemas de optimización no se suele maximizar sino minimizar. Minimizar el valor negativo es equivalente a maximizar. Esto sería equivalente a minimizar el error del modelo. 
 :::
-::: {.callout-caution .fragment}
+::: {.callout-warning style="font-size: 120%;" .fragment}
 Finalmente por razones de estabilidad numérica, minimizamos el logaritmo de la probabilidad que es una técnica bien conocida en Estadística.
 :::
 
 :::{.fragment}
 $$\begin{align}
-l_{ce}(h(x), y) &= -log\left(p(label = y)\right)\\
-&= -log \left(\frac{exp(h_{(i = y)}(x))}{\sum_{j=1}^k exp(h_j(x))}\right) \\
+l_{ce}(h(x), y) = -log\left(p(label = y)\right) &= -log \left(\frac{exp(h_{(i = y)}(x))}{\sum_{j=1}^k exp(h_j(x))}\right) \\
 &= - h_{(i=y)}(x) + log\left(\sum_{j = 1}^k exp(h_j(x))\right)\end{align}$$
 :::
 
@@ -337,7 +341,8 @@ l_{ce}(h(x), y) &= -log\left(p(label = y)\right)\\
 
 > El último ingrediente de un algoritmo de aprendizaje es el método de optimización. Es necesario minimizar la pérdida promedio asociada a todos los puntos de un cierto set de entrenamiento. Para ello definimos esto formalmente como:
 
-$$\underset{\theta}{minimize} = \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}), y^{(i)}) =\frac{1}{m} \sum_{i=1}^m l(\theta^Tx^{(i)}, y^{(i)})$$
+$$\underset{\theta}{minimize} = \frac{1}{m} \sum_{i=1}^m l_{ce}(h_\theta(x^{(i)}), y^{(i)})$$
+
 
 ::: {.callout-note}
 ***¿Cómo encontramos los parámetros $\theta$ que minimizan la pérdida de información/error de estimación?***
@@ -427,11 +432,15 @@ $$\theta := \theta - \alpha \nabla_\theta l_{ce}(\theta^Tx,y) $$
 
 Además sabemos que $\nabla_\theta l_{ce}(\theta^Tx, y)$ debe tener dimensiones $n \times k$.
 
+::: {.callout-important style="font-size: 150%;" .fragment fragment-index=1}
+***¿Por qué?***
+:::
+
 ::: {.columns}
-::: {.column}
+::: {.column .fragment fragment-index=2}
 $$\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}$$
 :::
-::: {.column}
+::: {.column .fragment fragment-index=3}
 $$\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = \frac{\partial l_{ce}(\theta^Tx, y)}{\partial h} = \begin{bmatrix}
 \frac{\partial l_{ce}(h,y)}{\partial h_1} \\
 \vdots\\
@@ -440,7 +449,7 @@ $$\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = \frac{\partial l_{
 :::
 ::: 
 
-::: {.callout-tip style="font-size: 130%;" .fragment}
+::: {.callout-tip style="font-size: 130%;" .fragment fragment-index=4}
 Luego el gradiente de $l_{ce}$ respecto a $h$ tiene dimensiones $k \times 1$.
 :::
 
@@ -454,7 +463,7 @@ $$\begin{align}
 \end{align}
 $$
 
-::: {.callout-tip}
+::: {.callout-tip .fragment}
 $$1\{i = y\} = \begin{cases}
 1,  & \text{i = y} \\
 0, & \text{otherwise}
@@ -462,6 +471,7 @@ $$1\{i = y\} = \begin{cases}
 $$
 :::
 
+::: {.fragment}
 Finalmente en forma vectorial quedaría como:
 
 ::: {.columns}
@@ -474,6 +484,7 @@ Donde $z$, es el vector de Softmax y $e_y$ es un vector con un 1 en la posición
 :::
 :::
 ::: 
+:::
 
 ## Calculando el Gradiente a mano {.smaller}
 
@@ -499,52 +510,89 @@ Luego:
 $$\nabla_\theta l_{ce}(\theta^T x,y) = x (z-e_y)^T$$
 :::
 
+::: {.callout-caution style="font-size: 150%;" .fragment}
+***¿Cuál es el tamaño de $\nabla_\theta l_{ce}(\theta^T x,y)$?***
+:::
+
+::: {.callout-note style="font-size: 150%;" .fragment}
+$n \times k$
+:::
+
+::: {.callout-warning style="font-size: 150%;" .fragment}
+***¿Por qué?***
+:::
+
+
 
 ## Calculando el Gradiente Matrix Batch Form {.smaller}
 
+#### Esto sería equivalente a tomar en consideración todos los puntos del Training Set
+
 ::: {.columns}
 ::: {.column}
-$$\begin{align}\nabla_\theta l_{ce}(X\theta,y) \in \mathbb{R}^{n\times k} &= \frac{\partial l_{ce}(X\theta,y)}{\partial X\theta} \cdot \frac{\partial X\theta}{\partial \theta}\\
+$$\begin{align}\nabla_\theta l_{ce}(X\theta,y) &= \frac{\partial l_{ce}(X\theta,y)}{\partial X\theta} \cdot \frac{\partial X\theta}{\partial \theta}\\
 &= (Z - I_y) \cdot X \\
 &= X^T \cdot (Z - I_y)
 \end{align}$$
+
+::: {.callout-tip}
+* $Z$ corresponde al Softmax de $X\theta$ aplicado por filas.
+* $I_y$ corresponde al One Hot Encoder de las etiquetas. Filas con 1 en la etiqueta correcta y 0 en el resto.
+:::
 :::
 ::: {.column}
-::: {.callout-caution appearance="default"}
+::: {.callout-caution appearance="default" .fragment}
 ## Ojo con las dimensiones
 
 * $Z - I_y \in \mathbb{R}^{m \times k}$
 * $X \in \mathbb{R}^{m \times n}$
 :::
+
+::: {.callout-warning .fragment}
+***¿Cuál es el tamaño de $\nabla_\theta l_{ce}(X\theta,y)$?***
+:::
 :::
 ::: 
 
-::: {.callout-tip}
-* $Z$ corresponde al Softmax de $X\theta$ aplicado por filas.
-* $I_y$ corresponde al One Hot Encoder de las etiquetas. 
-:::
 
-Finalmente la regla de actualización de parámetros usando Gradient Descent queda como:
+
+:::{.fragment}
+Finalmente la `Regla de Actualización` de parámetros usando Gradient Descent queda como:
 
 $$\theta := \theta - \alpha X^T (Z - I_y)$$
+:::
 
-::: {.callout-note}
+::: {.callout-note .fragment}
 * Aplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.
 * Se puede programar en pocas líneas en Python.
 :::
 
-## ¿Qué pasa con arquitecturas más complejas?
+## Conclusiones {.smaller}
 
 ::: {.columns}
 ::: {.column}
-![](img/clase-1/nn_arq_full.png){.lightbox fig-align="center" width="70%"} 
+
+::: {.callout-tip}
+* Acabamos de entrenar una Shallow Network, sin definir ningún concepto Fancy que es propio del área.
+* No hemos hablado ni de:
+  * `Forward Pass`
+  * `Epochs`
+  * `Backpropagation`
+  * `Adam`
+  * `Activation Functions`
+  * etc.
+
 :::
-::: {.column}
-::: {.callout-important appearance="default"}
+::: {.callout-important appearance="default" .fragment fragment-index=2}
 ## Próxima Clase
 * Vamos a hacer lo mismo para una Red Neuronal.
 * La única diferencia es que la hipótesis que utilizaremos es un poco más `fancy`.
 :::
+:::
+::: {.column .fragment fragment-index=1}
+#### Pero, ¿qué pasa con arquitecturas más complejas?
+
+![](img/clase-1/nn_arq_full.png){.lightbox fig-align="center" width="60%"} 
 :::
 ::: 
 
