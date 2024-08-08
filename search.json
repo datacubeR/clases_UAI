@@ -81,21 +81,21 @@
     "href": "tics579/clase-1.html#loss-function-softmaxcross-entropy-loss",
     "title": "TICS-579-Deep Learning",
     "section": "Loss Function: Softmax/Cross-Entropy Loss",
-    "text": "Loss Function: Softmax/Cross-Entropy Loss\nLa salida de nuestra Shallow Network retornará valores reales. Para poder tener una mejor interpretación del significado de cada una aplicaremos la función Softmax lo cual permitirá normalizar los resultados y llevará los resultados a una “distribución de probabilidad” (valores positivos que sumen 1).\n\n\n\n\n\n\n\n\n\n\nFormalmente definiremos la función Softmax como:\n\\[z_i = p(label = i) = \\frac{exp(h_i(x))}{\\sum_{j=1}^k exp(h_j(x))}\\]\n\\[Z = \\begin{bmatrix}\n&z_1&\\\\\n& \\vdots & \\\\\n&z_k&\\\\\n\\end{bmatrix}\\]"
+    "text": "Loss Function: Softmax/Cross-Entropy Loss\n\n\n\n\n\n\n\nLa salida de nuestra Shallow Network retornará valores reales.\n\n\n\n\n\n\n\n\n\n\n\nPara poder tener una mejor interpretación del significado de cada una aplicaremos la función Softmax lo cual permitirá normalizar los resultados y llevará los resultados a una “distribución de probabilidad” (valores positivos que sumen 1).\n\n\n\n\n\n\n\n\n\n\n\n\nFormalmente definiremos la función Softmax como:\n\\[z_i = p(label = i) = \\frac{exp(h_i(x))}{\\sum_{j=1}^k exp(h_j(x))}\\]\n\\[Z = \\begin{bmatrix}\n&z_1&\\\\\n& \\vdots & \\\\\n&z_k&\\\\\n\\end{bmatrix}\\]"
   },
   {
     "objectID": "tics579/clase-1.html#loss-function-softmaxcross-entropy-loss-1",
     "href": "tics579/clase-1.html#loss-function-softmaxcross-entropy-loss-1",
     "title": "TICS-579-Deep Learning",
     "section": "Loss Function: Softmax/Cross-Entropy Loss",
-    "text": "Loss Function: Softmax/Cross-Entropy Loss\nPara medir el error, o la pérdida de información de un punto utilizaremos el Negative Log Loss, también llamado Cross Entropy Loss.\n\n\n\n\n\n\n\nPara garantizar el éxito de nuestro modelo, básicamente queremos maximizar la probabilidad de encontrar la etiqueta correcta, es decir, que \\(p(label = y)\\) sea lo más alto posible.\n\n\n\n\n\n\n\n\n\n\n\nNormalmente en los problemas de optimización no se suele maximizar sino minimizar. Minimizar el valor negativo es equivalente a maximizar. Esto sería equivalente a minimizar el error del modelo.\n\n\n\n\n\n\n\n\n\n\n\nFinalmente por razones de estabilidad numérica, minimizamos el logaritmo de la probabilidad que es una técnica bien conocida en Estadística.\n\n\n\n\n\n\\[\\begin{align}\nl_{ce}(h(x), y) &= -log\\left(p(label = y)\\right)\\\\\n&= -log \\left(\\frac{exp(h_{(i = y)}(x))}{\\sum_{j=1}^k exp(h_j(x))}\\right) \\\\\n&= - h_{(i=y)}(x) + log\\left(\\sum_{j = 1}^k exp(h_j(x))\\right)\\end{align}\\]"
+    "text": "Loss Function: Softmax/Cross-Entropy Loss\nPara medir el error, o la pérdida de información de un punto utilizaremos el Negative Log Loss, también llamado Cross Entropy Loss.\n\\[l_{ce}(h(x), y) = -log\\left(p(label = y)\\right)\\]\n\n\n\n\n\n\n\nPara garantizar el éxito de nuestro modelo, básicamente queremos maximizar la probabilidad de encontrar la etiqueta correcta, es decir, que \\(p(label = y)\\) sea lo más alto posible.\n\n\n\n\n\n\n\n\n\n\n\nNormalmente en los problemas de optimización no se suele maximizar sino minimizar. Minimizar el valor negativo es equivalente a maximizar. Esto sería equivalente a minimizar el error del modelo.\n\n\n\n\n\n\n\n\n\n\n\nFinalmente por razones de estabilidad numérica, minimizamos el logaritmo de la probabilidad que es una técnica bien conocida en Estadística.\n\n\n\n\n\n\\[\\begin{align}\nl_{ce}(h(x), y) = -log\\left(p(label = y)\\right) &= -log \\left(\\frac{exp(h_{(i = y)}(x))}{\\sum_{j=1}^k exp(h_j(x))}\\right) \\\\\n&= - h_{(i=y)}(x) + log\\left(\\sum_{j = 1}^k exp(h_j(x))\\right)\\end{align}\\]"
   },
   {
     "objectID": "tics579/clase-1.html#método-de-optimización",
     "href": "tics579/clase-1.html#método-de-optimización",
     "title": "TICS-579-Deep Learning",
     "section": "Método de Optimización",
-    "text": "Método de Optimización\n\nEl último ingrediente de un algoritmo de aprendizaje es el método de optimización. Es necesario minimizar la pérdida promedio asociada a todos los puntos de un cierto set de entrenamiento. Para ello definimos esto formalmente como:\n\n\\[\\underset{\\theta}{minimize} = \\frac{1}{m} \\sum_{i=1}^m l(h_\\theta(x^{(i)}), y^{(i)}) =\\frac{1}{m} \\sum_{i=1}^m l(\\theta^Tx^{(i)}, y^{(i)})\\]\n\n\n\n\n\n\n¿Cómo encontramos los parámetros \\(\\theta\\) que minimizan la pérdida de información/error de estimación?\n\n\n\n\nGradient Descent\n\n\nEs un método numérico que permite minimizar funciones moviéndose en dirección contraria al Gradiente. Es computacionalmente muy eficiente y fácil de implementar en código."
+    "text": "Método de Optimización\n\nEl último ingrediente de un algoritmo de aprendizaje es el método de optimización. Es necesario minimizar la pérdida promedio asociada a todos los puntos de un cierto set de entrenamiento. Para ello definimos esto formalmente como:\n\n\\[\\underset{\\theta}{minimize} = \\frac{1}{m} \\sum_{i=1}^m l_{ce}(h_\\theta(x^{(i)}), y^{(i)})\\]\n\n\n\n\n\n\n¿Cómo encontramos los parámetros \\(\\theta\\) que minimizan la pérdida de información/error de estimación?\n\n\n\n\nGradient Descent\n\n\nEs un método numérico que permite minimizar funciones moviéndose en dirección contraria al Gradiente. Es computacionalmente muy eficiente y fácil de implementar en código."
   },
   {
     "objectID": "tics579/clase-1.html#gradient-descent",
@@ -123,35 +123,35 @@
     "href": "tics579/clase-1.html#calculando-el-gradiente-a-mano-1",
     "title": "TICS-579-Deep Learning",
     "section": "Calculando el Gradiente a mano",
-    "text": "Calculando el Gradiente a mano\n\nSimplifiquemos el problema pensando que calcularemos el Gradiente para un sólo vector \\(x\\).\n\n\nEs decir, \\(x \\in \\mathbb{R}^{n\\times1}\\).\n\nAdemás sabemos que \\(\\nabla_\\theta l_{ce}(\\theta^Tx, y)\\) debe tener dimensiones \\(n \\times k\\).\n\n\n\\[\\nabla_\\theta l_{ce}(\\theta^T x,y) = \\frac{\\partial l_{ce}(\\theta^T x,y)}{\\partial \\theta^T x} \\cdot \\frac{\\partial \\theta^Tx}{\\partial \\theta}\\]\n\n\\[\\frac{\\partial l_{ce}(\\theta^T x,y)}{\\partial \\theta^T x} = \\frac{\\partial l_{ce}(\\theta^Tx, y)}{\\partial h} = \\begin{bmatrix}\n\\frac{\\partial l_{ce}(h,y)}{\\partial h_1} \\\\\n\\vdots\\\\\n\\frac{\\partial l_{ce}(h,y)}{\\partial h_k} \\\\\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\n\nLuego el gradiente de \\(l_{ce}\\) respecto a \\(h\\) tiene dimensiones \\(k \\times 1\\)."
+    "text": "Calculando el Gradiente a mano\n\nSimplifiquemos el problema pensando que calcularemos el Gradiente para un sólo vector \\(x\\).\n\n\nEs decir, \\(x \\in \\mathbb{R}^{n\\times1}\\).\n\nAdemás sabemos que \\(\\nabla_\\theta l_{ce}(\\theta^Tx, y)\\) debe tener dimensiones \\(n \\times k\\).\n\n\n\n\n\n\n\n¿Por qué?\n\n\n\n\n\n\n\\[\\nabla_\\theta l_{ce}(\\theta^T x,y) = \\frac{\\partial l_{ce}(\\theta^T x,y)}{\\partial \\theta^T x} \\cdot \\frac{\\partial \\theta^Tx}{\\partial \\theta}\\]\n\n\\[\\frac{\\partial l_{ce}(\\theta^T x,y)}{\\partial \\theta^T x} = \\frac{\\partial l_{ce}(\\theta^Tx, y)}{\\partial h} = \\begin{bmatrix}\n\\frac{\\partial l_{ce}(h,y)}{\\partial h_1} \\\\\n\\vdots\\\\\n\\frac{\\partial l_{ce}(h,y)}{\\partial h_k} \\\\\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\n\nLuego el gradiente de \\(l_{ce}\\) respecto a \\(h\\) tiene dimensiones \\(k \\times 1\\)."
   },
   {
     "objectID": "tics579/clase-1.html#calculando-el-gradiente-a-mano-2",
     "href": "tics579/clase-1.html#calculando-el-gradiente-a-mano-2",
     "title": "TICS-579-Deep Learning",
     "section": "Calculando el Gradiente a mano",
-    "text": "Calculando el Gradiente a mano\n\\[\\begin{align}\n\\frac{\\partial l_{ce}(h,y)}{\\partial h_i} &= \\frac{\\partial }{\\partial h_i}\\left(-h_{(i = y)} + log \\sum_{j = 1}^k exp(h_j)\\right) \\\\\n&= -\\frac{\\partial h_{(i = y)}}{\\partial h_i}+ \\frac{1}{\\sum_{j = 1}^k exp(h_j)} \\cdot \\frac{\\partial}{\\partial h_i}\\left(\\sum_{j=1}^k exp(h_j)\\right) \\\\\n&= -\\frac{\\partial h_{(i = y)}}{\\partial h_i}+ \\frac{exp(h_i)}{\\sum_{j = 1}^k exp(h_j)} \\\\\n&= - 1\\{i=y\\} + z_i = z_i - 1\\{i=y\\}\n\\end{align}\n\\]\n\n\n\n\n\n\n\\[1\\{i = y\\} = \\begin{cases}\n1,  & \\text{i = y} \\\\\n0, & \\text{otherwise}\n\\end{cases}\n\\]\n\n\n\nFinalmente en forma vectorial quedaría como:\n\n\n\\[\\frac{\\partial l_{ce}(\\theta^T x,y)}{\\partial \\theta^T x} = z - e_y\\]\n\n\n\n\n\n\n\nDonde \\(z\\), es el vector de Softmax y \\(e_y\\) es un vector con un 1 en la posición \\(y\\) y 0 en el resto."
+    "text": "Calculando el Gradiente a mano\n\\[\\begin{align}\n\\frac{\\partial l_{ce}(h,y)}{\\partial h_i} &= \\frac{\\partial }{\\partial h_i}\\left(-h_{(i = y)} + log \\sum_{j = 1}^k exp(h_j)\\right) \\\\\n&= -\\frac{\\partial h_{(i = y)}}{\\partial h_i}+ \\frac{1}{\\sum_{j = 1}^k exp(h_j)} \\cdot \\frac{\\partial}{\\partial h_i}\\left(\\sum_{j=1}^k exp(h_j)\\right) \\\\\n&= -\\frac{\\partial h_{(i = y)}}{\\partial h_i}+ \\frac{exp(h_i)}{\\sum_{j = 1}^k exp(h_j)} \\\\\n&= - 1\\{i=y\\} + z_i = z_i - 1\\{i=y\\}\n\\end{align}\n\\]\n\n\n\n\n\n\n\n\\[1\\{i = y\\} = \\begin{cases}\n1,  & \\text{i = y} \\\\\n0, & \\text{otherwise}\n\\end{cases}\n\\]\n\n\n\n\n\nFinalmente en forma vectorial quedaría como:\n\n\n\\[\\frac{\\partial l_{ce}(\\theta^T x,y)}{\\partial \\theta^T x} = z - e_y\\]\n\n\n\n\n\n\n\nDonde \\(z\\), es el vector de Softmax y \\(e_y\\) es un vector con un 1 en la posición \\(y\\) y 0 en el resto."
   },
   {
     "objectID": "tics579/clase-1.html#calculando-el-gradiente-a-mano-3",
     "href": "tics579/clase-1.html#calculando-el-gradiente-a-mano-3",
     "title": "TICS-579-Deep Learning",
     "section": "Calculando el Gradiente a mano",
-    "text": "Calculando el Gradiente a mano\n\n\n\\[\\nabla_\\theta l_{ce}(\\theta^T x,y) = \\frac{\\partial l_{ce}(\\theta^T x,y)}{\\partial \\theta^T x} \\cdot \\frac{\\partial \\theta^Tx}{\\partial \\theta}\\] \\[\\nabla_\\theta l_{ce}(\\theta^T x,y) = (z-e_y)\\cdot x \\]\n\n\n\n\n\n\n\nOjo con las dimensiones\n\n\n\n\\(Z-e_y \\in \\mathbb{R}^{k \\times 1}\\)\n\\(x \\in \\mathbb{R}^{n \\times 1}\\)\n\n\n\n\n\n\n\nLuego:\n\\[\\nabla_\\theta l_{ce}(\\theta^T x,y) = x (z-e_y)^T\\]"
+    "text": "Calculando el Gradiente a mano\n\n\n\\[\\nabla_\\theta l_{ce}(\\theta^T x,y) = \\frac{\\partial l_{ce}(\\theta^T x,y)}{\\partial \\theta^T x} \\cdot \\frac{\\partial \\theta^Tx}{\\partial \\theta}\\] \\[\\nabla_\\theta l_{ce}(\\theta^T x,y) = (z-e_y)\\cdot x \\]\n\n\n\n\n\n\n\nOjo con las dimensiones\n\n\n\n\\(Z-e_y \\in \\mathbb{R}^{k \\times 1}\\)\n\\(x \\in \\mathbb{R}^{n \\times 1}\\)\n\n\n\n\n\n\n\nLuego:\n\\[\\nabla_\\theta l_{ce}(\\theta^T x,y) = x (z-e_y)^T\\]\n\n\n\n\n\n\n\n\n¿Cuál es el tamaño de \\(\\nabla_\\theta l_{ce}(\\theta^T x,y)\\)?\n\n\n\n\n\n\n\n\n\n\n\n\\(n \\times k\\)\n\n\n\n\n\n\n\n\n\n\n\n¿Por qué?"
   },
   {
     "objectID": "tics579/clase-1.html#calculando-el-gradiente-matrix-batch-form",
     "href": "tics579/clase-1.html#calculando-el-gradiente-matrix-batch-form",
     "title": "TICS-579-Deep Learning",
     "section": "Calculando el Gradiente Matrix Batch Form",
-    "text": "Calculando el Gradiente Matrix Batch Form\n\n\n\\[\\begin{align}\\nabla_\\theta l_{ce}(X\\theta,y) \\in \\mathbb{R}^{n\\times k} &= \\frac{\\partial l_{ce}(X\\theta,y)}{\\partial X\\theta} \\cdot \\frac{\\partial X\\theta}{\\partial \\theta}\\\\\n&= (Z - I_y) \\cdot X \\\\\n&= X^T \\cdot (Z - I_y)\n\\end{align}\\]\n\n\n\n\n\n\n\nOjo con las dimensiones\n\n\n\n\\(Z - I_y \\in \\mathbb{R}^{m \\times k}\\)\n\\(X \\in \\mathbb{R}^{m \\times n}\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(Z\\) corresponde al Softmax de \\(X\\theta\\) aplicado por filas.\n\\(I_y\\) corresponde al One Hot Encoder de las etiquetas.\n\n\n\n\nFinalmente la regla de actualización de parámetros usando Gradient Descent queda como:\n\\[\\theta := \\theta - \\alpha X^T (Z - I_y)\\]\n\n\n\n\n\n\n\nAplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.\nSe puede programar en pocas líneas en Python."
+    "text": "Calculando el Gradiente Matrix Batch Form\nEsto sería equivalente a tomar en consideración todos los puntos del Training Set\n\n\n\\[\\begin{align}\\nabla_\\theta l_{ce}(X\\theta,y) &= \\frac{\\partial l_{ce}(X\\theta,y)}{\\partial X\\theta} \\cdot \\frac{\\partial X\\theta}{\\partial \\theta}\\\\\n&= (Z - I_y) \\cdot X \\\\\n&= X^T \\cdot (Z - I_y)\n\\end{align}\\]\n\n\n\n\n\n\n\n\\(Z\\) corresponde al Softmax de \\(X\\theta\\) aplicado por filas.\n\\(I_y\\) corresponde al One Hot Encoder de las etiquetas. Filas con 1 en la etiqueta correcta y 0 en el resto.\n\n\n\n\n\n\n\n\n\n\n\n\nOjo con las dimensiones\n\n\n\n\\(Z - I_y \\in \\mathbb{R}^{m \\times k}\\)\n\\(X \\in \\mathbb{R}^{m \\times n}\\)\n\n\n\n\n\n\n\n\n\n\n\n\n¿Cuál es el tamaño de \\(\\nabla_\\theta l_{ce}(X\\theta,y)\\)?\n\n\n\n\n\n\n\nFinalmente la Regla de Actualización de parámetros usando Gradient Descent queda como:\n\\[\\theta := \\theta - \\alpha X^T (Z - I_y)\\]\n\n\n\n\n\n\n\n\n\nAplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.\nSe puede programar en pocas líneas en Python."
   },
   {
-    "objectID": "tics579/clase-1.html#qué-pasa-con-arquitecturas-más-complejas",
-    "href": "tics579/clase-1.html#qué-pasa-con-arquitecturas-más-complejas",
+    "objectID": "tics579/clase-1.html#conclusiones",
+    "href": "tics579/clase-1.html#conclusiones",
     "title": "TICS-579-Deep Learning",
-    "section": "¿Qué pasa con arquitecturas más complejas?",
-    "text": "¿Qué pasa con arquitecturas más complejas?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPróxima Clase\n\n\n\nVamos a hacer lo mismo para una Red Neuronal.\nLa única diferencia es que la hipótesis que utilizaremos es un poco más fancy."
+    "section": "Conclusiones",
+    "text": "Conclusiones\n\n\n\n\n\n\n\n\n\nAcabamos de entrenar una Shallow Network, sin definir ningún concepto Fancy que es propio del área.\nNo hemos hablado ni de:\n\nForward Pass\nEpochs\nBackpropagation\nAdam\nActivation Functions\netc.\n\n\n\n\n\n\n\n\n\n\n\n\nPróxima Clase\n\n\n\nVamos a hacer lo mismo para una Red Neuronal.\nLa única diferencia es que la hipótesis que utilizaremos es un poco más fancy.\n\n\n\n\n\n\n\nPero, ¿qué pasa con arquitecturas más complejas?"
   },
   {
     "objectID": "tics579/clase-1.html#multiplicación-matricial",
@@ -245,6 +245,13 @@
     "text": "Fechas Tareas\n\n\n\n\n\n\n\n\nTarea 1\n\n\n15 de Septiembre (23:59 hrs)\n\n\n\n\n\n\n\n\n\nTarea 2\n\n\n13 de Octubre (23:59 hrs)\n\n\n\n\n\n\n\n\n\n\nTarea 3\n\n\n3 de Noviembre (23:59 hrs)\n\n\n\n\n\n\n\n\n\nTarea 4\n\n\n24 de Noviembre (23:59 hrs)\n\n\n\n\n\n\n\n\n\n\n\nTarea 5 (Opcional, pero recomendada)\n\n\n15 de Diciembre (23:59 hrs)"
   },
   {
+    "objectID": "tics579/clase-0.html#garantías",
+    "href": "tics579/clase-0.html#garantías",
+    "title": "TICS-579-Deep Learning",
+    "section": "Garantías",
+    "text": "Garantías\n\n\n\n\n\n\nVamos a sufrir harto al menos las primeras semanas (yo al menos he sufrido harto preparando las clases), pero les aseguro que va a valer la pena.\nBare with me!!\n\n\n\n\n\n\n\n\n\nVamos a aprender conceptos muy avanzados que no muchos cursos consideran. Lo siento, pero van a ser mis conejillos de indias.\n\n\n\n\n\n\n\n\n\nVamos a pasarla bien mal, estudiando harto, demorándonos harto en las tareas, pero vamos a pasar todos.\n\n\n\n\n\n\n\n\n\nEso NO SIGNIFICA que las notas van a ser regaladas."
+  },
+  {
     "objectID": "tics411-labs.html",
     "href": "tics411-labs.html",
     "title": "Prácticos",
@@ -259,7 +266,7 @@
     "href": "tics579.html",
     "title": "Diapositivas",
     "section": "",
-    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nPreliminares\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nIntroducción a las Redes Neuronales\n\n\n\nAug 22, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
+    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nPreliminares\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
     "crumbs": [
       "Diapositivas del Curso"
     ]
@@ -3090,7 +3097,7 @@
     "href": "tics579-labs.html",
     "title": "Prácticos",
     "section": "",
-    "text": "Práctico\nColab\n\n\n\n\nPreprocesamiento\n\n\n\n\n\n\n\n Back to top",
+    "text": "Práctico\nColab\n\n\n\n\n\n\n\n\n\n Back to top",
     "crumbs": [
       "Notebooks"
     ]
@@ -3113,18 +3120,67 @@
     "text": "Hate Speech UAI\n\n\nPresentación del HateStack\n\n\n\nMay 15, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLike a Needle in the HateStack\n\n\nPresentación final para la Datatón 2022\n\n\n\nOct 10, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRFM-Superlag\n\n\nPresentación Final del Desafío Itaú-Binnario\n\n\n\nDec 5, 2020\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top"
   },
   {
-    "objectID": "tics579/clase-2.html#problemas-de-una-hipótesis-lineal",
-    "href": "tics579/clase-2.html#problemas-de-una-hipótesis-lineal",
+    "objectID": "tics579/clase-2.html#clase-anterior",
+    "href": "tics579/clase-2.html#clase-anterior",
     "title": "TICS-579-Deep Learning",
-    "section": "Problemas de una Hipótesis Lineal",
-    "text": "Problemas de una Hipótesis Lineal"
+    "section": "Clase anterior",
+    "text": "Clase anterior\n\n\nNuestra Regresión Softmax es capaz de generar separaciones lineales para más de dos clases.\n \\(h_\\theta(x) = \\theta^T x\\), tal que \\(\\theta \\in \\mathbb{R}^{n \\times k}\\).\n\n\n\n\n\n\n\nEsta hipótesis es bastante limitada, y existen muchos problemas que no podrán solucionarse con este tipo de solución."
+  },
+  {
+    "objectID": "tics579/clase-2.html#limitaciones-de-una-hipótesis-lineal",
+    "href": "tics579/clase-2.html#limitaciones-de-una-hipótesis-lineal",
+    "title": "TICS-579-Deep Learning",
+    "section": "Limitaciones de una Hipótesis Lineal",
+    "text": "Limitaciones de una Hipótesis Lineal\nEs claro que un problema como el que se muestra acá no podrá ser resuelto mediante un clasificador lineal (hipótesis lineal).\n\n\n La manera en la que normalmente se manejó este tipo de problemas es creando nuevas features que permitan predecir de mejor manera este tipo de problemas no-lineales.\n\\(h_\\theta(x) = \\theta^T \\phi(x)\\), tal que \\(\\theta \\in \\mathbb{R}^{n \\times k}\\) y \\(\\phi(x): \\mathbb{R}^n \\rightarrow \\mathbb{R}^d\\) con \\(d &gt; n\\).\n\n\n\n\n\n\n\n\nBásicamente \\(\\phi(.)\\) es la manera matemática de escribir que creamos más features que permiten resolver el problema.\n\n\n\n\n\n\n\n\n\n\n\n\nSVM es un algoritmo que hace esto de manera automática utilizando el famoso Kernel Trick, donde \\(\\phi(.)\\) es conocido como el Kernel."
+  },
+  {
+    "objectID": "tics579/clase-2.html#diferencias-entre-ml-y-dl",
+    "href": "tics579/clase-2.html#diferencias-entre-ml-y-dl",
+    "title": "TICS-579-Deep Learning",
+    "section": "Diferencias entre ML y DL",
+    "text": "Diferencias entre ML y DL\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNormalmente el Machine Learning está enfocado en que manualmente se generen features.\nDeep Learning busca que el Algoritmo busque esas features. El énfasis está en buscar la Arquitectura adecuada."
   },
   {
     "objectID": "tics579/clase-2.html#problema-xor",
     "href": "tics579/clase-2.html#problema-xor",
     "title": "TICS-579-Deep Learning",
     "section": "Problema XOR",
-    "text": "Problema XOR"
+    "text": "Problema XOR\n\n\n\n\n\n\n\n\n\n\n\nEl problema XOR es un problema sumamente sencillo, el cuál no puede ser por un clasificador líneal (una hipótesis lineal). Por lo tanto, es necesario agregar algún tipo de no-linealidad para resolver el problema.\n\n\n\n\n\n\n\n\n\n\n\nDado dos features \\(X_1\\) y \\(X_2\\), predecir una clase positiva si \\(X_1 \\neq X_2\\) y predecir una clase negativa si es que \\(X_1 = X_2\\)."
+  },
+  {
+    "objectID": "tics579/clase-2.html#cómo-creamos-features-de-manera-automática",
+    "href": "tics579/clase-2.html#cómo-creamos-features-de-manera-automática",
+    "title": "TICS-579-Deep Learning",
+    "section": "¿Cómo creamos features de manera automática?",
+    "text": "¿Cómo creamos features de manera automática?\nUna primera idea sería crearlas de manera lineal:\n\\[\\phi(x) = W^T x\\]\ndonde \\(W \\in \\mathbb{R}^{n \\times d}\\).\nEn este caso nuestra hipótesis queda como:\n\\[ h_\\theta(x) = \\theta^T \\phi(x) = \\theta^T W^T x = \\tilde{\\theta}^T x\\]\n\n\n\n\n\n\nOjo con las dimensiones.\n\n\n\n\\(W^T\\) tiene dimensión \\(d \\times n\\).\nSabemos que \\(h_\\theta(x)\\) tiene que devolver \\(k\\) salidas. Por lo tanto tiene que tener dimensiones \\(d \\times k\\).\n\\(x\\) es un vector con \\(n\\) features por lo tanto es de dimensión \\(1 \\times n\\).\nEso hará que \\(h_\\theta(x)\\) sea de tamaño \\(k \\times 1\\).\n\n\n\n\n\n\n\n\n\n\nLamentablemente esto no funciona ya que \\(\\tilde{theta}^T\\) es sólo otra matriz que genera dos transformaciones simultáneas, pero que en este caso llevará de \\(n\\) a \\(k\\) de manera directa."
+  },
+  {
+    "objectID": "tics579/clase-2.html#entonces-cómo",
+    "href": "tics579/clase-2.html#entonces-cómo",
+    "title": "TICS-579-Deep Learning",
+    "section": "¿Entonces cómo?",
+    "text": "¿Entonces cómo?\nVamos a utilizar funciones no lineales. Cualquiera sirve tal que:\n\\[\\phi(x) = \\sigma(W^Tx)\\]\ndonde \\(W \\in \\mathbb{R}^{n \\times d}\\) y \\(\\sigma: \\mathbb{R}^d \\rightarrow \\mathbb{R}^d\\).\nDe este modo nuestra hipótesis quedaría como:\n\\[h_\\theta(x) = \\theta^T \\sigma(W^T x) \\neq \\tilde{\\theta}^T x\\]\n\n\n\n\n\n\n\nEstamos aplicando una transformación no-lineal a la transformación lineal de \\(x\\) con \\(W\\).\n\n\n\n\n\n\n\n\n\n\n\nNormalmente escogeremos funciones no-lineales que sean diferenciables para poder actualizar no sólo nuestros parámetros \\(\\theta\\) sino también \\(W\\).\nEsto es lo que llamaremos el entrenamiento de una red neuronal."
+  },
+  {
+    "objectID": "tics579/clase-2.html#activation-functions",
+    "href": "tics579/clase-2.html#activation-functions",
+    "title": "TICS-579-Deep Learning",
+    "section": "Activation Functions",
+    "text": "Activation Functions"
+  },
+  {
+    "objectID": "tics579/clase-2.html#calcular-los-gradientes-para-una-red-neuronal",
+    "href": "tics579/clase-2.html#calcular-los-gradientes-para-una-red-neuronal",
+    "title": "TICS-579-Deep Learning",
+    "section": "Calcular los Gradientes para una Red Neuronal",
+    "text": "Calcular los Gradientes para una Red Neuronal"
+  },
+  {
+    "objectID": "tics579/clase-2.html#conceptos-tradicionales-de-deep-learning",
+    "href": "tics579/clase-2.html#conceptos-tradicionales-de-deep-learning",
+    "title": "TICS-579-Deep Learning",
+    "section": "Conceptos Tradicionales de Deep Learning",
+    "text": "Conceptos Tradicionales de Deep Learning"
   },
   {
     "objectID": "tics579/clase-2.html#por-qué-estudiar-deep-learning",

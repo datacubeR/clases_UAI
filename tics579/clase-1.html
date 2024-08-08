@@ -760,17 +760,38 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="loss-function-softmaxcross-entropy-loss" class="slide level2 smaller">
 <h2>Loss Function: Softmax/Cross-Entropy Loss</h2>
-<p>La salida de nuestra <code>Shallow Network</code> retornará valores reales. Para poder tener una mejor interpretación del significado de cada una aplicaremos la función <code>Softmax</code> lo cual permitirá <em>normalizar</em> los resultados y llevará los resultados a una <strong><em>“distribución de probabilidad”</em></strong> (valores positivos que sumen 1).</p>
+<div style="font-size: 130%;">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>La salida de nuestra <code>Shallow Network</code> retornará valores reales.</p>
+</div>
+</div>
+</div>
+</div>
+<div style="font-size: 130%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Para poder tener una mejor interpretación del significado de cada una aplicaremos la función <code>Softmax</code> lo cual permitirá <em>normalizar</em> los resultados y llevará los resultados a una <strong><em>“distribución de probabilidad”</em></strong> (valores positivos que sumen 1).</p>
+</div>
+</div>
+</div>
+</div>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p><br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="img/clase-1/softmax_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-1/softmax_example.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:40%;">
-<p><br></p>
 <p>Formalmente definiremos la función Softmax como:</p>
 <p><span class="math display">\[z_i = p(label = i) = \frac{exp(h_i(x))}{\sum_{j=1}^k exp(h_j(x))}\]</span></p>
 <p><span class="math display">\[Z = \begin{bmatrix}
@@ -784,7 +805,8 @@ Alfonso Tobar-Arancibia
 <section id="loss-function-softmaxcross-entropy-loss-1" class="slide level2 smaller">
 <h2>Loss Function: Softmax/Cross-Entropy Loss</h2>
 <p>Para medir el error, o la pérdida de información de un punto utilizaremos el Negative Log Loss, también llamado <code>Cross Entropy Loss</code>.</p>
-<div class="fragment">
+<p><span class="math display">\[l_{ce}(h(x), y) = -log\left(p(label = y)\right)\]</span></p>
+<div class="fragment" style="font-size: 120%;">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -796,7 +818,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-<div class="fragment">
+<div class="fragment" style="font-size: 120%;">
 <div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -808,8 +830,8 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-<div class="fragment">
-<div class="callout callout-caution callout-style-simple">
+<div class="fragment" style="font-size: 120%;">
+<div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -822,8 +844,7 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="fragment">
 <p><span class="math display">\[\begin{align}
-l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
-&amp;= -log \left(\frac{exp(h_{(i = y)}(x))}{\sum_{j=1}^k exp(h_j(x))}\right) \\
+l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(i = y)}(x))}{\sum_{j=1}^k exp(h_j(x))}\right) \\
 &amp;= - h_{(i=y)}(x) + log\left(\sum_{j = 1}^k exp(h_j(x))\right)\end{align}\]</span></p>
 </div>
 </section>
@@ -832,7 +853,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 <blockquote>
 <p>El último ingrediente de un algoritmo de aprendizaje es el método de optimización. Es necesario minimizar la pérdida promedio asociada a todos los puntos de un cierto set de entrenamiento. Para ello definimos esto formalmente como:</p>
 </blockquote>
-<p><span class="math display">\[\underset{\theta}{minimize} = \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}), y^{(i)}) =\frac{1}{m} \sum_{i=1}^m l(\theta^Tx^{(i)}, y^{(i)})\]</span></p>
+<p><span class="math display">\[\underset{\theta}{minimize} = \frac{1}{m} \sum_{i=1}^m l_{ce}(h_\theta(x^{(i)}), y^{(i)})\]</span></p>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -977,10 +998,22 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 <p>Es decir, <span class="math inline">\(x \in \mathbb{R}^{n\times1}\)</span>.</p>
 </blockquote>
 <p>Además sabemos que <span class="math inline">\(\nabla_\theta l_{ce}(\theta^Tx, y)\)</span> debe tener dimensiones <span class="math inline">\(n \times k\)</span>.</p>
+<div class="fragment" style="font-size: 150%;" data-fragment-index="1">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong><em>¿Por qué?</em></strong></p>
+</div>
+</div>
+</div>
+</div>
 <div class="columns">
-<div class="column">
+<div class="column fragment" data-fragment-index="2">
 <p><span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}\]</span></p>
-</div><div class="column">
+</div><div class="column fragment" data-fragment-index="3">
 <p><span class="math display">\[\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = \frac{\partial l_{ce}(\theta^Tx, y)}{\partial h} = \begin{bmatrix}
 \frac{\partial l_{ce}(h,y)}{\partial h_1} \\
 \vdots\\
@@ -988,7 +1021,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 \end{bmatrix}\]</span></p>
 </div>
 </div>
-<div class="fragment" style="font-size: 130%;">
+<div class="fragment" style="font-size: 130%;" data-fragment-index="4">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -1010,6 +1043,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 &amp;= - 1\{i=y\} + z_i = z_i - 1\{i=y\}
 \end{align}
 \]</span></p>
+<div class="fragment">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -1024,6 +1058,8 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 </div>
 </div>
 </div>
+</div>
+<div class="fragment">
 <p>Finalmente en forma vectorial quedaría como:</p>
 <div class="columns">
 <div class="column">
@@ -1036,6 +1072,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 </div>
 <div class="callout-content">
 <p>Donde <span class="math inline">\(z\)</span>, es el vector de Softmax y <span class="math inline">\(e_y\)</span> es un vector con un 1 en la posición <span class="math inline">\(y\)</span> y 0 en el resto.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1070,16 +1107,67 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 <p>Luego:</p>
 <p><span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = x (z-e_y)^T\]</span></p>
 </div>
+<div class="fragment" style="font-size: 150%;">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong><em>¿Cuál es el tamaño de <span class="math inline">\(\nabla_\theta l_{ce}(\theta^T x,y)\)</span>?</em></strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" style="font-size: 150%;">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(n \times k\)</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" style="font-size: 150%;">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong><em>¿Por qué?</em></strong></p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="calculando-el-gradiente-matrix-batch-form" class="slide level2 smaller">
 <h2>Calculando el Gradiente Matrix Batch Form</h2>
+<h4 id="esto-sería-equivalente-a-tomar-en-consideración-todos-los-puntos-del-training-set">Esto sería equivalente a tomar en consideración todos los puntos del Training Set</h4>
 <div class="columns">
 <div class="column">
-<p><span class="math display">\[\begin{align}\nabla_\theta l_{ce}(X\theta,y) \in \mathbb{R}^{n\times k} &amp;= \frac{\partial l_{ce}(X\theta,y)}{\partial X\theta} \cdot \frac{\partial X\theta}{\partial \theta}\\
+<p><span class="math display">\[\begin{align}\nabla_\theta l_{ce}(X\theta,y) &amp;= \frac{\partial l_{ce}(X\theta,y)}{\partial X\theta} \cdot \frac{\partial X\theta}{\partial \theta}\\
 &amp;= (Z - I_y) \cdot X \\
 &amp;= X^T \cdot (Z - I_y)
 \end{align}\]</span></p>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(Z\)</span> corresponde al Softmax de <span class="math inline">\(X\theta\)</span> aplicado por filas.</li>
+<li><span class="math inline">\(I_y\)</span> corresponde al One Hot Encoder de las etiquetas. Filas con 1 en la etiqueta correcta y 0 en el resto.</li>
+</ul>
+</div>
+</div>
+</div>
 </div><div class="column">
+<div class="fragment">
 <div class="callout callout-caution callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1097,22 +1185,25 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 </div>
 </div>
 </div>
-</div>
-<div class="callout callout-tip callout-style-simple">
+<div class="fragment">
+<div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<ul>
-<li><span class="math inline">\(Z\)</span> corresponde al Softmax de <span class="math inline">\(X\theta\)</span> aplicado por filas.</li>
-<li><span class="math inline">\(I_y\)</span> corresponde al One Hot Encoder de las etiquetas.</li>
-</ul>
+<p><strong><em>¿Cuál es el tamaño de <span class="math inline">\(\nabla_\theta l_{ce}(X\theta,y)\)</span>?</em></strong></p>
 </div>
 </div>
 </div>
-<p>Finalmente la regla de actualización de parámetros usando Gradient Descent queda como:</p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Finalmente la <code>Regla de Actualización</code> de parámetros usando Gradient Descent queda como:</p>
 <p><span class="math display">\[\theta := \theta - \alpha X^T (Z - I_y)\]</span></p>
+</div>
+<div class="fragment">
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -1126,17 +1217,34 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 </div>
 </div>
 </div>
+</div>
 </section>
-<section id="qué-pasa-con-arquitecturas-más-complejas" class="slide level2">
-<h2>¿Qué pasa con arquitecturas más complejas?</h2>
+<section id="conclusiones" class="slide level2 smaller">
+<h2>Conclusiones</h2>
 <div class="columns">
 <div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/nn_arq_full.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-1/nn_arq_full.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-</div><div class="column">
+<div class="callout-content">
+<ul>
+<li>Acabamos de entrenar una Shallow Network, sin definir ningún concepto Fancy que es propio del área.</li>
+<li>No hemos hablado ni de:
+<ul>
+<li><code>Forward Pass</code></li>
+<li><code>Epochs</code></li>
+<li><code>Backpropagation</code></li>
+<li><code>Adam</code></li>
+<li><code>Activation Functions</code></li>
+<li>etc.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="2">
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1152,6 +1260,15 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 </ul>
 </div>
 </div>
+</div>
+</div>
+</div><div class="column fragment" data-fragment-index="1">
+<!-- -->
+<h4 id="pero-qué-pasa-con-arquitecturas-más-complejas">Pero, ¿qué pasa con arquitecturas más complejas?</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/nn_arq_full.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-1/nn_arq_full.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
 </div>
 </div>
 </div>
@@ -1564,7 +1681,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
