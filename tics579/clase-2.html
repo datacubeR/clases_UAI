@@ -352,13 +352,19 @@ Alfonso Tobar-Arancibia
 <h1>Problemas de una Hipótesis Lineal</h1>
 
 </section>
-<section id="clase-anterior" class="slide level2">
+<section id="clase-anterior" class="slide level2 smaller">
 <h2>Clase anterior</h2>
+<blockquote>
+<p>La Regresión Softmax es capaz de generar separaciones lineales para más de dos clases para cualquier punto <span class="math inline">\(x \in \mathbb{R}^{1 \times n}\)</span>:</p>
+</blockquote>
 <div class="columns">
 <div class="column" style="width:70%;">
-<p>Nuestra Regresión Softmax es capaz de generar separaciones lineales para más de dos clases.</p>
-<p><br> <span class="math inline">\(h_\theta(x) = \theta^T x\)</span>, tal que <span class="math inline">\(\theta \in \mathbb{R}^{n \times k}\)</span>.</p>
 <p><br></p>
+<div style="font-size: 130%;">
+<p><span class="math inline">\(h_\theta(x) = \theta^T x\)</span>, tal que <span class="math inline">\(\theta \in \mathbb{R}^{n \times k}\)</span>.</p>
+</div>
+<p><br></p>
+<div style="font-size: 130%;">
 <div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -369,6 +375,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
+</div>
 </div><div class="column" style="width:30%;">
 <p><a href="img/clase-2/softmax_viz.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-2/softmax_viz.png"></a></p>
 </div>
@@ -376,11 +383,32 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="limitaciones-de-una-hipótesis-lineal" class="slide level2 smaller">
 <h2>Limitaciones de una Hipótesis Lineal</h2>
+<blockquote>
 <p>Es claro que un problema como el que se muestra acá no podrá ser resuelto mediante un clasificador lineal (hipótesis lineal).</p>
+</blockquote>
 <div class="columns">
 <div class="column" style="width:70%;">
-<p><br> La manera en la que normalmente se manejó este tipo de problemas es creando nuevas <code>features</code> que permitan predecir de mejor manera este tipo de problemas <code>no-lineales</code>.</p>
-<p><span class="math inline">\(h_\theta(x) = \theta^T \phi(x)\)</span>, tal que <span class="math inline">\(\theta \in \mathbb{R}^{n \times k}\)</span> y <span class="math inline">\(\phi(x): \mathbb{R}^n \rightarrow \mathbb{R}^d\)</span> con <span class="math inline">\(d &gt; n\)</span>.</p>
+<div style="font-size: 120%;">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>¿Cómo se resuelve este tipo de problemas?</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Creando nuevas features que permitan predecir problemas <code>no-lineales</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div style="font-size: 130%;">
+<p><span class="math display">\[h_\theta(x) = \theta^T \phi(x)\]</span></p>
+</div>
+<p>tal que <span class="math inline">\(\theta \in \mathbb{R}^{n \times k}\)</span> y <span class="math inline">\(\phi(x): \mathbb{R}^n \rightarrow \mathbb{R}^d\)</span> con <span class="math inline">\(d &gt; n\)</span>.</p>
 <div class="fragment" style="font-size: 130%;">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
@@ -389,7 +417,7 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <ul>
-<li>Básicamente <span class="math inline">\(\phi(.)\)</span> es la manera matemática de escribir que creamos más features que permiten resolver el problema.</li>
+<li>Básicamente <span class="math inline">\(\phi(.)\)</span> es la manera matemática de denotar la creación de más features que permiten resolver el problema.</li>
 </ul>
 </div>
 </div>
@@ -414,14 +442,15 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="diferencias-entre-ml-y-dl" class="slide level2 smaller">
 <h2>Diferencias entre ML y DL</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="img/clase-2/ml-dl.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-2/ml-dl.jpeg" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div><div class="column" style="width:40%;">
+<blockquote>
+<p>La diferencia principal entre el <code>Machine Learning</code> y el <code>Deep Learning</code> es la manera en la que se crean las features.</p>
+</blockquote>
+<div class="fragment">
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -436,48 +465,38 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-</div>
-</section>
-<section id="problema-xor" class="slide level2">
-<h2>Problema XOR</h2>
-<div class="columns">
-<div class="column">
-<p><a href="img/clase-2/xor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-2/xor.png"></a></p>
-</div><div class="column">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>El <strong><em>problema XOR</em></strong> es un problema sumamente sencillo, el cuál no puede ser por un clasificador líneal (una hipótesis lineal). Por lo tanto, es necesario agregar algún tipo de no-linealidad para resolver el problema.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Dado dos features <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>, predecir una clase positiva si <span class="math inline">\(X_1 \neq X_2\)</span> y predecir una clase negativa si es que <span class="math inline">\(X_1 = X_2\)</span>.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
 </section>
 <section id="cómo-creamos-features-de-manera-automática" class="slide level2 smaller">
 <h2>¿Cómo creamos features de manera automática?</h2>
+<div class="columns">
+<div class="column">
 <p>Una primera idea sería crearlas de manera lineal:</p>
 <p><span class="math display">\[\phi(x) = W^T x\]</span></p>
 <p>donde <span class="math inline">\(W \in \mathbb{R}^{n \times d}\)</span>.</p>
-<p>En este caso nuestra hipótesis queda como:</p>
-<p><span class="math display">\[ h_\theta(x) = \theta^T \phi(x) = \theta^T W^T x = \tilde{\theta}^T x\]</span></p>
+</div><div class="column fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-2/multilayer_softmax.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-2/multilayer_softmax.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="columns fragment">
+<div class="column">
+<p>En este caso nuestra hipótesis queda como: <span class="math display">\[ h_\theta(x) = \theta^T \phi(x) = \theta^T W^T x = \tilde{\theta}^T x\]</span></p>
+<div class="fragment">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Lamentablemente este approach <strong>no funciona</strong>, ya que <span class="math inline">\(\tilde{\theta}^T\)</span> es sólo otra matriz que genera dos transformaciones simultáneas, pero que en este caso llevará de <span class="math inline">\(n\)</span> a <span class="math inline">\(k\)</span> de manera directa.</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -488,33 +507,37 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <ul>
-<li><span class="math inline">\(W^T\)</span> tiene dimensión <span class="math inline">\(d \times n\)</span>.</li>
-<li>Sabemos que <span class="math inline">\(h_\theta(x)\)</span> tiene que devolver <span class="math inline">\(k\)</span> salidas. Por lo tanto tiene que tener dimensiones <span class="math inline">\(d \times k\)</span>.</li>
-<li><span class="math inline">\(x\)</span> es un vector con <span class="math inline">\(n\)</span> features por lo tanto es de dimensión <span class="math inline">\(1 \times n\)</span>.</li>
+<li><span class="math inline">\(W^t\)</span> tiene dimensión <span class="math inline">\(d \times n\)</span>.</li>
+<li>Sabemos que <span class="math inline">\(h_\theta(x)\)</span> tiene que devolver <span class="math inline">\(k\)</span> outputs. Por lo tanto, <span class="math inline">\(\theta^T\)</span> tiene que tener dimensiones <span class="math inline">\(k \times d\)</span>.</li>
+<li><span class="math inline">\(x\)</span> es un vector con <span class="math inline">\(n\)</span> features por lo tanto es de dimensión <span class="math inline">\(n \times 1\)</span>.</li>
 <li>Eso hará que <span class="math inline">\(h_\theta(x)\)</span> sea de tamaño <span class="math inline">\(k \times 1\)</span>.</li>
 </ul>
 </div>
 </div>
-</div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Lamentablemente esto no funciona ya que <span class="math inline">\(\tilde{theta}^T\)</span> es sólo otra matriz que genera dos transformaciones simultáneas, pero que en este caso llevará de <span class="math inline">\(n\)</span> a <span class="math inline">\(k\)</span> de manera directa.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="entonces-cómo" class="slide level2 smaller">
 <h2>¿Entonces cómo?</h2>
+<div class="columns">
+<div class="column">
 <p>Vamos a utilizar funciones no lineales. <strong>Cualquiera sirve</strong> tal que:</p>
 <p><span class="math display">\[\phi(x) = \sigma(W^Tx)\]</span></p>
-<p>donde <span class="math inline">\(W \in \mathbb{R}^{n \times d}\)</span> y <span class="math inline">\(\sigma: \mathbb{R}^d \rightarrow \mathbb{R}^d\)</span>.</p>
+<p>donde <span class="math inline">\(W \in \mathbb{R}^{n \times d}\)</span> y <span class="math inline">\(\sigma: \mathbb{R}^d \rightarrow \mathbb{R}^d\)</span>, es decir, <span class="math inline">\(\sigma\)</span> es una función escalar.</p>
+</div><div class="column fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-2/mlp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-2/mlp.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
 <p>De este modo nuestra hipótesis quedaría como:</p>
 <p><span class="math display">\[h_\theta(x) = \theta^T \sigma(W^T x) \neq \tilde{\theta}^T x\]</span></p>
-<div style="font-size: 130%;">
+</div>
+<div class="fragment" style="font-size: 130%;">
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -526,28 +549,335 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-<div style="font-size: 130%;">
+<div class="fragment" style="font-size: 130%;">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Normalmente escogeremos funciones no-lineales que sean diferenciables para poder actualizar no sólo nuestros parámetros <span class="math inline">\(\theta\)</span> sino también <span class="math inline">\(W\)</span>.</p>
+<p>Normalmente escogeremos <code>funciones no-lineales</code> que sean diferenciables para poder actualizar <span class="math inline">\(\theta\)</span> y <span class="math inline">\(W\)</span>.</p>
 <p>Esto es lo que llamaremos el <strong><em>entrenamiento de una red neuronal</em></strong>.</p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="activation-functions" class="slide level2">
+<section id="activation-functions" class="slide level2 smaller">
+<h2>Activation Functions</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<blockquote>
+<p>Definiremos las funciones de activación como funciones no-lineales que se aplican a la salida de cada capa para evitar la <code>composición</code> de dos trasnformaciones lineales consecutivas.</p>
+</blockquote>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Esta es la <strong>única</strong> manera de transformar hipótesis lineales en hipótesis no lineales.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-2/activation_functions.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-2/activation_functions.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Funciones Clásicas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong><em>Sigmoide</em></strong></li>
+<li><strong><em>ReLU</em></strong></li>
+<li><strong><em>Tanh</em></strong></li>
+<li><strong><em>Softmax</em></strong></li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Funciones más modernas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Swish</li>
+<li>GELU</li>
+<li>ELU</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="activation-functions-1" class="slide level2">
 <h2>Activation Functions</h2>
 </section>
-<section id="calcular-los-gradientes-para-una-red-neuronal" class="slide level2">
-<h2>Calcular los Gradientes para una Red Neuronal</h2>
+<section id="layer-non-linear-softmax-regression" class="slide level2 smaller">
+<h2>2-Layer non-linear Softmax Regression</h2>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[h_\theta(x) = W_2^T \phi(x) = W_2^T \sigma(W_1^T x)\]</span></p>
+<p>donde <span class="math inline">\(\theta=\{W_1 \in \mathbb{R}^{n \times d}, W_2 \in \mathbb{R}^{d \times k}\}\)</span></p>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Podemos pensar que <span class="math inline">\(W_1 \in \mathbb{R}^{n \times d}\)</span> es aquella matriz que lleva a un vector <span class="math inline">\(x\)</span> de <span class="math inline">\(n\)</span> a <span class="math inline">\(d\)</span> dimensiones.</li>
+<li>De la misma forma, <span class="math inline">\(W_2 \in \mathbb{R}^{d \times k}\)</span> es aquella matriz que lleva a un vector <span class="math inline">\(x\)</span> de <span class="math inline">\(d\)</span> a <span class="math inline">\(k\)</span> dimensiones/salidas.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-2/mlp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-2/mlp.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<h4 id="matrix-batch-form">Matrix Batch Form</h4>
+<p><span class="math display">\[h_\theta(X) = \sigma(XW_1)W_2\]</span></p>
+</div><div class="column">
+<h4 id="update-rule">Update Rule</h4>
+<p><span class="math display">\[W_1 := W_1 - \frac{\alpha}{m} \nabla_{W_1} l_{ce}(h_\theta(X),y)\]</span> <span class="math display">\[W_2 := W_2 - \frac{\alpha}{m} \nabla_{W_2} l_{ce}(h_\theta(X),y)\]</span></p>
+</div>
+</div>
 </section>
-<section id="conceptos-tradicionales-de-deep-learning" class="slide level2">
-<h2>Conceptos Tradicionales de Deep Learning</h2>
+<section id="cálculo-de-gradientes" class="slide level2 smaller">
+<h2>Cálculo de Gradientes</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Gradiente de <span class="math inline">\(W_1\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\begin{align} \nabla_{W_1} &amp;= \frac{\partial l_{ce}(h_\theta(X),y)}{\partial \sigma(XW_1)} \cdot \frac{\partial h_\theta(X)}{\partial \sigma(XW_1)} \cdot \frac{\partial \sigma(XW_1)}{\partial XW_1} \cdot \frac{\partial XW_1}{\partial W_1} \\
+&amp;= (Z-I_y)_{m \times k} \cdot (W_{2})_{d \times k}  \cdot \sigma'(XW_1)_{m \times d} \cdot X_{m \times n}
+\end{align}\]</span></p>
+<p>Luego, corrigiendo por dimensiones obtenemos que <span class="math display">\[\nabla_{W_1} \in \mathbb{R}^{n \times d} = X^T_{n \times m} \left[\sigma'(XW_1) \odot (Z-I_y)W_2^T \right]_{m \times d}\]</span></p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Gradiente de <span class="math inline">\(W_2\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\begin{align} \nabla_{W_2} &amp;= \frac{\partial l_{ce}(h_\theta(X),y)}{\partial h_\theta(X)} \cdot \frac{\partial h_\theta(X)}{\partial W_2}\\
+&amp;= (Z-I_y)_{m\times k} \cdot \sigma(XW_1)_{m \times d}
+\end{align}\]</span></p>
+<p>Luego, corrigiendo por dimensiones obtenemos que <span class="math display">\[\nabla_{W_2} \in \mathbb{R}^{d \times k} = \sigma(XW_1)^T_{d \times m}(Z - I_y)_{m \times k}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(\odot\)</span> representa el producto Hadamard entre dos matrices. Esto es, multiplicación elemento a elemento.</li>
+<li><span class="math inline">\(\sigma'(.)\)</span> representa la derivada de la función de activación <span class="math inline">\(\sigma(.)\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="nuestra-primera-red-neuronal" class="title-slide slide level1 center">
+<h1>Nuestra Primera Red Neuronal</h1>
+
+</section>
+<section id="definiciones" class="slide level2 smaller">
+<h2>Definiciones</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-2/formal_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-2/formal_nn.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+<div class="columns">
+<div class="column" style="width:25%;">
+<div style="font-size: 75%;">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Inputs</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[Z_1 = X\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:25%;">
+<div style="font-size: 75%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Intermediate Outputs</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[Z_{i+1} = \sigma_i(Z_iW_i), i=1,...,L\]</span> <span class="math display">\[Z_i \in \mathbb{R}^{m \times n_i}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:25%;">
+<div style="font-size: 75%;">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Output (Head)</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[h_\theta(X) = Z_{L+1}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:25%;">
+<div style="font-size: 75%;">
+<div class="callout callout-none no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Parámetros</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\theta = \left[W_1,..., W_L\right]\]</span> <span class="math display">\[ W_i \in \mathbb{R}^{n_i \times n_{i+1}}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Las salidas intermedias (intermediate outputs) son las mal llamadas hidden layers. Esta red cuenta con <span class="math inline">\(L\)</span> hidden layers <span class="math inline">\(W\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="definiciones-1" class="slide level2 smaller">
+<h2>Definiciones</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Red Neuronal</strong></p>
+</div>
+<div class="callout-content">
+<p>Vamos a definir como <strong><em>Red Neuronal</em></strong> un tipo particular de hipótesis que consiste en:</p>
+<ul>
+<li>Multiples capas que permiten cambiar de dimensión.</li>
+<li>Funciones de activación no-lineales y diferenciables que permiten <strong><em>desacoplar</em></strong> transformaciones lineales.</li>
+<li>Un set de parámetros optimizables, que permiten reducir una <code>Loss Function</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Si bien estas redes toman inspiración de la biólogía, poco o nada tienen que ver con neuronas reales.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Términos como <code>Neural Network</code>, <code>Deep Networks</code>, <code>Deep Learning</code>, son ampliamente usados y algunas veces usados para diferenciar el tamaño de distintas arquitecturas.</p>
+<p>Nosotros los vamos a usar <strong><em>prácticamente</em></strong> como sinónimos.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="redes-neuronales" class="slide level2 smaller">
+<h2>Redes Neuronales</h2>
+</section>
+<section id="generalización-de-una-red-neuronal-de-l-capas" class="slide level2">
+<h2>Generalización de una Red Neuronal de L capas</h2>
+</section>
+<section id="definiciones-2" class="slide level2">
+<h2>Definiciones</h2>
+<dl>
+<dt>: Forward Pass</dt>
+<dd>
+<p>Backpropagation</p>
+</dd>
+<dd>
+<p>Epoch Una iteración en la cuál todos los datos disponibles para entrenamiento han realizado un Forward y Backward Pass.</p>
+</dd>
+<dd>
+<p>Batch</p>
+</dd>
+<dd>
+<p>Learning Rate</p>
+</dd>
+</dl>
 </section>
 <section id="por-qué-estudiar-deep-learning" class="slide level2 smaller">
 <h2>¿Por qué estudiar Deep Learning?</h2>
@@ -558,19 +888,19 @@ Alfonso Tobar-Arancibia
 <div class="column fragment" style="width:25%;">
 <!-- -->
 <h4 id="alexnet-2012">Alexnet (2012)</h4>
-<p><a href="img/clase-1/alexnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-1/alexnet.png"></a></p>
+<p><a href="img/clase-1/alexnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-1/alexnet.png"></a></p>
 </div><div class="column fragment" style="width:25%;">
 <!-- -->
 <h4 id="alphago-2016">AlphaGo (2016)</h4>
-<p><a href="img/clase-1/alphago.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-1/alphago.png"></a></p>
+<p><a href="img/clase-1/alphago.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-1/alphago.png"></a></p>
 </div><div class="column fragment" style="width:25%;">
 <!-- -->
 <h4 id="transformers-2017">Transformers (2017)</h4>
-<p><a href="img/clase-1/transformer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-1/transformer.png"></a></p>
+<p><a href="img/clase-1/transformer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-1/transformer.png"></a></p>
 </div><div class="column fragment" style="width:25%;">
 <!-- -->
 <h4 id="gpt-2019">GPT (2019)</h4>
-<p><a href="img/clase-1/gpt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-1/gpt.png"></a></p>
+<p><a href="img/clase-1/gpt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-1/gpt.png"></a></p>
 </div>
 </div>
 </section>
@@ -583,19 +913,19 @@ Alfonso Tobar-Arancibia
 <div class="column fragment" style="width:25%;">
 <!-- -->
 <h4 id="gpt-3-2021">GPT-3 (2021)</h4>
-<p><a href="img/clase-1/gpt3.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-1/gpt3.jpeg"></a></p>
+<p><a href="img/clase-1/gpt3.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-1/gpt3.jpeg"></a></p>
 </div><div class="column fragment" style="width:25%;">
 <!-- -->
 <h4 id="alphafold-2021">AlphaFold (2021)</h4>
-<p><a href="img/clase-1/alphafold.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-1/alphafold.jpg"></a></p>
+<p><a href="img/clase-1/alphafold.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-1/alphafold.jpg"></a></p>
 </div><div class="column fragment" style="width:25%;">
 <!-- -->
 <h4 id="stable-diffussiondalle-2022">Stable Diffussion/Dalle (2022)</h4>
-<p><a href="img/clase-1/stable-diffusion-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-1/stable-diffusion-3.png"></a></p>
+<p><a href="img/clase-1/stable-diffusion-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-1/stable-diffusion-3.png"></a></p>
 </div><div class="column fragment" style="width:25%;">
 <!-- -->
 <h4 id="llms-2023-chatgptllama">LLMs (2023) (ChatGPT/Llama)</h4>
-<p><a href="img/clase-1/llms.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-1/llms.jpg"></a></p>
+<p><a href="img/clase-1/llms.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-1/llms.jpg"></a></p>
 </div>
 </div>
 </section>
@@ -603,7 +933,7 @@ Alfonso Tobar-Arancibia
 <h2>¿Por qué estudiar Deep Learning?</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/google_trends.png" class="lightbox" data-glightbox="description: .lightbox-desc-13" data-gallery="quarto-lightbox-gallery-13" title="Imágen tomada de la Clase de Zico Colter"><img data-src="img/clase-1/google_trends.png" class="quarto-figure quarto-figure-center" style="width:70.0%" alt="Imágen tomada de la Clase de Zico Colter"></a></p>
+<p><a href="img/clase-1/google_trends.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" data-glightbox="description: .lightbox-desc-17" title="Imágen tomada de la Clase de Zico Colter"><img data-src="img/clase-1/google_trends.png" class="quarto-figure quarto-figure-center" style="width:70.0%" alt="Imágen tomada de la Clase de Zico Colter"></a></p>
 <figcaption>Imágen tomada de la Clase de Zico Colter</figcaption>
 </figure>
 </div>
@@ -670,7 +1000,7 @@ Alfonso Tobar-Arancibia
 </blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/neuron_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-1/neuron_1.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/neuron_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-1/neuron_1.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </section>
@@ -683,7 +1013,7 @@ Alfonso Tobar-Arancibia
 <div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/neuron_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-1/neuron_2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-1/neuron_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-1/neuron_2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 <div class="callout callout-note callout-style-simple">
@@ -741,7 +1071,7 @@ Alfonso Tobar-Arancibia
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/nn_arq.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-1/nn_arq.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/nn_arq.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-1/nn_arq.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column">
@@ -856,7 +1186,7 @@ Alfonso Tobar-Arancibia
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/softmax_reg.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-1/softmax_reg.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/softmax_reg.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-1/softmax_reg.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div>
@@ -963,7 +1293,7 @@ Alfonso Tobar-Arancibia
 <p><br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/softmax_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-1/softmax_example.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/softmax_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-1/softmax_example.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:40%;">
@@ -1072,7 +1402,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/gradient.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-1/gradient.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/gradient.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-1/gradient.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div>
@@ -1097,7 +1427,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 <p>con <span class="math inline">\(\theta \in \mathbb{R}^{n \times k}\)</span> y <span class="math inline">\(\alpha &gt; 0\)</span> corresponde al <em>step size</em> o <code>learning rate</code>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/lr_effect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-1/lr_effect.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-1/lr_effect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-1/lr_effect.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
 <div class="callout callout-tip callout-style-simple">
@@ -1159,7 +1489,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 </div><div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/fuenzi.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-1/fuenzi.jpeg" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+<p><a href="img/clase-1/fuenzi.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-1/fuenzi.jpeg" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -1330,7 +1660,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/nn_arq_full.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-1/nn_arq_full.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-1/nn_arq_full.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-1/nn_arq_full.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
@@ -1374,7 +1704,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/mat_mat_mul.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-1/mat_mat_mul.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-1/mat_mat_mul.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-1/mat_mat_mul.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column">
@@ -1392,7 +1722,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 </div>
 </div>
 <div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-13">Imágen tomada de la Clase de Zico Colter</span>
+<span class="glightbox-desc lightbox-desc-17">Imágen tomada de la Clase de Zico Colter</span>
 </div>
 </section></section>
     </div>
@@ -1761,7 +2091,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
+    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox"});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
