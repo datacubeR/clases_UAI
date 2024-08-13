@@ -15,3 +15,33 @@
   path: tics579/clase-1.qmd
   categories:
    - slides
+
+
+- title: "Clase 2"
+  subtitle: "Clase 2: Introducción a las Redes Neuronales y formalidades"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-08-22
+  image: tics579/thumbnails/clase-2.png
+  path: tics579/clase-2.qmd
+  categories:
+   - slides
+  
+
+# - title: "Clase 3"
+#   subtitle: "Clase 3: Feed Forward Networks"
+#   author: "Alfonso Tobar-Arancibia"
+#   date: 2024-08-29
+#   image: tics579/thumbnails/clase-3.png
+#   path: tics579/clase-3.qmd
+#   categories:
+#    - slides
+
+
+# - title: "Clase 4"
+#   subtitle: "Clase 4: Introducción a Pytorch"
+#   author: "Alfonso Tobar-Arancibia"
+#   date: 2024-09-05
+#   image: tics579/thumbnails/clase-4.png
+#   path: tics579/clase-4.qmd
+#   categories:
+#    - slides

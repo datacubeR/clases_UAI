@@ -317,7 +317,7 @@ $$Z = \begin{bmatrix}
 
 ## Loss Function: Softmax/Cross-Entropy Loss {.smaller}
 
-Para medir el error, o la pérdida de información de un punto utilizaremos el Negative Log Loss, también llamado `Cross Entropy Loss`.
+Para medir el error/pérdida de información utilizaremos el `Negative Log Loss` o `Cross Entropy Loss`.
 
 $$l_{ce}(h(x), y) = -log\left(p(label = y)\right)$$
 
@@ -381,7 +381,7 @@ El gradiente apunta a la dirección de máximo crecimiento de la función $f$.
 ## Gradient Descent: Regla de Actualización {.smaller}
 Para minimizar la función, la idea es descender iterativamente por el trayecto **en contra** del gradiente. La regla de actualización se define como:
 
-$$\theta := \theta - \alpha \nabla_\theta f(\theta) = \theta - \alpha \nabla_\theta l_{ce}(X\theta,y)$$
+$$\theta := \theta - \alpha \nabla_\theta f(\theta) = \theta - \frac{\alpha}{m}\nabla_\theta l_{ce}(X\theta,y)$$
 
 con $\theta \in \mathbb{R}^{n \times k}$ y $\alpha > 0$ corresponde al *step size* o `learning rate`.
 
@@ -441,7 +441,7 @@ Además sabemos que $\nabla_\theta l_{ce}(\theta^Tx, y)$ debe tener dimensiones 
 $$\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}$$
 :::
 ::: {.column .fragment fragment-index=3}
-$$\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = \frac{\partial l_{ce}(\theta^Tx, y)}{\partial h} = \begin{bmatrix}
+$$\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = \frac{\partial l_{ce}(h_\theta(x), y)}{\partial h_\theta(x)} = \begin{bmatrix}
 \frac{\partial l_{ce}(h,y)}{\partial h_1} \\
 \vdots\\
 \frac{\partial l_{ce}(h,y)}{\partial h_k} \\
@@ -497,7 +497,7 @@ $$\nabla_\theta l_{ce}(\theta^T x,y) = (z-e_y)\cdot x $$
 ::: {.column .fragment}
 ::: {.callout-caution appearance="default"}
 ## Ojo con las dimensiones
-* $Z-e_y \in \mathbb{R}^{k \times 1}$
+* $z-e_y \in \mathbb{R}^{k \times 1}$
 * $x \in \mathbb{R}^{n \times 1}$
 :::
 
@@ -559,15 +559,12 @@ $$\begin{align}\nabla_\theta l_{ce}(X\theta,y) &= \frac{\partial l_{ce}(X\theta,
 :::{.fragment}
 Finalmente la `Regla de Actualización` de parámetros usando Gradient Descent queda como:
 
-$$\theta := \theta - \alpha X^T (Z - I_y)$$
+$$\theta := \theta - \frac{\alpha}{m} X^T (Z - I_y)$$
 :::
 
-::: {.callout-note .fragment}
-* Aplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.
-* Se puede programar en pocas líneas en Python.
-:::
 
 ## Conclusiones {.smaller}
+
 
 ::: {.columns}
 ::: {.column}
@@ -582,14 +579,16 @@ $$\theta := \theta - \alpha X^T (Z - I_y)$$
   * `Activation Functions`
   * etc.
 
+::: 
+::: {.callout-note .fragment fragment-index=1}
+* Aplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.
+* Se puede programar en pocas líneas en Python.
+
+![](img/clase-1/mnist.png){.lightbox fig-align="center" width="30%"} 
 :::
-::: {.callout-important appearance="default" .fragment fragment-index=2}
-## Próxima Clase
-* Vamos a hacer lo mismo para una Red Neuronal.
-* La única diferencia es que la hipótesis que utilizaremos es un poco más `fancy`.
 :::
-:::
-::: {.column .fragment fragment-index=1}
+
+::: {.column .fragment fragment-index=2}
 #### Pero, ¿qué pasa con arquitecturas más complejas?
 
 ![](img/clase-1/nn_arq_full.png){.lightbox fig-align="center" width="60%"} 
@@ -597,7 +596,7 @@ $$\theta := \theta - \alpha X^T (Z - I_y)$$
 ::: 
 
 
-# Nos vemos <br> (Próxima semana no hay clases)
+# ¡¡Eso es todo!!
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0

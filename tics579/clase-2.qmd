@@ -1,6 +1,6 @@
 ---
 title: "TICS-579-Deep Learning"
-subtitle: "Clase 2: Introducción a las Redes Neuronales"
+subtitle: "Clase 2: Introducción a las Redes Neuronales y formalidades"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -23,554 +23,407 @@ format:
     pdf-separate-fragments: true
 ---
 
-## Problemas de una Hipótesis Lineal
+# Problemas de una Hipótesis Lineal
 
-## Problema XOR
+## Clase anterior {.smaller}
 
-
-
-## ¿Por qué estudiar Deep Learning? {.smaller}
-
-> Principalmente porque es el Estado del Arte en las aplicaciones más Impresionantes en la Inteligencia Artificial.
-
-:::: {.columns}
-::: {.column width="25%" .fragment}
-
-#### Alexnet (2012)
-![](img/clase-1/alexnet.png){.lightbox}
-:::
-::: {.column width="25%" .fragment}
-#### AlphaGo (2016)
-![](img/clase-1/alphago.png){.lightbox}
-:::
-::: {.column width="25%" .fragment}
-#### Transformers (2017)
-![](img/clase-1/transformer.png){.lightbox}
-:::
-::: {.column width="25%" .fragment}
-#### GPT (2019)
-![](img/clase-1/gpt.png){.lightbox}
-:::
-::::
-
-
-## ¿Por qué estudiar Deep Learning? {.smaller}
-
-> Principalmente porque es el Estado del Arte en las aplicaciones más Impresionantes en la Inteligencia Artificial.
-
-:::: {.columns}
-::: {.column width="25%" .fragment}
-
-#### GPT-3 (2021)
-![](img/clase-1/gpt3.jpeg){.lightbox}
-:::
-::: {.column width="25%" .fragment}
-#### AlphaFold (2021)
-![](img/clase-1/alphafold.jpg){.lightbox}
-:::
-::: {.column width="25%" .fragment}
-#### Stable Diffussion/Dalle (2022)
-![](img/clase-1/stable-diffusion-3.png){.lightbox}
-:::
-::: {.column width="25%" .fragment}
-#### LLMs (2023) (ChatGPT/Llama)
-![](img/clase-1/llms.jpg){.lightbox}
-:::
-::::
-
-## ¿Por qué estudiar Deep Learning? {.smaller}
-
-![Imágen tomada de la Clase de Zico Colter](img/clase-1/google_trends.png){.lightbox width="70%" fig-align="center"}
-
-## ¿Por qué estudiar Deep Learning? {.smaller}
-
-::: {.callout-tip appearance="default"}
-## Facilidad y Autograd
-* Frameworks como Tensorflow, Pytorch o Jax permiten realizar esto de manera mucho más sencilla.
-    * Frameworks permiten calcular gradientes de manera automática.
-    * Antigua mente trabajar en Torch, Caffe o Theano podía tomar cerca de 50K líneas de código.
-:::
-
-::: {.callout-note appearance="default"}
-## Cómputo
-* Proliferación de las GPUs, TPUs, HPUs, IPUs, como sistemas masivos de Cómputos. 
-    * [How many computers to identify a cat? 16,000](https://www.nytimes.com/2012/06/26/technology/in-a-big-network-of-computers-evidence-of-machine-learning.html)
-:::
-
-::: {.callout-important appearance="default"}
-## Estado del Arte
-* Modelos de Deep Learning pueden generar sistemas que entiendan imágenes, textos, audios, videos, grafos, etc.
-:::
-
-## El nacimiento de las Redes Neuronales {.smaller}
-
-> Las redes neuronales artificiales (ANN), son modelos inspirados en el mecanismo cerebral de sinapsis. Su unidad más básica es una Neurona. 
-
-
-![](img/clase-1/neuron_1.png){.lightbox fig-align="center"}
-
-## El nacimiento de las Redes Neuronales {.smaller}
-
-> Las redes neuronales artificiales (ANN), son modelos inspirados en el mecanismo cerebral de sinapsis. Su unidad más básica es una Neurona. 
-
+> La Regresión Softmax es capaz de generar separaciones lineales para más de dos clases para cualquier punto $x \in \mathbb{R}^{1 \times n}$:
 
 ::: {.columns}
-::: {.column width="60%"}
-![](img/clase-1/neuron_2.png){.lightbox fig-align="center" width="70%"}
-
-
-::: {.callout-note} 
-Este tipo de nomenclatura está sumamente pasada de moda.
-:::
-:::
-::: {.column width="40%" .fragment}
-
-
-
-* Este cálculo se puede representar como: 
-
-$$ y = \phi(w_1 \cdot x_1 + w_2 \cdot x_2 + ... + w_5 \cdot x_5)$$
-$$ y = \phi(w^T \cdot x)$$
-
-donde $w = [w_1, w_2, w_3, w_4, w_5]$ y $x = [x_1, x_2, x_3, x_4, x_5]$.
-
-::: {.callout-warning .fragment .incremental}
-* ¿Qué pasa si $\phi(.)$ vale la función ***identidad***?
-* Tenemos una **Regresión Lineal**.
-:::
-
-
-::: {.callout-warning .fragment .incremental}
-* ¿Qué pasa si $\phi(.)$ vale la función ***sigmoide***?
-* Tenemos una **Regresión Logística**.
-:::
-:::
-::: 
-
-## Arquitectura de una Red {.smaller}
-
-
-::: {.columns}
-::: {.column}
-![](img/clase-1/nn_arq.png){.lightbox fig-align="center"} 
-:::
-::: {.column}
-### Estructura más común 
-###### *(Probablemente tampoco seguiremos esta nomenclatura)*
-
-* Nodos o Neuronas
-* Edges o Conexiones
-* Capas
-
-::: {.callout-caution .fragment style="font-size:150%;"}
-***¿Cuántas capas tiene esta red?***
-:::
-
-::: {.callout-tip .fragment style="font-size:150%;"}
-***Depende***
-:::
-:::
-::: 
-
-* Normalmente todas las neuronas de una capa anterior se conectan con las de una capa posterior (Hay excepciones). 
-* Dependiendo de la forma en la que se conecten, cada **Arquitectura** recibe un nombre.
-
-# Intuición y conceptos iniciales
-
-## Los Ingredientes de un Algoritmo de Aprendizaje {.smaller}
-
-Hipótesis
-: > Una función que describe como mapear inputs (features) con outputs (labels) por medio de parámetros.  
-
-Loss Function
-: > Una función que especifica cuanta información se pierde. Mayor pérdida implica más error de estimación.
-
-Método de Optimización
-: > Es el responsable de combinar la `hipótesis` y la `loss function`. Corresponde a un procedimiento para determinar los parámetros de la hipótesis, minimizando la suma de las pérdidas en un set de entrenamiento. 
-
-## Ejemplo: Softmax Regression 
-
-Softmax Regression
-: > Corresponde la versión multiclase de una Regresión Logística. También se le llama una `Shallow Network`.
-
-
-::: {.columns}
-::: {.column width="50%" style="font-size: 80%;"}
-::: {.callout-tip}
-#### Consideremos un problema de clasificación multiclase de $k$ clases tal que:
-
-* Datos de Entrenamiento: $x^{(i)}, y^{(i)} \in {1,...,k}$ para $i=1,...,m$.
-    * $n$: Es el número de Features.
-    * $m$: Es el número de puntos en el training set. 
-    * $k$: Es el número de clases del problema.
-:::
-
-::: {.callout-important}
-Vamos a tener en total $n \times k$ parámetros o pesos que actualizar.
-:::
-:::
-::: {.column width="50%"}
-![](img/clase-1/softmax_reg.png){.lightbox fig-align="center"} 
-:::
-::: 
-
-
-
-## Softmax Regression: Hipótesis
-
-::: {style="font-size: 80%;"}
-Vamos a definir una función que mapea valores de $x \in \mathbb{R}$ a vectores de $k$ dimensiones. 
-:::
-$$ h: \mathbb{R}^n \rightarrow \mathbb{R}^k$$
-$$ x \rightarrow h_\theta(x) = \theta^T x$$
-
-::: {style="font-size: 80%;"}
-donde $\theta \in \mathbb{R}^{n \times k}$ y $x \in \mathbb{R}^{n\times 1}$
-:::
-
-::: {.callout-warning}
-En este caso usamos una hipótesis lineal, ya que se usa una multiplicación matricial (o producto punto) para relacionar $\theta$ y $x$. 
-:::
-
-::: {.callout-note}
-En este caso el output de $h_i(x)$ devolverá la probabilidad de pertenecer a una cierta clase $i$.   
-:::
-
-::: {.callout-important .fragment}
-***¿Cuál es el tamaño/dimensión de $h_\theta(x)$?***
-:::
-
-## Notación Matricial {.smaller}
-
-> Una manera más conveniente de escribir estas operaciones es utilizar ***(Matrix Batch Form)***. 
-
-::: {.columns}
-::: {.column}
-##### Design Matrix
-
-$$X \in \mathbb{R}^{m \times n} = \begin{bmatrix}
-&-x^{(1)T}-\\
-& \vdots & \\
-&-x^{(m)T}- &\\
-\end{bmatrix}$$
-:::
-::: {.column}
-##### Labels Vector
-$$y \in {1,...,k} = \begin{bmatrix}
-&-y^{(1)}-\\
-& \vdots & \\
-&-y^{(m)}- &\\
-\end{bmatrix}$$
-:::
-::: 
-
-La hipótesis también se puede reescribir de manera matricial como: 
-
-::: {.columns}
-::: {.column}
-$$h_\theta(X) = \begin{bmatrix}
-&-h_\theta(x^{(1)})^T-\\
-& \vdots & \\
-&-h_\theta(x^{(m)})^T-\\
-\end{bmatrix}$$
-:::
-::: {.column}
-$$h_\theta(X)= \begin{bmatrix}
-&-x^{(1)T} \theta-\\
-& \vdots & \\
-&-x^{(m)T} \theta-\\
-\end{bmatrix} = X  \theta$$
-:::
-::: 
-
-::: {.callout-important .fragment}
-Normalmente este tipo de operaciones son las que utilizaremos para hacer nuestro código.
-:::
-
-## Loss Function: Softmax/Cross-Entropy Loss {.smaller}
-
-
-La salida de nuestra `Shallow Network` retornará valores reales. Para poder tener una mejor interpretación del significado de cada una aplicaremos la función `Softmax` lo cual permitirá *normalizar* los resultados y llevará los resultados a una ***"distribución de probabilidad"*** (valores positivos que sumen 1).
-
-::: {.columns}
-::: {.column width="60%"}
+::: {.column width="70%" }
 
 <br>
 
-![](img/clase-1/softmax_example.png){.lightbox fig-align="center"} 
+:::{style="font-size: 130%;"}
+$h_\theta(x) = \theta^T x$, tal que $\theta \in \mathbb{R}^{n \times k}$.
 :::
-::: {.column width="40%"}
 
 <br>
 
-Formalmente definiremos la función Softmax como: 
+::: {.callout-caution style="font-size: 130%;"}
+Esta hipótesis es bastante limitada, y existen muchos problemas que no podrán solucionarse con este tipo de solución.
+:::
 
-$$z_i = p(label = i) = \frac{exp(h_i(x))}{\sum_{j=1}^k exp(h_j(x))}$$
-
-
-$$Z = \begin{bmatrix}
-&z_1&\\
-& \vdots & \\
-&z_k&\\
-\end{bmatrix}$$
+:::
+::: {.column width="30%"}
+![](img/clase-2/softmax_viz.png){.lightbox}
 :::
 ::: 
 
-## Loss Function: Softmax/Cross-Entropy Loss {.smaller}
+## Limitaciones de una Hipótesis Lineal {.smaller}
 
-Para medir el error, o la pérdida de información de un punto utilizaremos el Negative Log Loss, también llamado `Cross Entropy Loss`.
-
-::: {.callout-tip .fragment}
-Para garantizar el éxito de nuestro modelo, básicamente queremos maximizar la probabilidad de encontrar la etiqueta correcta, es decir, que $p(label = y)$ sea lo más alto posible.
-:::
-::: {.callout-caution .fragment}
-Normalmente en los problemas de optimización no se suele maximizar sino minimizar. Minimizar el valor negativo es equivalente a maximizar. Esto sería equivalente a minimizar el error del modelo. 
-:::
-::: {.callout-caution .fragment}
-Finalmente por razones de estabilidad numérica, minimizamos el logaritmo de la probabilidad que es una técnica bien conocida en Estadística.
-:::
-
-:::{.fragment}
-$$\begin{align}
-l_{ce}(h(x), y) &= -log\left(p(label = y)\right)\\
-&= -log \left(\frac{exp(h_{(i = y)}(x))}{\sum_{j=1}^k exp(h_j(x))}\right) \\
-&= - h_{(i=y)}(x) + log\left(\sum_{j = 1}^k exp(h_j(x))\right)\end{align}$$
-:::
-
-## Método de Optimización {.smaller}
-
-> El último ingrediente de un algoritmo de aprendizaje es el método de optimización. Es necesario minimizar la pérdida promedio asociada a todos los puntos de un cierto set de entrenamiento. Para ello definimos esto formalmente como:
-
-$$\underset{\theta}{minimize} = \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}), y^{(i)}) =\frac{1}{m} \sum_{i=1}^m l(\theta^Tx^{(i)}, y^{(i)})$$
-
-::: {.callout-note}
-***¿Cómo encontramos los parámetros $\theta$ que minimizan la pérdida de información/error de estimación?***
-:::
-
-Gradient Descent
-: > Es un método numérico que permite minimizar funciones moviéndose en dirección contraria al Gradiente. Es computacionalmente muy eficiente y fácil de implementar en código.
-
-## Gradient Descent {.smaller}
+> Es claro que un problema como el que se muestra acá no podrá ser resuelto mediante un clasificador lineal (hipótesis lineal). 
 
 ::: {.columns}
-::: {.column width="60%"}
-Se define el gradiente como la matriz que contiene las derivadas parciales de una función $f$. Se denota como:
+::: {.column width="70%"}
 
-$$\nabla_\theta f(\theta) \in \mathbb{R}^{n \times k} =  \begin{bmatrix}
-\frac{\partial f(\theta)}{\partial \theta_{11}} & \cdots & \frac{\partial f(\theta)}{\partial \theta_{1k}} \\
-\cdots & \ddots & \cdots \\
-\frac{\partial f(\theta)}{\partial \theta_{n1}} & \cdots & \frac{\partial f(\theta)}{\partial \theta_{nk}}
-\end{bmatrix}$$
+::: {.callout-warning appearance="default" style="font-size: 120%;"}
+## ¿Cómo se resuelve este tipo de problemas?
 
-::: {.callout-tip}
-$\theta_{ij}$ corresponde al parámetro que une el nodo/feature $i$ con el nodo/predicción $j$.
+* Creando nuevas features que permitan predecir problemas `no-lineales`. 
 :::
-:::
-::: {.column width="40%"}
-![](img/clase-1/gradient.png){.lightbox fig-align="center" } 
-:::
-::: 
-
-
-::: {.callout-tip style="font-size: 130%;"}
-El gradiente apunta a la dirección de máximo crecimiento de la función $f$. 
-:::
-
-
-## Gradient Descent: Regla de Actualización {.smaller}
-Para minimizar la función, la idea es descender iterativamente por el trayecto **en contra** del gradiente. La regla de actualización se define como:
-
-$$\theta := \theta - \alpha \nabla_\theta f(\theta) = \theta - \alpha \nabla_\theta l_{ce}(X\theta,y)$$
-
-con $\theta \in \mathbb{R}^{n \times k}$ y $\alpha > 0$ corresponde al *step size* o `learning rate`.
-
-
-![](img/clase-1/lr_effect.png){.lightbox fig-align="center" width="60%"} 
-
-::: {.callout-tip}
-En nuestro caso $f$ corresponderá a nuestro $l_{ce}$ calculado anteriormente. El problema es, ¿cuánto vale el gradiente del `Cross Entropy Loss`?
-:::
-
-## Calculando el Gradiente a mano {.smaller}
-
 
 ::: {style="font-size: 130%;"}
-Simplifiquemos el problema a calcular para un sólo vector $x$.
-
-$$\theta := \theta - \alpha \nabla_\theta l_{ce}(\theta^Tx,y) $$
+$$h_\theta(x) = \theta^T \phi(x)$$
 :::
 
-::: {.callout-warning style="font-size: 120%;"}
-¿Cuánto vale el Gradiente?
+tal que $\theta \in \mathbb{R}^{n \times k}$ y $\phi(x): \mathbb{R}^n \rightarrow \mathbb{R}^d$ con $d > n$.
 
-* No es tan sencillo, ya que derivamos respecto a $\theta$ que es una matriz. 
-* Pero derivamos a $\theta^T x$ que es un vector.
-* Para ello, lo correcto es utilizar Calculo Diferencial Matricial, Jacobianos y Productos de Kroenecker (que probablemente no han visto en ningún curso).
-  * **SPOILER**: Yo tampoco lo he visto en ningún curso.
+::: {.callout-tip style="font-size: 130%;" .fragment}
+* Básicamente $\phi(.)$ es la manera matemática de denotar la creación de más features que permiten resolver el problema.
 :::
 
-::: {.columns .fragment}
-::: {.column width="70%"}
-::: {.callout-tip style="font-size: 120%;"}
-* Usaremos un truco (sumamente hacky 😱) que jamás deben revelar y que avergonzaría a cualquier profesor de Cálculo.
-    * Pretenderemos que todos los valores son escalares y corregiremos las dimensiones al final.
-
+::: {.callout-important style="font-size: 130%;" .fragment}
+SVM es un algoritmo que hace esto de manera automática utilizando el famoso `Kernel Trick`, donde $\phi(.)$ es conocido como el Kernel.
 :::
 :::
 ::: {.column width="30%"}
-![](img/clase-1/fuenzi.jpeg){.lightbox fig-align="center" width="40%"} 
-
+![](img/clase-2/non_linear_prob.png){.lightbox}
 :::
 ::: 
 
-## Calculando el Gradiente a mano {.smaller}
+## Diferencias entre ML y DL {.smaller}
 
-> Simplifiquemos el problema pensando que calcularemos el Gradiente para un sólo vector $x$.
+![](img/clase-2/ml-dl.jpeg){.lightbox fig-align="center"}
 
->  Es decir, $x \in \mathbb{R}^{n\times1}$.
+> La diferencia principal entre el `Machine Learning` y el `Deep Learning` es la manera en la que se crean las features.
 
-Además sabemos que $\nabla_\theta l_{ce}(\theta^Tx, y)$ debe tener dimensiones $n \times k$.
+::: {.callout-important .fragment}
+* Normalmente el Machine Learning está enfocado en que manualmente se generen features.
+* Deep Learning busca que el Algoritmo busque esas features. El énfasis está en buscar la `Arquitectura` adecuada.
+
+:::
+
+## ¿Cómo creamos features de manera automática? {.smaller}
 
 ::: {.columns}
 ::: {.column}
-$$\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}$$
+Una primera idea sería crearlas de manera lineal:
+
+$$\phi(x) = W^T x$$
+
+donde $W \in \mathbb{R}^{n \times d}$.
+
 :::
-::: {.column}
-$$\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = \frac{\partial l_{ce}(\theta^Tx, y)}{\partial h} = \begin{bmatrix}
-\frac{\partial l_{ce}(h,y)}{\partial h_1} \\
-\vdots\\
-\frac{\partial l_{ce}(h,y)}{\partial h_k} \\
-\end{bmatrix}$$
-:::
-::: 
-
-::: {.callout-tip style="font-size: 130%;" .fragment}
-Luego el gradiente de $l_{ce}$ respecto a $h$ tiene dimensiones $k \times 1$.
-:::
-
-## Calculando el Gradiente a mano {.smaller}
-
-$$\begin{align}
-\frac{\partial l_{ce}(h,y)}{\partial h_i} &= \frac{\partial }{\partial h_i}\left(-h_{(i = y)} + log \sum_{j = 1}^k exp(h_j)\right) \\
-&= -\frac{\partial h_{(i = y)}}{\partial h_i}+ \frac{1}{\sum_{j = 1}^k exp(h_j)} \cdot \frac{\partial}{\partial h_i}\left(\sum_{j=1}^k exp(h_j)\right) \\
-&= -\frac{\partial h_{(i = y)}}{\partial h_i}+ \frac{exp(h_i)}{\sum_{j = 1}^k exp(h_j)} \\
-&= - 1\{i=y\} + z_i = z_i - 1\{i=y\}
-\end{align}
-$$
-
-::: {.callout-tip}
-$$1\{i = y\} = \begin{cases}
-1,  & \text{i = y} \\
-0, & \text{otherwise}
-\end{cases}
-$$
-:::
-
-Finalmente en forma vectorial quedaría como:
-
-::: {.columns}
-::: {.column}
-$$\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = z - e_y$$
-:::
-::: {.column}
-::: {.callout-tip}
-Donde $z$, es el vector de Softmax y $e_y$ es un vector con un 1 en la posición $y$ y 0 en el resto.
-:::
-:::
-::: 
-
-## Calculando el Gradiente a mano {.smaller}
-
-::: {.columns}
-::: {.column }
-$$\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}$$
-$$\nabla_\theta l_{ce}(\theta^T x,y) = (z-e_y)\cdot x $$
-:::
-
 ::: {.column .fragment}
-::: {.callout-caution appearance="default"}
-## Ojo con las dimensiones
-* $Z-e_y \in \mathbb{R}^{k \times 1}$
-* $x \in \mathbb{R}^{n \times 1}$
+
+![](img/clase-2/multilayer_softmax.png){.lightbox fig-align="center" width="60%"}
+:::
+::: 
+
+::: {.columns .fragment}
+::: {.column }
+En este caso nuestra hipótesis queda como:
+$$ h_\theta(x) = \theta^T \phi(x) = \theta^T W^T x = \tilde{\theta}^T x$$
+
+::: {.callout-caution .fragment}
+Lamentablemente este approach **no funciona**, ya que $\tilde{\theta}^T$ es sólo otra matriz que genera dos transformaciones simultáneas, pero que en este caso llevará de $n$ a $k$ de manera directa.
+:::
 :::
 
-::: 
+::: {.column}
+
+::: {.callout-warning appearance="default"}
+## Ojo con las dimensiones.
+* $W^t$ tiene dimensión $d \times n$.
+* Sabemos que $h_\theta(x)$ tiene que devolver $k$ outputs. Por lo tanto, $\theta^T$ tiene que tener dimensiones $k \times d$. 
+* $x$ es un vector con $n$ features por lo tanto es de dimensión $n \times 1$.
+* Eso hará que $h_\theta(x)$ sea de tamaño $k \times 1$.
 :::
+:::
+:::
+
+## ¿Entonces cómo? {.smaller}
+
+::: {.columns}
+::: {.column}
+Vamos a utilizar funciones no lineales. **Cualquiera sirve** tal que:
+
+$$\phi(x) = \sigma(W^Tx)$$
+
+donde $W \in \mathbb{R}^{n \times d}$ y $\sigma: \mathbb{R}^d \rightarrow \mathbb{R}^d$, es decir, $\sigma$ es una función escalar.
+:::
+::: {.column .fragment}
+![](img/clase-2/mlp.png){.lightbox fig-align="center" width="60%"}
+:::
+::: 
 
 :::{.fragment}
-Luego: 
+De este modo nuestra hipótesis quedaría como:
 
-$$\nabla_\theta l_{ce}(\theta^T x,y) = x (z-e_y)^T$$
+$$h_\theta(x) = \theta^T \sigma(W^T x) \neq \tilde{\theta}^T x$$
 :::
 
+::: {.callout-important style="font-size: 130%;" .fragment} 
+Estamos aplicando una `transformación no-lineal` a la `transformación lineal` de $x$ con $W$. 
+:::
 
-## Calculando el Gradiente Matrix Batch Form {.smaller}
+::: {.callout-tip style="font-size: 130%;" .fragment}
+Normalmente escogeremos `funciones no-lineales` que sean diferenciables para poder actualizar $\theta$ y $W$. 
+
+Esto es lo que llamaremos el ***entrenamiento de una red neuronal***.
+:::
+
+## Activation Functions {.smaller}
+
+:::: {.columns}
+::: {.column width="60%"}
+> Definiremos las funciones de activación como funciones no-lineales que se aplican a la salida de cada capa para evitar la `composición` de dos trasnformaciones lineales consecutivas. 
+
+::: {.callout-important}
+Esta es la **única** manera de transformar hipótesis lineales en hipótesis no lineales. 
+:::
+:::
+
+::: {.column width="40%"}
+![](img/clase-2/activation_functions.png){.lightbox fig-align="center" width="80%"} 
+:::
+::::
+
 
 ::: {.columns}
 ::: {.column}
-$$\begin{align}\nabla_\theta l_{ce}(X\theta,y) \in \mathbb{R}^{n\times k} &= \frac{\partial l_{ce}(X\theta,y)}{\partial X\theta} \cdot \frac{\partial X\theta}{\partial \theta}\\
-&= (Z - I_y) \cdot X \\
-&= X^T \cdot (Z - I_y)
+::: {.callout-note appearance="default"}
+#### Funciones Clásicas
+* ***Sigmoide***
+* ***ReLU***
+* ***Tanh***
+* ***Softmax***
+:::
+:::
+
+::: {.column}
+::: {.callout-tip appearance="default"}
+#### Funciones más modernas
+* Swish
+* GELU
+* ELU
+:::
+:::
+::: 
+
+## Activation Functions
+
+---
+
+## 2-Layer non-linear Softmax Regression {.smaller}
+
+::: {.columns}
+::: {.column}
+$$h_\theta(x) = W_2^T \phi(x) = W_2^T \sigma(W_1^T x)$$
+
+donde $\theta=\{W_1 \in \mathbb{R}^{n \times d}, W_2 \in \mathbb{R}^{d \times k}\}$
+
+::: {.callout-caution}
+* Podemos pensar que $W_1 \in \mathbb{R}^{n \times d}$ es aquella matriz que lleva a un vector $x$ de $n$ a $d$ dimensiones.
+* De la misma forma, $W_2 \in \mathbb{R}^{d \times k}$ es aquella matriz que lleva a un vector $x$ de $d$ a $k$ dimensiones/salidas.
+:::
+
+:::
+::: {.column}
+![](img/clase-2/mlp.png){.lightbox fig-align="center" width="60%"} 
+:::
+::: 
+
+::: {.columns}
+::: {.column}
+#### Matrix Batch Form
+
+$$h_\theta(X) = \sigma(XW_1)W_2$$
+:::
+::: {.column}
+#### Update Rule
+
+$$W_1 := W_1 - \frac{\alpha}{m} \nabla_{W_1} l_{ce}(h_\theta(X),y)$$
+$$W_2 := W_2 - \frac{\alpha}{m} \nabla_{W_2} l_{ce}(h_\theta(X),y)$$
+:::
+::: 
+
+## Cálculo de Gradientes {.smaller}
+
+::: {.columns}
+::: {.column}
+::: {.callout-tip appearance="default"}
+#### Gradiente de $W_1$
+
+
+$$\begin{align} \nabla_{W_1} &= \frac{\partial l_{ce}(h_\theta(X),y)}{\partial \sigma(XW_1)} \cdot \frac{\partial h_\theta(X)}{\partial \sigma(XW_1)} \cdot \frac{\partial \sigma(XW_1)}{\partial XW_1} \cdot \frac{\partial XW_1}{\partial W_1} \\
+&= (Z-I_y)_{m \times k} \cdot (W_{2})_{d \times k}  \cdot \sigma'(XW_1)_{m \times d} \cdot X_{m \times n}
+\end{align}$$
+
+Luego, corrigiendo por dimensiones obtenemos que
+$$\nabla_{W_1} \in \mathbb{R}^{n \times d} = X^T_{n \times m} \left[\sigma'(XW_1) \odot (Z-I_y)W_2^T \right]_{m \times d}$$
+
+:::
+:::
+::: {.column}
+::: {.callout-note appearance="default"}
+#### Gradiente de $W_2$
+
+
+$$\begin{align} \nabla_{W_2} &= \frac{\partial l_{ce}(h_\theta(X),y)}{\partial h_\theta(X)} \cdot \frac{\partial h_\theta(X)}{\partial W_2}\\
+&= (Z-I_y)_{m\times k} \cdot \sigma(XW_1)_{m \times d}
+\end{align}$$
+
+Luego, corrigiendo por dimensiones obtenemos que
+$$\nabla_{W_2} \in \mathbb{R}^{d \times k} = \sigma(XW_1)^T_{d \times m}(Z - I_y)_{m \times k}$$
+
+:::
+:::
+::: 
+
+::: {.callout-important}
+* $\odot$ representa el producto Hadamard entre dos matrices. Esto es, multiplicación elemento a elemento.
+* $\sigma'(.)$ representa la derivada de la función de activación $\sigma(.)$
+
+:::
+
+# Nuestra Primera Red Neuronal
+
+## Definiciones {.smaller}
+
+
+![](img/clase-2/formal_nn.png){.lightbox fig-align="center" width="80%"}  
+
+
+::: {.columns}
+::: {.column width="25%"}
+::: {.callout-warning appearance="default" style="font-size: 75%;" }
+## Inputs
+$$Z_1 = X$$
+:::
+:::
+::: {.column width="25%"}
+::: {.callout-tip appearance="default" style="font-size: 75%;" }
+## Intermediate Outputs
+$$Z_{i+1} = \sigma_i(Z_iW_i), i=1,...,L$$
+$$Z_i \in \mathbb{R}^{m \times n_i}$$
+:::
+:::
+::: {.column width="25%"}
+::: {.callout-important appearance="default" style="font-size: 75%;" }
+## Output (Head)
+$$h_\theta(X) = Z_{L+1}$$
+:::
+:::
+::: {.column width="25%"}
+::: {.callout appearance="default" style="font-size: 75%;"}
+## Parámetros
+$$\theta = \left[W_1,..., W_L\right]$$
+$$ W_i \in \mathbb{R}^{n_i \times n_{i+1}}$$
+
+:::
+:::
+::: 
+::: {.callout-caution .fragment}
+* Las salidas intermedias (intermediate outputs) son las mal llamadas hidden layers. Esta red cuenta con $L$ hidden layers $W$.
+:::
+
+
+## Definiciones {.smaller}
+
+::: {.callout-note appearance="default"}
+## Red Neuronal
+Vamos a definir como ***Red Neuronal*** un tipo particular de hipótesis que consiste en:  
+
+* Multiples capas que permiten cambiar de dimensión.
+* Funciones de activación no-lineales y diferenciables que permiten ***desacoplar*** transformaciones lineales.
+* Un set de parámetros optimizables, que permiten reducir una `Loss Function`.
+:::
+
+::: {.callout-caution}
+Si bien estas redes toman inspiración de la biólogía, poco o nada tienen que ver con neuronas reales.
+:::
+
+::: {.callout-warning}
+Términos como `Neural Network`, `Deep Networks`, `Deep Learning`, son ampliamente usados y algunas veces usados para diferenciar el tamaño de distintas arquitecturas. 
+
+Nosotros los vamos a usar ***prácticamente*** como sinónimos.
+:::
+
+#### Update Rule
+
+$$W_i := W_i - \frac{\alpha}{m} \nabla_{W_i} l(h_\theta(X),y)$$
+
+
+## Cálculo de Gradientes de una Red Neuronal {.smaller}
+
+$$\nabla_{W_i} l(Z_{L+1},y) = \underbrace{\frac{\partial l(Z_{L+1},i)}{\partial Z_{L+1}} \cdot \frac{\partial Z_{{L+1}}}{\partial Z_L} \cdot \frac{\partial Z_L}{\partial Z_{L-1}}...\cdot \frac{\partial Z_{i+2}}{\partial Z_{i+1}}}_{G_{i+1} = \frac{\partial l(Z_{L+1},y)}{\partial Z_{i+1}}}\cdot \frac{\partial Z_{i+1}}{\partial W_i}$$
+
+::: {.callout-important appearance="default"}
+## **Gradiente Entrante (Incoming Backward Gradient)**
+
+* Vamos a definir el **Gradiente Entrante** hasta antes de la capa $i$ ***(desde la salida en dirección a la entrada)*** como:
+$$\begin{align}G_i &= G_{i+1} \cdot \frac{\partial Z_{i + 1}}{\partial Z_i} \\
+&= G_{i+1} \cdot \frac{\partial \sigma_i(Z_i W_i)}{\partial Z_i W_i} \cdot \frac{\partial Z_i W_i}{\partial Z_i}_{} \\
+&= (G_{i+1})_{m \times n_{i+1}} \cdot \sigma'(Z_i W_i)_{m \times n_{i + 1}} \cdot (W_i)_{n_i \times n_{i+1}}
 \end{align}$$
 :::
-::: {.column}
-::: {.callout-caution appearance="default"}
-## Ojo con las dimensiones
 
-* $Z - I_y \in \mathbb{R}^{m \times k}$
-* $X \in \mathbb{R}^{m \times n}$
+Luego,
+$$ G_i \in \mathbb{R}^{m \times n_i} = \left[ G_{i+1} \odot \sigma_i'(Z_i W_i)\right] W_i^T$$
+
+## Cálculo de Gradientes de una Red Neuronal {.smaller}
+
+$$\begin{align}\nabla_{W_i} l(Z_{L+1},y) &= G_{i+1} \cdot \frac{\partial Z_{i+1}}{\partial W_i} \\
+&= G_{i+1} \cdot \frac{\partial \sigma_i'(Z_i W_i)}{\partial Z_i W_i} \cdot \frac{\partial Z_i W_i}{\partial W_i} \\
+&= (G_{i+1})_{m \times n_{i+1}} \cdot \sigma'(Z_i W_i)_{m \times n_{i+1}} \cdot (Z_i)_{m \times n_i}
+\end{align}$$
+
+<br>
+
+::: {.callout-important style="font-size: 130%;"}
+
+Luego el Gradiente de cualquier `Loss Function` con respecto a un set de parámetros $W_i$ se escribe como:
+
+$$\nabla_{W_i}l(Z_{L+1}, y) = Z_i^T \left[G_{i+1} \odot \sigma'(Z_i W_i)\right]$$
 :::
+
+## Forward y Backward Passes {.smaller}
+
+Backpropagation
+: Corresponde al Algoritmo con el cuál calcularemos los Gradientes de una Red Neuronal. Es un nombre `muy fancy` para calcular la `Regla de la Cadena` de manera eficiente aplicando `caching` de los resultados intermedios. 
+
+
+::: {style="font-size: 90%;"}
+#### Forward Pass
+1. Inicializar $Z_1 = X$.
+2. Iterar calculando: $Z_i = \sigma_i(Z_i W_i), i=1,...,L$.
+
+#### Backward Pass
+3. Inicializar $G_{L+1} = \nabla_{Z_{L+1}}l(Z_{L+1},y) = S-I_y$ (Este ejemplo es sólo el caso de `Cross Entropy` como `Loss Function`).
+4. Iterar calculando: $G_i = \left[G_{i+1} \odot \sigma_i'(Z_i W_i)\right]W_i^T$
+
+#### Update Rule
+5. Calcular Gradientes para poder aplicar el `Update Rule`. 
+
+$$W_i := W_i - \frac{\alpha}{m}\nabla_{W_i}l(Z_{L+1},y) = Z_i^T\left[G_{i+1} \odot \sigma'(Z_i W_i)\right]$$
 :::
-::: 
 
-::: {.callout-tip}
-* $Z$ corresponde al Softmax de $X\theta$ aplicado por filas.
-* $I_y$ corresponde al One Hot Encoder de las etiquetas. 
-:::
+## Conceptos Clásicos del Entrenamiento de una NN {.smaller}
 
-Finalmente la regla de actualización de parámetros usando Gradient Descent queda como:
-
-$$\theta := \theta - \alpha X^T (Z - I_y)$$
+![](img/clase-2/formal_nn.png){.lightbox fig-align="center" width="60%"}  
 
 ::: {.callout-note}
-* Aplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.
-* Se puede programar en pocas líneas en Python.
+* Definiremos una `Epoch` como el número de veces que repetiremos el Algoritmo de Backpropagation con todos los datos de Entrenamiento. El número de `epochs` de entrenamiento será un hiperparámetro de un modelo.
+* Definiremos el `learning rate` como un hiperparámetro que controlará el aprendizaje del modelo. 
+* Definiremos este tipo de redes neuronales como `Feed Forward Networks` o ***FFN*** aunque en la práctica tienen una pequeña modificación que veremos en la siguiente clase.
 :::
 
-## ¿Qué pasa con arquitecturas más complejas?
+::: {.callout-important}
+Este tipo de redes es muy utilizada y recibe diversos nombres:
 
-::: {.columns}
-::: {.column}
-![](img/clase-1/nn_arq_full.png){.lightbox fig-align="center" width="70%"} 
+* Fully Connected Layers
+* Dense Layers: Proviene de la nomenclatura utilizada por Tensorflow.
+* Linear Layers: Proviene de la nomenclatura utilizada por Pytorch, pero **no es del todo** correcto.
+* **MLP** o Multilayer Perceptron.
 :::
-::: {.column}
-::: {.callout-important appearance="default"}
-## Próxima Clase
-* Vamos a hacer lo mismo para una Red Neuronal.
-* La única diferencia es que la hipótesis que utilizaremos es un poco más `fancy`.
-:::
-:::
-::: 
 
 
-# Nos vemos <br> (Próxima semana no hay clases)
+# See ya later, aligator!!
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
 
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
 :::
-
-# Anexos
-
-## Multiplicación Matricial {.smaller}
-
-::: {.columns}
-::: {.column}
-![](img/clase-1/mat_mat_mul.png){.lightbox fig-align="center"} 
-:::
-::: {.column}
-* Donde $B_{*,i}$ corresponde a la columna $i$ de B.
-* Donde $A_{i,*}$ corresponde a la fila $i$ de A.
-:::
-::: 
