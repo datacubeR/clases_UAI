@@ -333,7 +333,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-579-Deep Learning</h1>
-  <p class="subtitle">Clase 2: Introducción a las Redes Neuronales</p>
+  <p class="subtitle">Clase 2: Introducción a las Redes Neuronales y formalidades</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -854,792 +854,86 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
+<h4 id="update-rule-1">Update Rule</h4>
+<p><span class="math display">\[W_i := W_i - \frac{\alpha}{m} \nabla_{W_i} l(h_\theta(X),y)\]</span></p>
 </section>
-<section id="redes-neuronales" class="slide level2 smaller">
-<h2>Redes Neuronales</h2>
-</section>
-<section id="generalización-de-una-red-neuronal-de-l-capas" class="slide level2">
-<h2>Generalización de una Red Neuronal de L capas</h2>
-</section>
-<section id="definiciones-2" class="slide level2">
-<h2>Definiciones</h2>
-<dl>
-<dt>: Forward Pass</dt>
-<dd>
-<p>Backpropagation</p>
-</dd>
-<dd>
-<p>Epoch Una iteración en la cuál todos los datos disponibles para entrenamiento han realizado un Forward y Backward Pass.</p>
-</dd>
-<dd>
-<p>Batch</p>
-</dd>
-<dd>
-<p>Learning Rate</p>
-</dd>
-</dl>
-</section>
-<section id="por-qué-estudiar-deep-learning" class="slide level2 smaller">
-<h2>¿Por qué estudiar Deep Learning?</h2>
-<blockquote>
-<p>Principalmente porque es el Estado del Arte en las aplicaciones más Impresionantes en la Inteligencia Artificial.</p>
-</blockquote>
-<div class="columns">
-<div class="column fragment" style="width:25%;">
-<!-- -->
-<h4 id="alexnet-2012">Alexnet (2012)</h4>
-<p><a href="img/clase-1/alexnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-1/alexnet.png"></a></p>
-</div><div class="column fragment" style="width:25%;">
-<!-- -->
-<h4 id="alphago-2016">AlphaGo (2016)</h4>
-<p><a href="img/clase-1/alphago.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-1/alphago.png"></a></p>
-</div><div class="column fragment" style="width:25%;">
-<!-- -->
-<h4 id="transformers-2017">Transformers (2017)</h4>
-<p><a href="img/clase-1/transformer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-1/transformer.png"></a></p>
-</div><div class="column fragment" style="width:25%;">
-<!-- -->
-<h4 id="gpt-2019">GPT (2019)</h4>
-<p><a href="img/clase-1/gpt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-1/gpt.png"></a></p>
-</div>
-</div>
-</section>
-<section id="por-qué-estudiar-deep-learning-1" class="slide level2 smaller">
-<h2>¿Por qué estudiar Deep Learning?</h2>
-<blockquote>
-<p>Principalmente porque es el Estado del Arte en las aplicaciones más Impresionantes en la Inteligencia Artificial.</p>
-</blockquote>
-<div class="columns">
-<div class="column fragment" style="width:25%;">
-<!-- -->
-<h4 id="gpt-3-2021">GPT-3 (2021)</h4>
-<p><a href="img/clase-1/gpt3.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-1/gpt3.jpeg"></a></p>
-</div><div class="column fragment" style="width:25%;">
-<!-- -->
-<h4 id="alphafold-2021">AlphaFold (2021)</h4>
-<p><a href="img/clase-1/alphafold.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-1/alphafold.jpg"></a></p>
-</div><div class="column fragment" style="width:25%;">
-<!-- -->
-<h4 id="stable-diffussiondalle-2022">Stable Diffussion/Dalle (2022)</h4>
-<p><a href="img/clase-1/stable-diffusion-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-1/stable-diffusion-3.png"></a></p>
-</div><div class="column fragment" style="width:25%;">
-<!-- -->
-<h4 id="llms-2023-chatgptllama">LLMs (2023) (ChatGPT/Llama)</h4>
-<p><a href="img/clase-1/llms.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-1/llms.jpg"></a></p>
-</div>
-</div>
-</section>
-<section id="por-qué-estudiar-deep-learning-2" class="slide level2 smaller">
-<h2>¿Por qué estudiar Deep Learning?</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/google_trends.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" data-glightbox="description: .lightbox-desc-17" title="Imágen tomada de la Clase de Zico Colter"><img data-src="img/clase-1/google_trends.png" class="quarto-figure quarto-figure-center" style="width:70.0%" alt="Imágen tomada de la Clase de Zico Colter"></a></p>
-<figcaption>Imágen tomada de la Clase de Zico Colter</figcaption>
-</figure>
-</div>
-</section>
-<section id="por-qué-estudiar-deep-learning-3" class="slide level2 smaller">
-<h2>¿Por qué estudiar Deep Learning?</h2>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Facilidad y Autograd</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Frameworks como Tensorflow, Pytorch o Jax permiten realizar esto de manera mucho más sencilla.
-<ul>
-<li>Frameworks permiten calcular gradientes de manera automática.</li>
-<li>Antigua mente trabajar en Torch, Caffe o Theano podía tomar cerca de 50K líneas de código.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Cómputo</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Proliferación de las GPUs, TPUs, HPUs, IPUs, como sistemas masivos de Cómputos.
-<ul>
-<li><a href="https://www.nytimes.com/2012/06/26/technology/in-a-big-network-of-computers-evidence-of-machine-learning.html">How many computers to identify a cat? 16,000</a></li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
+<section id="cálculo-de-gradientes-de-una-red-neuronal" class="slide level2 smaller">
+<h2>Cálculo de Gradientes de una Red Neuronal</h2>
+<p><span class="math display">\[\nabla_{W_i} l(Z_{L+1},y) = \underbrace{\frac{\partial l(Z_{L+1},i)}{\partial Z_{L+1}} \cdot \frac{\partial Z_{{L+1}}}{\partial Z_L} \cdot \frac{\partial Z_L}{\partial Z_{L-1}}...\cdot \frac{\partial Z_{i+2}}{\partial Z_{i+1}}}_{G_{i+1} = \frac{\partial l(Z_{L+1},y)}{\partial Z_{i+1}}}\cdot \frac{\partial Z_{i+1}}{\partial W_i}\]</span></p>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Estado del Arte</strong></p>
+<p><strong><strong>Gradiente Entrante (Incoming Backward Gradient)</strong></strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Modelos de Deep Learning pueden generar sistemas que entiendan imágenes, textos, audios, videos, grafos, etc.</li>
+<li>Vamos a definir el <strong>Gradiente Entrante</strong> hasta antes de la capa <span class="math inline">\(i\)</span> <strong><em>(desde la salida en dirección a la entrada)</em></strong> como: <span class="math display">\[\begin{align}G_i &amp;= G_{i+1} \cdot \frac{\partial Z_{i + 1}}{\partial Z_i} \\
+&amp;= G_{i+1} \cdot \frac{\partial \sigma_i(Z_i W_i)}{\partial Z_i W_i} \cdot \frac{\partial Z_i W_i}{\partial Z_i}_{} \\
+&amp;= (G_{i+1})_{m \times n_{i+1}} \cdot \sigma'(Z_i W_i)_{m \times n_{i + 1}} \cdot (W_i)_{n_i \times n_{i+1}}
+\end{align}\]</span></li>
 </ul>
 </div>
 </div>
 </div>
+<p>Luego, <span class="math display">\[ G_i \in \mathbb{R}^{m \times n_i} = \left[ G_{i+1} \odot \sigma_i'(Z_i W_i)\right] W_i^T\]</span></p>
 </section>
-<section id="el-nacimiento-de-las-redes-neuronales" class="slide level2 smaller">
-<h2>El nacimiento de las Redes Neuronales</h2>
-<blockquote>
-<p>Las redes neuronales artificiales (ANN), son modelos inspirados en el mecanismo cerebral de sinapsis. Su unidad más básica es una Neurona.</p>
-</blockquote>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/neuron_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-1/neuron_1.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</section>
-<section id="el-nacimiento-de-las-redes-neuronales-1" class="slide level2 smaller">
-<h2>El nacimiento de las Redes Neuronales</h2>
-<blockquote>
-<p>Las redes neuronales artificiales (ANN), son modelos inspirados en el mecanismo cerebral de sinapsis. Su unidad más básica es una Neurona.</p>
-</blockquote>
-<div class="columns">
-<div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/neuron_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-1/neuron_2.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Este tipo de nomenclatura está sumamente pasada de moda.</p>
-</div>
-</div>
-</div>
-</div><div class="column fragment" style="width:40%;">
-<ul>
-<li>Este cálculo se puede representar como:</li>
-</ul>
-<p><span class="math display">\[ y = \phi(w_1 \cdot x_1 + w_2 \cdot x_2 + ... + w_5 \cdot x_5)\]</span> <span class="math display">\[ y = \phi(w^T \cdot x)\]</span></p>
-<p>donde <span class="math inline">\(w = [w_1, w_2, w_3, w_4, w_5]\)</span> y <span class="math inline">\(x = [x_1, x_2, x_3, x_4, x_5]\)</span>.</p>
-<div class="fragment">
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li class="fragment">¿Qué pasa si <span class="math inline">\(\phi(.)\)</span> vale la función <strong><em>identidad</em></strong>?</li>
-<li class="fragment">Tenemos una <strong>Regresión Lineal</strong>.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li class="fragment">¿Qué pasa si <span class="math inline">\(\phi(.)\)</span> vale la función <strong><em>sigmoide</em></strong>?</li>
-<li class="fragment">Tenemos una <strong>Regresión Logística</strong>.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="arquitectura-de-una-red" class="slide level2 smaller">
-<h2>Arquitectura de una Red</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/nn_arq.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-1/nn_arq.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<h3 id="estructura-más-común">Estructura más común</h3>
-<h6 id="probablemente-tampoco-seguiremos-esta-nomenclatura"><em>(Probablemente tampoco seguiremos esta nomenclatura)</em></h6>
-<ul>
-<li>Nodos o Neuronas</li>
-<li>Edges o Conexiones</li>
-<li>Capas</li>
-</ul>
-<div class="fragment" style="font-size:150%;">
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong><em>¿Cuántas capas tiene esta red?</em></strong></p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment" style="font-size:150%;">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong><em>Depende</em></strong></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<ul>
-<li>Normalmente todas las neuronas de una capa anterior se conectan con las de una capa posterior (Hay excepciones).</li>
-<li>Dependiendo de la forma en la que se conecten, cada <strong>Arquitectura</strong> recibe un nombre.</li>
-</ul>
-</section></section>
-<section>
-<section id="intuición-y-conceptos-iniciales" class="title-slide slide level1 center">
-<h1>Intuición y conceptos iniciales</h1>
-
-</section>
-<section id="los-ingredientes-de-un-algoritmo-de-aprendizaje" class="slide level2 smaller">
-<h2>Los Ingredientes de un Algoritmo de Aprendizaje</h2>
-<dl>
-<dt>Hipótesis</dt>
-<dd>
-<blockquote>
-<p>Una función que describe como mapear inputs (features) con outputs (labels) por medio de parámetros.</p>
-</blockquote>
-</dd>
-<dt>Loss Function</dt>
-<dd>
-<blockquote>
-<p>Una función que especifica cuanta información se pierde. Mayor pérdida implica más error de estimación.</p>
-</blockquote>
-</dd>
-<dt>Método de Optimización</dt>
-<dd>
-<blockquote>
-<p>Es el responsable de combinar la <code>hipótesis</code> y la <code>loss function</code>. Corresponde a un procedimiento para determinar los parámetros de la hipótesis, minimizando la suma de las pérdidas en un set de entrenamiento.</p>
-</blockquote>
-</dd>
-</dl>
-</section>
-<section id="ejemplo-softmax-regression" class="slide level2">
-<h2>Ejemplo: Softmax Regression</h2>
-<dl>
-<dt>Softmax Regression</dt>
-<dd>
-<blockquote>
-<p>Corresponde la versión multiclase de una Regresión Logística. También se le llama una <code>Shallow Network</code>.</p>
-</blockquote>
-</dd>
-</dl>
-<div class="columns">
-<div class="column" style="font-size: 80%;">
-<div class="callout callout-tip callout-titled callout-style-simple">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Consideremos un problema de clasificación multiclase de <span class="math inline">\(k\)</span> clases tal que:</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Datos de Entrenamiento: <span class="math inline">\(x^{(i)}, y^{(i)} \in {1,...,k}\)</span> para <span class="math inline">\(i=1,...,m\)</span>.
-<ul>
-<li><span class="math inline">\(n\)</span>: Es el número de Features.</li>
-<li><span class="math inline">\(m\)</span>: Es el número de puntos en el training set.</li>
-<li><span class="math inline">\(k\)</span>: Es el número de clases del problema.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Vamos a tener en total <span class="math inline">\(n \times k\)</span> parámetros o pesos que actualizar.</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/softmax_reg.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-1/softmax_reg.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="softmax-regression-hipótesis" class="slide level2">
-<h2>Softmax Regression: Hipótesis</h2>
-<div style="font-size: 80%;">
-<p>Vamos a definir una función que mapea valores de <span class="math inline">\(x \in \mathbb{R}\)</span> a vectores de <span class="math inline">\(k\)</span> dimensiones.</p>
-</div>
-<p><span class="math display">\[ h: \mathbb{R}^n \rightarrow \mathbb{R}^k\]</span> <span class="math display">\[ x \rightarrow h_\theta(x) = \theta^T x\]</span></p>
-<div style="font-size: 80%;">
-<p>donde <span class="math inline">\(\theta \in \mathbb{R}^{n \times k}\)</span> y <span class="math inline">\(x \in \mathbb{R}^{n\times 1}\)</span></p>
-</div>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En este caso usamos una hipótesis lineal, ya que se usa una multiplicación matricial (o producto punto) para relacionar <span class="math inline">\(\theta\)</span> y <span class="math inline">\(x\)</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En este caso el output de <span class="math inline">\(h_i(x)\)</span> devolverá la probabilidad de pertenecer a una cierta clase <span class="math inline">\(i\)</span>.</p>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong><em>¿Cuál es el tamaño/dimensión de <span class="math inline">\(h_\theta(x)\)</span>?</em></strong></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="notación-matricial" class="slide level2 smaller">
-<h2>Notación Matricial</h2>
-<blockquote>
-<p>Una manera más conveniente de escribir estas operaciones es utilizar <strong><em>(Matrix Batch Form)</em></strong>.</p>
-</blockquote>
-<div class="columns">
-<div class="column">
-<h5 id="design-matrix">Design Matrix</h5>
-<p><span class="math display">\[X \in \mathbb{R}^{m \times n} = \begin{bmatrix}
-&amp;-x^{(1)T}-\\
-&amp; \vdots &amp; \\
-&amp;-x^{(m)T}- &amp;\\
-\end{bmatrix}\]</span></p>
-</div><div class="column">
-<h5 id="labels-vector">Labels Vector</h5>
-<p><span class="math display">\[y \in {1,...,k} = \begin{bmatrix}
-&amp;-y^{(1)}-\\
-&amp; \vdots &amp; \\
-&amp;-y^{(m)}- &amp;\\
-\end{bmatrix}\]</span></p>
-</div>
-</div>
-<p>La hipótesis también se puede reescribir de manera matricial como:</p>
-<div class="columns">
-<div class="column">
-<p><span class="math display">\[h_\theta(X) = \begin{bmatrix}
-&amp;-h_\theta(x^{(1)})^T-\\
-&amp; \vdots &amp; \\
-&amp;-h_\theta(x^{(m)})^T-\\
-\end{bmatrix}\]</span></p>
-</div><div class="column">
-<p><span class="math display">\[h_\theta(X)= \begin{bmatrix}
-&amp;-x^{(1)T} \theta-\\
-&amp; \vdots &amp; \\
-&amp;-x^{(m)T} \theta-\\
-\end{bmatrix} = X  \theta\]</span></p>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Normalmente este tipo de operaciones son las que utilizaremos para hacer nuestro código.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="loss-function-softmaxcross-entropy-loss" class="slide level2 smaller">
-<h2>Loss Function: Softmax/Cross-Entropy Loss</h2>
-<p>La salida de nuestra <code>Shallow Network</code> retornará valores reales. Para poder tener una mejor interpretación del significado de cada una aplicaremos la función <code>Softmax</code> lo cual permitirá <em>normalizar</em> los resultados y llevará los resultados a una <strong><em>“distribución de probabilidad”</em></strong> (valores positivos que sumen 1).</p>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p><br></p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/softmax_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-1/softmax_example.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:40%;">
-<p><br></p>
-<p>Formalmente definiremos la función Softmax como:</p>
-<p><span class="math display">\[z_i = p(label = i) = \frac{exp(h_i(x))}{\sum_{j=1}^k exp(h_j(x))}\]</span></p>
-<p><span class="math display">\[Z = \begin{bmatrix}
-&amp;z_1&amp;\\
-&amp; \vdots &amp; \\
-&amp;z_k&amp;\\
-\end{bmatrix}\]</span></p>
-</div>
-</div>
-</section>
-<section id="loss-function-softmaxcross-entropy-loss-1" class="slide level2 smaller">
-<h2>Loss Function: Softmax/Cross-Entropy Loss</h2>
-<p>Para medir el error, o la pérdida de información de un punto utilizaremos el Negative Log Loss, también llamado <code>Cross Entropy Loss</code>.</p>
-<div class="fragment">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Para garantizar el éxito de nuestro modelo, básicamente queremos maximizar la probabilidad de encontrar la etiqueta correcta, es decir, que <span class="math inline">\(p(label = y)\)</span> sea lo más alto posible.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Normalmente en los problemas de optimización no se suele maximizar sino minimizar. Minimizar el valor negativo es equivalente a maximizar. Esto sería equivalente a minimizar el error del modelo.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Finalmente por razones de estabilidad numérica, minimizamos el logaritmo de la probabilidad que es una técnica bien conocida en Estadística.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\begin{align}
-l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
-&amp;= -log \left(\frac{exp(h_{(i = y)}(x))}{\sum_{j=1}^k exp(h_j(x))}\right) \\
-&amp;= - h_{(i=y)}(x) + log\left(\sum_{j = 1}^k exp(h_j(x))\right)\end{align}\]</span></p>
-</div>
-</section>
-<section id="método-de-optimización" class="slide level2 smaller">
-<h2>Método de Optimización</h2>
-<blockquote>
-<p>El último ingrediente de un algoritmo de aprendizaje es el método de optimización. Es necesario minimizar la pérdida promedio asociada a todos los puntos de un cierto set de entrenamiento. Para ello definimos esto formalmente como:</p>
-</blockquote>
-<p><span class="math display">\[\underset{\theta}{minimize} = \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}), y^{(i)}) =\frac{1}{m} \sum_{i=1}^m l(\theta^Tx^{(i)}, y^{(i)})\]</span></p>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong><em>¿Cómo encontramos los parámetros <span class="math inline">\(\theta\)</span> que minimizan la pérdida de información/error de estimación?</em></strong></p>
-</div>
-</div>
-</div>
-<dl>
-<dt>Gradient Descent</dt>
-<dd>
-<blockquote>
-<p>Es un método numérico que permite minimizar funciones moviéndose en dirección contraria al Gradiente. Es computacionalmente muy eficiente y fácil de implementar en código.</p>
-</blockquote>
-</dd>
-</dl>
-</section>
-<section id="gradient-descent" class="slide level2 smaller">
-<h2>Gradient Descent</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p>Se define el gradiente como la matriz que contiene las derivadas parciales de una función <span class="math inline">\(f\)</span>. Se denota como:</p>
-<p><span class="math display">\[\nabla_\theta f(\theta) \in \mathbb{R}^{n \times k} =  \begin{bmatrix}
-\frac{\partial f(\theta)}{\partial \theta_{11}} &amp; \cdots &amp; \frac{\partial f(\theta)}{\partial \theta_{1k}} \\
-\cdots &amp; \ddots &amp; \cdots \\
-\frac{\partial f(\theta)}{\partial \theta_{n1}} &amp; \cdots &amp; \frac{\partial f(\theta)}{\partial \theta_{nk}}
-\end{bmatrix}\]</span></p>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><span class="math inline">\(\theta_{ij}\)</span> corresponde al parámetro que une el nodo/feature <span class="math inline">\(i\)</span> con el nodo/predicción <span class="math inline">\(j\)</span>.</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/gradient.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-1/gradient.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<div style="font-size: 130%;">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>El gradiente apunta a la dirección de máximo crecimiento de la función <span class="math inline">\(f\)</span>.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="gradient-descent-regla-de-actualización" class="slide level2 smaller">
-<h2>Gradient Descent: Regla de Actualización</h2>
-<p>Para minimizar la función, la idea es descender iterativamente por el trayecto <strong>en contra</strong> del gradiente. La regla de actualización se define como:</p>
-<p><span class="math display">\[\theta := \theta - \alpha \nabla_\theta f(\theta) = \theta - \alpha \nabla_\theta l_{ce}(X\theta,y)\]</span></p>
-<p>con <span class="math inline">\(\theta \in \mathbb{R}^{n \times k}\)</span> y <span class="math inline">\(\alpha &gt; 0\)</span> corresponde al <em>step size</em> o <code>learning rate</code>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/lr_effect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-1/lr_effect.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En nuestro caso <span class="math inline">\(f\)</span> corresponderá a nuestro <span class="math inline">\(l_{ce}\)</span> calculado anteriormente. El problema es, ¿cuánto vale el gradiente del <code>Cross Entropy Loss</code>?</p>
-</div>
-</div>
-</div>
-</section>
-<section id="calculando-el-gradiente-a-mano" class="slide level2 smaller">
-<h2>Calculando el Gradiente a mano</h2>
-<div style="font-size: 130%;">
-<p>Simplifiquemos el problema a calcular para un sólo vector <span class="math inline">\(x\)</span>.</p>
-<p><span class="math display">\[\theta := \theta - \alpha \nabla_\theta l_{ce}(\theta^Tx,y) \]</span></p>
-</div>
-<div style="font-size: 120%;">
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>¿Cuánto vale el Gradiente?</p>
-<ul>
-<li>No es tan sencillo, ya que derivamos respecto a <span class="math inline">\(\theta\)</span> que es una matriz.</li>
-<li>Pero derivamos a <span class="math inline">\(\theta^T x\)</span> que es un vector.</li>
-<li>Para ello, lo correcto es utilizar Calculo Diferencial Matricial, Jacobianos y Productos de Kroenecker (que probablemente no han visto en ningún curso).
-<ul>
-<li><strong>SPOILER</strong>: Yo tampoco lo he visto en ningún curso.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="columns fragment">
-<div class="column" style="width:70%;">
-<div style="font-size: 120%;">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Usaremos un truco (sumamente hacky 😱) que jamás deben revelar y que avergonzaría a cualquier profesor de Cálculo.
-<ul>
-<li>Pretenderemos que todos los valores son escalares y corregiremos las dimensiones al final.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/fuenzi.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-1/fuenzi.jpeg" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="calculando-el-gradiente-a-mano-1" class="slide level2 smaller">
-<h2>Calculando el Gradiente a mano</h2>
-<blockquote>
-<p>Simplifiquemos el problema pensando que calcularemos el Gradiente para un sólo vector <span class="math inline">\(x\)</span>.</p>
-</blockquote>
-<blockquote>
-<p>Es decir, <span class="math inline">\(x \in \mathbb{R}^{n\times1}\)</span>.</p>
-</blockquote>
-<p>Además sabemos que <span class="math inline">\(\nabla_\theta l_{ce}(\theta^Tx, y)\)</span> debe tener dimensiones <span class="math inline">\(n \times k\)</span>.</p>
-<div class="columns">
-<div class="column">
-<p><span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}\]</span></p>
-</div><div class="column">
-<p><span class="math display">\[\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = \frac{\partial l_{ce}(\theta^Tx, y)}{\partial h} = \begin{bmatrix}
-\frac{\partial l_{ce}(h,y)}{\partial h_1} \\
-\vdots\\
-\frac{\partial l_{ce}(h,y)}{\partial h_k} \\
-\end{bmatrix}\]</span></p>
-</div>
-</div>
-<div class="fragment" style="font-size: 130%;">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Luego el gradiente de <span class="math inline">\(l_{ce}\)</span> respecto a <span class="math inline">\(h\)</span> tiene dimensiones <span class="math inline">\(k \times 1\)</span>.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="calculando-el-gradiente-a-mano-2" class="slide level2 smaller">
-<h2>Calculando el Gradiente a mano</h2>
-<p><span class="math display">\[\begin{align}
-\frac{\partial l_{ce}(h,y)}{\partial h_i} &amp;= \frac{\partial }{\partial h_i}\left(-h_{(i = y)} + log \sum_{j = 1}^k exp(h_j)\right) \\
-&amp;= -\frac{\partial h_{(i = y)}}{\partial h_i}+ \frac{1}{\sum_{j = 1}^k exp(h_j)} \cdot \frac{\partial}{\partial h_i}\left(\sum_{j=1}^k exp(h_j)\right) \\
-&amp;= -\frac{\partial h_{(i = y)}}{\partial h_i}+ \frac{exp(h_i)}{\sum_{j = 1}^k exp(h_j)} \\
-&amp;= - 1\{i=y\} + z_i = z_i - 1\{i=y\}
-\end{align}
-\]</span></p>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[1\{i = y\} = \begin{cases}
-1,  &amp; \text{i = y} \\
-0, &amp; \text{otherwise}
-\end{cases}
-\]</span></p>
-</div>
-</div>
-</div>
-<p>Finalmente en forma vectorial quedaría como:</p>
-<div class="columns">
-<div class="column">
-<p><span class="math display">\[\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = z - e_y\]</span></p>
-</div><div class="column">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Donde <span class="math inline">\(z\)</span>, es el vector de Softmax y <span class="math inline">\(e_y\)</span> es un vector con un 1 en la posición <span class="math inline">\(y\)</span> y 0 en el resto.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="calculando-el-gradiente-a-mano-3" class="slide level2 smaller">
-<h2>Calculando el Gradiente a mano</h2>
-<div class="columns">
-<div class="column">
-<p><span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}\]</span> <span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = (z-e_y)\cdot x \]</span></p>
-</div><div class="column fragment">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ojo con las dimensiones</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><span class="math inline">\(Z-e_y \in \mathbb{R}^{k \times 1}\)</span></li>
-<li><span class="math inline">\(x \in \mathbb{R}^{n \times 1}\)</span></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<p>Luego:</p>
-<p><span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = x (z-e_y)^T\]</span></p>
-</div>
-</section>
-<section id="calculando-el-gradiente-matrix-batch-form" class="slide level2 smaller">
-<h2>Calculando el Gradiente Matrix Batch Form</h2>
-<div class="columns">
-<div class="column">
-<p><span class="math display">\[\begin{align}\nabla_\theta l_{ce}(X\theta,y) \in \mathbb{R}^{n\times k} &amp;= \frac{\partial l_{ce}(X\theta,y)}{\partial X\theta} \cdot \frac{\partial X\theta}{\partial \theta}\\
-&amp;= (Z - I_y) \cdot X \\
-&amp;= X^T \cdot (Z - I_y)
+<section id="cálculo-de-gradientes-de-una-red-neuronal-1" class="slide level2 smaller">
+<h2>Cálculo de Gradientes de una Red Neuronal</h2>
+<p><span class="math display">\[\begin{align}\nabla_{W_i} l(Z_{L+1},y) &amp;= G_{i+1} \cdot \frac{\partial Z_{i+1}}{\partial W_i} \\
+&amp;= G_{i+1} \cdot \frac{\partial \sigma_i'(Z_i W_i)}{\partial Z_i W_i} \cdot \frac{\partial Z_i W_i}{\partial W_i} \\
+&amp;= (G_{i+1})_{m \times n_{i+1}} \cdot \sigma'(Z_i W_i)_{m \times n_{i+1}} \cdot (Z_i)_{m \times n_i}
 \end{align}\]</span></p>
-</div><div class="column">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ojo con las dimensiones</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><span class="math inline">\(Z - I_y \in \mathbb{R}^{m \times k}\)</span></li>
-<li><span class="math inline">\(X \in \mathbb{R}^{m \times n}\)</span></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-style-simple">
+<p><br></p>
+<div style="font-size: 130%;">
+<div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<ul>
-<li><span class="math inline">\(Z\)</span> corresponde al Softmax de <span class="math inline">\(X\theta\)</span> aplicado por filas.</li>
-<li><span class="math inline">\(I_y\)</span> corresponde al One Hot Encoder de las etiquetas.</li>
-</ul>
+<p>Luego el Gradiente de cualquier <code>Loss Function</code> con respecto a un set de parámetros <span class="math inline">\(W_i\)</span> se escribe como:</p>
+<p><span class="math display">\[\nabla_{W_i}l(Z_{L+1}, y) = Z_i^T \left[G_{i+1} \odot \sigma'(Z_i W_i)\right]\]</span></p>
 </div>
 </div>
 </div>
-<p>Finalmente la regla de actualización de parámetros usando Gradient Descent queda como:</p>
-<p><span class="math display">\[\theta := \theta - \alpha X^T (Z - I_y)\]</span></p>
+</div>
+</section>
+<section id="forward-y-backward-passes" class="slide level2 smaller">
+<h2>Forward y Backward Passes</h2>
+<dl>
+<dt>Backpropagation</dt>
+<dd>
+Corresponde al Algoritmo con el cuál calcularemos los Gradientes de una Red Neuronal. Es un nombre <code>muy fancy</code> para calcular la <code>Regla de la Cadena</code> de manera eficiente aplicando <code>caching</code> de los resultados intermedios.
+</dd>
+</dl>
+<div style="font-size: 90%;">
+<h4 id="forward-pass">Forward Pass</h4>
+<ol type="1">
+<li>Inicializar <span class="math inline">\(Z_1 = X\)</span>.</li>
+<li>Iterar calculando: <span class="math inline">\(Z_i = \sigma_i(Z_i W_i), i=1,...,L\)</span>.</li>
+</ol>
+<h4 id="backward-pass">Backward Pass</h4>
+<ol start="3" type="1">
+<li>Inicializar <span class="math inline">\(G_{L+1} = \nabla_{Z_{L+1}}l(Z_{L+1},y) = S-I_y\)</span> (Este ejemplo es sólo el caso de <code>Cross Entropy</code> como <code>Loss Function</code>).</li>
+<li>Iterar calculando: <span class="math inline">\(G_i = \left[G_{i+1} \odot \sigma_i'(Z_i W_i)\right]W_i^T\)</span></li>
+</ol>
+<h4 id="update-rule-2">Update Rule</h4>
+<ol start="5" type="1">
+<li>Calcular Gradientes para poder aplicar el <code>Update Rule</code>.</li>
+</ol>
+<p><span class="math display">\[W_i := W_i - \frac{\alpha}{m}\nabla_{W_i}l(Z_{L+1},y) = Z_i^T\left[G_{i+1} \odot \sigma'(Z_i W_i)\right]\]</span></p>
+</div>
+</section>
+<section id="conceptos-clásicos-del-entrenamiento-de-una-nn" class="slide level2 smaller">
+<h2>Conceptos Clásicos del Entrenamiento de una NN</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-2/formal_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-2/formal_nn.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -1647,72 +941,37 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 </div>
 <div class="callout-content">
 <ul>
-<li>Aplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.</li>
-<li>Se puede programar en pocas líneas en Python.</li>
+<li>Definiremos una <code>Epoch</code> como el número de veces que repetiremos el Algoritmo de Backpropagation con todos los datos de Entrenamiento. El número de <code>epochs</code> de entrenamiento será un hiperparámetro de un modelo.</li>
+<li>Definiremos el <code>learning rate</code> como un hiperparámetro que controlará el aprendizaje del modelo.</li>
+<li>Definiremos este tipo de redes neuronales como <code>Feed Forward Networks</code> o <strong><em>FFN</em></strong> aunque en la práctica tienen una pequeña modificación que veremos en la siguiente clase.</li>
 </ul>
 </div>
 </div>
 </div>
-</section>
-<section id="qué-pasa-con-arquitecturas-más-complejas" class="slide level2">
-<h2>¿Qué pasa con arquitecturas más complejas?</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/nn_arq_full.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-1/nn_arq_full.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout callout-important callout-style-simple">
 <div class="callout-body">
-<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Próxima Clase</strong></p>
-</div>
 <div class="callout-content">
+<p>Este tipo de redes es muy utilizada y recibe diversos nombres:</p>
 <ul>
-<li>Vamos a hacer lo mismo para una Red Neuronal.</li>
-<li>La única diferencia es que la hipótesis que utilizaremos es un poco más <code>fancy</code>.</li>
+<li>Fully Connected Layers</li>
+<li>Dense Layers: Proviene de la nomenclatura utilizada por Tensorflow.</li>
+<li>Linear Layers: Proviene de la nomenclatura utilizada por Pytorch, pero <strong>no es del todo</strong> correcto.</li>
+<li><strong>MLP</strong> o Multilayer Perceptron.</li>
 </ul>
-</div>
-</div>
 </div>
 </div>
 </div>
 </section></section>
-<section id="nos-vemos-próxima-semana-no-hay-clases" class="title-slide slide level1 center">
-<h1>Nos vemos <br> (Próxima semana no hay clases)</h1>
+<section id="see-ya-later-aligator" class="title-slide slide level1 center">
+<h1>See ya later, aligator!!</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a>
 <p></p>
-</div>
-</section>
-
-<section>
-<section id="anexos" class="title-slide slide level1 center">
-<h1>Anexos</h1>
-
-</section>
-<section id="multiplicación-matricial" class="slide level2 smaller">
-<h2>Multiplicación Matricial</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-1/mat_mat_mul.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-1/mat_mat_mul.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<ul>
-<li>Donde <span class="math inline">\(B_{*,i}\)</span> corresponde a la columna <span class="math inline">\(i\)</span> de B.</li>
-<li>Donde <span class="math inline">\(A_{i,*}\)</span> corresponde a la fila <span class="math inline">\(i\)</span> de A.</li>
-</ul>
-</div>
 </div>
 
 <div class="quarto-auto-generated-content">
@@ -1721,10 +980,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
 
 </div>
 </div>
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-17">Imágen tomada de la Clase de Zico Colter</span>
-</div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -2091,7 +1347,7 @@ l_{ce}(h(x), y) &amp;= -log\left(p(label = y)\right)\\
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
     window.onload = () => {
       lightboxQuarto.on('slide_before_load', (data) => {
         const { slideIndex, slideNode, slideConfig, player, trigger } = data;
