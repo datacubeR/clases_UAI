@@ -11,10 +11,10 @@
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.550">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Alfonso Tobar-Arancibia">
-  <title>Clases UAI - TICS-579-Deep Learning</title>
+  <title>Clases UAI – TICS-579-Deep Learning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -374,8 +374,7 @@ Alfonso Tobar-Arancibia
 <!-- -->
 <h4 id="gpt-2019">GPT (2019)</h4>
 <p><a href="img/clase-1/gpt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-1/gpt.png"></a></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="por-qué-estudiar-deep-learning-1" class="slide level2 smaller">
 <h2>¿Por qué estudiar Deep Learning?</h2>
@@ -399,14 +398,17 @@ Alfonso Tobar-Arancibia
 <!-- -->
 <h4 id="llms-2023-chatgptllama">LLMs (2023) (ChatGPT/Llama)</h4>
 <p><a href="img/clase-1/llms.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-1/llms.jpg"></a></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="por-qué-estudiar-deep-learning-2" class="slide level2 smaller">
 <h2>¿Por qué estudiar Deep Learning?</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/google_trends.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-glightbox="description: .lightbox-desc-9" title="Imágen tomada de la Clase de Zico Colter"><img data-src="img/clase-1/google_trends.png" class="quarto-figure quarto-figure-center" style="width:70.0%" alt="Imágen tomada de la Clase de Zico Colter"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/google_trends.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Imágen tomada de la Clase de Zico Colter"><img data-src="img/clase-1/google_trends.png" class="quarto-figure quarto-figure-center" style="width:70.0%" alt="Imágen tomada de la Clase de Zico Colter"></a></p>
+</figure>
+</div>
 <figcaption>Imágen tomada de la Clase de Zico Colter</figcaption>
 </figure>
 </div>
@@ -535,8 +537,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="arquitectura-de-una-red" class="slide level2 smaller">
 <h2>Arquitectura de una Red</h2>
@@ -579,8 +580,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <ul>
 <li>Normalmente todas las neuronas de una capa anterior se conectan con las de una capa posterior (Hay excepciones).</li>
 <li>Dependiendo de la forma en la que se conecten, cada <strong>Arquitectura</strong> recibe un nombre.</li>
@@ -662,8 +662,7 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-1/softmax_reg.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-1/softmax_reg.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="softmax-regression-hipótesis" class="slide level2">
 <h2>Softmax Regression: Hipótesis</h2>
@@ -727,8 +726,7 @@ Alfonso Tobar-Arancibia
 &amp; \vdots &amp; \\
 &amp;-y^{(m)}- &amp;\\
 \end{bmatrix}\]</span></p>
-</div>
-</div>
+</div></div>
 <p>La hipótesis también se puede reescribir de manera matricial como:</p>
 <div class="columns">
 <div class="column">
@@ -743,8 +741,7 @@ Alfonso Tobar-Arancibia
 &amp; \vdots &amp; \\
 &amp;-x^{(m)T} \theta-\\
 \end{bmatrix} = X  \theta\]</span></p>
-</div>
-</div>
+</div></div>
 <div class="fragment">
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
@@ -793,14 +790,13 @@ Alfonso Tobar-Arancibia
 </div>
 </div><div class="column" style="width:40%;">
 <p>Formalmente definiremos la función Softmax como:</p>
-<p><span class="math display">\[z_i = p(label = i) = \frac{exp(h_i(x))}{\sum_{j=1}^k exp(h_j(x))}\]</span></p>
-<p><span class="math display">\[Z = \begin{bmatrix}
-&amp;z_1&amp;\\
+<p><span class="math display">\[s_i = p(label = i) = \frac{exp(h_i(x))}{\sum_{j=1}^k exp(h_j(x))}\]</span></p>
+<p><span class="math display">\[s = \begin{bmatrix}
+&amp;s_1&amp;\\
 &amp; \vdots &amp; \\
-&amp;z_k&amp;\\
+&amp;s_k&amp;\\
 \end{bmatrix}\]</span></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="loss-function-softmaxcross-entropy-loss-1" class="slide level2 smaller">
 <h2>Loss Function: Softmax/Cross-Entropy Loss</h2>
@@ -899,8 +895,7 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 <p><a href="img/clase-1/gradient.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-1/gradient.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 <div style="font-size: 130%;">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
@@ -986,8 +981,7 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 <p><a href="img/clase-1/fuenzi.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-1/fuenzi.jpeg" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="calculando-el-gradiente-a-mano-1" class="slide level2 smaller">
 <h2>Calculando el Gradiente a mano</h2>
@@ -1019,8 +1013,7 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 \vdots\\
 \frac{\partial l_{ce}(h,y)}{\partial h_k} \\
 \end{bmatrix}\]</span></p>
-</div>
-</div>
+</div></div>
 <div class="fragment" style="font-size: 130%;" data-fragment-index="4">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
@@ -1040,7 +1033,7 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 \frac{\partial l_{ce}(h,y)}{\partial h_i} &amp;= \frac{\partial }{\partial h_i}\left(-h_{(i = y)} + log \sum_{j = 1}^k exp(h_j)\right) \\
 &amp;= -\frac{\partial h_{(i = y)}}{\partial h_i}+ \frac{1}{\sum_{j = 1}^k exp(h_j)} \cdot \frac{\partial}{\partial h_i}\left(\sum_{j=1}^k exp(h_j)\right) \\
 &amp;= -\frac{\partial h_{(i = y)}}{\partial h_i}+ \frac{exp(h_i)}{\sum_{j = 1}^k exp(h_j)} \\
-&amp;= - 1\{i=y\} + z_i = z_i - 1\{i=y\}
+&amp;= - 1\{i=y\} + s_i = s_i - 1\{i=y\}
 \end{align}
 \]</span></p>
 <div class="fragment">
@@ -1063,7 +1056,7 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 <p>Finalmente en forma vectorial quedaría como:</p>
 <div class="columns">
 <div class="column">
-<p><span class="math display">\[\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = z - e_y\]</span></p>
+<p><span class="math display">\[\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = s - e_y\]</span></p>
 </div><div class="column">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
@@ -1075,15 +1068,14 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </div>
 </section>
 <section id="calculando-el-gradiente-a-mano-3" class="slide level2 smaller">
 <h2>Calculando el Gradiente a mano</h2>
 <div class="columns">
 <div class="column">
-<p><span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}\]</span> <span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = (z-e_y)\cdot x \]</span></p>
+<p><span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}\]</span> <span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = (s-e_y)\cdot x \]</span></p>
 </div><div class="column fragment">
 <div class="callout callout-caution callout-titled callout-style-default">
 <div class="callout-body">
@@ -1095,17 +1087,16 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 </div>
 <div class="callout-content">
 <ul>
-<li><span class="math inline">\(z-e_y \in \mathbb{R}^{k \times 1}\)</span></li>
+<li><span class="math inline">\(s-e_y \in \mathbb{R}^{k \times 1}\)</span></li>
 <li><span class="math inline">\(x \in \mathbb{R}^{n \times 1}\)</span></li>
 </ul>
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <div class="fragment">
 <p>Luego:</p>
-<p><span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = x (z-e_y)^T\]</span></p>
+<p><span class="math display">\[\nabla_\theta l_{ce}(\theta^T x,y) = x (s-e_y)^T\]</span></p>
 </div>
 <div class="fragment" style="font-size: 150%;">
 <div class="callout callout-caution callout-style-simple">
@@ -1150,8 +1141,8 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 <div class="columns">
 <div class="column">
 <p><span class="math display">\[\begin{align}\nabla_\theta l_{ce}(X\theta,y) &amp;= \frac{\partial l_{ce}(X\theta,y)}{\partial X\theta} \cdot \frac{\partial X\theta}{\partial \theta}\\
-&amp;= (Z - I_y) \cdot X \\
-&amp;= X^T \cdot (Z - I_y)
+&amp;= (S - I_y) \cdot X \\
+&amp;= X^T \cdot (S - I_y)
 \end{align}\]</span></p>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
@@ -1160,7 +1151,7 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 </div>
 <div class="callout-content">
 <ul>
-<li><span class="math inline">\(Z\)</span> corresponde al Softmax de <span class="math inline">\(X\theta\)</span> aplicado por filas.</li>
+<li><span class="math inline">\(S\)</span> corresponde al Softmax de <span class="math inline">\(X\theta\)</span> aplicado por filas.</li>
 <li><span class="math inline">\(I_y\)</span> corresponde al One Hot Encoder de las etiquetas. Filas con 1 en la etiqueta correcta y 0 en el resto.</li>
 </ul>
 </div>
@@ -1178,7 +1169,7 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 </div>
 <div class="callout-content">
 <ul>
-<li><span class="math inline">\(Z - I_y \in \mathbb{R}^{m \times k}\)</span></li>
+<li><span class="math inline">\(S - I_y \in \mathbb{R}^{m \times k}\)</span></li>
 <li><span class="math inline">\(X \in \mathbb{R}^{m \times n}\)</span></li>
 </ul>
 </div>
@@ -1197,11 +1188,10 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <div class="fragment">
 <p>Finalmente la <code>Regla de Actualización</code> de parámetros usando Gradient Descent queda como:</p>
-<p><span class="math display">\[\theta := \theta - \frac{\alpha}{m} X^T (Z - I_y)\]</span></p>
+<p><span class="math display">\[\theta := \theta - \frac{\alpha}{m} X^T (S - I_y)\]</span></p>
 </div>
 </section>
 <section id="conclusiones" class="slide level2 smaller">
@@ -1257,8 +1247,7 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 <p><a href="img/clase-1/nn_arq_full.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-1/nn_arq_full.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section></section>
 <section id="eso-es-todo" class="title-slide slide level1 center">
 <h1>¡¡Eso es todo!!</h1>
@@ -1289,17 +1278,13 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
 <li>Donde <span class="math inline">\(B_{*,i}\)</span> corresponde a la columna <span class="math inline">\(i\)</span> de B.</li>
 <li>Donde <span class="math inline">\(A_{i,*}\)</span> corresponde a la fila <span class="math inline">\(i\)</span> de A.</li>
 </ul>
-</div>
-</div>
+</div></div>
 
 <div class="quarto-auto-generated-content">
 <p><img src="../logo-uai-blanco.jpeg" class="slide-logo"></p>
 <div class="footer footer-default">
 
 </div>
-</div>
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-9">Imágen tomada de la Clase de Zico Colter</span>
 </div>
 </section></section>
     </div>
@@ -1546,18 +1531,7 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1589,7 +1563,47 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp("https:\/\/datacubeR\.github\.io\/clases_UAI\/");
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
@@ -1626,7 +1640,11 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
@@ -1668,30 +1686,37 @@ l_{ce}(h(x), y) = -log\left(p(label = y)\right) &amp;= -log \left(\frac{exp(h_{(
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false});
-    window.onload = () => {
-      lightboxQuarto.on('slide_before_load', (data) => {
-        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-        const href = trigger.getAttribute('href');
-        if (href !== null) {
-          const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-          if (imgEl !== null) {
-            const srcAttr = imgEl.getAttribute("src");
-            if (srcAttr && srcAttr.startsWith("data:")) {
-              slideConfig.href = srcAttr;
-            }
-          }
-        } 
-      });
-
-      lightboxQuarto.on('slide_after_load', (data) => {
-        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(slideNode);
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","loop":false,"closeEffect":"zoom","openEffect":"zoom"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
         }
-      });
-
-    };
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
               </script>
     
 

@@ -11,10 +11,10 @@
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.550">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Alfonso Tobar-Arancibia">
-  <title>Clases UAI - TICS-411 Minería de Datos</title>
+  <title>Clases UAI – TICS-411 Minería de Datos</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -45,7 +45,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -73,7 +73,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -87,7 +87,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -543,8 +543,7 @@ Corresponde a valores reales de la clase 0 que fueron incorrectamente predichos 
 Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos como clase 0.
 </dd>
 </dl>
-</div>
-</div>
+</div></div>
 </section>
 <section id="métricas-a-partir-de-la-matriz-de-confusión" class="slide level2 smaller">
 <h2>Métricas: A partir de la Matriz de Confusión</h2>
@@ -591,8 +590,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -635,8 +633,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <p><a href="img/clase-9/roc_ex_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-9/roc_ex_2.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="implementación-en-python" class="slide level2">
 <h2>Implementación en Python</h2>
@@ -765,8 +762,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="complejidad-de-un-modelo" class="slide level2">
 <h2>Complejidad de un Modelo</h2>
@@ -856,8 +852,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <p><a href="img/clase-9/test_error.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-9/test_error.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 <div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -918,8 +913,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section></section>
 <section>
 <section id="esquemas-de-validación" class="title-slide slide level1 center">
@@ -1049,8 +1043,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="variante-holdout" class="slide level2">
 <h2>Variante Holdout</h2>
@@ -1102,8 +1095,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="variante-holdout-procedimiento" class="slide level2 smaller">
 <h2>Variante Holdout: Procedimiento</h2>
@@ -1140,8 +1132,7 @@ Corresponde a valores reales de la clase 1 que fueron incorrectamente predichos 
 <li class="fragment">Se reporta el rendimiento final del <strong><em>mejor modelo</em></strong> (al momento del diseño) utilizando métricas medidas en el <code>Test Set</code>.</li>
 </ol>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="k-fold-cv" class="slide level2 smaller">
 <h2>K-Fold CV</h2>
@@ -1198,8 +1189,7 @@ Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold c
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -1239,8 +1229,7 @@ Entenderemos Splits, como iteraciones. En cada iteración utilizaremos un Fold c
 <p><a href="img/clase-9/iter_boot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-9/iter_boot.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="variantes-y-consejos" class="slide level2 smaller">
 <h2>Variantes y Consejos</h2>
@@ -1625,18 +1614,7 @@ Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, 
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1668,7 +1646,47 @@ Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, 
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp("https:\/\/datacubeR\.github\.io\/clases_UAI\/");
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
@@ -1705,7 +1723,11 @@ Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, 
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
@@ -1747,30 +1769,37 @@ Sería una variante con <span class="math inline">\(K=n\)</span>. Por lo tanto, 
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
-    window.onload = () => {
-      lightboxQuarto.on('slide_before_load', (data) => {
-        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-        const href = trigger.getAttribute('href');
-        if (href !== null) {
-          const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-          if (imgEl !== null) {
-            const srcAttr = imgEl.getAttribute("src");
-            if (srcAttr && srcAttr.startsWith("data:")) {
-              slideConfig.href = srcAttr;
-            }
-          }
-        } 
-      });
-
-      lightboxQuarto.on('slide_after_load', (data) => {
-        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(slideNode);
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
         }
-      });
-
-    };
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
               </script>
     
 

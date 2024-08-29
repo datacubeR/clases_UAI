@@ -11,10 +11,10 @@
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.550">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Alfonso Tobar-Arancibia">
-  <title>Clases UAI - TICS-579-Deep Learning</title>
+  <title>Clases UAI – TICS-579-Deep Learning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -380,8 +380,7 @@ Alfonso Tobar-Arancibia
 <li class="fragment">Juego <strong>Tenis de Mesa</strong>, hago <strong>Agility</strong> con mi perrita Kira y escribo en mi Blog.</li>
 </ul>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section>
 <section id="cuéntenme-de-ustedes" class="title-slide slide level1 center">
@@ -469,8 +468,7 @@ Alfonso Tobar-Arancibia
 <li class="fragment">Implementar, entrenar y evaluar <code>Deep Neural Networks</code> utilizando Pytorch.</li>
 </ul>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="tópicos-del-curso" class="slide level2">
 <h2>Tópicos del Curso</h2>
@@ -505,8 +503,7 @@ Alfonso Tobar-Arancibia
 <p><img data-src="img/clase-0/hf.png" class="quarto-figure quarto-figure-center"></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="logística" class="slide level2 smaller">
 <h2>Logística</h2>
@@ -673,8 +670,7 @@ Alfonso Tobar-Arancibia
 <li><p><a href="https://www.youtube.com/watch?v=RLYoEyIHL6A">Tutorial Colab</a></p></li>
 <li><p><a href="https://www.youtube.com/watch?v=z1pBdycYCGY">Agregar Datos Externos a Colab</a></p></li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
 <section id="reglas-del-curso" class="slide level2 smaller">
 <h2>Reglas del Curso</h2>
@@ -828,8 +824,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1148,18 +1143,7 @@ Alfonso Tobar-Arancibia
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1191,7 +1175,47 @@ Alfonso Tobar-Arancibia
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp("https:\/\/datacubeR\.github\.io\/clases_UAI\/");
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
@@ -1228,7 +1252,11 @@ Alfonso Tobar-Arancibia
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
@@ -1271,29 +1299,36 @@ Alfonso Tobar-Arancibia
     });
     </script>
     <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom"});
-    window.onload = () => {
-      lightboxQuarto.on('slide_before_load', (data) => {
-        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-        const href = trigger.getAttribute('href');
-        if (href !== null) {
-          const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-          if (imgEl !== null) {
-            const srcAttr = imgEl.getAttribute("src");
-            if (srcAttr && srcAttr.startsWith("data:")) {
-              slideConfig.href = srcAttr;
-            }
-          }
-        } 
-      });
-
-      lightboxQuarto.on('slide_after_load', (data) => {
-        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(slideNode);
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
         }
-      });
-
-    };
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
               </script>
     
 

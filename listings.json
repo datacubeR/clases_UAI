@@ -1,34 +1,35 @@
 [
   {
-    "listing": "/charlas.html",
-    "items": []
+    "listing": "/tics579.html",
+    "items": [
+      "/tics579/clase-0.html",
+      "/tics579/clase-1.html",
+      "/tics579/clase-2.html",
+      "/tics579/clase-3.html"
+    ]
   },
   {
     "listing": "/tics411.html",
     "items": [
-      "tics411/clase-0.html",
-      "tics411/clase-1.html",
-      "tics411/clase-2.html",
-      "tics411/lab-0.html",
-      "tics411/clase-3.html",
-      "tics411/clase-4.html",
-      "tics411/clase-5.html",
-      "tics411/clase-6.html",
-      "tics411/clase-7.html",
-      "tics411/clase-8.html",
-      "tics411/clase-9.html",
-      "tics411/clase-10.html",
-      "tics411/clase-11.html",
-      "tics411/clase-12.html",
-      "tics411/clase-13.html"
+      "/tics411/clase-0.html",
+      "/tics411/clase-1.html",
+      "/tics411/clase-2.html",
+      "/tics411/lab-0.html",
+      "/tics411/clase-3.html",
+      "/tics411/clase-4.html",
+      "/tics411/clase-5.html",
+      "/tics411/clase-6.html",
+      "/tics411/clase-7.html",
+      "/tics411/clase-8.html",
+      "/tics411/clase-9.html",
+      "/tics411/clase-10.html",
+      "/tics411/clase-11.html",
+      "/tics411/clase-12.html",
+      "/tics411/clase-13.html"
     ]
   },
   {
-    "listing": "/tics579.html",
-    "items": [
-      "tics579/clase-0.html",
-      "tics579/clase-1.html",
-      "tics579/clase-2.html"
-    ]
+    "listing": "/charlas.html",
+    "items": []
   }
 ]

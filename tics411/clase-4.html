@@ -11,10 +11,10 @@
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.550">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Alfonso Tobar-Arancibia">
-  <title>Clases UAI - TICS-411 Minería de Datos</title>
+  <title>Clases UAI – TICS-411 Minería de Datos</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -45,7 +45,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -73,7 +73,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -87,7 +87,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -516,8 +516,7 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-4/d_matrix_ejemplo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-4/d_matrix_ejemplo.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="algoritmo-1era-iteración" class="slide level2">
 <h2>Algoritmo: 1era Iteración</h2>
@@ -573,8 +572,7 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-4/update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-4/update.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="clustering-aglomerativo-single-linkage" class="slide level2">
 <h2>Clustering Aglomerativo: Single Linkage</h2>
@@ -598,8 +596,7 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-4/single.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-4/single.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 <p><span class="math display">\[D(C_i, C_j) = min\{d(x,y) | x \in C_i, y \in C_j\}\]</span></p>
 <div class="columns">
 <div class="column">
@@ -634,8 +631,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="clustering-aglomerativo-complete-linkage" class="slide level2">
 <h2>Clustering Aglomerativo: Complete Linkage</h2>
@@ -659,8 +655,7 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-4/complete.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-4/complete.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 <p><span class="math display">\[D(C_i, C_j) = max\{d(x,y) | x \in C_i, y \in C_j\}\]</span></p>
 <div class="columns">
 <div class="column">
@@ -696,8 +691,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="clustering-aglomerativo-average-linkage" class="slide level2">
 <h2>Clustering Aglomerativo: Average Linkage</h2>
@@ -722,8 +716,7 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-4/average.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-4/average.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 <p><span class="math display">\[D(C_i, C_j) = avg\{d(x,y) | x \in C_i, y \in C_j\}\]</span></p>
 <div class="columns">
 <div class="column">
@@ -758,8 +751,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="clustering-aglomerativo-ward-linkage" class="slide level2">
 <h2>Clustering Aglomerativo: Ward Linkage</h2>
@@ -784,8 +776,7 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-4/ward.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-4/ward.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 <p><span class="math display">\[D(C_i, C_j) = wc(Cij) - wc(C_i) - wc(C_j) = \frac{n_i\cdot n_j}{n_i + n_j}||\bar{C_i} - \bar{C_j}||^2\]</span></p>
 <div class="columns">
 <div class="column">
@@ -820,8 +811,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="hiperparámetros" class="slide level2">
 <h2>Hiperparámetros</h2>
@@ -903,8 +893,7 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-4/dend_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-4/dend_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="5"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="iteración-2" class="slide level2 smaller">
 <h2>Iteración 2</h2>
@@ -948,8 +937,7 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-4/dend_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-4/dend_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="6"></a></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="iteración-3" class="slide level2 smaller">
 <h2>Iteración 3</h2>
@@ -987,8 +975,7 @@ Alfonso Tobar-Arancibia
 </figure>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="dendograma-resultante" class="slide level2">
 <h2>Dendograma Resultante</h2>
@@ -1060,8 +1047,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="efecto-del-linkage-escogido" class="slide level2">
 <h2>Efecto del Linkage Escogido</h2>
@@ -1220,8 +1206,7 @@ Se define como la proporción de variables que tienen distinto valor con respect
 </dl>
 </div><div class="column">
 <p><span class="math display">\[Gower(p1,p2) = \frac{3}{9}\]</span></p>
-</div>
-</div>
+</div></div>
 </section></section>
 <section id="cest-fini" class="title-slide slide level1 center">
 <h1>C’est fini</h1>
@@ -1483,18 +1468,7 @@ Se define como la proporción de variables que tienen distinto valor con respect
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1526,7 +1500,47 @@ Se define como la proporción de variables que tienen distinto valor con respect
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp("https:\/\/datacubeR\.github\.io\/clases_UAI\/");
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
@@ -1563,7 +1577,11 @@ Se define como la proporción de variables que tienen distinto valor con respect
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
@@ -1605,30 +1623,37 @@ Se define como la proporción de variables que tienen distinto valor con respect
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});
-    window.onload = () => {
-      lightboxQuarto.on('slide_before_load', (data) => {
-        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-        const href = trigger.getAttribute('href');
-        if (href !== null) {
-          const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-          if (imgEl !== null) {
-            const srcAttr = imgEl.getAttribute("src");
-            if (srcAttr && srcAttr.startsWith("data:")) {
-              slideConfig.href = srcAttr;
-            }
-          }
-        } 
-      });
-
-      lightboxQuarto.on('slide_after_load', (data) => {
-        const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(slideNode);
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false,"selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
         }
-      });
-
-    };
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
               </script>
     
 
