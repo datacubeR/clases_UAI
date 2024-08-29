@@ -27,14 +27,14 @@
    - slides
   
 
-# - title: "Clase 3"
-#   subtitle: "Clase 3: Feed Forward Networks"
-#   author: "Alfonso Tobar-Arancibia"
-#   date: 2024-08-29
-#   image: tics579/thumbnails/clase-3.png
-#   path: tics579/clase-3.qmd
-#   categories:
-#    - slides
+- title: "Clase 3"
+  subtitle: "Clase 3: Feed Forward Networks"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-08-29
+  image: tics579/thumbnails/multilayer_softmax.png
+  path: tics579/clase-3.qmd
+  categories:
+   - slides
 
 
 # - title: "Clase 4"

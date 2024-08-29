@@ -202,9 +202,6 @@ Esta es la **única** manera de transformar hipótesis lineales en hipótesis no
 :::
 ::: 
 
-## Activation Functions
-
----
 
 ## 2-Layer non-linear Softmax Regression {.smaller}
 
@@ -392,12 +389,12 @@ Backpropagation
 
 #### Backward Pass
 3. Inicializar $G_{L+1} = \nabla_{Z_{L+1}}l(Z_{L+1},y) = S-I_y$ (Este ejemplo es sólo el caso de `Cross Entropy` como `Loss Function`).
-4. Iterar calculando: $G_i = \left[G_{i+1} \odot \sigma_i'(Z_i W_i)\right]W_i^T$
+4. Iterar calculando: $G_i = \left[G_{i+1} \odot \sigma_i'(Z_i W_i)\right]W_i^T, i=L,...,1$
 
 #### Update Rule
 5. Calcular Gradientes para poder aplicar el `Update Rule`. 
 
-$$W_i := W_i - \frac{\alpha}{m}\nabla_{W_i}l(Z_{L+1},y) = Z_i^T\left[G_{i+1} \odot \sigma'(Z_i W_i)\right]$$
+$$W_i := W_i - \frac{\alpha}{m}\nabla_{W_i}l(Z_{L+1},y) = W_i - \frac{\alpha}{m} Z_i^T\left[G_{i+1} \odot \sigma'(Z_i W_i)\right]$$
 :::
 
 ## Conceptos Clásicos del Entrenamiento de una NN {.smaller}

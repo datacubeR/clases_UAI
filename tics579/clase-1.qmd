@@ -304,13 +304,13 @@ Para poder tener una mejor interpretación del significado de cada una aplicarem
 
 Formalmente definiremos la función Softmax como: 
 
-$$z_i = p(label = i) = \frac{exp(h_i(x))}{\sum_{j=1}^k exp(h_j(x))}$$
+$$s_i = p(label = i) = \frac{exp(h_i(x))}{\sum_{j=1}^k exp(h_j(x))}$$
 
 
-$$Z = \begin{bmatrix}
-&z_1&\\
+$$s = \begin{bmatrix}
+&s_1&\\
 & \vdots & \\
-&z_k&\\
+&s_k&\\
 \end{bmatrix}$$
 :::
 ::: 
@@ -459,7 +459,7 @@ $$\begin{align}
 \frac{\partial l_{ce}(h,y)}{\partial h_i} &= \frac{\partial }{\partial h_i}\left(-h_{(i = y)} + log \sum_{j = 1}^k exp(h_j)\right) \\
 &= -\frac{\partial h_{(i = y)}}{\partial h_i}+ \frac{1}{\sum_{j = 1}^k exp(h_j)} \cdot \frac{\partial}{\partial h_i}\left(\sum_{j=1}^k exp(h_j)\right) \\
 &= -\frac{\partial h_{(i = y)}}{\partial h_i}+ \frac{exp(h_i)}{\sum_{j = 1}^k exp(h_j)} \\
-&= - 1\{i=y\} + z_i = z_i - 1\{i=y\}
+&= - 1\{i=y\} + s_i = s_i - 1\{i=y\}
 \end{align}
 $$
 
@@ -476,7 +476,7 @@ Finalmente en forma vectorial quedaría como:
 
 ::: {.columns}
 ::: {.column}
-$$\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = z - e_y$$
+$$\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = s - e_y$$
 :::
 ::: {.column}
 ::: {.callout-tip}
@@ -491,13 +491,13 @@ Donde $z$, es el vector de Softmax y $e_y$ es un vector con un 1 en la posición
 ::: {.columns}
 ::: {.column }
 $$\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}$$
-$$\nabla_\theta l_{ce}(\theta^T x,y) = (z-e_y)\cdot x $$
+$$\nabla_\theta l_{ce}(\theta^T x,y) = (s-e_y)\cdot x $$
 :::
 
 ::: {.column .fragment}
 ::: {.callout-caution appearance="default"}
 ## Ojo con las dimensiones
-* $z-e_y \in \mathbb{R}^{k \times 1}$
+* $s-e_y \in \mathbb{R}^{k \times 1}$
 * $x \in \mathbb{R}^{n \times 1}$
 :::
 
@@ -507,7 +507,7 @@ $$\nabla_\theta l_{ce}(\theta^T x,y) = (z-e_y)\cdot x $$
 :::{.fragment}
 Luego: 
 
-$$\nabla_\theta l_{ce}(\theta^T x,y) = x (z-e_y)^T$$
+$$\nabla_\theta l_{ce}(\theta^T x,y) = x (s-e_y)^T$$
 :::
 
 ::: {.callout-caution style="font-size: 150%;" .fragment}
@@ -531,12 +531,12 @@ $n \times k$
 ::: {.columns}
 ::: {.column}
 $$\begin{align}\nabla_\theta l_{ce}(X\theta,y) &= \frac{\partial l_{ce}(X\theta,y)}{\partial X\theta} \cdot \frac{\partial X\theta}{\partial \theta}\\
-&= (Z - I_y) \cdot X \\
-&= X^T \cdot (Z - I_y)
+&= (S - I_y) \cdot X \\
+&= X^T \cdot (S - I_y)
 \end{align}$$
 
 ::: {.callout-tip}
-* $Z$ corresponde al Softmax de $X\theta$ aplicado por filas.
+* $S$ corresponde al Softmax de $X\theta$ aplicado por filas.
 * $I_y$ corresponde al One Hot Encoder de las etiquetas. Filas con 1 en la etiqueta correcta y 0 en el resto.
 :::
 :::
@@ -544,7 +544,7 @@ $$\begin{align}\nabla_\theta l_{ce}(X\theta,y) &= \frac{\partial l_{ce}(X\theta,
 ::: {.callout-caution appearance="default" .fragment}
 ## Ojo con las dimensiones
 
-* $Z - I_y \in \mathbb{R}^{m \times k}$
+* $S - I_y \in \mathbb{R}^{m \times k}$
 * $X \in \mathbb{R}^{m \times n}$
 :::
 
@@ -559,7 +559,7 @@ $$\begin{align}\nabla_\theta l_{ce}(X\theta,y) &= \frac{\partial l_{ce}(X\theta,
 :::{.fragment}
 Finalmente la `Regla de Actualización` de parámetros usando Gradient Descent queda como:
 
-$$\theta := \theta - \frac{\alpha}{m} X^T (Z - I_y)$$
+$$\theta := \theta - \frac{\alpha}{m} X^T (S - I_y)$$
 :::
 
 
