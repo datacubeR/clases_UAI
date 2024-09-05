@@ -1,0 +1,342 @@
+---
+title: "TICS-579-Deep Learning"
+subtitle: "Clase 4: Introducción a Pytorch"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs:
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo-uai-blanco.jpeg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+    pdf-separate-fragments: true
+---
+# ¿Qué es Pytorch?
+
+## Pytorch {.smaller}
+> Es una librería de manipulación de Tensores especializada en Deep Learning. Provee principalmente, manipulación de tensores (igual que Numpy, pero en GPU), además de Autograd (calcula derivadas de manera automática).
+
+Para poder comenzar a utilizarlo se requieren normalmente 3 imports:
+
+```{.python code-line-numbers="|1|2|3|"}
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+```
+
+::: {.callout-important}
+* `torch` es donde se encuentran la mayoría de funciones básicas para manipular tensores.
+* `torch.nn` es donde se encuentran los módulos necesarios para poder crear redes neuronales (neural networks). Cada módulo es una clase en Python.
+* `torch.nn.functional` es donde se encontrarán las versiones funcionales de elementos de `torch.nn`.
+:::
+
+
+## GPU {.smaller}
+
+::: {.callout-note}
+* Su principal ventaja es que puede ejecutarse en GPU, lo cual entrega una ventaja comparativa enorme (Muchos más núcleos).
+:::
+::: {.callout-important}
+* Las GPUs están programadas en CUDA, una variante de C++ que es muy complicado de entender. Por lo que los mensajes de error son sumamente crípticos. Se recomienda desarrollar en CPU, y cambiar a GPU sólo cuando sea necesario ejecutar libre de errores.
+:::
+
+```{.python}
+## Permite automáticamente reconocer si es que existe GPU en el sistema y de existir lo asigna.
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+```
+
+::: {.callout-note}
+* El código de arriba es particularmente útil para Google Colab o plataformas que permitan activar o desactivar GPUs.
+* También es posible definirlo de manera manual en caso de querer debuggear algo en particular.
+:::
+
+## Mapeando lo aprendido con Pytorch {.smaller}
+
+![](img/clase-2/formal_nn.png){.lightbox fig-align="center" width="80%"}  
+
+::: {style="font-size: 70%;"}
+* Supongamos el caso particular en el cual queremos resolver un problema de clasificación binaria. ¿Cuánto valdría $k$ y cuál sería la **Loss Function** a utilizar?
+* Supongamos que queremos transformar una Matriz $X$ de 1000 registros y 10 variables. Además tenemos un vector $y$ el cuál queremos predecir. 
+* Supongamos que queremos llevar a 32 variables, luego a 64 para luego generar nuestra predicción. 
+* Supongamos además que queremos usar como función de activación la función ReLU  en ambas capas de transformación.
+:::
+::: {.callout-caution .fragment}
+¿Cómo definimos los 3 elementos principales de una red? 
+:::
+::: {.callout-tip .fragment}
+(***Hipótesis***, ***Loss Function*** y ***Optimizador***)
+:::
+
+
+## nn.Module 
+
+::: {style="font-size: 70%;"}
+
+> En Pytorch, cada parte de una red es una clase.
+
+::: {.callout-tip}
+* Una clase tiene la ventaja de que es un objeto mutable que puede almacenar estados en su interior. En el caso particular de una red neuronal, ¿qué **estado** será importante que guarde?
+:::
+
+::: {.callout-important}
+Una vez que un módulo es instanciado, acepta tensores de entrada y devuelve tensores de salida. 
+:::
+
+nn.Linear()
+: Corresponde a la Red más básica de Pytorch y permite realizar ***Transformaciones Affine***.
+:::
+
+```{.python }
+fc = nn.Linear(in_features, out_features, bias=True)
+```
+
+::: {style="font-size: 70%;"}
+* **in_features** es la dimensión inicial ($n_i$).
+* **out_features** la dimensión a la que se quiere llevar ($n_{i+1}$).
+
+::: {.callout-tip}
+De manera análoga, `nn.ReLU()` será el módulo que representará una función de activación ReLU. 
+:::
+:::
+
+::: {.callout-important .fragment}
+Pero, ¿Cómo combinamos distintos módulos para crear una sóla arquitectura que represente nuestra Hipótesis?
+:::
+
+
+## Hipótesis
+
+::: {style="font-size: 70%;"}
+Para poder crear una Hipótesis en Pytorch podemos combinar cada Módulo entra clase que herede desde `nn.Module`.
+:::
+
+```{.python }
+class MyNeuralNetwork(nn.Module):
+    def __init__(self,):
+        pass
+    def forward(self,x):
+        pass
+```
+
+<br>
+
+::: {style="font-size: 70%;"}
+* La red neuronal ***siempre debe heredar*** `nn.Module`. Esto permitirá que transformar la clase en Módulos que pueden combinarse para crear Arquitecturas cada vez más complejas.
+* **\_\_init\_\_()** corresponde al constructor. Acá se deben definir todos los parámetros de entrada (similar a una función), con la que se instanciará la clase.
+* **forward()** corresponde a la definición del ***forward pass** de la red en cuestión.
+:::
+
+## Hipótesis: `__init__()`
+
+```{.python }
+class MyNeuralNetwork(nn.Module):
+    def __init__(self,*):
+        super().__init__()
+        self.w1 = nn.Linear(10,32)
+        self.w2 = nn.Linear(32,64)
+        self.w3 = nn.Linear(64,1)
+        self.relu_1= nn.ReLU()
+        self.relu_2= nn.ReLU()
+```
+
+<br>
+
+::: {style="font-size: 70%;"}
+* Siempre el primer elemento de una red neuronal la inicialización del `nn.Module` mediante el `super().__init__()`.
+* Es importante notar que todos los elementos dentro de la clase deben tener el prefijo `self`. Esto permite que estos elementos puedan estar disponibles en cualquier método de la clase. 
+* Es posible inicializar elementos mediante parámetros (representado por *) para que la red sea flexible y reutilizable. La convención es que todos los métodos tienen que tener como primer parámetro la palabra `self` y luego pueden tener otros parámetros.
+:::
+
+## Hipótesis: `forward()` {auto-animate="true"}
+
+```{.python }
+class MyNeuralNetwork(nn.Module):
+    def __init__(self,*):
+        super().__init__()
+        self.w1 = nn.Linear(10,32)
+        self.w2 = nn.Linear(32,64)
+        self.w3 = nn.Linear(64,1)
+        self.relu_1= nn.ReLU()
+        self.relu_2= nn.ReLU()
+    def forward(self,x):
+        x = self.w1(x)
+        x = self.relu_1(x)
+        x = self.w2(x)
+        x = self.relu_2(x)
+        x = self.w3(x)
+        return x
+
+```
+::: {style="font-size: 70%;"}
+* La método `forward` representa el ***forward pass** de la red e indica cómo están conectadas las distintas etapas de la red. 
+* En este caso $x$ representa una instancia/registro que va pasando por la red. 
+:::
+
+## Loss Function y Optimizer
+
+::: {style="font-size: 70%;"}
+Loss Function
+: > La nomenclatura utilizada en Pytorch para referirse a la definición de la función de Pérdida es el `criterion`. Es decir, el criterio con el que se mide la pérdida. Más Loss Functions se pueden encontrar [acá](https://pytorch.org/docs/stable/nn.html#loss-functions).
+
+
+Optimizador
+: > La nomenclatura utilizada en Pytorch para referirse al optimizador a utilizar es `optimizer`. Éste se importa desde `torch.optim` y debe recibir como argumentos `model.parameters()` y **al menos** el `learning_rate`. Todos los optimizers pueden encontrarse [acá](https://pytorch.org/docs/stable/optim.html#algorithms).
+:::
+
+
+```{.python }
+model = MyNeuralNetwork()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr = 3e-4)
+```
+
+## Training Loop
+
+
+::: {style="font-size: 50%;"}
+Definiremos como `Training Loop` al proceso en el cual entrenaremos el modelo.
+:::
+
+```{.python code-line-numbers="|2-3|5-6|8-9|11-12|14-15|17-18|1|"}
+for e in range(EPOCHS):
+    ## Fijar el modelo en Modo Entrenamiento
+    model.train()
+
+    ## Fijar Gradientes en 0
+    optimizer.zero_grad()
+
+    ## Forward Pass
+    preds = model(X)
+
+    ## Cálculo del Loss (Ojo, primero va la predicción y luego el target). Ver Docs.
+    loss = criterion(preds, y)
+
+    ## Cálculo de Gradientes
+    loss.backward()
+
+    ## Update Rule
+    optimizer.step()
+```
+
+::: {.callout-important style="font-size: 60%;"}
+* `.zero_grad()` fijan los gradientes a cero, ya que Pytorch acumula gradientes siempre. Es importante que en cada epoch todos los gradientes acumulados vuelvan a cero para una siguiente optimización.
+:::
+
+## Inferencia
+
+::: {style="font-size: 70%;"}
+> Para generar predicciones basta con generar un `Forward Pass` con el modelo ya entrenado. Dependiendo del modelo, es posible que sea necesario aplicar un `post-procesamiento`.
+:::
+
+<br>
+
+```{.python code-line-numbers="|1-2|4-7|9-10|12-13|"}
+## Fijar el Modelo en Evaluación.
+model.eval()
+
+## Evita que Pytorch calcule Gradientes ya que no es necesario.
+with torch.no_grad():
+    ## Cálculo de la salida del modelo (h)
+    h = model(X)
+
+## Cálculo de Probabilidades (si es que fuera necesario)
+y_proba = torch.sigmoid(h)
+
+## Clasificación propiamente tal
+y_preds = torch.where(y_proba>=0.5, 1,0)
+```
+
+## Mini-Batching
+
+::: {style="font-size: 80%;"}
+::: {.callout-warning}
+* Rara vez los datos vienen en formato de Tensor de Pytorch. Por lo tanto, el dataset (tablas, imágenes, videos, texto, audio, etc) debe ser llevado a formato Tensor, lo cual puede ser un proceso bastante costoso y que consume muchos recursos.
+:::
+
+::: {.callout-important}
+* Además, la cantidad de datos necesaria para poder entrenar un modelo de Deep Learning normalmente es alta. Lo cual limita el cierto Hardware al no contar con la capacidad necesaria.
+:::
+
+
+Mini-Batching
+: Se refiere a aplicar un proceso de Optimización Estocástica, con sólo una muestra de los datos. Se basa en que el gradiente de la suma de las muestras es equivalente al gradiente total.
+
+Para ello Pytorch introduce los conceptos de Dataset y DataLoader para implementar conversión y carga de datos `on-the-fly`.
+
+:::
+
+<br>
+```{.python code-line-numbers=""}
+from torch.utils.data import Dataset, DataLoader
+```
+
+## Mini-Batching: Dataset
+
+> Pytorch necesita crear una clase que herede de `Dataset` y que  permita tomar elementos uno a uno y transformarlos en Tensores. Este clase debe tener al menos 3 métodos: `\_\_init\_\_`, `\_\_len\_\_` y `\_\_getitem\_\_`.
+
+::: {.callout-tip}
+Supongamos que nuestros datos iniciales estaban en Numpy. 
+:::
+
+```{.python }
+class MyDataSet(Dataset):
+    def __init__(self, X,y):
+        self.X = X
+        self.y = y
+    def __len__(self):
+        return len(X)
+    def __getitem__(self,idx):
+        features = torch.from_numpy(self.X[idx])
+        target = torch.from_numpy(self.y[idx])
+        return features, target
+```
+
+## Mini-Batching: Dataloader 
+
+::: {style="font-size: 70%;"}
+> El Dataloader permitirá ir cargando los datos en memoria en un cierto `batch_size`. La idea es no generar cuellos de botella por falta de memoria disponible. 
+:::
+
+```{.python }
+data = MyDataset(X,y)
+train_loader = DataLoader(data, batch_size=32, pin_memory=True,num_workers=12, shuffle=True)
+```
+::: {style="font-size: 70%;"}
+::: {.callout-important}
+Esto implica que nuestro Training Loop deberá sufrir ciertas modificaciones para ir actualizandose por Batch y no sólo por Epoch.
+:::
+:::
+
+```{.python }
+for e in range(EPOCHS):
+    train_loss = []
+
+    model.train()
+    for batch in train_loader:
+        X, y = batch
+        optimizer.zero_grad()
+        preds = model(X)
+        loss = criterion(preds, y)
+        loss.backward()
+        optimizer.step()
+        train_loss.append(loss.item())
+    print(f"Loss para Epoch {e}: {np.mean(train_loss)}")
+```
+# Continuará
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::

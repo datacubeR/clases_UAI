@@ -37,11 +37,11 @@
    - slides
 
 
-# - title: "Clase 4"
-#   subtitle: "Clase 4: Introducción a Pytorch"
-#   author: "Alfonso Tobar-Arancibia"
-#   date: 2024-09-05
-#   image: tics579/thumbnails/clase-4.png
-#   path: tics579/clase-4.qmd
-#   categories:
-#    - slides
+- title: "Clase 4"
+  subtitle: "Clase 4: Introducción a Pytorch"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-09-05
+  image: tics579/thumbnails/clase-4.png
+  path: tics579/clase-4.qmd
+  categories:
+   - slides

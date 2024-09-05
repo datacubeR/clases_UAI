@@ -25,7 +25,7 @@ format:
 
 # Feed Forward Networks
 
-## Feed Fordward Networks {.smaller}
+## Feed Forward Networks {.smaller}
 
 Teorema de aproximación Universal
 : > Se dice que una Red Neuronal puede aproximar ***cualquier función*** en una región cerrada.
@@ -110,7 +110,7 @@ Si chequeamos las dimensiones:
 * $W_i \in \mathbb{R}^{n_i \times n_{i+1}}$
 :::
 ::: {.column width="30%"}
-* Pero, $b_i \in \mathbb{R}^{n_i}$
+* Pero, $b_i \in \mathbb{R}^{n_i+1}$
 :::
 ::: 
 
@@ -140,10 +140,10 @@ Corresponde a una replica de una dimensión de manera de permitir alguna operaci
 
 $$ b_i^T = 1 b_i^T$$
 
-donde 1, es un vector de **unos** de $m \times 1$ y $b_i$ es de dimensión $n_i \times 1$, al cuál se está aplicando el producto externo.
+donde 1, es un vector de **unos** de $m \times 1$ y $b_i$ es de dimensión $n_{i+1} \times 1$, al cuál se está aplicando el producto externo.
 
 ::: {.callout-important}
-El Broadcasting permitirá que $b_i$ tenga ahora dimensiones $m \times n_i$, lo cuál permitirá que la operación de suma se pueda realizar.
+El Broadcasting permitirá que $b_i$ tenga ahora dimensiones $m \times n_{i+1}$, lo cuál permitirá que la operación de suma se pueda realizar.
 :::
 
 ::: {.callout-tip}
