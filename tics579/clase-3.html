@@ -352,8 +352,8 @@ Alfonso Tobar-Arancibia
 <h1>Feed Forward Networks</h1>
 
 </section>
-<section id="feed-fordward-networks" class="slide level2 smaller">
-<h2>Feed Fordward Networks</h2>
+<section id="feed-forward-networks-1" class="slide level2 smaller">
+<h2>Feed Forward Networks</h2>
 <dl>
 <dt>Teorema de aproximación Universal</dt>
 <dd>
@@ -471,7 +471,7 @@ Alfonso Tobar-Arancibia
 </ul>
 </div><div class="column" style="width:30%;">
 <ul>
-<li>Pero, <span class="math inline">\(b_i \in \mathbb{R}^{n_i}\)</span></li>
+<li>Pero, <span class="math inline">\(b_i \in \mathbb{R}^{n_i+1}\)</span></li>
 </ul>
 </div></div>
 <div class="fragment">
@@ -531,14 +531,14 @@ Alfonso Tobar-Arancibia
 <p>Matemáticamente el Broadcasting en este caso corresponde a:</p>
 </blockquote>
 <p><span class="math display">\[ b_i^T = 1 b_i^T\]</span></p>
-<p>donde 1, es un vector de <strong>unos</strong> de <span class="math inline">\(m \times 1\)</span> y <span class="math inline">\(b_i\)</span> es de dimensión <span class="math inline">\(n_i \times 1\)</span>, al cuál se está aplicando el producto externo.</p>
+<p>donde 1, es un vector de <strong>unos</strong> de <span class="math inline">\(m \times 1\)</span> y <span class="math inline">\(b_i\)</span> es de dimensión <span class="math inline">\(n_{i+1} \times 1\)</span>, al cuál se está aplicando el producto externo.</p>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>El Broadcasting permitirá que <span class="math inline">\(b_i\)</span> tenga ahora dimensiones <span class="math inline">\(m \times n_i\)</span>, lo cuál permitirá que la operación de suma se pueda realizar.</p>
+<p>El Broadcasting permitirá que <span class="math inline">\(b_i\)</span> tenga ahora dimensiones <span class="math inline">\(m \times n_{i+1}\)</span>, lo cuál permitirá que la operación de suma se pueda realizar.</p>
 </div>
 </div>
 </div>
@@ -1426,7 +1426,7 @@ u_{t+1}&amp;=(1-\beta)\nabla_\theta f(\theta_{t}) + \beta (1-\beta) \nabla_\thet
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {

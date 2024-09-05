@@ -4,7 +4,7 @@
     "href": "tics579.html",
     "title": "Diapositivas",
     "section": "",
-    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nPreliminares\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nClase 2: Introducción a las Redes Neuronales y formalidades\n\n\n\nAug 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\nClase 3: Feed Forward Networks\n\n\n\nAug 29, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
+    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nPreliminares\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nClase 2: Introducción a las Redes Neuronales y formalidades\n\n\n\nAug 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\nClase 3: Feed Forward Networks\n\n\n\nAug 29, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 4\n\n\nClase 4: Introducción a Pytorch\n\n\n\nSep 5, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
     "crumbs": [
       "Diapositivas del Curso"
     ]
@@ -1438,6 +1438,55 @@
     "text": "Implementación en Scikit-Learn\nfrom sklearn.tree import DecisionTreeClassifier, plot_tree\n\ndt = DecisionTreeClassifier(criterion=\"gini\", max_depth=None, min_sample_split=2, \n                            min_samples_leaf=1,min_impurity_decrease=0, \n                            ccp_alpha=0, random_state=42)\ndt.fit(X_train, y_train)\n\ny_pred = dt.predict(X_test)\ny_proba = dt.predict_proba(X_test)\n\n## Permite Visualizar el Árbol de Decisión\nplt_tree(dt, filled = True, feature_names=None, class_names=None)\n\n\ncriterion: Puede ser gini o entropía. Por defecto \"gini\".\nmax_depth: Número de niveles que se permita que crezca el nivel, por defecto None, significa todos los que pueda.\nmin_samples_split: El número mínimo de elementos dentro de un nodo para permitir el split. Por defecto 2.\nmin_samples_leaf: El número mínimo de elementos para que un nodo pueda ser considerado hoja. Por defecto 1.\nmin_impurity_decreased: Decrecimiento mínimo de la impureza. Si no se cumple, no hay Split. Por defecto 0.\nccp_alpha: Parámetro de Post-Pruning. Valores más altos genera la poda de más nodos."
   },
   {
+    "objectID": "tics579/notebooks/control-2.html",
+    "href": "tics579/notebooks/control-2.html",
+    "title": "Clases UAI",
+    "section": "",
+    "text": "import torch\n\ntorch.manual_seed(42)\ndevice = (\n    torch.device(\"cuda\")\n    if torch.cuda.is_available()\n    else torch.device(\"cpu\")\n)\n\nX = torch.randn((10, 5), requires_grad=True)\nW = torch.randn((5, 15), requires_grad=True)\n\nX2 = torch.sigmoid(X @ W)\n# a). Qué dimensiones devuelve el siguiente comando?\nprint(X2.shape)\n\n## b). Calcular las derivadas de X2\nX2.________(torch.ones_like(X2), retain_graph=________)\ndW = ________\ndX = ________\n\n## c). Cuál es el resultado de los siguientes dos comandos?\nprint(dW.shape)\nprint(dX.shape)\n\ntorch.Size([10, 15])\ntorch.Size([5, 15])\ntorch.Size([10, 5])\n\n\n\nimport torch.nn as nn\n\nc1 = nn.Linear(5, 15, bias=True)\nc1.weight.data\nc1.bias.data\n\ntensor([-0.2076,  0.2146, -0.0780, -0.3501,  0.2187, -0.3392, -0.1134, -0.2447,\n         0.2722,  0.3920,  0.3577,  0.0681,  0.2821, -0.1295, -0.0507])\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "tics579/notebooks/Tarea-1.html",
+    "href": "tics579/notebooks/Tarea-1.html",
+    "title": "Parte I: Optimizadores",
+    "section": "",
+    "text": "import torch\nimport torch.nn as nn\nimport torch.nn.functional as F\nfrom sklearn.metrics import accuracy_score\nimport matplotlib.pyplot as plt\n\nSEED = 10\ntorch.manual_seed(SEED)\n\n&lt;torch._C.Generator at 0x7a9547f929f0&gt;\ndef plot_optimizers(theta_0, theta_1, title):\n    plt.plot(theta_0, theta_1)\n    plt.title(title)\n    plt.xlabel(r\"theta_0\")\n    plt.ylabel(r\"theta_1\")"
+  },
+  {
+    "objectID": "tics579/notebooks/Tarea-1.html#sgd",
+    "href": "tics579/notebooks/Tarea-1.html#sgd",
+    "title": "Parte I: Optimizadores",
+    "section": "SGD",
+    "text": "SGD\n\nalpha = 0.075\ntheta = torch.tensor([10.0, 1.0], requires_grad=True)\n\n\ndef f(theta):\n    return 0.5 * theta[0] ** 2 + 12 * theta[1] ** 2\n\n\nx = []\ny = []\n\nfor e in range(500):\n    output = f(theta)\n    output.backward(retain_graph=True)\n    df = theta.grad.data\n\n    theta.data = theta.data - alpha * df\n    theta.grad.data.zero_()\n    x.append(theta.detach().numpy()[0])\n    y.append(theta.detach().numpy()[1])\n\nplot_optimizers(x, y, title=\"Convergencia para SGD\")"
+  },
+  {
+    "objectID": "tics579/notebooks/Tarea-1.html#momentum",
+    "href": "tics579/notebooks/Tarea-1.html#momentum",
+    "title": "Parte I: Optimizadores",
+    "section": "Momentum",
+    "text": "Momentum\n\nbeta = 0.9\nu = torch.tensor([0, 0])\ntheta = torch.tensor([10.0, 1.0], requires_grad=True)\nx = []\ny = []\n\nfor e in range(500):\n    output = f(theta)\n    output.backward(retain_graph=True)\n    df = theta.grad.data\n    u = beta * u + (1 - beta) * df\n    theta.data = theta.data - alpha * u\n    theta.grad.data.zero_()\n    x.append(theta.detach().numpy()[0])\n    y.append(theta.detach().numpy()[1])\n\nplot_optimizers(x, y, title=\"Convergencia con SGD con Momentum\")"
+  },
+  {
+    "objectID": "tics579/notebooks/Tarea-1.html#adam",
+    "href": "tics579/notebooks/Tarea-1.html#adam",
+    "title": "Parte I: Optimizadores",
+    "section": "Adam",
+    "text": "Adam\n\noutput = f(theta)\noutput.backward(retain_graph=True)\ndf = theta.grad.data\n\n\nbeta_1 = 0.9\nbeta_2 = 0.999\nv = torch.tensor([0, 0])\ns = torch.tensor([0, 0])\ntheta = torch.tensor([10.0, 1.0], requires_grad=True)\nx = []\ny = []\nfor e in range(500):\n    output = f(theta)\n    output.backward(retain_graph=True)\n    df = theta.grad.data\n    v = beta_1 * v + (1 - beta_1) * df\n    s = beta_2 * s + (1 - beta_2) * df**2\n    v_p = v / (1 - beta_1 ** (e + 1))\n    s_p = s / (1 - beta_2 ** (e + 1))\n\n    theta.data = theta.data - alpha / s_p**0.5 * v_p\n    theta.grad.data.zero_()\n    x.append(theta.detach().numpy()[0])\n    y.append(theta.detach().numpy()[1])\n\nplot_optimizers(x, y, title=\"Convergencia con Adam\")"
+  },
+  {
+    "objectID": "tics579/notebooks/Tarea-1.html#parte-ii-red-softmax",
+    "href": "tics579/notebooks/Tarea-1.html#parte-ii-red-softmax",
+    "title": "Parte I: Optimizadores",
+    "section": "Parte II: Red Softmax",
+    "text": "Parte II: Red Softmax\n\ndef forward(X, y, W1, W2):\n    h = torch.relu(X @ W1) @ W2\n    S = torch.softmax(h, dim=1)\n    I_y = F.one_hot(y)\n    return h, S, I_y\n\n\ndef dReLU(x):\n    return torch.where(x &lt;= 0, 0, 1)\n\n\ndef dW2(X, W1, S, I_y):\n\n    return torch.relu(X @ W1).T @ (S - I_y)\n\n\ndef dW1(X, W1, W2, S, I_y):\n    return X.T @ (dReLU(X @ W1) * ((S - I_y) @ W2.T))\n\n\nX = torch.randn(100, 5)\ny = torch.randint(3, (100,))\nW1 = torch.randn(5, 32)\nW2 = torch.randn(32, 3)\nalpha = 0.1\nEPOCHS = 1000\nepoch_list = [10, 50, 100, 500, 1000]\n\n\ndef training_loop(X, y, W1, W2):\n    m = X.shape[0]\n    score = []\n    for e in range(1, EPOCHS + 1):\n        h, S, I_y = forward(X, y, W1, W2)\n        W1 -= alpha / m * dW1(X, W1, W2, S, I_y)\n        W2 -= alpha / m * dW2(X, W1, S, I_y)\n\n        if e in epoch_list:\n            h, _, _ = forward(X, y, W1, W2)\n            y_p = torch.argmax(h, dim=1).detach().numpy()\n            score.append(accuracy_score(y, y_p))\n\n    return W1, W2, score\n\n\nW1_t, W2_t, score = training_loop(X, y, W1, W2)\nplt.plot(epoch_list, score)\nscore"
+  },
+  {
+    "objectID": "tics579/notebooks/Tarea-1.html#parte-iii-entrenando-con-pytorch",
+    "href": "tics579/notebooks/Tarea-1.html#parte-iii-entrenando-con-pytorch",
+    "title": "Parte I: Optimizadores",
+    "section": "Parte III: Entrenando con Pytorch",
+    "text": "Parte III: Entrenando con Pytorch\n\nclass MySimpleMLP(nn.Module):\n    def __init__(\n        self, n_features, hidden_dim=32, output_dim=3, bias=False\n    ):\n        super().__init__()\n        self.w1 = nn.Linear(n_features, hidden_dim, bias=bias)\n        self.w2 = nn.Linear(hidden_dim, output_dim, bias=bias)\n        self.activation = nn.ReLU(inplace=True)\n        self.w1.weight.data = torch.randn(5, 32).T\n        self.w2.weight.data = torch.randn(32, 3).T\n\n    def forward(self, x):\n        x = self.w1(x)\n        x = self.activation(x)\n        x = self.w2(x)\n        return x\n\n\nmodel = MySimpleMLP(n_features=5, bias=False)\ncriterion = nn.CrossEntropyLoss()\noptimizer = torch.optim.SGD(model.parameters(), lr=alpha)\n\n\ndef training_loop_pytorch(model, X, y, epochs=EPOCHS):\n    score = []\n    for e in range(1, epochs + 1):\n        model.train()\n        optimizer.zero_grad()\n        preds = model(X)\n        loss = criterion(preds, y)\n        loss.backward()\n        optimizer.step()\n\n        if e in epoch_list:\n            model.eval()\n            with torch.no_grad():\n                y_pred_pytorch = (\n                    torch.argmax(model(X), dim=1).detach().numpy()\n                )\n                score.append(accuracy_score(y, y_pred_pytorch))\n\n    return model, score\n\n\nmodel, score = training_loop_pytorch(model, X, y)\nplt.plot(epoch_list, score)\nscore"
+  },
+  {
     "objectID": "tics579/clase-1.html#por-qué-estudiar-deep-learning",
     "href": "tics579/clase-1.html#por-qué-estudiar-deep-learning",
     "title": "TICS-579-Deep Learning",
@@ -1808,11 +1857,11 @@
     "text": "Conceptos Clásicos del Entrenamiento de una NN\n\n\n\n\n\n\n\n\n\n\n\n\nDefiniremos una Epoch como el número de veces que repetiremos el Algoritmo de Backpropagation con todos los datos de Entrenamiento. El número de epochs de entrenamiento será un hiperparámetro de un modelo.\nDefiniremos el learning rate como un hiperparámetro que controlará el aprendizaje del modelo.\nDefiniremos este tipo de redes neuronales como Feed Forward Networks o FFN aunque en la práctica tienen una pequeña modificación que veremos en la siguiente clase.\n\n\n\n\n\n\n\n\n\n\nEste tipo de redes es muy utilizada y recibe diversos nombres:\n\nFully Connected Layers\nDense Layers: Proviene de la nomenclatura utilizada por Tensorflow.\nLinear Layers: Proviene de la nomenclatura utilizada por Pytorch, pero no es del todo correcto.\nMLP o Multilayer Perceptron."
   },
   {
-    "objectID": "tics579/clase-3.html#feed-fordward-networks",
-    "href": "tics579/clase-3.html#feed-fordward-networks",
+    "objectID": "tics579/clase-3.html#feed-forward-networks-1",
+    "href": "tics579/clase-3.html#feed-forward-networks-1",
     "title": "TICS-579-Deep Learning",
-    "section": "Feed Fordward Networks",
-    "text": "Feed Fordward Networks\n\nTeorema de aproximación Universal\n\n\nSe dice que una Red Neuronal puede aproximar cualquier función en una región cerrada.\n\n\n\nEs decir,\n\\[\\underset{x \\in \\mathbb{D}}{max}|f(x) - \\hat{f(x)}| \\le \\epsilon\\]\ncon \\(D \\subset \\mathbb{R}\\) y \\(\\epsilon &gt;0\\).\n\n\n\n\n\n\n\nExisten muchas otras funciones como Splines, KNN y otras que también tienen esta propiedad.\nSi se escogen puntos suficientemente cercanos, cumplir esta propiedad es trivial."
+    "section": "Feed Forward Networks",
+    "text": "Feed Forward Networks\n\nTeorema de aproximación Universal\n\n\nSe dice que una Red Neuronal puede aproximar cualquier función en una región cerrada.\n\n\n\nEs decir,\n\\[\\underset{x \\in \\mathbb{D}}{max}|f(x) - \\hat{f(x)}| \\le \\epsilon\\]\ncon \\(D \\subset \\mathbb{R}\\) y \\(\\epsilon &gt;0\\).\n\n\n\n\n\n\n\nExisten muchas otras funciones como Splines, KNN y otras que también tienen esta propiedad.\nSi se escogen puntos suficientemente cercanos, cumplir esta propiedad es trivial."
   },
   {
     "objectID": "tics579/clase-3.html#feed-forward-networks-ffn",
@@ -1833,14 +1882,14 @@
     "href": "tics579/clase-3.html#ffn---broadcasting",
     "title": "TICS-579-Deep Learning",
     "section": "FFN - Broadcasting",
-    "text": "FFN - Broadcasting\n\\[Z_{i + 1} = \\sigma_i(Z_i W_i + b_i^T)\\]\nSi chequeamos las dimensiones:\n\n\n\n\\(Z_i \\in \\mathbb{R}^{m \\times n_i}\\)\n\n\n\n\\(W_i \\in \\mathbb{R}^{n_i \\times n_{i+1}}\\)\n\n\n\nPero, \\(b_i \\in \\mathbb{R}^{n_i}\\)\n\n\n\n\n\n\n\n\n\nTenemos un problema y es que esto hace que las dimensiones no calcen. Esto sería una operación no válida en términos matriciales. Sin embargo es posible realizarla aplicando Broadcasting.\n\n\n\n\n\n\n\n\n\n\n\nBroadcasting\n\n\nCorresponde a una replica de una dimensión de manera de permitir alguna operación que requiera que ciertas dimensiones calcen.\n\n\n\n\n\n\n\n\n\n\n\nBroadcasting Rules\n\n\n\nCada tensor debe tener al menos una dimensión.\nMoviéndose de derecha a izquierda por cada dimensión una vez alineadas a la derecha, las dimensiones deben:\n\nSer iguales,\niguales a 1,\no no debe existir."
+    "text": "FFN - Broadcasting\n\\[Z_{i + 1} = \\sigma_i(Z_i W_i + b_i^T)\\]\nSi chequeamos las dimensiones:\n\n\n\n\\(Z_i \\in \\mathbb{R}^{m \\times n_i}\\)\n\n\n\n\\(W_i \\in \\mathbb{R}^{n_i \\times n_{i+1}}\\)\n\n\n\nPero, \\(b_i \\in \\mathbb{R}^{n_i+1}\\)\n\n\n\n\n\n\n\n\n\nTenemos un problema y es que esto hace que las dimensiones no calcen. Esto sería una operación no válida en términos matriciales. Sin embargo es posible realizarla aplicando Broadcasting.\n\n\n\n\n\n\n\n\n\n\n\nBroadcasting\n\n\nCorresponde a una replica de una dimensión de manera de permitir alguna operación que requiera que ciertas dimensiones calcen.\n\n\n\n\n\n\n\n\n\n\n\nBroadcasting Rules\n\n\n\nCada tensor debe tener al menos una dimensión.\nMoviéndose de derecha a izquierda por cada dimensión una vez alineadas a la derecha, las dimensiones deben:\n\nSer iguales,\niguales a 1,\no no debe existir."
   },
   {
     "objectID": "tics579/clase-3.html#ffn---broadcasting-1",
     "href": "tics579/clase-3.html#ffn---broadcasting-1",
     "title": "TICS-579-Deep Learning",
     "section": "FFN - Broadcasting",
-    "text": "FFN - Broadcasting\n\nMatemáticamente el Broadcasting en este caso corresponde a:\n\n\\[ b_i^T = 1 b_i^T\\]\ndonde 1, es un vector de unos de \\(m \\times 1\\) y \\(b_i\\) es de dimensión \\(n_i \\times 1\\), al cuál se está aplicando el producto externo.\n\n\n\n\n\n\nEl Broadcasting permitirá que \\(b_i\\) tenga ahora dimensiones \\(m \\times n_i\\), lo cuál permitirá que la operación de suma se pueda realizar.\n\n\n\n\n\n\n\n\n\nEl Broadcasting evita que se tenga que almacenar información repetida, lo cual permite que las implementaciones sean más eficientes en términos de memoria. Siempre que se pueda se debe utilizar Broadcasting para simplificar un cálculo.\n\n\n\nMás info ver: Numpy Docs"
+    "text": "FFN - Broadcasting\n\nMatemáticamente el Broadcasting en este caso corresponde a:\n\n\\[ b_i^T = 1 b_i^T\\]\ndonde 1, es un vector de unos de \\(m \\times 1\\) y \\(b_i\\) es de dimensión \\(n_{i+1} \\times 1\\), al cuál se está aplicando el producto externo.\n\n\n\n\n\n\nEl Broadcasting permitirá que \\(b_i\\) tenga ahora dimensiones \\(m \\times n_{i+1}\\), lo cuál permitirá que la operación de suma se pueda realizar.\n\n\n\n\n\n\n\n\n\nEl Broadcasting evita que se tenga que almacenar información repetida, lo cual permite que las implementaciones sean más eficientes en términos de memoria. Siempre que se pueda se debe utilizar Broadcasting para simplificar un cálculo.\n\n\n\nMás info ver: Numpy Docs"
   },
   {
     "objectID": "tics579/clase-3.html#hiperparámetros-de-una-red-neuronal",
@@ -1946,6 +1995,104 @@
     "title": "TICS-579-Deep Learning",
     "section": "Métodos Adaptativos: Adam",
     "text": "Métodos Adaptativos: Adam\n\n\n\n\n\n\nIdea\n\n\n\nCombinar Descenso con Momentum y RMSProp.\n\n\n\n\n\n\n\\[v_{t+1} = \\beta_1 v_t + (1-\\beta_1) \\nabla_\\theta f(\\theta_t)\\] \\[s_{t+1} = \\beta_2 s_t + (1-\\beta_2) \\nabla_\\theta f(\\theta_t)^2\\] \\[\\theta_{t+1} = \\theta_t - \\frac{\\alpha}{\\sqrt{s'_{t+1}}} v'_{t+1}\\]\n\nCorrecciones Iniciales\n\\[v'_{t+1} = \\frac{v_{t+1}}{1-\\beta_1^{t+1}}\\] \\[s'_{t+1} = \\frac{v_{t+1}}{1-\\beta_2^{t+1}}\\]\n\n\n\n\n\n\n\nPytorch utiliza 0.9 y 0.999 como valores de \\(\\beta_1\\) y \\(\\beta_2\\) respectivamente."
+  },
+  {
+    "objectID": "tics579/clase-4.html#pytorch",
+    "href": "tics579/clase-4.html#pytorch",
+    "title": "TICS-579-Deep Learning",
+    "section": "Pytorch",
+    "text": "Pytorch\n\nEs una librería de manipulación de Tensores especializada en Deep Learning. Provee principalmente, manipulación de tensores (igual que Numpy, pero en GPU), además de Autograd (calcula derivadas de manera automática).\n\nPara poder comenzar a utilizarlo se requieren normalmente 3 imports:\nimport torch\nimport torch.nn as nn\nimport torch.nn.functional as F\n\n\n\n\n\n\n\ntorch es donde se encuentran la mayoría de funciones básicas para manipular tensores.\ntorch.nn es donde se encuentran los módulos necesarios para poder crear redes neuronales (neural networks). Cada módulo es una clase en Python.\ntorch.nn.functional es donde se encontrarán las versiones funcionales de elementos de torch.nn."
+  },
+  {
+    "objectID": "tics579/clase-4.html#gpu",
+    "href": "tics579/clase-4.html#gpu",
+    "title": "TICS-579-Deep Learning",
+    "section": "GPU",
+    "text": "GPU\n\n\n\n\n\n\n\nSu principal ventaja es que puede ejecutarse en GPU, lo cual entrega una ventaja comparativa enorme (Muchos más núcleos).\n\n\n\n\n\n\n\n\n\n\n\nLas GPUs están programadas en CUDA, una variante de C++ que es muy complicado de entender. Por lo que los mensajes de error son sumamente crípticos. Se recomienda desarrollar en CPU, y cambiar a GPU sólo cuando sea necesario ejecutar libre de errores.\n\n\n\n\n## Permite automáticamente reconocer si es que existe GPU en el sistema y de existir lo asigna.\ndevice = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n\n\n\n\n\n\n\nEl código de arriba es particularmente útil para Google Colab o plataformas que permitan activar o desactivar GPUs.\nTambién es posible definirlo de manera manual en caso de querer debuggear algo en particular."
+  },
+  {
+    "objectID": "tics579/clase-4.html#mapeando-lo-aprendido-con-pytorch",
+    "href": "tics579/clase-4.html#mapeando-lo-aprendido-con-pytorch",
+    "title": "TICS-579-Deep Learning",
+    "section": "Mapeando lo aprendido con Pytorch",
+    "text": "Mapeando lo aprendido con Pytorch\n\n\n\n\n\n\n\nSupongamos el caso particular en el cual queremos resolver un problema de clasificación binaria. ¿Cuánto valdría \\(k\\) y cuál sería la Loss Function a utilizar?\nSupongamos que queremos transformar una Matriz \\(X\\) de 1000 registros y 10 variables. Además tenemos un vector \\(y\\) el cuál queremos predecir.\nSupongamos que queremos llevar a 32 variables, luego a 64 para luego generar nuestra predicción.\nSupongamos además que queremos usar como función de activación la función ReLU en ambas capas de transformación.\n\n\n\n\n\n\n\n\n\n¿Cómo definimos los 3 elementos principales de una red?\n\n\n\n\n\n\n\n\n\n\n\n(Hipótesis, Loss Function y Optimizador)"
+  },
+  {
+    "objectID": "tics579/clase-4.html#nn.module",
+    "href": "tics579/clase-4.html#nn.module",
+    "title": "TICS-579-Deep Learning",
+    "section": "nn.Module",
+    "text": "nn.Module\n\n\nEn Pytorch, cada parte de una red es una clase.\n\n\n\n\n\n\n\n\nUna clase tiene la ventaja de que es un objeto mutable que puede almacenar estados en su interior. En el caso particular de una red neuronal, ¿qué estado será importante que guarde?\n\n\n\n\n\n\n\n\n\n\nUna vez que un módulo es instanciado, acepta tensores de entrada y devuelve tensores de salida.\n\n\n\n\nnn.Linear()\n\nCorresponde a la Red más básica de Pytorch y permite realizar Transformaciones Affine.\n\n\n\nfc = nn.Linear(in_features, out_features, bias=True)\n\n\nin_features es la dimensión inicial (\\(n_i\\)).\nout_features la dimensión a la que se quiere llevar (\\(n_{i+1}\\)).\n\n\n\n\n\n\n\nDe manera análoga, nn.ReLU() será el módulo que representará una función de activación ReLU.\n\n\n\n\n\n\n\n\n\n\n\nPero, ¿Cómo combinamos distintos módulos para crear una sóla arquitectura que represente nuestra Hipótesis?"
+  },
+  {
+    "objectID": "tics579/clase-4.html#hipótesis",
+    "href": "tics579/clase-4.html#hipótesis",
+    "title": "TICS-579-Deep Learning",
+    "section": "Hipótesis",
+    "text": "Hipótesis\n\nPara poder crear una Hipótesis en Pytorch podemos combinar cada Módulo entra clase que herede desde nn.Module.\n\nclass MyNeuralNetwork(nn.Module):\n    def __init__(self,):\n        pass\n    def forward(self,x):\n        pass\n\n\n\nLa red neuronal siempre debe heredar nn.Module. Esto permitirá que transformar la clase en Módulos que pueden combinarse para crear Arquitecturas cada vez más complejas.\n__init__() corresponde al constructor. Acá se deben definir todos los parámetros de entrada (similar a una función), con la que se instanciará la clase.\nforward() corresponde a la definición del *forward pass de la red en cuestión."
+  },
+  {
+    "objectID": "tics579/clase-4.html#hipótesis-__init__",
+    "href": "tics579/clase-4.html#hipótesis-__init__",
+    "title": "TICS-579-Deep Learning",
+    "section": "Hipótesis: __init__()",
+    "text": "Hipótesis: __init__()\nclass MyNeuralNetwork(nn.Module):\n    def __init__(self,*):\n        super().__init__()\n        self.w1 = nn.Linear(10,32)\n        self.w2 = nn.Linear(32,64)\n        self.w3 = nn.Linear(64,1)\n        self.relu_1= nn.ReLU()\n        self.relu_2= nn.ReLU()\n\n\n\nSiempre el primer elemento de una red neuronal la inicialización del nn.Module mediante el super().__init__().\nEs importante notar que todos los elementos dentro de la clase deben tener el prefijo self. Esto permite que estos elementos puedan estar disponibles en cualquier método de la clase.\nEs posible inicializar elementos mediante parámetros (representado por *) para que la red sea flexible y reutilizable. La convención es que todos los métodos tienen que tener como primer parámetro la palabra self y luego pueden tener otros parámetros."
+  },
+  {
+    "objectID": "tics579/clase-4.html#hipótesis-forward",
+    "href": "tics579/clase-4.html#hipótesis-forward",
+    "title": "TICS-579-Deep Learning",
+    "section": "Hipótesis: forward()",
+    "text": "Hipótesis: forward()\nclass MyNeuralNetwork(nn.Module):\n    def __init__(self,*):\n        super().__init__()\n        self.w1 = nn.Linear(10,32)\n        self.w2 = nn.Linear(32,64)\n        self.w3 = nn.Linear(64,1)\n        self.relu_1= nn.ReLU()\n        self.relu_2= nn.ReLU()\n    def forward(self,x):\n        x = self.w1(x)\n        x = self.relu_1(x)\n        x = self.w2(x)\n        x = self.relu_2(x)\n        x = self.w3(x)\n        return x\n\n\nLa método forward representa el *forward pass de la red e indica cómo están conectadas las distintas etapas de la red.\nEn este caso \\(x\\) representa una instancia/registro que va pasando por la red."
+  },
+  {
+    "objectID": "tics579/clase-4.html#loss-function-y-optimizer",
+    "href": "tics579/clase-4.html#loss-function-y-optimizer",
+    "title": "TICS-579-Deep Learning",
+    "section": "Loss Function y Optimizer",
+    "text": "Loss Function y Optimizer\n\n\nLoss Function\n\n\nLa nomenclatura utilizada en Pytorch para referirse a la definición de la función de Pérdida es el criterion. Es decir, el criterio con el que se mide la pérdida. Más Loss Functions se pueden encontrar acá.\n\n\nOptimizador\n\n\nLa nomenclatura utilizada en Pytorch para referirse al optimizador a utilizar es optimizer. Éste se importa desde torch.optim y debe recibir como argumentos model.parameters() y al menos el learning_rate. Todos los optimizers pueden encontrarse acá.\n\n\n\n\nmodel = MyNeuralNetwork()\ncriterion = nn.CrossEntropyLoss()\noptimizer = torch.optim.Adam(model.parameters(), lr = 3e-4)"
+  },
+  {
+    "objectID": "tics579/clase-4.html#training-loop",
+    "href": "tics579/clase-4.html#training-loop",
+    "title": "TICS-579-Deep Learning",
+    "section": "Training Loop",
+    "text": "Training Loop\n\nDefiniremos como Training Loop al proceso en el cual entrenaremos el modelo.\n\nfor e in range(EPOCHS):\n    ## Fijar el modelo en Modo Entrenamiento\n    model.train()\n\n    ## Fijar Gradientes en 0\n    optimizer.zero_grad()\n\n    ## Forward Pass\n    preds = model(X)\n\n    ## Cálculo del Loss (Ojo, primero va la predicción y luego el target). Ver Docs.\n    loss = criterion(preds, y)\n\n    ## Cálculo de Gradientes\n    loss.backward()\n\n    ## Update Rule\n    optimizer.step()\n\n\n\n\n\n\n\n\n.zero_grad() fijan los gradientes a cero, ya que Pytorch acumula gradientes siempre. Es importante que en cada epoch todos los gradientes acumulados vuelvan a cero para una siguiente optimización."
+  },
+  {
+    "objectID": "tics579/clase-4.html#inferencia",
+    "href": "tics579/clase-4.html#inferencia",
+    "title": "TICS-579-Deep Learning",
+    "section": "Inferencia",
+    "text": "Inferencia\n\n\nPara generar predicciones basta con generar un Forward Pass con el modelo ya entrenado. Dependiendo del modelo, es posible que sea necesario aplicar un post-procesamiento.\n\n\n\n## Fijar el Modelo en Evaluación.\nmodel.eval()\n\n## Evita que Pytorch calcule Gradientes ya que no es necesario.\nwith torch.no_grad():\n    ## Cálculo de la salida del modelo (h)\n    h = model(X)\n\n## Cálculo de Probabilidades (si es que fuera necesario)\ny_proba = torch.sigmoid(h)\n\n## Clasificación propiamente tal\ny_preds = torch.where(y_proba&gt;=0.5, 1,0)"
+  },
+  {
+    "objectID": "tics579/clase-4.html#mini-batching",
+    "href": "tics579/clase-4.html#mini-batching",
+    "title": "TICS-579-Deep Learning",
+    "section": "Mini-Batching",
+    "text": "Mini-Batching\n\n\n\n\n\n\n\n\nRara vez los datos vienen en formato de Tensor de Pytorch. Por lo tanto, el dataset (tablas, imágenes, videos, texto, audio, etc) debe ser llevado a formato Tensor, lo cual puede ser un proceso bastante costoso y que consume muchos recursos.\n\n\n\n\n\n\n\n\n\n\n\nAdemás, la cantidad de datos necesaria para poder entrenar un modelo de Deep Learning normalmente es alta. Lo cual limita el cierto Hardware al no contar con la capacidad necesaria.\n\n\n\n\n\nMini-Batching\n\nSe refiere a aplicar un proceso de Optimización Estocástica, con sólo una muestra de los datos. Se basa en que el gradiente de la suma de las muestras es equivalente al gradiente total.\n\n\nPara ello Pytorch introduce los conceptos de Dataset y DataLoader para implementar conversión y carga de datos on-the-fly.\n\n\nfrom torch.utils.data import Dataset, DataLoader"
+  },
+  {
+    "objectID": "tics579/clase-4.html#mini-batching-dataset",
+    "href": "tics579/clase-4.html#mini-batching-dataset",
+    "title": "TICS-579-Deep Learning",
+    "section": "Mini-Batching: Dataset",
+    "text": "Mini-Batching: Dataset\n\nPytorch necesita crear una clase que herede de Dataset y que permita tomar elementos uno a uno y transformarlos en Tensores. Este clase debe tener al menos 3 métodos: \\_\\_init\\_\\_, \\_\\_len\\_\\_ y \\_\\_getitem\\_\\_.\n\n\n\n\n\n\n\nSupongamos que nuestros datos iniciales estaban en Numpy.\n\n\n\nclass MyDataSet(Dataset):\n    def __init__(self, X,y):\n        self.X = X\n        self.y = y\n    def __len__(self):\n        return len(X)\n    def __getitem__(self,idx):\n        features = torch.from_numpy(self.X[idx])\n        target = torch.from_numpy(self.y[idx])\n        return features, target"
+  },
+  {
+    "objectID": "tics579/clase-4.html#mini-batching-dataloader",
+    "href": "tics579/clase-4.html#mini-batching-dataloader",
+    "title": "TICS-579-Deep Learning",
+    "section": "Mini-Batching: Dataloader",
+    "text": "Mini-Batching: Dataloader\n\n\nEl Dataloader permitirá ir cargando los datos en memoria en un cierto batch_size. La idea es no generar cuellos de botella por falta de memoria disponible.\n\n\ndata = MyDataset(X,y)\ntrain_loader = DataLoader(data, batch_size=32, pin_memory=True,num_workers=12, shuffle=True)\n\n\n\n\n\n\n\nEsto implica que nuestro Training Loop deberá sufrir ciertas modificaciones para ir actualizandose por Batch y no sólo por Epoch.\n\n\n\n\nfor e in range(EPOCHS):\n    train_loss = []\n\n    model.train()\n    for batch in train_loader:\n        X, y = batch\n        optimizer.zero_grad()\n        preds = model(X)\n        loss = criterion(preds, y)\n        loss.backward()\n        optimizer.step()\n        train_loss.append(loss.item())\n    print(f\"Loss para Epoch {e}: {np.mean(train_loss)}\")"
+  },
+  {
+    "objectID": "tics579/notebooks/Tarea-1_template.html",
+    "href": "tics579/notebooks/Tarea-1_template.html",
+    "title": "Tarea 1",
+    "section": "",
+    "text": "import matplotlib.pyplot as plt\n\n\ndef plot_optimizers(theta_0, theta_1, title):\n    plt.plot(theta_0, theta_1)\n    plt.title(title)\n    plt.xlabel(r\"theta_0\")\n    plt.ylabel(r\"theta_1\")\n\n\nParte I\n\n\nParte II\n\n\nParte III\n\n\n\n\n Back to top"
   },
   {
     "objectID": "charlas.html",
