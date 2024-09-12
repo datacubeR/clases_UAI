@@ -231,6 +231,7 @@ for e in range(EPOCHS):
 
 ::: {.callout-important style="font-size: 60%;"}
 * `.zero_grad()` fijan los gradientes a cero, ya que Pytorch acumula gradientes siempre. Es importante que en cada epoch todos los gradientes acumulados vuelvan a cero para una siguiente optimización.
+* En el caso de querer dejar en zero los gradientes de un tensor, y no del optimizador, se puede usar `.zero_()`.
 :::
 
 ## Inferencia
@@ -283,7 +284,7 @@ from torch.utils.data import Dataset, DataLoader
 
 ## Mini-Batching: Dataset
 
-> Pytorch necesita crear una clase que herede de `Dataset` y que  permita tomar elementos uno a uno y transformarlos en Tensores. Este clase debe tener al menos 3 métodos: `\_\_init\_\_`, `\_\_len\_\_` y `\_\_getitem\_\_`.
+> Pytorch necesita crear una clase que herede de `Dataset` y que  permita tomar elementos uno a uno y transformarlos en Tensores. Este clase debe tener al menos 3 métodos: `__init__`, `__len__` y `__getitem__`.
 
 ::: {.callout-tip}
 Supongamos que nuestros datos iniciales estaban en Numpy. 
@@ -295,11 +296,55 @@ class MyDataSet(Dataset):
         self.X = X
         self.y = y
     def __len__(self):
-        return len(X)
+        return len(self.X)
     def __getitem__(self,idx):
         features = torch.from_numpy(self.X[idx])
         target = torch.from_numpy(self.y[idx])
         return features, target
+```
+
+## Model Registry {.smaller}
+
+> Cada vez que nosotros llamamos un objeto modelo (que herede de `nn.Module`) este modelo mostrará el model `registry`. El `registry` permitirá ver todos los elementos que son parte del modelo. Para que un elemento sea parte del registro, debe haber sido definido como `self.----`.
+
+![](img/clase-4/model_registry.png){.lightbox width="60%" fig-align="center"}
+
+::: {.callout-important}
+* Si es que se define un elemento como `self.---` debe definirse como un nn.Module y no como un `F.---`
+* Además se puede acceder a cualquier elemento/atributo mediante el comando `model.atributo`.
+:::
+
+## Model Registry 
+
+::: {style="font-size: 80%;"}
+![](img/clase-4/model_atributtes.png){.lightbox width="40%" fig-align="center"}
+
+::: {.callout-note}
+* Es posible acceder a los datos de Parámetros y Bias de una capa linear utilizando:
+:::
+
+```{.python }
+model.w1.weights.data
+model.w1.weights.bias
+```
+
+::: {.callout-tip appearance="default"}
+## Idea:
+* Podría utilizarse esto para poder definir valores iniciales de capas de parámetros y de bias.
+:::
+:::
+
+
+```{.python }
+class MyNeuralNetwork(nn.Module):
+    def __init__(self, *):
+        self.w1 = ...
+        self.relu = ...
+        self.model.w1.weights.data = tensor([...])
+        self.model.w1.weights.bias = tensor([...])
+    
+    def forward(self,x):
+        ...
 ```
 
 ## Mini-Batching: Dataloader 

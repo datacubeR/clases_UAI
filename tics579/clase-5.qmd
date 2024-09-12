@@ -1,0 +1,221 @@
+---
+title: "TICS-579-Deep Learning"
+subtitle: "Clase 5: Model Training"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs:
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo-uai-blanco.jpeg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+    pdf-separate-fragments: true
+---
+
+## Entrenamiento de la Red
+
+> A diferencia de un Modelo de Machine Learning, las Redes Neuronales se entrenan de manera progresiva (se espera una mejora en cada Epoch). Si nuestra Arquitectura es apropiada nosotros deberíamos esperar que el `Loss` de nuestra ***red siempre disminuya***. ¿Por qué?
+
+::: {.callout-warning .fragment}
+* **¿Siempre buscamos la Red que tenga el mejor Loss de Entrenamiento?**
+:::
+
+::: {.callout-important .fragment}
+* Al igual que en los modelos de Machine Learning debemos evitar a toda costa el Overfitting. ¿Qué es el overfitting?
+:::
+
+## Entrenamiento de la Red
+
+Bias-Variance Tradeoff (Dilema Sesgo-Varianza)
+: > Probablemente el concepto más importante para determinar si un modelo tiene potencial o no. Corresponden a dos tipos de errores que pueden sufrir los modelos de ML. 
+
+::: {style="font-size: 80%;"}
+::: {.columns .fragment}
+::: {.column}
+Bias
+: Corresponde al sesgo, y tiene que ver con la diferencia entre el valor real y el valor predicho. Bajo sesgo implica una mejor predicción.
+:::
+::: {.column}
+Variance
+: Corresponde a la varianza y tiene que ver con la dispersión dada por los valores predichos. Baja Varianza implica un modelo más estable pero menos flexible.
+:::
+::: 
+
+::: {.callout-important .fragment}
+En general hay que buscar el equilibrio entre ambos tipos de errores:
+
+* Alto Sesgo y baja Varianza: **Underfitting**. 
+* Bajo Sesgo y Alta Varianza: **Overfitting**. 
+
+:::
+:::
+
+
+## Model Validation 
+
+Validación Cruzada
+: > Se refiere al proceso de entrenar un modelo en una cierta porción de los datos, pero validar sus rendimiento y capacidad de ***generalización*** en un set de datos ***no vistos*** por el modelo al momento de entrenar. 
+
+::: {.callout-warning}
+* ***¿Qué es la Generalización?***
+:::
+
+::: {.callout-note}
+Los dos métodos más populares que se usan en Machine Learning son **Holdout** y **K-Fold.** Más métodos se pueden encontrar en los [docs de Scikit-Learn](https://scikit-learn.org/stable/modules/cross_validation.html). 
+:::
+
+::: {.callout-important}
+Debido a los volúmenes de datos utilizados, el esquema de validación más utilizado es el **Holdout**.
+:::
+
+## Model Validation: Holdout {.smaller}
+
+::: {.columns}
+::: {.column}
+
+![](img/clase-4/data_split.png){.lightbox fig-align="center"}
+:::
+::: {.column}
+
+::: {.callout-note appearance="default" icon="false"}
+## **Train**
+Se utiliza para entrenar.
+:::
+::: {.callout-warning appearance="default" icon="false"}
+## **Validation**
+Se utiliza para medir el nivel de generalización del modelo.
+:::
+::: {.callout-caution appearance="default" icon="false"}
+## **Test**
+Se utiliza para evaluar reportando una métrica de diseño del Modelo.
+:::
+
+::: {.callout-warning appearance="default"}
+## OJO
+
+`Loss` no es lo mismo que `métrica`. ***¿Cuál es la diferencia?***
+:::
+
+::: {.callout-caution}
+A diferencia de un modelo de Machine Learning el proceso de validación del modelo se realiza en paralelo con el entrenamiento. Es decir, se entrena y valida el modelo Epoch a Epoch. 
+:::
+:::
+::: 
+
+## Model Validation: K-Fold {.smaller}
+
+![](img/clase-4/k-fold.png){.lightbox fig-align="center" width="60%"}
+
+::: {.callout-important}
+Corresponde al proceso de Holdout pero repetido $K$ veces.
+:::
+
+## Model Evaluation {.smaller}
+
+> La Evaluación del Modelo se hará en torno a una métrica definida a priori por el modelador. ¿Entonces es un Hiperparámetro?
+
+::: {.callout-important}
+La métrica a utilizar está íntimamente ligada al tipo de modelo.
+:::
+
+::: {.columns}
+::: {.column}
+#### Clasificación
+
+* $Accuracy = \frac{1}{m} \sum_{i = 1}^m 1\{y_i = \hat{y_i}\}$
+* $Precision = \frac{TP}{TP + FP}$
+* $Recall = \frac{TP}{TP + FN}$
+* $F1-Score = 2 \cdot \frac{Precision \cdot Recall}{Precision + Recall}$
+:::
+
+
+::: {.column}
+#### Regresión
+* $RMSE = \frac{1}{m} \sum_{i=1}^m (y_i-\hat{y_i})^2$
+* $MAE = \frac{1}{m} \sum_{i=1}^m |y_i - \hat{y_i}|$
+* $MAPE = 100 \cdot \frac{1}{m} \sum_{i=1}^m \frac{|y_i-\hat{y_i}|}{max(\epsilon,y_i)}$
+* $SMAPE = \frac{2}{m} \sum_{i=1}^2 \frac{|y_i - \hat{y_i}  |}{max(|y_i + \hat{y_i}|,\epsilon)}$
+:::
+::: 
+
+::: {.callout-warning}
+* Las métricas acá explicadas son métricas básicas de cualquier modelo general de Clasificación y Regresión. Existen muchas otras métricas que son específicas para campos específicos. IoU por ejemplo es una Métrica de Segmentación Semántica, Map\@k es una métrica para modelos de Recomendación, Bleu o Rouge son métricas para NLP, etc. Para ver millones de métricas pueden ver las [docs de Torchmetrics](https://lightning.ai/docs/torchmetrics/stable/all-metrics.html).
+:::
+::: {.callout-tip}
+Es posible utilizar métricas para ir ***monitoreando*** el progreso del modelo Epoch a Epoch. 
+:::
+
+
+## Training-Validation Loop {.smaller}
+
+> Corresponde a la modificación del Training Loop con el Objetivo de Entrenar y Validar de manera simultánea.
+
+![](img/clase-4/forward_train.png){.lightbox fig-align="center" width="60%"}
+
+::: {.callout-note}
+Se realiza un Forward Pass con datos de **Train** y se calcula el Loss asociado. Internamente, Pytorch comienza a acumular Gradientes.
+:::
+
+## Training-Validation Loop {.smaller}
+
+![](img/clase-4/backward_train.png){.lightbox fig-align="center"}
+
+::: {.callout-note}
+Se realiza un Backward Pass, se aplican los gradientes y se aplica el Update Rule.
+:::
+
+## Training-Validation Loop {.smaller}
+
+![](img/clase-4/forward_val.png){.lightbox fig-align="center"}
+
+::: {.callout-note}
+Se realiza un nuevo Forward Pass, pero esta vez con los datos de **Validación**. En este caso Pytorch internamente sigue acumulando gradientes, lo cual no es correcto. Para ello se debe utilizar un `with torch.no_grad()`. Se calcula un Validation Loss.
+:::
+
+## Monitoreo de un Modelo: Validation Curve {.smaller}
+
+
+::: {.columns}
+::: {.column width="60%"}
+![](img/clase-4/validation_curve.png){.lightbox fig-align="center"}
+:::
+::: {.column width="40%"}
+::: {.callout-important}
+Es importante ser capaz de identificar el momento exacto en el cual el momento comienza su overfitting. Para ello se utiliza el **"Checkpointing"**. 
+:::
+
+::: {.callout-note appearance="default"}
+## Checkpoint
+
+* Corresponde a un snapshot del modelo a un cierto punto. En la **práctica** se almacenan los parámetros del **mejor modelo** y del **último Epoch**.
+:::
+
+::: {.callout-tip appearance="default"}
+## EarlyStopping
+
+* Teoricamente, una vez que la red Neuronal alcanza el punto de Overfitting ya no tiene sentido seguir el entrenamiento. Por lo tanto es posible detener el entrenamiento bajo una cierta condición.
+:::
+:::
+::: 
+
+
+
+
+# Continuará
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::

@@ -45,3 +45,13 @@
   path: tics579/clase-4.qmd
   categories:
    - slides
+
+
+- title: "Clase 5"
+  subtitle: "Clase 5: Model Training"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-09-12
+  image: tics579/thumbnails/clase-5.png
+  path: tics579/clase-5.qmd
+  categories:
+   - slides
