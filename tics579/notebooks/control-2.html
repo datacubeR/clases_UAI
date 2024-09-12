@@ -199,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X2.shape)</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">## b). Calcular las derivadas de X2</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>X2.________(torch.ones_like(X2), retain_graph<span class="op">=</span>________)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>X2._______(torch.ones_like(X2), retain_graph<span class="op">=</span>________)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>dW <span class="op">=</span> ________</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>dX <span class="op">=</span> ________</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
@@ -210,17 +210,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>torch.Size([10, 15])
 torch.Size([5, 15])
 torch.Size([10, 5])</code></pre>
-</div>
-</div>
-<div id="cell-1" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>c1 <span class="op">=</span> nn.Linear(<span class="dv">5</span>, <span class="dv">15</span>, bias<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>c1.weight.data</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>c1.bias.data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>tensor([-0.2076,  0.2146, -0.0780, -0.3501,  0.2187, -0.3392, -0.1134, -0.2447,
-         0.2722,  0.3920,  0.3577,  0.0681,  0.2821, -0.1295, -0.0507])</code></pre>
 </div>
 </div>
 
