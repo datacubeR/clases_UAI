@@ -325,7 +325,7 @@ class MyDataSet(Dataset):
 
 ```{.python }
 model.w1.weights.data
-model.w1.weights.bias
+model.w1.bias.data
 ```
 
 ::: {.callout-tip appearance="default"}
@@ -341,7 +341,7 @@ class MyNeuralNetwork(nn.Module):
         self.w1 = ...
         self.relu = ...
         self.model.w1.weights.data = tensor([...])
-        self.model.w1.weights.bias = tensor([...])
+        self.model.w1.bias.data = tensor([...])
     
     def forward(self,x):
         ...

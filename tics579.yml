@@ -55,3 +55,12 @@
   path: tics579/clase-5.qmd
   categories:
    - slides
+
+- title: "Clase 6"
+  subtitle: "Clase 6: Training Tips & Tricks"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-09-26
+  image: tics579/thumbnails/clase-6.png
+  path: tics579/clase-6.qmd
+  categories:
+   - slides

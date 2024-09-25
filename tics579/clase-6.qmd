@@ -1,0 +1,443 @@
+---
+title: "TICS-579-Deep Learning"
+subtitle: "Clase 6: Training Tips & Tricks"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs:
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo-uai-blanco.jpeg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+    pdf-separate-fragments: true
+---
+
+## Entrenamiento de un Modelo {.smaller}
+
+> El entrenamiento de un modelo tiene demasiadas variables que pueden influir en el éxito del modelo. Algunos aspectos relevantes a los que hay que poner énfasis al momento de entrenar:
+
+* Overfitting
+* Convergencia/Tiempo de Convergencia
+* Generalización
+* Optimización de Recursos Computacionales/Hardware.
+* Prevenir problemas de Vanishing Gradient y Exploding Gradients.
+
+::: {.callout-note}
+Muchas de las técnicas que veremos acá permiten abordar mejoras en nuestros modelos para uno o más aspectos de los mencionados anteriormente.
+:::
+
+## Normalización
+
+> En general el término Normalización está muy trillado y en la práctica se utiliza para referirse a muchos temas distintos. Algunas definiciones conocidas:
+
+::: {.columns}
+
+::: {.column}
+### Normalización
+
+$$x_{i\_norm} = \frac{x_i-x_{min}}{x_{max} - x_{min}}$$
+Esta operación se puede hacer mediante [MinMaxScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html) de Scikit-Learn.
+:::
+
+
+::: {.column}
+### Estandarización
+
+$$ x_{i\_est} = \frac{x_i - E[x]}{\sqrt(Var[x])}$$
+
+Esta operación se puede hacer mediante [StandardScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html) de Scikit-Learn.
+
+:::
+::: 
+
+## Normalización (Batch Norm) {.smaller}
+
+[Paper 2015: Batch Normalization](https://arxiv.org/pdf/1502.03167)
+
+::: {.callout-caution appearance="default" style="font-size: 120%;"}
+## ¿Por qué?
+* Acelera el entrenamiento
+* Disminuye la importancia de los Parámetros iniciales.
+* Regulariza el modelo (un poquito)
+* Resuelve el problema de [Internal Covariate Shift](https://machinelearning.wtf/terms/internal-covariate-shift/).
+:::
+
+#### Ejemplo: Supongamos que dado la altura y la edad queremos predecir si será deportista de alto rendimiento.
+
+::: {.columns}
+::: {.column}
+![](img/clase-6/normalize.png){.lightbox fig-align="center"}
+:::
+::: {.column}
+![](img/clase-6/nn_example.png){.lightbox fig-align="center"}
+
+:::
+::: 
+
+## Normalización (Batch Norm) {.smaller}
+
+::: {.columns style="font-size: 90%;"}
+::: {.column}
+![](img/clase-6/normalize.png){.lightbox fig-align="center" width="80%"}
+
+:::
+::: {.column}
+* Cambios en Altura son mucho más pequeños que en Edad debido al rango.
+* Toma más tiempo optimizar (requiere parámetros más pequeños)
+* Si el learning rate es alto puede diverger.
+* Si el learning rate es bajo implica que demora mucho más en converger.
+
+:::
+::: 
+
+::: {.columns style="font-size: 110%;" .fragment}
+::: {.column}
+![](img/clase-6/post_normalize.png){.lightbox fig-align="center" width="55%"} 
+:::
+::: {.column}
+::: {.callout-tip appearance="default"}
+## Pros
+
+* Sin importar el punto inicial, el mínimo se encuentra **casi** a la misma distancia.  
+* Es posible utilizar un learning rate más grande sin miedo a diverger.
+:::
+::: {.callout-important appearance="default"}
+## Cons
+* Más cálculos y parámetros involucrados
+
+:::
+:::
+::: 
+
+## Normalización (Batch Norm) {.smaller}
+
+![](img/clase-6/batch_norm_nn.png){.lightbox fig-align="center" width="58%"} 
+
+::: {.columns}
+::: {.column}
+![](img/clase-6/Z1.png){.lightbox fig-align="center" width="60%"}
+
+:::
+::: {.column}
+
+![](img/clase-6/Z2.png){.lightbox fig-align="center" width="100%"}
+
+:::
+::: 
+
+## Normalización (Batch Norm) {.smaller}
+
+::: {.columns}
+::: {.column}
+::: {.callout-tip appearance="default"}
+## Cálculo de Estadísticos
+
+$$ \mu_B = \frac{1}{B} \sum_{i=1}^B z^{(i)} = \frac{1}{3}(4 + 7 + 5) = 5.33$$
+$$ \sigma_B^2 = \frac{1}{B} \sum_{i=1}^B (z^{(i)} - \mu_B)^2 = 1.555$$
+
+:::
+::: {.callout-warning appearance="default"}
+## Normalización
+$$\widehat{z^{(i)}} = \frac{z^{(i)} - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}$$
+:::
+::: {.callout-note appearance="default" .fragment fragment-index=1}
+## Scale and Shift: $\gamma$ y $\beta$ son parámetros.
+$$BN_{\gamma,\beta}(z_i)= \gamma \widehat{z_i} + \beta $$
+:::
+:::
+::: {.column}
+
+![](img/clase-6/batch_norm_nn.png){.lightbox fig-align="center" width="70%"} 
+
+#### Z2 norm
+![](img/clase-6/Z2_norm.png){.lightbox fig-align="center" width="70%"}
+
+::: {.callout-note appearance="default" .fragment fragment-index=1}
+Donde $\gamma$ y $\beta$ son parámetros aprendidos durante el entrenamiento.
+:::
+
+:::
+::: 
+
+## Normalización (Batch Norm): Test Time {.smaller}
+
+::: {.callout-caution appearance="default"}
+## Problema
+
+La predicción de una instancia $i$ específica, ahora depende de otros elementos dentro del Batch. ***¿Cómo funciona entonces el modelo en Test Time?***
+:::
+
+::: {.callout-tip}
+Se estiman valores de $\mu_B$ y $\sigma_B$ para usar en inferencia basados en los valores obtenidos en entrenamiento.
+:::
+
+::: {.columns}
+::: {.column}
+::: {.callout-tip appearance="default"}
+## Estimación de Estadísticos
+
+* $\mu_B^{inf} = E[\mu_B^{j}]$, $j = 1,...,B$
+* $\sigma_B^{inf} = \frac{m}{m-1}E[\mu_B^{j}]$, $j = 1,...,B$
+:::
+:::
+::: {.column}
+::: {.callout-warning appearance="default"}
+## Normalización
+$$\widehat{z^{(i)}} = \frac{z^{(i)} - \mu_B^{inf}}{\sqrt{(\sigma_B^{inf})^2 + \epsilon}}$$
+:::
+:::
+::: 
+
+::: {.callout-note appearance="default"}
+## Scale and Shift: $\gamma$ y $\beta$ son parámetros.
+$$BN_{\gamma,\beta}(z_i)= \gamma \widehat{z_i} + \beta $$
+:::
+::: {.callout-important}
+Los parámetros $\gamma$ y $\beta$ son los aprendidos durante el proceso de entrenamiento.
+:::
+
+## Normalización (Batch Norm): Consejos {.smaller}
+
+* Andrew Ng propone utilizar BatchNorm justo antes de la función de Activacion.
+* El paper original también propone su uso justo antes de la activación.
+* Francoise Chollet, creador de Keras dice que los autores del paper en realidad lo utilizaron después de la función de activación.
+* Adicionalmente existen benchmarks que muestran mejoras usando BatchNorm después de las funciones de activación.
+
+::: {.callout-note}
+Entonces, la posición del BatchNorm termina siendo parte de la Arquitectura, y se debe comprobar donde tiene un mejor efecto.
+:::
+
+::: {.callout-warning}
+Batchnorm tiene efectos distintos al momento de entrenar o de evaluar/predecir en un modelo. Por lo tanto, de usar Batchnorm es imperativo utilizar los modos `model.train()` y `model.eval()` de manera apropiada.
+:::
+
+## Normalización: Layer Norm 
+
+::: {.callout-important appearance="default"}
+## Batch Norm tiene algunos problemas:
+* Muy difícil de calcular en datos secuenciales (lo veremos más adelante).
+* Inestable cuando el Batch Size es muy pequeño.
+* Difícil de Paralelizar.
+:::
+
+::: {.callout-important appearance="default"}
+## Beneficios de Layer Norm
+* Puede trabajar con secuencias.
+* No tiene problemas para trabajar con cualquier tipo de Batch Size.
+* Se puede paralelizar, lo cuál es útil en redes como las RNN.
+:::
+
+::: {.callout-tip}
+* En este caso se realiza la normalización por **capa** o por **Data Point** (instancia). 
+* Además son el elementos cruciales en las Arquitecturas de Transformers.
+:::
+
+
+## Normalización: Layer Norm {.smaller}
+
+::: {.columns}
+::: {.column}
+![](img/clase-6/Z1.png){.lightbox fig-align="center"}
+
+![](img/clase-6/Z2_ly.png){.lightbox fig-align="center"}
+:::
+::: {.column}
+$$ \mu_{norm} = \frac{1}{n_i} \sum_{j=1}^{n_i} z_j = \frac{1}{4}(4 + 9 + 6 + 7) = 6.5$$
+$$ \sigma_{norm}^2 = \frac{1}{n_i} \sum_{j=1}^{n_i} (z_j - \mu_B)^2 = 3.25$$
+
+::: {.callout-warning appearance="default"}
+## Normalización
+$$\widehat{z_j} = \frac{z_j - \mu_{norm}}{\sqrt{\sigma_{norm}^2 + \epsilon}}$$
+:::
+![](img/clase-6/Z2_post_ly.png){.lightbox fig-align="center"}
+:::
+::: 
+
+## Regularización L2 aka Weight Decay {.smaller}
+
+::: {style="font-size: 80%;"}
+> En general el gran problema de las Redes Neuronales es el ***Overfitting***. Esto porque las redes neuronales normalmente se denominan como **Overparametrized Models**. ***¿Qué significa esto?***
+
+Weight Decay
+: > Corresponde a una penalización que se da a los modelos para limitar su complejidad y asegurar que pueda generalizar correctamente en datos no vistos. 
+:::
+
+$$ \underset{W_{i:L}}{minimize} \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}),y^{(i)}) + \frac{\lambda}{2} \sum_{i=1}^L ||W_i||_f^2$$
+
+Eso implica una transformación a nuestro ***Update Rule***:
+
+$$W_i := W_i - \alpha \nabla \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}),y^{(i)}) - \alpha \lambda W_i = (1-\alpha\lambda)W_i - \alpha \nabla l(h_\theta(x^{(i)}),y^{(i)})$$
+
+
+::: {.columns}
+::: {.column}
+::: {.callout-tip}
+Se puede ver que los pesos (weights) se ***contraen*** (decaen) antes de actualizarse en la dirección del gradiente.
+:::
+:::
+::: {.column}
+::: {.callout-important}
+Por alguna razón Pytorch decidió implementarlo como una propiedad de los ***Optimizers*** cuando en realidad debió ser de la Loss Function.
+:::
+:::
+::: 
+
+## Dropout {.smaller}
+
+> A diferencia de la estrategia anterior, este tipo de regularización se aplica a las activaciones de la red (resultados de la Transformación Affine, previo a la transformación no lineal). 
+
+Definiremos el Dropout como:
+
+$$Z_{i+1} = \sigma(W_i^T Z_i + b_i)$$
+$$\widehat{Z_{i+1}} = D(Z_{i+1})$$
+
+donde $D$ implica la aplicación de Dropout a la capa $i+1$. El elemento $j$ de la capa $\widehat{Z_i}$ se calcula como:
+
+$$(\widehat{Z_{i+1}})_j = \begin{cases}
+\frac{(Z_{i+1})_j}{1-p}  & \text{with prob 1-p} \\
+0, & \text{with prob p}
+\end{cases}$$
+
+$p$ se conoce como el `Dropout Rate`.
+::: {.callout-important}
+El factor $\frac{1}{1-p}$ se aplica para mantener la varianza estable luego de haber eliminado activaciones con probabilidad $p$.
+:::
+
+::: {.callout-warning}
+Dropout se aplica normalmente al momento de entrenar el modelo. Por lo tanto, de usar Dropout es imperativo cambiar al modo `model.eval()` al momento de predecir.
+:::
+
+
+## Weights Initialization {.smaller}
+
+Hemos hablado que los métodos basados en SGD normalmente utilizan valores aleatorios para partir su entrenamiento, lo cual deja un poco al azar el éxito de un proceso de entrenamiento.
+
+Existen diversos estudios de cómo `inicializar` los parámetros para una convergencia óptima. Algunas de las inicializaciones son:
+
+::: {.callout-note appearance="default"}
+## Activaciones Triviales
+* Constante
+* Sólo unos
+* Sólo Zeros
+:::
+
+## Weights Initialization {.smaller}
+
+::: {.columns}
+::: {.column}
+#### Xavier o Glorot Uniforme
+
+Se inicia con valores provenientes de una distribución uniforme: $\mathcal{U}(-a,a)$
+
+$$ a = gain \cdot \sqrt{\frac{6}{fan_{in} + fan_{out}}}$$
+:::
+::: {.column}
+
+#### Xavier o Glorot Normal
+
+Se inicia con valores provenientes de una distribución uniforme: $\mathcal{N}(0,std^2)$
+
+$$ std = gain \cdot \sqrt{\frac{2}{fan_{in} + fan_{out}}}$$
+:::
+::: 
+
+::: {.callout-note}
+* $fan_{in}$ corresponde al número de conexiones que entran a una neurona. Mientras que $fan_{out}$ corresponde al número de neuronas que salen de dicha neurona.
+* $fan\_mode$ corresponde a la elección de $fan_{in}$ o $fan_{out}$.
+:::
+
+::: {.columns}
+::: {.column}
+#### Kaiming (aka He) Uniforme
+
+Se inicia con valores provenientes de una distribución uniforme: $\mathcal{U}(-bound,bound)$
+
+$$ bound = gain \cdot \sqrt{\frac{3}{fan\_mode}}$$
+:::
+::: {.column}
+
+#### Kaiming (aka He) Normal
+
+Se inicia con valores provenientes de una distribución uniforme: $\mathcal{N}(0,std^2)$
+
+$$std =\sqrt{\frac{gain}{fan\_mode}}$$
+:::
+::: 
+
+## Training Control {.smaller}
+
+El entrenamiento de una red neuronal puede tomar mucho tiempo. Es por eso que algunas buenas prácticas serían:
+
+* Disponer de resultados preliminares aunque el entrenamiento no haya terminado. 
+* Guardar los pesos del mejor modelo obtenido en el proceso de entrenamiento.
+* Evitar entrenar pasado el punto de Overfitting. 
+  * Aunque hay nuevas ideas de lo que se llama el [grokking](https://www.linkedin.com/feed/update/urn:li:activity:7214966566696718336?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7214966566696718336%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29).
+
+
+::: {.columns}
+::: {.column}
+::: {.callout-tip appearance="default"}
+#### Early Stopping
+* Se refiere al proceso de detener el entrenamiento luego de `patience` epochs sin mejorar el validation loss u otro criterio.
+:::
+:::
+::: {.column}
+::: {.callout-note appearance="default"}
+#### Checkpointing
+* Corresponde al proceso de guardar los parámetros obtenidos en un epoch en específico. Normalmente se guarda la mejor epoch y la última, pero se puede generar algún criterio.
+:::
+:::
+::: 
+
+## Categorical Variables {.smaller}
+
+> Es importante mencionar que normalmente no se utilizan redes neuronales para poder entrenar datos tabulares. Pero de hacerlo, es muy probable que nos encontremos con variables categóricas. Para ello existen dos técnicas que son las más comunes en redes neuronales.
+
+One Hot Encoder
+: Corresponde a la representación mediante dummy variables. Normalmente se considera una representación `Sparse` de los datos. 
+
+::: {.callout-important}
+En Pytorch se puede implementar como `F.one_hot()`, pero mi recomendación es utilizar las herramientas de Scikit-Learn para evitar `Data Leakage`.
+:::
+
+![](img/clase-6/one_hot.png){.lightbox fig-align="center"}
+
+## Categorical Variables {.smaller}
+
+Embeddings
+: Es una representación de Densa de los Datos. Corresponde a una representación a en un espacio dimensional definido que es aprendido por la misma red. La representación aprendida considera aspectos como la similaridad la cual se refleja como una medida de distancia.
+
+En Pytorch esto se puede realizar mediante: `nn.Embedding()`. 
+
+::: {style="font-size: 150%;"}
+
+```{.python }
+nn.Embedding(num_embeddings, embedding_dim)
+```
+:::
+
+* **num_embeddings**: Corresponde al número de categórías.
+* **embedding_dim**: El número de dimensiones en el cual se quiere representar.
+
+::: {.callout-important}
+* Este proceso tiene parámetros entrenables asociados.
+:::
+
+# That's all Folks
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::

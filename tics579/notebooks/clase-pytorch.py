@@ -12,6 +12,12 @@ X = torch.from_numpy(X_numpy).float()
 y = torch.from_numpy(y_numpy).float()
 X.shape, y.shape
 
+# %%
+#
+import pandas as pd
+
+df = pd.DataFrame(X_numpy).head()
+
 # %% Red Neuronal MLP
 
 class MLP(nn.Module):
