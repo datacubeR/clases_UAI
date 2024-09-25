@@ -14,7 +14,7 @@
   <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Alfonso Tobar-Arancibia">
-  <title>Clases UAI – TICS-411 Minería de Datos</title>
+  <title>Clases UAI – TICS-579-Deep Learning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -397,8 +397,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 5: DBSCAN</p>
+  <h1 class="title">TICS-579-Deep Learning</h1>
+  <p class="subtitle">Clase 6: Training Tips &amp; Tricks</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -412,408 +412,178 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section>
-<section id="clustering-por-densidad" class="title-slide slide level1 center">
-<h1>Clustering por Densidad</h1>
-
-</section>
-<section id="clustering-densidad" class="slide level2">
-<h2>Clustering: Densidad</h2>
+<section id="entrenamiento-de-un-modelo" class="slide level2 smaller">
+<h2>Entrenamiento de un Modelo</h2>
 <blockquote>
-<p>Se basan en la idea de continuar el crecimiento de un cluster a medida que la densidad (número de objetos o puntos) en el vecindario sobrepase algún umbral.</p>
+<p>El entrenamiento de un modelo tiene demasiadas variables que pueden influir en el éxito del modelo. Algunos aspectos relevantes a los que hay que poner énfasis al momento de entrenar:</p>
 </blockquote>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-3/densidad.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-3/densidad.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
+<ul>
+<li>Overfitting</li>
+<li>Convergencia/Tiempo de Convergencia</li>
+<li>Generalización</li>
+<li>Optimización de Recursos Computacionales/Hardware.</li>
+<li>Prevenir problemas de Vanishing Gradient y Exploding Gradients.</li>
+</ul>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>En nuestro caso utilizaremos <strong>DBSCAN</strong> (Density-Based Spatial Clustering Applications with Noise).</p>
+<p>Muchas de las técnicas que veremos acá permiten abordar mejoras en nuestros modelos para uno o más aspectos de los mencionados anteriormente.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="dbscan-definiciones" class="slide level2 smaller">
-<h2>DBSCAN: Definiciones</h2>
-<div class="callout callout-note callout-titled callout-style-default">
+<section id="normalización" class="slide level2">
+<h2>Normalización</h2>
+<blockquote>
+<p>En general el término Normalización está muy trillado y en la práctica se utiliza para referirse a muchos temas distintos. Algunas definiciones conocidas:</p>
+</blockquote>
+<div class="columns">
+<div class="column">
+<h3 id="normalización-1">Normalización</h3>
+<p><span class="math display">\[x_{i\_norm} = \frac{x_i-x_{min}}{x_{max} - x_{min}}\]</span> Esta operación se puede hacer mediante <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html">MinMaxScaler</a> de Scikit-Learn.</p>
+</div><div class="column">
+<h3 id="estandarización">Estandarización</h3>
+<p><span class="math display">\[ x_{i\_est} = \frac{x_i - E[x]}{\sqrt(Var[x])}\]</span></p>
+<p>Esta operación se puede hacer mediante <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">StandardScaler</a> de Scikit-Learn.</p>
+</div></div>
+</section>
+<section id="normalización-batch-norm" class="slide level2 smaller">
+<h2>Normalización (Batch Norm)</h2>
+<p><a href="https://arxiv.org/pdf/1502.03167">Paper 2015: Batch Normalization</a></p>
+<div style="font-size: 120%;">
+<div class="callout callout-caution callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Hiperparámetros del Modelo</strong></p>
+<p><strong>¿Por qué?</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li><code>eps</code>: Radio de análisis</li>
-<li><code>MinPts</code>: Corresponde al mínimo de puntos necesarios en un Radio <code>eps</code>.</li>
+<li>Acelera el entrenamiento</li>
+<li>Disminuye la importancia de los Parámetros iniciales.</li>
+<li>Regulariza el modelo (un poquito)</li>
+<li>Resuelve el problema de <a href="https://machinelearning.wtf/terms/internal-covariate-shift/">Internal Covariate Shift</a>.</li>
 </ul>
 </div>
 </div>
 </div>
+</div>
+<h4 id="ejemplo-supongamos-que-dado-la-altura-y-la-edad-queremos-predecir-si-será-deportista-de-alto-rendimiento.">Ejemplo: Supongamos que dado la altura y la edad queremos predecir si será deportista de alto rendimiento.</h4>
 <div class="columns">
 <div class="column">
-<dl>
-<dt>Densidad</dt>
-<dd>
-<blockquote>
-<p>Densidad es el número de puntos dentro del radio <code>eps</code>.</p>
-</blockquote>
-</dd>
-<dt>Core Point/Punto Central</dt>
-<dd>
-<blockquote>
-<p>Un punto central/core es aquel que tiene al menos <code>MinPts</code> puntos dentro de la esfera definida por <code>eps</code> (se incluye él mismo).</p>
-</blockquote>
-</dd>
-</dl>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-6/normalize.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
 </div><div class="column">
-<dl>
-<dt>Border Point/Punto Borde</dt>
-<dd>
-<blockquote>
-<p>Un punto de borde tiene menos puntos que <code>MinPts</code> del <code>eps</code>, pero está dentro de la esfera de un punto central.</p>
-</blockquote>
-</dd>
-<dt>Noise Point/Punto Ruido</dt>
-<dd>
-<blockquote>
-<p>Un punto de ruido es todo aquel que no es punto central ni de borde.</p>
-</blockquote>
-</dd>
-</dl>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/nn_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-6/nn_example.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
 </div></div>
 </section>
-<section id="dbscan-algoritmo-categorización-de-puntos" class="slide level2 smaller">
-<h2>DBSCAN: Algoritmo categorización de puntos</h2>
-<blockquote>
-<p>Primeramente se aplica un algoritmo para categorizar cada punto de acuerdo a las definiciones anteriores.</p>
-</blockquote>
+<section id="normalización-batch-norm-1" class="slide level2 smaller">
+<h2>Normalización (Batch Norm)</h2>
+<div class="columns" style="font-size: 90%;">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-6/normalize.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
 <ul>
-<li>Para cada punto en el espacio:
-<ul>
-<li>Calcular su densidad en EPS y aplicar el siguiente algoritmo:</li>
-</ul></li>
+<li>Cambios en Altura son mucho más pequeños que en Edad debido al rango.</li>
+<li>Toma más tiempo optimizar (requiere parámetros más pequeños)</li>
+<li>Si el learning rate es alto puede diverger.</li>
+<li>Si el learning rate es bajo implica que demora mucho más en converger.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/dbscan_algo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-5/dbscan_algo.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
-</section>
-<section id="ejemplo-iteración-1" class="slide level2 smaller">
-<h2>Ejemplo: Iteración 1</h2>
-<blockquote>
-<p>Supongamos un ejemplo con <span class="math inline">\(MinPts=4\)</span>.</p>
-</blockquote>
-<div class="columns">
+</div></div>
+<div class="columns fragment" style="font-size: 110%;">
 <div class="column">
-<div class="r-stack">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-5/ejemplo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-5/ejemplo.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
+<p><a href="img/clase-6/post_normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-6/post_normalize.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></a></p>
 </figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/ejemplo_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-5/ejemplo_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/ejemplo_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-5/ejemplo_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="3"></a></p>
-</figure>
-</div>
 </div>
 </div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/iter_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-5/iter_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Este punto corresponde a un <strong>Core Point</strong>.</p>
-</div>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="ejemplo-iteración-2" class="slide level2">
-<h2>Ejemplo: Iteración 2</h2>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/border_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-5/border_1.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/border_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-5/border_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/border_algo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-5/border_algo.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="1">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Este punto corresponde a un <strong>Border Point</strong>.</p>
-</div>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="ejemplo-iteración-3" class="slide level2">
-<h2>Ejemplo: Iteración 3</h2>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/noise_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-5/noise_1.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/noise_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-5/noise_2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/noise_algo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-5/noise_algo.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="1">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Este punto corresponde a un <strong>Noise Point</strong>.</p>
-</div>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="ejemplo-iteración-final" class="slide level2">
-<h2>Ejemplo: Iteración Final</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/iter_final.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-5/iter_final.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Ahora, <strong>¿Cómo definimos que partes son clusters o no?</strong></p>
-</div>
-</div>
-</div>
-</section>
-<section id="algoritmo-de-clustering" class="slide level2">
-<h2>Algoritmo de Clustering</h2>
-<p>Se aplica el siguiente algoritmo para calcular clusterings.</p>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Antes de aplicar se desechan los Noise Points ya que no serán considerados. <strong>(Veremos luego que ocurre con estos puntos)</strong>.</p>
-</div>
-</div>
-</div>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|2|3-5|6|7-8|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>label<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb1-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb1-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb1-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb1-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb1-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb1-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="iteración-1" class="slide level2">
-<h2>Iteración 1</h2>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c1_0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-5/c1_0.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-5/c1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c1_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-5/c1_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="r-stack">
-<div class="fragment fade-in-then-out" data-fragment-index="1">
-<div class="sourceCode" id="cb2" data-code-line-numbers="2-5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>label<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb2-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb2-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb2-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb2-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb2-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb2-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb2-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="fragment" data-fragment-index="2">
-<div class="sourceCode" id="cb3" data-code-line-numbers="6-8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>label<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb3-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb3-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb3-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb3-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb3-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb3-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb3-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Todos los puntos cercanos a un Core reciben la misma etiqueta.</p>
-</div>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="iteración-2" class="slide level2">
-<h2>Iteración 2</h2>
-<div class="columns">
-<div class="column">
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c2_0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-5/c2_0.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-5/c2.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="1"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/c2_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-5/c2_1.png" class="fragment quarto-figure quarto-figure-center" data-fragment-index="2"></a></p>
-</figure>
-</div>
-</div>
-</div><div class="column">
-<div class="r-stack">
-<div class="fragment fade-in-then-out" data-fragment-index="1">
-<div class="sourceCode" id="cb4" data-code-line-numbers="2-5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>label<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb4-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb4-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb4-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb4-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb4-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb4-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb4-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="fragment" data-fragment-index="2">
-<div class="sourceCode" id="cb5" data-code-line-numbers="6-8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co">## label ya está en 1</span></span>
-<span id="cb5-2"><a></a><span class="cf">for</span> punto_c <span class="kw">in</span> corePoints:</span>
-<span id="cb5-3"><a></a>    <span class="cf">if</span> punto_c no tiene etiqueta:</span>
-<span id="cb5-4"><a></a>        label <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb5-5"><a></a>        punto_c <span class="op">=</span> label</span>
-<span id="cb5-6"><a></a>    <span class="cf">for</span> point_eps dentro de eps:</span>
-<span id="cb5-7"><a></a>        <span class="cf">if</span> punto_eps no tiene etiqueta:</span>
-<span id="cb5-8"><a></a>            punto_eps <span class="op">=</span> label</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="3">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En este caso obtuvimos 2 clusters, e indirectamente un 3er de puntos ruido.</p>
-</div>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="dbscan" class="slide level2">
-<h2>DBSCAN</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/dbscan.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-5/dbscan.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="fragment">
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong>¿Sería posible replicar un proceso de Clustering similar utilizando K-Means?</strong> <strong>¿Por qué?</strong></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="dbscan-detalles-técnicos" class="slide level2">
-<h2>DBSCAN: Detalles Técnicos</h2>
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Fortalezas</strong></p>
+<p><strong>Pros</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Resistente al ruido.</li>
-<li>Puede lidiar con clusters de diferentes formas y tamaños.</li>
-<li>No es necesario especificar cuántos clusters encontrar.</li>
+<li>Sin importar el punto inicial, el mínimo se encuentra <strong>casi</strong> a la misma distancia.<br>
+</li>
+<li>Es posible utilizar un learning rate más grande sin miedo a diverger.</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Cons</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Más cálculos y parámetros involucrados</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="normalización-batch-norm-2" class="slide level2 smaller">
+<h2>Normalización (Batch Norm)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/batch_norm_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-6/batch_norm_nn.png" class="quarto-figure quarto-figure-center" style="width:58.0%"></a></p>
+</figure>
+</div>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/Z1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-6/Z1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/Z2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-6/Z2.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="normalización-batch-norm-3" class="slide level2 smaller">
+<h2>Normalización (Batch Norm)</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Cálculo de Estadísticos</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[ \mu_B = \frac{1}{B} \sum_{i=1}^B z^{(i)} = \frac{1}{3}(4 + 7 + 5) = 5.33\]</span> <span class="math display">\[ \sigma_B^2 = \frac{1}{B} \sum_{i=1}^B (z^{(i)} - \mu_B)^2 = 1.555\]</span></p>
 </div>
 </div>
 </div>
@@ -823,121 +593,492 @@ Alfonso Tobar-Arancibia
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Debilidades</strong></p>
+<p><strong>Normalización</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>Algoritmo de alta complejidad computacional que puede llegar <span class="math inline">\(O(n^2)\)</span> en el peor caso.</li>
-<li>Se ve afectado por densidad de los datos y por datos con una alta dimensionalidad.</li>
-<li>Su óptimo resultado depende específicamente de sus Hiperparámetros.</li>
-<li>No puede generalizar en datos no usados en entrenamiento.</li>
-</ul>
+<p><span class="math display">\[\widehat{z^{(i)}} = \frac{z^{(i)} - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}\]</span></p>
 </div>
 </div>
 </div>
-</section>
-<section id="cómo-encontrar-los-hiperparámetros" class="slide level2">
-<h2>¿Cómo encontrar los Hiperparámetros?</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>minPts</strong></p>
-</div>
-<div class="callout-content">
-<p>Para datasets multidimensionales grandes, la regla es:</p>
-<p><span class="math display">\[minPts \ge dim + 1\]</span></p>
-</div>
-</div>
-</div>
+<div class="fragment" data-fragment-index="1">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Otras recomendaciones:</strong></p>
+<p><strong>Scale and Shift: <span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span> son parámetros.</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>Para dos dimensiones: <span class="math inline">\(minPts=4\)</span> (Ester et al., 1996)</li>
-<li>Para más de 2 dimensiones: <span class="math inline">\(minPts = 2 \cdot dim\)</span> (Sander et al., 1998)</li>
-</ul>
+<p><span class="math display">\[BN_{\gamma,\beta}(z_i)= \gamma \widehat{z_i} + \beta \]</span></p>
 </div>
-</div>
-</div>
-</div><div class="column" style="width:30%;">
-<p><br> <br> <br></p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/hp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-5/hp.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="cómo-encontrar-los-hiperparámetros-1" class="slide level2 smaller">
-<h2>¿Cómo encontrar los Hiperparámetros?</h2>
-<blockquote>
-<p>Para encontrar EPS se suele utilizar el método de Vecinos más cercanos.</p>
-</blockquote>
-<div class="columns">
-<div class="column">
-<h4 id="idea">Idea</h4>
-<ul>
-<li><p>La distancia de los puntos dentro de un cluster a su k-ésimo vecino deberían ser similares.</p></li>
-<li><p>Luego, los puntos atípicos (o ruidosos) tienen el k-ésimo vecino a una mayor distancia.</p></li>
-</ul>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>💡 Podemos plotear la distancia ordenada de cada punto a su k-ésimo vecino y seleccionar un <code>eps</code> cercano al crecimiento exponencial (codo).</p>
 </div>
 </div>
 </div>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-5/codo_dbscan.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-5/codo_dbscan.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/batch_norm_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-6/batch_norm_nn.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<h4 id="z2-norm">Z2 norm</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/Z2_norm.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-6/Z2_norm.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<div class="fragment" data-fragment-index="1">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Donde <span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span> son parámetros aprendidos durante el entrenamiento.</p>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="normalización-batch-norm-test-time" class="slide level2 smaller">
+<h2>Normalización (Batch Norm): Test Time</h2>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Problema</strong></p>
+</div>
+<div class="callout-content">
+<p>La predicción de una instancia <span class="math inline">\(i\)</span> específica, ahora depende de otros elementos dentro del Batch. <strong><em>¿Cómo funciona entonces el modelo en Test Time?</em></strong></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Se estiman valores de <span class="math inline">\(\mu_B\)</span> y <span class="math inline">\(\sigma_B\)</span> para usar en inferencia basados en los valores obtenidos en entrenamiento.</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Estimación de Estadísticos</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(\mu_B^{inf} = E[\mu_B^{j}]\)</span>, <span class="math inline">\(j = 1,...,B\)</span></li>
+<li><span class="math inline">\(\sigma_B^{inf} = \frac{m}{m-1}E[\mu_B^{j}]\)</span>, <span class="math inline">\(j = 1,...,B\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Normalización</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\widehat{z^{(i)}} = \frac{z^{(i)} - \mu_B^{inf}}{\sqrt{(\sigma_B^{inf})^2 + \epsilon}}\]</span></p>
+</div>
+</div>
+</div>
+</div></div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Scale and Shift: <span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span> son parámetros.</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[BN_{\gamma,\beta}(z_i)= \gamma \widehat{z_i} + \beta \]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Los parámetros <span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span> son los aprendidos durante el proceso de entrenamiento.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="normalización-batch-norm-consejos" class="slide level2 smaller">
+<h2>Normalización (Batch Norm): Consejos</h2>
+<ul>
+<li>Andrew Ng propone utilizar BatchNorm justo antes de la función de Activacion.</li>
+<li>El paper original también propone su uso justo antes de la activación.</li>
+<li>Francoise Chollet, creador de Keras dice que los autores del paper en realidad lo utilizaron después de la función de activación.</li>
+<li>Adicionalmente existen benchmarks que muestran mejoras usando BatchNorm después de las funciones de activación.</li>
+</ul>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Entonces, la posición del BatchNorm termina siendo parte de la Arquitectura, y se debe comprobar donde tiene un mejor efecto.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Batchnorm tiene efectos distintos al momento de entrenar o de evaluar/predecir en un modelo. Por lo tanto, de usar Batchnorm es imperativo utilizar los modos <code>model.train()</code> y <code>model.eval()</code> de manera apropiada.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="normalización-layer-norm" class="slide level2">
+<h2>Normalización: Layer Norm</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Batch Norm tiene algunos problemas:</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Muy difícil de calcular en datos secuenciales (lo veremos más adelante).</li>
+<li>Inestable cuando el Batch Size es muy pequeño.</li>
+<li>Difícil de Paralelizar.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Beneficios de Layer Norm</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Puede trabajar con secuencias.</li>
+<li>No tiene problemas para trabajar con cualquier tipo de Batch Size.</li>
+<li>Se puede paralelizar, lo cuál es útil en redes como las RNN.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>En este caso se realiza la normalización por <strong>capa</strong> o por <strong>Data Point</strong> (instancia).</li>
+<li>Además son el elementos cruciales en las Arquitecturas de Transformers.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="normalización-layer-norm-1" class="slide level2 smaller">
+<h2>Normalización: Layer Norm</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/Z1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-6/Z1.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/Z2_ly.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-6/Z2_ly.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<p><span class="math display">\[ \mu_{norm} = \frac{1}{n_i} \sum_{j=1}^{n_i} z_j = \frac{1}{4}(4 + 9 + 6 + 7) = 6.5\]</span> <span class="math display">\[ \sigma_{norm}^2 = \frac{1}{n_i} \sum_{j=1}^{n_i} (z_j - \mu_B)^2 = 3.25\]</span></p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Normalización</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\widehat{z_j} = \frac{z_j - \mu_{norm}}{\sqrt{\sigma_{norm}^2 + \epsilon}}\]</span></p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/Z2_post_ly.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-6/Z2_post_ly.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div></div>
 </section>
-<section id="implementación-en-scikit-learn" class="slide level2">
-<h2>Implementación en Scikit-Learn</h2>
-<div class="sourceCode" id="cb6" data-code-line-numbers="|1|3|5-6|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
-<span id="cb6-2"><a></a></span>
-<span id="cb6-3"><a></a>dbs <span class="op">=</span> DBSCAN(min_samples <span class="op">=</span> <span class="dv">5</span>, eps <span class="op">=</span> <span class="fl">0.5</span>, metric <span class="op">=</span> <span class="st">"euclidean"</span>)</span>
-<span id="cb6-4"><a></a></span>
-<span id="cb6-5"><a></a><span class="co">## Se entrena y se genera la predicción</span></span>
-<span id="cb6-6"><a></a>dbs.fit_predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="columns" style="font-size: 70%;">
+<section id="regularización-l2-aka-weight-decay" class="slide level2 smaller">
+<h2>Regularización L2 aka Weight Decay</h2>
+<div style="font-size: 80%;">
+<blockquote>
+<p>En general el gran problema de las Redes Neuronales es el <strong><em>Overfitting</em></strong>. Esto porque las redes neuronales normalmente se denominan como <strong>Overparametrized Models</strong>. <strong><em>¿Qué significa esto?</em></strong></p>
+</blockquote>
+<dl>
+<dt>Weight Decay</dt>
+<dd>
+<blockquote>
+<p>Corresponde a una penalización que se da a los modelos para limitar su complejidad y asegurar que pueda generalizar correctamente en datos no vistos.</p>
+</blockquote>
+</dd>
+</dl>
+</div>
+<p><span class="math display">\[ \underset{W_{i:L}}{minimize} \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}),y^{(i)}) + \frac{\lambda}{2} \sum_{i=1}^L ||W_i||_f^2\]</span></p>
+<p>Eso implica una transformación a nuestro <strong><em>Update Rule</em></strong>:</p>
+<p><span class="math display">\[W_i := W_i - \alpha \nabla \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}),y^{(i)}) - \alpha \lambda W_i = (1-\alpha\lambda)W_i - \alpha \nabla l(h_\theta(x^{(i)}),y^{(i)})\]</span></p>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Se puede ver que los pesos (weights) se <strong><em>contraen</em></strong> (decaen) antes de actualizarse en la dirección del gradiente.</p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Por alguna razón Pytorch decidió implementarlo como una propiedad de los <strong><em>Optimizers</em></strong> cuando en realidad debió ser de la Loss Function.</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="dropout" class="slide level2 smaller">
+<h2>Dropout</h2>
+<blockquote>
+<p>A diferencia de la estrategia anterior, este tipo de regularización se aplica a las activaciones de la red (resultados de la Transformación Affine, previo a la transformación no lineal).</p>
+</blockquote>
+<p>Definiremos el Dropout como:</p>
+<p><span class="math display">\[Z_{i+1} = \sigma(W_i^T Z_i + b_i)\]</span> <span class="math display">\[\widehat{Z_{i+1}} = D(Z_{i+1})\]</span></p>
+<p>donde <span class="math inline">\(D\)</span> implica la aplicación de Dropout a la capa <span class="math inline">\(i+1\)</span>. El elemento <span class="math inline">\(j\)</span> de la capa <span class="math inline">\(\widehat{Z_i}\)</span> se calcula como:</p>
+<p><span class="math display">\[(\widehat{Z_{i+1}})_j = \begin{cases}
+\frac{(Z_{i+1})_j}{1-p}  &amp; \text{with prob 1-p} \\
+0, &amp; \text{with prob p}
+\end{cases}\]</span></p>
+<p><span class="math inline">\(p\)</span> se conoce como el <code>Dropout Rate</code>. ::: {.callout-important} El factor <span class="math inline">\(\frac{1}{1-p}\)</span> se aplica para mantener la varianza estable luego de haber eliminado activaciones con probabilidad <span class="math inline">\(p\)</span>. :::</p>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Dropout se aplica normalmente al momento de entrenar el modelo. Por lo tanto, de usar Dropout es imperativo cambiar al modo <code>model.eval()</code> al momento de predecir.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="weights-initialization" class="slide level2 smaller">
+<h2>Weights Initialization</h2>
+<p>Hemos hablado que los métodos basados en SGD normalmente utilizan valores aleatorios para partir su entrenamiento, lo cual deja un poco al azar el éxito de un proceso de entrenamiento.</p>
+<p>Existen diversos estudios de cómo <code>inicializar</code> los parámetros para una convergencia óptima. Algunas de las inicializaciones son:</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Activaciones Triviales</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li><p><strong>min_samples</strong>: Corresponde a minPts. Por defecto 5.</p></li>
-<li><p><strong>eps</strong>: Corresponde al radio de la esfera en la que se buscan los puntos cercanos. Por defecto 0.5.</p></li>
-<li><p><strong>metric</strong>: Corresponde a la distancia utilizada para medir la distancia. Permite todas las distancias mencionadas <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise_distances.html#sklearn.metrics.pairwise_distances">acá</a>.</p></li>
-<li><p><code>.fit_predict()</code>: Entrenará el modelo en los datos suministrados e inmediatamente genera el cluster asociado a cada elemento. Adicionalmente los puntos ruidosos se etiquetarán como -1.</p></li>
+<li>Constante</li>
+<li>Sólo unos</li>
+<li>Sólo Zeros</li>
 </ul>
 </div>
-<p>👀 Veamos un ejemplo.</p>
-</section></section>
-<section id="its-over" class="title-slide slide level1 center">
-<h1>It’s over!!</h1>
+</div>
+</div>
+</section>
+<section id="weights-initialization-1" class="slide level2 smaller">
+<h2>Weights Initialization</h2>
+<div class="columns">
+<div class="column">
+<h4 id="xavier-o-glorot-uniforme">Xavier o Glorot Uniforme</h4>
+<p>Se inicia con valores provenientes de una distribución uniforme: <span class="math inline">\(\mathcal{U}(-a,a)\)</span></p>
+<p><span class="math display">\[ a = gain \cdot \sqrt{\frac{6}{fan_{in} + fan_{out}}}\]</span></p>
+</div><div class="column">
+<h4 id="xavier-o-glorot-normal">Xavier o Glorot Normal</h4>
+<p>Se inicia con valores provenientes de una distribución uniforme: <span class="math inline">\(\mathcal{N}(0,std^2)\)</span></p>
+<p><span class="math display">\[ std = gain \cdot \sqrt{\frac{2}{fan_{in} + fan_{out}}}\]</span></p>
+</div></div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(fan_{in}\)</span> corresponde al número de conexiones que entran a una neurona. Mientras que <span class="math inline">\(fan_{out}\)</span> corresponde al número de neuronas que salen de dicha neurona.</li>
+<li><span class="math inline">\(fan\_mode\)</span> corresponde a la elección de <span class="math inline">\(fan_{in}\)</span> o <span class="math inline">\(fan_{out}\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<h4 id="kaiming-aka-he-uniforme">Kaiming (aka He) Uniforme</h4>
+<p>Se inicia con valores provenientes de una distribución uniforme: <span class="math inline">\(\mathcal{U}(-bound,bound)\)</span></p>
+<p><span class="math display">\[ bound = gain \cdot \sqrt{\frac{3}{fan\_mode}}\]</span></p>
+</div><div class="column">
+<h4 id="kaiming-aka-he-normal">Kaiming (aka He) Normal</h4>
+<p>Se inicia con valores provenientes de una distribución uniforme: <span class="math inline">\(\mathcal{N}(0,std^2)\)</span></p>
+<p><span class="math display">\[std =\sqrt{\frac{gain}{fan\_mode}}\]</span></p>
+</div></div>
+</section>
+<section id="training-control" class="slide level2 smaller">
+<h2>Training Control</h2>
+<p>El entrenamiento de una red neuronal puede tomar mucho tiempo. Es por eso que algunas buenas prácticas serían:</p>
+<ul>
+<li>Disponer de resultados preliminares aunque el entrenamiento no haya terminado.</li>
+<li>Guardar los pesos del mejor modelo obtenido en el proceso de entrenamiento.</li>
+<li>Evitar entrenar pasado el punto de Overfitting.
+<ul>
+<li>Aunque hay nuevas ideas de lo que se llama el <a href="https://www.linkedin.com/feed/update/urn:li:activity:7214966566696718336?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7214966566696718336%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29">grokking</a>.</li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Early Stopping</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Se refiere al proceso de detener el entrenamiento luego de <code>patience</code> epochs sin mejorar el validation loss u otro criterio.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Checkpointing</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Corresponde al proceso de guardar los parámetros obtenidos en un epoch en específico. Normalmente se guarda la mejor epoch y la última, pero se puede generar algún criterio.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="categorical-variables" class="slide level2 smaller">
+<h2>Categorical Variables</h2>
+<blockquote>
+<p>Es importante mencionar que normalmente no se utilizan redes neuronales para poder entrenar datos tabulares. Pero de hacerlo, es muy probable que nos encontremos con variables categóricas. Para ello existen dos técnicas que son las más comunes en redes neuronales.</p>
+</blockquote>
+<dl>
+<dt>One Hot Encoder</dt>
+<dd>
+Corresponde a la representación mediante dummy variables. Normalmente se considera una representación <code>Sparse</code> de los datos.
+</dd>
+</dl>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En Pytorch se puede implementar como <code>F.one_hot()</code>, pero mi recomendación es utilizar las herramientas de Scikit-Learn para evitar <code>Data Leakage</code>.</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/one_hot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-6/one_hot.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="categorical-variables-1" class="slide level2 smaller">
+<h2>Categorical Variables</h2>
+<dl>
+<dt>Embeddings</dt>
+<dd>
+Es una representación de Densa de los Datos. Corresponde a una representación a en un espacio dimensional definido que es aprendido por la misma red. La representación aprendida considera aspectos como la similaridad la cual se refleja como una medida de distancia.
+</dd>
+</dl>
+<p>En Pytorch esto se puede realizar mediante: <code>nn.Embedding()</code>.</p>
+<div style="font-size: 150%;">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>nn.Embedding(num_embeddings, embedding_dim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>num_embeddings</strong>: Corresponde al número de categórías.</li>
+<li><strong>embedding_dim</strong>: El número de dimensiones en el cual se quiere representar.</li>
+</ul>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Este proceso tiene parámetros entrenables asociados.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="thats-all-folks" class="title-slide slide level1 center">
+<h1>That’s all Folks</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
-</p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+</p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a>
 <p></p>
 </div>
 
 <div class="quarto-auto-generated-content">
-<p><img src="../logo.jpg" class="slide-logo"></p>
+<p><img src="../logo-uai-blanco.jpeg" class="slide-logo"></p>
 <div class="footer footer-default">
 
 </div>
@@ -970,7 +1111,7 @@ Alfonso Tobar-Arancibia
       Reveal.initialize({
 'controlsAuto': false,
 'previewLinksAuto': false,
-'pdfSeparateFragments': false,
+'pdfSeparateFragments': true,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
@@ -1342,7 +1483,7 @@ Alfonso Tobar-Arancibia
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
