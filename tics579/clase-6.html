@@ -453,7 +453,7 @@ Alfonso Tobar-Arancibia
 <section id="normalización-batch-norm" class="slide level2 smaller">
 <h2>Normalización (Batch Norm)</h2>
 <p><a href="https://arxiv.org/pdf/1502.03167">Paper 2015: Batch Normalization</a></p>
-<div style="font-size: 120%;">
+<div style="font-size: 90%;">
 <div class="callout callout-caution callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -755,8 +755,9 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </section>
-<section id="normalización-layer-norm" class="slide level2">
+<section id="normalización-layer-norm" class="slide level2 smaller">
 <h2>Normalización: Layer Norm</h2>
+<p><a href="https://arxiv.org/abs/1607.06450">Paper 2016: Layer Normalization</a></p>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -774,7 +775,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
@@ -791,7 +792,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-<div class="callout callout-tip callout-style-simple">
+<div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -819,7 +820,7 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-6/Z2_ly.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-6/Z2_ly.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div><div class="column">
+</div><div class="column fragment">
 <p><span class="math display">\[ \mu_{norm} = \frac{1}{n_i} \sum_{j=1}^{n_i} z_j = \frac{1}{4}(4 + 9 + 6 + 7) = 6.5\]</span> <span class="math display">\[ \sigma_{norm}^2 = \frac{1}{n_i} \sum_{j=1}^{n_i} (z_j - \mu_B)^2 = 3.25\]</span></p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -843,6 +844,7 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="regularización-l2-aka-weight-decay" class="slide level2 smaller">
 <h2>Regularización L2 aka Weight Decay</h2>
+<p><a href="https://proceedings.neurips.cc/paper/1991/file/8eefcfdf5990e441f0fb6f3fad709e21-Paper.pdf">Paper 1991: Weight Decay</a></p>
 <div style="font-size: 80%;">
 <blockquote>
 <p>En general el gran problema de las Redes Neuronales es el <strong><em>Overfitting</em></strong>. Esto porque las redes neuronales normalmente se denominan como <strong>Overparametrized Models</strong>. <strong><em>¿Qué significa esto?</em></strong></p>
@@ -855,10 +857,10 @@ Alfonso Tobar-Arancibia
 </blockquote>
 </dd>
 </dl>
-</div>
 <p><span class="math display">\[ \underset{W_{i:L}}{minimize} \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}),y^{(i)}) + \frac{\lambda}{2} \sum_{i=1}^L ||W_i||_f^2\]</span></p>
 <p>Eso implica una transformación a nuestro <strong><em>Update Rule</em></strong>:</p>
 <p><span class="math display">\[W_i := W_i - \alpha \nabla \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}),y^{(i)}) - \alpha \lambda W_i = (1-\alpha\lambda)W_i - \alpha \nabla l(h_\theta(x^{(i)}),y^{(i)})\]</span></p>
+</div>
 <div class="columns">
 <div class="column">
 <div class="callout callout-tip callout-style-simple">
@@ -886,6 +888,8 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="dropout" class="slide level2 smaller">
 <h2>Dropout</h2>
+<p><a href="https://paperswithcode.com/paper/dropout-a-simple-way-to-prevent-neural">Paper 2014: Dropout</a></p>
+<div style="font-size: 80%;">
 <blockquote>
 <p>A diferencia de la estrategia anterior, este tipo de regularización se aplica a las activaciones de la red (resultados de la Transformación Affine, previo a la transformación no lineal).</p>
 </blockquote>
@@ -896,7 +900,18 @@ Alfonso Tobar-Arancibia
 \frac{(Z_{i+1})_j}{1-p}  &amp; \text{with prob 1-p} \\
 0, &amp; \text{with prob p}
 \end{cases}\]</span></p>
-<p><span class="math inline">\(p\)</span> se conoce como el <code>Dropout Rate</code>. ::: {.callout-important} El factor <span class="math inline">\(\frac{1}{1-p}\)</span> se aplica para mantener la varianza estable luego de haber eliminado activaciones con probabilidad <span class="math inline">\(p\)</span>. :::</p>
+<p><span class="math inline">\(p\)</span> se conoce como el <code>Dropout Rate</code>.</p>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El factor <span class="math inline">\(\frac{1}{1-p}\)</span> se aplica para mantener la varianza estable luego de haber eliminado activaciones con probabilidad <span class="math inline">\(p\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -910,6 +925,7 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="weights-initialization" class="slide level2 smaller">
 <h2>Weights Initialization</h2>
+<p><a href="https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">Paper 2010: Xavier Initialization</a> <a href="https://arxiv.org/abs/1502.01852">Paper 2015: Kaiming Initialization</a></p>
 <p>Hemos hablado que los métodos basados en SGD normalmente utilizan valores aleatorios para partir su entrenamiento, lo cual deja un poco al azar el éxito de un proceso de entrenamiento.</p>
 <p>Existen diversos estudios de cómo <code>inicializar</code> los parámetros para una convergencia óptima. Algunas de las inicializaciones son:</p>
 <div class="callout callout-note callout-titled callout-style-default">
@@ -1483,7 +1499,7 @@ Es una representación de Densa de los Datos. Corresponde a una representación 
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
