@@ -65,7 +65,7 @@ Esta operación se puede hacer mediante [StandardScaler](https://scikit-learn.or
 
 [Paper 2015: Batch Normalization](https://arxiv.org/pdf/1502.03167)
 
-::: {.callout-caution appearance="default" style="font-size: 120%;"}
+::: {.callout-caution appearance="default" style="font-size: 90%;"}
 ## ¿Por qué?
 * Acelera el entrenamiento
 * Disminuye la importancia de los Parámetros iniciales.
@@ -222,7 +222,9 @@ Entonces, la posición del BatchNorm termina siendo parte de la Arquitectura, y 
 Batchnorm tiene efectos distintos al momento de entrenar o de evaluar/predecir en un modelo. Por lo tanto, de usar Batchnorm es imperativo utilizar los modos `model.train()` y `model.eval()` de manera apropiada.
 :::
 
-## Normalización: Layer Norm 
+## Normalización: Layer Norm {.smaller}
+
+[Paper 2016: Layer Normalization](https://arxiv.org/abs/1607.06450)
 
 ::: {.callout-important appearance="default"}
 ## Batch Norm tiene algunos problemas:
@@ -231,14 +233,14 @@ Batchnorm tiene efectos distintos al momento de entrenar o de evaluar/predecir e
 * Difícil de Paralelizar.
 :::
 
-::: {.callout-important appearance="default"}
+::: {.callout-tip appearance="default"}
 ## Beneficios de Layer Norm
 * Puede trabajar con secuencias.
 * No tiene problemas para trabajar con cualquier tipo de Batch Size.
 * Se puede paralelizar, lo cuál es útil en redes como las RNN.
 :::
 
-::: {.callout-tip}
+::: {.callout-note}
 * En este caso se realiza la normalización por **capa** o por **Data Point** (instancia). 
 * Además son el elementos cruciales en las Arquitecturas de Transformers.
 :::
@@ -252,7 +254,7 @@ Batchnorm tiene efectos distintos al momento de entrenar o de evaluar/predecir e
 
 ![](img/clase-6/Z2_ly.png){.lightbox fig-align="center"}
 :::
-::: {.column}
+::: {.column .fragment}
 $$ \mu_{norm} = \frac{1}{n_i} \sum_{j=1}^{n_i} z_j = \frac{1}{4}(4 + 9 + 6 + 7) = 6.5$$
 $$ \sigma_{norm}^2 = \frac{1}{n_i} \sum_{j=1}^{n_i} (z_j - \mu_B)^2 = 3.25$$
 
@@ -266,18 +268,20 @@ $$\widehat{z_j} = \frac{z_j - \mu_{norm}}{\sqrt{\sigma_{norm}^2 + \epsilon}}$$
 
 ## Regularización L2 aka Weight Decay {.smaller}
 
+[Paper 1991: Weight Decay](https://proceedings.neurips.cc/paper/1991/file/8eefcfdf5990e441f0fb6f3fad709e21-Paper.pdf)
+
 ::: {style="font-size: 80%;"}
 > En general el gran problema de las Redes Neuronales es el ***Overfitting***. Esto porque las redes neuronales normalmente se denominan como **Overparametrized Models**. ***¿Qué significa esto?***
 
 Weight Decay
 : > Corresponde a una penalización que se da a los modelos para limitar su complejidad y asegurar que pueda generalizar correctamente en datos no vistos. 
-:::
 
 $$ \underset{W_{i:L}}{minimize} \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}),y^{(i)}) + \frac{\lambda}{2} \sum_{i=1}^L ||W_i||_f^2$$
 
 Eso implica una transformación a nuestro ***Update Rule***:
 
 $$W_i := W_i - \alpha \nabla \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}),y^{(i)}) - \alpha \lambda W_i = (1-\alpha\lambda)W_i - \alpha \nabla l(h_\theta(x^{(i)}),y^{(i)})$$
+:::
 
 
 ::: {.columns}
@@ -295,6 +299,9 @@ Por alguna razón Pytorch decidió implementarlo como una propiedad de los ***Op
 
 ## Dropout {.smaller}
 
+[Paper 2014: Dropout](https://paperswithcode.com/paper/dropout-a-simple-way-to-prevent-neural)
+
+::: {style="font-size: 80%;"}
 > A diferencia de la estrategia anterior, este tipo de regularización se aplica a las activaciones de la red (resultados de la Transformación Affine, previo a la transformación no lineal). 
 
 Definiremos el Dropout como:
@@ -310,8 +317,10 @@ $$(\widehat{Z_{i+1}})_j = \begin{cases}
 \end{cases}$$
 
 $p$ se conoce como el `Dropout Rate`.
+
 ::: {.callout-important}
 El factor $\frac{1}{1-p}$ se aplica para mantener la varianza estable luego de haber eliminado activaciones con probabilidad $p$.
+:::
 :::
 
 ::: {.callout-warning}
@@ -320,6 +329,9 @@ Dropout se aplica normalmente al momento de entrenar el modelo. Por lo tanto, de
 
 
 ## Weights Initialization {.smaller}
+
+[Paper 2010: Xavier Initialization](https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf)
+[Paper 2015: Kaiming Initialization](https://arxiv.org/abs/1502.01852)
 
 Hemos hablado que los métodos basados en SGD normalmente utilizan valores aleatorios para partir su entrenamiento, lo cual deja un poco al azar el éxito de un proceso de entrenamiento.
 
