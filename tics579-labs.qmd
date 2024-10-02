@@ -16,3 +16,4 @@ Práctico| Colab
 :----:|-----|
 Intro Pytorch|[![](tics579/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics579/notebooks/Intro_pytorch.ipynb)
 Intro Pytorch 2|[![](tics579/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics579/notebooks/Intro_pytorch_2.ipynb)
+CNN|[![](tics579/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics579/notebooks/CNN-pytorch.ipynb)

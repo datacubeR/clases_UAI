@@ -64,3 +64,13 @@
   path: tics579/clase-6.qmd
   categories:
    - slides
+  
+
+- title: "Clase 7"
+  subtitle: "Clase 7: Redes Convolucionales"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-10-03
+  image: tics579/thumbnails/clase-7.png
+  path: tics579/clase-7.qmd
+  categories:
+   - slides
