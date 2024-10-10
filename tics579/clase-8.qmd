@@ -1,0 +1,303 @@
+---
+title: "TICS-579-Deep Learning"
+subtitle: "Clase 8: Transfer Learning y Data Augmentation"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs:
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo-uai-blanco.jpeg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+    pdf-separate-fragments: true
+---
+
+# Arquitecturas Famosas
+
+## LeNet-5 (LeCun et al., 1998) {.smaller}
+
+> Probablemente la primera arquitectura famosa en poder realizar tareas importantes de reconocimiento de imagen. Diseñada especialmente para reconocimiento de dígitos, introduce los bloques de convolución más pooling para luego conectarse con FFN.
+
+![](img/clase-7/lenet.png){.lightbox fig-align="center"} 
+
+::: {.callout-caution appearance="default" icon="false"}
+## Adaptive Pooling
+La mayoría de arquitecturas más modernas utiliza una capa llamada Adaptive Pooling antes del proceso de Flatten. El Adaptive Pooling es una especie de Pooling inverso, donde uno define el tamaño del output, y automáticamente se calcula el Kernel, Stride, Padding, etc. necesario para obtener ese tamaño.
+
+Eso garantiza que cualquier tamaño de imagen puede pasar por la red sin romper las dimensiones necesarias para la transición al MLP.
+
+:::
+
+## AlexNext (Krizhevsky, Sutskever y Hinton, 2012) {.smaller}
+
+> Ganó el concurso Imagenet (ILSVRC) en 2012 por un largo margen (algo impensado para ese tiempo). Introdujo los conceptos de ReLU, Dropout y Aceleración por GPU. Esta arquitectura está disponible en `torchvision`.
+
+![](img/clase-8/alexnet.png){.lightbox fig-align="center" width="60%"} 
+
+```{.python}
+import torchvision
+torchvision.models.alexnet(weights = "IMAGENET1K_V1")
+```
+::: {.callout-important}
+La arquitectura de Torchvision está inspirada en una ***versión alternativa*** de Alexnet. Esto probablemente *no será* corregido ya que no es una arquitectura que se utilice comunmente en la actualidad.
+:::
+
+## VGGNet (Simonyan, Zisserman, 2014) {.smaller}
+
+> Presentaron las primeras redes relativamente profundas con Kernels pequeños de $3 \times 3$. Su propuesta incluye Redes de hasta 19 capas.
+
+::: {.columns}
+::: {.column}
+![](img/clase-7/VGG16.png){.lightbox fig-align="center"} 
+:::
+::: {.column}
+```{.python}
+import torchvision
+torchvision.models.vgg16(weights = "IMAGENET1K_V1")
+## Versión con Batchnorm
+torchvision.models.vgg16_bn(weights = "IMAGENET1K_V1")
+```
+::: {.callout-tip}
+`torchvision` incluye las arquitecturas de 11, 13, 16 y 19 capas, además de variantes que incluyen Batchnorm (que en eltiempo del paper no existían aún).
+:::
+:::
+::: 
+
+## GoogleNet/Inception (Szegedy et al., 2014) {.smaller}
+
+::: {.columns}
+::: {.column width=60% style="font-size: 80%;"}
+
+> Introduce las *"Pointwise Convolutions"* (Convoluciones de 1x1) que permiten reducir la complejidad de canales (mediante una combinación lineal) manteniendo las dimensiones de la imagen. Además introduce los Inception Modules, que combinan resultados de Kernels de distinto tamaño. Fue la Arquitectura ganadora de ILSVRC 2014.
+
+```{.python}
+import torchvision
+torchvision.models.googlenet(weights = "IMAGENET1K_V1")
+```
+
+:::
+::: {.column width=40%}
+#### 1x1 Convolutions
+
+![](img/clase-8/1x1_convs_1.png){.lightbox fig-align="center"} 
+![](img/clase-8/1x1_convs_2.png){.lightbox fig-align="center"} 
+:::
+::: 
+
+![](img/clase-8/googlenet.png){.lightbox fig-align="center" width="55%"} 
+
+## Resnet (He et al., 2015) {.smaller}
+
+:::: {.columns}
+::: {.column width="20%"}
+![](img/clase-8/resnet.png){.lightbox fig-align="center" width="45%"}  
+:::
+::: {.column width="80%"}
+> Introduce las conexiones residuales, lo cual permite evitar el problema del ***vanishing gradient*** para redes muy profundas. Es la Arquitectura ganadora de ILSVRC 2015.
+
+::: {.callout-tip}
+Esta arquitectura se puede encontrar tanto en `torchvision` como `timm`. Recomiendo `timm`, ya que hay muchas más variantes, mejor mantención y procesos de entrenamiento actualizados.
+:::
+
+```{.python}
+import timm
+model = timm.create_model("resnet50", pretrained = True)
+
+## Listar todas las versiones de Resnet disponibles
+timm.list_models("resnet*")
+```
+<br>
+
+#### Conexiones Residuales
+
+![](img/clase-8/residual.png){.lightbox fig-align="center" width="40%"}  
+
+:::
+:::: 
+
+## EfficientNet (Tan, Le, 2019) {.smaller}
+
+> Introducen el concepto de ***Compound Scaling*** que permite cambiar la escala de profundidad (número de capas en la red), ancho (número de canales en cada capa) y resolución (dimensiones de la imagen) para poder mejorar la performance. Permite crear resultados al nivel del estado del arte con muchísimos menos parámetros.
+
+![](img/clase-8/efficientnet.png){.lightbox fig-align="center" width="70%"}  
+
+```{.python}
+import timm
+model = timm.create_model("efficientnet_b0", pretrained = True)
+
+## Listar todas las versiones de Resnet disponibles
+timm.list_models("efficientnet*")
+```
+
+## Pre-training {.smaller}
+
+Imagenet
+: Corresponde a un dataset de cerca de 14M de imágenes con que fueron anotados a mano. Este dataset se utilizó para la competencia de ImageNet Large Scale Visual Recognition Challenge (ILSVRC) desde el año 2010 al 2017, el cuál generó innumerables avances en el estado del arte. Normalmente las imágenes tienen rangos entre $4288 \times 2848$ hasta $75 \times 56$. Las imágenes se encuentran normalizadas restando medias por canal de $[0.485,0.456,0.406]$ y divididas por SD de $[0.229,0.224,0.225]$.
+
+::: {.callout-important}
+* Las dos variantes más conocidas son el ImageNet-1K que tiene 1.281.167, 50.000 y 100.000 imágenes para train, validation y test set con 1000 categorías y el ImageNet-21K que tiene 14.197.122 imágenes con 21.841 clases.
+:::
+
+::: {.callout-tip}
+Debido a la importancia y complejidad de este dataset es que la mayoría de los backbones han sido pre-entrenados con este él. Por lo que las distintas arquitecturas ***"pueden ver"*** gracias a este dataset.
+:::
+
+::: {.callout-note}
+Debido a que muchas arquitecturas pueden/saben ver en un dataset tan complejo como Imagenet. ***¿Sería posible utilizar ese conocimiento en otro dataset?***
+:::
+
+::: {.fragment}
+### Entering Transfer Learning
+:::
+
+## Transfer Learning {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+![](img/clase-8/transfer_learning.png){.lightbox fig-align="center"}  
+:::
+::: {.column width="40%"}
+::: {.callout-note appearance="default" icon="false"}
+## Dataset Público/alta complejidad
+Normalmente se utilizan datos públicos y de alta complejidad y se utiliza para ***pre-entrenar*** una arquitectura.
+:::
+
+::: {.callout-tip appearance="default" icon="false"}
+## Pre-entrenamiento
+Se entrena una arquitectura para una tarea en específico con los detalles del dataset a utilizar.
+
+:::
+::: {.callout-important appearance="default" icon="false"}
+## Fine-Tuning
+Se carga la arquitectura pre-entrenada, con los pesos obtenidos en el pre-entrenamiento y se ajusta el prediction head para la nueva tarea y se vuelve a entrenar el modelo.
+:::
+::: {.callout-caution appearance="default" icon="false"}
+## Freezing Layers
+Se refiere a congelar los parámetros del **backbone** pre-entrenado, es decir, estos no se actualizan. Este paso es opcional, y en ocasiones puede funcionar de mejor manera que un ***Full-Fine-Tuning***
+
+:::
+:::
+::: 
+
+## Image Preprocessing y Data Augmentation {.smaller}
+
+> En general el proceso de Preprocesamiento de Imágenes es bastante más engorroso que el de datos tabulares. Afortunadamente Pytorch tiene algunos `utilities` que permiten hacer el proceso más sencillo:
+
+ImageFolder
+: Permite cargar imágenes de un Path en específico. Dentro de esa carpeta `ImageFolder` considerará cada carpeta como una clase y los elementos (imágenes) dentro de dicha clase como instancia de la clase en cuestión.
+
+```{.python}
+from torchvision.dataset import ImageFolder
+
+train_data = ImageFolder("path/to/train/images", transform = None)
+validation_data = ImageFolder("path/to/validation/images", transform = None)
+test_data = ImageFolder("path/to/test/images", transform = None)
+```
+
+::: {.callout-tip}
+Además `ImageFolder` posee un parámetro llamado transform en el cuál se pueden ingresar transformaciones a los datos para realizar procesos de Data Augmentation.
+:::
+
+::: {.callout-important appearance="default" icon="false"}
+## Ojo
+Image Folder entrega los datos como una Imagen PIL. Por lo tanto, es necesario aplicar procesamientos que permitan su transformación en Tensor.
+:::
+
+## Data Augmentation {.smaller}
+
+::: {.columns}
+::: {.column width=70% style="font-size: 70%;"}
+
+Corresponde a un proceso de generación de datos sintéticos. Este proceso se puede utilizar para:
+
+* Permite la generación de datos adicionales debido a escasez por costo o disponibilidad de ellos. Ejemplo: Datos médicos.
+* Genera variedad de datos, que entrega al modelo un mayor poder de generalización en datos no vistos.
+* Al introducir mayor variabilidad en los datos entrega una mayor robustez ante el overfitting (Regularización).
+* Simular condiciones adversas para el modelo en la cuál se quiera generar robustez.
+    * Ej: Se tiene un modelo de reconocimiento de vehículos, pero que tiene que funcionar en condiciones de niebla.
+:::
+::: {.column width="30%"}
+![](img/clase-8/augmentations.jpg){.lightbox fig-align="center" width="90%"}  
+:::
+::: 
+
+::: {.callout-tip appearance="default" icon="false"}
+## Albumentations
+
+Existen diversas librerías que permiten generar Aumento de Datos. La librerías más famosas son Albumentations y Kornia. Albumentations, permite transformaciones extremadamente eficientes en CPU, mientras que Kornia hace lo mismo pero en GPU. Debido a las limitaciones de GPU que contamos, utilizaremos Albumentations, de manera tal de balancear procesamiento tanto en CPU como en GPU.
+:::
+
+::: {.callout-note}
+Normalmente este tipo de transformaciones entrega mejores resultados cuando se generan de manera aleatoria y `on-the-fly`. Es decir, se genera el aumento de datos en la carga de datos durante el entrenamiento.
+:::
+
+## Transformaciones Básicas {.smaller}
+
+```{.python}
+import albumentations as A
+from albumentations.pytorch.transforms import ToTensorV2
+```
+::: {.callout-caution}
+Albumentations espera que la imagen venga como Numpy Array. Además es una librería bastante quisquillosa, por lo que toma un rato acostumbrarse. Pero su eficiencia y utilidad hace que valga la pena.
+:::
+
+A.Compose()
+: Permite generar Pipelines de Transformación. Es decir, irá aplicando transformaciones una a una.
+
+A.ToFloat()
+: Transforma los datos en tipo Float. Esto a veces es necesario cuando hay incompatibilidad de data types en ciertos módulos.
+
+ToTensorV2()
+: Transforma a Tensor de Pytorch. Existe una versión `ToTensor()` pero está deprecada y no debería usarse.
+
+A.Normalize()
+: Permite normalizar imágenes según su proceso de pre-entrenamiento. Normalmente estos provienen de pre-entrenamiento en Imagenet por lo que se debe normalizar con $mean=[0.485,0.456,0.406]$ y $SD=[0.229,0.224,0.225]$.
+
+A.Resize()
+: Se utiliza para estandarizar el tamaño de las imágenes. Imágenes más grandes permiten mejores resultados pero son computacionalmente más costosas. 
+
+## Transformaciones Probabilísticas {.smaller}
+
+::: {.callout-tip}
+Como su nombre lo indica, la transformación se aplicará con una cierta probabilidad, lo que permitirá que cada epoch haya mayor variabilidad.
+:::
+
+[A.CenterCrop/A.RandomCrop](https://explore.albumentations.ai/transform/RandomCrop)
+: Genera un Crop de la imagen o al centro o Random. Esto logrará que los elementos de la imagen cambien de posición.
+
+[A.VerticalFlip](https://explore.albumentations.ai/transform/VerticalFlip)
+: Genera Flip Vertical.
+
+[A.HorizontalFlip](https://explore.albumentations.ai/transform/HorizontalFlip)
+: Genera Flip Horizontal.
+
+[A.Rotate](https://explore.albumentations.ai/transform/Rotate)
+: Genera rotaciones aleatorias entre un ángulo mínimo y máximo.
+
+
+::: {.callout-important}
+Existen un sinnúmero de transformaciones que se pueden aplicar. La lista completa se puede encontrar [acá](https://explore.albumentations.ai/). Y existen transformaciones que incluso permiten simular niebla, lluvia, nieve, sepia, Zoom, y variados otros efectos.
+:::
+
+::: {.callout-caution}
+Aplicar estas transformaciones es de extremo cuidado ya que para tareas más complejas como Semantic Segmentation, Object Detection, Keypoint Detection, se debe aplicar dichas transformaciones también a las etiquetas. 
+:::
+
+# Class Dismissed
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::

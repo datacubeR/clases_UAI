@@ -74,3 +74,13 @@
   path: tics579/clase-7.qmd
   categories:
    - slides
+
+
+- title: "Clase 8"
+  subtitle: "Clase 8: Transfer Learning y Data Augmentation"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-10-10
+  image: tics579/thumbnails/clase-8.png
+  path: tics579/clase-8.qmd
+  categories:
+   - slides
