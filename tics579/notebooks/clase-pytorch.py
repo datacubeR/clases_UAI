@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+
 np.random.seed(1)
 # %% Datos
 X_numpy = np.random.randn(1000, 10)
@@ -16,16 +17,22 @@ X.shape, y.shape
 #
 import pandas as pd
 
+
+def hello_world(z, x):
+    return x + 1
+
+
 df = pd.DataFrame(X_numpy).head()
 
 # %% Red Neuronal MLP
+
 
 class MLP(nn.Module):
     def __init__(self, n_features, hidden_dim_1, hidden_dim_2, output_dim):
         super(MLP, self).__init__()
         self.w1 = nn.Linear(n_features, hidden_dim_1)
         self.w2 = nn.Linear(hidden_dim_1, hidden_dim_2)
-        self.w3 = nn.Linear(hidden_dim_2,output_dim)
+        self.w3 = nn.Linear(hidden_dim_2, output_dim)
         self.relu_1 = nn.ReLU(inplace=True)
         self.relu_2 = nn.ReLU(inplace=True)
 
@@ -55,6 +62,8 @@ for e in range(EPOCHS):
 
 # %%
 from torch.utils.data import Dataset, DataLoader
+
+
 class MyDataset(Dataset):
     def __init__(self, X, y):
         self.X = torch.tensor(X, dtype=torch.float32)
@@ -65,6 +74,7 @@ class MyDataset(Dataset):
 
     def __getitem__(self, idx):
         return self.X[idx], self.y[idx]
+
 
 dataset = MyDataset(X, y)
 train_loader = DataLoader(dataset, batch_size=128, shuffle=True)

@@ -84,3 +84,13 @@
   path: tics579/clase-8.qmd
   categories:
    - slides
+
+
+- title: "Clase 9"
+  subtitle: "Clase 9: Redes Recurrentes"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-10-24
+  image: tics579/thumbnails/clase-9.png
+  path: tics579/clase-9.qmd
+  categories:
+   - slides

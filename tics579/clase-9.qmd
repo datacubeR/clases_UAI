@@ -1,0 +1,478 @@
+---
+title: "TICS-579-Deep Learning"
+subtitle: "Clase 9: Redes Recurrentes"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs:
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo-uai-blanco.jpeg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+    pdf-separate-fragments: true
+---
+
+## Datos Secuenciales {.smaller}
+
+
+::: {.callout-note}
+Hasta ahora, asumimos que todos nuestros datos son ***i.i.d***. Pero en la realidad existen datos que contienen una secuencia temporal y que debe ser considerada al momento de modelarlos.
+
+:::
+::: {.columns}
+::: {.column}
+
+#### Time Series 
+![](img/clase-9/timeseries.png){.lightbox fig-align="center" width="50%"} 
+
+#### Audio
+![](img/clase-9/audio.png){.lightbox fig-align="center" width="70%"} 
+:::
+::: {.column}
+#### Text 
+![](img/clase-9/text.png){.lightbox fig-align="center" width="70%"} 
+
+#### Genoma
+![](img/clase-9/genom.jpeg){.lightbox fig-align="center" width="50%"} 
+:::
+::: 
+
+
+## Datos Secuenciales {.smaller}
+
+> También pudiesen existir datos "multimodales", donde por ejemplo, se combinan secuencias con imágenes.
+
+::: {.columns}
+::: {.column}
+#### Image Time Series
+![](img/clase-9/image_ts.jpg){.lightbox fig-align="center"} 
+:::
+::: {.column}
+#### Video
+
+![](img/clase-9/video.gif){.lightbox fig-align="center"} 
+:::
+::: 
+
+## Modelamiento de una secuencia {.smaller}
+
+![](img/clase-9/sequence_example.png){.lightbox fig-align="center" width="35%"} 
+
+
+::: {.callout-tip}
+En este caso consideramos que $x_t$ corresponde a la instancia de un dato en el tiempo $t$ asociado a un target $y_t$. Además tenemos cierta dependencia entre los elementos en $t$ y $t+1$.
+:::
+
+::: {.callout-important}
+Es importante notar que $x_t$ no tiene por qué ser un escalar, sino que puede ser un vector de constituidos por varios features.
+:::
+
+::: {.callout-warning appearance="default"}
+## Ojo
+Un dato corresponde una secuencia de elementos, por lo tanto $x = [x_1,x_2,...x_L]$, donde $L$ es el largo de la secuencia.
+:::
+
+## Modelamiento de una secuencia: Ejemplo {.smaller}
+
+#### Part of Speech Tagging
+
+::: {.r-stack}
+
+![](img/clase-9/pos.png){.lightbox fig-align="center" } 
+
+![](img/clase-9/pos_2.png){.lightbox fig-align="center" .fragment} 
+
+:::
+
+::: {.callout-note .fragment}
+Es importante recalcar que la correcta descripción de cada palabra depende del contexto en el que se está usando y no sólo la palabra en sí misma.
+:::
+
+## Speech Recognition
+
+> El contexto ayuda a interpretar cuál es la manera correcta de interpretar el sonido emitido.
+
+![](img/clase-9/meme_speech.png){.lightbox fig-align="center" } 
+
+
+## Recurrent Neural Networks {.smaller}
+
+RNN
+: Corresponden a un tipo de red neuronal diseñada para procesar secuencias de datos manteniendo en memoria los inputs previos. A diferencia de los otros tipos de redes que procesan datos de manera independiente, acá existen conexiones cíclicas que permiten retener información en el tiempo.
+
+### Ejemplo
+
+::: {.columns}
+::: {.column}
+![](img/clase-9/forecast_example.png){.lightbox fig-align="center" } 
+:::
+::: {.column}
+::: {.callout-tip icon="false" appearance="default"}
+## Pros
+* Pueden tomar secuencias de distinto tamaño (Largo) como predictores de un problema.
+* Toman como antecedentes los puntos pasados como referencia para las predicciones futuras.
+:::
+::: {.callout-important icon="false" appearance="default"}
+## Cons
+* Se van complicando a medida que las secuencias son cada vez más largas.
+* Vanishing/Exploding Gradients Problem.
+:::
+:::
+::: 
+
+## RNNs {.smaller}
+
+
+::: {.columns}
+::: {.column width="60%"}
+![](img/clase-9/RNN_example.png){.lightbox fig-align="center" width="70%"} 
+
+::: {.callout-note}
+Supongamos los siguientes parámetros para nuestro modelo:
+
+* $W_1$ = 1.8
+* $W_2$ = -0.5
+* $W_3$ = 1.1
+* $sigma(\cdot) = ReLU(\cdot)$
+* Consideraremos los bias como 0.
+:::
+:::
+::: {.column width="40%"}
+
+![](img/clase-9/rnn_output.png){.lightbox fig-align="center" width="55%"} 
+
+::: {.callout-warning appearance="default"}
+## Ojo
+Esta es solamente una secuencia de largo 9.
+
+:::
+:::
+::: 
+
+## Unrolled RNN {.smaller}
+
+::: {.columns}
+::: {.column}
+![](img/clase-9/rnn_unroll.png){.lightbox fig-align="center" width="55%"} 
+:::
+::: {.column}
+::: {.callout-tip}
+* El ***"Unrollment"*** o el desenrollar la Red, se refiere a generar copias de las redes que irán recibiendo las salidas de las capas en un $t$ anterior. Estos valores, conocidos como ***"hidden state"***, irán alimentando las siguientes copias considerando los casos anteriores. Sólo el último output es el que nos interesa  para la predicción.
+
+:::
+::: {.callout-important}
+* Todos los parámetros de la red (Weights and Biases), son compartidos por cada una de las copias realizadas.
+* Se realizarán tantas copias como el largo de la secuencia. Esto permite que pase toda la secuencia "de una sola vez".
+* Sin importar cuantas copias se realicen, el número de parámetros NO aumenta.
+:::
+:::
+::: 
+
+## RNN formalmente {.smaller}
+
+![](img/clase-9/rnn_formal.png){.lightbox fig-align="center" width="45%"} 
+
+::: {.columns}
+::: {.column width="40%"}
+donde: 
+
+$$h_t = f(W_{hh} \cdot h_{t-1} + W_{hx} \cdot x_t + b_h)$$
+$$y_t = g(W_{yh}\cdot h_{t} + b_y)$$
+
+:::
+::: {.column width="30%"}
+* $h_t \in \mathbb{R}^d$
+* $x_t \in \mathbb{R}^n$
+* $y_t \in \mathbb{R}^k$
+:::
+::: {.column width="30%"}
+* $W_{hh} \in \mathbb{R}^{d \times d}$
+* $W_{hx} \in \mathbb{R}^{d \times n}$
+* $W_{yh} \in \mathbb{R}^{k \times d}$
+* $b_h \in \mathbb{R}^d$
+* $b_y \in \mathbb{R}^k$
+:::
+::: 
+
+## Stacking RNNs {.smaller}
+
+::: {.columns}
+::: {.column}
+![](img/clase-9/stacking_RNN.png){.lightbox fig-align="center" width="80%"} 
+:::
+::: {.column}
+::: {.callout-tip}
+Es posible juntar varias capas recurrentes, para que las salidas de una alimenten un siguiente Hidden State, y que luego de algunas capas efectivamente se llegue a las salidas de interés.
+:::
+
+::: {.callout-caution}
+A diferencia de otro tipos de Redes como las Convolucionales o FFN, la profundidad en este tipo de redes es de bastante menos impacto.
+:::
+
+::: {.callout-warning appearance="default"}
+## OJO
+No existen salidas intermedias, sino que los Hidden States de capas anteriores son utilizados directamente como inputs de los hidden states posteriores.
+:::
+:::
+::: 
+
+
+## Vanishing/Exploding Gradients {.smaller}
+
+::: {.callout-warning}
+* Entre más larga se la secuencia (más unrolls se realicen), más difícil es entrenar la red.
+:::
+
+
+::: {.columns}
+::: {.column}
+![](img/clase-9/exploding-vanishing_gradient.png){.lightbox fig-align="center" width="60%"} 
+:::
+::: {.column}
+$$Output = Input \times W_2^{N_{Unroll}}$$
+
+* Si $W_2$ corresponde a parámetros muy pequeños (menores a 1), entonces, el gradiente se desvanecerá (vanishing gradient).
+
+* Si $W_2$ corresponde a parámetros muy grandes (mayores a 1), entonces, el gradiente explotará (exploding gradient).
+
+::: {.callout-caution}
+Esto ocurre ya que si intentamos derivar la función de pérdida con respecto a alguno de los parámetros, eventualmente $W_2^{N_unroll}$ aparecerá en la ecuación, provocando dicho efecto en el gradiente.
+:::
+::: {.callout-important}
+Esta es quizás la razón más importante del por qué `Vanilla RNNs` son usadas rara vez en la práctica. Lo importante histórica de este tipo de redes es que abrieron las puertas a sistemas más modernos que hoy en día sí son usados (LSTMs, y Transformers).
+:::
+:::
+::: 
+
+
+## LSTM: Formalmente {.smaller}
+
+LSTMs
+: Es un tipo de Red Neuronal Recurrente que está diseñada para capturar dependencias de largo rango en datos secuenciales abordando algunas de las limitaciones de las RNNs tradicionales, tales como el `vanishing gradient problem`.
+
+::: {.columns}
+::: {.column}
+![](img/clase-9/LSTM_formal.png){.lightbox fig-align="center"} 
+:::
+::: {.column}
+::: {.callout-tip}
+Corresponde a la misma forma de una RNN, sólo que el "hidden state" se divide en dos partes: $h_t$ y $C_t$, llamados "hidden state" y "cell state" respectivamente.
+:::
+
+::: {.callout-important}
+La manera de calcular el "Hidden State" y el "Cell State" es muchísimo más engorrosa.
+:::
+:::
+::: 
+
+::: {.callout-warning}
+Spoiler: El Hidden y Cell State está compuesto por multiples set de parámetros a los cuales se les dan los nombres de `forget gate`, `input gate`, `cell gate` y `output gate`. Su interpretabilidad nunca ha logrado ser completamente explicada.
+:::
+
+
+## Long Short-Term Memory RNNs (1997) {.smaller}
+
+
+![](img/clase-9/LSTM.png){.lightbox fig-align="center"} 
+
+::: {.columns}
+::: {.column style="font-size: 80%;"}
+* La LSTM está regida por las siguientes ecuaciones:
+
+* $$i_t = \sigma(W_{ii}x_t) + b_{ii} + W_{hi}h_{t-1} + b_{hi}$$
+* $$f_t = \sigma(W_{if}x_t + b_{if} + W_{hf}h_{t-1} + b_{hf})$$
+* $$g_t = tanh(W_{ig}x_t + b_{ig} + W_{hg}h_{t-1} + b_{hg})$$
+* $$o_t = \sigma(W_{io}x_t + b_{io} + W_{ho}h_{t-1} + b_{ho})$$ 
+* $$c_t = f_t \odot c_{t-1} + i_t \odot g_t$$
+* $$h_t = o_t \odot tanh(c_t)$$
+:::
+::: {.column}
+::: {.callout-important}
+Todas estos elementos $i_t,f_t, g_t,o_t, c_t,h_t \in \mathbb{R}^d$, donde $d$ corresponde a la "hidden dimension".
+:::
+:::
+::: 
+
+## LSTM: Forget Gate 
+
+
+![](img/clase-9/forget_gate.png){.lightbox fig-align="center" width="40%"} 
+
+::: {.callout-caution appearance="default" icon="false" style="font-size: 85%;"}
+## Forget Gate
+* Corresponde a una red neuronal que indica qué informacion debe ser descartada del `Cell State`.
+* Básicamente combina la secuencia en el tiempo t y el hidden state anterior.
+* Luego se le aplica una Sigmoide que indicará el `porcentaje` a olvidar.
+
+$$f_t = \sigma(W_{if}x_t + b_{if} + W_{hf}h_{t-1} + b_{hf})$$
+:::
+
+
+
+## LSTM: Input y Cell Gate 
+
+![](img/clase-9/input_gate.png){.lightbox fig-align="center" width="30%"} 
+
+::: {.callout-tip appearance="default" icon="false" style="font-size: 70%;"}
+
+## Input Gate
+* Controla Cuánta información debe ingresar al `Cell State`.
+
+$$i_t = \sigma(W_{ii}x_t) + b_{ii} + W_{hi}h_{t-1} + b_{hi}$$
+:::
+
+
+
+::: {.callout-note appearance="default" icon="false" style="font-size: 70%"}
+## Cell Gate
+* Representa los potenciales nuevos candidatos a entrar al `Cell State`.
+
+$$g_t = tanh(W_{ig}x_t + b_{ig} + W_{hg}h_{t-1} + b_{hg})$$
+:::
+
+## Output Gate y Hidden State
+
+![](img/clase-9/output_gate.png){.lightbox fig-align="center" width="30%"} 
+
+::: {.callout-important appearance="default" icon="false" style="font-size: 70%;"}
+## Output Gate
+* Determina qué "porcentaje" de información del "Cell State" debe salir como "Hidden State" para el tiempo $t$ actual.
+
+* $$o_t = \sigma(W_{io}x_t + b_{io} + W_{ho}h_{t-1} + b_{ho})$$ 
+:::
+
+::: {.callout-warning appearance="default" icon="false" style="font-size: 70%;"}
+## Hidden State
+* Corresponde a las dependencias del tiempo anterior que se van traspasando en cada time step.
+* Adicionalmente el Hidden State corresponde a la salida de la red para el tiempo $t$.
+
+$$h_t = o_t \odot tanh(c_t)$$
+:::
+
+
+## Cell State
+
+![](img/clase-9/cell_state.png){.lightbox fig-align="center" width="40%"} 
+
+::: {.callout appearance="default" icon="false" style="font-size: 90%;"}
+
+## Cell State
+
+Representa la principal innovación de este tipo de redes ya que permite recordar dependencias de largo plazo (es decir time steps anteriores en secuencias largas). Esto ya que el Cell State puede avanzar casi sin interacciones lineales (no hay parámetros que influyen en ella, por lo que no es afectada por problemas de gradientes).
+
+$$c_t = f_t \odot c_{t-1} + i_t \odot g_t$$
+:::
+
+## Gated Recurrent Unit (2014) {.smaller}
+
+GRU
+: Corresponde a otro tipo de Arquitectura Recurrente, similar a la LSTM, pero con una estructura más simplificada en la cuál se mantiene sólo un "Hidden State" y se tienen menos gates.
+
+::: {.columns}
+::: {.column}
+![](img/clase-9/GRU.png){.lightbox fig-align="center" width="80%"} 
+
+::: {.callout-caution appearance="default" icon="false"}
+## Hidden State
+
+Representa la potencial actualización del "Hidden State".
+
+$$h_t = (1-z_t) \odot n_t + z_t \odot h_{t-1}$$
+:::
+:::
+::: {.column}
+::: {.callout-tip appearance="default" icon="false"}
+## Update Gate
+
+Controla qué porcentaje del "hidden state" previo se lleva al siguiente paso.
+
+$$z_t = \sigma(W_{iz} x_t + b_{iz} + W_{hz}h_{t-1} + b_{hz})$$
+:::
+
+::: {.callout-important appearance="default" icon="false"}
+## Reset Gate
+
+Controla cuánta información del pasado se debe olvidar. 
+
+$$r_t = \sigma(W_{ir} x_t + b_{ir} + W_{hr}h_{t-1} + b_{hr})$$
+:::
+
+::: {.callout-note appearance="default" icon="false"}
+##  Candidate Hidden State
+
+Representa la potencial actualización del "Hidden State".
+
+$$n_t = tanh(W_{in} x_t + b_{in} + r_t \odot (W_{hn} h_{t-1} + b_{hn}))$$
+:::
+
+:::
+::: 
+
+## Bidirectional RNNs {.smaller}
+
+Existen ocasiones en las que se requiere no sólo el contexto de los tiempos anteriores, sino también de los posteriores. Por ejemplo, problemas de traducción.
+
+> Para ello existen las redes bidireccionales, en la cual se agrega una segunda capa pero que mueve los hidden state en el otro sentido.
+
+::: {.columns}
+::: {.column}
+![](img/clase-9/bidirectional.png){.lightbox fig-align="center" width="80%"}  
+:::
+::: {.column}
+::: {.callout-note}
+* En este caso la capa amarilla será la encargada de detectar dependencias del pasado.
+* Mientras que la capa verde será la encargada de traer dependencias desde el futuro.
+:::
+
+::: {.callout-important}
+Los hidden states pueden ser capas Vanilla RNN, LSTM o GRUs.
+:::
+:::
+::: 
+
+## Pytorch Layers 
+
+```{.python}
+nn.RNN(input_size, hidden_size, num_layers=1, batch_first=False, 
+        dropout=0, bidirectional=False, nonlinearity="tanh")
+```
+```{.python}
+nn.LSTM(input_size, hidden_size, num_layers=1, batch_first=False, 
+        dropout=0, bidirectional=False) 
+```
+
+```{.python}
+nn.GRU(input_size, hidden_size, num_layers=1, batch_first=False, 
+        dropout=0, bidirectional=False) 
+```
+:::{style="font-size: 60%;"}
+
+* **input_size**: Corresponde al número de features de la secuencia. 
+* **hidden_size**: Corresponde al número de dimensiones del hidden state.
+* **num_layers**: Corresponderá al número de capas recurrentes a apilar, por defecto 1.
+* **batch_first**: Este siempre deben fijarlo como True, de esa manera se espera que los tensores a recibir siempre tengan el batch como primera dimensión. Por defecto False.
+    * Luego RNNs esperan tensores de tamaño $(N,L,H_{in})$. Donde $N$ es el batch_size, $L$ es el largo de secuencia y $H_in$ es el `input_size`.
+* **dropout**: Cantidad de dropout a aplicar a la salida de cada capa, excepto la última. Por defecto 0.
+* **bidirectional**: Indica si se hace la red Bidireccional o no. Por defecto `False`.
+* **nonlinearity**: Función de activación a utilizar para activar cada matriz de peso. Puede ser ***"tanh"*** o ***"relu"***. Sólo para Vanilla RNN.
+:::
+
+
+# Sha's tá
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::

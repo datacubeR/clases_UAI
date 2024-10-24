@@ -296,7 +296,7 @@ Este tipo de redes no requiere que se le den las dimensiones de la imagen, pero 
 La Red convolucional devuelve un Tensor de Dimensiones $(N,C_{out}, H_{out}, W_{out})$. Donde:
 
 $$H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor$$
-$$W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor$$
+$$W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor$$
 :::
 
 :::
@@ -339,7 +339,7 @@ Importante mencionar que Average Pooling no permite Dilation.
 :::
 
 $$H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor$$
-$$W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor$$
+$$W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor$$
 
 ## Arquitectura de una CNN {.smaller}
 
