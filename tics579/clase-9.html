@@ -398,7 +398,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-579-Deep Learning</h1>
-  <p class="subtitle">Clase 8: Redes Recurrentes</p>
+  <p class="subtitle">Clase 9: Redes Recurrentes</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -420,9 +420,7 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<ul>
-<li>Hasta ahora, asumimos que todos nuestros datos son i.i.d. Pero en la realidad existen datos que contienen una secuencia temporal y que debe ser considerada al momento de modelarlos.</li>
-</ul>
+<p>Hasta ahora, asumimos que todos nuestros datos son <strong><em>i.i.d</em></strong>. Pero en la realidad existen datos que contienen una secuencia temporal y que debe ser considerada al momento de modelarlos.</p>
 </div>
 </div>
 </div>
@@ -631,8 +629,21 @@ Corresponden a un tipo de red neuronal diseñada para procesar secuencias de dat
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/rnn_output.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-9/rnn_output.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-9/rnn_output.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-9/rnn_output.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></a></p>
 </figure>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Ojo</strong></p>
+</div>
+<div class="callout-content">
+<p>Esta es solamente una secuencia de largo 9.</p>
+</div>
+</div>
 </div>
 </div></div>
 </section>
@@ -678,7 +689,7 @@ Corresponden a un tipo de red neuronal diseñada para procesar secuencias de dat
 <h2>RNN formalmente</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/rnn_formal.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-9/rnn_formal.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-9/rnn_formal.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-9/rnn_formal.png" class="quarto-figure quarto-figure-center" style="width:45.0%"></a></p>
 </figure>
 </div>
 <div class="columns">
@@ -696,7 +707,7 @@ Corresponden a un tipo de red neuronal diseñada para procesar secuencias de dat
 <li><span class="math inline">\(W_{hh} \in \mathbb{R}^{d \times d}\)</span></li>
 <li><span class="math inline">\(W_{hx} \in \mathbb{R}^{d \times n}\)</span></li>
 <li><span class="math inline">\(W_{yh} \in \mathbb{R}^{k \times d}\)</span></li>
-<li><span class="math inline">\(b_n \in \mathbb{R}^d\)</span></li>
+<li><span class="math inline">\(b_h \in \mathbb{R}^d\)</span></li>
 <li><span class="math inline">\(b_y \in \mathbb{R}^k\)</span></li>
 </ul>
 </div></div>
@@ -1117,7 +1128,7 @@ Corresponde a otro tipo de Arquitectura Recurrente, similar a la LSTM, pero con 
 </ul></li>
 <li><strong>dropout</strong>: Cantidad de dropout a aplicar a la salida de cada capa, excepto la última. Por defecto 0.</li>
 <li><strong>bidirectional</strong>: Indica si se hace la red Bidireccional o no. Por defecto <code>False</code>.</li>
-<li><strong>nonlinearity</strong>: Función de activación a utilizar para activar cada matriz de peso. Puede ser “tanh” o “relu”. Sólo para Vanilla RNN.</li>
+<li><strong>nonlinearity</strong>: Función de activación a utilizar para activar cada matriz de peso. Puede ser <strong><em>“tanh”</em></strong> o <strong><em>“relu”</em></strong>. Sólo para Vanilla RNN.</li>
 </ul>
 </div>
 </section>
@@ -1536,7 +1547,7 @@ Corresponde a otro tipo de Arquitectura Recurrente, similar a la LSTM, pero con 
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {

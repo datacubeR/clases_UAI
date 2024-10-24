@@ -847,7 +847,7 @@ Corresponde a la salida de una convolución y es un nuevo tensor que captura cie
 </div>
 <div class="callout-content">
 <p>La Red convolucional devuelve un Tensor de Dimensiones <span class="math inline">\((N,C_{out}, H_{out}, W_{out})\)</span>. Donde:</p>
-<p><span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span></p>
+<p><span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor\]</span></p>
 </div>
 </div>
 </div>
@@ -926,7 +926,7 @@ El Pooling es una operación de agregación que permite ir disminuyendo la dimen
 </div>
 </div>
 </div>
-<p><span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span></p>
+<p><span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor\]</span></p>
 </section>
 <section id="arquitectura-de-una-cnn" class="slide level2 smaller">
 <h2>Arquitectura de una CNN</h2>
@@ -1509,7 +1509,7 @@ Corresponde a la variante de tres dimensiones, en la cual la entrada corresponde
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
