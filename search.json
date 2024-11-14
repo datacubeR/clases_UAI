@@ -4,7 +4,7 @@
     "href": "tics579.html",
     "title": "Diapositivas",
     "section": "",
-    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nPreliminares\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nClase 2: Introducción a las Redes Neuronales y formalidades\n\n\n\nAug 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\nClase 3: Feed Forward Networks\n\n\n\nAug 29, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 4\n\n\nClase 4: Introducción a Pytorch\n\n\n\nSep 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 5\n\n\nClase 5: Model Training\n\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 6\n\n\nClase 6: Training Tips & Tricks\n\n\n\nSep 26, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 7\n\n\nClase 7: Redes Convolucionales\n\n\n\nOct 3, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 8\n\n\nClase 8: Transfer Learning y Data Augmentation\n\n\n\nOct 10, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 9\n\n\nClase 9: Redes Recurrentes\n\n\n\nOct 24, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
+    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nPreliminares\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nClase 2: Introducción a las Redes Neuronales y formalidades\n\n\n\nAug 22, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\nClase 3: Feed Forward Networks\n\n\n\nAug 29, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 4\n\n\nClase 4: Introducción a Pytorch\n\n\n\nSep 5, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 5\n\n\nClase 5: Model Training\n\n\n\nSep 12, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 6\n\n\nClase 6: Training Tips & Tricks\n\n\n\nSep 26, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 7\n\n\nClase 7: Redes Convolucionales\n\n\n\nOct 3, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 8\n\n\nClase 8: Transfer Learning y Data Augmentation\n\n\n\nOct 10, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 9\n\n\nClase 9: Redes Recurrentes\n\n\n\nOct 24, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 10\n\n\nClase 10: Mecanismos de Atención\n\n\n\nNov 14, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
     "crumbs": [
       "Diapositivas del Curso"
     ]
@@ -2075,6 +2075,16 @@
     "text": "Conceptos Clásicos del Entrenamiento de una NN\n\n\n\n\n\n\n\n\n\n\n\n\nDefiniremos una Epoch como el número de veces que repetiremos el Algoritmo de Backpropagation con todos los datos de Entrenamiento. El número de epochs de entrenamiento será un hiperparámetro de un modelo.\nDefiniremos el learning rate como un hiperparámetro que controlará el aprendizaje del modelo.\nDefiniremos este tipo de redes neuronales como Feed Forward Networks o FFN aunque en la práctica tienen una pequeña modificación que veremos en la siguiente clase.\n\n\n\n\n\n\n\n\n\n\nEste tipo de redes es muy utilizada y recibe diversos nombres:\n\nFully Connected Layers\nDense Layers: Proviene de la nomenclatura utilizada por Tensorflow.\nLinear Layers: Proviene de la nomenclatura utilizada por Pytorch, pero no es del todo correcto.\nMLP o Multilayer Perceptron."
   },
   {
+    "objectID": "tics411.html",
+    "href": "tics411.html",
+    "title": "Diapositivas",
+    "section": "",
+    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nMar 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nCalidad de los Datos y Feature Engineering\n\n\n\nMar 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nExploratory Data Analysis (EDA)\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase Bonus\n\n\nIntroducción a Scikit-Learn\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\nModelación Descriptiva y K-Means\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 4\n\n\nClustering Jerárquico\n\n\n\nApr 4, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 5\n\n\nDBSCAN\n\n\n\nApr 11, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 6\n\n\nEvaluación de Clusters\n\n\n\nApr 18, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 7\n\n\nAlgoritmo Apriori\n\n\n\nApr 25, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 8\n\n\nIntroducción al Aprendizaje Supervisado\n\n\n\nMay 2, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 9\n\n\nEvaluación de Modelos\n\n\n\nMay 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 10\n\n\nÁrboles de Decisión\n\n\n\nMay 30, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 11\n\n\nNaive Bayes\n\n\n\nMay 30, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 12\n\n\nRegresión Logística\n\n\n\nJun 6, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 13\n\n\nDetección de Anomalías\n\n\n\nJun 27, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
+    "crumbs": [
+      "Diapositivas del Curso"
+    ]
+  },
+  {
     "objectID": "tics411-labs.html",
     "href": "tics411-labs.html",
     "title": "Prácticos",
@@ -2085,14 +2095,151 @@
     ]
   },
   {
-    "objectID": "tics411.html",
-    "href": "tics411.html",
-    "title": "Diapositivas",
-    "section": "",
-    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nMar 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nCalidad de los Datos y Feature Engineering\n\n\n\nMar 21, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 2\n\n\nExploratory Data Analysis (EDA)\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase Bonus\n\n\nIntroducción a Scikit-Learn\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 3\n\n\nModelación Descriptiva y K-Means\n\n\n\nMar 28, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 4\n\n\nClustering Jerárquico\n\n\n\nApr 4, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 5\n\n\nDBSCAN\n\n\n\nApr 11, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 6\n\n\nEvaluación de Clusters\n\n\n\nApr 18, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 7\n\n\nAlgoritmo Apriori\n\n\n\nApr 25, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 8\n\n\nIntroducción al Aprendizaje Supervisado\n\n\n\nMay 2, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 9\n\n\nEvaluación de Modelos\n\n\n\nMay 16, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 10\n\n\nÁrboles de Decisión\n\n\n\nMay 30, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 11\n\n\nNaive Bayes\n\n\n\nMay 30, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 12\n\n\nRegresión Logística\n\n\n\nJun 6, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 13\n\n\nDetección de Anomalías\n\n\n\nJun 27, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n Back to top",
-    "crumbs": [
-      "Diapositivas del Curso"
-    ]
+    "objectID": "tics579/clase-10.html#datos-de-texto",
+    "href": "tics579/clase-10.html#datos-de-texto",
+    "title": "TICS-579-Deep Learning",
+    "section": "Datos de Texto",
+    "text": "Datos de Texto\nLos datos de texto corresponden a un caso particular de datos secuenciales. En este caso, dependiendo del idioma, las dependencias pueden venir tanto del pasado como del futuro. Consideramos texto libre como una secuencia de Strings, el cuál es inteligible para seres humanos pero no necesariamente para un computador.\n\n\n\n\n\n\nEs probablemente el tipo de dato más abundante, aunque también uno de los más sensible al ruido (variabilidad, idioma, tono, formalidad, etc.).\n\n\n\n\n\n\n\n\nEl problema\n\n\nLos computadores, y por ende los modelos, no pueden entender strings. El computador sólo puede entender datos numéricos.\n\n\n\n\n\n\n\n\n\nPara poder manipular texto dentro de un modelo será necesario un pre-procesamiento que permita transformar el texto en datos numéricos que un modelo pueda entender.\n\n\n\n\n\n\n\n\n\nLa disciplina encargada de desarrollar modelos asociado a lenguaje/texto es conocida como Procesamiento de Lenguaje Natural (NLP en inglés)."
+  },
+  {
+    "objectID": "tics579/clase-10.html#tareas-asociadas-a-nlp",
+    "href": "tics579/clase-10.html#tareas-asociadas-a-nlp",
+    "title": "TICS-579-Deep Learning",
+    "section": "Tareas asociadas a NLP",
+    "text": "Tareas asociadas a NLP"
+  },
+  {
+    "objectID": "tics579/clase-10.html#proceso-de-tokenización-y-embedding",
+    "href": "tics579/clase-10.html#proceso-de-tokenización-y-embedding",
+    "title": "TICS-579-Deep Learning",
+    "section": "Proceso de Tokenización y Embedding",
+    "text": "Proceso de Tokenización y Embedding\n\n\n\n\n\nTokenización\n\n\nEl proceso de Tokenización permite transformar texto en datos numéricos. Cada dato numérico se mapea con un “trozo de texto”. Normalmente los modelos van asociados a la tokenización con la que fueron entrenados. Cambiar la tokenización puede generar gran degradación.\n\n\n\n\n\n\nEmbedding\n\n\nCorresponde el proceso en el que los Tokens se transforman en vectores densos en las cuales la distancia entre ellos representa una noción de similaridad.\n\n\n\n\n\n\n\nEn este caso la frase “Frog on a log”  es separada en Tokens (en este caso cada token es una palabra).\nLuego cada Token es mapeado a un Token id proveniente de un vocabulario. ¿Qué es un vocabulario?\nLos embeddings en este caso representan una secuencia de largo 7 con 3 dimensiones."
+  },
+  {
+    "objectID": "tics579/clase-10.html#embeddings",
+    "href": "tics579/clase-10.html#embeddings",
+    "title": "TICS-579-Deep Learning",
+    "section": "Embeddings",
+    "text": "Embeddings\n\n\n\n\n\n\n\n\n\n\n\n¿Por qué es tan importante el uso de Embeddings?\n\n\n\nPrimero porque son entrenables. Es decir la red puede aprender cuál es la mejor manera de representar palabras.\nExisten embeddings pre-entrenados, es decir, se puede hacer transfer learning de embeddings.\nLa red puede aprender relaciones semánticas entre palabras, algo imposible utilizando otras representaciones."
+  },
+  {
+    "objectID": "tics579/clase-10.html#problema-de-las-rnn",
+    "href": "tics579/clase-10.html#problema-de-las-rnn",
+    "title": "TICS-579-Deep Learning",
+    "section": "Problema de las RNN",
+    "text": "Problema de las RNN\n\n\n\n\n\n\nA pesar de las habilidades de las RNN, estas no son suficientes para distintas tareas de NLP.\n\n\n\n\n\n\n\n\nLas RNN inicialmente toman cada elemento de una secuencia y generan un output para cada entrada. Esto potencialmente genera ciertas limitantes. Una de ellas es el proceso llamado Machine Translation.\n\n\n\n\n\n\nEste es un ejemplo de Modelamiento seq2seq en el que se utiliza una secuencia de entrada pero se espera también una secuencia de salida."
+  },
+  {
+    "objectID": "tics579/clase-10.html#machine-translation-ejemplo-del-inglés",
+    "href": "tics579/clase-10.html#machine-translation-ejemplo-del-inglés",
+    "title": "TICS-579-Deep Learning",
+    "section": "Machine Translation: Ejemplo del Inglés",
+    "text": "Machine Translation: Ejemplo del Inglés\nSupongamos que necesitamos hacer la siguiente traducción:\n\nInglés\n\n\nHi, my name is Alfonso\n\n\n\n\n\nEspañol\n\n\nHola, mi nombre es Alfonso\n\n\n\n\n\n\n\n\n\nEste tipo de traducción es uno a uno. Cada input puede tener asociado una salida de manera directa puede realizarse de manera directa con una RNN."
+  },
+  {
+    "objectID": "tics579/clase-10.html#machine-translation-ejemplo-del-inglés-1",
+    "href": "tics579/clase-10.html#machine-translation-ejemplo-del-inglés-1",
+    "title": "TICS-579-Deep Learning",
+    "section": "Machine Translation: Ejemplo del Inglés",
+    "text": "Machine Translation: Ejemplo del Inglés\n\nInglés\n\n\nWould you help me prepare something for tomorrow?\n\n\n\n\n\nEspañol\n\n\n¿Me ayudarías a preparar algo para mañana?\n\n\n\n\n\n\n\n\n\nProblemas\n\n\n\nLa traducción no es uno. De hecho en inglés se utilizan 8 palabras y 1 signo de puntuación. En español se traduce en 7 palabras y 2 signos de puntuación.\n“Would” no tiene equivalente en español.\n“a” no tiene equivalente en el inglés.\n“Me” se traduce como “me” en inglés pero en vez de ir al inicio, va al final de “help”.\n“¿” no existe en inglés.\n\n\n\n\n\n\n\n\n\n\n\nOtros idiomas como el Alemán o el Ruso, tienen fusión de palabras o declinaciones que hacen la traducción mucho más difícil.\nEs por ello que se requiere una cierta libertad entre los tokens de entradas y los tokens de salida."
+  },
+  {
+    "objectID": "tics579/clase-10.html#soluciones-redes-convolucionales",
+    "href": "tics579/clase-10.html#soluciones-redes-convolucionales",
+    "title": "TICS-579-Deep Learning",
+    "section": "Soluciones: Redes Convolucionales",
+    "text": "Soluciones: Redes Convolucionales\nUna potencial solución se puede dar por medio de Redes Convolucionales de 1D. En este caso las redes convolucionales tienen la ventaja de poder mirar tanto al pasado como al futuro de manera móvil.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nPueden tomar contexto desde el inicio y desde el final.\n\n\n\n\n\n\n\n\n\n\nDesventajas\n\n\n\nSu campo receptivo es mucho más acotado y depende del número de capas y el largo del Kernel lo cual repercute directamente en el número de parámetros del modelo.\nNo tienen estado latente (o memoria) que almacena contexto.\nNo es útil para modelos de generación (ya que ve contexto desde el futuro)."
+  },
+  {
+    "objectID": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder",
+    "href": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder",
+    "title": "TICS-579-Deep Learning",
+    "section": "Soluciones: Arquitecturas Encoder-Decoder",
+    "text": "Soluciones: Arquitecturas Encoder-Decoder\n\nEncoder\n\nCorresponde a una arquitectura que permitirá tomar datos de entrada y codificarlos en una representación numérica (normalmente como hidden states o como embeddings).\n\nDecoder\n\nCorresponde a una arquitectura que toma una representación codificada de datos (normalmente generado por un encoder) y la transforma nuevamente en una salida con un formato comprensible y no solamente una “simple etiqueta”.\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste tipo de arquitecturas son quizás las más populares hoy en día y tienen aplicaciones en distintos dominios."
+  },
+  {
+    "objectID": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-1",
+    "href": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-1",
+    "title": "TICS-579-Deep Learning",
+    "section": "Soluciones: Arquitecturas Encoder-Decoder",
+    "text": "Soluciones: Arquitecturas Encoder-Decoder\n\n\n\n\n\n\nUna arquitectura Encoder-Decoder convolucional permite devolver una imagen como salida. Este ejemplo se conoce como Segmentación Semántica."
+  },
+  {
+    "objectID": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-2",
+    "href": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-2",
+    "title": "TICS-579-Deep Learning",
+    "section": "Soluciones: Arquitecturas Encoder-Decoder",
+    "text": "Soluciones: Arquitecturas Encoder-Decoder\n\n\n\n\n\n\nUna arquitectura recurrente permite devolver una secuencia como salida. La cual puede utilizarse para generación o traducción de texto.\n\n\n\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nPermite “desligarse” de la predicción uno a uno.\nLa salida de este tipo de modelos depende principalmente del contexto almacenado en el Hidden State/Bottleneck.\n\n\n\n\n\n\n\nDesventajas\n\n\n\nDado los problemas de Vanishing/Exploding Gradients es ingenuo pensar que todo el contexto de una frase vive en el último hidden state."
+  },
+  {
+    "objectID": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-3",
+    "href": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-3",
+    "title": "TICS-579-Deep Learning",
+    "section": "Soluciones: Arquitecturas Encoder-Decoder",
+    "text": "Soluciones: Arquitecturas Encoder-Decoder\n\n\n\n\n\n\n\n\nOjo\n\n\nEl último Hidden State del Encoder se utilizará como Hidden State inicial del Decoder."
+  },
+  {
+    "objectID": "tics579/clase-10.html#entrenamiento-de-una-arquitectura-encoder-decoder",
+    "href": "tics579/clase-10.html#entrenamiento-de-una-arquitectura-encoder-decoder",
+    "title": "TICS-579-Deep Learning",
+    "section": "Entrenamiento de una Arquitectura Encoder-Decoder",
+    "text": "Entrenamiento de una Arquitectura Encoder-Decoder\n\n\n\n\n\n\n\n\n\n\n\nArquitectura\n\n\n\nRNN Bidireccional\nCon un Encoder (colores pastel) y un Decoder independientes (colores más oscuros).\n\n\n\n\n\n\n\n\nTenemos dos frases una en inglés (input) y una en español (output). Ambas frases son claramente de tamaños distintos.\nTenemos el token especial &lt;eos&gt; (end of sentence) que separa el input del output.\n\n\n\n\n\n\n\n\nLos últimos Hidden States del Encoder son los Hidden States iniciales del Decoder. Estos también se conocen como Context Vectors.\n\n\n\n\n\n\n\nEntrenamiento\n\n\nAl momento de entrenarse, las salidas \\(y1\\) e \\(y2\\) pueden ser distintas al valor esperado y deben ir ajustándose epoch a epoch."
+  },
+  {
+    "objectID": "tics579/clase-10.html#inferencia-de-una-arquitectura-encoder-decoder",
+    "href": "tics579/clase-10.html#inferencia-de-una-arquitectura-encoder-decoder",
+    "title": "TICS-579-Deep Learning",
+    "section": "Inferencia de una Arquitectura Encoder-Decoder",
+    "text": "Inferencia de una Arquitectura Encoder-Decoder\n\n\n\n\n\n\n\n\n\n\n\nPredicción\n\n\n\nLa predicción se va realizando de manera autoregresiva. Es decir, la predicción del primer step corresponde a la entrada del segundo step y así sucesivamente.\n\n\n\n\n\n\n\n\nLa primera entrada siempre será el token especial &lt;eos&gt; (otros modelos pueden utilizar otros tokens especiales).\n\n\n\n\n\n\n\n\nEl modelo irá prediciendo de manera autoregresiva hasta predecir el token &lt;eos&gt;.\n\n\n\n\n\n\n\n\n\n\nProblema\n\n\n\nPensar que todo el contexto se puede almacenar en el último hidden state es un poco ingenuo.\nEl último hidden state tiene más influencia de las palabras más cercanas y menos de las palabras iniciales (debido al problema de vanishing/exploding gradients)."
+  },
+  {
+    "objectID": "tics579/clase-10.html#mecanismo-de-atención-bahdanau-et-al-2015",
+    "href": "tics579/clase-10.html#mecanismo-de-atención-bahdanau-et-al-2015",
+    "title": "TICS-579-Deep Learning",
+    "section": "Mecanismo de Atención (Bahdanau et al, (2015))",
+    "text": "Mecanismo de Atención (Bahdanau et al, (2015))\n\n\n\n\n\n\n\n\n\nAtención\n\nSe refiere a cualquier mecanismo en el que los hidden states se ponderan y combinan para poder utilizarlos como contexto. En otras palabras, el mecanismo busca a qué inputs iniciales debe poner más “atención” para poder generar la predicción.\n\n\n\\[c_i = \\sum_{t=1}^T a_{i,t} \\cdot h_t\\]\nDonde \\(c_i\\) corresponde al contexto para la predicción del output \\(i\\) y \\(a_{i,t}\\) (que van entre 0 y 1) corresponden a cuánta atención le presta el output \\(i\\) al token \\(t\\).\n\n\n\n\n\n\nOjo\n\n\nEn el paper original, se interpreta \\(a_{i,t}\\) como cuánto se “alínea” o se parece el estado \\(h_t\\) con \\(S_{t-1}\\)."
+  },
+  {
+    "objectID": "tics579/clase-10.html#atención-de-bahdanau",
+    "href": "tics579/clase-10.html#atención-de-bahdanau",
+    "title": "TICS-579-Deep Learning",
+    "section": "Atención de Bahdanau",
+    "text": "Atención de Bahdanau\n\\[a_{i,t} = align(h_t, S_{i-1})\\] \n\\[[a_{i,1},...,a_{i,T}] = Softmax([\\tilde{a_{i,1}},...\\tilde{a_{i,T}}])\\]"
+  },
+  {
+    "objectID": "tics579/clase-10.html#otras-formas-de-atención",
+    "href": "tics579/clase-10.html#otras-formas-de-atención",
+    "title": "TICS-579-Deep Learning",
+    "section": "Otras formas de Atención",
+    "text": "Otras formas de Atención\n\n\n\n1. Proyecciones Lineales\n\n\n\\[k_t = W_k \\cdot h_t\\] \\[q_{i-1} = W_q \\cdot S_{i-1}\\]\n\n\n\n\n\n\n2. Similaridad: Producto Punto es equivalente al Cosine Similarity\n\n\n\\[\\tilde{a}_{i,t} = k_t^T \\cdot q_{i-1}\\]\n\n\n\n\n\n\n3. Normalización:\n\n\n\\[[a_{i,1},...,a_{i,T}] = Softmax([\\tilde{a}_{i,1},...\\tilde{a}_{i,T}])\\]"
+  },
+  {
+    "objectID": "tics579/clase-10.html#transformers-arquitectura",
+    "href": "tics579/clase-10.html#transformers-arquitectura",
+    "title": "TICS-579-Deep Learning",
+    "section": "Transformers: Arquitectura",
+    "text": "Transformers: Arquitectura\n\nTransformer\n\nCorresponde a la Arquitectura más avanzada que tenemos hoy en día. Está basada en distintos mecanismos de atención.\n\n\n\n\n\n\n\n\n\n\n\n\n\nDetalles de la Arquitectura\n\n\n\nCorresponde a un Encoder + un Decoder.\nCada uno contiene una capa de Embeddings.\nAdemás posee un Positional Encoding para entender el orden de la secuencia.\nEl decoder funciona de manera autoregresiva.\nPosee 4 tipos de atención."
+  },
+  {
+    "objectID": "tics579/clase-10.html#transformers-self-y-multihead-attention",
+    "href": "tics579/clase-10.html#transformers-self-y-multihead-attention",
+    "title": "TICS-579-Deep Learning",
+    "section": "Transformers: Self y Multihead Attention",
+    "text": "Transformers: Self y Multihead Attention\n\n\n\n\n\n\n\n\n\n\n\nDetalles\n\n\n\nEl self-attention pone atención (aprendiendo la relación) existente entre datos de una misma secuencia. La gran ventaja es que permite la paralelización de cálculos.\nEl Multihead Attention corresponde a la concatenación de varios Self-Attention. Esto permite no “sesgarse” con sólo una forma de poner atención, permitiendo aprender relaciones en distintas direcciones."
+  },
+  {
+    "objectID": "tics579/clase-10.html#transformers-causal-self-attention",
+    "href": "tics579/clase-10.html#transformers-causal-self-attention",
+    "title": "TICS-579-Deep Learning",
+    "section": "Transformers: Causal Self Attention",
+    "text": "Transformers: Causal Self Attention\n\n\n\n\n\n\n\n\n\n\n\nDetalles\n\n\n\nCorresponde a un tipo particular de Self Attention, en el cuál sólo se puede poner atención a valores de secuencia previa (no puede ver al futuro). Esto es particularmente necesario para tareas de generación autoregresiva."
+  },
+  {
+    "objectID": "tics579/clase-10.html#transformers-cross-attention",
+    "href": "tics579/clase-10.html#transformers-cross-attention",
+    "title": "TICS-579-Deep Learning",
+    "section": "Transformers: Cross Attention",
+    "text": "Transformers: Cross Attention\n\n\n\n\n\n\n\n\n\n\n\nDetalles\n\n\n\nCorresponde a la atención que relaciona información proveniente tanto del Encoder como del Decoder. Muy similar al concepto original de Atención."
   },
   {
     "objectID": "tics579/clase-5.html#entrenamiento-de-la-red",

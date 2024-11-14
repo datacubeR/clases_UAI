@@ -14,7 +14,7 @@
   <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Alfonso Tobar-Arancibia">
-  <title>Clases UAI – TICS-411 Minería de Datos</title>
+  <title>Clases UAI – TICS-579-Deep Learning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -32,71 +32,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../logo.css">
@@ -397,8 +332,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">TICS-411 Minería de Datos</h1>
-  <p class="subtitle">Clase 8: Introducción al Aprendizaje Supervisado</p>
+  <h1 class="title">TICS-579-Deep Learning</h1>
+  <p class="subtitle">Clase 10: Mecanismos de Atención</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -412,264 +347,38 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section>
-<section id="aprendizaje-supervisado" class="title-slide slide level1 center">
-<h1>Aprendizaje Supervisado</h1>
-
-</section>
-<section id="introducción-al-aprendizaje-supervisado" class="slide level2">
-<h2>Introducción al Aprendizaje Supervisado</h2>
-<p>Los modelos Predictivos/Supervisados tienen la capacidad de predecir valores en datos no vistos.</p>
-<dl>
-<dt>Chip Huyen, Designing ML Systems (Profesora de Stanford)</dt>
-<dd>
-<blockquote>
-<p>“Machine Learning Algorithms do not predict the future but encode the past, thus perpetuating the biases in the data and mode…”</p>
-</blockquote>
-</dd>
-</dl>
-<p>Aprenden mediante un proceso de <code>entrenamiento</code> en un <code>train set</code> y evalúan su performance/rendimiento utilizando un <code>test set</code>.</p>
-</section>
-<section id="definiciones" class="slide level2">
-<h2>Definiciones</h2>
-<dl>
-<dt>Features</dt>
-<dd>
-<blockquote>
-<p>También llamadas <code>variables</code> o <code>atributos</code>. Corresponden al <strong><em>input</em></strong> del Modelo y con el cuál el modelo <strong><em>aprende</em></strong> y <strong><em>predice</em></strong>. Normalmente es representado mediante una Matriz denominada <span class="math inline">\(X\)</span>.</p>
-</blockquote>
-</dd>
-<dt>Labels o Etiquetas</dt>
-<dd>
-<blockquote>
-<p>Corresponden a las <strong><em>respuestas</em></strong> que el modelo necesita mapear para poder descubrir patrones de manera automática. Normalmente se representa mediante un vector denominado <span class="math inline">\(y\)</span>.</p>
-</blockquote>
-</dd>
-</dl>
-</section>
-<section id="ejemplo" class="slide level2">
-<h2>Ejemplo</h2>
-<blockquote>
-<p>Queremos generar un algoritmo de aprendizaje tal que dado un cierto set de datos predigamos si es que a un niño se le dará o no permiso para jugar.</p>
-</blockquote>
+<section id="datos-de-texto" class="slide level2 smaller">
+<h2>Datos de Texto</h2>
+<p>Los datos de texto corresponden a un caso particular de datos secuenciales. En este caso, dependiendo del idioma, las dependencias pueden venir tanto del pasado como del futuro. Consideramos texto libre como una secuencia de Strings, el cuál es inteligible para seres humanos pero no necesariamente para un computador.</p>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Problema de Clasificación Binaria (Dos clases opuestas).</p>
-</div>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/dataset_sunny.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-8/dataset_sunny.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</section>
-<section id="definición-del-problema" class="slide level2">
-<h2>Definición del Problema</h2>
-<p><span class="math display">\[h_\theta(X) = f(X, \theta)\]</span></p>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>A <span class="math inline">\(h_\theta(\cdot)\)</span> la denominaremos <code>hipótesis</code> o simplemente <code>modelo</code>.</li>
-<li><span class="math inline">\(X\)</span> será nuestro set de <code>features</code> (<span class="math inline">\(n\times m\)</span> donde <span class="math inline">\(n\)</span> es el número de observaciones y <span class="math inline">\(m\)</span> el número de features).<br>
-</li>
-<li>Cada fila de <span class="math inline">\(X\)</span> corresponde a un vector <span class="math inline">\(x_i\)</span> que representa una observación de nuestro set de features.</li>
-<li><span class="math inline">\(\theta\)</span> corresponde a los parámetros del modelo <em>(existen modelos paramétricos y no paramétricos)</em>.</li>
-<li>Cada <code>algoritmo</code> tendrá su propio mapeo <span class="math inline">\(f(\cdot)\)</span> para tratar de <em>predecir</em> una etiqueta.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tipos de Hipótesis</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Si <span class="math inline">\(h_\theta(X)\)</span> devuelve valores discretos (o categóricos) hablaremos de un modelo de <code>Clasificación</code>.</li>
-<li>Si <span class="math inline">\(h_\theta(X)\)</span> devuelve valores continuos hablaremos de un modelo de <code>Regresión</code>.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="tipos-de-problemas" class="slide level2 smaller">
-<h2>Tipos de Problemas</h2>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Clasificación:</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><strong>Binaria</strong>: La Clasificación es dicotómica, Perro o Gato, Sí o No, 1 o 0, Clase Positiva o Negativa.</li>
-<li><strong>Multiclase</strong>: La clasificación puede tener más de 2 clases, pero sólo una es posible.
-<ul>
-<li>Ej: Perro, Gato o Canario; 0, 1, 2, 3, 4.</li>
-</ul></li>
-<li><strong>Multilabel</strong>: La clasificación puede tener más de 2 clases, y más de una es posible a la vez.
-<ul>
-<li>Ej: Categorías de Libro: Puede ser Romance y Drama, Películas: Fantasía, Animación y Acción.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Regresión:</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><strong>Simple</strong>: Predigo sólo un valor. Ej: Predecir la Temperatura.</li>
-<li><strong>Multiple</strong>: Predigo varios valores continuos a la vez.
-<ul>
-<li>Ej: Modelo para intentar estimar Temperatura y Humedad a la vez.</li>
-</ul></li>
-<li><strong>Forecast</strong>: Donde se utilizan valores pasados para estimar valores futuros.
-<ul>
-<li>Dadas mis ganancias pasadas, estimar las futuras.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="clasificación-intuición" class="slide level2 smaller">
-<h2>Clasificación: Intuición</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/clf_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-8/clf_ex.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-<blockquote>
-<p>Supongamos el siguiente problema de clasificación. Tenemos un algoritmo, que dadas las variables <code>Largo</code> y <code>Peso</code> sean capaces de predecir si es que un Pez es una <em>Reineta</em> o una <em>Sardina</em>.</p>
-</blockquote>
-</section>
-<section id="clasificación-intuición-1" class="slide level2">
-<h2>Clasificación: Intuición</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/clf_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-8/clf_1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Queremos encontrar una <code>Regla de Decisión</code> (Decision Rule) que permita clasificar correctamente un punto nuevo.</li>
-<li>Distintos modelos son capaces de encontrar distintas reglas de decisión. Por lo tanto, sus predicciones pueden ser completamente distintas.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="clasificación-detalles" class="slide level2">
-<h2>Clasificación: Detalles</h2>
-<p>Es importante mencionar que un modelo de clasificación puede generar:</p>
-<ul>
-<li><strong>Hard Predictions</strong>: Es decir, la instancia a predecir es clase 0 o clase 1.</li>
-<li><strong>Soft Prediction</strong>: Es decir, la instancia a predecir tiene una probabilidad <span class="math inline">\(p\)</span> de pertenecer a la clase 1 y de <span class="math inline">\(1-p\)</span> de pertenecer a la clase 0.</li>
-</ul>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Cuando se hace predicción binaria, lo común es usar un Threshold de 0.5 para elegir la clase. Es decir si <span class="math inline">\(p&lt;0\)</span> entonces clase 0, si <span class="math inline">\(p \ge 0.5\)</span> entonces clase 1.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En el caso de predicción multiclase o multilabel. Se calcula la probabilidad para cada clase. Por lo tanto se se asigna la clase de mayor probabilidad.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="k-nearest-neighbors" class="slide level2 smaller">
-<h2>K-Nearest Neighbors</h2>
-<blockquote>
-<p>El modelo de vecinos más cercanos, o KNN por sus siglas en Inglés es un modelo basado en <code>distancias</code>. Su <code>regla de decisión</code> se basa en imitar el comportamiento de sus <span class="math inline">\(K\)</span> vecinos más cercanos por votación (para clasificación) o la media (para regresión).</p>
-</blockquote>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>K es un <code>hiperparámetro</code> de este modelo.</p>
+<p>Es probablemente el tipo de dato más abundante, aunque también uno de los más sensible al ruido (variabilidad, idioma, tono, formalidad, etc.).</p>
 </div>
 </div>
 </div>
 <div class="columns">
 <div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/knn_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-8/knn_ex.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<ul>
-<li>Supongamos <span class="math inline">\(K = 3\)</span>.</li>
-<li>Es decir, tomaremos los 3 vecinos más cercanos.</li>
-</ul>
-<div class="callout callout-note callout-style-simple">
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>El problema</strong></p>
 </div>
 <div class="callout-content">
-<p>En general es una buena idea elegir vecinos impares. <strong>¿Por qué?</strong></p>
+<p>Los computadores, y por ende los modelos, no pueden entender strings. El computador <strong><em>sólo puede entender datos numéricos</em></strong>.</p>
 </div>
 </div>
 </div>
-</div></div>
-</section>
-<section id="knn-paso-1-training-time" class="slide level2">
-<h2>KNN: Paso 1 (Training Time)</h2>
-<dl>
-<dt>Training Time</dt>
-<dd>
-Corresponde al periodo donde el modelo aprende de los datos. Toma un patrón y ese modelo es utilizado para predecir.
-</dd>
-</dl>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>En el caso de un KNN <strong>NO HAY APRENDIZAJE</strong> en esta etapa.</p>
+<p>Para poder manipular texto dentro de un modelo será necesario un pre-procesamiento que permita transformar el texto en datos numéricos que un modelo pueda entender.</p>
 </div>
 </div>
 </div>
@@ -679,179 +388,668 @@ Corresponde al periodo donde el modelo aprende de los datos. Toma un patrón y e
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Es considerado un modelo <code>no-paramétrico</code> ya que no aprende parámetros para realizar su predicción.</p>
+<p>La disciplina encargada de desarrollar modelos asociado a lenguaje/texto es conocida como <strong><em>Procesamiento de Lenguaje Natural</em></strong> (NLP en inglés).</p>
 </div>
 </div>
 </div>
-</section>
-<section id="knn-paso-2-test-time" class="slide level2 smaller">
-<h2>KNN: Paso 2 (Test Time)</h2>
-<dl>
-<dt>Inference Time</dt>
-<dd>
-Corresponde al periodo donde el modelo debe emitir una predicción.
-</dd>
-</dl>
-<p>En este caso, KNN calcula las distancias del punto a predecir (en verde) a todos los otros puntos existentes (proceso caro).</p>
-<div class="columns">
-<div class="column" style="width:40%;">
+</div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/knn_ex.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-8/knn_ex.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/knn_dist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-8/knn_dist.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/ord_dist_knn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-8/ord_dist_knn.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+<p><a href="img/clase-10/wordcloud.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-10/wordcloud.jpeg" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div></div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>La predicción corresponderá a la etiqueta mayoritaria por <code>votacioń</code></li>
-</ul>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>La predicción corresponderá a la etiqueta mayoritaria por <code>votacioń</code>.</li>
-<li><strong>¿Cuál sería una buena estrategia de predicción para un modelo de Regresión?</strong></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </section>
-<section id="fronteras-de-decisión" class="slide level2">
-<h2>Fronteras de Decisión</h2>
+<section id="tareas-asociadas-a-nlp" class="slide level2">
+<h2>Tareas asociadas a NLP</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><a href="img/clase-10/sentiment_analysis.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-10/sentiment_analysis.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-10/summarization.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-10/summarization.jpg" class="quarto-figure quarto-figure-center"></a></p>
+</div><div class="column" style="width:40%;">
+<p><a href="img/clase-10/ner.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-10/ner.jpg" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-10/neural_translation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-10/neural_translation.png" class="quarto-figure quarto-figure-center"></a></p>
+</div><div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/frontera_decision.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-8/frontera_decision.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+<p><a href="img/clase-10/question_answering.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-10/question_answering.jpg" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-<div class="callout callout-note callout-style-simple">
+</div></div>
+</section>
+<section id="proceso-de-tokenización-y-embedding" class="slide level2 smaller">
+<h2>Proceso de Tokenización y Embedding</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Tokenización</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>Implicitamente, todo modelo de Machine Learning generará lo que se llama una Frontera de Decisión.</li>
-<li>Si un punto no visto cae dentro de su frontera entonces se le asigna dicha etiqueta.</li>
-</ul>
+<p>El proceso de Tokenización permite transformar texto en datos numéricos. Cada dato numérico se mapea con un “trozo de texto”. Normalmente los modelos van asociados a la tokenización con la que fueron entrenados. Cambiar la tokenización puede generar gran degradación.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="implementación-clasificación-en-scikit-learn" class="slide level2">
-<h2>Implementación Clasificación en Scikit-Learn</h2>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3-4|6-7|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>knn_clf <span class="op">=</span> KNeighborsClasifier(n_neighbors <span class="op">=</span> <span class="dv">5</span>, metric<span class="op">=</span><span class="st">"minkowski"</span>, p<span class="op">=</span><span class="dv">2</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb1-4"><a></a>knn_clf.fit(X, y)</span>
-<span id="cb1-5"><a></a></span>
-<span id="cb1-6"><a></a><span class="co"># Predicción...</span></span>
-<span id="cb1-7"><a></a>y_pred <span class="op">=</span> knn_clf.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div style="font-size: 75%;">
-<ul>
-<li><strong>n_neighbors</strong>: <span class="math inline">\(K\)</span> número de vecinos a utilizar. Por defecto 5.</li>
-<li><strong>metric</strong>: Métrica de distancia. Por defecto “Minkowski”.</li>
-<li><strong>p</strong>: Potencia de Minkowski: <span class="math inline">\(p=1\)</span>, Manhattan, <span class="math inline">\(p=2\)</span> Euclideana. Por defecto <span class="math inline">\(p=2\)</span>.</li>
-<li><strong>n_jobs</strong>: Corresponde a un parámetro interno para poder paralelizar los cálculos. Se recomienda utilizar -1 para utilizar todos sus cores.</li>
-</ul>
-</div>
-</section>
-<section id="implementación-regresión-en-scikit-learn" class="slide level2">
-<h2>Implementación Regresión en Scikit-Learn</h2>
-<div class="sourceCode" id="cb2" data-code-line-numbers="|1|3-4|6-7|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a>knn_clf <span class="op">=</span> KNeighborsRegressor(n_neighbors <span class="op">=</span> <span class="dv">5</span>, metric<span class="op">=</span><span class="st">"minkowski"</span>, p<span class="op">=</span><span class="dv">2</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb2-4"><a></a>knn_clf.fit(X, y)</span>
-<span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a><span class="co"># Predicción...</span></span>
-<span id="cb2-7"><a></a>y_pred <span class="op">=</span> knn_clf.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div style="font-size: 75%;">
-<ul>
-<li><strong>n_neighbors</strong>: <span class="math inline">\(K\)</span> número de vecinos a utilizar. Por defecto 5.</li>
-<li><strong>metric</strong>: Métrica de distancia. Por defecto “Minkowski”.</li>
-<li><strong>p</strong>: Potencia de Minkowski: <span class="math inline">\(p=1\)</span>, Manhattan, <span class="math inline">\(p=2\)</span> Euclideana. Por defecto <span class="math inline">\(p=2\)</span>.</li>
-<li><strong>n_jobs</strong>: Corresponde a un parámetro interno para poder paralelizar los cálculos. Se recomienda utilizar -1 para utilizar todos sus cores.</li>
-</ul>
-</div>
-<div class="callout callout-caution callout-style-simple">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Embedding</strong></p>
 </div>
 <div class="callout-content">
-<p>¿Cómo se encuentran las predicciones en un modelo de <strong>Regresión</strong>?</p>
+<p>Corresponde el proceso en el que los Tokens se transforman en vectores densos en las cuales la distancia entre ellos representa una noción de similaridad.</p>
 </div>
 </div>
 </div>
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<ul>
+<li>En este caso la frase <strong><em>“Frog on a log” </em></strong> es separada en Tokens (en este caso cada token es una palabra).</li>
+<li>Luego cada Token es mapeado a un Token id proveniente de un vocabulario. <strong><em>¿Qué es un vocabulario?</em></strong></li>
+<li>Los embeddings en este caso representan una secuencia de largo 7 con 3 dimensiones.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/tokenization_process.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-10/tokenization_process.jpg" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
 </section>
-<section id="knn-detalles-técnicos" class="slide level2">
-<h2>KNN: Detalles Técnicos</h2>
-<div class="callout callout-note callout-titled callout-style-default">
+<section id="embeddings" class="slide level2 smaller">
+<h2>Embeddings</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/embedding_space.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-10/embedding_space.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Fortalezas</strong></p>
+<p><strong>¿Por qué es tan importante el uso de Embeddings?</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Modelo muy simple de implementar y entender.</li>
-<li>Muy eficiente en el <strong><em>aprendizaje</em></strong>.</li>
+<li>Primero porque son entrenables. Es decir la red puede aprender cuál es la mejor manera de representar palabras.</li>
+<li>Existen embeddings pre-entrenados, es decir, se puede hacer transfer learning de embeddings.</li>
+<li>La red puede aprender relaciones semánticas entre palabras, algo imposible utilizando otras representaciones.</li>
 </ul>
 </div>
 </div>
 </div>
+</section>
+<section id="problema-de-las-rnn" class="slide level2 smaller">
+<h2>Problema de las RNN</h2>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>A pesar de las habilidades de las RNN, estas no son suficientes para distintas tareas de NLP.</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/rnn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-10/rnn.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p>Las RNN inicialmente toman cada elemento de una secuencia y generan un output para cada entrada. Esto potencialmente genera ciertas limitantes. Una de ellas es el proceso llamado Machine Translation.</p>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Este es un ejemplo de Modelamiento <strong><em>seq2seq</em></strong> en el que se utiliza una secuencia de entrada pero se espera también una secuencia de salida.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="machine-translation-ejemplo-del-inglés" class="slide level2 smaller">
+<h2>Machine Translation: Ejemplo del Inglés</h2>
+<p>Supongamos que necesitamos hacer la siguiente traducción:</p>
+<dl>
+<dt>Inglés</dt>
+<dd>
+<blockquote>
+<p>Hi, my name is Alfonso</p>
+</blockquote>
+</dd>
+</dl>
+<div class="fragment">
+<dl>
+<dt>Español</dt>
+<dd>
+<blockquote>
+<p>Hola, mi nombre es Alfonso</p>
+</blockquote>
+</dd>
+</dl>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Este tipo de traducción es uno a uno. Cada input puede tener asociado una salida de manera directa puede realizarse de manera directa con una RNN.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="machine-translation-ejemplo-del-inglés-1" class="slide level2 smaller">
+<h2>Machine Translation: Ejemplo del Inglés</h2>
+<dl>
+<dt>Inglés</dt>
+<dd>
+<blockquote>
+<p>Would you help me prepare something for tomorrow?</p>
+</blockquote>
+</dd>
+</dl>
+<div class="fragment">
+<dl>
+<dt>Español</dt>
+<dd>
+<blockquote>
+<p>¿Me ayudarías a preparar algo para mañana?</p>
+</blockquote>
+</dd>
+</dl>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Debilidades</strong></p>
+<p><strong>Problemas</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Inferencia ineficiente: <span class="math inline">\(O(mn^2)\)</span>.</li>
-<li><code>Curse of Dimensionality</code>: A medida que el número de dimensiones del problema crece, se requiere un incremento exponencial en la cantidad de datos para asegurar que existen suficientes vecinos cercanos para cualquier punto.</li>
+<li>La traducción no es uno. De hecho en inglés se utilizan 8 palabras y 1 signo de puntuación. En español se traduce en 7 palabras y 2 signos de puntuación.</li>
+<li><em>“Would”</em> no tiene equivalente en español.</li>
+<li><em>“a”</em> no tiene equivalente en el inglés.</li>
+<li><em>“Me”</em> se traduce como <em>“me”</em> en inglés pero en vez de ir al inicio, va al final de <em>“help”</em>.</li>
+<li>“<em>¿</em>” no existe en inglés.</li>
 </ul>
 </div>
 </div>
 </div>
-</section></section>
-<section id="saionara" class="title-slide slide level1 center">
-<h1>Saionara!</h1>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Otros idiomas como el Alemán o el Ruso, tienen fusión de palabras o declinaciones que hacen la traducción mucho más difícil.</li>
+<li>Es por ello que se requiere una cierta libertad entre los tokens de entradas y los tokens de salida.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="soluciones-redes-convolucionales" class="slide level2 smaller">
+<h2>Soluciones: Redes Convolucionales</h2>
+<p>Una potencial solución se puede dar por medio de Redes Convolucionales de 1D. En este caso las redes convolucionales tienen la ventaja de poder mirar tanto al pasado como al futuro de manera móvil.</p>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/conv1d.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-10/conv1d.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Ventajas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Pueden tomar contexto desde el inicio y desde el final.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Desventajas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Su campo receptivo es mucho más acotado y depende del número de capas y el largo del Kernel lo cual repercute directamente en el número de parámetros del modelo.</li>
+<li>No tienen estado latente (o memoria) que almacena contexto.</li>
+<li>No es útil para modelos de generación (ya que ve contexto desde el futuro).</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="soluciones-arquitecturas-encoder-decoder" class="slide level2 smaller">
+<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
+<dl>
+<dt>Encoder</dt>
+<dd>
+Corresponde a una arquitectura que permitirá tomar datos de entrada y codificarlos en una representación numérica (normalmente como hidden states o como embeddings).
+</dd>
+<dt>Decoder</dt>
+<dd>
+Corresponde a una arquitectura que toma una representación codificada de datos (normalmente generado por un encoder) y la transforma nuevamente en una salida con un formato comprensible y no solamente una “simple etiqueta”.
+</dd>
+</dl>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/autoencoder.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-10/autoencoder.jpeg" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Este tipo de arquitecturas son quizás las más populares hoy en día y tienen aplicaciones en distintos dominios.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="soluciones-arquitecturas-encoder-decoder-1" class="slide level2 smaller">
+<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Una arquitectura Encoder-Decoder convolucional permite devolver una imagen como salida. Este ejemplo se conoce como Segmentación Semántica.</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/conv_enc-dec.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-10/conv_enc-dec.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="soluciones-arquitecturas-encoder-decoder-2" class="slide level2 smaller">
+<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Una arquitectura recurrente permite devolver una secuencia como salida. La cual puede utilizarse para generación o traducción de texto.</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/rnn_enc-dec.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-10/rnn_enc-dec.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Ventajas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Permite “desligarse” de la predicción uno a uno.</li>
+<li>La salida de este tipo de modelos depende principalmente del contexto almacenado en el Hidden State/Bottleneck.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Desventajas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Dado los problemas de Vanishing/Exploding Gradients es ingenuo pensar que todo el contexto de una frase vive en el último hidden state.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="soluciones-arquitecturas-encoder-decoder-3" class="slide level2 smaller">
+<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/neural_translation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-10/neural_translation.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Ojo</strong></p>
+</div>
+<div class="callout-content">
+<p>El último Hidden State del Encoder se utilizará como Hidden State inicial del Decoder.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="entrenamiento-de-una-arquitectura-encoder-decoder" class="slide level2 smaller">
+<h2>Entrenamiento de una Arquitectura Encoder-Decoder</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/seq2seq_training.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-10/seq2seq_training.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Arquitectura</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>RNN Bidireccional</li>
+<li>Con un Encoder (colores pastel) y un Decoder independientes (colores más oscuros).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<ul>
+<li>Tenemos dos frases una en inglés (input) y una en español (output). Ambas frases son claramente de tamaños distintos.</li>
+<li>Tenemos el token especial <code>&lt;eos&gt;</code> (end of sentence) que separa el input del output.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<ul>
+<li>Los últimos Hidden States del Encoder son los Hidden States iniciales del Decoder. Estos también se conocen como <strong><em>Context Vectors</em></strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Entrenamiento</strong></p>
+</div>
+<div class="callout-content">
+<p>Al momento de entrenarse, las salidas <span class="math inline">\(y1\)</span> e <span class="math inline">\(y2\)</span> pueden ser distintas al valor esperado y deben ir ajustándose epoch a epoch.</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="inferencia-de-una-arquitectura-encoder-decoder" class="slide level2 smaller">
+<h2>Inferencia de una Arquitectura Encoder-Decoder</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/prediction_seq2seq.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-10/prediction_seq2seq.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Predicción</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>La predicción se va realizando de <strong><em>manera autoregresiva</em></strong>. Es decir, la predicción del primer step corresponde a la entrada del segundo step y así sucesivamente.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<ul>
+<li>La primera entrada siempre será el token especial <code>&lt;eos&gt;</code> (otros modelos pueden utilizar otros tokens especiales).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<ul>
+<li>El modelo irá prediciendo de manera autoregresiva hasta predecir el token <code>&lt;eos&gt;</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Problema</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Pensar que todo el contexto se puede almacenar en el último hidden state es un poco ingenuo.</li>
+<li>El último hidden state tiene más influencia de las palabras más cercanas y menos de las palabras iniciales (debido al problema de vanishing/exploding gradients).</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="mecanismo-de-atención-bahdanau-et-al-2015" class="slide level2 smaller">
+<h2>Mecanismo de Atención (Bahdanau et al, (2015))</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/Attention.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-10/Attention.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<dl>
+<dt>Atención</dt>
+<dd>
+Se refiere a cualquier mecanismo en el que los hidden states se ponderan y combinan para poder utilizarlos como contexto. En otras palabras, el mecanismo busca a qué inputs iniciales debe poner más “atención” para poder generar la predicción.
+</dd>
+</dl>
+<p><span class="math display">\[c_i = \sum_{t=1}^T a_{i,t} \cdot h_t\]</span></p>
+<p>Donde <span class="math inline">\(c_i\)</span> corresponde al contexto para la predicción del output <span class="math inline">\(i\)</span> y <span class="math inline">\(a_{i,t}\)</span> (que van entre 0 y 1) corresponden a cuánta atención le presta el output <span class="math inline">\(i\)</span> al token <span class="math inline">\(t\)</span>.</p>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Ojo</strong></p>
+</div>
+<div class="callout-content">
+<p>En el paper original, se interpreta <span class="math inline">\(a_{i,t}\)</span> como cuánto se “alínea” o se parece el estado <span class="math inline">\(h_t\)</span> con <span class="math inline">\(S_{t-1}\)</span>.</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="atención-de-bahdanau" class="slide level2 smaller">
+<h2>Atención de Bahdanau</h2>
+<p><span class="math display">\[a_{i,t} = align(h_t, S_{i-1})\]</span> <a href="img/clase-10/bahdanau.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-10/bahdanau.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><span class="math display">\[[a_{i,1},...,a_{i,T}] = Softmax([\tilde{a_{i,1}},...\tilde{a_{i,T}}])\]</span></p>
+</section>
+<section id="otras-formas-de-atención" class="slide level2">
+<h2>Otras formas de Atención</h2>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>1. Proyecciones Lineales</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[k_t = W_k \cdot h_t\]</span> <span class="math display">\[q_{i-1} = W_q \cdot S_{i-1}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>2. Similaridad: Producto Punto es equivalente al Cosine Similarity</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\tilde{a}_{i,t} = k_t^T \cdot q_{i-1}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>3. Normalización:</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[[a_{i,1},...,a_{i,T}] = Softmax([\tilde{a}_{i,1},...\tilde{a}_{i,T}])\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="transformers-arquitectura" class="slide level2 smaller">
+<h2>Transformers: Arquitectura</h2>
+<dl>
+<dt>Transformer</dt>
+<dd>
+Corresponde a la Arquitectura más avanzada que tenemos hoy en día. Está basada en distintos mecanismos de atención.
+</dd>
+</dl>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/transformer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-10/transformer.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Detalles de la Arquitectura</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Corresponde a un Encoder + un Decoder.</li>
+<li>Cada uno contiene una capa de Embeddings.</li>
+<li>Además posee un Positional Encoding para entender el orden de la secuencia.</li>
+<li>El decoder funciona de manera autoregresiva.</li>
+<li>Posee 4 tipos de atención.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="transformers-self-y-multihead-attention" class="slide level2">
+<h2>Transformers: Self y Multihead Attention</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/self_attention.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-10/self_attention.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Detalles</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>El self-attention pone atención (aprendiendo la relación) existente entre datos de una misma secuencia. La gran ventaja es que permite la paralelización de cálculos.</li>
+<li>El Multihead Attention corresponde a la concatenación de varios Self-Attention. Esto permite no “sesgarse” con sólo una forma de poner atención, permitiendo aprender relaciones en distintas direcciones.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="transformers-causal-self-attention" class="slide level2">
+<h2>Transformers: Causal Self Attention</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/causal_self_attention.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-10/causal_self_attention.jpg" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Detalles</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Corresponde a un tipo particular de Self Attention, en el cuál sólo se puede poner atención a valores de secuencia previa (no puede ver al futuro). Esto es particularmente necesario para tareas de generación autoregresiva.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="transformers-cross-attention" class="slide level2">
+<h2>Transformers: Cross Attention</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/cross_attention.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-10/cross_attention.jpg" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Detalles</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Corresponde a la atención que relaciona información proveniente tanto del Encoder como del Decoder. Muy similar al concepto original de Atención.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="y-estamos-por-hoy" class="title-slide slide level1 center">
+<h1>Y… estamos por hoy</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
-</p><p><span property="dct:title">Tics-411 Minería de Datos</span> está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+</p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a>
 <p></p>
 </div>
 
 <div class="quarto-auto-generated-content">
-<p><img src="../logo.jpg" class="slide-logo"></p>
+<p><img src="../logo-uai-blanco.jpeg" class="slide-logo"></p>
 <div class="footer footer-default">
 
 </div>
@@ -1256,7 +1454,7 @@ Corresponde al periodo donde el modelo debe emitir una predicción.
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
