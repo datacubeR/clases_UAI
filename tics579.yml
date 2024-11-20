@@ -103,3 +103,12 @@
   path: tics579/clase-10.qmd
   categories:
    - slides
+
+- title: "Clase 11"
+  subtitle: "Clase 11: Transformers"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2024-11-21
+  image: tics579/thumbnails/clase-11.png
+  path: tics579/clase-11.qmd
+  categories:
+   - slides
