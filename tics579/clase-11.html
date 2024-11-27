@@ -923,12 +923,12 @@ No es más que una Lookup Table. Es una tabla de parámetros entrenables que per
 \begin{array}{c c}
 X = \left[
 \begin{array}{c c c}
-[1,...,512]\\
-[1,...,512]\\
-[1,...,512]\\
-[1,...,512]\\
-[1,...,512]\\
-[1,...,512]\\
+[1,...,64]\\
+[1,...,64]\\
+[1,...,64]\\
+[1,...,64]\\
+[1,...,64]\\
+[1,...,64]\\
 \end{array}
 \right]
 \begin{array}{c c c}Me\\gusta\\la\\pizza\\de\\pepperoni \end{array} &amp;
@@ -1215,7 +1215,7 @@ V = \left[
 <div class="callout-content">
 <p>Podemos definir en realidad todas las matrices de manera análoga rescribiendo las matrices de proyección para <span class="math inline">\(Q\)</span>, <span class="math inline">\(K\)</span> y <span class="math inline">\(V\)</span> como una subdivisión de cada embedding en <span class="math inline">\(h\)</span> cabezas.</p>
 <ul>
-<li>Por lo tanto si <span class="math inline">\(d_k=d_v=64\)</span> y <span class="math inline">\(h=8\)</span> tendríamos una dimensión total de 1024.</li>
+<li>Por lo tanto si <span class="math inline">\(d_k=d_v=64\)</span> y <span class="math inline">\(h=8\)</span> tendríamos una dimensión total de 512.</li>
 <li><span class="math inline">\(dim(Q) = dim(K) = (N,h \cdot d_k) = (6, 512)\)</span></li>
 <li><span class="math inline">\(dim(V) = (N, h \cdot d_v) = (6, 512)\)</span></li>
 <li><span class="math inline">\(dim(W_q) = (d_{model}, h, d_k)\)</span></li>
@@ -1446,7 +1446,7 @@ Q/K/V = \left[
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Multihead Attention Output (6,1024)</strong></p>
+<p><strong>Multihead Attention Output (6,512)</strong></p>
 </div>
 <div class="callout-content">
 <p><span class="math display">\[
@@ -1506,7 +1506,7 @@ Multihead(Q,K,V) = \begin{array}{c c}
 </div>
 <div class="callout-content">
 <p>El LayerNorm calcula el promedio y la varianza por token normalizando las dimensiones del embedding de cada token.</p>
-<p><span class="math display">\[X_norm = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}}\cdot \gamma + \beta\]</span></p>
+<p><span class="math display">\[X_{norm} = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}}\cdot \gamma + \beta\]</span></p>
 </div>
 </div>
 </div>
@@ -1685,7 +1685,7 @@ Multihead(Q,K,V) = \begin{array}{c c}
 </div>
 <div class="callout-content">
 <ul>
-<li><span class="math inline">\(Q = X_{decoder} \cdot W_q = (F,512) \cdot (512,\overbrace{8,64}^{512}) = (F,8,512)\)</span></li>
+<li><span class="math inline">\(Q = X_{decoder} \cdot W_q = (F,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,512)\)</span></li>
 <li><span class="math inline">\(K = X_{encoder} \cdot W_k = (6,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,512)\)</span></li>
 <li><span class="math inline">\(V = X_{encoder} \cdot W_v = (6,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,512)\)</span></li>
 </ul>
@@ -2143,7 +2143,7 @@ Multihead(Q,K,V) = \begin{array}{c c}
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":false,"openEffect":"zoom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
