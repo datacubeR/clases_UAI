@@ -598,7 +598,7 @@ Corresponden a la arquitectura más moderna diseñada al día de hoy. Está basa
 </div>
 <p>Luego la secuencia tokenizada de largo <span class="math inline">\(L=6\)</span> será:</p>
 <blockquote>
-<p>[25, 32, 51, 20, 101, 20258]</p>
+<p>[105,6587,5475,301,708,358]</p>
 </blockquote>
 <div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
@@ -923,12 +923,12 @@ No es más que una Lookup Table. Es una tabla de parámetros entrenables que per
 \begin{array}{c c}
 X = \left[
 \begin{array}{c c c}
-[1,...,64]\\
-[1,...,64]\\
-[1,...,64]\\
-[1,...,64]\\
-[1,...,64]\\
-[1,...,64]\\
+[1,...,512]\\
+[1,...,512]\\
+[1,...,512]\\
+[1,...,512]\\
+[1,...,512]\\
+[1,...,512]\\
 \end{array}
 \right]
 \begin{array}{c c c}Me\\gusta\\la\\pizza\\de\\pepperoni \end{array} &amp;
@@ -983,7 +983,7 @@ X = \left[
 <section id="encoder-self-attention-2" class="slide level2 smaller">
 <h2>Encoder: Self-Attention</h2>
 <blockquote>
-<p>Siguiendo nuestro ejemplo: <span class="math inline">\(d_k = d_v = 128\)</span></p>
+<p>Siguiendo nuestro ejemplo: <span class="math inline">\(d_k = d_v = 64\)</span></p>
 </blockquote>
 <div class="columns">
 <div class="column" style="width:30%;">
@@ -1259,7 +1259,7 @@ V = \left[
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Query/Key/Value (6, 8, 512) (Previo a Transponer)</strong></p>
+<p><strong>Query/Key/Value (6, 8, 64) (Previo a Transponer)</strong></p>
 </div>
 <div class="callout-content">
 <p><span class="math display">\[
@@ -1293,7 +1293,7 @@ Q/K/V = \left[
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Query/Key/Value (8,6, 512) (Luego de Transponer)</strong></p>
+<p><strong>Query/Key/Value (8,6, 64) (Luego de Transponer)</strong></p>
 </div>
 <div class="callout-content">
 <p><span class="math display">\[
@@ -2143,7 +2143,7 @@ Multihead(Q,K,V) = \begin{array}{c c}
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
