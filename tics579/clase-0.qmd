@@ -1,6 +1,6 @@
 ---
 title: "TICS-579-Deep Learning"
-subtitle: "Clase 0: Presentación del Curso"
+subtitle: "Clase 0: Presentación y Reglas del Curso"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -61,20 +61,30 @@ format:
 
 ## Disclaimer
 
-::: {.callout-caution .fragment fragment-index=1}
+::: {.callout-caution .fragment fragment-index=1 style ="font-size: 80%"}
 Mucho del contenido de este curso será una mezcla entre **inglés** y **español**. Esto debido a que el contenido del curso está en constante desarrollo y casi no existen libros o artículos en español al respecto.
 :::
 
-::: {.callout-warning .fragment fragment-index=2}
-Este curso se considera **altamente teórico** y con una **fuerte componente en programación**. 
+::: {.callout-warning .fragment fragment-index=2 style ="font-size: 80%"}
+Este curso se considera **altamente teórico** y con una **fuerte componente en programación**. ¡Están advertidos!
 :::
 
-::: {.callout-important .fragment fragment-index=2}
-¡Están advertidos!
+::: {.callout-caution .fragment fragment-index=3 style ="font-size: 80%"}
+* Está completamente prohibido ***copiar y pegar*** código de algún modelo de IA. Gente sorprendida se va directamente a Código de Honor. Y además... **no se aprende**.
+
+* Se prohibe el uso de código de librerías no vistas en clases. **Esto también se considerará copia**.
 :::
 
-::: {.callout-caution .fragment fragment-index=3}
-Está completamente prohibido ***copiar y pegar*** código de algún modelo de IA. Hablaremos más adelante cómo trataremos de mitigar esto ya que gran parte del curso requiere programación fuerte.
+::: {.callout-important .fragment fragment-index=4 style ="font-size: 80%"}
+Vamos a sufrir harto al menos las primeras semanas (yo al menos he sufrido harto preparando las clases), pero les aseguro que va a valer la pena.
+
+**Bare with me!!**
+:::
+::: {.callout-tip .fragment fragment-index=5 style ="font-size: 80%"}
+Vamos a aprender conceptos muy avanzados que no muchos cursos consideran. Lo siento, pero van a ser mis conejillos de indias.
+:::
+::: {.callout-note .fragment fragment-index=6 style ="font-size: 80%"}
+Vamos a pasarla bien mal, estudiando harto, demorándonos harto en las tareas, pero vamos a aprender harto.
 :::
 
 ## Objetivos del Curso {.smaller}
@@ -89,90 +99,24 @@ Está completamente prohibido ***copiar y pegar*** código de algún modelo de I
 ::: {.callout .center style="font-size: 150%;"}
 Ser el curso más **completo** y **exhaustivo** de Deep Learning del país.
 :::
+
 :::{ .incremental}
 
 * Identificar elementos claves de las Redes Neuronales. 
+  * Inputs, Capas, Outputs, Parámetros, Optimizadores, Funciones de Activación, Funciones de Pérdida, etc.
 * Entender conceptos básicos como el `Training Loop`, `Gradient Propagation`, `Optimización`, etc. 
 * Identificar los distintos tipos de Redes Neuronales: 
-  * Feed Fordward Networks,
+  * Feed Fordward Networks (MLP),
   * Convolutional Neural Networks,
   * Recurrent Neural Networks,
   * Transformers. 
-* Entender las Arquitecturas Estado del Arte en diferentes dominios: Datos Tabulares, Computer Vision, Natural Language Processing. 
-* Implementar, entrenar y evaluar `Deep Neural Networks` utilizando Pytorch. 
+* Entender las Arquitecturas Estado del Arte principalmente en Computer Vision y  Natural Language Processing. 
+* Implementar, entrenar y evaluar `Deep Neural Networks` utilizando `Pytorch`. 
 :::
 :::
 ::::
----
 
-## Tópicos del Curso
-
-::: {.columns}
-::: {.column width="60%"}
-* Shallow Models 
-* El Perceptron
-* Tensores
-* Entrenamiento y Evaluación de Modelos
-* Arquitecturas de Redes Neuronales
-* Aplicación de estas redes a distintos dominios. 
-
-::: {.callout-important}
-Implementación en librerías ***SOTA*** como Pytorch y HuggingFace.
-:::
-
-:::
-::: {.column width="40%"}
-![](img/clase-0/pytorch.png){fig-align="center"}
-
-![](img/clase-0/hf.png){fig-align="center"}
-:::
-::: 
-
-## Logística {.smaller}
-
-* Clases todos los **Jueves de 8:45 a 11:25** de manera **presencial**.
-  * **Sala**: Por Confirmar.
-* **Instructor**: Alfonso Tobar-Arancibia (`alfonso.tobar.a@edu.uai.cl`)
-    * **Office Hours**: Miercoles por la mañana en la A-220.
-* Ayudantías Online, sólo en algunas semanas.* 
-    * **Ayudante**: María Alejandra Bravo (`mariaabravo@alumnos.uai.cl`)
-
-::: {.callout-note style="font-size: 120%;" appearance="default"}
-## Horarios Posibles: 
-
-* Martes de 17:00 a 18:10 hrs.
-* Miércoles de 8:45 a 09:55 hrs.
-* Miércoles de 10:15 a 11:25 hrs.
-* Miércoles de 17:00 a 18:10 hrs.
-:::
-
-
-## Prerequisitos 
-
-::: {.callout-note}
-* Haber cursado Minería de Datos (no es excluyente pero es necesario saber de Machine Learning).
-    * Entrenamiento de un Modelo
-    * Evaluación y Validación
-    * Regresión Logística
-:::
-::: {.callout-tip}
-* Tener conocimientos de Algebra Lineal (poner mucha atención al curso de Algebra Lineal del MSDS).
-    * Notación Matricial
-    * Multiplicaciones Matriciales
-    * Transformaciones Lineales
-:::
-::: {.callout-warning}
-* Entender Inglés
-    * Mucho del material adicional serán lecturas o videos en inglés. 
-:::
-
-
-## Recursos
-
-* [Slides](https://datacuber.cl/clases_UAI/tics579.html)
-* [Notebooks](https://datacuber.cl/clases_UAI/tics579-labs.html)
-* [Foro de Dudas](https://webcursos.uai.cl/mod/forum/view.php?id=2269196)
-
+## ¿Cómo aprovechar las diapositivas al máximo? (Véanlo después)
 
 ::: {style="font-size: 75%;"}
 
@@ -181,155 +125,34 @@ Implementación en librerías ***SOTA*** como Pytorch y HuggingFace.
     * Permite copiar y pegar código directamente. 
     * Imágenes se pueden ver en tamaño completo al clickearlas. 
     * Se puede buscar contenido específico de cualquier Slide utilizando la **Search Bar**.
-    * Se puede obtener una copia en PDF presionando la tecla `E` para luego guardarlas para tomar notas. 
+    * Se puede obtener una copia en PDF presionando la tecla `E` para luego guardarlas para tomar notas.
 :::
 
-## Herramientas
-::: {.callout-tip}
-Se espera que los estudiantes dominen las siguientes herramientas: 
-
-* [Python](https://www.python.org/)
-* [Pandas](https://pandas.pydata.org/docs/user_guide/10min.html)/[Numpy](https://numpy.org/doc/stable/user/absolute_beginners.html)
-* [Google Colab](https://colab.research.google.com/?hl=es#scrollTo=zwFnJsE6vjf8)
-
-:::
-
-::: {.callout-important}
-
-* A lo largo del curso utilizaremos otras librerías que se enseñaran a lo largo del curso:
-    * [Pytorch](https://pytorch.org/docs/stable/index.html) 
-    * [Transformers](https://huggingface.co/docs/transformers/es/index)
-    * [Albumentations](https://albumentations.ai/)
-    * etc.
-:::
-
-## Material Complementario {.smaller}
-
-> No hay un texto guía para este curso. La mayoría de las cosas aparecen día a día o las podemos encontrar en Papers, los cuales irán siendo mencionados a medida que sea necesario. 
-
-### Lectura Recomendada
-
-:::: {.columns}
-::: {.column width="25%"}
-
-![](img/clase-0/book_1.png){.lightbox}
-:::
-
-::: {.column width="25%"}
-
-![](img/clase-0/book_2.png){.lightbox}
-
-:::
-::: {.column width="25%"}
-
-![](img/clase-0/book_3.png){.lightbox}
-
-:::
-::: {.column width="25%"}
-
-* [Docs Pytorch nn](https://pytorch.org/docs/stable/nn.html)
-* [Docs Pytorch functional](https://pytorch.org/docs/stable/nn.functional.html)
-
-* [Tutorial Colab](https://www.youtube.com/watch?v=RLYoEyIHL6A)
-
-* [Agregar Datos Externos a Colab](https://www.youtube.com/watch?v=z1pBdycYCGY)
-:::
-::::
-
-## Reglas del Curso {.smaller}
+## ¿Cómo apruebo? {.smaller}
 
 ::: {.callout-warning appearance="default"}
 ## Nota Final
-$$NF = NT + 0.3 \cdot NQ$$
+$$NF = 0.7 \cdot NP + 0.3\cdot \overline{NT}$$
+
+* $\overline{NT}$: Promedio de tareas. Será un 1.0 si es que NP es menor a 5.0.
 :::
 
 ::: {.callout-note appearance="default"}
-## Tareas
+## Pruebas
 
-* Se realizarán 5 Tareas. T5 es opcional y reemplaza la peor nota. 
+**Midterm**: Prueba a mitad del Curso el cuál vale un 30% de la Nota de Presentación.
 
-$$NT = 0.1 \cdot T1 + 0.15 \cdot T2 + 0.20 \cdot T3 + 0.25 \cdot T4$$ 
-:::
+**Final Exam**: 70% de la Nota Final, considera todo el contenido del curso.
 
-::: {.callout-tip appearance="default"}
-## Quizes
-
-* Se realizarán controles cortos al inicio de clases (previo aviso). 
-* Se realizarán `suficientes` controles para eliminar algunos al final del semestre.
-* No hay controles recuperativos. 
-
-$$NQ = \frac{1}{n}\sum_{i=1}^n Q_i$$
-:::
-
-## Tareas
-
-::: {style="font-size: 80%;"}
-::: {.callout-tip appearance="default"}
-## Reglas
-* Se deben entregar en Jupyter Notebook.
-* Se realizarán en parejas o un grupo de 3 (sólo en caso de número impar) previa inscripción.
-* Las partes teóricas que necesiten notación matemática se deben realizar dentro del Jupyter Notebook pero usando simbología Latex (Dudas de cómo hacerlo a la ayudante).
 :::
 
 ::: {.callout-important appearance="default"}
-## Defensa de Código
-* El código presentado en las tareas se defenderá mediante **interrogación oral** en horarios a convenir (normalmente de ayudantía).
-* **3 preguntas aleatorias** a ***cualquier*** miembro del grupo.
-* En caso de no defender el código correctamente se penalizará de la siguiente manera:
-    * 3 preguntas buenas: 100% del puntaje.
-    * 2 preguntas buenas: 70% del puntaje.
-    * 1 preguntas buenas: 40% del puntaje.
-    * 0 preguntas buenas: 20% del puntaje.
-:::
-:::
+## Tareas
 
-## Fechas Tareas 
-
-::: {.columns}
-::: {.column}
-::: {.callout-note appearance="default"}
-## Tarea 1
-15 de Septiembre (23:59 hrs)
-:::
-
-::: {.callout-tip appearance="default"}
-## Tarea 2
-13 de Octubre (23:59 hrs)
-:::
-:::
-::: {.column}
-::: {.callout-warning appearance="default"}
-## Tarea 3
-3 de Noviembre (23:59 hrs)
-:::
-
-::: {.callout-caution appearance="default"}
-## Tarea 4
-24 de Noviembre (23:59 hrs)
-:::
-:::
-::: 
-
-::: {.callout-important appearance="default"}
-## Tarea 5 (Opcional, pero recomendada)
-15 de Diciembre (23:59 hrs)
-:::
-
-## Garantías
-
-::: {.callout-caution}
-Vamos a sufrir harto al menos las primeras semanas (yo al menos he sufrido harto preparando las clases), pero les aseguro que va a valer la pena.
-
-**Bare with me!!**
-:::
-::: {.callout-tip}
-Vamos a aprender conceptos muy avanzados que no muchos cursos consideran. Lo siento, pero van a ser mis conejillos de indias.
-:::
-::: {.callout-note}
-Vamos a pasarla bien mal, estudiando harto, demorándonos harto en las tareas, pero vamos a pasar todos.
-:::
-::: {.callout-warning}
-Eso **NO SIGNIFICA** que las notas van a ser regaladas.
+* Serán principalmente desafíos de programación y posibles problemas teóricos.
+* Se prohibe la copia de código. 
+* Hágalas a conciencia, ya que será material preguntado durante las pruebas.
+* Fechas de tarea serán anunciadas cuando corresponda.
 :::
 
 
