@@ -7,12 +7,21 @@
   categories:
    - slides
 
-- title: "Clase 1"
-  subtitle: "Tensores"
+- title: "Clase P1"
+  subtitle: "Álgebra Tensorial"
   author: "Alfonso Tobar-Arancibia"
-  date: 2025-08-0j
-  image: tics579/thumbnails/clase-1.png
-  path: tics579/clase-1.qmd
+  date: 2025-08-07
+  image: tics579/thumbnails/clase-P1.jpg
+  path: tics579/clase-P1.qmd
+  categories:
+   - slides
+
+- title: "Clase P2"
+  subtitle: "Cálculo Tensorial"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2025-08-07
+  image: tics579/thumbnails/clase-P2.png
+  path: tics579/clase-P2.qmd
   categories:
    - slides
 
