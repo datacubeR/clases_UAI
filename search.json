@@ -1208,7 +1208,7 @@
     "href": "tics579.html",
     "title": "Diapositivas",
     "section": "",
-    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase 1\n\n\nTensores\n\n\n\nInvalid Date\n\n\n\n\n\n\nNo matching items\n Back to top",
+    "text": "Clase 0\n\n\nPresentación del Curso\n\n\n\nAug 8, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase P1\n\n\nÁlgebra Tensorial\n\n\n\nAug 7, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\nClase P2\n\n\nCálculo Tensorial\n\n\n\nAug 7, 2025\n\n\n\n\n\n\nNo matching items\n Back to top",
     "crumbs": [
       "Diapositivas del Curso"
     ]
@@ -1269,151 +1269,235 @@
     "text": "¿Cómo apruebo?\n\n\n\n\n\n\nNota Final\n\n\n\\[NF = 0.7 \\cdot NP + 0.3\\cdot \\overline{NT}\\]\n\n\\(\\overline{NT}\\): Promedio de tareas. Será un 1.0 si es que NP es menor a 5.0.\n\n\n\n\n\n\n\n\n\n\nPruebas\n\n\nMidterm: Prueba a mitad del Curso el cuál vale un 30% de la Nota de Presentación.\nFinal Exam: 70% de la Nota Final, considera todo el contenido del curso.\n\n\n\n\n\n\n\n\n\nTareas\n\n\n\nSerán principalmente desafíos de programación y posibles problemas teóricos.\nSe prohibe la copia de código.\nHágalas a conciencia, ya que será material preguntado durante las pruebas.\nFechas de tarea serán anunciadas cuando corresponda."
   },
   {
-    "objectID": "tics579/clase-10.html#datos-de-texto",
-    "href": "tics579/clase-10.html#datos-de-texto",
+    "objectID": "tics579/clase-8.html#lenet-5-lecun-et-al.-1998",
+    "href": "tics579/clase-8.html#lenet-5-lecun-et-al.-1998",
     "title": "TICS-579-Deep Learning",
-    "section": "Datos de Texto",
-    "text": "Datos de Texto\nLos datos de texto corresponden a un caso particular de datos secuenciales. En este caso, dependiendo del idioma, las dependencias pueden venir tanto del pasado como del futuro. Consideramos texto libre como una secuencia de Strings, el cuál es inteligible para seres humanos pero no necesariamente para un computador.\n\n\n\n\n\n\nEs probablemente el tipo de dato más abundante, aunque también uno de los más sensible al ruido (variabilidad, idioma, tono, formalidad, etc.).\n\n\n\n\n\n\n\n\nEl problema\n\n\nLos computadores, y por ende los modelos, no pueden entender strings. El computador sólo puede entender datos numéricos.\n\n\n\n\n\n\n\n\n\nPara poder manipular texto dentro de un modelo será necesario un pre-procesamiento que permita transformar el texto en datos numéricos que un modelo pueda entender.\n\n\n\n\n\n\n\n\n\nLa disciplina encargada de desarrollar modelos asociado a lenguaje/texto es conocida como Procesamiento de Lenguaje Natural (NLP en inglés)."
+    "section": "LeNet-5 (LeCun et al., 1998)",
+    "text": "LeNet-5 (LeCun et al., 1998)\n\nProbablemente la primera arquitectura famosa en poder realizar tareas importantes de reconocimiento de imagen. Diseñada especialmente para reconocimiento de dígitos, introduce los bloques de convolución más pooling para luego conectarse con FFN.\n\n\n\n\n\n\n\n\n\nAdaptive Pooling\n\n\nLa mayoría de arquitecturas más modernas utiliza una capa llamada Adaptive Pooling antes del proceso de Flatten. El Adaptive Pooling es una especie de Pooling inverso, donde uno define el tamaño del output, y automáticamente se calcula el Kernel, Stride, Padding, etc. necesario para obtener ese tamaño.\nEso garantiza que cualquier tamaño de imagen puede pasar por la red sin romper las dimensiones necesarias para la transición al MLP."
   },
   {
-    "objectID": "tics579/clase-10.html#tareas-asociadas-a-nlp",
-    "href": "tics579/clase-10.html#tareas-asociadas-a-nlp",
+    "objectID": "tics579/clase-8.html#alexnext-krizhevsky-sutskever-y-hinton-2012",
+    "href": "tics579/clase-8.html#alexnext-krizhevsky-sutskever-y-hinton-2012",
     "title": "TICS-579-Deep Learning",
-    "section": "Tareas asociadas a NLP",
-    "text": "Tareas asociadas a NLP"
+    "section": "AlexNext (Krizhevsky, Sutskever y Hinton, 2012)",
+    "text": "AlexNext (Krizhevsky, Sutskever y Hinton, 2012)\n\nGanó el concurso Imagenet (ILSVRC) en 2012 por un largo margen (algo impensado para ese tiempo). Introdujo los conceptos de ReLU, Dropout y Aceleración por GPU. Esta arquitectura está disponible en torchvision.\n\n\n\n\n\n\nimport torchvision\ntorchvision.models.alexnet(weights = \"IMAGENET1K_V1\")\n\n\n\n\n\n\nLa arquitectura de Torchvision está inspirada en una versión alternativa de Alexnet. Esto probablemente no será corregido ya que no es una arquitectura que se utilice comunmente en la actualidad."
   },
   {
-    "objectID": "tics579/clase-10.html#proceso-de-tokenización-y-embedding",
-    "href": "tics579/clase-10.html#proceso-de-tokenización-y-embedding",
+    "objectID": "tics579/clase-8.html#vggnet-simonyan-zisserman-2014",
+    "href": "tics579/clase-8.html#vggnet-simonyan-zisserman-2014",
     "title": "TICS-579-Deep Learning",
-    "section": "Proceso de Tokenización y Embedding",
-    "text": "Proceso de Tokenización y Embedding\n\n\n\n\n\nTokenización\n\n\nEl proceso de Tokenización permite transformar texto en datos numéricos. Cada dato numérico se mapea con un “trozo de texto”. Normalmente los modelos van asociados a la tokenización con la que fueron entrenados. Cambiar la tokenización puede generar gran degradación.\n\n\n\n\n\n\nEmbedding\n\n\nCorresponde el proceso en el que los Tokens se transforman en vectores densos en las cuales la distancia entre ellos representa una noción de similaridad.\n\n\n\n\n\n\n\nEn este caso la frase “Frog on a log”  es separada en Tokens (en este caso cada token es una palabra).\nLuego cada Token es mapeado a un Token id proveniente de un vocabulario. ¿Qué es un vocabulario?\nLos embeddings en este caso representan una secuencia de largo 7 con 3 dimensiones."
+    "section": "VGGNet (Simonyan, Zisserman, 2014)",
+    "text": "VGGNet (Simonyan, Zisserman, 2014)\n\nPresentaron las primeras redes relativamente profundas con Kernels pequeños de \\(3 \\times 3\\). Su propuesta incluye Redes de hasta 19 capas.\n\n\n\n\n\n\n\n\n\nimport torchvision\ntorchvision.models.vgg16(weights = \"IMAGENET1K_V1\")\n## Versión con Batchnorm\ntorchvision.models.vgg16_bn(weights = \"IMAGENET1K_V1\")\n\n\n\n\n\n\ntorchvision incluye las arquitecturas de 11, 13, 16 y 19 capas, además de variantes que incluyen Batchnorm (que en eltiempo del paper no existían aún)."
   },
   {
-    "objectID": "tics579/clase-10.html#embeddings",
-    "href": "tics579/clase-10.html#embeddings",
+    "objectID": "tics579/clase-8.html#googlenetinception-szegedy-et-al.-2014",
+    "href": "tics579/clase-8.html#googlenetinception-szegedy-et-al.-2014",
     "title": "TICS-579-Deep Learning",
-    "section": "Embeddings",
-    "text": "Embeddings\n\n\n\n\n\n\n\n\n\n\n\n¿Por qué es tan importante el uso de Embeddings?\n\n\n\nPrimero porque son entrenables. Es decir la red puede aprender cuál es la mejor manera de representar palabras.\nExisten embeddings pre-entrenados, es decir, se puede hacer transfer learning de embeddings.\nLa red puede aprender relaciones semánticas entre palabras, algo imposible utilizando otras representaciones."
+    "section": "GoogleNet/Inception (Szegedy et al., 2014)",
+    "text": "GoogleNet/Inception (Szegedy et al., 2014)\n\n\n\nIntroduce las “Pointwise Convolutions” (Convoluciones de 1x1) que permiten reducir la complejidad de canales (mediante una combinación lineal) manteniendo las dimensiones de la imagen. Además introduce los Inception Modules, que combinan resultados de Kernels de distinto tamaño. Fue la Arquitectura ganadora de ILSVRC 2014.\n\nimport torchvision\ntorchvision.models.googlenet(weights = \"IMAGENET1K_V1\")\n\n1x1 Convolutions"
   },
   {
-    "objectID": "tics579/clase-10.html#problema-de-las-rnn",
-    "href": "tics579/clase-10.html#problema-de-las-rnn",
+    "objectID": "tics579/clase-8.html#resnet-he-et-al.-2015",
+    "href": "tics579/clase-8.html#resnet-he-et-al.-2015",
     "title": "TICS-579-Deep Learning",
-    "section": "Problema de las RNN",
-    "text": "Problema de las RNN\n\n\n\n\n\n\nA pesar de las habilidades de las RNN, estas no son suficientes para distintas tareas de NLP.\n\n\n\n\n\n\n\n\nLas RNN inicialmente toman cada elemento de una secuencia y generan un output para cada entrada. Esto potencialmente genera ciertas limitantes. Una de ellas es el proceso llamado Machine Translation.\n\n\n\n\n\n\nEste es un ejemplo de Modelamiento seq2seq en el que se utiliza una secuencia de entrada pero se espera también una secuencia de salida."
+    "section": "Resnet (He et al., 2015)",
+    "text": "Resnet (He et al., 2015)\n\n\n\n\n\n\n\n\n\nIntroduce las conexiones residuales, lo cual permite evitar el problema del vanishing gradient para redes muy profundas. Es la Arquitectura ganadora de ILSVRC 2015.\n\n\n\n\n\n\n\nEsta arquitectura se puede encontrar tanto en torchvision como timm. Recomiendo timm, ya que hay muchas más variantes, mejor mantención y procesos de entrenamiento actualizados.\n\n\n\nimport timm\nmodel = timm.create_model(\"resnet50\", pretrained = True)\n\n## Listar todas las versiones de Resnet disponibles\ntimm.list_models(\"resnet*\")\n\nConexiones Residuales"
   },
   {
-    "objectID": "tics579/clase-10.html#machine-translation-ejemplo-del-inglés",
-    "href": "tics579/clase-10.html#machine-translation-ejemplo-del-inglés",
+    "objectID": "tics579/clase-8.html#efficientnet-tan-le-2019",
+    "href": "tics579/clase-8.html#efficientnet-tan-le-2019",
     "title": "TICS-579-Deep Learning",
-    "section": "Machine Translation: Ejemplo del Inglés",
-    "text": "Machine Translation: Ejemplo del Inglés\nSupongamos que necesitamos hacer la siguiente traducción:\n\nInglés\n\n\nHi, my name is Alfonso\n\n\n\n\n\nEspañol\n\n\nHola, mi nombre es Alfonso\n\n\n\n\n\n\n\n\n\nEste tipo de traducción es uno a uno. Cada input puede tener asociado una salida de manera directa puede realizarse de manera directa con una RNN."
+    "section": "EfficientNet (Tan, Le, 2019)",
+    "text": "EfficientNet (Tan, Le, 2019)\n\nIntroducen el concepto de Compound Scaling que permite cambiar la escala de profundidad (número de capas en la red), ancho (número de canales en cada capa) y resolución (dimensiones de la imagen) para poder mejorar la performance. Permite crear resultados al nivel del estado del arte con muchísimos menos parámetros.\n\n\n\n\n\n\nimport timm\nmodel = timm.create_model(\"efficientnet_b0\", pretrained = True)\n\n## Listar todas las versiones de Resnet disponibles\ntimm.list_models(\"efficientnet*\")"
   },
   {
-    "objectID": "tics579/clase-10.html#machine-translation-ejemplo-del-inglés-1",
-    "href": "tics579/clase-10.html#machine-translation-ejemplo-del-inglés-1",
+    "objectID": "tics579/clase-8.html#pre-training",
+    "href": "tics579/clase-8.html#pre-training",
     "title": "TICS-579-Deep Learning",
-    "section": "Machine Translation: Ejemplo del Inglés",
-    "text": "Machine Translation: Ejemplo del Inglés\n\nInglés\n\n\nWould you help me prepare something for tomorrow?\n\n\n\n\n\nEspañol\n\n\n¿Me ayudarías a preparar algo para mañana?\n\n\n\n\n\n\n\n\n\nProblemas\n\n\n\nLa traducción no es uno. De hecho en inglés se utilizan 8 palabras y 1 signo de puntuación. En español se traduce en 7 palabras y 2 signos de puntuación.\n“Would” no tiene equivalente en español.\n“a” no tiene equivalente en el inglés.\n“Me” se traduce como “me” en inglés pero en vez de ir al inicio, va al final de “help”.\n“¿” no existe en inglés.\n\n\n\n\n\n\n\n\n\n\n\nOtros idiomas como el Alemán o el Ruso, tienen fusión de palabras o declinaciones que hacen la traducción mucho más difícil.\nEs por ello que se requiere una cierta libertad entre los tokens de entradas y los tokens de salida."
+    "section": "Pre-training",
+    "text": "Pre-training\n\nImagenet\n\nCorresponde a un dataset de cerca de 14M de imágenes con que fueron anotados a mano. Este dataset se utilizó para la competencia de ImageNet Large Scale Visual Recognition Challenge (ILSVRC) desde el año 2010 al 2017, el cuál generó innumerables avances en el estado del arte. Normalmente las imágenes tienen rangos entre \\(4288 \\times 2848\\) hasta \\(75 \\times 56\\). Las imágenes se encuentran normalizadas restando medias por canal de \\([0.485,0.456,0.406]\\) y divididas por SD de \\([0.229,0.224,0.225]\\).\n\n\n\n\n\n\n\n\n\nLas dos variantes más conocidas son el ImageNet-1K que tiene 1.281.167, 50.000 y 100.000 imágenes para train, validation y test set con 1000 categorías y el ImageNet-21K que tiene 14.197.122 imágenes con 21.841 clases.\n\n\n\n\n\n\n\n\n\n\nDebido a la importancia y complejidad de este dataset es que la mayoría de los backbones han sido pre-entrenados con este él. Por lo que las distintas arquitecturas “pueden ver” gracias a este dataset.\n\n\n\n\n\n\n\n\n\nDebido a que muchas arquitecturas pueden/saben ver en un dataset tan complejo como Imagenet. ¿Sería posible utilizar ese conocimiento en otro dataset?\n\n\n\n\nEntering Transfer Learning"
   },
   {
-    "objectID": "tics579/clase-10.html#soluciones-redes-convolucionales",
-    "href": "tics579/clase-10.html#soluciones-redes-convolucionales",
+    "objectID": "tics579/clase-8.html#transfer-learning",
+    "href": "tics579/clase-8.html#transfer-learning",
     "title": "TICS-579-Deep Learning",
-    "section": "Soluciones: Redes Convolucionales",
-    "text": "Soluciones: Redes Convolucionales\nUna potencial solución se puede dar por medio de Redes Convolucionales de 1D. En este caso las redes convolucionales tienen la ventaja de poder mirar tanto al pasado como al futuro de manera móvil.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nPueden tomar contexto desde el inicio y desde el final.\n\n\n\n\n\n\n\n\n\n\nDesventajas\n\n\n\nSu campo receptivo es mucho más acotado y depende del número de capas y el largo del Kernel lo cual repercute directamente en el número de parámetros del modelo.\nNo tienen estado latente (o memoria) que almacena contexto.\nNo es útil para modelos de generación (ya que ve contexto desde el futuro)."
+    "section": "Transfer Learning",
+    "text": "Transfer Learning\n\n\n\n\n\n\n\n\n\n\n\nDataset Público/alta complejidad\n\n\nNormalmente se utilizan datos públicos y de alta complejidad y se utiliza para pre-entrenar una arquitectura.\n\n\n\n\n\n\nPre-entrenamiento\n\n\nSe entrena una arquitectura para una tarea en específico con los detalles del dataset a utilizar.\n\n\n\n\n\n\nFine-Tuning\n\n\nSe carga la arquitectura pre-entrenada, con los pesos obtenidos en el pre-entrenamiento y se ajusta el prediction head para la nueva tarea y se vuelve a entrenar el modelo.\n\n\n\n\n\n\nFreezing Layers\n\n\nSe refiere a congelar los parámetros del backbone pre-entrenado, es decir, estos no se actualizan. Este paso es opcional, y en ocasiones puede funcionar de mejor manera que un Full-Fine-Tuning"
   },
   {
-    "objectID": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder",
-    "href": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder",
+    "objectID": "tics579/clase-8.html#image-preprocessing-y-data-augmentation",
+    "href": "tics579/clase-8.html#image-preprocessing-y-data-augmentation",
     "title": "TICS-579-Deep Learning",
-    "section": "Soluciones: Arquitecturas Encoder-Decoder",
-    "text": "Soluciones: Arquitecturas Encoder-Decoder\n\nEncoder\n\nCorresponde a una arquitectura que permitirá tomar datos de entrada y codificarlos en una representación numérica (normalmente como hidden states o como embeddings).\n\nDecoder\n\nCorresponde a una arquitectura que toma una representación codificada de datos (normalmente generado por un encoder) y la transforma nuevamente en una salida con un formato comprensible y no solamente una “simple etiqueta”.\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste tipo de arquitecturas son quizás las más populares hoy en día y tienen aplicaciones en distintos dominios."
+    "section": "Image Preprocessing y Data Augmentation",
+    "text": "Image Preprocessing y Data Augmentation\n\nEn general el proceso de Preprocesamiento de Imágenes es bastante más engorroso que el de datos tabulares. Afortunadamente Pytorch tiene algunos utilities que permiten hacer el proceso más sencillo:\n\n\nImageFolder\n\nPermite cargar imágenes de un Path en específico. Dentro de esa carpeta ImageFolder considerará cada carpeta como una clase y los elementos (imágenes) dentro de dicha clase como instancia de la clase en cuestión.\n\n\nfrom torchvision.dataset import ImageFolder\n\ntrain_data = ImageFolder(\"path/to/train/images\", transform = None)\nvalidation_data = ImageFolder(\"path/to/validation/images\", transform = None)\ntest_data = ImageFolder(\"path/to/test/images\", transform = None)\n\n\n\n\n\n\nAdemás ImageFolder posee un parámetro llamado transform en el cuál se pueden ingresar transformaciones a los datos para realizar procesos de Data Augmentation.\n\n\n\n\n\n\nOjo\n\n\nImage Folder entrega los datos como una Imagen PIL. Por lo tanto, es necesario aplicar procesamientos que permitan su transformación en Tensor."
   },
   {
-    "objectID": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-1",
-    "href": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-1",
+    "objectID": "tics579/clase-8.html#data-augmentation",
+    "href": "tics579/clase-8.html#data-augmentation",
     "title": "TICS-579-Deep Learning",
-    "section": "Soluciones: Arquitecturas Encoder-Decoder",
-    "text": "Soluciones: Arquitecturas Encoder-Decoder\n\n\n\n\n\n\nUna arquitectura Encoder-Decoder convolucional permite devolver una imagen como salida. Este ejemplo se conoce como Segmentación Semántica."
+    "section": "Data Augmentation",
+    "text": "Data Augmentation\n\n\nCorresponde a un proceso de generación de datos sintéticos. Este proceso se puede utilizar para:\n\nPermite la generación de datos adicionales debido a escasez por costo o disponibilidad de ellos. Ejemplo: Datos médicos.\nGenera variedad de datos, que entrega al modelo un mayor poder de generalización en datos no vistos.\nAl introducir mayor variabilidad en los datos entrega una mayor robustez ante el overfitting (Regularización).\nSimular condiciones adversas para el modelo en la cuál se quiera generar robustez.\n\nEj: Se tiene un modelo de reconocimiento de vehículos, pero que tiene que funcionar en condiciones de niebla.\n\n\n\n\n\n\n\n\n\n\n\n\nAlbumentations\n\n\nExisten diversas librerías que permiten generar Aumento de Datos. La librerías más famosas son Albumentations y Kornia. Albumentations, permite transformaciones extremadamente eficientes en CPU, mientras que Kornia hace lo mismo pero en GPU. Debido a las limitaciones de GPU que contamos, utilizaremos Albumentations, de manera tal de balancear procesamiento tanto en CPU como en GPU.\n\n\n\n\n\n\n\n\n\nNormalmente este tipo de transformaciones entrega mejores resultados cuando se generan de manera aleatoria y on-the-fly. Es decir, se genera el aumento de datos en la carga de datos durante el entrenamiento."
   },
   {
-    "objectID": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-2",
-    "href": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-2",
+    "objectID": "tics579/clase-8.html#transformaciones-básicas",
+    "href": "tics579/clase-8.html#transformaciones-básicas",
     "title": "TICS-579-Deep Learning",
-    "section": "Soluciones: Arquitecturas Encoder-Decoder",
-    "text": "Soluciones: Arquitecturas Encoder-Decoder\n\n\n\n\n\n\nUna arquitectura recurrente permite devolver una secuencia como salida. La cual puede utilizarse para generación o traducción de texto.\n\n\n\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nPermite “desligarse” de la predicción uno a uno.\nLa salida de este tipo de modelos depende principalmente del contexto almacenado en el Hidden State/Bottleneck.\n\n\n\n\n\n\n\nDesventajas\n\n\n\nDado los problemas de Vanishing/Exploding Gradients es ingenuo pensar que todo el contexto de una frase vive en el último hidden state."
+    "section": "Transformaciones Básicas",
+    "text": "Transformaciones Básicas\nimport albumentations as A\nfrom albumentations.pytorch.transforms import ToTensorV2\n\n\n\n\n\n\nAlbumentations espera que la imagen venga como Numpy Array. Además es una librería bastante quisquillosa, por lo que toma un rato acostumbrarse. Pero su eficiencia y utilidad hace que valga la pena.\n\n\n\n\nA.Compose()\n\nPermite generar Pipelines de Transformación. Es decir, irá aplicando transformaciones una a una.\n\nA.ToFloat()\n\nTransforma los datos en tipo Float. Esto a veces es necesario cuando hay incompatibilidad de data types en ciertos módulos.\n\nToTensorV2()\n\nTransforma a Tensor de Pytorch. Existe una versión ToTensor() pero está deprecada y no debería usarse.\n\nA.Normalize()\n\nPermite normalizar imágenes según su proceso de pre-entrenamiento. Normalmente estos provienen de pre-entrenamiento en Imagenet por lo que se debe normalizar con \\(mean=[0.485,0.456,0.406]\\) y \\(SD=[0.229,0.224,0.225]\\).\n\nA.Resize()\n\nSe utiliza para estandarizar el tamaño de las imágenes. Imágenes más grandes permiten mejores resultados pero son computacionalmente más costosas."
   },
   {
-    "objectID": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-3",
-    "href": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-3",
+    "objectID": "tics579/clase-8.html#transformaciones-probabilísticas",
+    "href": "tics579/clase-8.html#transformaciones-probabilísticas",
     "title": "TICS-579-Deep Learning",
-    "section": "Soluciones: Arquitecturas Encoder-Decoder",
-    "text": "Soluciones: Arquitecturas Encoder-Decoder\n\n\n\n\n\n\n\n\nOjo\n\n\nEl último Hidden State del Encoder se utilizará como Hidden State inicial del Decoder."
+    "section": "Transformaciones Probabilísticas",
+    "text": "Transformaciones Probabilísticas\n\n\n\n\n\n\nComo su nombre lo indica, la transformación se aplicará con una cierta probabilidad, lo que permitirá que cada epoch haya mayor variabilidad.\n\n\n\n\nA.CenterCrop/A.RandomCrop\n\nGenera un Crop de la imagen o al centro o Random. Esto logrará que los elementos de la imagen cambien de posición.\n\nA.VerticalFlip\n\nGenera Flip Vertical.\n\nA.HorizontalFlip\n\nGenera Flip Horizontal.\n\nA.Rotate\n\nGenera rotaciones aleatorias entre un ángulo mínimo y máximo.\n\n\n\n\n\n\n\n\nExisten un sinnúmero de transformaciones que se pueden aplicar. La lista completa se puede encontrar acá. Y existen transformaciones que incluso permiten simular niebla, lluvia, nieve, sepia, Zoom, y variados otros efectos.\n\n\n\n\n\n\n\n\n\nAplicar estas transformaciones es de extremo cuidado ya que para tareas más complejas como Semantic Segmentation, Object Detection, Keypoint Detection, se debe aplicar dichas transformaciones también a las etiquetas."
   },
   {
-    "objectID": "tics579/clase-10.html#entrenamiento-de-una-arquitectura-encoder-decoder",
-    "href": "tics579/clase-10.html#entrenamiento-de-una-arquitectura-encoder-decoder",
+    "objectID": "tics579/clase-P1.html#historia",
+    "href": "tics579/clase-P1.html#historia",
     "title": "TICS-579-Deep Learning",
-    "section": "Entrenamiento de una Arquitectura Encoder-Decoder",
-    "text": "Entrenamiento de una Arquitectura Encoder-Decoder\n\n\n\n\n\n\n\n\n\n\n\nArquitectura\n\n\n\nRNN Bidireccional\nCon un Encoder (colores pastel) y un Decoder independientes (colores más oscuros).\n\n\n\n\n\n\n\n\nTenemos dos frases una en inglés (input) y una en español (output). Ambas frases son claramente de tamaños distintos.\nTenemos el token especial &lt;eos&gt; (end of sentence) que separa el input del output.\n\n\n\n\n\n\n\n\nLos últimos Hidden States del Encoder son los Hidden States iniciales del Decoder. Estos también se conocen como Context Vectors.\n\n\n\n\n\n\n\nEntrenamiento\n\n\nAl momento de entrenarse, las salidas \\(y1\\) e \\(y2\\) pueden ser distintas al valor esperado y deben ir ajustándose epoch a epoch."
+    "section": "Historia",
+    "text": "Historia\nLa verdad podríamos estudiar historia e importancia de porqué el Deep Learning es importante, pero la verdad…\n\n\n\n\n\n\nNO TENEMOS TIEMPO PARA ESO.\n\n\n\n\n\nAlexnet (2012)\n\n\nTransformers (2017)\n\n\nGPT (2019)\n\n\nLLMs (2023) (ChatGPT/Llama)"
   },
   {
-    "objectID": "tics579/clase-10.html#inferencia-de-una-arquitectura-encoder-decoder",
-    "href": "tics579/clase-10.html#inferencia-de-una-arquitectura-encoder-decoder",
+    "objectID": "tics579/clase-P1.html#por-qué-estudiar-deep-learning",
+    "href": "tics579/clase-P1.html#por-qué-estudiar-deep-learning",
     "title": "TICS-579-Deep Learning",
-    "section": "Inferencia de una Arquitectura Encoder-Decoder",
-    "text": "Inferencia de una Arquitectura Encoder-Decoder\n\n\n\n\n\n\n\n\n\n\n\nPredicción\n\n\n\nLa predicción se va realizando de manera autoregresiva. Es decir, la predicción del primer step corresponde a la entrada del segundo step y así sucesivamente.\n\n\n\n\n\n\n\n\nLa primera entrada siempre será el token especial &lt;eos&gt; (otros modelos pueden utilizar otros tokens especiales).\n\n\n\n\n\n\n\n\nEl modelo irá prediciendo de manera autoregresiva hasta predecir el token &lt;eos&gt;.\n\n\n\n\n\n\n\n\n\n\nProblema\n\n\n\nPensar que todo el contexto se puede almacenar en el último hidden state es un poco ingenuo.\nEl último hidden state tiene más influencia de las palabras más cercanas y menos de las palabras iniciales (debido al problema de vanishing/exploding gradients)."
+    "section": "¿Por qué estudiar Deep Learning?",
+    "text": "¿Por qué estudiar Deep Learning?\n\n\n\n\n\n\n\nImágen tomada de la Clase de Zico Colter"
   },
   {
-    "objectID": "tics579/clase-10.html#mecanismo-de-atención-bahdanau-et-al-2015",
-    "href": "tics579/clase-10.html#mecanismo-de-atención-bahdanau-et-al-2015",
+    "objectID": "tics579/clase-P1.html#por-qué-estudiar-deep-learning-1",
+    "href": "tics579/clase-P1.html#por-qué-estudiar-deep-learning-1",
     "title": "TICS-579-Deep Learning",
-    "section": "Mecanismo de Atención (Bahdanau et al, (2015))",
-    "text": "Mecanismo de Atención (Bahdanau et al, (2015))\n\n\n\n\n\n\n\n\n\nAtención\n\nSe refiere a cualquier mecanismo en el que los hidden states se ponderan y combinan para poder utilizarlos como contexto. En otras palabras, el mecanismo busca a qué inputs iniciales debe poner más “atención” para poder generar la predicción.\n\n\n\\[c_i = \\sum_{t=1}^T a_{i,t} \\cdot h_t\\]\nDonde \\(c_i\\) corresponde al contexto para la predicción del output \\(i\\) y \\(a_{i,t}\\) (que van entre 0 y 1) corresponden a cuánta atención le presta el output \\(i\\) al token \\(t\\).\n\n\n\n\n\n\nOjo\n\n\nEn el paper original, se interpreta \\(a_{i,t}\\) como cuánto se “alínea” o se parece el estado \\(h_t\\) con \\(S_{t-1}\\)."
+    "section": "¿Por qué estudiar Deep Learning?",
+    "text": "¿Por qué estudiar Deep Learning?\n\n\n\n\n\n\nFacilidad y Autograd\n\n\n\nFrameworks como Tensorflow, Pytorch o Jax permiten realizar esto de manera mucho más sencilla.\n\nFrameworks permiten calcular gradientes de manera automática.\nAntigua mente trabajar en Torch, Caffe o Theano podía tomar cerca de 50K líneas de código.\n\n\n\n\n\n\n\n\n\n\n\nCómputo\n\n\n\nProliferación de las GPUs, TPUs, HPUs, IPUs, como sistemas masivos de Cómputos.\n\nHow many computers to identify a cat? 16,000\n\n\n\n\n\n\n\n\n\n\n\nEstado del Arte\n\n\n\nModelos de Deep Learning pueden generar sistemas que entiendan imágenes, textos, audios, videos, grafos, etc."
   },
   {
-    "objectID": "tics579/clase-10.html#atención-de-bahdanau",
-    "href": "tics579/clase-10.html#atención-de-bahdanau",
+    "objectID": "tics579/clase-P1.html#tensores",
+    "href": "tics579/clase-P1.html#tensores",
     "title": "TICS-579-Deep Learning",
-    "section": "Atención de Bahdanau",
-    "text": "Atención de Bahdanau\n\\[a_{i,t} = align(h_t, S_{i-1})\\] \n\\[[a_{i,1},...,a_{i,T}] = Softmax([\\tilde{a_{i,1}},...\\tilde{a_{i,T}}])\\]"
+    "section": "Tensores",
+    "text": "Tensores\n\nCorresponde a una generalización de los vectores y matrices que permite representar datos de múltiples dimensiones.\n\n\n\nEscalares (Orden 0)\n\\[-1, 11.27, \\pi\\]\n\nVectores Filas (Orden 1)\n\\[\\begin{bmatrix}1.0 & -0.27 & -1.22\\end{bmatrix}\\]\nVectores Columnas (Orden 1)\n\\[\\begin{bmatrix}\n1 \\\\\n-0.27\\\\\n-1.22\n\\end{bmatrix}\\]\n\nMatrices (Orden 2)\n\\[\\begin{bmatrix}\n1.0 & -0.27 & 3\\\\\n3.15 & 2.02 & 1.2\\\\\n-1.22& 0.55 & 3.97 \\\\\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\nNormalmente los tensores utilizan un mismo tipo de dato: Integers o Float es lo más común."
   },
   {
-    "objectID": "tics579/clase-10.html#otras-formas-de-atención",
-    "href": "tics579/clase-10.html#otras-formas-de-atención",
+    "objectID": "tics579/clase-P1.html#tensores-1",
+    "href": "tics579/clase-P1.html#tensores-1",
     "title": "TICS-579-Deep Learning",
-    "section": "Otras formas de Atención",
-    "text": "Otras formas de Atención\n\n\n\n1. Proyecciones Lineales\n\n\n\\[k_t = W_k \\cdot h_t\\] \\[q_{i-1} = W_q \\cdot S_{i-1}\\]\n\n\n\n\n\n\n2. Similaridad: Producto Punto es equivalente al Cosine Similarity\n\n\n\\[\\tilde{a}_{i,t} = k_t^T \\cdot q_{i-1}\\]\n\n\n\n\n\n\n3. Normalización:\n\n\n\\[[a_{i,1},...,a_{i,T}] = Softmax([\\tilde{a}_{i,1},...\\tilde{a}_{i,T}])\\]"
+    "section": "Tensores",
+    "text": "Tensores\n\n\nTensores (Orden 3+)\n\\[\\begin{bmatrix}\n    \\begin{bmatrix}\n        0.2 & 0.1 & -0.25 \\\\\n        0.1 & -1.0 & 0.22\\\\\n    \\end{bmatrix} \\\\\n    \\begin{bmatrix}\n        0.24 & 0.1 & -0.25 \\\\\n        0.05 & -0.69 & 0.98\n    \\end{bmatrix} \\\\\n    \\begin{bmatrix}\n        0.66& -1.0 & 0.22\\\\\n        -0.07 & -0.59 & 0.99\n    \\end{bmatrix} \\\\\n    \\begin{bmatrix}\n        0.16& 1.0 & 3.22\\\\\n        9.17 & 7.19 & 9.99\n    \\end{bmatrix}\n\\end{bmatrix}\n\\]\n\n\n\n\n\n\n\nNomenclatura\n\n\n\n\\(\\alpha\\), \\(\\beta\\), \\(\\gamma\\): Minúsculas griegas denotan a Escalares.\nx, y, z: Minúsculas latinas denotan a Vectores.\nX, Y, Z: Mayúsculas latinas denotan a Matrices o Tensores.\n\n\n\n\n\n\n\n\n\n\nShape/Tamaño: Tamaño del tensor, tiene tantas dimensiones como su orden.\n\n\n\nEscalar: No tiene dimensiones.\nVector: Tamaño es equivalente al número de elementos del vector. (3,)\n\nA veces se usa la versión (1,3) para vectores filas y (3,1) para vectores columnas.\n\nMatrices: Tamaño es equivalente al número de filas y columnas. Ejemplo: (3,3)\nTensores: Tamaño es equivalente al número de matrices que lo componen y el número de filas y columnas de cada una de ellas. Ejemplo: (4,2,3)\n\n\n\n\n\n\n\nImportante\n\n\n\nLa primera dimensión del shape se conoce como Batch Size el cual denota la cantidad de elementos de orden inferior.\n(3, ) tenemos 3 escalares.\n(3,2) tenemos 3 vectores filas de 2 elementos cada uno.\n(4,2,3) tenemos 4 matrices de (2,3) cada una."
   },
   {
-    "objectID": "tics579/clase-10.html#transformers-arquitectura",
-    "href": "tics579/clase-10.html#transformers-arquitectura",
+    "objectID": "tics579/clase-P1.html#vectores-suma",
+    "href": "tics579/clase-P1.html#vectores-suma",
     "title": "TICS-579-Deep Learning",
-    "section": "Transformers: Arquitectura",
-    "text": "Transformers: Arquitectura\n\nTransformer\n\nCorresponde a la Arquitectura más avanzada que tenemos hoy en día. Está basada en distintos mecanismos de atención.\n\n\n\n\n\n\n\n\n\n\n\n\n\nDetalles de la Arquitectura\n\n\n\nCorresponde a un Encoder + un Decoder.\nCada uno contiene una capa de Embeddings.\nAdemás posee un Positional Encoding para entender el orden de la secuencia.\nEl decoder funciona de manera autoregresiva.\nPosee 4 tipos de atención."
+    "section": "Vectores: Suma",
+    "text": "Vectores: Suma\n\nCorresponde a un arreglo unidimensional de números reales. Se puede representar como fila o columna. Por convención denotaremos \\(\\bar{x}\\) como vector columna y \\(\\bar{x}^T\\) como vector fila.\n\n\n\n\n\n\n\n\n\nOperación Suma\n\n\n\nPermite sumar dos vectores de igual tamaño dimensión por dimensión.\n\nEj: \\([7,2]^T + [2,3]^T = [9,5]^T\\)\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nConmutatividad: \\(\\bar{x}+\\bar{y} = \\bar{y}+\\bar{x}\\)\nAsociatividad: \\((\\bar{x}+\\bar{y})+\\bar{z} = \\bar{x}+(\\bar{y}+\\bar{z})\\)\nElemento Neutro: \\(\\bar{x} + \\bar{0} = \\bar{x}\\)"
   },
   {
-    "objectID": "tics579/clase-10.html#transformers-self-y-multihead-attention",
-    "href": "tics579/clase-10.html#transformers-self-y-multihead-attention",
+    "objectID": "tics579/clase-P1.html#vectores-ponderación",
+    "href": "tics579/clase-P1.html#vectores-ponderación",
     "title": "TICS-579-Deep Learning",
-    "section": "Transformers: Self y Multihead Attention",
-    "text": "Transformers: Self y Multihead Attention\n\n\n\n\n\n\n\n\n\n\n\nDetalles\n\n\n\nEl self-attention pone atención (aprendiendo la relación) existente entre datos de una misma secuencia. La gran ventaja es que permite la paralelización de cálculos.\nEl Multihead Attention corresponde a la concatenación de varios Self-Attention. Esto permite no “sesgarse” con sólo una forma de poner atención, permitiendo aprender relaciones en distintas direcciones."
+    "section": "Vectores: Ponderación",
+    "text": "Vectores: Ponderación\n\nCorresponde a un arreglo unidimensional de números reales. Se puede representar como fila o columna. Por convención denotaremos \\(\\bar{x}\\) como vector columna y \\(\\bar{x}^T\\) como vector fila.\n\n\n\n\n\n\n\n\n\nOperación Ponderación\n\n\n\nPermite multiplicar/ponderar cada dimensión del vector por un escalar.\nEj: \\(2 \\cdot [3,2]^T = [6,4]^T\\)\n\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nDistributividad Escalar: \\(a(\\bar{x}+\\bar{y}) = a\\bar{x} + a\\bar{y}\\)\nDistributividad Vectorial: \\((a+b)\\bar{x} = a\\bar{x} + b\\bar{x}\\)\nElemento Neutro: \\(1\\cdot \\bar{x} = \\bar{x}\\)\nCompatibilidad: \\(a(b\\bar{x}) = (ab)\\bar{x}\\)"
   },
   {
-    "objectID": "tics579/clase-10.html#transformers-causal-self-attention",
-    "href": "tics579/clase-10.html#transformers-causal-self-attention",
+    "objectID": "tics579/clase-P1.html#vectores-norma",
+    "href": "tics579/clase-P1.html#vectores-norma",
     "title": "TICS-579-Deep Learning",
-    "section": "Transformers: Causal Self Attention",
-    "text": "Transformers: Causal Self Attention\n\n\n\n\n\n\n\n\n\n\n\nDetalles\n\n\n\nCorresponde a un tipo particular de Self Attention, en el cuál sólo se puede poner atención a valores de secuencia previa (no puede ver al futuro). Esto es particularmente necesario para tareas de generación autoregresiva."
+    "section": "Vectores: Norma",
+    "text": "Vectores: Norma\n\n\n\n\n\n\n\n\nNorma (Euclideana)\n\n\nPara un vector \\(\\bar{x}=[x_1, ..., x_n] \\in \\mathbb{R}^n\\) se define la norma como:\n\\[||\\bar{x}|| = \\sqrt{\\sum_{i=1}^n x_i^2}\\]\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nDesigualdad Triangular: \\(||\\bar{x}+\\bar{y}|| \\leq ||\\bar{x}|| + ||\\bar{y}||\\)\n\\(||\\alpha \\bar{x}= |\\alpha| \\cdot ||\\bar{x}||\\)\n\\(||\\bar{x}|| = 0 \\Longleftrightarrow \\bar{0}\\)\n\n\n\n\n\n\n\n\n\n\nAplicación\n\n\nLa norma permite calcular la distancia entre dos vectores.\n\\[d_{x,y} = ||\\bar{x} - \\bar{y}\\]\nTambién serviría para puntos. ¿Por qué?"
   },
   {
-    "objectID": "tics579/clase-10.html#transformers-cross-attention",
-    "href": "tics579/clase-10.html#transformers-cross-attention",
+    "objectID": "tics579/clase-P1.html#vectores-producto-interno-producto-punto",
+    "href": "tics579/clase-P1.html#vectores-producto-interno-producto-punto",
     "title": "TICS-579-Deep Learning",
-    "section": "Transformers: Cross Attention",
-    "text": "Transformers: Cross Attention\n\n\n\n\n\n\n\n\n\n\n\nDetalles\n\n\n\nCorresponde a la atención que relaciona información proveniente tanto del Encoder como del Decoder. Muy similar al concepto original de Atención."
+    "section": "Vectores: Producto Interno (Producto Punto)",
+    "text": "Vectores: Producto Interno (Producto Punto)\n\n\n\n\n\n\n\n\nInner Product or Dot Product\n\n\nEl producto interno entre dos vectores en \\(\\mathbb{R}^n\\) se define como:\n\\(\\bar{x} = [x_1, ..., x_n]\\) e \\(\\bar{y} = [y_1, ..., y_n]\\)\n\\[ \\bar{x} \\cdot \\bar{y} = ||\\bar{x}|| ||\\bar{y}|| Cos\\theta =  \\sum_{i=1}^n x_i y_i = x_1 y_1 + ... + x_n y_n\\]\nA veces el producto interno se denota como \\(\\bar{x}^T \\bar{y}\\) o \\(\\langle \\bar{x}, \\bar{y} \\rangle\\).\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nConmutatividad: \\(\\bar{x} \\cdot \\bar{y} = \\bar{y} \\cdot \\bar{x}\\)\nLinealidad: $({x}){y} = ({x}{y})\nDistributividad: \\(\\bar{x} \\cdot (\\bar{y} + \\bar{z}) = (\\bar{x} \\cdot \\bar{y}) + (\\bar{x} \\cdot \\bar{z})\\)\n\\(||\\bar{x}||^2 = \\bar{x} \\cdot \\bar{x}\\)\n\n\n\n\n\n\n\n\n\n\nAplicaciones\n\n\n\nOrtogonalidad: Dos vectores son ortogonales si su producto interno es cero.\nSimilaridad: Se puede usar el Cosine Similarity para calcular qué tan parecidos son dos vectores.\n\n\n\n\n\n\n\n\nCosine Similarity\n\n\n\\[sim(\\bar{a}, \\bar{b}) = \\frac{\\bar{a} \\cdot \\bar{b}}{||\\bar{a}|| \\cdot ||\\bar{b}||}\\]\n\n1 implica misma dirección (idénticos)\n-1 implica direcciones opuestas (opuestos).\n0 implica totalmente distintos (ortogonales)."
+  },
+  {
+    "objectID": "tics579/clase-P1.html#vectores-otras-propiedades",
+    "href": "tics579/clase-P1.html#vectores-otras-propiedades",
+    "title": "TICS-579-Deep Learning",
+    "section": "Vectores: Otras Propiedades",
+    "text": "Vectores: Otras Propiedades\n\n\n\n\n\n\nCombinación Lineal\n\n\n\nSe denomina una combinación lineal de vectores a la suma ponderada de estos.\n\nEj: \\(\\bar{w} = \\alpha \\cdot \\bar{x} + \\beta \\cdot \\bar{y} + \\gamma \\cdot \\bar{z}\\)\n\\(\\bar{w}\\) es una combinación lineal de los vectores \\(\\bar{x}, \\bar{y} y \\bar{z}\\).\n\n\n\n\n\n\n\n\n\nIndependencia Lineal\n\n\n\nUn conjunto de vectores es linealmente independiente si:\n\n$\\(\\alpha_1 \\cdot \\bar{x}_1 + \\alpha_2 \\cdot \\bar{x}_2 + ... + \\alpha_n \\cdot \\bar{x}_n = 0\\) implica que \\(\\alpha_i = 0\\) para todo \\(i\\).\n\n\n\n\n\n\n\n\n\n👀 Ojito\n\n\nHay otras propiedades sumamente importantes de vectores, por lo que coloquen atención al curso de Algebra Lineal."
+  },
+  {
+    "objectID": "tics579/clase-P1.html#matrices-definición",
+    "href": "tics579/clase-P1.html#matrices-definición",
+    "title": "TICS-579-Deep Learning",
+    "section": "Matrices: Definición",
+    "text": "Matrices: Definición\n\n\nCorresponde a un arreglo bidimensional de números reales. Se dice que una matriz es de \\(n\\times m\\) o que es \\(\\mathbb{R}^{n \\times m}\\) cuando tiene \\(n\\) filas y \\(m\\) columnas.\n\\[A = \\begin{bmatrix}\nA_{1,1} & \\dots & A_{1,m} \\\\\nA_{2,1} & \\dots & A_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{n, 1} & \\dots & A_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\n\n\n\n\n\n👀\n\n\n\nNormalmente se utiliza \\(m\\) para denotar el número de registros y \\(n\\) como el número de features de un dataset tabular (o también conocido como Dataframe).\n\\(n=m\\) nos referimos a una matriz cuadrada."
+  },
+  {
+    "objectID": "tics579/clase-P1.html#matrices-notación",
+    "href": "tics579/clase-P1.html#matrices-notación",
+    "title": "TICS-579-Deep Learning",
+    "section": "Matrices: Notación",
+    "text": "Matrices: Notación\n\nSi \\(A\\) es una matriz entonces:\n\n\\(A_{i,j}\\) corresponde al elemento en la fila \\(i\\) y columna \\(j\\). Es decir, un escalar.\n\\(A_{i,:}\\) corresponde a la fila \\(i\\) completa. Es decir, un vector fila.\n\\(A_{:,j}\\) corresponde a la columna \\(j\\) completa. Es decir un vector columna.\n\n\n\n\\[A = \\begin{bmatrix}\n0.2 & 1 & -5.2 & 3.1 & -1.3 \\\\\n-0.5 & 10 & 0 & 3.1 & 3 \\\\\n2 & 25 & -5.2 & 0 & 0 \\\\\n100 & 3.4 & 4.1 & 0 & 42\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\nImportante: Recordar que los índices en Python son 0-based.\n\n\n\n\\(A_{2,4} = 3.1\\)\n\\(A_{:,3} = [-5.2, 0, -5.2, 4.1]^T\\)\n\\(A_{1,:} = [0.2, 1, -5.2, 3.1, -1.3]\\)"
+  },
+  {
+    "objectID": "tics579/clase-P1.html#matrices-suma",
+    "href": "tics579/clase-P1.html#matrices-suma",
+    "title": "TICS-579-Deep Learning",
+    "section": "Matrices: Suma",
+    "text": "Matrices: Suma\n\n\n\n\n\n\n\n\nOperación Suma\n\n\n\nPermite sumar dos matrices elemento a elemento.\nEj: Sea \\(A\\) y \\(B\\) dos matrices:\n\n\\[A = \\begin{bmatrix}\nA_{1,1} & \\dots & A_{1,m} \\\\\nA_{2,1} & \\dots & A_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{n, 1} & \\dots & A_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\n\\[B = \\begin{bmatrix}\nB_{1,1} & \\dots & B_{1,m} \\\\\nB_{2,1} & \\dots & B_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nB_{n, 1} & \\dots & B_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\n\n\n\n\n\n\n\n\nResultado\n\n\n\\[A + B = \\begin{bmatrix}\nA_{1,1} + B_{1,1} & \\dots & A_{1,m} + B_{1,m} \\\\\nA_{2,1} + A_{2,1} & \\dots & A_{2,m} + B_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{n, 1} + B_{n,1} & \\dots & A_{n,m} + B_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\n\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nAsociatividad: \\((A + B) + C = A + (B + C)\\)\nConmutatividad: \\(A + B = B + A\\)\nElemento Neutro: \\(A + 0 = A\\)\nElemento Inverso: \\(A + (-A) = 0\\)"
+  },
+  {
+    "objectID": "tics579/clase-P1.html#matrices-ponderación",
+    "href": "tics579/clase-P1.html#matrices-ponderación",
+    "title": "TICS-579-Deep Learning",
+    "section": "Matrices: Ponderación",
+    "text": "Matrices: Ponderación\n\n\n\n\n\n\n\n\nOperación Ponderación\n\n\n\nPermite multiplicar/ponderar cada elemento de la matriz por un escalar.\nEj: Sea \\(A\\) una matriz:\n\n\\[A = \\begin{bmatrix}\nA_{1,1} & \\dots & A_{1,m} \\\\\nA_{2,1} & \\dots & A_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{n, 1} & \\dots & A_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\ny \\(\\gamma\\) un escalar.\n\n\n\n\n\n\n\n\nResultado\n\n\n\\[\\gamma \\cdot A = \\begin{bmatrix}\n\\gamma \\cdot A_{1,1} & \\dots & \\gamma \\cdot A_{1,m} \\\\\n\\gamma \\cdot A_{2,1} & \\dots & \\gamma \\cdot A_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\n\\gamma \\cdot A_{n, 1} & \\dots & \\gamma \\cdot A_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\n\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nDistibutividad Escalar: \\(\\gamma(A + B) = \\gamma A + \\gamma B\\)\nDistibutividad Matricial: \\((\\gamma + \\delta) A = \\gamma A + \\delta A\\)\nCompatibilidad: \\((\\gamma \\delta) A = \\gamma (\\delta A) = \\delta (\\gamma A)\\)"
+  },
+  {
+    "objectID": "tics579/clase-P1.html#transpuesta-y-reshape",
+    "href": "tics579/clase-P1.html#transpuesta-y-reshape",
+    "title": "TICS-579-Deep Learning",
+    "section": "Transpuesta y Reshape",
+    "text": "Transpuesta y Reshape\n\n\n\n\n\n\n\n\nTranspuesta\n\n\nSea:\n\\[A = \\begin{bmatrix}\nA_{1,1} & \\dots & A_{1,m} \\\\\nA_{2,1} & \\dots & A_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{n, 1} & \\dots & A_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\nEntonces, \\(A^T\\) se define como:\n\\[A^T = \\begin{bmatrix}\nA_{1,1} & \\dots & A_{m,1} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{1,m} & \\dots & A_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\nEs decir, intercambiamos filas por las columnas y viceversa.\n\n\n\n\n\n\n\n\n\n\nReshape\n\n\n\\[B = \\begin{bmatrix}\n1 & 3 & 5 \\\\\n1 & 7 & 9 \\\\\n4 & 6 & 7 \\\\\n3 & 3 & 5 \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{4 \\times 3}\\]\nPodemos hacer un reshape a (6,2)\n\\[B_{reshaped} = \\begin{bmatrix}\n1 & 3 \\\\\n5 & 1 \\\\\n7 & 9 \\\\\n4 & 6 \\\\\n7 & 3 \\\\\n3 & 5\n\\end{bmatrix} \\in \\mathbb{R}^{6 \\times 2}\\]"
+  },
+  {
+    "objectID": "tics579/clase-P1.html#producto-matriz-vector-por-la-derecha",
+    "href": "tics579/clase-P1.html#producto-matriz-vector-por-la-derecha",
+    "title": "TICS-579-Deep Learning",
+    "section": "Producto Matriz-Vector (Por la derecha)",
+    "text": "Producto Matriz-Vector (Por la derecha)\nA diferencia de todas las otras operaciones, el producto entre una matriz y un vector no es conmutativo.\nPost-multiplicación (Multiplicación por la derecha)\n\n\n\n\n\n\n\n\nSea\n\n\n\\[\\bar{y} = A \\cdot \\bar{x}\\]\n\\[A = \\begin{bmatrix}\n2 & 3 & 0 \\\\\n1 & 0 & 7\n\\end{bmatrix}\\]\n\\[\\bar{x} = \\begin{bmatrix}\n4 \\\\\n2 \\\\\n1\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\n\n\nAtención\n\n\nLa post-multiplicación se puede ver como la combinación lineal de las columnas de una matriz por cada elemento del vector. \\[\n\\begin{align}\n\\bar{y} = A \\cdot \\bar{x} &= \\begin{bmatrix}\n2 \\cdot 4 + 3 \\cdot 2 + 0 \\cdot 1 \\\\\n1 \\cdot 4 + 0 \\cdot 2 + 7 \\cdot 1\n\\end{bmatrix} \\\\\n&= 4 \\cdot \\begin{bmatrix}2 \\\\ 1\\end{bmatrix} + 2 \\cdot \\begin{bmatrix}3 \\\\ 0\\end{bmatrix} + 1 \\cdot \\begin{bmatrix}0 \\\\ 7\\end{bmatrix} \\\\\n&= \\begin{bmatrix}14 \\\\ 11\\end{bmatrix}\n\\end{align}\\]\n\n\n\n\n\n\n\n\n👀\n\n\n\nLa multiplicación sólo es válida si la dimensión de las columnas de la matriz es igual a la dimensión del vector. El resultado siempre es un vector columna.\nLa multiplicación de una fila por una columna es equivalente al Producto Interno. Es decir, \\(\\bar{y}_{i,:} = A_{i,:} \\cdot \\bar{x}\\)"
+  },
+  {
+    "objectID": "tics579/clase-P1.html#producto-matriz-vector-por-la-izquierda",
+    "href": "tics579/clase-P1.html#producto-matriz-vector-por-la-izquierda",
+    "title": "TICS-579-Deep Learning",
+    "section": "Producto Matriz-Vector (Por la izquierda)",
+    "text": "Producto Matriz-Vector (Por la izquierda)\nA diferencia de todas las otras operaciones, el producto entre una matriz y un vector no es conmutativo.\nPre-multiplicación (Multiplicación por la izquierda)\n\n\n\n\n\n\n\n\nSea\n\n\n\\[\\bar{y}^T = \\bar{x}^T \\cdot A\\]\n\\[A = \\begin{bmatrix}\n2 & 3 & 0 \\\\\n1 & 0 & 7\n\\end{bmatrix}\\]\n\\[\\bar{x} = \\begin{bmatrix}\n2 & 1\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\n\n\nAtención\n\n\nLa pre-multiplicación se puede ver como la combinación lineal de las filas de una matriz por cada elemento del vector. \\[\n\\begin{align}\n\\bar{y}^T = \\bar{x}^T \\cdot A &=\n\\begin{bmatrix}\n(2 \\cdot 2 + 1 \\cdot 1)  & (2 \\cdot 3 + 1 \\cdot 0) & (2 \\cdot 0 + 1 \\cdot 7) \\\\\n\\end{bmatrix} \\\\\n&= 2 \\cdot \\begin{bmatrix} 2 & 3 & 0\\end{bmatrix} + 1 \\cdot \\begin{bmatrix} 1 & 0 & 7\\end{bmatrix} \\\\\n&= \\begin{bmatrix}5 & 6 & 7\\end{bmatrix}\n\\end{align}\n\\]\n\n\n\n\n\n\n\n\n👀\n\n\n\nLa multiplicación sólo es válida si la dimensión de las filas de la matriz es igual a la dimensión del vector. El resultado siempre es un vector fila"
+  },
+  {
+    "objectID": "tics579/clase-P1.html#producto-matriz-matriz",
+    "href": "tics579/clase-P1.html#producto-matriz-matriz",
+    "title": "TICS-579-Deep Learning",
+    "section": "Producto Matriz-Matriz",
+    "text": "Producto Matriz-Matriz\nCorresponde a una operación que permite multiplicar 2 matrices si las columnas de la primera son iguales a las filas de la segunda. Una matriz de \\(n \\times p\\) multiplicada con una de \\(p \\times m\\) nos dará una matriz de \\(n \\times m\\). La manera de multiplicar es tomar cada fila de la primera y multiplicarla por cada columna de la segunda.\n\n\n\n\nOjito!!\n\n\n\nLa multiplicación matricial es equivalente a \\(m\\) post-multiplicaciones Matriz-Vector, stackeadas hacia el lado.\nTambién se puede ver como \\(n\\) pre-multiplicaciones Matriz-Vector, stackeadas hacia abajo.\n\n\\[\n\\begin{align}\nAB &= \\begin{bmatrix}\nA_{1,1} & \\dots & A_{1,p} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{n, 1} & \\dots & A_{n,p} \\\\\n\\end{bmatrix}\n\\begin{bmatrix}\nB_{1,1} & \\dots & B_{1,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nB_{p, 1} & \\dots & B_{p,m} \\\\\n\\end{bmatrix} \\\\\n&= \\begin{bmatrix}\n| & &  | \\\\\nA \\cdot B_{:,1}& \\dots &  A \\cdot B_{:,m} \\\\\n| & &  | \\\\\n\\end{bmatrix}\\\\\n&= \\begin{bmatrix}\n- & A_{1,:} \\cdot B & - \\\\\n& \\vdots &  \\\\\n- & A_{n,:} \\cdot B & - \\\\\n\\end{bmatrix}\\\\\n\\end{align}\\]"
+  },
+  {
+    "objectID": "tics579/clase-P1.html#producto-matriz-matriz-propiedades-útiles",
+    "href": "tics579/clase-P1.html#producto-matriz-matriz-propiedades-útiles",
+    "title": "TICS-579-Deep Learning",
+    "section": "Producto Matriz-Matriz: Propiedades Útiles",
+    "text": "Producto Matriz-Matriz: Propiedades Útiles\n\n\n\n\n\n\n\n\nSupongamos el siguiente caso:\n\n\n\\[A = \\begin{bmatrix}\n4 & 3 & 2 \\\\\n2 & 2 & 4 \\\\\n4 & 4 & 4\n\\end{bmatrix}\nB = \\begin{bmatrix}\n1 & 2 & 1 \\\\\n2 & 3 & 4 \\\\\n4 & 3 & 1 \\\\\n\\end{bmatrix}\n\\]\n\\[\nAB = \\begin{bmatrix}\n18 & 18 & 23 \\\\\n22 & 22 & 14 \\\\\n28 & 24 & 32 \\\\\n\\end{bmatrix}\n\\]\n\n\n\n\n\n\n\n\n\n\nPermutación de Columnas en Post-multiplicación\n\n\nSi permuto columnas de \\[B^* = \\begin{bmatrix}\n1 & 1 & 2 \\\\\n2 & 4 & 3 \\\\\n4 & 1 & 3 \\\\\n\\end{bmatrix}\nAB^*= \\begin{bmatrix}\n18 & 23 & 18\\\\\n22 & 14 & 22\\\\\n28 & 32 & 24\\\\\n\\end{bmatrix}\n\\]"
+  },
+  {
+    "objectID": "tics579/clase-P1.html#otros-productos",
+    "href": "tics579/clase-P1.html#otros-productos",
+    "title": "TICS-579-Deep Learning",
+    "section": "Otros Productos",
+    "text": "Otros Productos\n\n\n\n\n\n\n\n\nHadamard Product\n\n\nCorresponde a otra operación que permite multiplicar 2 matrices si y sólo si tienen el mismo tamaño. La multiplicación se realiza elemento a elemento.\n\\[A = \\begin{bmatrix}\n2 & 3 & 0 \\\\\n1 & 0 & 7\n\\end{bmatrix}\\]\n\\[B = \\begin{bmatrix}\n2 & 5 & 1 \\\\\n2& 3 & 7\n\\end{bmatrix}\\]\n\\[A \\odot B = \\begin{bmatrix} 4 & 15 & 0 \\\\ 2 & 0 & 49\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\n\n\nOuter Product (Producto Externo)\n\n\nCorresponde a otra operación que permite multiplicar 2 vectores. El resultado es una matriz de tamaño \\(d1 \\times d2\\) donde \\(d1\\) es la dimensión del primer vector y \\(d2\\) es la dimensión del segundo vector.\n\\[\\bar{x} = \\begin{bmatrix}\n2 \\\\\n-1 \\\\\n3\n\\end{bmatrix} \\, \\bar{y} = \\begin{bmatrix}\n4 \\\\\n1 \\\\\n5 \\\\\n-2\n\\end{bmatrix}\\]\n\\[\n\\begin{align}\n\\bar{x} \\otimes \\bar{y} = \\bar{x} \\cdot \\bar{y}^T &= \\begin{bmatrix}\n2 \\cdot 4 & 2 \\cdot 1 & 2 \\cdot 5 & 2 \\cdot -2 \\\\\n-1 \\cdot 4 & -1 \\cdot 1 & -1 \\cdot 5 & -1 \\cdot -2 \\\\\n3 \\cdot 4 & 3 \\cdot 1 & 3 \\cdot 5 & 3 \\cdot -2\n\\end{bmatrix} \\\\\n&= \\begin{bmatrix}\n8 & 2 & 10 & -4 \\\\\n-4 & -1 & -5 & 2 \\\\\n12 & 3 & 15 & -6\n\\end{bmatrix}\n\\end{align}\n\\]"
+  },
+  {
+    "objectID": "tics579/clase-P1.html#batch-product",
+    "href": "tics579/clase-P1.html#batch-product",
+    "title": "TICS-579-Deep Learning",
+    "section": "Batch Product",
+    "text": "Batch Product\nEste tipo de operación es bastante poco común en otras áreas, pero extremadamente común en Deep Learning.\n\n\n\n\n\n\nEjemplo\n\n\n¿Qué pasa si queremos calcular la multiplicación de un tensor de dimensiones (2, 3, 2) y otra de (2, 2, 4)?\n\nEl resultado es un tensor de dimensiones (2, 3, 4). Podemos interpretarlo como que se harán 2 multiplicaciones a matrices de (3,2) y (2,4) respectivamente (las cuales son compatibles).\n\n\n\n\n\n\n\n\\[A = \\begin{bmatrix}\n\\begin{bmatrix}\n2 & 2 \\\\\n2 & 3 \\\\\n1 & 2 \\\\\n\\end{bmatrix} \\\\\n\\begin{bmatrix}\n1 & 2 \\\\\n4 & 1 \\\\\n1 & 4 \\\\\n\\end{bmatrix} \\\\\n\\end{bmatrix}\nB = \\begin{bmatrix}\n\\begin{bmatrix}\n4 & 3 & 4 & 4 \\\\\n3 & 3 & 3 & 2 \\\\\n\\end{bmatrix} \\\\\n\\begin{bmatrix}\n4 & 2 & 4 & 4 \\\\\n4 & 1 & 1 & 4 \\\\\n\\end{bmatrix}\n\\end{bmatrix}\n\\]\n\\[\nAB = \\begin{bmatrix}\n\\begin{bmatrix}\n14 & 12 & 14 & 12 \\\\\n17 & 15 & 17 & 14 \\\\\n10 & 9 & 10 & 8 \\\\\n\\end{bmatrix} \\\\\n\\begin{bmatrix}\n12 & 4 & 6 & 12 \\\\\n20 & 9 & 17 & 20 \\\\\n20 & 6 & 8 & 20 \\\\\n\\end{bmatrix} \\\\\n\\end{bmatrix}\n\\]\n\n\n\n\n\n\n\n\nImportante\n\n\n\nEs importante notar que para que esta multiplicación sea válida. Las dimensiones de las matrices internas deben ser compatibles.\nEl Batch Size tiene ser idéntico."
   },
   {
     "objectID": "tics579/clase-9.html#datos-secuenciales",
@@ -2508,146 +2592,6 @@
     "text": "Métodos Adaptativos: Adam\n\n\n\n\n\n\nIdea\n\n\n\nCombinar Descenso con Momentum y RMSProp.\n\n\n\n\n\n\n\\[v_{t+1} = \\beta_1 v_t + (1-\\beta_1) \\nabla_\\theta f(\\theta_t)\\] \\[s_{t+1} = \\beta_2 s_t + (1-\\beta_2) \\nabla_\\theta f(\\theta_t)^2\\] \\[\\theta_{t+1} = \\theta_t - \\frac{\\alpha}{\\sqrt{s'_{t+1}}} v'_{t+1}\\]\n\nCorrecciones Iniciales\n\\[v'_{t+1} = \\frac{v_{t+1}}{1-\\beta_1^{t+1}}\\] \\[s'_{t+1} = \\frac{v_{t+1}}{1-\\beta_2^{t+1}}\\]\n\n\n\n\n\n\n\nPytorch utiliza 0.9 y 0.999 como valores de \\(\\beta_1\\) y \\(\\beta_2\\) respectivamente."
   },
   {
-    "objectID": "tics579/clase-1.html#historia",
-    "href": "tics579/clase-1.html#historia",
-    "title": "TICS-579-Deep Learning",
-    "section": "Historia",
-    "text": "Historia\nLa verdad podríamos estudiar historia e importancia de porqué el Deep Learning es importante, pero la verdad…\n\n\n\n\n\n\nNO TENEMOS TIEMPO PARA ESO.\n\n\n\n\n\nAlexnet (2012)\n\n\nTransformers (2017)\n\n\nGPT (2019)\n\n\nLLMs (2023) (ChatGPT/Llama)"
-  },
-  {
-    "objectID": "tics579/clase-1.html#por-qué-estudiar-deep-learning",
-    "href": "tics579/clase-1.html#por-qué-estudiar-deep-learning",
-    "title": "TICS-579-Deep Learning",
-    "section": "¿Por qué estudiar Deep Learning?",
-    "text": "¿Por qué estudiar Deep Learning?\n\n\n\n\n\n\n\nImágen tomada de la Clase de Zico Colter"
-  },
-  {
-    "objectID": "tics579/clase-1.html#por-qué-estudiar-deep-learning-1",
-    "href": "tics579/clase-1.html#por-qué-estudiar-deep-learning-1",
-    "title": "TICS-579-Deep Learning",
-    "section": "¿Por qué estudiar Deep Learning?",
-    "text": "¿Por qué estudiar Deep Learning?\n\n\n\n\n\n\nFacilidad y Autograd\n\n\n\nFrameworks como Tensorflow, Pytorch o Jax permiten realizar esto de manera mucho más sencilla.\n\nFrameworks permiten calcular gradientes de manera automática.\nAntigua mente trabajar en Torch, Caffe o Theano podía tomar cerca de 50K líneas de código.\n\n\n\n\n\n\n\n\n\n\n\nCómputo\n\n\n\nProliferación de las GPUs, TPUs, HPUs, IPUs, como sistemas masivos de Cómputos.\n\nHow many computers to identify a cat? 16,000\n\n\n\n\n\n\n\n\n\n\n\nEstado del Arte\n\n\n\nModelos de Deep Learning pueden generar sistemas que entiendan imágenes, textos, audios, videos, grafos, etc."
-  },
-  {
-    "objectID": "tics579/clase-1.html#tensores",
-    "href": "tics579/clase-1.html#tensores",
-    "title": "TICS-579-Deep Learning",
-    "section": "Tensores",
-    "text": "Tensores\n\nCorresponde a una generalización de los vectores y matrices que permite representar datos de múltiples dimensiones.\n\n\n\nEscalares (Orden 0)\n\\[-1, 11.27, \\pi\\]\n\nVectores Filas (Orden 1)\n\\[[1.0,-0.27, -1.22]\\]\nVectores Columnas (Orden 1)\n\\[\\begin{bmatrix}\n1 \\\\\n-0.27\\\\\n-1.22\n\\end{bmatrix}\\]\n\nMatrices (Orden 2)\n\\[\\begin{bmatrix}\n1.0 & -0.27 & 3\\\\\n3.15 & 2.02 & 1.2\\\\\n-1.22& 0.55 & 3.97 \\\\\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\nNormalmente los tensores utilizan un mismo tipo de dato: Integers o Float es lo más común."
-  },
-  {
-    "objectID": "tics579/clase-1.html#tensores-1",
-    "href": "tics579/clase-1.html#tensores-1",
-    "title": "TICS-579-Deep Learning",
-    "section": "Tensores",
-    "text": "Tensores\n\n\nTensores (Orden 3+)\n\\[\\begin{bmatrix}\n    \\begin{bmatrix}\n        0.2 & 0.1 & -0.25 \\\\\n        0.1 & -1.0 & 0.22\\\\\n    \\end{bmatrix} \\\\\n    \\begin{bmatrix}\n        0.24 & 0.1 & -0.25 \\\\\n        0.05 & -0.69 & 0.98\n    \\end{bmatrix} \\\\\n    \\begin{bmatrix}\n        0.66& -1.0 & 0.22\\\\\n        -0.07 & -0.59 & 0.99\n    \\end{bmatrix} \\\\\n    \\begin{bmatrix}\n        0.16& 1.0 & 3.22\\\\\n        9.17 & 7.19 & 9.99\n    \\end{bmatrix}\n\\end{bmatrix}\n\\]\n\n\n\n\n\n\n\nNomenclatura\n\n\n\n\\(\\alpha\\), \\(\\beta\\), \\(\\gamma\\): Minúsculas griegas denotan a Escalares.\nx, y, z: Minúsculas latinas denotan a Vectores.\nX, Y, Z: Mayúsculas latinas denotan a Matrices o Tensores.\n\n\n\n\n\n\n\n\n\n\nShape/Tamaño: Tamaño del tensor, tiene tantas dimensiones como su orden.\n\n\n\nEscalar: No tiene dimensiones.\nVector: Tamaño es equivalente al número de elementos del vector. (3,)\n\nA veces se usa la versión (1,3) para vectores filas y (3,1) para vectores columnas.\n\nMatrices: Tamaño es equivalente al número de filas y columnas. Ejemplo: (3,3)\nTensores: Tamaño es equivalente al número de matrices que lo componen y el número de filas y columnas de cada una de ellas. Ejemplo: (4,2,3)\n\n\n\n\n\n\n\nImportante\n\n\n\nLa primera dimensión del shape se conoce como Batch Size el cual denota la cantidad de elementos de orden inferior.\n(3, ) tenemos 3 escalares.\n(3,2) tenemos 3 vectores filas de 2 elementos cada uno.\n(4,2,3) tenemos 4 matrices de (2,3) cada una."
-  },
-  {
-    "objectID": "tics579/clase-1.html#vectores-suma",
-    "href": "tics579/clase-1.html#vectores-suma",
-    "title": "TICS-579-Deep Learning",
-    "section": "Vectores: Suma",
-    "text": "Vectores: Suma\n\nCorresponde a un arreglo unidimensional de números reales. Se puede representar como fila o columna. Por convención denotaremos \\(\\bar{x}\\) como vector columna y \\(\\bar{x}^T\\) como vector fila.\n\n\n\n\n\n\n\n\n\nOperación Suma\n\n\n\nPermite sumar dos vectores de igual tamaño dimensión por dimensión.\n\nEj: \\([7,2]^T + [2,3]^T = [9,5]^T\\)\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nConmutatividad: \\(\\bar{x}+\\bar{y} = \\bar{y}+\\bar{x}\\)\nAsociatividad: \\((\\bar{x}+\\bar{y})+\\bar{z} = \\bar{x}+(\\bar{y}+\\bar{z})\\)\nElemento Neutro: \\(\\bar{x} + \\bar{0} = \\bar{x}\\)"
-  },
-  {
-    "objectID": "tics579/clase-1.html#vectores-ponderación",
-    "href": "tics579/clase-1.html#vectores-ponderación",
-    "title": "TICS-579-Deep Learning",
-    "section": "Vectores: Ponderación",
-    "text": "Vectores: Ponderación\n\nCorresponde a un arreglo unidimensional de números reales. Se puede representar como fila o columna. Por convención denotaremos \\(\\bar{x}\\) como vector columna y \\(\\bar{x}^T\\) como vector fila.\n\n\n\n\n\n\n\n\n\nOperación Ponderación\n\n\n\nPermite multiplicar/ponderar cada dimensión del vector por un escalar.\nEj: \\(2 \\cdot [3,2]^T = [6,4]^T\\)\n\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nDistributividad Escalar: \\(a(\\bar{x}+\\bar{y}) = a\\bar{x} + a\\bar{y}\\)\nDistributividad Vectorial: \\((a+b)\\bar{x} = a\\bar{x} + b\\bar{x}\\)\nElemento Neutro: \\(1\\cdot \\bar{x} = \\bar{x}\\)\nCompatibilidad: \\(a(b\\bar{x}) = (ab)\\bar{x}\\)"
-  },
-  {
-    "objectID": "tics579/clase-1.html#vectores-norma",
-    "href": "tics579/clase-1.html#vectores-norma",
-    "title": "TICS-579-Deep Learning",
-    "section": "Vectores: Norma",
-    "text": "Vectores: Norma\n\n\n\n\n\n\n\n\nNorma (Euclideana)\n\n\nPara un vector \\(\\bar{x}=[x_1, ..., x_n] \\in \\mathbb{R}^n\\) se define la norma como:\n\\[||\\bar{x}|| = \\sqrt{\\sum_{i=1}^n x_i^2}\\]\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nDesigualdad Triangular: \\(||\\bar{x}+\\bar{y}|| \\leq ||\\bar{x}|| + ||\\bar{y}||\\)\n\\(||\\alpha \\bar{x}= |\\alpha| \\cdot ||\\bar{x}||\\)\n\\(||\\bar{x}|| = 0 \\Longleftrightarrow \\bar{0}\\)\n\n\n\n\n\n\n\n\n\n\nAplicación\n\n\nLa norma permite calcular la distancia entre dos vectores.\n\\[d_{x,y} = ||\\bar{x} - \\bar{y}\\]\nTambién serviría para puntos. ¿Por qué?"
-  },
-  {
-    "objectID": "tics579/clase-1.html#vectores-producto-interno-producto-punto",
-    "href": "tics579/clase-1.html#vectores-producto-interno-producto-punto",
-    "title": "TICS-579-Deep Learning",
-    "section": "Vectores: Producto Interno (Producto Punto)",
-    "text": "Vectores: Producto Interno (Producto Punto)\n\n\n\n\n\n\n\n\nInner Product or Dot Product\n\n\nEl producto interno entre dos vectores en \\(\\mathbb{R}^n\\) se define como:\n\\(\\bar{x} = [x_1, ..., x_n]\\) e \\(\\bar{y} = [y_1, ..., y_n]\\)\n\\[ \\bar{x} \\cdot \\bar{y} = \\sum_{i=1}^n x_i y_i = x_1 y_1 + ... + x_n y_n\\]\nA veces el producto interno se denota como \\(\\bar{x}^T \\bar{y}\\) o \\(\\langle \\bar{x}, \\bar{y} \\rangle\\).\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nConmutatividad: \\(\\bar{x} \\cdot \\bar{y} = \\bar{y} \\cdot \\bar{x}\\)\nLinealidad: $({x}){y} = ({x}{y})\nDistributividad: \\(\\bar{x} \\cdot (\\bar{y} + \\bar{z}) = (\\bar{x} \\cdot \\bar{y}) + (\\bar{x} \\cdot \\bar{z})\\)\n\\(||\\bar{x}||^2 = \\bar{x} \\cdot \\bar{x}\\)\n\n\n\n\n\n\n\n\n\n\nAplicaciones\n\n\n\nOrtogonalidad: Dos vectores son ortogonales si su producto interno es cero.\nSimilaridad: Se puede usar el Cosine Similarity para calcular qué tan parecidos son dos vectores.\n\n\n\n\n\n\n\n\nCosine Similarity\n\n\n\\[sim(\\bar{a}, \\bar{b}) = \\frac{\\bar{a} \\cdot \\bar{b}}{||\\bar{a}|| \\cdot ||\\bar{b}||}\\]\n\n1 implica misma dirección (idénticos)\n-1 implica direcciones opuestas (opuestos).\n0 implica totalmente distintos (ortogonales)."
-  },
-  {
-    "objectID": "tics579/clase-1.html#vectores-otras-propiedades",
-    "href": "tics579/clase-1.html#vectores-otras-propiedades",
-    "title": "TICS-579-Deep Learning",
-    "section": "Vectores: Otras Propiedades",
-    "text": "Vectores: Otras Propiedades\n\n\n\n\n\n\nCombinación Lineal\n\n\n\nSe denomina una combinación lineal de vectores a la suma ponderada de estos.\n\nEj: \\(\\bar{w} = \\alpha \\cdot \\bar{x} + \\beta \\cdot \\bar{y} + \\gamma \\cdot \\bar{z}\\)\n\\(\\bar{w}\\) es una combinación lineal de los vectores \\(\\bar{x}, \\bar{y} y \\bar{z}\\).\n\n\n\n\n\n\n\n\n\nIndependencia Lineal\n\n\n\nUn conjunto de vectores es linealmente independiente si:\n\n$\\(\\alpha_1 \\cdot \\bar{x}_1 + \\alpha_2 \\cdot \\bar{x}_2 + ... + \\alpha_n \\cdot \\bar{x}_n = 0\\) implica que \\(\\alpha_i = 0\\) para todo \\(i\\).\n\n\n\n\n\n\n\n\n\n👀 Ojito\n\n\nHay otras propiedades sumamente importantes de vectores, por lo que coloquen atención al curso de Algebra Lineal."
-  },
-  {
-    "objectID": "tics579/clase-1.html#matrices-definición",
-    "href": "tics579/clase-1.html#matrices-definición",
-    "title": "TICS-579-Deep Learning",
-    "section": "Matrices: Definición",
-    "text": "Matrices: Definición\n\n\nCorresponde a un arreglo bidimensional de números reales. Se dice que una matriz es de \\(n\\times m\\) o que es \\(\\mathbb{R}^{n \\times m}\\) cuando tiene \\(n\\) filas y \\(m\\) columnas.\n\\[A = \\begin{bmatrix}\nA_{1,1} & \\dots & A_{1,m} \\\\\nA_{2,1} & \\dots & A_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{n, 1} & \\dots & A_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\n\n\n\n\n\n👀\n\n\n\nNormalmente se utiliza \\(m\\) para denotar el número de registros y \\(n\\) como el número de features de un dataset tabular (o también conocido como Dataframe).\n\\(n=m\\) nos referimos a una matriz cuadrada."
-  },
-  {
-    "objectID": "tics579/clase-1.html#matrices-notación",
-    "href": "tics579/clase-1.html#matrices-notación",
-    "title": "TICS-579-Deep Learning",
-    "section": "Matrices: Notación",
-    "text": "Matrices: Notación\n\nSi \\(A\\) es una matriz entonces:\n\n\\(A_{i,j}\\) corresponde al elemento en la fila \\(i\\) y columna \\(j\\). Es decir, un escalar.\n\\(A_{i,:}\\) corresponde a la fila \\(i\\) completa. Es decir, un vector fila.\n\\(A_{:,j}\\) corresponde a la columna \\(j\\) completa. Es decir un vector columna.\n\n\n\n\\[A = \\begin{bmatrix}\n0.2 & 1 & -5.2 & 3.1 & -1.3 \\\\\n-0.5 & 10 & 0 & 3.1 & 3 \\\\\n2 & 25 & -5.2 & 0 & 0 \\\\\n100 & 3.4 & 4.1 & 0 & 42\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\nImportante: Recordar que los índices en Python son 0-based.\n\n\n\n\\(A_{2,4} = 3.1\\)\n\\(A_{:,3} = [-5.2, 0, -5.2, 4.1]^T\\)\n\\(A_{1,:} = [0.2, 1, -5.2, 3.1, -1.3]\\)"
-  },
-  {
-    "objectID": "tics579/clase-1.html#matrices-suma",
-    "href": "tics579/clase-1.html#matrices-suma",
-    "title": "TICS-579-Deep Learning",
-    "section": "Matrices: Suma",
-    "text": "Matrices: Suma\n\n\n\n\n\n\n\n\nOperación Suma\n\n\n\nPermite sumar dos matrices elemento a elemento.\nEj: Sea \\(A\\) y \\(B\\) dos matrices:\n\n\\[A = \\begin{bmatrix}\nA_{1,1} & \\dots & A_{1,m} \\\\\nA_{2,1} & \\dots & A_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{n, 1} & \\dots & A_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\n\\[B = \\begin{bmatrix}\nB_{1,1} & \\dots & B_{1,m} \\\\\nB_{2,1} & \\dots & B_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nB_{n, 1} & \\dots & B_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\n\n\n\n\n\n\n\n\nResultado\n\n\n\\[A + B = \\begin{bmatrix}\nA_{1,1} + B_{1,1} & \\dots & A_{1,m} + B_{1,m} \\\\\nA_{2,1} + A_{2,1} & \\dots & A_{2,m} + B_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{n, 1} + B_{n,1} & \\dots & A_{n,m} + B_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\n\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nAsociatividad: \\((A + B) + C = A + (B + C)\\)\nConmutatividad: \\(A + B = B + A\\)\nElemento Neutro: \\(A + 0 = A\\)\nElemento Inverso: \\(A + (-A) = 0\\)"
-  },
-  {
-    "objectID": "tics579/clase-1.html#matrices-ponderación",
-    "href": "tics579/clase-1.html#matrices-ponderación",
-    "title": "TICS-579-Deep Learning",
-    "section": "Matrices: Ponderación",
-    "text": "Matrices: Ponderación\n\n\n\n\n\n\n\n\nOperación Ponderación\n\n\n\nPermite multiplicar/ponderar cada elemento de la matriz por un escalar.\nEj: Sea \\(A\\) una matriz:\n\n\\[A = \\begin{bmatrix}\nA_{1,1} & \\dots & A_{1,m} \\\\\nA_{2,1} & \\dots & A_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{n, 1} & \\dots & A_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\ny \\(\\gamma\\) un escalar.\n\n\n\n\n\n\n\n\nResultado\n\n\n\\[\\gamma \\cdot A = \\begin{bmatrix}\n\\gamma \\cdot A_{1,1} & \\dots & \\gamma \\cdot A_{1,m} \\\\\n\\gamma \\cdot A_{2,1} & \\dots & \\gamma \\cdot A_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\n\\gamma \\cdot A_{n, 1} & \\dots & \\gamma \\cdot A_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\n\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nDistibutividad Escalar: \\(\\gamma(A + B) = \\gamma A + \\gamma B\\)\nDistibutividad Matricial: \\((\\gamma + \\delta) A = \\gamma A + \\delta A\\)\nCompatibilidad: \\((\\gamma \\delta) A = \\gamma (\\delta A) = \\delta (\\gamma A)\\)"
-  },
-  {
-    "objectID": "tics579/clase-1.html#transpuesta-y-reshape",
-    "href": "tics579/clase-1.html#transpuesta-y-reshape",
-    "title": "TICS-579-Deep Learning",
-    "section": "Transpuesta y Reshape",
-    "text": "Transpuesta y Reshape\n\n\n\n\n\n\n\n\nTranspuesta\n\n\nSea:\n\\[A = \\begin{bmatrix}\nA_{1,1} & \\dots & A_{1,m} \\\\\nA_{2,1} & \\dots & A_{2,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{n, 1} & \\dots & A_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\nEntonces, \\(A^T\\) se define como:\n\\[A^T = \\begin{bmatrix}\nA_{1,1} & \\dots & A_{m,1} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{1,m} & \\dots & A_{n,m} \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{n \\times m}\\]\nEs decir, intercambiamos filas por las columnas y viceversa.\n\n\n\n\n\n\n\n\n\n\nReshape\n\n\n\\[B = \\begin{bmatrix}\n1 & 3 & 5 \\\\\n1 & 7 & 9 \\\\\n4 & 6 & 7 \\\\\n3 & 3 & 5 \\\\\n\\end{bmatrix} \\in \\mathbb{R}^{4 \\times 3}\\]\nPodemos hacer un reshape a (6,2)\n\\[B_{reshaped} = \\begin{bmatrix}\n1 & 3 \\\\\n5 & 1 \\\\\n7 & 9 \\\\\n4 & 6 \\\\\n7 & 3 \\\\\n3 & 5\n\\end{bmatrix} \\in \\mathbb{R}^{6 \\times 2}\\]"
-  },
-  {
-    "objectID": "tics579/clase-1.html#producto-matriz-vector-por-la-derecha",
-    "href": "tics579/clase-1.html#producto-matriz-vector-por-la-derecha",
-    "title": "TICS-579-Deep Learning",
-    "section": "Producto Matriz-Vector (Por la derecha)",
-    "text": "Producto Matriz-Vector (Por la derecha)\nA diferencia de todas las otras operaciones, el producto entre una matriz y un vector no es conmutativo.\nPost-multiplicación (Multiplicación por la derecha)\n\n\n\n\n\n\n\n\nSea\n\n\n\\[\\bar{y} = A \\cdot \\bar{x}\\]\n\\[A = \\begin{bmatrix}\n2 & 3 & 0 \\\\\n1 & 0 & 7\n\\end{bmatrix}\\]\n\\[\\bar{x} = \\begin{bmatrix}\n4 \\\\\n2 \\\\\n1\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\n\n\nAtención\n\n\nLa post-multiplicación se puede ver como la combinación lineal de las columnas de una matriz por cada elemento del vector. \\[\n\\begin{align}\n\\bar{y} = A \\cdot \\bar{x} &= \\begin{bmatrix}\n2 \\cdot 4 + 3 \\cdot 2 + 0 \\cdot 1 \\\\\n1 \\cdot 4 + 0 \\cdot 2 + 7 \\cdot 1\n\\end{bmatrix} \\\\\n&= 4 \\cdot \\begin{bmatrix}2 \\\\ 1\\end{bmatrix} + 2 \\cdot \\begin{bmatrix}3 \\\\ 0\\end{bmatrix} + 1 \\cdot \\begin{bmatrix}0 \\\\ 7\\end{bmatrix} \\\\\n&= \\begin{bmatrix}14 \\\\ 11\\end{bmatrix}\n\\end{align}\\]\n\n\n\n\n\n\n\n\n👀\n\n\n\nLa multiplicación sólo es válida si la dimensión de las columnas de la matriz es igual a la dimensión del vector. El resultado siempre es un vector columna.\nLa multiplicación de una fila por una columna es equivalente al Producto Interno. Es decir, \\(\\bar{y}_{i,:} = A_{i,:} \\cdot \\bar{x}\\)"
-  },
-  {
-    "objectID": "tics579/clase-1.html#producto-matriz-vector-por-la-izquierda",
-    "href": "tics579/clase-1.html#producto-matriz-vector-por-la-izquierda",
-    "title": "TICS-579-Deep Learning",
-    "section": "Producto Matriz-Vector (Por la izquierda)",
-    "text": "Producto Matriz-Vector (Por la izquierda)\nA diferencia de todas las otras operaciones, el producto entre una matriz y un vector no es conmutativo.\nPre-multiplicación (Multiplicación por la izquierda)\n\n\n\n\n\n\n\n\nSea\n\n\n\\[\\bar{y}^T = \\bar{x}^T \\cdot A\\]\n\\[A = \\begin{bmatrix}\n2 & 3 & 0 \\\\\n1 & 0 & 7\n\\end{bmatrix}\\]\n\\[\\bar{x} = \\begin{bmatrix}\n2 & 1\n\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\n\n\nAtención\n\n\nLa pre-multiplicación se puede ver como la combinación lineal de las filas de una matriz por cada elemento del vector. \\[\n\\begin{align}\n\\bar{y}^T = \\bar{x}^T \\cdot A &=\n\\begin{bmatrix}\n(2 \\cdot 2 + 1 \\cdot 1)  & (2 \\cdot 3 + 1 \\cdot 0) & (2 \\cdot 0 + 1 \\cdot 7) \\\\\n\\end{bmatrix} \\\\\n&= 2 \\cdot \\begin{bmatrix} 2 & 3 & 0\\end{bmatrix} + 1 \\cdot \\begin{bmatrix} 1 & 0 & 7\\end{bmatrix} \\\\\n&= \\begin{bmatrix}5 & 6 & 7\\end{bmatrix}\n\\end{align}\n\\]\n\n\n\n\n\n\n\n\n👀\n\n\n\nLa multiplicación sólo es válida si la dimensión de las filas de la matriz es igual a la dimensión del vector. El resultado siempre es un vector fila"
-  },
-  {
-    "objectID": "tics579/clase-1.html#producto-matriz-matriz",
-    "href": "tics579/clase-1.html#producto-matriz-matriz",
-    "title": "TICS-579-Deep Learning",
-    "section": "Producto Matriz-Matriz",
-    "text": "Producto Matriz-Matriz\nCorresponde a una operación que permite multiplicar 2 matrices si las columnas de la primera son iguales a las filas de la segunda. Una matriz de \\(n \\times p\\) multiplicada con una de \\(p \\times m\\) nos dará una matriz de \\(n \\times m\\). La manera de multiplicar es tomar cada fila de la primera y multiplicarla por cada columna de la segunda.\n\n\n\n\nOjito!!\n\n\n\nLa multiplicación matricial es equivalente a \\(m\\) post-multiplicaciones Matriz-Vector, stackeadas hacia el lado.\nTambién se puede ver como \\(n\\) pre-multiplicaciones Matriz-Vector, stackeadas hacia abajo.\n\n\\[\n\\begin{align}\nAB &= \\begin{bmatrix}\nA_{1,1} & \\dots & A_{1,p} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nA_{n, 1} & \\dots & A_{n,p} \\\\\n\\end{bmatrix}\n\\begin{bmatrix}\nB_{1,1} & \\dots & B_{1,m} \\\\\n\\vdots & \\ddots & \\vdots \\\\\nB_{p, 1} & \\dots & B_{p,m} \\\\\n\\end{bmatrix} \\\\\n&= \\begin{bmatrix}\n| & &  | \\\\\nA \\cdot B_{:,1}& \\dots &  A \\cdot B_{:,m} \\\\\n| & &  | \\\\\n\\end{bmatrix}\\\\\n&= \\begin{bmatrix}\n- & A_{1,:} \\cdot B & - \\\\\n& \\vdots &  \\\\\n- & A_{n,:} \\cdot B & - \\\\\n\\end{bmatrix}\\\\\n\\end{align}\\]"
-  },
-  {
-    "objectID": "tics579/clase-1.html#otros-productos",
-    "href": "tics579/clase-1.html#otros-productos",
-    "title": "TICS-579-Deep Learning",
-    "section": "Otros Productos",
-    "text": "Otros Productos\n\n\n\n\n\n\n\n\nHadamard Product\n\n\nCorresponde a otra operación que permite multiplicar 2 matrices si y sólo si tienen el mismo tamaño. La multiplicación se realiza elemento a elemento.\n\\[A = \\begin{bmatrix}\n2 & 3 & 0 \\\\\n1 & 0 & 7\n\\end{bmatrix}\\]\n\\[B = \\begin{bmatrix}\n2 & 5 & 1 \\\\\n2& 3 & 7\n\\end{bmatrix}\\]\n\\[A \\odot B = \\begin{bmatrix} 4 & 15 & 0 \\\\ 2 & 0 & 49\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\n\n\nOuter Product (Producto Externo)\n\n\nCorresponde a otra operación que permite multiplicar 2 vectores. El resultado es una matriz de tamaño \\(d1 \\times d2\\) donde \\(d1\\) es la dimensión del primer vector y \\(d2\\) es la dimensión del segundo vector.\n\\[\\bar{x} = \\begin{bmatrix}\n2 \\\\\n-1 \\\\\n3\n\\end{bmatrix} \\, \\bar{y} = \\begin{bmatrix}\n4 \\\\\n1 \\\\\n5 \\\\\n-2\n\\end{bmatrix}\\]\n\\[\n\\begin{align}\n\\bar{x} \\otimes \\bar{y} = \\bar{x} \\cdot \\bar{y}^T &= \\begin{bmatrix}\n2 \\cdot 4 & 2 \\cdot 1 & 2 \\cdot 5 & 2 \\cdot -2 \\\\\n-1 \\cdot 4 & -1 \\cdot 1 & -1 \\cdot 5 & -1 \\cdot -2 \\\\\n3 \\cdot 4 & 3 \\cdot 1 & 3 \\cdot 5 & 3 \\cdot -2\n\\end{bmatrix} \\\\\n&= \\begin{bmatrix}\n8 & 2 & 10 & -4 \\\\\n-4 & -1 & -5 & 2 \\\\\n12 & 3 & 15 & -6\n\\end{bmatrix}\n\\end{align}\n\\]"
-  },
-  {
-    "objectID": "tics579/clase-1.html#batch-product",
-    "href": "tics579/clase-1.html#batch-product",
-    "title": "TICS-579-Deep Learning",
-    "section": "Batch Product",
-    "text": "Batch Product\nEste tipo de operación es bastante poco común en otras áreas, pero extremadamente común en Deep Learning.\n\n\n\n\n\n\nEjemplo\n\n\n¿Qué pasa si queremos calcular la multiplicación de un tensor de dimensiones (2, 3, 2) y otra de (2, 2, 4)? El resultado es un tensor de dimensiones (2, 3, 4).\nPodemos interpretarlo como que se harán 2 multiplicaciones a matrices de (3,2) y (2,4) respectivamente (las cuales son compatibles).\nTODO: Ejemplo numérico Pendiente…"
-  },
-  {
     "objectID": "tics579/clase-1.html#el-nacimiento-de-las-redes-neuronales",
     "href": "tics579/clase-1.html#el-nacimiento-de-las-redes-neuronales",
     "title": "TICS-579-Deep Learning",
@@ -2774,95 +2718,242 @@
     "text": "Conclusiones\n\n\n\n\n\n\n\n\n\nAcabamos de entrenar una Shallow Network, sin definir ningún concepto Fancy que es propio del área.\nNo hemos hablado ni de:\n\nForward Pass\nEpochs\nBackpropagation\nAdam\nActivation Functions\netc.\n\n\n\n\n\n\n\n\n\n\n\n\n\nAplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.\nSe puede programar en pocas líneas en Python.\n\n\n\n\n\n\n\n\n\n\n\nPero, ¿qué pasa con arquitecturas más complejas?"
   },
   {
-    "objectID": "tics579/clase-1.html#multiplicación-matricial",
-    "href": "tics579/clase-1.html#multiplicación-matricial",
+    "objectID": "tics579/clase-10.html#datos-de-texto",
+    "href": "tics579/clase-10.html#datos-de-texto",
     "title": "TICS-579-Deep Learning",
-    "section": "Multiplicación Matricial",
-    "text": "Multiplicación Matricial\n\n\n\n\n\n\n\n\n\nDonde \\(B_{*,i}\\) corresponde a la columna \\(i\\) de B.\nDonde \\(A_{i,*}\\) corresponde a la fila \\(i\\) de A."
+    "section": "Datos de Texto",
+    "text": "Datos de Texto\nLos datos de texto corresponden a un caso particular de datos secuenciales. En este caso, dependiendo del idioma, las dependencias pueden venir tanto del pasado como del futuro. Consideramos texto libre como una secuencia de Strings, el cuál es inteligible para seres humanos pero no necesariamente para un computador.\n\n\n\n\n\n\nEs probablemente el tipo de dato más abundante, aunque también uno de los más sensible al ruido (variabilidad, idioma, tono, formalidad, etc.).\n\n\n\n\n\n\n\n\nEl problema\n\n\nLos computadores, y por ende los modelos, no pueden entender strings. El computador sólo puede entender datos numéricos.\n\n\n\n\n\n\n\n\n\nPara poder manipular texto dentro de un modelo será necesario un pre-procesamiento que permita transformar el texto en datos numéricos que un modelo pueda entender.\n\n\n\n\n\n\n\n\n\nLa disciplina encargada de desarrollar modelos asociado a lenguaje/texto es conocida como Procesamiento de Lenguaje Natural (NLP en inglés)."
   },
   {
-    "objectID": "tics579/clase-8.html#lenet-5-lecun-et-al.-1998",
-    "href": "tics579/clase-8.html#lenet-5-lecun-et-al.-1998",
+    "objectID": "tics579/clase-10.html#tareas-asociadas-a-nlp",
+    "href": "tics579/clase-10.html#tareas-asociadas-a-nlp",
     "title": "TICS-579-Deep Learning",
-    "section": "LeNet-5 (LeCun et al., 1998)",
-    "text": "LeNet-5 (LeCun et al., 1998)\n\nProbablemente la primera arquitectura famosa en poder realizar tareas importantes de reconocimiento de imagen. Diseñada especialmente para reconocimiento de dígitos, introduce los bloques de convolución más pooling para luego conectarse con FFN.\n\n\n\n\n\n\n\n\n\nAdaptive Pooling\n\n\nLa mayoría de arquitecturas más modernas utiliza una capa llamada Adaptive Pooling antes del proceso de Flatten. El Adaptive Pooling es una especie de Pooling inverso, donde uno define el tamaño del output, y automáticamente se calcula el Kernel, Stride, Padding, etc. necesario para obtener ese tamaño.\nEso garantiza que cualquier tamaño de imagen puede pasar por la red sin romper las dimensiones necesarias para la transición al MLP."
+    "section": "Tareas asociadas a NLP",
+    "text": "Tareas asociadas a NLP"
   },
   {
-    "objectID": "tics579/clase-8.html#alexnext-krizhevsky-sutskever-y-hinton-2012",
-    "href": "tics579/clase-8.html#alexnext-krizhevsky-sutskever-y-hinton-2012",
+    "objectID": "tics579/clase-10.html#proceso-de-tokenización-y-embedding",
+    "href": "tics579/clase-10.html#proceso-de-tokenización-y-embedding",
     "title": "TICS-579-Deep Learning",
-    "section": "AlexNext (Krizhevsky, Sutskever y Hinton, 2012)",
-    "text": "AlexNext (Krizhevsky, Sutskever y Hinton, 2012)\n\nGanó el concurso Imagenet (ILSVRC) en 2012 por un largo margen (algo impensado para ese tiempo). Introdujo los conceptos de ReLU, Dropout y Aceleración por GPU. Esta arquitectura está disponible en torchvision.\n\n\n\n\n\n\nimport torchvision\ntorchvision.models.alexnet(weights = \"IMAGENET1K_V1\")\n\n\n\n\n\n\nLa arquitectura de Torchvision está inspirada en una versión alternativa de Alexnet. Esto probablemente no será corregido ya que no es una arquitectura que se utilice comunmente en la actualidad."
+    "section": "Proceso de Tokenización y Embedding",
+    "text": "Proceso de Tokenización y Embedding\n\n\n\n\n\nTokenización\n\n\nEl proceso de Tokenización permite transformar texto en datos numéricos. Cada dato numérico se mapea con un “trozo de texto”. Normalmente los modelos van asociados a la tokenización con la que fueron entrenados. Cambiar la tokenización puede generar gran degradación.\n\n\n\n\n\n\nEmbedding\n\n\nCorresponde el proceso en el que los Tokens se transforman en vectores densos en las cuales la distancia entre ellos representa una noción de similaridad.\n\n\n\n\n\n\n\nEn este caso la frase “Frog on a log”  es separada en Tokens (en este caso cada token es una palabra).\nLuego cada Token es mapeado a un Token id proveniente de un vocabulario. ¿Qué es un vocabulario?\nLos embeddings en este caso representan una secuencia de largo 7 con 3 dimensiones."
   },
   {
-    "objectID": "tics579/clase-8.html#vggnet-simonyan-zisserman-2014",
-    "href": "tics579/clase-8.html#vggnet-simonyan-zisserman-2014",
+    "objectID": "tics579/clase-10.html#embeddings",
+    "href": "tics579/clase-10.html#embeddings",
     "title": "TICS-579-Deep Learning",
-    "section": "VGGNet (Simonyan, Zisserman, 2014)",
-    "text": "VGGNet (Simonyan, Zisserman, 2014)\n\nPresentaron las primeras redes relativamente profundas con Kernels pequeños de \\(3 \\times 3\\). Su propuesta incluye Redes de hasta 19 capas.\n\n\n\n\n\n\n\n\n\nimport torchvision\ntorchvision.models.vgg16(weights = \"IMAGENET1K_V1\")\n## Versión con Batchnorm\ntorchvision.models.vgg16_bn(weights = \"IMAGENET1K_V1\")\n\n\n\n\n\n\ntorchvision incluye las arquitecturas de 11, 13, 16 y 19 capas, además de variantes que incluyen Batchnorm (que en eltiempo del paper no existían aún)."
+    "section": "Embeddings",
+    "text": "Embeddings\n\n\n\n\n\n\n\n\n\n\n\n¿Por qué es tan importante el uso de Embeddings?\n\n\n\nPrimero porque son entrenables. Es decir la red puede aprender cuál es la mejor manera de representar palabras.\nExisten embeddings pre-entrenados, es decir, se puede hacer transfer learning de embeddings.\nLa red puede aprender relaciones semánticas entre palabras, algo imposible utilizando otras representaciones."
   },
   {
-    "objectID": "tics579/clase-8.html#googlenetinception-szegedy-et-al.-2014",
-    "href": "tics579/clase-8.html#googlenetinception-szegedy-et-al.-2014",
+    "objectID": "tics579/clase-10.html#problema-de-las-rnn",
+    "href": "tics579/clase-10.html#problema-de-las-rnn",
     "title": "TICS-579-Deep Learning",
-    "section": "GoogleNet/Inception (Szegedy et al., 2014)",
-    "text": "GoogleNet/Inception (Szegedy et al., 2014)\n\n\n\nIntroduce las “Pointwise Convolutions” (Convoluciones de 1x1) que permiten reducir la complejidad de canales (mediante una combinación lineal) manteniendo las dimensiones de la imagen. Además introduce los Inception Modules, que combinan resultados de Kernels de distinto tamaño. Fue la Arquitectura ganadora de ILSVRC 2014.\n\nimport torchvision\ntorchvision.models.googlenet(weights = \"IMAGENET1K_V1\")\n\n1x1 Convolutions"
+    "section": "Problema de las RNN",
+    "text": "Problema de las RNN\n\n\n\n\n\n\nA pesar de las habilidades de las RNN, estas no son suficientes para distintas tareas de NLP.\n\n\n\n\n\n\n\n\nLas RNN inicialmente toman cada elemento de una secuencia y generan un output para cada entrada. Esto potencialmente genera ciertas limitantes. Una de ellas es el proceso llamado Machine Translation.\n\n\n\n\n\n\nEste es un ejemplo de Modelamiento seq2seq en el que se utiliza una secuencia de entrada pero se espera también una secuencia de salida."
   },
   {
-    "objectID": "tics579/clase-8.html#resnet-he-et-al.-2015",
-    "href": "tics579/clase-8.html#resnet-he-et-al.-2015",
+    "objectID": "tics579/clase-10.html#machine-translation-ejemplo-del-inglés",
+    "href": "tics579/clase-10.html#machine-translation-ejemplo-del-inglés",
     "title": "TICS-579-Deep Learning",
-    "section": "Resnet (He et al., 2015)",
-    "text": "Resnet (He et al., 2015)\n\n\n\n\n\n\n\n\n\nIntroduce las conexiones residuales, lo cual permite evitar el problema del vanishing gradient para redes muy profundas. Es la Arquitectura ganadora de ILSVRC 2015.\n\n\n\n\n\n\n\nEsta arquitectura se puede encontrar tanto en torchvision como timm. Recomiendo timm, ya que hay muchas más variantes, mejor mantención y procesos de entrenamiento actualizados.\n\n\n\nimport timm\nmodel = timm.create_model(\"resnet50\", pretrained = True)\n\n## Listar todas las versiones de Resnet disponibles\ntimm.list_models(\"resnet*\")\n\nConexiones Residuales"
+    "section": "Machine Translation: Ejemplo del Inglés",
+    "text": "Machine Translation: Ejemplo del Inglés\nSupongamos que necesitamos hacer la siguiente traducción:\n\nInglés\n\n\nHi, my name is Alfonso\n\n\n\n\n\nEspañol\n\n\nHola, mi nombre es Alfonso\n\n\n\n\n\n\n\n\n\nEste tipo de traducción es uno a uno. Cada input puede tener asociado una salida de manera directa puede realizarse de manera directa con una RNN."
   },
   {
-    "objectID": "tics579/clase-8.html#efficientnet-tan-le-2019",
-    "href": "tics579/clase-8.html#efficientnet-tan-le-2019",
+    "objectID": "tics579/clase-10.html#machine-translation-ejemplo-del-inglés-1",
+    "href": "tics579/clase-10.html#machine-translation-ejemplo-del-inglés-1",
     "title": "TICS-579-Deep Learning",
-    "section": "EfficientNet (Tan, Le, 2019)",
-    "text": "EfficientNet (Tan, Le, 2019)\n\nIntroducen el concepto de Compound Scaling que permite cambiar la escala de profundidad (número de capas en la red), ancho (número de canales en cada capa) y resolución (dimensiones de la imagen) para poder mejorar la performance. Permite crear resultados al nivel del estado del arte con muchísimos menos parámetros.\n\n\n\n\n\n\nimport timm\nmodel = timm.create_model(\"efficientnet_b0\", pretrained = True)\n\n## Listar todas las versiones de Resnet disponibles\ntimm.list_models(\"efficientnet*\")"
+    "section": "Machine Translation: Ejemplo del Inglés",
+    "text": "Machine Translation: Ejemplo del Inglés\n\nInglés\n\n\nWould you help me prepare something for tomorrow?\n\n\n\n\n\nEspañol\n\n\n¿Me ayudarías a preparar algo para mañana?\n\n\n\n\n\n\n\n\n\nProblemas\n\n\n\nLa traducción no es uno. De hecho en inglés se utilizan 8 palabras y 1 signo de puntuación. En español se traduce en 7 palabras y 2 signos de puntuación.\n“Would” no tiene equivalente en español.\n“a” no tiene equivalente en el inglés.\n“Me” se traduce como “me” en inglés pero en vez de ir al inicio, va al final de “help”.\n“¿” no existe en inglés.\n\n\n\n\n\n\n\n\n\n\n\nOtros idiomas como el Alemán o el Ruso, tienen fusión de palabras o declinaciones que hacen la traducción mucho más difícil.\nEs por ello que se requiere una cierta libertad entre los tokens de entradas y los tokens de salida."
   },
   {
-    "objectID": "tics579/clase-8.html#pre-training",
-    "href": "tics579/clase-8.html#pre-training",
+    "objectID": "tics579/clase-10.html#soluciones-redes-convolucionales",
+    "href": "tics579/clase-10.html#soluciones-redes-convolucionales",
     "title": "TICS-579-Deep Learning",
-    "section": "Pre-training",
-    "text": "Pre-training\n\nImagenet\n\nCorresponde a un dataset de cerca de 14M de imágenes con que fueron anotados a mano. Este dataset se utilizó para la competencia de ImageNet Large Scale Visual Recognition Challenge (ILSVRC) desde el año 2010 al 2017, el cuál generó innumerables avances en el estado del arte. Normalmente las imágenes tienen rangos entre \\(4288 \\times 2848\\) hasta \\(75 \\times 56\\). Las imágenes se encuentran normalizadas restando medias por canal de \\([0.485,0.456,0.406]\\) y divididas por SD de \\([0.229,0.224,0.225]\\).\n\n\n\n\n\n\n\n\n\nLas dos variantes más conocidas son el ImageNet-1K que tiene 1.281.167, 50.000 y 100.000 imágenes para train, validation y test set con 1000 categorías y el ImageNet-21K que tiene 14.197.122 imágenes con 21.841 clases.\n\n\n\n\n\n\n\n\n\n\nDebido a la importancia y complejidad de este dataset es que la mayoría de los backbones han sido pre-entrenados con este él. Por lo que las distintas arquitecturas “pueden ver” gracias a este dataset.\n\n\n\n\n\n\n\n\n\nDebido a que muchas arquitecturas pueden/saben ver en un dataset tan complejo como Imagenet. ¿Sería posible utilizar ese conocimiento en otro dataset?\n\n\n\n\nEntering Transfer Learning"
+    "section": "Soluciones: Redes Convolucionales",
+    "text": "Soluciones: Redes Convolucionales\nUna potencial solución se puede dar por medio de Redes Convolucionales de 1D. En este caso las redes convolucionales tienen la ventaja de poder mirar tanto al pasado como al futuro de manera móvil.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nPueden tomar contexto desde el inicio y desde el final.\n\n\n\n\n\n\n\n\n\n\nDesventajas\n\n\n\nSu campo receptivo es mucho más acotado y depende del número de capas y el largo del Kernel lo cual repercute directamente en el número de parámetros del modelo.\nNo tienen estado latente (o memoria) que almacena contexto.\nNo es útil para modelos de generación (ya que ve contexto desde el futuro)."
   },
   {
-    "objectID": "tics579/clase-8.html#transfer-learning",
-    "href": "tics579/clase-8.html#transfer-learning",
+    "objectID": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder",
+    "href": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder",
     "title": "TICS-579-Deep Learning",
-    "section": "Transfer Learning",
-    "text": "Transfer Learning\n\n\n\n\n\n\n\n\n\n\n\nDataset Público/alta complejidad\n\n\nNormalmente se utilizan datos públicos y de alta complejidad y se utiliza para pre-entrenar una arquitectura.\n\n\n\n\n\n\nPre-entrenamiento\n\n\nSe entrena una arquitectura para una tarea en específico con los detalles del dataset a utilizar.\n\n\n\n\n\n\nFine-Tuning\n\n\nSe carga la arquitectura pre-entrenada, con los pesos obtenidos en el pre-entrenamiento y se ajusta el prediction head para la nueva tarea y se vuelve a entrenar el modelo.\n\n\n\n\n\n\nFreezing Layers\n\n\nSe refiere a congelar los parámetros del backbone pre-entrenado, es decir, estos no se actualizan. Este paso es opcional, y en ocasiones puede funcionar de mejor manera que un Full-Fine-Tuning"
+    "section": "Soluciones: Arquitecturas Encoder-Decoder",
+    "text": "Soluciones: Arquitecturas Encoder-Decoder\n\nEncoder\n\nCorresponde a una arquitectura que permitirá tomar datos de entrada y codificarlos en una representación numérica (normalmente como hidden states o como embeddings).\n\nDecoder\n\nCorresponde a una arquitectura que toma una representación codificada de datos (normalmente generado por un encoder) y la transforma nuevamente en una salida con un formato comprensible y no solamente una “simple etiqueta”.\n\n\n\n\n\n\n\n\n\n\n\n\n\nEste tipo de arquitecturas son quizás las más populares hoy en día y tienen aplicaciones en distintos dominios."
   },
   {
-    "objectID": "tics579/clase-8.html#image-preprocessing-y-data-augmentation",
-    "href": "tics579/clase-8.html#image-preprocessing-y-data-augmentation",
+    "objectID": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-1",
+    "href": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-1",
     "title": "TICS-579-Deep Learning",
-    "section": "Image Preprocessing y Data Augmentation",
-    "text": "Image Preprocessing y Data Augmentation\n\nEn general el proceso de Preprocesamiento de Imágenes es bastante más engorroso que el de datos tabulares. Afortunadamente Pytorch tiene algunos utilities que permiten hacer el proceso más sencillo:\n\n\nImageFolder\n\nPermite cargar imágenes de un Path en específico. Dentro de esa carpeta ImageFolder considerará cada carpeta como una clase y los elementos (imágenes) dentro de dicha clase como instancia de la clase en cuestión.\n\n\nfrom torchvision.dataset import ImageFolder\n\ntrain_data = ImageFolder(\"path/to/train/images\", transform = None)\nvalidation_data = ImageFolder(\"path/to/validation/images\", transform = None)\ntest_data = ImageFolder(\"path/to/test/images\", transform = None)\n\n\n\n\n\n\nAdemás ImageFolder posee un parámetro llamado transform en el cuál se pueden ingresar transformaciones a los datos para realizar procesos de Data Augmentation.\n\n\n\n\n\n\nOjo\n\n\nImage Folder entrega los datos como una Imagen PIL. Por lo tanto, es necesario aplicar procesamientos que permitan su transformación en Tensor."
+    "section": "Soluciones: Arquitecturas Encoder-Decoder",
+    "text": "Soluciones: Arquitecturas Encoder-Decoder\n\n\n\n\n\n\nUna arquitectura Encoder-Decoder convolucional permite devolver una imagen como salida. Este ejemplo se conoce como Segmentación Semántica."
   },
   {
-    "objectID": "tics579/clase-8.html#data-augmentation",
-    "href": "tics579/clase-8.html#data-augmentation",
+    "objectID": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-2",
+    "href": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-2",
     "title": "TICS-579-Deep Learning",
-    "section": "Data Augmentation",
-    "text": "Data Augmentation\n\n\nCorresponde a un proceso de generación de datos sintéticos. Este proceso se puede utilizar para:\n\nPermite la generación de datos adicionales debido a escasez por costo o disponibilidad de ellos. Ejemplo: Datos médicos.\nGenera variedad de datos, que entrega al modelo un mayor poder de generalización en datos no vistos.\nAl introducir mayor variabilidad en los datos entrega una mayor robustez ante el overfitting (Regularización).\nSimular condiciones adversas para el modelo en la cuál se quiera generar robustez.\n\nEj: Se tiene un modelo de reconocimiento de vehículos, pero que tiene que funcionar en condiciones de niebla.\n\n\n\n\n\n\n\n\n\n\n\n\nAlbumentations\n\n\nExisten diversas librerías que permiten generar Aumento de Datos. La librerías más famosas son Albumentations y Kornia. Albumentations, permite transformaciones extremadamente eficientes en CPU, mientras que Kornia hace lo mismo pero en GPU. Debido a las limitaciones de GPU que contamos, utilizaremos Albumentations, de manera tal de balancear procesamiento tanto en CPU como en GPU.\n\n\n\n\n\n\n\n\n\nNormalmente este tipo de transformaciones entrega mejores resultados cuando se generan de manera aleatoria y on-the-fly. Es decir, se genera el aumento de datos en la carga de datos durante el entrenamiento."
+    "section": "Soluciones: Arquitecturas Encoder-Decoder",
+    "text": "Soluciones: Arquitecturas Encoder-Decoder\n\n\n\n\n\n\nUna arquitectura recurrente permite devolver una secuencia como salida. La cual puede utilizarse para generación o traducción de texto.\n\n\n\n\n\n\n\n\n\n\n\nVentajas\n\n\n\nPermite “desligarse” de la predicción uno a uno.\nLa salida de este tipo de modelos depende principalmente del contexto almacenado en el Hidden State/Bottleneck.\n\n\n\n\n\n\n\nDesventajas\n\n\n\nDado los problemas de Vanishing/Exploding Gradients es ingenuo pensar que todo el contexto de una frase vive en el último hidden state."
   },
   {
-    "objectID": "tics579/clase-8.html#transformaciones-básicas",
-    "href": "tics579/clase-8.html#transformaciones-básicas",
+    "objectID": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-3",
+    "href": "tics579/clase-10.html#soluciones-arquitecturas-encoder-decoder-3",
     "title": "TICS-579-Deep Learning",
-    "section": "Transformaciones Básicas",
-    "text": "Transformaciones Básicas\nimport albumentations as A\nfrom albumentations.pytorch.transforms import ToTensorV2\n\n\n\n\n\n\nAlbumentations espera que la imagen venga como Numpy Array. Además es una librería bastante quisquillosa, por lo que toma un rato acostumbrarse. Pero su eficiencia y utilidad hace que valga la pena.\n\n\n\n\nA.Compose()\n\nPermite generar Pipelines de Transformación. Es decir, irá aplicando transformaciones una a una.\n\nA.ToFloat()\n\nTransforma los datos en tipo Float. Esto a veces es necesario cuando hay incompatibilidad de data types en ciertos módulos.\n\nToTensorV2()\n\nTransforma a Tensor de Pytorch. Existe una versión ToTensor() pero está deprecada y no debería usarse.\n\nA.Normalize()\n\nPermite normalizar imágenes según su proceso de pre-entrenamiento. Normalmente estos provienen de pre-entrenamiento en Imagenet por lo que se debe normalizar con \\(mean=[0.485,0.456,0.406]\\) y \\(SD=[0.229,0.224,0.225]\\).\n\nA.Resize()\n\nSe utiliza para estandarizar el tamaño de las imágenes. Imágenes más grandes permiten mejores resultados pero son computacionalmente más costosas."
+    "section": "Soluciones: Arquitecturas Encoder-Decoder",
+    "text": "Soluciones: Arquitecturas Encoder-Decoder\n\n\n\n\n\n\n\n\nOjo\n\n\nEl último Hidden State del Encoder se utilizará como Hidden State inicial del Decoder."
   },
   {
-    "objectID": "tics579/clase-8.html#transformaciones-probabilísticas",
-    "href": "tics579/clase-8.html#transformaciones-probabilísticas",
+    "objectID": "tics579/clase-10.html#entrenamiento-de-una-arquitectura-encoder-decoder",
+    "href": "tics579/clase-10.html#entrenamiento-de-una-arquitectura-encoder-decoder",
     "title": "TICS-579-Deep Learning",
-    "section": "Transformaciones Probabilísticas",
-    "text": "Transformaciones Probabilísticas\n\n\n\n\n\n\nComo su nombre lo indica, la transformación se aplicará con una cierta probabilidad, lo que permitirá que cada epoch haya mayor variabilidad.\n\n\n\n\nA.CenterCrop/A.RandomCrop\n\nGenera un Crop de la imagen o al centro o Random. Esto logrará que los elementos de la imagen cambien de posición.\n\nA.VerticalFlip\n\nGenera Flip Vertical.\n\nA.HorizontalFlip\n\nGenera Flip Horizontal.\n\nA.Rotate\n\nGenera rotaciones aleatorias entre un ángulo mínimo y máximo.\n\n\n\n\n\n\n\n\nExisten un sinnúmero de transformaciones que se pueden aplicar. La lista completa se puede encontrar acá. Y existen transformaciones que incluso permiten simular niebla, lluvia, nieve, sepia, Zoom, y variados otros efectos.\n\n\n\n\n\n\n\n\n\nAplicar estas transformaciones es de extremo cuidado ya que para tareas más complejas como Semantic Segmentation, Object Detection, Keypoint Detection, se debe aplicar dichas transformaciones también a las etiquetas."
+    "section": "Entrenamiento de una Arquitectura Encoder-Decoder",
+    "text": "Entrenamiento de una Arquitectura Encoder-Decoder\n\n\n\n\n\n\n\n\n\n\n\nArquitectura\n\n\n\nRNN Bidireccional\nCon un Encoder (colores pastel) y un Decoder independientes (colores más oscuros).\n\n\n\n\n\n\n\n\nTenemos dos frases una en inglés (input) y una en español (output). Ambas frases son claramente de tamaños distintos.\nTenemos el token especial &lt;eos&gt; (end of sentence) que separa el input del output.\n\n\n\n\n\n\n\n\nLos últimos Hidden States del Encoder son los Hidden States iniciales del Decoder. Estos también se conocen como Context Vectors.\n\n\n\n\n\n\n\nEntrenamiento\n\n\nAl momento de entrenarse, las salidas \\(y1\\) e \\(y2\\) pueden ser distintas al valor esperado y deben ir ajustándose epoch a epoch."
+  },
+  {
+    "objectID": "tics579/clase-10.html#inferencia-de-una-arquitectura-encoder-decoder",
+    "href": "tics579/clase-10.html#inferencia-de-una-arquitectura-encoder-decoder",
+    "title": "TICS-579-Deep Learning",
+    "section": "Inferencia de una Arquitectura Encoder-Decoder",
+    "text": "Inferencia de una Arquitectura Encoder-Decoder\n\n\n\n\n\n\n\n\n\n\n\nPredicción\n\n\n\nLa predicción se va realizando de manera autoregresiva. Es decir, la predicción del primer step corresponde a la entrada del segundo step y así sucesivamente.\n\n\n\n\n\n\n\n\nLa primera entrada siempre será el token especial &lt;eos&gt; (otros modelos pueden utilizar otros tokens especiales).\n\n\n\n\n\n\n\n\nEl modelo irá prediciendo de manera autoregresiva hasta predecir el token &lt;eos&gt;.\n\n\n\n\n\n\n\n\n\n\nProblema\n\n\n\nPensar que todo el contexto se puede almacenar en el último hidden state es un poco ingenuo.\nEl último hidden state tiene más influencia de las palabras más cercanas y menos de las palabras iniciales (debido al problema de vanishing/exploding gradients)."
+  },
+  {
+    "objectID": "tics579/clase-10.html#mecanismo-de-atención-bahdanau-et-al-2015",
+    "href": "tics579/clase-10.html#mecanismo-de-atención-bahdanau-et-al-2015",
+    "title": "TICS-579-Deep Learning",
+    "section": "Mecanismo de Atención (Bahdanau et al, (2015))",
+    "text": "Mecanismo de Atención (Bahdanau et al, (2015))\n\n\n\n\n\n\n\n\n\nAtención\n\nSe refiere a cualquier mecanismo en el que los hidden states se ponderan y combinan para poder utilizarlos como contexto. En otras palabras, el mecanismo busca a qué inputs iniciales debe poner más “atención” para poder generar la predicción.\n\n\n\\[c_i = \\sum_{t=1}^T a_{i,t} \\cdot h_t\\]\nDonde \\(c_i\\) corresponde al contexto para la predicción del output \\(i\\) y \\(a_{i,t}\\) (que van entre 0 y 1) corresponden a cuánta atención le presta el output \\(i\\) al token \\(t\\).\n\n\n\n\n\n\nOjo\n\n\nEn el paper original, se interpreta \\(a_{i,t}\\) como cuánto se “alínea” o se parece el estado \\(h_t\\) con \\(S_{t-1}\\)."
+  },
+  {
+    "objectID": "tics579/clase-10.html#atención-de-bahdanau",
+    "href": "tics579/clase-10.html#atención-de-bahdanau",
+    "title": "TICS-579-Deep Learning",
+    "section": "Atención de Bahdanau",
+    "text": "Atención de Bahdanau\n\\[a_{i,t} = align(h_t, S_{i-1})\\] \n\\[[a_{i,1},...,a_{i,T}] = Softmax([\\tilde{a_{i,1}},...\\tilde{a_{i,T}}])\\]"
+  },
+  {
+    "objectID": "tics579/clase-10.html#otras-formas-de-atención",
+    "href": "tics579/clase-10.html#otras-formas-de-atención",
+    "title": "TICS-579-Deep Learning",
+    "section": "Otras formas de Atención",
+    "text": "Otras formas de Atención\n\n\n\n1. Proyecciones Lineales\n\n\n\\[k_t = W_k \\cdot h_t\\] \\[q_{i-1} = W_q \\cdot S_{i-1}\\]\n\n\n\n\n\n\n2. Similaridad: Producto Punto es equivalente al Cosine Similarity\n\n\n\\[\\tilde{a}_{i,t} = k_t^T \\cdot q_{i-1}\\]\n\n\n\n\n\n\n3. Normalización:\n\n\n\\[[a_{i,1},...,a_{i,T}] = Softmax([\\tilde{a}_{i,1},...\\tilde{a}_{i,T}])\\]"
+  },
+  {
+    "objectID": "tics579/clase-10.html#transformers-arquitectura",
+    "href": "tics579/clase-10.html#transformers-arquitectura",
+    "title": "TICS-579-Deep Learning",
+    "section": "Transformers: Arquitectura",
+    "text": "Transformers: Arquitectura\n\nTransformer\n\nCorresponde a la Arquitectura más avanzada que tenemos hoy en día. Está basada en distintos mecanismos de atención.\n\n\n\n\n\n\n\n\n\n\n\n\n\nDetalles de la Arquitectura\n\n\n\nCorresponde a un Encoder + un Decoder.\nCada uno contiene una capa de Embeddings.\nAdemás posee un Positional Encoding para entender el orden de la secuencia.\nEl decoder funciona de manera autoregresiva.\nPosee 4 tipos de atención."
+  },
+  {
+    "objectID": "tics579/clase-10.html#transformers-self-y-multihead-attention",
+    "href": "tics579/clase-10.html#transformers-self-y-multihead-attention",
+    "title": "TICS-579-Deep Learning",
+    "section": "Transformers: Self y Multihead Attention",
+    "text": "Transformers: Self y Multihead Attention\n\n\n\n\n\n\n\n\n\n\n\nDetalles\n\n\n\nEl self-attention pone atención (aprendiendo la relación) existente entre datos de una misma secuencia. La gran ventaja es que permite la paralelización de cálculos.\nEl Multihead Attention corresponde a la concatenación de varios Self-Attention. Esto permite no “sesgarse” con sólo una forma de poner atención, permitiendo aprender relaciones en distintas direcciones."
+  },
+  {
+    "objectID": "tics579/clase-10.html#transformers-causal-self-attention",
+    "href": "tics579/clase-10.html#transformers-causal-self-attention",
+    "title": "TICS-579-Deep Learning",
+    "section": "Transformers: Causal Self Attention",
+    "text": "Transformers: Causal Self Attention\n\n\n\n\n\n\n\n\n\n\n\nDetalles\n\n\n\nCorresponde a un tipo particular de Self Attention, en el cuál sólo se puede poner atención a valores de secuencia previa (no puede ver al futuro). Esto es particularmente necesario para tareas de generación autoregresiva."
+  },
+  {
+    "objectID": "tics579/clase-10.html#transformers-cross-attention",
+    "href": "tics579/clase-10.html#transformers-cross-attention",
+    "title": "TICS-579-Deep Learning",
+    "section": "Transformers: Cross Attention",
+    "text": "Transformers: Cross Attention\n\n\n\n\n\n\n\n\n\n\n\nDetalles\n\n\n\nCorresponde a la atención que relaciona información proveniente tanto del Encoder como del Decoder. Muy similar al concepto original de Atención."
+  },
+  {
+    "objectID": "tics579/clase-P2.html#derivadas",
+    "href": "tics579/clase-P2.html#derivadas",
+    "title": "TICS-579-Deep Learning",
+    "section": "Derivadas",
+    "text": "Derivadas\n\nLa derivada corresponde a la razón de cambio de una función con respecto a una variable de entrada \\(x\\). Es decir, cuánto cambia el valor de la función \\(f(x)\\) cuando cambiamos el valor de \\(x\\) en una cantidad infinitesimal \\(h\\).\n\n\n\n\n\n\n\n\n\nLa definición formal de la derivada\n\n\nPara una función \\(f: \\mathbb{R} \\rightarrow \\mathbb{R}\\), la derivada se define como: \\[\\frac{df(x)}{dx} = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}\\]\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\n\\(f(x + h) \\approx f(x) + f'(x)h\\) cuando \\(h \\to 0\\).\nSi la derivada existe en \\(x\\), decimos que la función es derivable o diferenciable en \\(x\\).\nSi las derivadas laterales no existen o no son iguales, entonces \\(f\\) no es derivable en \\(x\\).\nSi \\(f\\) es derivable, entonces \\(f\\) es continua.\n\n\n\n\n\n\n\n\n\n\n\nOtra interpretación\n\n\nEsto se puede interpretar como la pendiente de la recta tangente a la curva de \\(f(x)\\) en el punto \\(x\\)."
+  },
+  {
+    "objectID": "tics579/clase-P2.html#derivadas-ejemplos",
+    "href": "tics579/clase-P2.html#derivadas-ejemplos",
+    "title": "TICS-579-Deep Learning",
+    "section": "Derivadas: Ejemplos",
+    "text": "Derivadas: Ejemplos\n\n\n\n\\((c)'= 0\\)\n\\((cx)' = c\\)\n\\(x^n' = n x^{n-1}\\)\n\n\n\n\\((\\sqrt{x})' = \\frac{1}{2\\sqrt{x}}\\)\n\\((\\frac{1}{x})' = -\\frac{1}{x^2}\\)\n\n\n\n\\((e^x)' = e^x\\)\n\\((ln(x))' = \\frac{1}{x}\\)\n\\((log_a(x))' = \\frac{1}{x ln(a)}\\)\n\n\nReglas de Cálculo\n\n\\((f+g)' = f' + g'\\)\n\\((fg)' = f'g + fg'\\)\n\\((\\frac{f}{g})' = \\frac{f'g - fg'}{g^2}\\)\n\\((\\alpha f)' = \\alpha f'\\)\n\\(f(x) = h(g(x)) \\Rightarrow f'(x) = h'(g(x)) g'(x)\\), conocida como la regla de la cadena."
+  },
+  {
+    "objectID": "tics579/clase-P2.html#caso-multivariado",
+    "href": "tics579/clase-P2.html#caso-multivariado",
+    "title": "TICS-579-Deep Learning",
+    "section": "Caso Multivariado",
+    "text": "Caso Multivariado\n\n\n\n\n\n\n\nOjo\n\n\nSi tenemos una función \\(f: \\mathbb{R}^n \\rightarrow \\mathbb{R}\\). ¿Cómo se define la derivada?\n\nSe requiere una dirección para derivar. Dado por un vector \\(\\bar{v} \\in \\mathbb{R}^n\\) y la recta que define.\n\n\n\n\n\n\n\n\n\n\nLa definición formal de la derivada direccional\n\n\nPara una función \\(f: \\mathbb{R} \\rightarrow \\mathbb{R}\\), la derivada en torno a \\(\\bar{x}\\) en dirección \\(\\bar{v}\\) (\\(\\bar{v}\\) es un vector unitario) se define como: \\[\\nabla_{\\bar{v}}f(x) = \\lim_{h \\to 0} \\frac{f(\\bar{x}+h\\bar{v}) - f(\\bar{x})}{h}\\]\n\n\n\n\n\n\n\n\n\nProblema\n\n\nEste cálculo en general es poco práctico debido a que existen infinitas direcciones posibles. Por lo tanto, ¿cuál debería tomar?"
+  },
+  {
+    "objectID": "tics579/clase-P2.html#derivadas-parciales",
+    "href": "tics579/clase-P2.html#derivadas-parciales",
+    "title": "TICS-579-Deep Learning",
+    "section": "Derivadas Parciales",
+    "text": "Derivadas Parciales\nSi \\(f: \\mathbb{R}^n \\rightarrow \\mathbb{R}\\), se define la derivada parcial de \\(f\\) en torno a \\(\\bar{x}=(x_1,...,x_n)\\) con respecto a la variable \\(x_i\\) como como la derivada direccional en la dirección del vector unitario \\(\\bar{e_i}\\).\n\\[\\frac{\\partial f(x)}{\\partial_{x_i}} = \\lim_{h \\to 0} \\frac{f(x_1, ..., x_i + h, ..., x_n) - f(x_1, ..., x_i, ...x_n)}{h}\\]\n\n\n\n\n\n\n\nGradiente: Función Escalar\n\n\nDefinimos el gradiente de \\(f\\) como:\n\\[\n\\begin{align}\n\\nabla f: \\mathbb{R}^n &\\rightarrow \\mathbb{R}^{1 \\times n} \\\\\n\\bar{x}  &\\rightarrow \\nabla f(\\bar{x}) = \\begin{bmatrix}\\frac{\\partial f}{\\partial x_1} & \\dots & \\frac{\\partial f}{\\partial x_n}\\end{bmatrix}\n\\end{align}\n\\]\n\n\n\n\n\n\n\n\n\n\n\nEl gradiente podríamos considerarlo como un vector fila o columna según conveniencia. Por simplicidad lo dejaremos como un vector fila.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDerivada Direccional en función del Gradiente. ¿Cuál es la dirección en la que la Derivada Direccional es máxima?\n\n\n\\[\\nabla_{\\bar{v}}f(x) = \\nabla f(x) \\cdot \\bar{v}\\]"
+  },
+  {
+    "objectID": "tics579/clase-P2.html#gradiente-ejemplo",
+    "href": "tics579/clase-P2.html#gradiente-ejemplo",
+    "title": "TICS-579-Deep Learning",
+    "section": "Gradiente: Ejemplo",
+    "text": "Gradiente: Ejemplo\n\\[f(x,y) = 3x^2 + 2xy + y^2 + 5x + 4\\]\nConsideremos entonces que \\(\\bar{x} = (x,y)\\). Es decir, va de \\(\\mathbb{R}^2\\) a \\(\\mathbb{R}\\).\n\n\n\n\n\n\n\nGradiente de \\(f\\)\n\n\n\\[\\nabla f(\\bar{x}) = \\nabla f(x,y) = \\begin{bmatrix}\\partial f_x & \\partial f_y\\end{bmatrix} = \\begin{bmatrix} 6x + 2y + 5 & 2x + 2y\\end{bmatrix}\\]"
+  },
+  {
+    "objectID": "tics579/clase-P2.html#jacobiano-función-vectorial",
+    "href": "tics579/clase-P2.html#jacobiano-función-vectorial",
+    "title": "TICS-579-Deep Learning",
+    "section": "Jacobiano: Función Vectorial",
+    "text": "Jacobiano: Función Vectorial\nSea \\(f: \\mathbb{R}^n \\rightarrow \\mathbb{R}^m\\), el Jacobiano de \\(f\\) es la generalización del Gradiente y corresponderá a la matriz que contiene las derivadas parciales de una \\(f\\) multivariada respecto a cada una de sus variables de entrada. Se denota como:\nEs decir \\(f=(f1(\\bar{x}),...,f_m(\\bar{x}))^T\\)\nLuego,\n\\[\nJ = \\begin{bmatrix}\n- \\nabla f_1(\\bar{x}) -\\\\\n\\vdots \\\\\n- \\nabla f_m(\\bar{x}) -\\\\\n\\end{bmatrix}\n\\]\n\n\n\n\n\n\n\nImportante\n\n\nPodemos pensar el Jacobiano como el “vector de Gradientes” stackeados hacia abajo para cada componente de la función multivariada. Como cada componente es un vector de \\(1 \\times n\\), el Jacobiano tendrá dimensiones \\(m \\times n\\)."
+  },
+  {
+    "objectID": "tics579/clase-P2.html#matrices-como-transformaciones-lineales",
+    "href": "tics579/clase-P2.html#matrices-como-transformaciones-lineales",
+    "title": "TICS-579-Deep Learning",
+    "section": "Matrices como Transformaciones Lineales",
+    "text": "Matrices como Transformaciones Lineales\nSupongamos:\n\\[f(x) = A \\cdot \\bar{x}\\]\n\n\n\n\n\n\n\nCaution\n\n\n\nSi \\(\\bar{x} \\in \\mathbb{R}^n\\) y \\(A \\in \\mathbb{R}^{m \\times n}\\), entonces \\(f(x) \\in \\mathbb{R}^m\\). Es decir, \\(f\\) es una tranformación que lleva al vector \\(\\bar{x}\\) de \\(\\mathbb{R}^n\\) a un vector de \\(\\mathbb{R}^m\\).\nEntenderemos una Transformación Lineal como una función que toma un vector de entrada (cada componente \\(x_j\\) es lineal) y lo transforma en otro vector de salida, manteniendo la estructura lineal .\n\n\n\n\n\n\n\n\n\n\n\n\nGradiente de una Transformación Lineal\n\n\nSi: \\[f_i(\\bar{x}) = A_{i,:} \\cdot \\bar{x} = \\sum_{j=1}^n A_{i,j}\\cdot x_j \\implies \\frac{\\partial f_i}{\\partial x_j} = A_{i,j}\\]\n\n\\(f_i(\\bar{x})\\) corresponde a la componente \\(i\\) de la función vectorial \\(f\\) evaluada en \\(\\bar{x}\\).\n\\(\\frac{\\partial f_i}{\\partial x_j}\\) corresponde a la derivada parcial de \\(f_i\\) respecto a la componente \\(x_j\\).\nTodas las derivadas se guardan en el Jacobiano de \\(f\\)."
+  },
+  {
+    "objectID": "tics579/clase-P2.html#matrices-como-transformaciones-lineales-1",
+    "href": "tics579/clase-P2.html#matrices-como-transformaciones-lineales-1",
+    "title": "TICS-579-Deep Learning",
+    "section": "Matrices como Transformaciones Lineales",
+    "text": "Matrices como Transformaciones Lineales\nEl Jacobiano de \\(f\\) es entonces:\n\\[\nJ = \\begin{bmatrix}\nA_{1,1} & A_{1,2} & \\cdots & A_{1,n} \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\\nA_{m,1} & A_{m,2} & \\cdots & A_{m,n}\n\\end{bmatrix}\n\\]\n\n\n\n\n\n\n\nPropiedad\n\n\nDe acá podemos deducir que \\(\\frac{\\partial A \\cdot \\bar{x}}{\\partial \\bar{x}} = A\\). Es decir el calculo matricial se comporta como las reglas de derivación escalar (al menos lo que usaremos nosotros).\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nRecomiendo ver los siguientes videos para entender el concepto de Transformación Lineal de una Matriz:\n\nTransformaciones Lineales y Matrices\nMatrices no cuadradas como Transformaciones"
+  },
+  {
+    "objectID": "tics579/clase-P2.html#hessiano",
+    "href": "tics579/clase-P2.html#hessiano",
+    "title": "TICS-579-Deep Learning",
+    "section": "Hessiano",
+    "text": "Hessiano\n\n\n\n\n\n\n\nHessiano\n\n\nSi la función a derivar es el Gradiente, entonces el Jacobiano pasa a llamarse Hessiano. Es decir, el Hessiano es el Jacobiano del Gradiente y es equivalente a la segunda derivada de una función multivariada.\n\n\n\n\n\n\n\n\n\n\n\nPropiedades\n\n\n\nEl Hessiano es una matriz cuadrada de dimensiones \\(n \\times n\\).\nSiempre es simétrica.\nSi el Hessiano es PSD (Positive Semi-Definite), entonces la función es convexa. Demostrando que \\(\\bar{x}^T H_f(\\bar{x}) \\bar{x} \\geq 0\\) para todo \\(\\bar{x}\\).\n\n\n\n\n\n\\(\\nabla f_i(\\bar{x})\\) corresponde a la componente \\(i\\) del Gradiente de \\(f\\) evaluada en \\(\\bar{x}\\).\n\\[\nH_f(\\bar{x}) = \\begin{bmatrix}\n\\frac{\\partial^2 f}{\\partial x_1^2} & \\frac{\\partial^2 f}{\\partial x_1 \\partial x_2} & \\cdots & \\frac{\\partial^2 f}{\\partial x_1 \\partial x_n} \\\\\n\\frac{\\partial^2 f}{\\partial x_2 \\partial x_1} & \\frac{\\partial^2 f}{\\partial x_2^2} & \\cdots & \\frac{\\partial^2 f}{\\partial x_2 \\partial x_n} \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\\n\\frac{\\partial^2 f}{\\partial x_n \\partial x_1} & \\frac{\\partial^2 f}{\\partial x_n \\partial x_2} & \\cdots & \\frac{\\partial^2 f}{\\partial x_n^2}\n\\end{bmatrix} = \\begin{bmatrix}\n- \\nabla (\\nabla f_1(\\bar{x})) -\\\\\n- \\nabla (\\nabla f_2(\\bar{x})) -\\\\\n\\vdots \\\\\n- \\nabla (\\nabla f_n(\\bar{x})) -\n\\end{bmatrix}\n\\]"
+  },
+  {
+    "objectID": "tics579/clase-P2.html#hessiano-ejemplo",
+    "href": "tics579/clase-P2.html#hessiano-ejemplo",
+    "title": "TICS-579-Deep Learning",
+    "section": "Hessiano: Ejemplo",
+    "text": "Hessiano: Ejemplo\n\\[f(x,y) = 3x^2 + 2xy + y^2 + 5x + 4\\]\nConsideremos entonces que \\(\\bar{x} = (x,y)\\). Es decir, va de \\(\\mathbb{R}^2\\) a \\(\\mathbb{R}\\).\n\n\n\n\n\n\n\nGradiente de \\(f\\)\n\n\n\\[\\nabla f(\\bar{x}) = \\nabla f(x,y) = \\begin{bmatrix}\\partial f_x & \\partial f_y\\end{bmatrix} = \\begin{bmatrix} 6x + 2y + 5 & 2x + 2y\\end{bmatrix}\\]\n\n\n\n\n\n\n\n\n\n\n\nHessiano\n\n\n\\[ H_f(\\bar{x}) = \\begin{bmatrix}\n- \\nabla (\\nabla f_1(\\bar{x})) - \\\\\n- \\nabla (\\nabla f_2(\\bar{x})) - \\\\\n\\end{bmatrix} =\n\\begin{bmatrix}\n6 & 2 \\\\\n2 & 2\n\\end{bmatrix}\\]"
+  },
+  {
+    "objectID": "tics579/clase-P2.html#automatic-differentiation",
+    "href": "tics579/clase-P2.html#automatic-differentiation",
+    "title": "TICS-579-Deep Learning",
+    "section": "Automatic Differentiation",
+    "text": "Automatic Differentiation\nSupongamos que tenemos que calcular la derivada de f(1) de la siguiente función:\n\\[f(x) = \\sqrt{x^2 + exp(x^2)} + cos((x^2 + exp(x^2))\\]\n\\[f'(x) = 2x \\left(\\frac{1}{2\\sqrt{x^2+exp(x^2)}} - sen(x^2 + exp(x^2))\\right)\\left(1+exp(x^2)\\right)\\] \\[f'(1) = 5.983\\]\n\n\n\n\n\n\n\nWarning\n\n\nCalcular la Derivada Analíticamente es muy engorroso y propenso a errores. Además, si la función tiene muchas variables, el cálculo se vuelve inviable. Además es muy difícil de programar. Por ello se utiliza la diferenciación automática, un proceso algorítmico que permite calcular derivadas de funciones complejas de manera eficiente y precisa."
+  },
+  {
+    "objectID": "tics579/clase-P2.html#automatic-differentiation-ejemplo",
+    "href": "tics579/clase-P2.html#automatic-differentiation-ejemplo",
+    "title": "TICS-579-Deep Learning",
+    "section": "Automatic Differentiation: Ejemplo",
+    "text": "Automatic Differentiation: Ejemplo\nPodemos reescribir la función como una secuencia de operaciones elementales y asignar variables intermedias:\n\n\n\n\n\n\n\n\n\n\\(a = x^2\\)\n\\(b = exp(a)\\)\n\\(c = a + b\\)\n\\(d = \\sqrt{c}\\)\n\\(e = Cos(c)\\)\n\\(f = d + e\\)\n\n\n\n\n\n\n\n\n\nProcedimiento\n\n\n\nLa idea es que el camino entre dos nodos rojos son una derivada entre ambos nodos. Es decir, el camino entre \\(f\\) y \\(d\\) es \\(\\frac{\\partial f}{\\partial d}\\).\nLas derivadas se van acumulando y deben considerar todos los caminos. Por ejemplo, para calcular \\(\\frac{\\partial f}{\\partial c}\\), debemos considerar los caminos \\(f \\to d \\to c\\) y \\(f \\to e \\to c\\).\nTodas las variables definidas permiten calcular sus derivadas respecto a su input.\nSi comenzamos a derivar de atrás hacia adelante podemos reutilizar cálculos anteriores."
+  },
+  {
+    "objectID": "tics579/clase-P2.html#automatic-differentiation-ejemplo-1",
+    "href": "tics579/clase-P2.html#automatic-differentiation-ejemplo-1",
+    "title": "TICS-579-Deep Learning",
+    "section": "Automatic Differentiation: Ejemplo",
+    "text": "Automatic Differentiation: Ejemplo\n\n\n\\[\\frac{\\partial f}{\\partial d} = \\frac{\\partial f}{\\partial e} = 1\\] \\[\\frac{\\partial f}{\\partial c} = \\frac{\\partial f}{\\partial d} \\cdot \\frac{\\partial d}{\\partial c} + \\frac{\\partial f}{\\partial e} \\cdot \\frac{\\partial e}{\\partial c} = 1 \\cdot 0.259 + 1 \\cdot 0.545 = 0.8045\\] \\[\n\\begin{align}\n\\frac{\\partial f}{\\partial b} &= \\frac{\\partial f}{\\partial d} \\cdot \\frac{\\partial d}{\\partial c} \\cdot \\frac{\\partial c}{\\partial b} + \\frac{\\partial f}{\\partial e} \\cdot \\frac{\\partial e}{\\partial c} \\cdot \\frac{\\partial c}{\\partial b} \\\\\n&= \\frac{\\partial f}{\\partial c} \\cdot \\frac{\\partial c}{\\partial b} = 0.8045 \\cdot 1 = 0.8045\n\\end{align}\n\\]\n\n\n\n\n\n\nNotar que \\(\\frac{\\partial f}{\\partial c}\\) ya la habíamos calculado.\n\n\n\n\n\n\n\\[\\frac{\\partial f}{\\partial a} = \\frac{\\partial f}{\\partial b} \\cdot \\frac{\\partial b}{\\partial a} + \\frac{\\partial f}{\\partial c} \\cdot \\frac{\\partial c}{\\partial a} = 0.8045 \\cdot 2.7183 + 0.8045 \\cdot 1 = 2.9913\\]\n\\[\\frac{\\partial f}{\\partial x} = \\frac{\\partial f}{\\partial a} \\cdot \\frac{\\partial a}{\\partial x} = 2.9913 \\cdot 2 = 5.983\\]\n\n\nSi \\(x = 1\\), entonces:\n\\(a = x^2 = 1\\)\n\\(b = exp(a) = 2.7183\\)\n\\(c = a + b = 3.7183\\)\n\\(d = \\sqrt{c} = 1.9283\\)\n\\(e = Cos(c) = -0.8383\\)\n\\(f = d + e = 1.09\\)\n\\(\\frac{\\partial d}{\\partial c} = \\frac{1}{2\\sqrt{c}} = 0.259\\)\n\\(\\frac{\\partial e}{\\partial c} = -sen(c) = 0.545\\)\n\\(\\frac{\\partial c}{\\partial b} = 1\\)\n\\(\\frac{\\partial b}{\\partial a} = exp(a) = 2.7183\\)\n\\(\\frac{\\partial a}{\\partial x} = 2x = 2\\)"
   },
   {
     "objectID": "index.html",
