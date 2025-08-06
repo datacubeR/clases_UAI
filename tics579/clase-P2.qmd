@@ -40,7 +40,7 @@ $$\frac{df(x)}{dx} = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$
 
 :::{.callout-caution appearance="default"}
 ### Propiedades
-* $f(x + h) \approx f(x) + f'(x)h$ cuando $h \to 0$.
+* $f(x + h) \approx f(x) + f'(x) \cdot h$, cuando $h \to 0$.
 * Si la derivada existe en $x$, decimos que la función es derivable o diferenciable en $x$.
 * Si las derivadas laterales no existen o no son iguales, entonces $f$ no es derivable en $x$.
 * Si $f$ es derivable, entonces $f$ es continua.
@@ -63,7 +63,7 @@ Esto se puede interpretar como la pendiente de la recta tangente a la curva de $
 :::{.column width="30%"}
 * $(c)'= 0$
 * $(cx)' = c$
-* $x^n' = n x^{n-1}$
+* $(x^n)' = n x^{n-1}$
 :::
 :::{.column width="30%"}
 * $(\sqrt{x})' = \frac{1}{2\sqrt{x}}$
@@ -88,7 +88,7 @@ Esto se puede interpretar como la pendiente de la recta tangente a la curva de $
 
 ## Caso Multivariado
 
-::::{style="font-size: 80%;"}
+::::{style="font-size: 90%;"}
 ::: {.callout-warning appearance="default"}
 ## Ojo
 Si tenemos una función $f: \mathbb{R}^n \rightarrow \mathbb{R}$. **¿Cómo se define la derivada?**
@@ -211,8 +211,9 @@ $$
 De acá podemos deducir que $\frac{\partial A \cdot \bar{x}}{\partial \bar{x}} = A$. Es decir el calculo matricial se comporta como las reglas de derivación escalar (al menos lo que usaremos nosotros).
 :::
 
-:::{.callout-important appearance="default" style="font-size: 120%;"}
-Recomiendo ver los siguientes videos para entender el concepto de Transformación Lineal de una Matriz:
+:::{.callout-warning appearance="default" style="font-size: 120%;"}
+## Recomendación
+Ver los siguientes videos para entender el concepto de Transformación Lineal de una Matriz:
 
 * [Transformaciones Lineales y Matrices](https://www.youtube.com/watch?v=kYB8IZa5AuE&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&index=3)
 * [Matrices no cuadradas como Transformaciones](https://www.youtube.com/watch?v=v8VSDg_WQlA&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&index=8)
@@ -224,7 +225,7 @@ Recomiendo ver los siguientes videos para entender el concepto de Transformació
 
 :::{.callout-tip appearance="default" style="font-size: 120%;"}
 ## Hessiano
-Si la función a derivar es el Gradiente, entonces el Jacobiano pasa a llamarse Hessiano. Es decir, el Hessiano es el Jacobiano del Gradiente y es equivalente a la segunda derivada de una función multivariada.
+Si la función a derivar es el Gradiente, entonces el Jacobiano pasa a llamarse Hessiano. Es decir, el Hessiano es el Jacobiano del Gradiente y es equivalente a la segunda derivada de una función vectorial/multivariada.
 :::
 
 :::{.callout-warning appearance="default" style="font-size: 120%;"}
@@ -277,20 +278,23 @@ $$ H_f(\bar{x}) = \begin{bmatrix}
 
 ## Automatic Differentiation {.smaller}
 
-Supongamos que tenemos que calcular la derivada de f(1) de la siguiente función:
+Supongamos que tenemos que calcular la derivada de $f(1)$ de la siguiente función:
 
 $$f(x) = \sqrt{x^2 + exp(x^2)} + cos((x^2 + exp(x^2))$$
+
+* Su derivada analítica, luego de bastante esfuerzo es: 
 
 $$f'(x) = 2x \left(\frac{1}{2\sqrt{x^2+exp(x^2)}} - sen(x^2 + exp(x^2))\right)\left(1+exp(x^2)\right)$$
 $$f'(1) = 5.983$$
 
 :::{.callout-warning appearance="default" style="font-size: 120%;"}
-Calcular la Derivada Analíticamente es muy engorroso y propenso a errores. Además, si la función tiene muchas variables, el cálculo se vuelve inviable. Además es muy difícil de programar. Por ello se utiliza la diferenciación automática, un proceso algorítmico que permite calcular derivadas de funciones complejas de manera eficiente y precisa.
+## Atención
+Calcular la derivada de manera analítica es muy engorroso y propenso a errores. Además, si la función tiene muchas variables, el cálculo se vuelve inviable y difícil de programar. Por ello se utiliza la diferenciación automática, un proceso algorítmico que permite calcular derivadas de funciones complejas de manera eficiente y precisa.
 :::
 
 ## Automatic Differentiation: Ejemplo {.smaller}
 
-Podemos reescribir la función como una secuencia de operaciones elementales y asignar variables intermedias:
+Podemos reescribir la función $f$ como una secuencia de operaciones elementales y asignar variables intermedias:
 
 ::::{.columns}
 :::{.column width="80%"}
@@ -358,8 +362,7 @@ $$\frac{\partial f}{\partial x} = \frac{\partial f}{\partial a} \cdot \frac{\par
 ::::
 
 
-
-# ¡¡Eso es todo!!
+# ¡¡Terminamos 😮‍💨!!
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0

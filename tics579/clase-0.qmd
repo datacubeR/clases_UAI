@@ -51,7 +51,7 @@ format:
 * Contribuyo a **HuggingFace** y **Feature Engine**.
 * He ganado 2 competencias de Machine Learning.
 * Publiqué mi primer [paper](https://ieeexplore.ieee.org/abstract/document/10315748) el año pasado sobre Hate Speech en Español.
-* Juego **Tenis de Mesa**, hago **Agility** con mi perrita Kira y escribo en mi Blog. 
+* Juego **Tenis de Mesa**, hacía **Agility** con mi perrita Kira y escribo en mi Blog (poco). Estoy volviendo a tocar batería.
 :::
 :::
 
@@ -130,6 +130,7 @@ Ser el curso más **completo** y **exhaustivo** de Deep Learning del país.
 
 ## ¿Cómo apruebo? {.smaller}
 
+:::{style="font-size: 120%;"}
 ::: {.callout-warning appearance="default"}
 ## Nota Final
 $$NF = 0.7 \cdot NP + 0.3\cdot \overline{NT}$$
@@ -154,7 +155,7 @@ $$NF = 0.7 \cdot NP + 0.3\cdot \overline{NT}$$
 * Hágalas a conciencia, ya que será material preguntado durante las pruebas.
 * Fechas de tarea serán anunciadas cuando corresponda.
 :::
-
+:::
 
 # Gracias
 
