@@ -1,19 +1,13 @@
 [
   {
+    "listing": "/charlas.html",
+    "items": []
+  },
+  {
     "listing": "/tics579.html",
     "items": [
       "/tics579/clase-0.html",
-      "/tics579/clase-1.html",
-      "/tics579/clase-2.html",
-      "/tics579/clase-3.html",
-      "/tics579/clase-4.html",
-      "/tics579/clase-5.html",
-      "/tics579/clase-6.html",
-      "/tics579/clase-7.html",
-      "/tics579/clase-8.html",
-      "/tics579/clase-9.html",
-      "/tics579/clase-10.html",
-      "/tics579/clase-11.html"
+      "/tics579/clase-1.html"
     ]
   },
   {
@@ -35,9 +29,5 @@
       "/tics411/clase-12.html",
       "/tics411/clase-13.html"
     ]
-  },
-  {
-    "listing": "/charlas.html",
-    "items": []
   }
 ]
