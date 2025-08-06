@@ -8,107 +8,107 @@
    - slides
 
 - title: "Clase 1"
-  subtitle: "Preliminares"
+  subtitle: "Tensores"
   author: "Alfonso Tobar-Arancibia"
-  date: 2024-08-08
+  date: 2025-08-0j
   image: tics579/thumbnails/clase-1.png
   path: tics579/clase-1.qmd
   categories:
    - slides
 
 
-- title: "Clase 2"
-  subtitle: "Clase 2: Introducción a las Redes Neuronales y formalidades"
-  author: "Alfonso Tobar-Arancibia"
-  date: 2024-08-22
-  image: tics579/thumbnails/clase-2.png
-  path: tics579/clase-2.qmd
-  categories:
-   - slides
-  
-
-- title: "Clase 3"
-  subtitle: "Clase 3: Feed Forward Networks"
-  author: "Alfonso Tobar-Arancibia"
-  date: 2024-08-29
-  image: tics579/thumbnails/multilayer_softmax.png
-  path: tics579/clase-3.qmd
-  categories:
-   - slides
-
-
-- title: "Clase 4"
-  subtitle: "Clase 4: Introducción a Pytorch"
-  author: "Alfonso Tobar-Arancibia"
-  date: 2024-09-05
-  image: tics579/thumbnails/clase-4.png
-  path: tics579/clase-4.qmd
-  categories:
-   - slides
-
-
-- title: "Clase 5"
-  subtitle: "Clase 5: Model Training"
-  author: "Alfonso Tobar-Arancibia"
-  date: 2024-09-12
-  image: tics579/thumbnails/clase-5.png
-  path: tics579/clase-5.qmd
-  categories:
-   - slides
-
-- title: "Clase 6"
-  subtitle: "Clase 6: Training Tips & Tricks"
-  author: "Alfonso Tobar-Arancibia"
-  date: 2024-09-26
-  image: tics579/thumbnails/clase-6.png
-  path: tics579/clase-6.qmd
-  categories:
-   - slides
-  
-
-- title: "Clase 7"
-  subtitle: "Clase 7: Redes Convolucionales"
-  author: "Alfonso Tobar-Arancibia"
-  date: 2024-10-03
-  image: tics579/thumbnails/clase-7.png
-  path: tics579/clase-7.qmd
-  categories:
-   - slides
-
-
-- title: "Clase 8"
-  subtitle: "Clase 8: Transfer Learning y Data Augmentation"
-  author: "Alfonso Tobar-Arancibia"
-  date: 2024-10-10
-  image: tics579/thumbnails/clase-8.png
-  path: tics579/clase-8.qmd
-  categories:
-   - slides
-
-
-- title: "Clase 9"
-  subtitle: "Clase 9: Redes Recurrentes"
-  author: "Alfonso Tobar-Arancibia"
-  date: 2024-10-24
-  image: tics579/thumbnails/clase-9.png
-  path: tics579/clase-9.qmd
-  categories:
-   - slides
-
-- title: "Clase 10"
-  subtitle: "Clase 10: Mecanismos de Atención"
-  author: "Alfonso Tobar-Arancibia"
-  date: 2024-11-14
-  image: tics579/thumbnails/clase-10.png
-  path: tics579/clase-10.qmd
-  categories:
-   - slides
-
-- title: "Clase 11"
-  subtitle: "Clase 11: Transformers"
-  author: "Alfonso Tobar-Arancibia"
-  date: 2024-11-21
-  image: tics579/thumbnails/clase-11.png
-  path: tics579/clase-11.qmd
-  categories:
-   - slides
+# - title: "Clase 2"
+#   subtitle: "Clase 2: Introducción a las Redes Neuronales y formalidades"
+#   author: "Alfonso Tobar-Arancibia"
+#   date: 2024-08-22
+#   image: tics579/thumbnails/clase-2.png
+#   path: tics579/clase-2.qmd
+#   categories:
+#    - slides
+#
+#
+# - title: "Clase 3"
+#   subtitle: "Clase 3: Feed Forward Networks"
+#   author: "Alfonso Tobar-Arancibia"
+#   date: 2024-08-29
+#   image: tics579/thumbnails/multilayer_softmax.png
+#   path: tics579/clase-3.qmd
+#   categories:
+#    - slides
+#
+#
+# - title: "Clase 4"
+#   subtitle: "Clase 4: Introducción a Pytorch"
+#   author: "Alfonso Tobar-Arancibia"
+#   date: 2024-09-05
+#   image: tics579/thumbnails/clase-4.png
+#   path: tics579/clase-4.qmd
+#   categories:
+#    - slides
+#
+#
+# - title: "Clase 5"
+#   subtitle: "Clase 5: Model Training"
+#   author: "Alfonso Tobar-Arancibia"
+#   date: 2024-09-12
+#   image: tics579/thumbnails/clase-5.png
+#   path: tics579/clase-5.qmd
+#   categories:
+#    - slides
+#
+# - title: "Clase 6"
+#   subtitle: "Clase 6: Training Tips & Tricks"
+#   author: "Alfonso Tobar-Arancibia"
+#   date: 2024-09-26
+#   image: tics579/thumbnails/clase-6.png
+#   path: tics579/clase-6.qmd
+#   categories:
+#    - slides
+#
+#
+# - title: "Clase 7"
+#   subtitle: "Clase 7: Redes Convolucionales"
+#   author: "Alfonso Tobar-Arancibia"
+#   date: 2024-10-03
+#   image: tics579/thumbnails/clase-7.png
+#   path: tics579/clase-7.qmd
+#   categories:
+#    - slides
+#
+#
+# - title: "Clase 8"
+#   subtitle: "Clase 8: Transfer Learning y Data Augmentation"
+#   author: "Alfonso Tobar-Arancibia"
+#   date: 2024-10-10
+#   image: tics579/thumbnails/clase-8.png
+#   path: tics579/clase-8.qmd
+#   categories:
+#    - slides
+#
+#
+# - title: "Clase 9"
+#   subtitle: "Clase 9: Redes Recurrentes"
+#   author: "Alfonso Tobar-Arancibia"
+#   date: 2024-10-24
+#   image: tics579/thumbnails/clase-9.png
+#   path: tics579/clase-9.qmd
+#   categories:
+#    - slides
+#
+# - title: "Clase 10"
+#   subtitle: "Clase 10: Mecanismos de Atención"
+#   author: "Alfonso Tobar-Arancibia"
+#   date: 2024-11-14
+#   image: tics579/thumbnails/clase-10.png
+#   path: tics579/clase-10.qmd
+#   categories:
+#    - slides
+#
+# - title: "Clase 11"
+#   subtitle: "Clase 11: Transformers"
+#   author: "Alfonso Tobar-Arancibia"
+#   date: 2024-11-21
+#   image: tics579/thumbnails/clase-11.png
+#   path: tics579/clase-11.qmd
+#   categories:
+#    - slides
