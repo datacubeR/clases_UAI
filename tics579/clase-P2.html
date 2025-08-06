@@ -183,7 +183,7 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <ul>
-<li><span class="math inline">\(f(x + h) \approx f(x) + f'(x)h\)</span> cuando <span class="math inline">\(h \to 0\)</span>.</li>
+<li><span class="math inline">\(f(x + h) \approx f(x) + f'(x) \cdot h\)</span>, cuando <span class="math inline">\(h \to 0\)</span>.</li>
 <li>Si la derivada existe en <span class="math inline">\(x\)</span>, decimos que la función es derivable o diferenciable en <span class="math inline">\(x\)</span>.</li>
 <li>Si las derivadas laterales no existen o no son iguales, entonces <span class="math inline">\(f\)</span> no es derivable en <span class="math inline">\(x\)</span>.</li>
 <li>Si <span class="math inline">\(f\)</span> es derivable, entonces <span class="math inline">\(f\)</span> es continua.</li>
@@ -219,7 +219,7 @@ Alfonso Tobar-Arancibia
 <ul>
 <li><span class="math inline">\((c)'= 0\)</span></li>
 <li><span class="math inline">\((cx)' = c\)</span></li>
-<li><span class="math inline">\(x^n' = n x^{n-1}\)</span></li>
+<li><span class="math inline">\((x^n)' = n x^{n-1}\)</span></li>
 </ul>
 </div><div class="column" style="width:30%;">
 <ul>
@@ -244,7 +244,7 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="caso-multivariado" class="slide level2">
 <h2>Caso Multivariado</h2>
-<div style="font-size: 80%;">
+<div style="font-size: 90%;">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -462,16 +462,16 @@ A_{m,1} &amp; A_{m,2} &amp; \cdots &amp; A_{m,n}
 </div>
 </div>
 <div style="font-size: 120%;">
-<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Important</strong></p>
+<p><strong>Recomendación</strong></p>
 </div>
 <div class="callout-content">
-<p>Recomiendo ver los siguientes videos para entender el concepto de Transformación Lineal de una Matriz:</p>
+<p>Ver los siguientes videos para entender el concepto de Transformación Lineal de una Matriz:</p>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=kYB8IZa5AuE&amp;list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&amp;index=3">Transformaciones Lineales y Matrices</a></li>
 <li><a href="https://www.youtube.com/watch?v=v8VSDg_WQlA&amp;list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&amp;index=8">Matrices no cuadradas como Transformaciones</a></li>
@@ -493,7 +493,7 @@ A_{m,1} &amp; A_{m,2} &amp; \cdots &amp; A_{m,n}
 <p><strong>Hessiano</strong></p>
 </div>
 <div class="callout-content">
-<p>Si la función a derivar es el Gradiente, entonces el Jacobiano pasa a llamarse Hessiano. Es decir, el Hessiano es el Jacobiano del Gradiente y es equivalente a la segunda derivada de una función multivariada.</p>
+<p>Si la función a derivar es el Gradiente, entonces el Jacobiano pasa a llamarse Hessiano. Es decir, el Hessiano es el Jacobiano del Gradiente y es equivalente a la segunda derivada de una función vectorial/multivariada.</p>
 </div>
 </div>
 </div>
@@ -576,8 +576,11 @@ H_f(\bar{x}) = \begin{bmatrix}
 </section>
 <section id="automatic-differentiation" class="slide level2 smaller">
 <h2>Automatic Differentiation</h2>
-<p>Supongamos que tenemos que calcular la derivada de f(1) de la siguiente función:</p>
+<p>Supongamos que tenemos que calcular la derivada de <span class="math inline">\(f(1)\)</span> de la siguiente función:</p>
 <p><span class="math display">\[f(x) = \sqrt{x^2 + exp(x^2)} + cos((x^2 + exp(x^2))\]</span></p>
+<ul>
+<li>Su derivada analítica, luego de bastante esfuerzo es:</li>
+</ul>
 <p><span class="math display">\[f'(x) = 2x \left(\frac{1}{2\sqrt{x^2+exp(x^2)}} - sen(x^2 + exp(x^2))\right)\left(1+exp(x^2)\right)\]</span> <span class="math display">\[f'(1) = 5.983\]</span></p>
 <div style="font-size: 120%;">
 <div class="callout callout-warning callout-titled callout-style-default">
@@ -586,10 +589,10 @@ H_f(\bar{x}) = \begin{bmatrix}
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Warning</strong></p>
+<p><strong>Atención</strong></p>
 </div>
 <div class="callout-content">
-<p>Calcular la Derivada Analíticamente es muy engorroso y propenso a errores. Además, si la función tiene muchas variables, el cálculo se vuelve inviable. Además es muy difícil de programar. Por ello se utiliza la diferenciación automática, un proceso algorítmico que permite calcular derivadas de funciones complejas de manera eficiente y precisa.</p>
+<p>Calcular la derivada de manera analítica es muy engorroso y propenso a errores. Además, si la función tiene muchas variables, el cálculo se vuelve inviable y difícil de programar. Por ello se utiliza la diferenciación automática, un proceso algorítmico que permite calcular derivadas de funciones complejas de manera eficiente y precisa.</p>
 </div>
 </div>
 </div>
@@ -597,7 +600,7 @@ H_f(\bar{x}) = \begin{bmatrix}
 </section>
 <section id="automatic-differentiation-ejemplo" class="slide level2 smaller">
 <h2>Automatic Differentiation: Ejemplo</h2>
-<p>Podemos reescribir la función como una secuencia de operaciones elementales y asignar variables intermedias:</p>
+<p>Podemos reescribir la función <span class="math inline">\(f\)</span> como una secuencia de operaciones elementales y asignar variables intermedias:</p>
 <div class="columns">
 <div class="column" style="width:80%;">
 <div class="quarto-figure quarto-figure-center">
@@ -678,8 +681,8 @@ H_f(\bar{x}) = \begin{bmatrix}
 </ul>
 </div></div>
 </section></section>
-<section id="eso-es-todo" class="title-slide slide level1 center">
-<h1>¡¡Eso es todo!!</h1>
+<section id="terminamos" class="title-slide slide level1 center">
+<h1>¡¡Terminamos 😮‍💨!!</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">

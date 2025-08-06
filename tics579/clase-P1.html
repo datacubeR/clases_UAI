@@ -196,6 +196,7 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="por-qué-estudiar-deep-learning-1" class="slide level2 smaller">
 <h2>¿Por qué estudiar Deep Learning?</h2>
+<div style="font-size: 130%;">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -248,6 +249,7 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
+</div>
 </section></section>
 <section>
 <section id="prerrequisitos" class="title-slide slide level1 center">
@@ -280,13 +282,18 @@ Alfonso Tobar-Arancibia
 -1.22&amp; 0.55 &amp; 3.97 \\
 \end{bmatrix}\]</span></p>
 </div></div>
-<div class="callout callout-note callout-style-simple">
+<div style="font-size: 130%;">
+<div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
+<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
+<p><strong>Normalmente los tensores utilizan un mismo tipo de dato: Integers o Float es lo más común.</strong></p>
+</div>
 <div class="callout-content">
-<p>Normalmente los tensores utilizan un mismo tipo de dato: Integers o Float es lo más común.</p>
+
+</div>
 </div>
 </div>
 </div>
@@ -498,7 +505,7 @@ Alfonso Tobar-Arancibia
 <div class="callout-content">
 <ul>
 <li>Desigualdad Triangular: <span class="math inline">\(||\bar{x}+\bar{y}|| \leq ||\bar{x}|| + ||\bar{y}||\)</span></li>
-<li><span class="math inline">\(||\alpha \bar{x}= |\alpha| \cdot ||\bar{x}||\)</span></li>
+<li><span class="math inline">\(||\alpha \bar{x}||= |\alpha| \cdot ||\bar{x}||\)</span></li>
 <li><span class="math inline">\(||\bar{x}|| = 0 \Longleftrightarrow \bar{0}\)</span></li>
 </ul>
 </div>
@@ -514,7 +521,7 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <p>La norma permite calcular la distancia entre dos vectores.</p>
-<p><span class="math display">\[d_{x,y} = ||\bar{x} - \bar{y}\]</span></p>
+<p><span class="math display">\[d_{x,y} = ||\bar{x} - \bar{y}||\]</span></p>
 <p><strong>También serviría para puntos. ¿Por qué?</strong></p>
 </div>
 </div>
@@ -559,7 +566,7 @@ Alfonso Tobar-Arancibia
 <div class="callout-content">
 <ul>
 <li>Conmutatividad: <span class="math inline">\(\bar{x} \cdot \bar{y} = \bar{y} \cdot \bar{x}\)</span></li>
-<li>Linealidad: $({x}){y} = ({x}{y})</li>
+<li>Linealidad: <span class="math inline">\((\alpha \bar{x})\cdot \bar{y} = \alpha(\bar{x}\cdot \bar{y})\)</span></li>
 <li>Distributividad: <span class="math inline">\(\bar{x} \cdot (\bar{y} + \bar{z}) = (\bar{x} \cdot \bar{y}) + (\bar{x} \cdot \bar{z})\)</span></li>
 <li><span class="math inline">\(||\bar{x}||^2 = \bar{x} \cdot \bar{x}\)</span></li>
 </ul>
@@ -615,7 +622,7 @@ Alfonso Tobar-Arancibia
 <li>Se denomina una combinación lineal de vectores a la suma ponderada de estos.</li>
 </ul>
 <p>Ej: <span class="math inline">\(\bar{w} = \alpha \cdot \bar{x} + \beta \cdot \bar{y} + \gamma \cdot \bar{z}\)</span></p>
-<p><span class="math inline">\(\bar{w}\)</span> es una combinación lineal de los vectores <span class="math inline">\(\bar{x}, \bar{y} y \bar{z}\)</span>.</p>
+<p><span class="math inline">\(\bar{w}\)</span> es una combinación lineal de los vectores <span class="math inline">\(\bar{x}, \bar{y}, \bar{z}\)</span>.</p>
 </div>
 </div>
 </div>
@@ -631,7 +638,7 @@ Alfonso Tobar-Arancibia
 <ul>
 <li>Un conjunto de vectores es linealmente independiente si:</li>
 </ul>
-<p>$<span class="math inline">\(\alpha_1 \cdot \bar{x}_1 + \alpha_2 \cdot \bar{x}_2 + ... + \alpha_n \cdot \bar{x}_n = 0\)</span> implica que <span class="math inline">\(\alpha_i = 0\)</span> para todo <span class="math inline">\(i\)</span>.</p>
+<p><span class="math inline">\(\alpha_1 \cdot \bar{x}_1 + \alpha_2 \cdot \bar{x}_2 + ... + \alpha_n \cdot \bar{x}_n = 0\)</span> implica que <span class="math inline">\(\alpha_i = 0\)</span> para todo <span class="math inline">\(i\)</span>.</p>
 </div>
 </div>
 </div>
@@ -658,13 +665,13 @@ Alfonso Tobar-Arancibia
 <h2>Matrices: Definición</h2>
 <div class="columns" style="font-size: 120%;">
 <blockquote>
-<p>Corresponde a un arreglo bidimensional de números reales. Se dice que una matriz es de <span class="math inline">\(n\times m\)</span> o que es <span class="math inline">\(\mathbb{R}^{n \times m}\)</span> cuando tiene <span class="math inline">\(n\)</span> filas y <span class="math inline">\(m\)</span> columnas.</p>
+<p>Corresponde a un arreglo bidimensional de números reales. Se dice que una matriz es de <span class="math inline">\(m\times n\)</span> o que es <span class="math inline">\(\mathbb{R}^{m \times n}\)</span> cuando tiene <span class="math inline">\(m\)</span> filas y <span class="math inline">\(n\)</span> columnas.</p>
 </blockquote><p><span class="math display">\[A = \begin{bmatrix}
-A_{1,1} &amp; \dots &amp; A_{1,m} \\
-A_{2,1} &amp; \dots &amp; A_{2,m} \\
+A_{1,1} &amp; \dots &amp; A_{1,n} \\
+A_{2,1} &amp; \dots &amp; A_{2,n} \\
 \vdots &amp; \ddots &amp; \vdots \\
-A_{n, 1} &amp; \dots &amp; A_{n,m} \\
-\end{bmatrix} \in \mathbb{R}^{n \times m}\]</span></p><div class="callout callout-important callout-titled callout-style-default">
+A_{m, 1} &amp; \dots &amp; A_{m,n} \\
+\end{bmatrix} \in \mathbb{R}^{m \times n}\]</span></p><div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
@@ -675,7 +682,7 @@ A_{n, 1} &amp; \dots &amp; A_{n,m} \\
 <div class="callout-content">
 <ul>
 <li>Normalmente se utiliza <span class="math inline">\(m\)</span> para denotar el número de registros y <span class="math inline">\(n\)</span> como el número de features de un dataset tabular (o también conocido como Dataframe).</li>
-<li><span class="math inline">\(n=m\)</span> nos referimos a una matriz cuadrada.</li>
+<li>Si <span class="math inline">\(m=n\)</span> nos referimos a una matriz cuadrada.</li>
 </ul>
 </div>
 </div>
@@ -711,8 +718,8 @@ A_{n, 1} &amp; \dots &amp; A_{n,m} \\
 <div class="callout-content">
 <ul>
 <li><span class="math inline">\(A_{2,4} = 3.1\)</span></li>
-<li><span class="math inline">\(A_{:,3} = [-5.2, 0, -5.2, 4.1]^T\)</span></li>
-<li><span class="math inline">\(A_{1,:} = [0.2, 1, -5.2, 3.1, -1.3]\)</span></li>
+<li><span class="math inline">\(A_{:,3} = \begin{bmatrix}-5.2 &amp; 0 &amp; -5.2 &amp; 4.1\end{bmatrix}^T\)</span></li>
+<li><span class="math inline">\(A_{1,:} = \begin{bmatrix} 0.2, 1, -5.2, 3.1, -1.3\end{bmatrix}\)</span></li>
 </ul>
 </div>
 </div>
@@ -738,17 +745,17 @@ A_{n, 1} &amp; \dots &amp; A_{n,m} \\
 <p>Ej: Sea <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> dos matrices:</p></li>
 </ul>
 <p><span class="math display">\[A = \begin{bmatrix}
-A_{1,1} &amp; \dots &amp; A_{1,m} \\
-A_{2,1} &amp; \dots &amp; A_{2,m} \\
+A_{1,1} &amp; \dots &amp; A_{1,n} \\
+A_{2,1} &amp; \dots &amp; A_{2,n} \\
 \vdots &amp; \ddots &amp; \vdots \\
-A_{n, 1} &amp; \dots &amp; A_{n,m} \\
-\end{bmatrix} \in \mathbb{R}^{n \times m}\]</span></p>
+A_{m, 1} &amp; \dots &amp; A_{m,n} \\
+\end{bmatrix} \in \mathbb{R}^{m \times n}\]</span></p>
 <p><span class="math display">\[B = \begin{bmatrix}
-B_{1,1} &amp; \dots &amp; B_{1,m} \\
-B_{2,1} &amp; \dots &amp; B_{2,m} \\
+B_{1,1} &amp; \dots &amp; B_{1,n} \\
+B_{2,1} &amp; \dots &amp; B_{2,n} \\
 \vdots &amp; \ddots &amp; \vdots \\
-B_{n, 1} &amp; \dots &amp; B_{n,m} \\
-\end{bmatrix} \in \mathbb{R}^{n \times m}\]</span></p>
+B_{m, 1} &amp; \dots &amp; B_{m,n} \\
+\end{bmatrix} \in \mathbb{R}^{m \times n}\]</span></p>
 </div>
 </div>
 </div>
@@ -761,11 +768,11 @@ B_{n, 1} &amp; \dots &amp; B_{n,m} \\
 </div>
 <div class="callout-content">
 <p><span class="math display">\[A + B = \begin{bmatrix}
-A_{1,1} + B_{1,1} &amp; \dots &amp; A_{1,m} + B_{1,m} \\
-A_{2,1} + A_{2,1} &amp; \dots &amp; A_{2,m} + B_{2,m} \\
+A_{1,1} + B_{1,1} &amp; \dots &amp; A_{1,n} + B_{1,n} \\
+A_{2,1} + A_{2,1} &amp; \dots &amp; A_{2,n} + B_{2,n} \\
 \vdots &amp; \ddots &amp; \vdots \\
-A_{n, 1} + B_{n,1} &amp; \dots &amp; A_{n,m} + B_{n,m} \\
-\end{bmatrix} \in \mathbb{R}^{n \times m}\]</span></p>
+A_{m, 1} + B_{m,1} &amp; \dots &amp; A_{m,n} + B_{m,n} \\
+\end{bmatrix} \in \mathbb{R}^{m \times n}\]</span></p>
 </div>
 </div>
 </div>
@@ -810,11 +817,11 @@ A_{n, 1} + B_{n,1} &amp; \dots &amp; A_{n,m} + B_{n,m} \\
 <p>Ej: Sea <span class="math inline">\(A\)</span> una matriz:</p></li>
 </ul>
 <p><span class="math display">\[A = \begin{bmatrix}
-A_{1,1} &amp; \dots &amp; A_{1,m} \\
-A_{2,1} &amp; \dots &amp; A_{2,m} \\
+A_{1,1} &amp; \dots &amp; A_{1,n} \\
+A_{2,1} &amp; \dots &amp; A_{2,n} \\
 \vdots &amp; \ddots &amp; \vdots \\
-A_{n, 1} &amp; \dots &amp; A_{n,m} \\
-\end{bmatrix} \in \mathbb{R}^{n \times m}\]</span></p>
+A_{m, 1} &amp; \dots &amp; A_{m,n} \\
+\end{bmatrix} \in \mathbb{R}^{m \times n}\]</span></p>
 <p>y <span class="math inline">\(\gamma\)</span> un escalar.</p>
 </div>
 </div>
@@ -828,11 +835,11 @@ A_{n, 1} &amp; \dots &amp; A_{n,m} \\
 </div>
 <div class="callout-content">
 <p><span class="math display">\[\gamma \cdot A = \begin{bmatrix}
-\gamma \cdot A_{1,1} &amp; \dots &amp; \gamma \cdot A_{1,m} \\
-\gamma \cdot A_{2,1} &amp; \dots &amp; \gamma \cdot A_{2,m} \\
+\gamma \cdot A_{1,1} &amp; \dots &amp; \gamma \cdot A_{1,n} \\
+\gamma \cdot A_{2,1} &amp; \dots &amp; \gamma \cdot A_{2,n} \\
 \vdots &amp; \ddots &amp; \vdots \\
-\gamma \cdot A_{n, 1} &amp; \dots &amp; \gamma \cdot A_{n,m} \\
-\end{bmatrix} \in \mathbb{R}^{n \times m}\]</span></p>
+\gamma \cdot A_{m, 1} &amp; \dots &amp; \gamma \cdot A_{m,n} \\
+\end{bmatrix} \in \mathbb{R}^{m \times n}\]</span></p>
 </div>
 </div>
 </div>
@@ -873,16 +880,16 @@ A_{n, 1} &amp; \dots &amp; A_{n,m} \\
 <div class="callout-content">
 <p>Sea:</p>
 <p><span class="math display">\[A = \begin{bmatrix}
-A_{1,1} &amp; \dots &amp; A_{1,m} \\
-A_{2,1} &amp; \dots &amp; A_{2,m} \\
+A_{1,1} &amp; \dots &amp; A_{1,n} \\
+A_{2,1} &amp; \dots &amp; A_{2,n} \\
 \vdots &amp; \ddots &amp; \vdots \\
-A_{n, 1} &amp; \dots &amp; A_{n,m} \\
-\end{bmatrix} \in \mathbb{R}^{n \times m}\]</span></p>
+A_{m, 1} &amp; \dots &amp; A_{m,n} \\
+\end{bmatrix} \in \mathbb{R}^{m \times n}\]</span></p>
 <p>Entonces, <span class="math inline">\(A^T\)</span> se define como:</p>
 <p><span class="math display">\[A^T = \begin{bmatrix}
-A_{1,1} &amp; \dots &amp; A_{m,1} \\
+A_{1,1} &amp; \dots &amp; A_{1,m} \\
 \vdots &amp; \ddots &amp; \vdots \\
-A_{1,m} &amp; \dots &amp; A_{n,m} \\
+A_{n,1} &amp; \dots &amp; A_{n,m} \\
 \end{bmatrix} \in \mathbb{R}^{n \times m}\]</span></p>
 <p>Es decir, intercambiamos filas por las columnas y viceversa.</p>
 </div>
@@ -1151,6 +1158,21 @@ AB^*= \begin{bmatrix}
 </div>
 </div>
 </div></div>
+<div style="font-size: 130%;">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Recordar que la multiplicación no es conmutativa. <span class="math inline">\(AB \neq BA\)</span>.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="otros-productos" class="slide level2 smaller">
 <h2>Otros Productos</h2>
@@ -1290,7 +1312,7 @@ AB = \begin{bmatrix}
 <div class="callout-content">
 <ul>
 <li>Es importante notar que para que esta multiplicación sea válida. Las dimensiones de las <strong>matrices internas</strong> deben ser compatibles.</li>
-<li>El <strong>Batch Size</strong> tiene ser idéntico.</li>
+<li>El <strong>Batch Size</strong> tiene que ser idéntico.</li>
 </ul>
 </div>
 </div>
