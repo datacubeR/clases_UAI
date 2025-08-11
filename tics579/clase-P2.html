@@ -367,14 +367,14 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="jacobiano-función-vectorial" class="slide level2 smaller">
 <h2>Jacobiano: Función Vectorial</h2>
-<p>Sea <span class="math inline">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\)</span>, el Jacobiano de <span class="math inline">\(f\)</span> es la generalización del Gradiente y corresponderá a la matriz que contiene las derivadas parciales de una <span class="math inline">\(f\)</span> multivariada respecto a cada una de sus variables de entrada. Se denota como:</p>
-<p>Es decir <span class="math inline">\(f=(f1(\bar{x}),...,f_m(\bar{x}))^T\)</span></p>
-<p>Luego,</p>
+<p>Sea <span class="math inline">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^k\)</span>, el Jacobiano de <span class="math inline">\(f\)</span> es la generalización del Gradiente y corresponderá a la matriz que contiene las derivadas parciales de una <span class="math inline">\(f\)</span> multivariada respecto a cada una de sus variables de entrada.</p>
+<p>Es decir, si <span class="math inline">\(f=(f_1(\bar{x}),...,f_k(\bar{x}))^T\)</span></p>
+<p>Entonces,</p>
 <p><span class="math display">\[
 J = \begin{bmatrix}
 - \nabla f_1(\bar{x}) -\\
 \vdots \\
-- \nabla f_m(\bar{x}) -\\
+- \nabla f_k(\bar{x}) -\\
 \end{bmatrix}
 \]</span></p>
 <div style="font-size: 120%;">
@@ -387,7 +387,7 @@ J = \begin{bmatrix}
 <p><strong>Importante</strong></p>
 </div>
 <div class="callout-content">
-<p>Podemos pensar el Jacobiano como el <strong>“vector de Gradientes”</strong> stackeados hacia abajo para cada componente de la función multivariada. Como cada componente es un vector de <span class="math inline">\(1 \times n\)</span>, el Jacobiano tendrá dimensiones <span class="math inline">\(m \times n\)</span>.</p>
+<p>Podemos pensar el Jacobiano como el <strong>“vector de Gradientes”</strong> stackeados hacia abajo para cada componente de la función multivariada. Como cada componente es un vector de <span class="math inline">\(1 \times n\)</span>, el Jacobiano tendrá dimensiones <span class="math inline">\(k \times n\)</span>.</p>
 </div>
 </div>
 </div>
@@ -680,6 +680,21 @@ H_f(\bar{x}) = \begin{bmatrix}
 <li><p><span class="math inline">\(\frac{\partial a}{\partial x} = 2x = 2\)</span></p></li>
 </ul>
 </div></div>
+</section></section>
+<section>
+<section id="para-qué-nos-sirve-todo-esto" class="title-slide slide level1 center">
+<h1>¿Para qué nos sirve todo esto? 🤔</h1>
+
+</section>
+<section id="optimización-método-de-newton" class="slide level2 smaller">
+<h2>Optimización: Método de Newton</h2>
+<ul>
+<li>Derivarlo como un método para encontrar raíces. Y luego como se puede aplicar para minimizar funciones.</li>
+</ul>
+</section>
+<section id="optimización-gradient-descent" class="slide level2 smaller">
+<h2>Optimización: Gradient Descent</h2>
+<p>Cómo llegamos desde el método de Newton al Gradient Descent.</p>
 </section></section>
 <section id="terminamos" class="title-slide slide level1 center">
 <h1>¡¡Terminamos 😮‍💨!!</h1>

@@ -867,8 +867,9 @@ A_{m, 1} &amp; \dots &amp; A_{m,n} \\
 </section>
 <section id="transpuesta-y-reshape" class="slide level2 smaller">
 <h2>Transpuesta y Reshape</h2>
-<div class="columns" style="font-size: 120%;">
-<div class="column" style="width:50%;">
+<div class="columns" style="font-size: 100%;">
+<div class="column">
+<div width="50%">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -892,6 +893,26 @@ A_{1,1} &amp; \dots &amp; A_{1,m} \\
 A_{n,1} &amp; \dots &amp; A_{n,m} \\
 \end{bmatrix} \in \mathbb{R}^{n \times m}\]</span></p>
 <p>Es decir, intercambiamos filas por las columnas y viceversa.</p>
+</div>
+</div>
+</div>
+</div>
+<div width="50%">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Propiedades</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\((A^T)^T = A\)</span></li>
+<li><span class="math inline">\((A + B)^T = A^T + B^T\)</span></li>
+<li><span class="math inline">\((A \cdot B)^T = B^T \cdot A^T\)</span></li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -1012,7 +1033,7 @@ A_{n,1} &amp; \dots &amp; A_{n,m} \\
 2 &amp; 3 &amp; 0 \\
 1 &amp; 0 &amp; 7
 \end{bmatrix}\]</span></p>
-<p><span class="math display">\[\bar{x} = \begin{bmatrix}
+<p><span class="math display">\[\bar{x}^T = \begin{bmatrix}
 2 &amp; 1
 \end{bmatrix}\]</span></p>
 </div>
@@ -1125,9 +1146,9 @@ B = \begin{bmatrix}
 \]</span></p>
 <p><span class="math display">\[
 AB = \begin{bmatrix}
-18 &amp; 18 &amp; 23 \\
-22 &amp; 22 &amp; 14 \\
-28 &amp; 24 &amp; 32 \\
+18 &amp; 23  &amp; 18\\
+22 &amp; 14  &amp; 22\\
+28 &amp; 32  &amp; 24\\
 \end{bmatrix}
 \]</span></p>
 </div>
@@ -1149,9 +1170,9 @@ AB = \begin{bmatrix}
 4 &amp; 1 &amp; 3 \\
 \end{bmatrix}
 AB^*= \begin{bmatrix}
-18 &amp; 23 &amp; 18\\
-22 &amp; 14 &amp; 22\\
-28 &amp; 32 &amp; 24\\
+18 &amp; 18 &amp; 23\\
+22 &amp; 22 &amp; 14\\
+28 &amp; 24 &amp; 32\\
 \end{bmatrix}
 \]</span></p>
 </div>
