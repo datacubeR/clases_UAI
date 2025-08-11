@@ -757,19 +757,49 @@ H_f(\bar{x}) = \begin{bmatrix}
 <section id="optimización-gradient-descent" class="slide level2 smaller">
 <h2>Optimización: Gradient Descent</h2>
 <blockquote>
-<p>El Algoritmo de <strong>Gradient Descent</strong> es un método iterativo para encontrar el mínimo de una función. Básicamente es una <strong><em>“simplificación burda”</em></strong> del método de Newton, dado que calcular el Hessiano es costoso y no siempre es necesario. Para ello se aproxima el Hessiano como una constante <span class="math inline">\(\alpha\)</span> el cuál llamaremos <strong>learning rate</strong>. Luego el Gradient Descent se define como:</p>
+<p>El Algoritmo de <strong>Gradient Descent</strong> es un método iterativo para encontrar el mínimo de una función. Básicamente es una <strong><em>“simplificación burda”</em></strong> del método de Newton, dado que calcular el Hessiano es costoso y no siempre es necesario.</p>
 </blockquote>
+<blockquote>
+<p>Para ello se aproxima el Hessiano como una constante <span class="math inline">\(\alpha\)</span> el cuál llamaremos <strong>learning rate</strong>. El Gradient Descent queda definido como:</p>
+</blockquote>
+<div style="font-size: 120%;">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Gradient Descent</strong></p>
+</div>
+<div class="callout-content">
 <p><span class="math display">\[x_{k+1} = x_k - \alpha \cdot \nabla f(x_k)\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>👀 Ojito</strong></p>
+</div>
+<div class="callout-content">
+<p>Adicionalmente este método se generalizó no sólo para escalares y/o vectores sino también para matrices y tensores que requieran optimizar cualquier función <span class="math inline">\(f\)</span>.</p>
+</div>
+</div>
+</div>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Tip</strong></p>
+<p><strong>Otra forma de verlo</strong></p>
 </div>
 <div class="callout-content">
-<p>Adicionalmente este método se generalizó no sólo para escalares y/o vectores sino también para matrices y tensores que requieran optimizar cualquier función <span class="math inline">\(f\)</span>.</p>
+<p>Se puede pensar también como que el valor óptimo se encuentra en la dirección opuesta al gradiente moviéndose a un paso constante <span class="math inline">\(\alpha\)</span>.</p>
 </div>
 </div>
 </div>
