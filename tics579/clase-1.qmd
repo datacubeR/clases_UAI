@@ -1,6 +1,6 @@
 ---
 title: "TICS-579-Deep Learning"
-subtitle: "Clase 0: Presentación y Reglas del Curso"
+subtitle: "Clase 1: Introducción a los Shallow Models"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -29,7 +29,13 @@ format:
 > Las redes neuronales artificiales (ANN), son modelos inspirados en el mecanismo cerebral de sinapsis. Su unidad más básica es una Neurona. 
 
 
-![](img/clase-1/neuron_1.png){.lightbox fig-align="center"}
+![](img/clase-1/neuron_1.png){.lightbox fig-align="center" width="50%"}
+
+
+:::{.callout-important appearance="default"}
+## Importante
+Si bien los modelos están inspirados en el función neuronal, existe muy poca evidencia de que las neuronas de verdad efectivamente funcionen similar a una red Neuronal.
+:::
 
 ## El nacimiento de las Redes Neuronales {.smaller}
 
@@ -42,7 +48,7 @@ format:
 
 
 ::: {.callout-note} 
-Este tipo de nomenclatura está sumamente pasada de moda.
+
 :::
 :::
 ::: {.column width="40%" .fragment}

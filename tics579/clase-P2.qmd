@@ -152,23 +152,23 @@ $$\nabla f(\bar{x}) = \nabla f(x,y) = \begin{bmatrix}\partial f_x & \partial f_y
 
 ## Jacobiano: Función Vectorial {.smaller}
 
-Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$, el Jacobiano de $f$ es la generalización del Gradiente y corresponderá a la matriz que contiene las derivadas parciales de una $f$ multivariada respecto a cada una de sus variables de entrada. Se denota como:
+Sea $f: \mathbb{R}^n \rightarrow \mathbb{R}^k$, el Jacobiano de $f$ es la generalización del Gradiente y corresponderá a la matriz que contiene las derivadas parciales de una $f$ multivariada respecto a cada una de sus variables de entrada.
 
-Es decir $f=(f1(\bar{x}),...,f_m(\bar{x}))^T$
+Es decir, si $f=(f_1(\bar{x}),...,f_k(\bar{x}))^T$
 
-Luego,
+Entonces,
 
 $$
 J = \begin{bmatrix}
 - \nabla f_1(\bar{x}) -\\
 \vdots \\
-- \nabla f_m(\bar{x}) -\\
+- \nabla f_k(\bar{x}) -\\
 \end{bmatrix}
 $$
 
 :::{.callout-note appearance="default" style="font-size: 120%;"}
 ## Importante
-Podemos pensar el Jacobiano como el **"vector de Gradientes"** stackeados hacia abajo para cada componente de la función multivariada. Como cada componente es un vector de $1 \times n$, el Jacobiano tendrá dimensiones $m \times n$.
+Podemos pensar el Jacobiano como el **"vector de Gradientes"** stackeados hacia abajo para cada componente de la función multivariada. Como cada componente es un vector de $1 \times n$, el Jacobiano tendrá dimensiones $k \times n$.
 :::
 
 ## Matrices como Transformaciones Lineales {.smaller}
@@ -361,6 +361,15 @@ $$\frac{\partial f}{\partial x} = \frac{\partial f}{\partial a} \cdot \frac{\par
 :::
 ::::
 
+# ¿Para qué nos sirve todo esto? 🤔
+
+## Optimización: Método de Newton {.smaller}
+
+* Derivarlo como un método para encontrar raíces. Y luego como se puede aplicar para minimizar funciones.
+
+## Optimización: Gradient Descent {.smaller}
+
+Cómo llegamos desde el método de Newton al Gradient Descent.
 
 # ¡¡Terminamos 😮‍💨!!
 

@@ -472,8 +472,9 @@ $$\gamma \cdot A = \begin{bmatrix}
 
 ## Transpuesta y Reshape {.smaller}
 
-::::{.columns style="font-size: 120%;"} 
-:::{.column .callout-tip width="50%" appearance="default"}
+::::{.columns style="font-size: 100%;"} 
+:::{.column}
+:::{.callout-tip width="50%" appearance="default"}
 ## Transpuesta
 
 Sea: 
@@ -495,6 +496,13 @@ A_{n,1} & \dots & A_{n,m} \\
 \end{bmatrix} \in \mathbb{R}^{n \times m}$$
 
 Es decir, intercambiamos filas por las columnas y viceversa.
+:::
+:::{.callout-important width="50%" appearance="default"}
+## Propiedades
+* $(A^T)^T = A$
+* $(A + B)^T = A^T + B^T$
+* $(A \cdot B)^T = B^T \cdot A^T$
+:::
 :::
 
 :::{.column .callout-note width="50%" appearance="default"}
@@ -588,7 +596,7 @@ $$A = \begin{bmatrix}
 1 & 0 & 7
 \end{bmatrix}$$
 
-$$\bar{x} = \begin{bmatrix}
+$$\bar{x}^T = \begin{bmatrix}
 2 & 1
 \end{bmatrix}$$
 
@@ -669,9 +677,9 @@ $$
 
 $$
 AB = \begin{bmatrix}
-18 & 18 & 23 \\
-22 & 22 & 14 \\
-28 & 24 & 32 \\
+18 & 23  & 18\\
+22 & 14  & 22\\
+28 & 32  & 24\\
 \end{bmatrix} 
 $$
 :::
@@ -688,9 +696,9 @@ $$B^* = \begin{bmatrix}
 4 & 1 & 3 \\
 \end{bmatrix}
 AB^*= \begin{bmatrix}
-18 & 23 & 18\\
-22 & 14 & 22\\
-28 & 32 & 24\\
+18 & 18 & 23\\
+22 & 22 & 14\\
+28 & 24 & 32\\
 \end{bmatrix} 
 $$
 :::
