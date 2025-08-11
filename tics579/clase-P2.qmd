@@ -363,13 +363,69 @@ $$\frac{\partial f}{\partial x} = \frac{\partial f}{\partial a} \cdot \frac{\par
 
 # ¿Para qué nos sirve todo esto? 🤔
 
-## Optimización: Método de Newton {.smaller}
+## Método de Newton {.smaller}
 
-* Derivarlo como un método para encontrar raíces. Y luego como se puede aplicar para minimizar funciones.
+* El método de Newton es un algoritmo iterativo utilizado para encontrar las raíces de una función real (los puntos donde la función se hace cero). 
+
+::::{.columns}
+:::{.column}
+![](img/clase-1/newton_method.png){.lightbox fig-align="center" width="70%"}
+:::
+:::{.column} 
+:::{.callout-tip appearance="default"}
+## Algotitmo de Newton
+* La idea es acercarse de manera iterativa a un punto $x_{k+1}$ que sea una raíz de la función $f(x)$ (o al menos se acerque), partiendo de un punto inicial $x_k$.
+* Se asume que me muevo un espacio $h$.
+* Aproximo $f(x + h)$ utilizando la aproximación local de la función en torno a $x_k$ como una derivada.
+:::
+::: {.callout-warning appearance="default"}
+## Fórmula de Newton
+
+$$x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}$$
+:::
+
+:::
+::::
+
+## Aplicación como Algoritmo de Optimización {.smaller}
+
+> Normalmente cuando necesitamos optimizar una función, buscamos los puntos críticos igualando las derivadas a cero. Es decir: 
+
+$$\frac{d f}{d x_i} = 0$$
+
+Si consideramos que $f$ ahora es una derivada. Entonces el Método de Newton se convierte en un algoritmo de optimización.
+
+$$x_{k+1} = x_k - \frac{f'(x_k)}{f''(x_k)}$$
+
+:::{.callout-important appearance="default"}
+## Versión Matricial/Multivariada
+
+$$\bar{x_{k+1}} = \bar{x_k} - H_f(\bar{x_k}) \cdot \nabla f(\bar{x_k})$$
+
+Donde $\nabla f(\bar{x_k})$ es el Gradiente de $f$ evaluado en $\bar{x_k}$ y $H_f(\bar{x_k})$ es el Hessiano de $f$ evaluado en $\bar{x_k}$.
+:::
+
 
 ## Optimización: Gradient Descent {.smaller}
 
-Cómo llegamos desde el método de Newton al Gradient Descent.
+> El Algoritmo de **Gradient Descent** es un método iterativo para encontrar el mínimo de una función. Básicamente es una ***"simplificación burda"*** del método de Newton, dado que calcular el Hessiano es costoso y no siempre es necesario.
+
+> Para ello se aproxima el Hessiano como una constante $\alpha$ el cuál llamaremos **learning rate**. El Gradient Descent queda definido como:
+
+:::{.callout-important appearance="default" style="font-size: 120%;"}
+## Gradient Descent
+$$x_{k+1} = x_k - \alpha \cdot \nabla f(x_k)$$
+:::
+
+:::{.callout-warning appearance="default"}
+## 👀 Ojito
+Adicionalmente este método se generalizó no sólo para escalares y/o vectores sino también para matrices y tensores que requieran optimizar cualquier función $f$.
+:::
+
+:::{.callout-tip appearance="default"}
+## Otra forma de verlo
+Se puede pensar también como que el valor óptimo se encuentra en la dirección opuesta al gradiente moviéndose a un paso constante $\alpha$.
+:::
 
 # ¡¡Terminamos 😮‍💨!!
 
