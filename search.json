@@ -2956,18 +2956,25 @@
     "text": "Automatic Differentiation: Ejemplo\n\n\n\\[\\frac{\\partial f}{\\partial d} = \\frac{\\partial f}{\\partial e} = 1\\] \\[\\frac{\\partial f}{\\partial c} = \\frac{\\partial f}{\\partial d} \\cdot \\frac{\\partial d}{\\partial c} + \\frac{\\partial f}{\\partial e} \\cdot \\frac{\\partial e}{\\partial c} = 1 \\cdot 0.259 + 1 \\cdot 0.545 = 0.8045\\] \\[\n\\begin{align}\n\\frac{\\partial f}{\\partial b} &= \\frac{\\partial f}{\\partial d} \\cdot \\frac{\\partial d}{\\partial c} \\cdot \\frac{\\partial c}{\\partial b} + \\frac{\\partial f}{\\partial e} \\cdot \\frac{\\partial e}{\\partial c} \\cdot \\frac{\\partial c}{\\partial b} \\\\\n&= \\frac{\\partial f}{\\partial c} \\cdot \\frac{\\partial c}{\\partial b} = 0.8045 \\cdot 1 = 0.8045\n\\end{align}\n\\]\n\n\n\n\n\n\nNotar que \\(\\frac{\\partial f}{\\partial c}\\) ya la habíamos calculado.\n\n\n\n\n\n\n\\[\\frac{\\partial f}{\\partial a} = \\frac{\\partial f}{\\partial b} \\cdot \\frac{\\partial b}{\\partial a} + \\frac{\\partial f}{\\partial c} \\cdot \\frac{\\partial c}{\\partial a} = 0.8045 \\cdot 2.7183 + 0.8045 \\cdot 1 = 2.9913\\]\n\\[\\frac{\\partial f}{\\partial x} = \\frac{\\partial f}{\\partial a} \\cdot \\frac{\\partial a}{\\partial x} = 2.9913 \\cdot 2 = 5.983\\]\n\n\nSi \\(x = 1\\), entonces:\n\\(a = x^2 = 1\\)\n\\(b = exp(a) = 2.7183\\)\n\\(c = a + b = 3.7183\\)\n\\(d = \\sqrt{c} = 1.9283\\)\n\\(e = Cos(c) = -0.8383\\)\n\\(f = d + e = 1.09\\)\n\\(\\frac{\\partial d}{\\partial c} = \\frac{1}{2\\sqrt{c}} = 0.259\\)\n\\(\\frac{\\partial e}{\\partial c} = -sen(c) = 0.545\\)\n\\(\\frac{\\partial c}{\\partial b} = 1\\)\n\\(\\frac{\\partial b}{\\partial a} = exp(a) = 2.7183\\)\n\\(\\frac{\\partial a}{\\partial x} = 2x = 2\\)"
   },
   {
-    "objectID": "tics579/clase-P2.html#optimización-método-de-newton",
-    "href": "tics579/clase-P2.html#optimización-método-de-newton",
+    "objectID": "tics579/clase-P2.html#método-de-newton",
+    "href": "tics579/clase-P2.html#método-de-newton",
     "title": "TICS-579-Deep Learning",
-    "section": "Optimización: Método de Newton",
-    "text": "Optimización: Método de Newton\n\nDerivarlo como un método para encontrar raíces. Y luego como se puede aplicar para minimizar funciones."
+    "section": "Método de Newton",
+    "text": "Método de Newton\n\nEl método de Newton es un algoritmo iterativo utilizado para encontrar las raíces de una función real (los puntos donde la función se hace cero).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAlgotitmo de Newton\n\n\n\nLa idea es acercarse de manera iterativa a un punto \\(x_{k+1}\\) que sea una raíz de la función \\(f(x)\\) (o al menos se acerque), partiendo de un punto inicial \\(x_k\\).\nSe asume que me muevo un espacio \\(h\\).\nAproximo \\(f(x + h)\\) utilizando la aproximación local de la función en torno a \\(x_k\\) como una derivada.\n\n\n\n\n\n\n\n\n\n\nFórmula de Newton\n\n\n\\[x_{k+1} = x_k - \\frac{f(x_k)}{f'(x_k)}\\]"
+  },
+  {
+    "objectID": "tics579/clase-P2.html#aplicación-como-algoritmo-de-optimización",
+    "href": "tics579/clase-P2.html#aplicación-como-algoritmo-de-optimización",
+    "title": "TICS-579-Deep Learning",
+    "section": "Aplicación como Algoritmo de Optimización",
+    "text": "Aplicación como Algoritmo de Optimización\n\nNormalmente cuando necesitamos optimizar una función, buscamos los puntos críticos igualando las derivadas a cero. Es decir:\n\n\\[\\frac{d f}{d x_i} = 0\\]\nSi consideramos que \\(f\\) ahora es una derivada. Entonces el Método de Newton se convierte en un algoritmo de optimización.\n\\[x_{k+1} = x_k - \\frac{f'(x_k)}{f''(x_k)}\\]\n\n\n\n\n\n\nVersión Matricial/Multivariada\n\n\n\\[\\bar{x_{k+1}} = \\bar{x_k} - H_f(\\bar{x_k}) \\cdot \\nabla f(\\bar{x_k})\\]\nDonde \\(\\nabla f(\\bar{x_k})\\) es el Gradiente de \\(f\\) evaluado en \\(\\bar{x_k}\\) y \\(H_f(\\bar{x_k})\\) es el Hessiano de \\(f\\) evaluado en \\(\\bar{x_k}\\)."
   },
   {
     "objectID": "tics579/clase-P2.html#optimización-gradient-descent",
     "href": "tics579/clase-P2.html#optimización-gradient-descent",
     "title": "TICS-579-Deep Learning",
     "section": "Optimización: Gradient Descent",
-    "text": "Optimización: Gradient Descent\nCómo llegamos desde el método de Newton al Gradient Descent."
+    "text": "Optimización: Gradient Descent\n\nEl Algoritmo de Gradient Descent es un método iterativo para encontrar el mínimo de una función. Básicamente es una “simplificación burda” del método de Newton, dado que calcular el Hessiano es costoso y no siempre es necesario. Para ello se aproxima el Hessiano como una constante \\(\\alpha\\) el cuál llamaremos learning rate. Luego el Gradient Descent se define como:\n\n\\[x_{k+1} = x_k - \\alpha \\cdot \\nabla f(x_k)\\]\n\n\n\n\n\n\nTip\n\n\nAdicionalmente este método se generalizó no sólo para escalares y/o vectores sino también para matrices y tensores que requieran optimizar cualquier función \\(f\\)."
   },
   {
     "objectID": "index.html",

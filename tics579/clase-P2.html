@@ -686,15 +686,93 @@ H_f(\bar{x}) = \begin{bmatrix}
 <h1>¿Para qué nos sirve todo esto? 🤔</h1>
 
 </section>
-<section id="optimización-método-de-newton" class="slide level2 smaller">
-<h2>Optimización: Método de Newton</h2>
+<section id="método-de-newton" class="slide level2 smaller">
+<h2>Método de Newton</h2>
 <ul>
-<li>Derivarlo como un método para encontrar raíces. Y luego como se puede aplicar para minimizar funciones.</li>
+<li>El método de Newton es un algoritmo iterativo utilizado para encontrar las raíces de una función real (los puntos donde la función se hace cero).</li>
 </ul>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-1/newton_method.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-1/newton_method.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Algotitmo de Newton</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>La idea es acercarse de manera iterativa a un punto <span class="math inline">\(x_{k+1}\)</span> que sea una raíz de la función <span class="math inline">\(f(x)\)</span> (o al menos se acerque), partiendo de un punto inicial <span class="math inline">\(x_k\)</span>.</li>
+<li>Se asume que me muevo un espacio <span class="math inline">\(h\)</span>.</li>
+<li>Aproximo <span class="math inline">\(f(x + h)\)</span> utilizando la aproximación local de la función en torno a <span class="math inline">\(x_k\)</span> como una derivada.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Fórmula de Newton</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}\]</span></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="aplicación-como-algoritmo-de-optimización" class="slide level2 smaller">
+<h2>Aplicación como Algoritmo de Optimización</h2>
+<blockquote>
+<p>Normalmente cuando necesitamos optimizar una función, buscamos los puntos críticos igualando las derivadas a cero. Es decir:</p>
+</blockquote>
+<p><span class="math display">\[\frac{d f}{d x_i} = 0\]</span></p>
+<p>Si consideramos que <span class="math inline">\(f\)</span> ahora es una derivada. Entonces el Método de Newton se convierte en un algoritmo de optimización.</p>
+<p><span class="math display">\[x_{k+1} = x_k - \frac{f'(x_k)}{f''(x_k)}\]</span></p>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Versión Matricial/Multivariada</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\bar{x_{k+1}} = \bar{x_k} - H_f(\bar{x_k}) \cdot \nabla f(\bar{x_k})\]</span></p>
+<p>Donde <span class="math inline">\(\nabla f(\bar{x_k})\)</span> es el Gradiente de <span class="math inline">\(f\)</span> evaluado en <span class="math inline">\(\bar{x_k}\)</span> y <span class="math inline">\(H_f(\bar{x_k})\)</span> es el Hessiano de <span class="math inline">\(f\)</span> evaluado en <span class="math inline">\(\bar{x_k}\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="optimización-gradient-descent" class="slide level2 smaller">
 <h2>Optimización: Gradient Descent</h2>
-<p>Cómo llegamos desde el método de Newton al Gradient Descent.</p>
+<blockquote>
+<p>El Algoritmo de <strong>Gradient Descent</strong> es un método iterativo para encontrar el mínimo de una función. Básicamente es una <strong><em>“simplificación burda”</em></strong> del método de Newton, dado que calcular el Hessiano es costoso y no siempre es necesario. Para ello se aproxima el Hessiano como una constante <span class="math inline">\(\alpha\)</span> el cuál llamaremos <strong>learning rate</strong>. Luego el Gradient Descent se define como:</p>
+</blockquote>
+<p><span class="math display">\[x_{k+1} = x_k - \alpha \cdot \nabla f(x_k)\]</span></p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Adicionalmente este método se generalizó no sólo para escalares y/o vectores sino también para matrices y tensores que requieran optimizar cualquier función <span class="math inline">\(f\)</span>.</p>
+</div>
+</div>
+</div>
 </section></section>
 <section id="terminamos" class="title-slide slide level1 center">
 <h1>¡¡Terminamos 😮‍💨!!</h1>
