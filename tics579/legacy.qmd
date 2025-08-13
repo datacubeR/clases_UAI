@@ -1,0 +1,503 @@
+
+## El nacimiento de las Redes Neuronales {.smaller}
+
+> Las redes neuronales artificiales (ANN), son modelos inspirados en el mecanismo cerebral de sinapsis. Su unidad más básica es una Neurona. 
+
+
+![](img/clase-1/neuron_1.png){.lightbox fig-align="center" width="50%"}
+
+
+:::{.callout-important appearance="default"}
+## Importante
+Si bien los modelos están inspirados en el función neuronal, existe muy poca evidencia de que las neuronas de verdad efectivamente funcionen similar a una red Neuronal.
+:::
+
+## El nacimiento de las Redes Neuronales {.smaller}
+
+> Las redes neuronales artificiales (ANN), son modelos inspirados en el mecanismo cerebral de sinapsis. Su unidad más básica es una Neurona. 
+
+
+::: {.columns}
+::: {.column width="60%"}
+![](img/clase-1/neuron_2.png){.lightbox fig-align="center" width="70%"}
+
+
+::: {.callout-note} 
+
+:::
+:::
+::: {.column width="40%" .fragment}
+
+
+
+* Este cálculo se puede representar como: 
+
+$$ y = \phi(w_1 \cdot x_1 + w_2 \cdot x_2 + ... + w_5 \cdot x_5)$$
+$$ y = \phi(w^T \cdot x)$$
+
+donde $w = [w_1, w_2, w_3, w_4, w_5]$ y $x = [x_1, x_2, x_3, x_4, x_5]$.
+
+::: {.callout-warning .fragment .incremental}
+* ¿Qué pasa si $\phi(.)$ vale la función ***identidad***?
+* Tenemos una **Regresión Lineal**.
+:::
+
+
+::: {.callout-warning .fragment .incremental}
+* ¿Qué pasa si $\phi(.)$ vale la función ***sigmoide***?
+* Tenemos una **Regresión Logística**.
+:::
+:::
+::: 
+
+## Arquitectura de una Red {.smaller}
+
+
+::: {.columns}
+::: {.column}
+![](img/clase-1/nn_arq.png){.lightbox fig-align="center"} 
+:::
+::: {.column}
+### Estructura más común 
+###### *(Probablemente tampoco seguiremos esta nomenclatura)*
+
+* Nodos o Neuronas
+* Edges o Conexiones
+* Capas
+
+::: {.callout-caution .fragment style="font-size:150%;"}
+***¿Cuántas capas tiene esta red?***
+:::
+
+::: {.callout-tip .fragment style="font-size:150%;"}
+***Depende***
+:::
+:::
+::: 
+
+* Normalmente todas las neuronas de una capa anterior se conectan con las de una capa posterior (Hay excepciones). 
+* Dependiendo de la forma en la que se conecten, cada **Arquitectura** recibe un nombre.
+
+# Intuición y conceptos iniciales
+
+## Los Ingredientes de un Algoritmo de Aprendizaje {.smaller}
+
+Hipótesis
+: > Una función que describe como mapear inputs (features) con outputs (labels) por medio de parámetros.  
+
+Loss Function
+: > Una función que especifica cuanta información se pierde. Mayor pérdida implica más error de estimación.
+
+Método de Optimización
+: > Es el responsable de combinar la `hipótesis` y la `loss function`. Corresponde a un procedimiento para determinar los parámetros de la hipótesis, minimizando la suma de las pérdidas en un set de entrenamiento. 
+
+## Ejemplo: Softmax Regression 
+
+Softmax Regression
+: > Corresponde la versión multiclase de una Regresión Logística. También se le llama una `Shallow Network`.
+
+
+::: {.columns}
+::: {.column width="50%" style="font-size: 80%;"}
+::: {.callout-tip}
+#### Consideremos un problema de clasificación multiclase de $k$ clases tal que:
+
+* Datos de Entrenamiento: $x^{(i)}, y^{(i)} \in {1,...,k}$ para $i=1,...,m$.
+    * $n$: Es el número de Features.
+    * $m$: Es el número de puntos en el training set. 
+    * $k$: Es el número de clases del problema.
+:::
+
+::: {.callout-important}
+Vamos a tener en total $n \times k$ parámetros o pesos que actualizar.
+:::
+:::
+::: {.column width="50%"}
+![](img/clase-1/softmax_reg.png){.lightbox fig-align="center"} 
+:::
+::: 
+
+
+
+## Softmax Regression: Hipótesis
+
+::: {style="font-size: 80%;"}
+Vamos a definir una función que mapea valores de $x \in \mathbb{R}$ a vectores de $k$ dimensiones. 
+:::
+$$ h: \mathbb{R}^n \rightarrow \mathbb{R}^k$$
+$$ x \rightarrow h_\theta(x) = \theta^T x$$
+
+::: {style="font-size: 80%;"}
+donde $\theta \in \mathbb{R}^{n \times k}$ y $x \in \mathbb{R}^{n\times 1}$
+:::
+
+::: {.callout-warning}
+En este caso usamos una `hipótesis lineal`, ya que se usa una multiplicación matricial (o producto punto) para relacionar $\theta$ y $x$. 
+:::
+
+::: {.callout-note}
+En este caso el output de $h_i(x)$ devolverá la probabilidad de pertenecer a una cierta clase $i$.   
+:::
+
+::: {.callout-important .fragment}
+***¿Cuál es el tamaño/dimensión de $h_\theta(x)$?***
+:::
+
+## Notación Matricial {.smaller}
+
+> Una manera más conveniente de escribir estas operaciones es utilizar ***(Matrix Batch Form)***. 
+
+::: {.columns}
+::: {.column}
+##### Design Matrix
+
+$$X \in \mathbb{R}^{m \times n} = \begin{bmatrix}
+&-x^{(1)T}-\\
+& \vdots & \\
+&-x^{(m)T}- &\\
+\end{bmatrix}$$
+:::
+::: {.column}
+##### Labels Vector
+$$y \in {1,...,k} = \begin{bmatrix}
+&-y^{(1)}-\\
+& \vdots & \\
+&-y^{(m)}- &\\
+\end{bmatrix}$$
+:::
+::: 
+
+La hipótesis también se puede reescribir de manera matricial como: 
+
+::: {.columns}
+::: {.column}
+$$h_\theta(X) = \begin{bmatrix}
+&-h_\theta(x^{(1)})^T-\\
+& \vdots & \\
+&-h_\theta(x^{(m)})^T-\\
+\end{bmatrix}$$
+:::
+::: {.column}
+$$h_\theta(X)= \begin{bmatrix}
+&-x^{(1)T} \theta-\\
+& \vdots & \\
+&-x^{(m)T} \theta-\\
+\end{bmatrix} = X  \theta$$
+:::
+::: 
+
+::: {.callout-important .fragment}
+Normalmente este tipo de operaciones son las que utilizaremos para hacer nuestro código.
+:::
+
+## Loss Function: Softmax/Cross-Entropy Loss {.smaller}
+
+
+::: {.callout-warning style="font-size: 130%;"}
+La salida de nuestra `Shallow Network` retornará valores reales.
+:::
+::: {.callout-tip style="font-size: 130%;"}
+Para poder tener una mejor interpretación del significado de cada una aplicaremos la función `Softmax` lo cual permitirá *normalizar* los resultados y llevará los resultados a una ***"distribución de probabilidad"*** (valores positivos que sumen 1).
+:::
+
+::: {.columns}
+::: {.column width="60%"}
+
+
+![](img/clase-1/softmax_example.png){.lightbox fig-align="center"} 
+:::
+::: {.column width="40%"}
+
+
+Formalmente definiremos la función Softmax como: 
+
+$$s_i = p(label = i) = \frac{exp(h_i(x))}{\sum_{j=1}^k exp(h_j(x))}$$
+
+
+$$s = \begin{bmatrix}
+&s_1&\\
+& \vdots & \\
+&s_k&\\
+\end{bmatrix}$$
+:::
+::: 
+
+## Loss Function: Softmax/Cross-Entropy Loss {.smaller}
+
+Para medir el error/pérdida de información utilizaremos el `Negative Log Loss` o `Cross Entropy Loss`.
+
+$$l_{ce}(h(x), y) = -log\left(p(label = y)\right)$$
+
+::: {.callout-tip style="font-size: 120%;" .fragment}
+Para garantizar el éxito de nuestro modelo, básicamente queremos maximizar la probabilidad de encontrar la etiqueta correcta, es decir, que $p(label = y)$ sea lo más alto posible.
+:::
+::: {.callout-caution style="font-size: 120%;" .fragment}
+Normalmente en los problemas de optimización no se suele maximizar sino minimizar. Minimizar el valor negativo es equivalente a maximizar. Esto sería equivalente a minimizar el error del modelo. 
+:::
+::: {.callout-warning style="font-size: 120%;" .fragment}
+Finalmente por razones de estabilidad numérica, minimizamos el logaritmo de la probabilidad que es una técnica bien conocida en Estadística.
+:::
+
+:::{.fragment}
+$$\begin{align}
+l_{ce}(h(x), y) = -log\left(p(label = y)\right) &= -log \left(\frac{exp(h_{(i = y)}(x))}{\sum_{j=1}^k exp(h_j(x))}\right) \\
+&= - h_{(i=y)}(x) + log\left(\sum_{j = 1}^k exp(h_j(x))\right)\end{align}$$
+:::
+
+## Método de Optimización {.smaller}
+
+> El último ingrediente de un algoritmo de aprendizaje es el método de optimización. Es necesario minimizar la pérdida promedio asociada a todos los puntos de un cierto set de entrenamiento. Para ello definimos esto formalmente como:
+
+$$\underset{\theta}{minimize} = \frac{1}{m} \sum_{i=1}^m l_{ce}(h_\theta(x^{(i)}), y^{(i)})$$
+
+
+::: {.callout-note}
+***¿Cómo encontramos los parámetros $\theta$ que minimizan la pérdida de información/error de estimación?***
+:::
+
+Gradient Descent
+: > Es un método numérico que permite minimizar funciones moviéndose en dirección contraria al Gradiente. Es computacionalmente muy eficiente y fácil de implementar en código.
+
+## Gradient Descent {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+Se define el gradiente como la matriz que contiene las derivadas parciales de una función $f$. Se denota como:
+
+$$\nabla_\theta f(\theta) \in \mathbb{R}^{n \times k} =  \begin{bmatrix}
+\frac{\partial f(\theta)}{\partial \theta_{11}} & \cdots & \frac{\partial f(\theta)}{\partial \theta_{1k}} \\
+\cdots & \ddots & \cdots \\
+\frac{\partial f(\theta)}{\partial \theta_{n1}} & \cdots & \frac{\partial f(\theta)}{\partial \theta_{nk}}
+\end{bmatrix}$$
+
+::: {.callout-tip}
+$\theta_{ij}$ corresponde al parámetro que une el nodo/feature $i$ con el nodo/predicción $j$.
+:::
+:::
+::: {.column width="40%"}
+![](img/clase-1/gradient.png){.lightbox fig-align="center" } 
+:::
+::: 
+
+
+::: {.callout-tip style="font-size: 130%;"}
+El gradiente apunta a la dirección de máximo crecimiento de la función $f$. 
+:::
+
+
+## Gradient Descent: Regla de Actualización {.smaller}
+Para minimizar la función, la idea es descender iterativamente por el trayecto **en contra** del gradiente. La regla de actualización se define como:
+
+$$\theta := \theta - \alpha \nabla_\theta f(\theta) = \theta - \frac{\alpha}{m}\nabla_\theta l_{ce}(X\theta,y)$$
+
+con $\theta \in \mathbb{R}^{n \times k}$ y $\alpha > 0$ corresponde al *step size* o `learning rate`.
+
+
+![](img/clase-1/lr_effect.png){.lightbox fig-align="center" width="60%"} 
+
+::: {.callout-tip}
+En nuestro caso $f$ corresponderá a nuestro $l_{ce}$ calculado anteriormente. El problema es, ¿cuánto vale el gradiente del `Cross Entropy Loss`?
+:::
+
+## Calculando el Gradiente a mano {.smaller}
+
+
+::: {style="font-size: 130%;"}
+Simplifiquemos el problema a calcular para un sólo vector $x$.
+
+$$\theta := \theta - \alpha \nabla_\theta l_{ce}(\theta^Tx,y) $$
+:::
+
+::: {.callout-warning style="font-size: 120%;"}
+¿Cuánto vale el Gradiente?
+
+* No es tan sencillo, ya que derivamos respecto a $\theta$ que es una matriz. 
+* Pero derivamos a $\theta^T x$ que es un vector.
+* Para ello, lo correcto es utilizar Calculo Diferencial Matricial, Jacobianos y Productos de Kroenecker (que probablemente no han visto en ningún curso).
+  * **SPOILER**: Yo tampoco lo he visto en ningún curso.
+:::
+
+::: {.columns .fragment}
+::: {.column width="70%"}
+::: {.callout-tip style="font-size: 120%;"}
+* Usaremos un truco (sumamente hacky 😱) que jamás deben revelar y que avergonzaría a cualquier profesor de Cálculo.
+    * Pretenderemos que todos los valores son escalares y corregiremos las dimensiones al final.
+
+:::
+:::
+::: {.column width="30%"}
+![](img/clase-1/fuenzi.jpeg){.lightbox fig-align="center" width="40%"} 
+
+:::
+::: 
+
+## Calculando el Gradiente a mano {.smaller}
+
+> Simplifiquemos el problema pensando que calcularemos el Gradiente para un sólo vector $x$.
+
+>  Es decir, $x \in \mathbb{R}^{n\times1}$.
+
+Además sabemos que $\nabla_\theta l_{ce}(\theta^Tx, y)$ debe tener dimensiones $n \times k$.
+
+::: {.callout-important style="font-size: 150%;" .fragment fragment-index=1}
+***¿Por qué?***
+:::
+
+::: {.columns}
+::: {.column .fragment fragment-index=2}
+$$\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}$$
+:::
+::: {.column .fragment fragment-index=3}
+$$\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = \frac{\partial l_{ce}(h_\theta(x), y)}{\partial h_\theta(x)} = \begin{bmatrix}
+\frac{\partial l_{ce}(h,y)}{\partial h_1} \\
+\vdots\\
+\frac{\partial l_{ce}(h,y)}{\partial h_k} \\
+\end{bmatrix}$$
+:::
+::: 
+
+::: {.callout-tip style="font-size: 130%;" .fragment fragment-index=4}
+Luego el gradiente de $l_{ce}$ respecto a $h$ tiene dimensiones $k \times 1$.
+:::
+
+## Calculando el Gradiente a mano {.smaller}
+
+$$\begin{align}
+\frac{\partial l_{ce}(h,y)}{\partial h_i} &= \frac{\partial }{\partial h_i}\left(-h_{(i = y)} + log \sum_{j = 1}^k exp(h_j)\right) \\
+&= -\frac{\partial h_{(i = y)}}{\partial h_i}+ \frac{1}{\sum_{j = 1}^k exp(h_j)} \cdot \frac{\partial}{\partial h_i}\left(\sum_{j=1}^k exp(h_j)\right) \\
+&= -\frac{\partial h_{(i = y)}}{\partial h_i}+ \frac{exp(h_i)}{\sum_{j = 1}^k exp(h_j)} \\
+&= - 1\{i=y\} + s_i = s_i - 1\{i=y\}
+\end{align}
+$$
+
+::: {.callout-tip .fragment}
+$$1\{i = y\} = \begin{cases}
+1,  & \text{i = y} \\
+0, & \text{otherwise}
+\end{cases}
+$$
+:::
+
+::: {.fragment}
+Finalmente en forma vectorial quedaría como:
+
+::: {.columns}
+::: {.column}
+$$\frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} = s - e_y$$
+:::
+::: {.column}
+::: {.callout-tip}
+Donde $z$, es el vector de Softmax y $e_y$ es un vector con un 1 en la posición $y$ y 0 en el resto.
+:::
+:::
+::: 
+:::
+
+## Calculando el Gradiente a mano {.smaller}
+
+::: {.columns}
+::: {.column }
+$$\nabla_\theta l_{ce}(\theta^T x,y) = \frac{\partial l_{ce}(\theta^T x,y)}{\partial \theta^T x} \cdot \frac{\partial \theta^Tx}{\partial \theta}$$
+$$\nabla_\theta l_{ce}(\theta^T x,y) = (s-e_y)\cdot x $$
+:::
+
+::: {.column .fragment}
+::: {.callout-caution appearance="default"}
+## Ojo con las dimensiones
+* $s-e_y \in \mathbb{R}^{k \times 1}$
+* $x \in \mathbb{R}^{n \times 1}$
+:::
+
+::: 
+:::
+
+:::{.fragment}
+Luego: 
+
+$$\nabla_\theta l_{ce}(\theta^T x,y) = x (s-e_y)^T$$
+:::
+
+::: {.callout-caution style="font-size: 150%;" .fragment}
+***¿Cuál es el tamaño de $\nabla_\theta l_{ce}(\theta^T x,y)$?***
+:::
+
+::: {.callout-note style="font-size: 150%;" .fragment}
+$n \times k$
+:::
+
+::: {.callout-warning style="font-size: 150%;" .fragment}
+***¿Por qué?***
+:::
+
+
+
+## Calculando el Gradiente Matrix Batch Form {.smaller}
+
+#### Esto sería equivalente a tomar en consideración todos los puntos del Training Set
+
+::: {.columns}
+::: {.column}
+$$\begin{align}\nabla_\theta l_{ce}(X\theta,y) &= \frac{\partial l_{ce}(X\theta,y)}{\partial X\theta} \cdot \frac{\partial X\theta}{\partial \theta}\\
+&= (S - I_y) \cdot X \\
+&= X^T \cdot (S - I_y)
+\end{align}$$
+
+::: {.callout-tip}
+* $S$ corresponde al Softmax de $X\theta$ aplicado por filas.
+* $I_y$ corresponde al One Hot Encoder de las etiquetas. Filas con 1 en la etiqueta correcta y 0 en el resto.
+:::
+:::
+::: {.column}
+::: {.callout-caution appearance="default" .fragment}
+## Ojo con las dimensiones
+
+* $S - I_y \in \mathbb{R}^{m \times k}$
+* $X \in \mathbb{R}^{m \times n}$
+:::
+
+::: {.callout-warning .fragment}
+***¿Cuál es el tamaño de $\nabla_\theta l_{ce}(X\theta,y)$?***
+:::
+:::
+::: 
+
+
+
+:::{.fragment}
+Finalmente la `Regla de Actualización` de parámetros usando Gradient Descent queda como:
+
+$$\theta := \theta - \frac{\alpha}{m} X^T (S - I_y)$$
+:::
+
+
+## Conclusiones {.smaller}
+
+
+::: {.columns}
+::: {.column}
+
+::: {.callout-tip}
+* Acabamos de entrenar una Shallow Network, sin definir ningún concepto Fancy que es propio del área.
+* No hemos hablado ni de:
+  * `Forward Pass`
+  * `Epochs`
+  * `Backpropagation`
+  * `Adam`
+  * `Activation Functions`
+  * etc.
+
+::: 
+::: {.callout-note .fragment fragment-index=1}
+* Aplicando esta simple regla se puede obtener cerca de un 8% de error clasificando dígitos en MNIST.
+* Se puede programar en pocas líneas en Python.
+
+![](img/clase-1/mnist.png){.lightbox fig-align="center" width="30%"} 
+:::
+:::
+
+::: {.column .fragment fragment-index=2}
+#### Pero, ¿qué pasa con arquitecturas más complejas?
+
+![](img/clase-1/nn_arq_full.png){.lightbox fig-align="center" width="60%"} 
+:::
+::: 
