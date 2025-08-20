@@ -134,7 +134,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-579-Deep Learning</h1>
-  <p class="subtitle">Clase 2: Introducción a las Redes Neuronales y formalidades</p>
+  <p class="subtitle">Clase 2: Introducción a las Redes Neuronales</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -149,611 +149,446 @@ Alfonso Tobar-Arancibia
 
 </section>
 <section>
-<section id="problemas-de-una-hipótesis-lineal" class="title-slide slide level1 center">
-<h1>Problemas de una Hipótesis Lineal</h1>
+<section id="por-qué-machine-learning-y-deep-learning-no-son-lo-mismo" class="title-slide slide level1 center">
+<h1>¿Por qué Machine Learning y Deep Learning no son lo mismo?</h1>
 
 </section>
-<section id="clase-anterior" class="slide level2 smaller">
-<h2>Clase anterior</h2>
+<section id="machine-learning-vs-deep-learning" class="slide level2 smaller">
+<h2>Machine Learning vs Deep Learning</h2>
 <blockquote>
-<p>La Regresión Softmax es capaz de generar separaciones lineales para más de dos clases para cualquier punto <span class="math inline">\(x \in \mathbb{R}^{1 \times n}\)</span>:</p>
+<p>Es sabido que la mejor manera de mejorar el performance de un algoritmo en partícular no es con ajuste de Hiperparámetros sino crear features que sean representativas del problema.</p>
 </blockquote>
-<div class="columns">
-<div class="column" style="width:70%;">
-<p><br></p>
-<div style="font-size: 130%;">
-<p><span class="math inline">\(h_\theta(x) = \theta^T x\)</span>, tal que <span class="math inline">\(\theta \in \mathbb{R}^{n \times k}\)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-2/ml-dl.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-2/ml-dl.jpeg" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
 </div>
-<p><br></p>
-<div style="font-size: 130%;">
-<div class="callout callout-caution callout-style-simple">
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>🤓 ¿Cómo se mejora un modelo?</strong></p>
 </div>
 <div class="callout-content">
-<p>Esta hipótesis es bastante limitada, y existen muchos problemas que no podrán solucionarse con este tipo de solución.</p>
+<ul>
+<li>Normalmente el <code>Machine Learning</code> busca generar features de manera manual.</li>
+<li><code>Deep Learning</code> busca que el Algoritmo genere esas features de <strong><em>manera automática</em></strong>.</li>
+</ul>
 </div>
 </div>
 </div>
+</section>
+<section id="cómo-se-crean-features" class="slide level2 smaller">
+<h2>¿Cómo se crean features?</h2>
+<div style="font-size: 80%;">
+<blockquote>
+<p>Normalmente un approach es agregar features externas/exógenas, pero también es completamente válido crear features nuevas por medio de las existentes.</p>
+</blockquote>
 </div>
-</div><div class="column" style="width:30%;">
-<p><a href="img/clase-2/softmax_viz.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-2/softmax_viz.png"></a></p>
+<div class="columns">
+<div class="column">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Ejemplo</strong></p>
+</div>
+<div class="callout-content">
+<p>Si <span class="math inline">\(X_1\)</span> es el Largo de un objeto y <span class="math inline">\(X_2\)</span> es el ancho, entonces una feature nueva podría ser <span class="math inline">\(X_3 = X_1 \cdot X_2\)</span>, que es el área del objeto.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>¿Cómo podríamos crear nuevas features pero de manera automática?</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Una opción es hacer una combinación lineal de features existentes.
+<ul>
+<li><code>Esto lo podemos realizar con operaciones matriciales</code>.</li>
+</ul></li>
+</ul>
+<p>Por ejemplo un set de nuevas features <span class="math inline">\(\phi(X)\)</span> podría ser:</p>
+<p><span class="math inline">\(\phi(X) = X W\)</span> donde <span class="math inline">\(W \in \mathbb{R}^{n \times d}\)</span>, donde <span class="math inline">\(d\)</span> es el número de nuevas features resultantes luego del proceso de creación.</p>
+<ul>
+<li><strong><em>Esto implica que si <span class="math inline">\(X\)</span> tiene <span class="math inline">\(n\)</span> features, entonces <span class="math inline">\(\phi(X)\)</span> tendrá <span class="math inline">\(d\)</span> features que son combinaciones de las anteriores</em></strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column" style="font-size: 75%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-2/new_features.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-2/new_features.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+<p>Es decir:</p>
+<p><span class="math display">\[f_j^{(i)} = (\bar{x}^{(i)})^T W_{:,j} = \sum_{k=1}^n x_k^{(i)} W_{k,j}\]</span></p>
+<p>Donde <span class="math inline">\(j=1,...,d\)</span> y <span class="math inline">\(i=1,...,m\)</span>.</p>
 </div></div>
 </section>
-<section id="limitaciones-de-una-hipótesis-lineal" class="slide level2 smaller">
-<h2>Limitaciones de una Hipótesis Lineal</h2>
-<blockquote>
-<p>Es claro que un problema como el que se muestra acá no podrá ser resuelto mediante un clasificador lineal (hipótesis lineal).</p>
-</blockquote>
-<div class="columns">
-<div class="column" style="width:70%;">
+<section id="regresión-logística-features" class="slide level2 smaller">
+<h2>Regresión Logística + Features</h2>
 <div style="font-size: 120%;">
-<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>¿Cómo se resuelve este tipo de problemas?</strong></p>
+<p><strong>😱 ¿Y si combinamos ambas ideas?</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>Creando nuevas features que permitan predecir problemas <code>no-lineales</code>.</li>
-</ul>
+<p>Perfectamente podemos crear una Regresión logística con nuestras nuevas features y combinar todo en un sólo modelo:</p>
+<p><span class="math display">\[h_\theta(X) = p = \sigma(\phi(X) \theta) = \sigma(X W \theta)\]</span></p>
 </div>
 </div>
 </div>
 </div>
-<div style="font-size: 130%;">
-<p><span class="math display">\[h_\theta(x) = \theta^T \phi(x)\]</span></p>
-</div>
-<p>tal que <span class="math inline">\(\theta \in \mathbb{R}^{n \times k}\)</span> y <span class="math inline">\(\phi(x): \mathbb{R}^n \rightarrow \mathbb{R}^d\)</span> con <span class="math inline">\(d &gt; n\)</span>.</p>
-<div class="fragment" style="font-size: 130%;">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Básicamente <span class="math inline">\(\phi(.)\)</span> es la manera matemática de denotar la creación de más features que permiten resolver el problema.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment" style="font-size: 130%;">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>SVM es un algoritmo que hace esto de manera automática utilizando el famoso <code>Kernel Trick</code>, donde <span class="math inline">\(\phi(.)\)</span> es conocido como el Kernel.</p>
-</div>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:30%;">
-<p><a href="img/clase-2/non_linear_prob.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-2/non_linear_prob.png"></a></p>
-</div></div>
-</section>
-<section id="diferencias-entre-ml-y-dl" class="slide level2 smaller">
-<h2>Diferencias entre ML y DL</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/ml-dl.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-2/ml-dl.jpeg" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<blockquote>
-<p>La diferencia principal entre el <code>Machine Learning</code> y el <code>Deep Learning</code> es la manera en la que se crean las features.</p>
-</blockquote>
-<div class="fragment">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Normalmente el Machine Learning está enfocado en que manualmente se generen features.</li>
-<li>Deep Learning busca que el Algoritmo busque esas features. El énfasis está en buscar la <code>Arquitectura</code> adecuada.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="cómo-creamos-features-de-manera-automática" class="slide level2 smaller">
-<h2>¿Cómo creamos features de manera automática?</h2>
-<div class="columns">
-<div class="column">
-<p>Una primera idea sería crearlas de manera lineal:</p>
-<p><span class="math display">\[\phi(x) = W^T x\]</span></p>
-<p>donde <span class="math inline">\(W \in \mathbb{R}^{n \times d}\)</span>.</p>
-</div><div class="column fragment">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/multilayer_softmax.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-2/multilayer_softmax.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</div></div>
-<div class="columns fragment">
-<div class="column">
-<p>En este caso nuestra hipótesis queda como: <span class="math display">\[ h_\theta(x) = \theta^T \phi(x) = \theta^T W^T x = \tilde{\theta}^T x\]</span></p>
-<div class="fragment">
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Lamentablemente este approach <strong>no funciona</strong>, ya que <span class="math inline">\(\tilde{\theta}^T\)</span> es sólo otra matriz que genera dos transformaciones simultáneas, pero que en este caso llevará de <span class="math inline">\(n\)</span> a <span class="math inline">\(k\)</span> de manera directa.</p>
-</div>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ojo con las dimensiones.</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><span class="math inline">\(W^t\)</span> tiene dimensión <span class="math inline">\(d \times n\)</span>.</li>
-<li>Sabemos que <span class="math inline">\(h_\theta(x)\)</span> tiene que devolver <span class="math inline">\(k\)</span> outputs. Por lo tanto, <span class="math inline">\(\theta^T\)</span> tiene que tener dimensiones <span class="math inline">\(k \times d\)</span>.</li>
-<li><span class="math inline">\(x\)</span> es un vector con <span class="math inline">\(n\)</span> features por lo tanto es de dimensión <span class="math inline">\(n \times 1\)</span>.</li>
-<li>Eso hará que <span class="math inline">\(h_\theta(x)\)</span> sea de tamaño <span class="math inline">\(k \times 1\)</span>.</li>
-</ul>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="entonces-cómo" class="slide level2 smaller">
-<h2>¿Entonces cómo?</h2>
-<div class="columns">
-<div class="column">
-<p>Vamos a utilizar funciones no lineales. <strong>Cualquiera sirve</strong> tal que:</p>
-<p><span class="math display">\[\phi(x) = \sigma(W^Tx)\]</span></p>
-<p>donde <span class="math inline">\(W \in \mathbb{R}^{n \times d}\)</span> y <span class="math inline">\(\sigma: \mathbb{R}^d \rightarrow \mathbb{R}^d\)</span>, es decir, <span class="math inline">\(\sigma\)</span> es una función escalar.</p>
-</div><div class="column fragment">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/mlp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-2/mlp.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</div></div>
-<div class="fragment">
-<p>De este modo nuestra hipótesis quedaría como:</p>
-<p><span class="math display">\[h_\theta(x) = \theta^T \sigma(W^T x) \neq \tilde{\theta}^T x\]</span></p>
-</div>
-<div class="fragment" style="font-size: 130%;">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Estamos aplicando una <code>transformación no-lineal</code> a la <code>transformación lineal</code> de <span class="math inline">\(x\)</span> con <span class="math inline">\(W\)</span>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment" style="font-size: 130%;">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Normalmente escogeremos <code>funciones no-lineales</code> que sean diferenciables para poder actualizar <span class="math inline">\(\theta\)</span> y <span class="math inline">\(W\)</span>.</p>
-<p>Esto es lo que llamaremos el <strong><em>entrenamiento de una red neuronal</em></strong>.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="activation-functions" class="slide level2 smaller">
-<h2>Activation Functions</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<blockquote>
-<p>Definiremos las funciones de activación como funciones no-lineales que se aplican a la salida de cada capa para evitar la <code>composición</code> de dos trasnformaciones lineales consecutivas.</p>
-</blockquote>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Esta es la <strong>única</strong> manera de transformar hipótesis lineales en hipótesis no lineales.</p>
-</div>
-</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-2/2-layer_log_reg.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-2/2-layer_log_reg.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
 </div>
 </div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/activation_functions.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-2/activation_functions.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div></div>
-<div class="columns">
-<div class="column">
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Funciones Clásicas</strong></p>
+<p><strong>🤓 Nuestra Notación</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li><strong><em>Sigmoide</em></strong></li>
-<li><strong><em>ReLU</em></strong></li>
-<li><strong><em>Tanh</em></strong></li>
-<li><strong><em>Softmax</em></strong></li>
+<li>Cada nodo se le conoce como Neurona o <code>Activación</code>.</li>
+<li>Cada conjunto de vértices, se les conoce como <code>Capa</code> o <code>Capa de Parámetros</code>.
+<ul>
+<li><strong><em>Ojo</em></strong>: Las capas <strong><em>no son</em></strong> los conjuntos de Nodos.</li>
+</ul></li>
 </ul>
 </div>
 </div>
 </div>
-</div><div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout callout-caution callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Funciones más modernas</strong></p>
+<p><strong>👀 Ojo</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Swish</li>
-<li>GELU</li>
-<li>ELU</li>
+<li>Existen convenciones donde cada conjunto de nodos es una capa.
+<ul>
+<li>A la primera capa de nodos se le llama Capa de <code>Entrada/Input Layer</code>.</li>
+<li>A la última capa de nodos se le llama Capa de <code>Salida/Output Layer</code>.</li>
+<li>A las capas intermedias se les llama <code>Hidden Layers</code>.</li>
+</ul></li>
 </ul>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="layer-non-linear-softmax-regression" class="slide level2 smaller">
-<h2>2-Layer non-linear Softmax Regression</h2>
+<section id="y-si-hacemos-nuestro-modelo-más-profundo" class="slide level2 smaller">
+<h2>¿Y si hacemos nuestro modelo más profundo?</h2>
+<p>Podemos hacer nuestro modelo más profundo, agregando más capas de features. Por ejemplo:</p>
 <div class="columns">
 <div class="column">
-<p><span class="math display">\[h_\theta(x) = W_2^T \phi(x) = W_2^T \sigma(W_1^T x)\]</span></p>
-<p>donde <span class="math inline">\(\theta=\{W_1 \in \mathbb{R}^{n \times d}, W_2 \in \mathbb{R}^{d \times k}\}\)</span></p>
-<div class="callout callout-caution callout-style-simple">
+<p><span class="math display">\[h_\theta(X) = \sigma(X W_1 W_2 \theta)\]</span></p>
+<p>Donde <span class="math inline">\(X \in \mathbb{R}^{m \times n}\)</span>, <span class="math inline">\(W_1 \in \mathbb{R}^{n \times d}\)</span>, <span class="math inline">\(W_2 \in \mathbb{R}^{d \times k}\)</span> y <span class="math inline">\(\theta \in \mathbb{R}^{k \times 1}\)</span>.</p>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>🤔 El problema</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>Podemos pensar que <span class="math inline">\(W_1 \in \mathbb{R}^{n \times d}\)</span> es aquella matriz que lleva a un vector <span class="math inline">\(x\)</span> de <span class="math inline">\(n\)</span> a <span class="math inline">\(d\)</span> dimensiones.</li>
-<li>De la misma forma, <span class="math inline">\(W_2 \in \mathbb{R}^{d \times k}\)</span> es aquella matriz que lleva a un vector <span class="math inline">\(x\)</span> de <span class="math inline">\(d\)</span> a <span class="math inline">\(k\)</span> dimensiones/salidas.</li>
-</ul>
+<p>Lamentablemente agregar capas no soluciona el problema de la linealidad. Agregar muchas capas lineales siguen siendo una transformación lineal.</p>
+<p><span class="math display">\[ h_\theta(X) = \sigma(X W_1 W_2 \theta) = \sigma(X \tilde{\theta})\]</span></p>
+<p>Donde <span class="math inline">\(\tilde{\theta} \in \mathbb{R}^{n \times 1}\)</span> es sólo otra matriz de parámetros.</p>
 </div>
 </div>
 </div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/mlp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-2/mlp.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</div></div>
-<div class="columns">
-<div class="column">
-<h4 id="matrix-batch-form">Matrix Batch Form</h4>
-<p><span class="math display">\[h_\theta(X) = \sigma(XW_1)W_2\]</span></p>
-</div><div class="column">
-<h4 id="update-rule">Update Rule</h4>
-<p><span class="math display">\[W_1 := W_1 - \frac{\alpha}{m} \nabla_{W_1} l_{ce}(h_\theta(X),y)\]</span> <span class="math display">\[W_2 := W_2 - \frac{\alpha}{m} \nabla_{W_2} l_{ce}(h_\theta(X),y)\]</span></p>
-</div></div>
-</section>
-<section id="cálculo-de-gradientes" class="slide level2 smaller">
-<h2>Cálculo de Gradientes</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout callout-caution callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Gradiente de <span class="math inline">\(W_1\)</span></strong></p>
+<p><strong>Atención: En este caso <span class="math inline">\(\sigma(\cdot)\)</span> tiene como único propósito acotar la salida entre 0 y 1.</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[\begin{align} \nabla_{W_1} &amp;= \frac{\partial l_{ce}(h_\theta(X),y)}{\partial \sigma(XW_1)} \cdot \frac{\partial h_\theta(X)}{\partial \sigma(XW_1)} \cdot \frac{\partial \sigma(XW_1)}{\partial XW_1} \cdot \frac{\partial XW_1}{\partial W_1} \\
-&amp;= (Z-I_y)_{m \times k} \cdot (W_{2})_{d \times k}  \cdot \sigma'(XW_1)_{m \times d} \cdot X_{m \times n}
-\end{align}\]</span></p>
-<p>Luego, corrigiendo por dimensiones obtenemos que <span class="math display">\[\nabla_{W_1} \in \mathbb{R}^{n \times d} = X^T_{n \times m} \left[\sigma'(XW_1) \odot (Z-I_y)W_2^T \right]_{m \times d}\]</span></p>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Gradiente de <span class="math inline">\(W_2\)</span></strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[\begin{align} \nabla_{W_2} &amp;= \frac{\partial l_{ce}(h_\theta(X),y)}{\partial h_\theta(X)} \cdot \frac{\partial h_\theta(X)}{\partial W_2}\\
-&amp;= (Z-I_y)_{m\times k} \cdot \sigma(XW_1)_{m \times d}
-\end{align}\]</span></p>
-<p>Luego, corrigiendo por dimensiones obtenemos que <span class="math display">\[\nabla_{W_2} \in \mathbb{R}^{d \times k} = \sigma(XW_1)^T_{d \times m}(Z - I_y)_{m \times k}\]</span></p>
-</div>
-</div>
-</div>
-</div></div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li><span class="math inline">\(\odot\)</span> representa el producto Hadamard entre dos matrices. Esto es, multiplicación elemento a elemento.</li>
-<li><span class="math inline">\(\sigma'(.)\)</span> representa la derivada de la función de activación <span class="math inline">\(\sigma(.)\)</span></li>
-</ul>
-</div>
-</div>
-</div>
-</section></section>
-<section>
-<section id="nuestra-primera-red-neuronal" class="title-slide slide level1 center">
-<h1>Nuestra Primera Red Neuronal</h1>
 
-</section>
-<section id="definiciones" class="slide level2 smaller">
-<h2>Definiciones</h2>
+</div>
+</div>
+</div>
+</div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-2/formal_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-2/formal_nn.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-2/3-layer_log_reg.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-2/3-layer_log_reg.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
 </figure>
 </div>
+</div></div>
+</section>
+<section id="el-problema-de-una-hipótesis-lineal" class="slide level2 smaller">
+<h2>El problema de una Hipótesis Lineal</h2>
 <div class="columns">
-<div class="column" style="width:25%;">
-<div style="font-size: 75%;">
-<div class="callout callout-warning callout-titled callout-style-default">
+<div class="column fragment">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Inputs</strong></p>
+<p><strong>Esto Funciona</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[Z_1 = X\]</span></p>
+
 </div>
 </div>
 </div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-2/linear_model.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-2/linear_model.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+</figure>
 </div>
-</div><div class="column" style="width:25%;">
-<div style="font-size: 75%;">
-<div class="callout callout-tip callout-titled callout-style-default">
+</div><div class="column fragment">
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Intermediate Outputs</strong></p>
+<p><strong>Esto no Funciona</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[Z_{i+1} = \sigma_i(Z_iW_i), i=1,...,L\]</span> <span class="math display">\[Z_i \in \mathbb{R}^{m \times n_i}\]</span></p>
+
 </div>
 </div>
 </div>
-</div>
-</div><div class="column" style="width:25%;">
-<div style="font-size: 75%;">
-<div class="callout callout-important callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Output (Head)</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[h_\theta(X) = Z_{L+1}\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:25%;">
-<div style="font-size: 75%;">
-<div class="callout callout-none no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Parámetros</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[\theta = \left[W_1,..., W_L\right]\]</span> <span class="math display">\[ W_i \in \mathbb{R}^{n_i \times n_{i+1}}\]</span></p>
-</div>
-</div>
-</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-2/non_linear.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-2/non_linear.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+</figure>
 </div>
 </div></div>
 <div class="fragment">
-<div class="callout callout-caution callout-style-simple">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>😞 No podemos salir del Origen</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>Las salidas intermedias (intermediate outputs) son las mal llamadas hidden layers. Esta red cuenta con <span class="math inline">\(L\)</span> hidden layers <span class="math inline">\(W\)</span>.</li>
-</ul>
+<p>Por definición de una transformación lineal, si <span class="math inline">\(X=0\)</span> entonces <span class="math inline">\(h_\theta(X)=0\)</span>. Eso lamentablemente limita las posibilidades de un modelo de poder generar una buena separación entre clases.</p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="definiciones-1" class="slide level2 smaller">
-<h2>Definiciones</h2>
+<section id="entonces-cómo-solucionamos-este-problema" class="slide level2 smaller">
+<h2>¿Entonces cómo solucionamos este problema?</h2>
+<div data-syle="font-size: 130%;">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Red Neuronal</strong></p>
+<p><strong>Haremos una transformación Affine. Es decir, agregaremos un <code>bias</code> a nuestra transformación lineal.</strong></p>
 </div>
 <div class="callout-content">
-<p>Vamos a definir como <strong><em>Red Neuronal</em></strong> un tipo particular de hipótesis que consiste en:</p>
+<p><span class="math display">\[\phi_{L+1}(X) = \phi_L(X) W_{L+1} + b_{L+1}^T\]</span></p>
 <ul>
-<li>Multiples capas que permiten cambiar de dimensión.</li>
-<li>Funciones de activación no-lineales y diferenciables que permiten <strong><em>desacoplar</em></strong> transformaciones lineales.</li>
-<li>Un set de parámetros optimizables, que permiten reducir una <code>Loss Function</code>.</li>
+<li>Donde:
+<ul>
+<li>Donde <span class="math inline">\(\phi(X)_{L+1}\)</span> corresponde a las activaciones de la capa <span class="math inline">\(L+1\)</span>. <span class="math inline">\(L=0,...,L_{net}-1\)</span>.
+<ul>
+<li>Notar que <span class="math inline">\(\phi_0(X) = X\)</span>.</li>
+<li>Asimismo, <span class="math inline">\(\phi_{L_{net}}(X)\)</span> corresponde a las activaciones de la capa de salida, es decir, las predicciones del modelo.</li>
+</ul></li>
+<li><span class="math inline">\(W_{L+1}\)</span> es la matrix de <code>pesos/parámetros</code> que lleva de <span class="math inline">\(n_L\)</span> a <span class="math inline">\(n_{L+1}\)</span> dimensiones.</li>
+<li><span class="math inline">\(b_{L+1}^T\in \mathbb{R}^{1 \times n_{L+1}}\)</span> es el vector de <code>bias</code> de la capa <span class="math inline">\(L\)</span> (Esto no es un error).</li>
+</ul></li>
 </ul>
 </div>
 </div>
 </div>
-<div class="callout callout-caution callout-style-simple">
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong><code>¡Pero esto es una operación inválida!</code> 🙄 No.&nbsp;Gracias al Broadcasting, esto es equivalente a hacer <span class="math inline">\(1_m \bar{b}^T\)</span>, donde <span class="math inline">\(1_m\)</span> es un vector columna de unos de tamaño <span class="math inline">\(m x 1\)</span> Esto implica que cada componente de ${b} se suma igual a todas las muestras.</strong></p>
 </div>
 <div class="callout-content">
-<p>Si bien estas redes toman inspiración de la biólogía, poco o nada tienen que ver con neuronas reales.</p>
+
 </div>
 </div>
 </div>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Términos como <code>Neural Network</code>, <code>Deep Networks</code>, <code>Deep Learning</code>, son ampliamente usados y algunas veces usados para diferenciar el tamaño de distintas arquitecturas.</p>
-<p>Nosotros los vamos a usar <strong><em>prácticamente</em></strong> como sinónimos.</p>
-</div>
-</div>
-</div>
-<h4 id="update-rule-1">Update Rule</h4>
-<p><span class="math display">\[W_i := W_i - \frac{\alpha}{m} \nabla_{W_i} l(h_\theta(X),y)\]</span></p>
-</section>
-<section id="cálculo-de-gradientes-de-una-red-neuronal" class="slide level2 smaller">
-<h2>Cálculo de Gradientes de una Red Neuronal</h2>
-<p><span class="math display">\[\nabla_{W_i} l(Z_{L+1},y) = \underbrace{\frac{\partial l(Z_{L+1},i)}{\partial Z_{L+1}} \cdot \frac{\partial Z_{{L+1}}}{\partial Z_L} \cdot \frac{\partial Z_L}{\partial Z_{L-1}}...\cdot \frac{\partial Z_{i+2}}{\partial Z_{i+1}}}_{G_{i+1} = \frac{\partial l(Z_{L+1},y)}{\partial Z_{i+1}}}\cdot \frac{\partial Z_{i+1}}{\partial W_i}\]</span></p>
-<div class="callout callout-important callout-titled callout-style-default">
+<div data-syle="font-size: 130%;">
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong><strong>Gradiente Entrante (Incoming Backward Gradient)</strong></strong></p>
+<p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
+<p>Vamos a utilizar funciones no lineales. <strong>Cualquiera sirve</strong> tal que:</p>
+<p><span class="math display">\[\phi_{L+1}(X) = \sigma_{L+1}(\phi_L(X) W_{L+1} + b_{L+1}^T)\]</span></p>
 <ul>
-<li>Vamos a definir el <strong>Gradiente Entrante</strong> hasta antes de la capa <span class="math inline">\(i\)</span> <strong><em>(desde la salida en dirección a la entrada)</em></strong> como: <span class="math display">\[\begin{align}G_i &amp;= G_{i+1} \cdot \frac{\partial Z_{i + 1}}{\partial Z_i} \\
-&amp;= G_{i+1} \cdot \frac{\partial \sigma_i(Z_i W_i)}{\partial Z_i W_i} \cdot \frac{\partial Z_i W_i}{\partial Z_i}_{} \\
-&amp;= (G_{i+1})_{m \times n_{i+1}} \cdot \sigma'(Z_i W_i)_{m \times n_{i + 1}} \cdot (W_i)_{n_i \times n_{i+1}}
-\end{align}\]</span></li>
+<li>Donde <span class="math inline">\(\sigma_{L+1}\)</span> es una función no lineal que aplica a cada elemento de la matriz <span class="math inline">\(X W_{L+1} + b_{L+1}^T\)</span>.</li>
+<li><span class="math inline">\(\sigma_{L+1}\)</span> puede ser cualquier función no lineal, pero normalmente utilizamos funciones diferenciables.</li>
 </ul>
-</div>
-</div>
-</div>
-<p>Luego, <span class="math display">\[ G_i \in \mathbb{R}^{m \times n_i} = \left[ G_{i+1} \odot \sigma_i'(Z_i W_i)\right] W_i^T\]</span></p>
-</section>
-<section id="cálculo-de-gradientes-de-una-red-neuronal-1" class="slide level2 smaller">
-<h2>Cálculo de Gradientes de una Red Neuronal</h2>
-<p><span class="math display">\[\begin{align}\nabla_{W_i} l(Z_{L+1},y) &amp;= G_{i+1} \cdot \frac{\partial Z_{i+1}}{\partial W_i} \\
-&amp;= G_{i+1} \cdot \frac{\partial \sigma_i'(Z_i W_i)}{\partial Z_i W_i} \cdot \frac{\partial Z_i W_i}{\partial W_i} \\
-&amp;= (G_{i+1})_{m \times n_{i+1}} \cdot \sigma'(Z_i W_i)_{m \times n_{i+1}} \cdot (Z_i)_{m \times n_i}
-\end{align}\]</span></p>
-<p><br></p>
-<div style="font-size: 130%;">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Luego el Gradiente de cualquier <code>Loss Function</code> con respecto a un set de parámetros <span class="math inline">\(W_i\)</span> se escribe como:</p>
-<p><span class="math display">\[\nabla_{W_i}l(Z_{L+1}, y) = Z_i^T \left[G_{i+1} \odot \sigma'(Z_i W_i)\right]\]</span></p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="forward-y-backward-passes" class="slide level2 smaller">
-<h2>Forward y Backward Passes</h2>
-<dl>
-<dt>Backpropagation</dt>
-<dd>
-Corresponde al Algoritmo con el cuál calcularemos los Gradientes de una Red Neuronal. Es un nombre <code>muy fancy</code> para calcular la <code>Regla de la Cadena</code> de manera eficiente aplicando <code>caching</code> de los resultados intermedios.
-</dd>
-</dl>
-<div style="font-size: 90%;">
-<h4 id="forward-pass">Forward Pass</h4>
-<ol type="1">
-<li>Inicializar <span class="math inline">\(Z_1 = X\)</span>.</li>
-<li>Iterar calculando: <span class="math inline">\(Z_i = \sigma_i(Z_i W_i), i=1,...,L\)</span>.</li>
-</ol>
-<h4 id="backward-pass">Backward Pass</h4>
-<ol start="3" type="1">
-<li>Inicializar <span class="math inline">\(G_{L+1} = \nabla_{Z_{L+1}}l(Z_{L+1},y) = S-I_y\)</span> (Este ejemplo es sólo el caso de <code>Cross Entropy</code> como <code>Loss Function</code>).</li>
-<li>Iterar calculando: <span class="math inline">\(G_i = \left[G_{i+1} \odot \sigma_i'(Z_i W_i)\right]W_i^T, i=L,...,1\)</span></li>
-</ol>
-<h4 id="update-rule-2">Update Rule</h4>
-<ol start="5" type="1">
-<li>Calcular Gradientes para poder aplicar el <code>Update Rule</code>.</li>
-</ol>
-<p><span class="math display">\[W_i := W_i - \frac{\alpha}{m}\nabla_{W_i}l(Z_{L+1},y) = W_i - \frac{\alpha}{m} Z_i^T\left[G_{i+1} \odot \sigma'(Z_i W_i)\right]\]</span></p>
+<section id="formalmente-una-red-neuronal-profunda" class="slide level2 smaller">
+<h2>Formalmente: Una Red Neuronal Profunda</h2>
+<p>Vamos a definir una Red Neuronal Profunda como:</p>
+<p><span class="math display">\[h_\theta(X) = \sigma_{L+1}(\phi_L(X) W_{L+1} + b_{L+1}^T)\]</span></p>
+<p>con <span class="math inline">\(L=0,...,L_{net}-1\)</span>.</p>
+<div style="font-size: 120%;">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Importante</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(L_{net}\)</span> es el número de capas de parámetros ocultas de la red neuronal.
+<ul>
+<li>Notar que <span class="math inline">\(\phi_0(X) = X\)</span>.</li>
+<li>Existen <span class="math inline">\(L_{net} + 1\)</span> capas de activación. Una que es la capa de entrada <span class="math inline">\(\phi_0(X)\)</span> y <span class="math inline">\(L_{net}\)</span> capas <strong><em>“calculadas”</em></strong>.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </section>
-<section id="conceptos-clásicos-del-entrenamiento-de-una-nn" class="slide level2 smaller">
-<h2>Conceptos Clásicos del Entrenamiento de una NN</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/formal_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-2/formal_nn.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
+<section id="entrenemos-una-red-neuronal-a-mano" class="slide level2 smaller">
+<h2>Entrenemos una Red Neuronal a mano</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math inline">\(W_1 \in \mathbb{R}^{n \times d1}\)</span></p>
+<p><span class="math inline">\(\bar{b_1}^T \in \mathbb{R}^{1 \times d1}\)</span></p>
+<p><span class="math inline">\(W_2 \in \mathbb{R}^{d1 \times d2}\)</span></p>
+<p><span class="math inline">\(\bar{b_2}^T \in \mathbb{R}^{1 \times d2}\)</span></p>
+<p><span class="math display">\[u=X W_1\]</span> <span class="math display">\[\phi_1 = u + 1_m\bar{b_1}^T\]</span> <span class="math display">\[Z_1 = \sigma(\phi_1)\]</span> <span class="math display">\[v=Z_1 W_2\]</span> <span class="math display">\[\phi_2 = v + 1_m\bar{b_2}^T\]</span> <span class="math display">\[p = \sigma(\phi_2)\]</span> <span class="math display">\[L = -\frac{1}{m}\left[y^T log(p) + (1-y)^T log(1-p)\right]\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><a href="img/clase-2/2-layer-comp-graph.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-2/2-layer-comp-graph.png"></a></p>
+</div></div>
+</section>
+<section id="entrenemos-una-red-neuronal-a-mano-1" class="slide level2 smaller">
+<h2>Entrenemos una Red Neuronal a mano</h2>
+<p>Si <span class="math inline">\(L=-[y^T log(p) + (1-y)^T log(1-p)]\)</span> entonces:</p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p><span class="math display">\[\frac{\partial L}{\partial p} = -\frac{1}{m} \left[\frac{y^T}{p} - \frac{1 -y)^T}{(1-p)}\right] = \frac{1}{m} \left[\frac{p-y}{p(1-p)}\right]\]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial \phi_2} = \frac{\partial L}{\partial p} \cdot \sigma'(\phi_2)=\frac{1}{m} \left[\frac{p-y}{p(1-p)}\right] p (1-p) = \frac{1}{m} \left[p-y\right]\]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial b_2} = \frac{\partial L}{\partial \phi_2} \cdot 1_m = \frac{1}{m} 1_m^T \left[p-y\right]\]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial v} = \frac{\partial L}{\partial \phi_2} \frac{\partial \phi_2}{\partial v} = \frac{\partial L}{\partial \phi_2}\]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial W_2} = \frac{\partial L}{\partial v} \frac{\partial v}{\partial W_2} = \frac{\partial L}{\partial v} \cdot Z_1= \frac{1}{m} Z_1^T \left[p-y\right]\]</span></p>
+</div><div class="column fragment" style="width:30%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Update Rule para <span class="math inline">\(b_2\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[b_2 = b_2 - \alpha \frac{1}{m} 1_m^T \left[p-y\right]\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Update Rule para <span class="math inline">\(W_2\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[W_2 = W_2 - \alpha \frac{1}{m} Z_1^T \left[p-y\right]\]</span></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="entrenemos-una-red-neuronal-a-mano-2" class="slide level2 smaller">
+<h2>Entrenemos una Red Neuronal a mano</h2>
+<p><span class="math display">\[\frac{\partial L}{\partial Z_1} =\frac{\partial L}{\partial \phi_2} \frac{\partial \phi_2}{\partial Z_1}=  \frac{\partial L}{\partial \phi_2} \cdot W_2^T = \frac{1}{m}[p-y] W_2^T \]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial \phi_1} = \frac{\partial L}{\partial Z_1} \frac{\partial Z_1}{\partial \phi_1}= \frac{\partial L}{\partial Z_1} \cdot \sigma'(\phi_1) = \frac{1}{m}[p-y] W_2^T \odot [Z_1  \odot (1-Z_1)]\]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial b_1} =\frac{\partial L}{\partial \phi_1} \frac{\partial \phi_1}{\partial \phi_1}{\partial b_1}=  \frac{\partial L}{\partial \phi_1} \cdot 1_m = \frac{1_m^T}{m} [p-y] W_2^T \odot [Z_1  \odot (1-Z_1)]\]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial u} = \frac{\partial L}{\partial \phi_1} \frac{\partial \phi_1}{\partial u} = \frac{\partial L}{\partial \phi_1}\]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial W_1} = \frac{\partial L}{\partial u} \frac{\partial u}{\partial W_1} = \frac{\partial L}{\partial u} \cdot X = \frac{1}{m} X^T [p-y] W_2^T \odot [Z_1  \odot (1-Z_1)]\]</span></p>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Update Rule para <span class="math inline">\(b_1\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[b_1 = b_1 - \alpha \frac{1_m^T}{m} [p-y] W_2^T \odot [Z_1  \odot (1-Z_1)]\]</span></p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Update Rule para <span class="math inline">\(W_1\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[W_1 = W_1 - \alpha \frac{1}{m} X^T [p-y] W_2^T \odot [Z_1  \odot (1-Z_1)]\]</span></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="entrenamiento-de-una-red-neuronal" class="slide level2 smaller">
+<h2>Entrenamiento de una Red Neuronal</h2>
+<div style="font-size: 120%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>➡️ Forward Pass</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Definiremos una <code>Epoch</code> como el número de veces que repetiremos el Algoritmo de Backpropagation con todos los datos de Entrenamiento. El número de <code>epochs</code> de entrenamiento será un hiperparámetro de un modelo.</li>
-<li>Definiremos el <code>learning rate</code> como un hiperparámetro que controlará el aprendizaje del modelo.</li>
-<li>Definiremos este tipo de redes neuronales como <code>Feed Forward Networks</code> o <strong><em>FFN</em></strong> aunque en la práctica tienen una pequeña modificación que veremos en la siguiente clase.</li>
+<li>Corresponde al proceso de calcular las activaciones de cada capa para una matriz de diseño <span class="math inline">\(X\)</span>.</li>
+<li>El forward pass permitirá calcular las variables intermedias que son necesarias para el cálculo del <code>Backward Pass</code>.</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="callout callout-important callout-style-simple">
+</div>
+<div style="font-size: 120%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>⬅️ Backward Pass</strong></p>
 </div>
 <div class="callout-content">
-<p>Este tipo de redes es muy utilizada y recibe diversos nombres:</p>
 <ul>
-<li>Fully Connected Layers</li>
-<li>Dense Layers: Proviene de la nomenclatura utilizada por Tensorflow.</li>
-<li>Linear Layers: Proviene de la nomenclatura utilizada por Pytorch, pero <strong>no es del todo</strong> correcto.</li>
-<li><strong>MLP</strong> o Multilayer Perceptron.</li>
+<li>Corresponde al proceso de calcular las derivadas de cada una de las variables del modelo con respecto a la función de pérdida.</li>
+<li>Notar que muchos calculos del <code>Backward Pass</code> dependen de los resultados del <code>Forward Pass</code>.</li>
 </ul>
+</div>
+</div>
+</div>
+</div>
+<div style="font-size: 120%;">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>👀 Backpropagation</strong></p>
+</div>
+<div class="callout-content">
+<p>La combinación del <code>Forward Pass</code> y el <code>Backward Pass</code> se conoce como <code>Backpropagation</code> o <code>Retropropagación</code>.</p>
+</div>
 </div>
 </div>
 </div>
 </section></section>
-<section id="see-ya-later-aligator" class="title-slide slide level1 center">
-<h1>See ya later, aligator!!</h1>
+<section id="terminamos" class="title-slide slide level1 center">
+<h1>😱 Terminamos!!</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">

@@ -426,11 +426,14 @@ p,  &amp; \text{si y = 1} \\
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Función de Pérdida/Loss Function</strong></p>
+<p><strong>Función de Pérdida/Loss Function en notación matricial</strong></p>
 </div>
 <div class="callout-content">
-<p>Podemos reescribir el Negative Log Likelihood con notación matricial de la siguiente manera: <span class="math display">\[L(\theta) = -\left[y^T \log(\bar{p}) + (1-y)^T \log(1-\bar{p})\right]\]</span></p>
+<p><span class="math display">\[L(\theta) = -\frac{1}{m}\left[y^T \log(\bar{p}) + (1-y)^T \log(1-\bar{p})\right]\]</span></p>
 <p>donde <span class="math inline">\(\bar{p} = \sigma(X\theta)\)</span> es el vector de probabilidades estimadas por el modelo.</p>
+<ul>
+<li><strong>Atención</strong>: Es más común calcular la pérdida promedio, es decir, dividir por <span class="math inline">\(m\)</span>.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -441,12 +444,12 @@ p,  &amp; \text{si y = 1} \\
 </div>
 <div class="callout-content">
 <ul>
-<li>Si <span class="math inline">\(y^{(i)} = 1\)</span>, entonces <span class="math inline">\(L(\theta) = -\log(p^{(i)})\)</span>.
+<li>Si <span class="math inline">\(y^{(i)} = 1\)</span>, entonces <span class="math inline">\(L(\theta) = -\frac{1}{m}log(p^{(i)})\)</span>.
 <ul>
 <li>Luego si la probabilidad es cercana a 1, que significa que el modelo predijo correctamente la clase, entonces la pérdida es cercana a 0.</li>
 <li>Pero si la probabilidad es cercana a 0, entonces la pérdida es alta.</li>
 </ul></li>
-<li>Si <span class="math inline">\(y^{(i)} = 0\)</span>, entonces <span class="math inline">\(L(\theta) = -\log(1-p^{(i)})\)</span>.
+<li>Si <span class="math inline">\(y^{(i)} = 0\)</span>, entonces <span class="math inline">\(L(\theta) = -\frac{1}{m}log(1-p^{(i)})\)</span>.
 <ul>
 <li>Luego si la probabilidad es cercana a 0, que significa que el modelo predijo correctamente la clase, entonces la pérdida es cercana a 0.</li>
 <li>Pero si la probabilidad es cercana a 1, entonces la pérdida es alta.</li>
@@ -535,7 +538,7 @@ p,  &amp; \text{si y = 1} \\
 <li><span class="math inline">\(e = y^T c\)</span></li>
 <li><span class="math inline">\(f = (1-y)^T d\)</span></li>
 <li><span class="math inline">\(L* = e + f\)</span></li>
-<li><span class="math inline">\(L = -L*\)</span></li>
+<li><span class="math inline">\(L = -\frac{1}{m} L*\)</span></li>
 </ul>
 </div><div class="column" style="width:70%;">
 <div class="quarto-figure quarto-figure-center">
@@ -565,7 +568,7 @@ p,  &amp; \text{si y = 1} \\
 <p><span class="math display">\[\frac{\partial L*}{\partial \theta} =\left[\frac{y^T - b}{b(1-b)}\right] \cdot \sigma(a)' \cdot X\]</span></p>
 <p>Luego reemplazamos que <span class="math inline">\(b=\sigma(a)\)</span> y <span class="math inline">\(\sigma(a)'=\sigma(a)(1-\sigma(a))\)</span>:</p>
 <p>Obtenemos que:</p>
-<p><span class="math display">\[\frac{\partial L}{\partial \theta} = \left[\sigma(X\theta)_{m \times 1} - y^T_{1 \times m}\right]X_{m \times (n+1)}\]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial \theta} = \frac{1}{m}\left[\sigma(X\theta)_{m \times 1} - y^T_{1 \times m}\right]X_{m \times (n+1)}\]</span></p>
 <div class="columns">
 <div class="column">
 <div class="callout callout-important no-icon callout-titled callout-style-default">
@@ -575,7 +578,7 @@ p,  &amp; \text{si y = 1} \\
 </div>
 <div class="callout-content">
 <p>Debemos modificar nuestro cálculo de modo que las dimensiones sean compatibles. Luego:</p>
-<p><span class="math display">\[\frac{\partial L}{\partial \theta}_{(n+1) \times 1} = X^T_{(n+1) \times m} \cdot \left[\sigma(X\theta) - y\right]_{m \times 1}\]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial \theta}_{(n+1) \times 1} = \frac{1}{m}  X^T_{(n+1) \times m} \cdot \left[\sigma(X\theta) - y\right]_{m \times 1}\]</span></p>
 <ul>
 <li>Tengo que tener un gradiente para cada parámetro (<strong><em>¿por qué son <span class="math inline">\(n+1\)</span>?</em></strong>)</li>
 </ul>
@@ -596,7 +599,7 @@ p,  &amp; \text{si y = 1} \\
 <p>Llamaremos Update Rule al Algoritmo que permite <strong><em>entrenar un modelo</em></strong>. En el caso de la Regresión Logística, el Update Rule es:</p>
 </blockquote>
 <div style="font-size: 130%;">
-<p><span class="math display">\[\theta_{n+1 \times 1} = \theta_{n+1 \times 1} - \alpha \cdot X^T_{(n+1) \times m} \cdot \left[\sigma(X\theta) - y\right]_{m \times 1}\]</span></p>
+<p><span class="math display">\[\theta_{n+1 \times 1} = \theta_{n+1 \times 1} - \frac{\alpha}{m} \cdot X^T_{(n+1) \times m} \cdot \left[\sigma(X\theta) - y\right]_{m \times 1}\]</span></p>
 </div>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -613,9 +616,22 @@ p,  &amp; \text{si y = 1} \\
 </div>
 </div>
 </div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>😱Entrenamiento</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Llamaremos al proceso de encontrar los parámetros óptimos del modelo <strong><em>“Entrenamiento”</em></strong>. Es decir, el proceso de encontrar los parámetros <span class="math inline">\(\theta\)</span> que minimizan la Loss Function <span class="math inline">\(L(\theta)\)</span>.</li>
+<li>Un modelo que ya está entrenado, puede ser utilizado para hacer predicciones en nuevos datos. <strong><em>Es fin último de un modelo de Machine Learning es utilizarse en producción, no sólo presentar métricas.</em></strong></li>
+</ul>
+</div>
+</div>
+</div>
 </section></section>
-<section id="esa-fue-la-clase-de-hoy" class="title-slide slide level1 center">
-<h1>Esa fue la clase de hoy 🤯</h1>
+<section id="section" class="title-slide slide level1 center">
+<h1>🤯</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
