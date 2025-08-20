@@ -2435,7 +2435,7 @@
     "href": "tics579/clase-2.html#entrenamiento-de-una-red-neuronal",
     "title": "TICS-579-Deep Learning",
     "section": "Entrenamiento de una Red Neuronal",
-    "text": "Entrenamiento de una Red Neuronal\n\n\n\n\n➡️ Forward Pass\n\n\n\nCorresponde al proceso de calcular las activaciones de cada capa para una matriz de diseño \\(X\\).\nEl forward pass permitirá calcular las variables intermedias que son necesarias para el cálculo del Backward Pass.\n\n\n\n\n\n\n\n\n\n⬅️ Backward Pass\n\n\n\nCorresponde al proceso de calcular las derivadas de cada una de las variables del modelo con respecto a la función de pérdida.\nNotar que muchos calculos del Backward Pass dependen de los resultados del Forward Pass.\n\n\n\n\n\n\n\n\n\n👀 Backpropagation\n\n\nLa combinación del Forward Pass y el Backward Pass se conoce como Backpropagation o Retropropagación."
+    "text": "Entrenamiento de una Red Neuronal\n\n\n\n\n➡️ Forward Pass\n\n\n\nCorresponde al proceso de calcular las activaciones de cada capa para una matriz de diseño \\(X\\).\nEl forward pass permitirá calcular las variables intermedias que son necesarias para el cálculo del Backward Pass las cuales van variando a medida que los parámetros del modelo se actualizan.\n\n\n\n\n\n\n\n\n\n⬅️ Backward Pass\n\n\n\nCorresponde al proceso de calcular las derivadas de cada una de las variables del modelo con respecto a la función de pérdida.\nNotar que muchos calculos del Backward Pass dependen de los resultados del Forward Pass.\n\n\n\n\n\n\n\n\n\n👀 Backpropagation\n\n\nLa combinación del Forward Pass y el Backward Pass se conoce como Backpropagation o Retropropagación."
   },
   {
     "objectID": "tics579/clase-7.html#limitaciones-de-las-ffn",
