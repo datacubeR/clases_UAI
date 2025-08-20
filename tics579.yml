@@ -29,9 +29,18 @@
 - title: "Clase 1"
   subtitle: "Clase 1: Introducción a los Shallow Models"
   author: "Alfonso Tobar-Arancibia"
-  date: 2025-08-22
+  date: 2025-08-21
   image: tics579/thumbnails/clase-1.png
   path: tics579/clase-1.qmd
+  categories:
+   - slides
+
+- title: "Clase 2"
+  subtitle: "Clase 2: Introducción a las Redes Neuronales"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2025-08-21
+  image: tics579/thumbnails/clase-2.png
+  path: tics579/clase-2.qmd
   categories:
    - slides
 #

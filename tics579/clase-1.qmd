@@ -181,19 +181,20 @@ $$\mathcal{l}(\theta) = -\log(\mathcal{L}(\theta)) = -\sum_{i=1}^m \left(y^{(i)}
 ## Regresión Logística: Loss Function {.smaller}
 
 :::{.callout-important appearance="default" icon=false}
-## Función de Pérdida/Loss Function
-Podemos reescribir el Negative Log Likelihood con notación matricial de la siguiente manera: 
-$$L(\theta) = -\left[y^T \log(\bar{p}) + (1-y)^T \log(1-\bar{p})\right]$$
+## Función de Pérdida/Loss Function en notación matricial
+$$L(\theta) = -\frac{1}{m}\left[y^T \log(\bar{p}) + (1-y)^T \log(1-\bar{p})\right]$$
 
 donde $\bar{p} = \sigma(X\theta)$ es el vector de probabilidades estimadas por el modelo.
+
+* **Atención**: Es más común calcular la pérdida promedio, es decir, dividir por $m$.
 :::
 
 :::{.callout-warning appearance="default" icon=false}
 ## Propiedades
-* Si $y^{(i)} = 1$, entonces $L(\theta) = -\log(p^{(i)})$.
+* Si $y^{(i)} = 1$, entonces $L(\theta) = -\frac{1}{m}log(p^{(i)})$.
   * Luego si la probabilidad es cercana a 1, que significa que el modelo predijo correctamente la clase, entonces la pérdida es cercana a 0.
   * Pero si la probabilidad es cercana a 0, entonces la pérdida es alta.
-* Si $y^{(i)} = 0$, entonces $L(\theta) = -\log(1-p^{(i)})$.
+* Si $y^{(i)} = 0$, entonces $L(\theta) = -\frac{1}{m}log(1-p^{(i)})$.
   * Luego si la probabilidad es cercana a 0, que significa que el modelo predijo correctamente la clase, entonces la pérdida es cercana a 0.
   * Pero si la probabilidad es cercana a 1, entonces la pérdida es alta.
 :::
@@ -249,7 +250,7 @@ Supongamos lo siguiente:
 * $e = y^T c$
 * $f = (1-y)^T d$
 * $L* = e + f$
-* $L = -L*$
+* $L = -\frac{1}{m} L*$
 :::
 ::::{.column width="70%"}
 ![](img/clase-1/comp_graph_log_reg.png){.lightbox fig-align="center" width="90%"}
@@ -280,7 +281,7 @@ Luego reemplazamos que $b=\sigma(a)$ y $\sigma(a)'=\sigma(a)(1-\sigma(a))$:
 
 Obtenemos que:
 
-$$\frac{\partial L}{\partial \theta} = \left[\sigma(X\theta)_{m \times 1} - y^T_{1 \times m}\right]X_{m \times (n+1)}$$
+$$\frac{\partial L}{\partial \theta} = \frac{1}{m}\left[\sigma(X\theta)_{m \times 1} - y^T_{1 \times m}\right]X_{m \times (n+1)}$$
 
 ::::{.columns}
 :::{.column}
@@ -288,7 +289,7 @@ $$\frac{\partial L}{\partial \theta} = \left[\sigma(X\theta)_{m \times 1} - y^T_
 ### 😅Ojo con las dimensiones.
 Debemos modificar nuestro cálculo de modo que las dimensiones sean compatibles. Luego: 
 
-$$\frac{\partial L}{\partial \theta}_{(n+1) \times 1} = X^T_{(n+1) \times m} \cdot \left[\sigma(X\theta) - y\right]_{m \times 1}$$
+$$\frac{\partial L}{\partial \theta}_{(n+1) \times 1} = \frac{1}{m}  X^T_{(n+1) \times m} \cdot \left[\sigma(X\theta) - y\right]_{m \times 1}$$
 
 * Tengo que tener un gradiente para cada parámetro (***¿por qué son $n+1$?***)
 :::
@@ -306,7 +307,7 @@ $$\frac{\partial L}{\partial \theta}_{(n+1) \times 1} = X^T_{(n+1) \times m} \cd
 
 :::{style="font-size: 130%;"}
 
-$$\theta_{n+1 \times 1} = \theta_{n+1 \times 1} - \alpha \cdot X^T_{(n+1) \times m} \cdot \left[\sigma(X\theta) - y\right]_{m \times 1}$$
+$$\theta_{n+1 \times 1} = \theta_{n+1 \times 1} - \frac{\alpha}{m} \cdot X^T_{(n+1) \times m} \cdot \left[\sigma(X\theta) - y\right]_{m \times 1}$$
 
 :::
 
@@ -320,8 +321,14 @@ $$\theta_{n+1 \times 1} = \theta_{n+1 \times 1} - \alpha \cdot X^T_{(n+1) \times
 * Encontrar los gradientes de la Loss Function.
 :::
 
+:::{.callout-tip appearance="default" icon=false}
+## 😱Entrenamiento
+* Llamaremos al proceso de encontrar los parámetros óptimos del modelo ***"Entrenamiento"***. Es decir, el proceso de encontrar los parámetros $\theta$ que minimizan la Loss Function $L(\theta)$.
+* Un modelo que ya está entrenado, puede ser utilizado para hacer predicciones en nuevos datos. ***Es fin último de un modelo de Machine Learning es utilizarse en producción, no sólo presentar métricas.***
 
-# Esa fue la clase de hoy 🤯
+:::
+
+# 🤯
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
