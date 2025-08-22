@@ -27,24 +27,25 @@ format:
 
 ## Feed Forward Networks {.smaller}
 
+> Son redes neuronales que se caracterizan por tener una arquitectura en la que la información fluye en una sola dirección, desde las entradas hasta las salidas. En general todas las neuronas de una capa están conectadas a todas las neuronas de la siguiente capa, sin ciclos ni conexiones recurrentes.
+
+
+
 Teorema de aproximación Universal
-: > Se dice que una Red Neuronal puede aproximar ***cualquier función*** en una región cerrada.
+: > Una red neuronal feedforward con al menos una capa oculta y un número finito de neuronas, usando funciones de activación no lineales (como sigmoide, tanh o ReLU), puede aproximar cualquier función continua definida en un conjunto compacto (acotado y cerrado) de $\mathbb{R}^n$ a cualquier nivel de precisión, siempre que se utilicen suficientes neuronas y se ajusten adecuadamente los pesos y sesgos.
 
-Es decir, 
+::: {.callout-important appearance="default"}
+## Importante
+* El teorema dice que es posible encontrar aproximar cualquier función.
+* El teorema no dice ni cómo se hace ni los recursos necesarios para hacerlo (Número de Neuronas, capas, Hiperparámetros, etc.).
+:::
 
-$$\underset{x \in \mathbb{D}}{max}|f(x) - \hat{f(x)}| \le \epsilon$$
-
-con $D \subset \mathbb{R}$ y $\epsilon >0$.
-
-::: {.callout-important}
-* Existen muchas otras funciones como Splines, KNN y otras que también tienen esta propiedad.
-* Si se escogen puntos suficientemente cercanos, cumplir esta propiedad es trivial.
+::: {.callout-tip}
+* Básicamente nos están diciendo que tienes la mejor herramienta que existe, pero es tu responsabilidad saber cómo utilizarla y qué recursos necesitas para lograrlo.
 :::
 
 
 ## Feed Forward Networks (FFN) {.smaller}
-
-> Es un tipo de Arquitectura caracterizada por Nodos en un nivel que se conectan con todos los nodos del siguiente nivel. Este es probablemente el tipo de Arquitectura de Red Neuronal más común.
 
 ::: {.callout-important}
 Este tipo de Redes tiene distintos nombres que son usados de manera intercambiable:
@@ -54,200 +55,235 @@ Este tipo de Redes tiene distintos nombres que son usados de manera intercambiab
 * Multilayer Perceptron: O también conocido como MLP, debido a que es la generalización del Perceptrón, la primera propuesta de Redes Neuronales de Rosenblatt en 1958.
 :::
 
-::: {.columns}
-::: {.column}
+::::{.columns}
+:::{.column}
 ![](img/clase-1/nn_arq.png){.lightbox width="60%" fig-align="center"}
 :::
-::: {.column style="font-size: 70%;"}
-### Comunmente
+:::{.column}
+De ahora en adelante utilizaremos las siguiente notación para referirnos a una Red Neuronal Feed Forward:
 
-* Cada suma-producto de parámetros e inputs corresponde a una capa. Nosotros llamamos capas de parámetros a cada grupo de conexiones. 
-* Cada nodo corresponde a una Neurona. Nosotros consideramos que eso es la nueva dimensión a la que se mueve nuestro vector de entrada.
-  * SPOILER: El número de nodos/neuronas no es importante, nos importan más los parámetros necesarios.
-* La capa de salida corresponde a nuestra Hipótesis.
-:::
-::: 
+$$h_\theta(X) = \sigma_s(Z)$$
 
-
-
-## FFN: Formalmente {.smaller}
-
-::: {.columns}
-::: {.column}
-$$ Z_1 = X$$
-$$Z_{i +1} = \sigma_i(Z_i W_i + b_i)$$
-$$h_\theta(X) = Z_{L + 1}$$
-
-con $\theta = \{W_{1:L}, b_{1:L}\}$ 
-
-para $i=1,...,L$
-
-:::
-::: {.column}
-::: {.callout-important}
-$Z_{i}$ corresponde a la salida de la capa $i$, $W_i$ corresponde al conjunto de parámetros de la capa $i$, y $b_i$ corresponde al **bias** de la capa $i$.
-:::
-::: {.callout-tip}
-* $b_i$ es otro set de parámetros, llamado ***bias*** (el cual se traduce como sesgo, pero lo vamos a mantener en inglés para evitar confusiones semánticas). 
-* Al agregar este componente, ya no se tiene una Transformación Lineal, sino que una ***Transformación Affine***. 
+:::{.callout-warning appearance="default" icon=false}
+## Logits
+Definiremos $Z=\phi_L(X) W_{L+1} + b_{L+1}^T$ como Logits y corresponden a las activaciones de la última capa antes de aplicar la función de activación de salida $\sigma_s(.)$.
 :::
 :::
-::: 
 
-![](img/clase-2/formal_nn.png){.lightbox width="70%" fig-align="center"}
+::::
 
-## FFN - Broadcasting {.smaller}
-
-$$Z_{i + 1} = \sigma_i(Z_i W_i + b_i^T)$$
-
-Si chequeamos las dimensiones: 
-
-::: {.columns}
-::: {.column width="30%"}
-* $Z_i \in \mathbb{R}^{m \times n_i}$
-:::
-::: {.column width="40%"}
-* $W_i \in \mathbb{R}^{n_i \times n_{i+1}}$
-:::
-::: {.column width="30%"}
-* Pero, $b_i \in \mathbb{R}^{n_i+1}$
-:::
-::: 
-
-::: {.callout-warning .fragment}
-Tenemos un problema y es que esto hace que las dimensiones no calcen. Esto sería una operación no válida en términos matriciales. Sin embargo es posible realizarla aplicando ***Broadcasting***.
-:::
-
-::: {.callout-tip appearance="default" .fragment}
-### Broadcasting
-
-Corresponde a una replica de una dimensión de manera de permitir alguna operación que requiera que ciertas dimensiones **calcen**.
-:::
-
-
-::: {.callout-caution appearance="default" .fragment}
-### Broadcasting Rules
-* Cada tensor debe tener al menos una dimensión.
-* Moviéndose de derecha a izquierda por cada dimensión una vez alineadas a la derecha, las dimensiones deben:
-  * Ser iguales,
-  * iguales a 1,
-  * o no debe existir.
-:::
-
-## FFN - Broadcasting {.smaller}
-
-> Matemáticamente el Broadcasting en este caso corresponde a:
-
-$$ b_i^T = 1 b_i^T$$
-
-donde 1, es un vector de **unos** de $m \times 1$ y $b_i$ es de dimensión $n_{i+1} \times 1$, al cuál se está aplicando el producto externo.
-
-::: {.callout-important}
-El Broadcasting permitirá que $b_i$ tenga ahora dimensiones $m \times n_{i+1}$, lo cuál permitirá que la operación de suma se pueda realizar.
-:::
-
-::: {.callout-tip}
-El ***Broadcasting*** evita que se tenga que almacenar información repetida, lo cual permite que las implementaciones sean más eficientes en términos de memoria. ***Siempre*** que se pueda se debe utilizar ***Broadcasting*** para simplificar un cálculo.
-:::
-
-Más info ver: [Numpy Docs](https://numpy.org/doc/stable/user/basics.broadcasting.html)
-
-# Ya pero formalmente, ¿Cómo entrenamos una red Neuronal?
 
 ## Hiperparámetros de una Red Neuronal {.smaller}
 
 Hiperparámetros
-: >  Valores necesarios para el cómputo de una red neuronal que deben ser determinados por el modelador. Estos valores *NO* pueden ser aprendidos de manera autónoma por la red neuronal.
+: >  Son las configuraciones externas que no se aprenden durante el entrenamiento, sino que se definen antes de entrenar el modelo y controlan su comportamiento y rendimiento.
 
-::: {.callout-important style="font-size: 120%;"}
 
-* ***Learning Rate*** (Karpathy Constant: 3e-4)
-* ¿Cuáles son las ***dimensiones*** de los Pesos (Weights) y de los sesgos (Biases)? (De qué tamaño es cada capa)
-* ¿Qué ***funciones de Activación*** se utilizarán?
-* ¿Qué ***funciones de perdida*** se utilizarán?
-* ¿Qué ***optimizadores*** se utilizarán?
-* ¿Cómo se ***inicializarán los parámetros*** de la Red Neuronal?
-* ¿Cuánto ***tiempo*** entrenanaremos nuestro modelo? ¿Cómo sabemos si es que convergió o no?
+::: {.callout-caution style="font-size: 120%;" appearance="default" icon=false}
+## 🤓 Hiperparámetros de una Red Neuronal
+
+* ***Learning Rate*** (Karpathy Constant: 3e-4), valores entre [1e-5, 1e-1] son comunes.
+* **Número de Capas** y sus respectivas dimensiones (Para Pesos/Weights y Sesgos/Biases).
+* **Funciones de Activación** para cada capa.
+* **Función de Pérdida** (Loss Function) a utilizar.
+* **Optimizador** a utilizar.
+* **Punto de Partida** de los Parámetros (Inicialización de Pesos y Sesgos).
+* ¿Cuánto tiempo debo entrenar mi modelo? ***¿Cómo sabemos si es que convergió o no?***
 :::
 
-## Tipos de Hipótesis {.smaller}
+## Output de una Red Neuronal {.smaller}
 
-> En el aprendizaje supervisado contamos principalmente con la resolución de dos tipos de Problemas: Clasificación y Regresión. Dependiendo del tipo de Problema armaremos nuestra hipótesis.
+> En el aprendizaje supervisado se abordan principalmente dos tipos de problemas: clasificación y regresión. Según el tipo de problema, la hipótesis debe adoptar una forma distinta en la capa de salida.
 
-$$h_\theta(X) = Z_{L+1} \in \mathbb{R}^{m \times k}$$
+:::{.callout-important appearance="default" style="font-size: 120%;" icon=false}
+## ⚠️ Dimensión de Salida
+Está definida por el número de valores a predecir para cada observación. Denominaremos $k$ como la dimensión de salida.
 
-<br>
+Para una red de dos capas:
 
+$$\phi_0(X) = X$$
+$$\phi_1(X) = \sigma_1(W_1 \cdot \phi_0(X) + \bar{b_1}^T)$$
+$$\phi_2(X) = \sigma_2(W_2 \cdot \phi_1(X) + \bar{b_2}^T)$$
+
+Donde $W_1 \in \mathbb{R}^{n \times d_1}$ y $W_2 \in \mathbb{R}^{d_1 \times k}$ y $b_1 \in \mathbb{R}^{d_1}$ y $b_2 \in \mathbb{R}^{k}$.
+:::
+
+:::{.callout-note appearance="default" style="font-size: 120%;" icon=false}
+## ✅ Activación de la Salida
+Según el tipo de problema, la capa de salida puede necesitar una función de activación particular que ajuste los resultados al formato correcto. En este sentido, $\sigma_2$ estará determinada por la naturaleza del problema a resolver.
+:::
+
+## Consejos para el Output de una Red {.smaller}
 ::: {.columns}
-::: {.column style="font-size: 70%;"}
-### Clasificación
-
-* **Clasificación Binaria**: Se requiere un $k=1$. Se usa una Función Sigmoide para transformar el Output en la probabilidad de que ocurra la clase positiva.
-* **Clasificación Multiclase**: Se requiere un $k=C$, donde C es el número de clases a clasificar. Se usa una función Softmax para transformar el output en una distribución de probabilidades.
-* **Clasificación Multilabel**: Se requiere un $k=C$ donde C es el número de clases a clasificar. Se usa una función Sigmoide para transformar cada clase en probabilidades.
-
+::: {.column}
+:::{.callout-note appearance="default" icon=false}
+## Clasificación Binaria
+El approach más común utiliza $k=1$ con una ***Sigmoide*** para calcular la probabilidad de la clase 1. Otros approach utilizan $k=2$ para calcular la probabilidad de ambas clases (Activando con ***Softmax***).
 :::
-::: {.column style="font-size: 70%;"}
-### Regresión
 
-* **Regresión Simple**: Se requiere un $k=1$. No requiere de funciones adicionales.
-* **Regresión Multiple**: Se requiere un $k=V$ con V el número de valores a predecir.
-
-::: {.callout-caution}
-Adicionalmente se pueden utilizar funciones como la sigmoide o ReLU para forzar salidas entre 0 y 1 o entre 0 e $\infty$ respectivamente.
+:::{.callout-warning appearance="default" icon=false}
+## Clasificación Multiclase
+Utiliza $k=C$ donde C es el número de clases a clasificar. Se usa una función ***Softmax*** para transformar el output en una distribución de probabilidades.
 :::
+
+:::{.callout-important appearance="default" icon=false}
+## Clasificación Multilabel
+Se requiere un $k=C$ donde C es el número de clases a clasificar. Se usa una función ***Sigmoide*** para transformar cada clase en probabilidades.
+:::
+:::
+::: {.column}
+
+:::{.callout-caution appearance="default" icon=false}
+## Regresión Simple
+Se requiere un $k=1$. Típicamente no requiere de funciones adicionales aunque a veces se agregan funciones para acotar la salida.
+:::
+
+:::{.callout-tip appearance="default" icon=false}
+## Regresión Multiple
+Se requiere un $k=V$ con V el número de valores a predecir. Se deben tener las mismas consideraciones para acotar la salida.
+:::
+
 :::
 ::: 
 
-::: {.callout-tip .fragment}
-Normalmente las funciones necesarias en la capa de salida van embebidas en la Loss Function. Normalmente estas funciones sí deben aplicarse al momento de la ***Predicción del modelo***.
+::: {.callout .fragment appearance="default" icon=false}
+## 👀 Muy Importante
+En la mayoría de las implementaciones en Código la activación de la salida va embebida en la Loss Function. Por lo tanto, no es necesario aplicar una función de activación explícita en la capa de salida. Aunque sí deben aplicarse al momento de la ***Predicción del modelo***.
 :::
 
 ## Funciones de Activación {.smaller}
 
 Activation Functions
-: Corresponden a las funciones que agregarán características no lineales a nuestra hipótesis, impidiendo la composición de transformaciones lineales (o Affine).
+: Corresponden a las funciones que agregarán características no lineales a cada activación, impidiendo la composición de transformaciones Affine.
 
-::: {.callout-tip}
-Como convención, las funciones de activación sólo se aplicarán a las **Hidden Layers**. Es decir $\sigma_{L+1}(x) = x$.
+::: {.callout-tip icon=false appearance="default"}
+## 🤓 Convención para Código
+En Pytorch, nunca aplicaremos una función de activación a la capa de salida.
 :::
 
-::: {.callout-caution}
-Otras convenciones utilizan funciones de activación para la capa de salida. Esto bajo el abánico de Pytorch no es correcto ya que la Activación de la última capa esta embebida en la **Loss Function** (Recordar como Softmax es parte del Cross Entropy). 
-
-Ahora, sí es posible utilizar **funciones de Activación** a la salida de una predicción, pero dichas funciones tienen otro propósito y no son del todo estrictamente necesarias.
+::: {.callout-warning appearance="default"}
+## Cuidado
+Otros frameworks como Tensorflow, Keras, etc. utilizan una convención distinta y aplican funciones de activación a la capa de salida.
 :::
 
-::: {.callout-note}
-***¿Puedo aplicar distintas Funciones de Activación a cada Neurona?***
+::: {.callout-note appearance="default" icon=false}
+## ¿Puedo aplicar distintas Funciones de Activación a cada Neurona?
+
+Puedo, pero no se hace. Complicaría muchísimo la implementación.
 :::
 
-::: {.callout-important}
-Para ver más Activation Functions y detalles de su funcionamiento, ir directamente a la [Documentación de Pytorch](https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity).
-:::
+[Activation Functions in Pytorch](https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity).
 
 ## Funciones de Activación {.smaller}
 
-![](img/clase-3/activation_funcs_1.png){.lightbox width="60%" fig-align="center"}
+### Sigmoide
 
-#### Derivadas:
+::::{.columns}
+:::{.column width="60%"}
+![](img/clase-1/sigmoid.png){.lightbox fig-align="center" width="80%"}
+:::
 
-::: {.columns}
-::: {.column width="30%"}
-* Sigmoide: $g'(z) = g(z)(1 - g(z))$
+:::{.column width="40%"}
+
+:::{.callout-tip appearance="default" icon=false style="font-size: 120%;"}
+## Definición
+
+$$\sigma(z) = \frac{1}{1 + e^{-z}}$$
 :::
-::: {.column width="30%"}
-* Tanh: $g'(z) = 1 - g^2(z)$
+:::{.callout-warning appearance="default" icon=false}
+## Propiedades
+
+* Acota la salida entre 0 y 1.
+* Su derivada es $\sigma'(z) = \sigma(z)(1 - \sigma(z))$.
+* Su gradiente es general es muy pequeño, lo que lleva a problemas de ***Vanishing Gradient***.
+* Su principal uso es en la capa de salida para problemas de clasificación binaria y Clasificación Multilabel.
 :::
-::: {.column width="40%"}
-* ReLU: $g'(z) =
-\begin{cases}
-0,  & \text{if $z \le$ 0} \\[2ex]
-1, & \text{if $z > 0$}
+:::
+::::
+
+## Funciones de Activación {.smaller}
+
+### Softmax
+
+::::{.columns}
+:::{.column width="60%"}
+![](img/clase-3/softmax.png){.lightbox fig-align="center" width="80%"}
+:::
+
+:::{.column width="40%"}
+
+:::{.callout-tip appearance="default" icon=false style="font-size: 120%;"}
+## Definición
+
+$$S_i(z) = \frac{e^{z_i}}{\sum_{j=1}^k e^{z_j}}$$
+:::
+:::{.callout-warning appearance="" icon=false}
+## Propiedades
+
+* Transofrma un vector en una distribución de probabilidad.
+* Su principal uso es en la capa de salida para problemas de clasificación multiclase. Es por lejos la función de activación más utilizada en la salida, pero en casos más avanzados también en Mecanismos de Atención.
+:::
+:::
+::::
+
+
+## Funciones de Activación {.smaller}
+
+### Tanh
+
+::::{.columns}
+:::{.column width="60%"}
+![](img/clase-3/tanh.jpg){.lightbox fig-align="center" width="80%"}
+:::
+
+:::{.column width="40%"}
+
+:::{.callout-tip appearance="default" icon=false style="font-size: 120%;"}
+## Definición
+
+$$Tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$$
+:::
+:::{.callout-warning appearance="" icon=false}
+## Propiedades
+
+* Acota su salida entre -1 y 1.
+* Su derivada es $Tanh'(z) = 1 - Tanh^2(z)$.
+* Su gradiente normalmente es más grande que el de la Sigmoide, pero aún así puede llevar a problemas de ***Vanishing Gradient***.
+* A pesar de estar un poco en desuso, tiene un rol protagónico en las `Redes Recurrentes` (RNNs).
+:::
+:::
+::::
+
+## Funciones de Activación {.smaller}
+
+### ReLU (Rectified Linear Unit)
+
+::::{.columns}
+:::{.column width="60%"}
+![](img/clase-3/relu.png){.lightbox fig-align="center" width="80%"}
+:::
+
+:::{.column width="40%"}
+
+:::{.callout-tip appearance="default" icon=false style="font-size: 120%;"}
+## Definición
+
+$$ReLU(z) = max(0, z)$$
+:::
+
+:::{.callout-warning appearance="" icon=false}
+## Propiedades
+
+* Acota su salida entre 0 e $\infty$.
+* Su derivada es $ReLU'(z) = \begin{cases}
+1,  & \text{if $z \ge$ 0} \\
+0 & \text{if $z < 0$}
 \end{cases}$
+* Es la función de activación más utilizada en la actualidad, principalmente en las capas ocultas de las Redes Neuronales.
+* Se hizo extremadamente popular por su simplicidad y efectividad en `Redes Convolucionales` (CNNs).
 :::
-::: 
-
+:::
+::::
 
 ## Funciones de Activación Modernas {.smaller}
 
@@ -303,160 +339,269 @@ $$g(z) = z \cdot sigmoid(z)$$
 :::
 ::: 
 
-## Loss Functions {.smaller}
+## Loss Functions: Clasificación {.smaller}
 
-> Al igual que el caso de la Hipótesis, la Loss Function dependerá del tipo de problema a resolver. Existen muchas Loss Functions, pero los más comunes para problemas generales son las siguientes: 
+> Son las encargadas de medir el error entre la predicción del modelo y el valor real. En general, se busca minimizar la Loss Function durante el entrenamiento del modelo.
 
-##### Clasificación Binaria: Binary Cross Entropy
+:::{.callout-note appearance="default" icon=false style="font-size: 120%;"}
+## Clasificación Binaria: Binary Cross Entropy
 
-$$BCE_i = - \left[y_i \cdot log(h(x_i)) + (1-y_i) log(1-h(x_i))\right]$$
+$$BCE(Z) = - \frac{1}{m}\left[y^T log(\sigma(Z)) + (1-y)^T log(1-\sigma(Z))\right]$$
 
-donde $h(x)$ corresponde a un valor de probabilidad de la clase positiva (debe ir entre 0 y 1).
-
-::: {.callout-important}
-En Pytorch se suele utilizar `BCEWithLogitsLoss` ya que aplica una función Sigmoide a la capa de salida además de ser una clase numericamente más estable. Esto garantiza que la salida de la Red tiene valores entre 0 y 1 como se necesita.
+Donde $Z$ corresponden a los Logits del Modelo.
 :::
 
-##### Clasificación Multiclase: CrossEntropy
-$$CE_i = -log \left(\frac{exp(h_{(i=y)}(x_i))}{\sum_{j=1}^k exp(h_j(x_i))}\right)$$
-
 ::: {.callout-important}
+En Pytorch esta función se llama `BCEWithLogitsLoss`.
+:::
+
+:::{.callout-warning appearance="default" icon=false style="font-size: 120%;"}
+## 🤓 Logits
+Se refiere a las activaciones finales del modelo antes de aplicar la función de activación.
+:::
+
+::: {.callout-important appearance="default"}
+## 👊 Clasificación Multilabel: BCEWithLogitsLoss
+En Pytorch se suele utilizar `BCEWithLogitsLoss` ya que combina una sigmoide a cada activación de la salida.
+:::
+
+## Loss Functions: Clasificación {.smaller}
+
+:::{.callout-note appearance="default" icon=false style="font-size: 120%;"}
+## Clasificación Multiclase: CrossEntropy
+$$CE(Z)= \frac{1}{m}Tr(Y^T \hat{Y})$$
+
+Donde $Tr(.)$ es la traza de una matriz e $Y \in \{0,1\}^{m \times k}$ es la codificación One-Hot de las etiquetas y $\hat{Y} = Softmax(Z)$, donde $Z$ son los Logits del modelo.
+:::
+
+:::{.callout-tip appearance="default" icon=false style="font-size: 120%;"}
+## 🤓 Traza ($Tr(.)$)
+Corresponde a la suma de los elementos de la diagonal principal de una matriz.
+:::
+
+:::{.callout-warning appearance="default" icon=false style="font-size: 120%;"}
+## Derivada
+$$\frac{\partial CE(X)}{\partial Z} = \frac{1}{m}\left(Softmax(Z) - Y\right)$$
+:::
+
+::: {.callout-tip}
 En Pytorch se suele utilizar `CrossEntropyLoss` ya que combina aplica una función Softmax a la capa de salida además de ser una clase numericamente más estable.
 :::
 
-## Loss Functions {.smaller}
 
-##### Clasificación Multilabel: CrossEntropy
 
-Para este tipo de problema se debería aplicar un Negative LogLoss combinado con la salidas de una red que van entre 0 y 1 (es decir, que se aplica una Sigmoide)
+## Loss Functions: Regresión {.smaller}
 
-::: {.callout-important}
-En Pytorch se suele utilizar `BCEWithLogitsLoss` ya que combina aplica una función Softmax a la capa de salida y permite resultados de más de una dimensión.
+:::{.callout-note appearance="default" icon=false style="font-size: 120%;"}
+## Regresión: Mean Squared Error (MSELoss)
+$$MSE(Z) = \frac{1}{m}||Z - \bar{y}||^2$$
+
+Donde $||.||$ corresponde a la norma Euclideana e $\bar{y} \in \mathbb{R}^{m \times 1}$.
 :::
 
-##### Regresión
-
-::: {.columns}
-::: {.column}
-* Mean Absolute Error o L1Loss
-
-$$L1_i = |y_i - h(x_i)|$$
-:::
-::: {.column}
-* Mean Squared Error Loss o L2Loss
-
-$$L2_i = (y_i - h(x_i))^2$$
-:::
-::: 
-
-
-::: {.callout-important}
-Es importante recordar que en general se debe calcular un valor agregado de la Loss Function. En Pytorch a esto se le llama `reduction`. Donde el más utilizado es `reduction="mean"`. Es decir,
-
-$$l = \frac{1}{m}\sum_{i=1}^m L_i$$
+:::{.callout-warning appearance="default" icon=false style="font-size: 120%;"}
+## Derivada
+$$\frac{\partial MSE(Z)}{\partial Z} = \frac{2}{m}(Z - \bar{y})$$
 :::
 
-## Optimizers {.smaller}
+## Loss Functions: Regresión {.smaller}
 
+
+:::{.callout-note appearance="default" icon=false style="font-size: 120%;"}
+## Regresión: Mean Absolute Error (L1Loss)
+
+$$L1Loss(Z) = \frac{1}{m}|Z - \bar{y}|$$
+
+Donde $||.||$ corresponde a la norma Euclideana y $\bar{y} \in \mathbb{R}^{m \times 1}$.
+:::
+
+:::{.callout-warning appearance="default" icon=false style="font-size: 120%;"}
+## Derivada
+$$\frac{\partial L1Loss(Z)}{\partial Z} = \frac{1}{m}sign(Z-\bar{y})$$
+
+$$\operatorname{sign}(z) =
+\begin{cases}
++1 & \text{si  z > 0},\\[2mm]
+0 & \text{si z = 0},\\[1mm]
+-1 & \text{si z < 0}
+\end{cases}$$
+:::
+
+
+## Optimizers: Gradient Descent {.smaller}
+
+:::{style="font-size: 80%;"}
 > Gradient Descent corresponde al algoritmo de Optimización más popular, pero no necesariamente el más eficiente. Distintas variantes han ido apareciendo para ir mejorando eventuales deficiencias de la proposición inicial.
+:::
 
-#### Normal Gradient Descent
+:::{.callout-warning appearance="default" icon=false}
+## Epochs
+Corresponden a la cantidad de iteraciones que se realizan a la Update Rule para que el modelo se optimize.
+:::
 
-$$\theta := \theta - \frac{\alpha}{m}\nabla_\theta l(h_\theta(X), y), \text{donde $X \in \mathbb{R}^{m \times n}$ e $y \in \mathbb{R}^{m \times 1}$}$$
+:::{.callout-note appearance="default" icon=false style="font-size: 120%;"}
+#### Standard Gradient Descent
+
+$$\theta := \theta - \frac{\alpha}{m}\nabla_\theta L$$
+:::
+
+::: {.callout-caution appearance="default"} 
+### Importante
+* En Deep Learning, los conjuntos de datos suelen ser tan grandes que calcular el gradiente sobre todos ellos es inviable por memoria y tiempo de cómputo.
+* Adicionalmente no basta con calcular el gradiente una vez, sino que se debe hacer varias veces según el número de Epochs definido.
+* Practicar Standard Gradient Descent en la práctica es muy poco común, ya que no es eficiente.
+:::
+
+## Minibatch Gradient Descent {.smaller}
 
 ::: {.callout-important}
-La dirección del Gradiente utilizando menos puntos debería ser más o menos similar. Sin duda, más ruidoso, pero a la larga debería dirigir en ***casi*** la misma dirección. Por lo que podríamos hacer actualizaciones de parámetros utilizando B datos con B << m. 
+
+Los `minibatches` permiten estimar el gradiente con un subconjunto de datos, manteniendo la dirección correcta para actualizar los parámetros de manera más eficiente. Se realiza en un subconjunto de $B$ datos donde $B << m$.
 :::
 
-::: {.callout-tip}
-Esto entrega como beneficio, menos requerimientos de memoria, ya que operarían matrices más pequeñas, por lo tanto, requiere de menos RAM tanto en CPU como en GPU.
+
+$$\theta := \theta - \frac{\alpha}{B}\nabla_\theta L$$
+
+:::{.callout-warning appearance="default" icon=false}
+## 👀 Importante
+* $X \in \mathbb{R}^{B \times n}$ e $y \in \mathbb{R}^{B \times 1}$ son versiones reducidas de los datos totales. Se deben hacer suficientes `minibatches` para utilizar todos los datos.
+* Cada actualización de parámetros ahora se le denomina `step`.
+* Cuando todos losd `minibatches` han sido utilizados, se dice que se ha completado una `epoch`.
+* Es común utilizar un `minibatch` de tamaño 32, 64 o 128.
+* A veces se deshecha el último `minibatch` si no tiene el tamaño completo para evitar problemas de estabilidad de graientes.
 :::
 
-##### Stochastic Gradient Descent (MiniBatch)
+:::{.callout-tip appearance="default" icon=false}
+## Pros
+* Permite optimizar utilizando menos recursos computacionales.
+* Al actualizar los parámetros de manera más frecuente, se puede converger más rápido.
+:::
 
-::: {.columns}
-::: {.column width="60%"}
-$$\theta := \theta - \frac{\alpha}{B}\nabla_\theta l(h_\theta(X), y), \text{donde $X \in \mathbb{R}^{B \times n}$ e $y \in \mathbb{R}^{B \times 1}$}$$
+:::{.callout-important appearance="default" icon=false}
+## Contras
+* Si $B$ es muy pequeño, el gradiente puede ser muy ruidoso y no converger.
+* El entrenamiento toma más tiempo que el Standard Gradient Descent.
 :::
-::: {.column width="40%"}
-::: {.callout-note}
-
-Se van tomando $B$ muestras de manera incremental hasta utilizar la totalidad de datos de entrenamiento
-:::
-:::
-::: 
 
 ## SGD with Momentum {.smaller}
 
+::::{.columns}
+:::{.column style="font-size: 90%;"}
 #### Update Rule
 
-$$u_{t + 1} = \beta u_t + (1-\beta) \nabla_\theta f(\theta_t)$$
-$$\theta_{t+1} = \theta_t - \alpha u_{t + 1}$$
+$$\theta_{t+1} = \theta_t - \alpha v_{t + 1}$$
+$$v_{t+1} = \beta v_{t} + (1-\beta) \nabla_\theta L(\theta_{t+1})$$
 
 donde $0<\beta<1$, pero normalmente $\beta=0.9$.
+:::
+:::{.column}
+![](img/clase-3/momentum_update.png){.lightbox width="45%" fig-align="center"}
+:::
+::::
 
-::: {.callout-important}
-Este cálculo se denomina un Exponential Moving Average de los Gradientes.
+::: {.callout-note appearance="default" icon=false}
+## ☝️ Intuición
+* Este cálculo se denomina un Exponential Moving Average de los Gradientes. Y se puede interpretar como una especie de velocidad del gradiente. Su objetivo es ponderar con un cierto porcentaje el gradiente actual y el gradiente anterior.
+* $v_{0} = 0$
 :::
 
-$$\begin{align} u_{t+1}&=(1-\beta)\nabla_\theta f(\theta_{t}) + \beta u_t \\
-u_{t+1}&=(1-\beta)\nabla_\theta f(\theta_{t}) + \beta \left[(1-\beta) \nabla_\theta f(\theta_{t-1}) + \beta u_{t-1}\right] \\
-u_{t+1}&=(1-\beta)\nabla_\theta f(\theta_{t}) + \beta (1-\beta) \nabla_\theta f(\theta_{t-1}) + \beta^2 (1-\beta) \nabla_\theta f(\theta_{t-2})... \\
+$$\begin{align} v_{t+1}&=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta v_t \\
+v_{t+1}&=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta \left[(1-\beta) \nabla_\theta L(\theta_{t-1}) + \beta v_{t-1}\right] \\
+v_{t+1}&=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\theta L(\theta_{t-1}) + \beta^2 (1-\beta) \nabla_\theta L(\theta_{t-2})... \\
 \end{align}$$
-
-::: {.callout-tip}
-La componente de momento, está tomando en consideración todos los otros Gradientes en pasos anteriores para escoger correctamente la dirección del Gradiente actual.
-:::
 
 ## SGD with Nesterov Momentum {.smaller}
 
-$$u_{t + 1} = \beta u_t + (1-\beta) \nabla_\theta f(\theta_t - \alpha u_t)$$
+::::{.columns}
+:::{.column}
 $$\theta_{t+1} = \theta_t - \alpha u_{t + 1}$$
+$$v_{t + 1} = \beta v_t + (1-\beta) \nabla_\theta f(\theta_{t+1} + \beta v_t)$$
 
-::: {.callout-tip}
-Notar que la lógica es casi la misma, sólo que el Gradiente se evalúa en un ***punto futuro***. Es decir, $\theta_t-\alpha u_t$ corresponde al punto siguiente utilizando SGD con Momentum. 
+
+donde $0<\beta<1$, pero normalmente $\beta=0.9$.
+:::
+:::{.column}
+![](img/clase-3/nesterov_update.png){.lightbox fig-align="center" width="50%"}
+:::
+::::
+::: {.callout-note appearance="default" icon=false}
+
+## ☝️ Intuición
+El método de Nesterov "mira hacia adelante" en la dirección del momentum antes de calcular el gradiente, lo que le da una corrección más precisa y evita en parte el sobrepaso de mínimos. En este caso $\theta_{t+1} + \beta v_t$ es el punto "futuro" para calcular el gradiente.
 :::
 
-::: {.columns}
-::: {.column}
-#### Momentum
-![](img/clase-3/momentum.png){.lightbox width="60%" fig-align="center"}
-:::
-::: {.column}
-#### Nesterov
-![](img/clase-3/nesterov.png){.lightbox width="60%" fig-align="center"}
-:::
-::: 
+## Efecto del Momentum en el Update Rule {.smaller}
 
-## Métodos Adaptativos: Adagrad 
 
-> ¿Qué tal, si la tasa de aprendizaje se va adaptando en el tiempo y deja de ser estática?
+![](img/clase-3/momentum_effect.png){.lightbox fig-align="center"}
 
-::: {.callout-note appearance="default"}
-## Idea
-* Normalizar por la historia de los gradientes al cuadrado.
+:::{.callout-note appearance="default" icon=false}
+## ☝️ Intuición
+
+* El SGD tiende a ser más oscilante.
+* El SGD con Momentum tiende a ser más suave y rápido debido a la inercia recibida por el término de momentum.
 :::
+
+## Métodos Adaptativos: Adagrad {.smaller}
+
+:::{.callout-note appearance="default" icon=false}
+## ☝️ Intuición
+¿Qué tal, si el learning rate se va adaptando en el tiempo y deja de ser estática?
+:::
+
 
 $$r_{t+1} = r_t + \nabla_\theta f(\theta_t)^2$$
 $$\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{r_{t+1}}}\nabla_\theta f(\theta_t)$$
 
-## Métodos Adaptativos: RMSProp
-
-::: {.callout-note appearance="default"}
-## Idea
-* Normalizar por el Exponential Moving Average de los Gradientes al cuadrado.
+:::{.callout-warning appearance="default" icon=false}
+## Efecto
+* Parámetros con gradientes grandes $\rightarrow$ tasa de aprendizaje disminuye más rápido.
+* Parámetros con gradientes pequeños $\rightarrow$ tasa de aprendizaje se mantiene más alta.
 :::
+
+:::{.callout-tip appearance="default" icon=false}
+## Pros
+* Util cuando hay parámetros que se actualizan con distinta freciencia.
+* Acelera la convergencia en direcciones poco exploradas.
+:::
+
+:::{.callout-important appearance="default" icon=false}
+## Contras
+* Como el denominador acumula gradientes al cuadrado, la tasa de aprendizaje puede llegar a volverse muy pequeña $\rightarrow$ el entrenamiento se ***"frena"*** antes de llegar al óptimo.
+:::
+
+
+## Métodos Adaptativos: RMSProp {.smaller}
+
+::: {.callout-note appearance="default" icon=false}
+## ☝️ Intuición
+* Normalizar por el Exponential Moving Average de los Gradientes al cuadrado para controlar el efecto de reducción del learning rate.
+:::
+
 
 $$s_{t+1} = \beta r_t + (1-\beta) \nabla_\theta f(\theta_t)^2$$
 $$\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{s_{t+1}}}\nabla_\theta f(\theta_t)$$
 
 
-## Métodos Adaptativos: Adam
-
-::: {.callout-note appearance="default"}
-## Idea
-* Combinar Descenso con Momentum y RMSProp.
+:::{.callout-tip appearance="default" icon=false}
+## Pros
+* Normalización adaptativa: cada parámetro tiene su propia tasa de aprendizaje ajustada dinámicamente.
+* A diferencia de Adagrad, el denominador no crece indefinidamente porque el promedio exponencial “olvida” gradientes antiguos. Esto permite seguir aprendiendo incluso después de muchos pasos.
 :::
+
+:::{.callout-important appearance="default" icon=false}
+## Contras
+* Depende mucho de la elección de su hiperparámetro $\beta$
+:::
+
+## Métodos Adaptativos: Adam {.smaller}
+
+::: {.callout-note appearance="default" icon=false}
+## ☝️ Intuición
+Se mantiene el Exponential Moving average para: Los gradientes (como utilizando momentum), los gradientes al cuadrado (como RMSprop).
+
+:::
+
 
 ::: {.columns}
 ::: {.column}
@@ -472,13 +617,19 @@ $$s'_{t+1} = \frac{v_{t+1}}{1-\beta_2^{t+1}}$$
 :::
 ::: 
 
-::: {.callout-important}
-Pytorch utiliza 0.9 y 0.999 como valores de $\beta_1$ y $\beta_2$ respectivamente.
+
+:::{.callout-tip appearance="default" icon=false}
+## Pros
+* Combina momentum + RMSprop + corrección $\rightarrow$ rápido, estable.
+* Es por lejos el optimizador más usado.
 :::
 
+:::{.callout-important appearance="default" icon=false}
+## Contras
+* Sensible a la elección de sus hiperparámetros $\beta_1$ y $\beta_2$. Pytorch utiliza 0.9 y 0.999 como valores de $\beta_1$ y $\beta_2$ respectivamente.
+:::
 
-
-# Eso es todo amigos
+# 👊 Eso es todo amigos
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
