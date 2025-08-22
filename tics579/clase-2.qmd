@@ -191,7 +191,7 @@ $$\phi_{L+1}(X) = \phi_L(X) W_{L+1} + b_{L+1}^T$$
 :::
 
 :::{.callout-warning appearance="default" icon=false}
-## `¡Pero esto es una operación inválida!` 🙄 No. Gracias al Broadcasting, esto es equivalente a hacer $1_m \bar{b}^T$, donde $1_m$ es un vector columna de unos de tamaño $m x 1$ Esto implica que cada componente de $\bar{b} se suma igual a todas las muestras.
+## `¡Pero esto es una operación inválida!` 🙄 No. Gracias al Broadcasting, esto es equivalente a hacer $1_m \bar{b}^T$, donde $1_m$ es un vector columna de unos de tamaño $m x 1$ Esto implica que cada componente de $\bar{b}$ se suma igual a todas las muestras.
 :::
 
 :::{.callout-tip appearance="default" syle="font-size: 130%;"}
@@ -256,9 +256,9 @@ Si $L=-[y^T log(p) + (1-y)^T log(1-p)]$ entonces:
 
 $$\frac{\partial L}{\partial p} = -\frac{1}{m} \left[\frac{y^T}{p} - \frac{1 -y)^T}{(1-p)}\right] = \frac{1}{m} \left[\frac{p-y}{p(1-p)}\right]$$
 
-$$\frac{\partial L}{\partial \phi_2} = \frac{\partial L}{\partial p} \cdot \sigma'(\phi_2)=\frac{1}{m} \left[\frac{p-y}{p(1-p)}\right] p (1-p) = \frac{1}{m} \left[p-y\right]$$
+$$\frac{\partial L}{\partial \phi_2} = \frac{\partial L}{\partial p} \frac{\partial p}{\partial \phi_2} = \frac{1}{m} \left[\frac{p-y}{p(1-p)}\right] p (1-p) = \frac{1}{m} \left[p-y\right]$$
 
-$$\frac{\partial L}{\partial b_2} = \frac{\partial L}{\partial \phi_2} \cdot 1_m = \frac{1}{m} 1_m^T \left[p-y\right]$$
+$$\frac{\partial L}{\partial b_2} = \frac{\partial L}{\partial \phi_2} \frac{\partial \phi_2}{\partial b_2} = \frac{1}{m} 1_m^T \left[p-y\right]$$
 
 $$\frac{\partial L}{\partial v} = \frac{\partial L}{\partial \phi_2} \frac{\partial \phi_2}{\partial v} = \frac{\partial L}{\partial \phi_2}$$
 
@@ -269,7 +269,7 @@ $$\frac{\partial L}{\partial W_2} = \frac{\partial L}{\partial v} \frac{\partial
 
 :::{.callout-tip appearance="default" icon=false}
 ## Update Rule para $b_2$
-$$b_2 = b_2 - \alpha \frac{1}{m} 1_m^T \left[p-y\right]$$
+$$b_2^T = b_2^T - \alpha \frac{1}{m} 1_m^T \left[p-y\right]$$
 :::
 
 :::{.callout-note appearance="default" icon=false}
@@ -297,7 +297,7 @@ $$\frac{\partial L}{\partial W_1} = \frac{\partial L}{\partial u} \frac{\partial
 ::::{.columns}
 :::{.callout-tip appearance="default" icon=false .column}
 ## Update Rule para $b_1$
-$$b_1 = b_1 - \alpha \frac{1_m^T}{m} [p-y] W_2^T \odot [Z_1  \odot (1-Z_1)]$$
+$$b_1^T = b_1^T - \alpha \frac{1_m^T}{m} [p-y] W_2^T \odot [Z_1  \odot (1-Z_1)]$$
 :::
 
 :::{.callout-note appearance="default" icon=false .column}
@@ -333,3 +333,36 @@ La combinación del `Forward Pass` y el `Backward Pass` se conoce como `Backprop
 
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
 :::
+
+# Anexo
+
+## Broadcasting Rules {.smaller}
+
+::::{style="font-size: 120%;"}
+::: {.callout-tip appearance="default"}
+### Broadcasting
+
+Corresponde a una replica de una dimensión de manera de permitir alguna operación que requiera que ciertas dimensiones **calcen**.
+:::
+
+
+
+
+
+::: {.callout-caution appearance="default"}
+### Broadcasting Rules
+* Cada tensor debe tener al menos una dimensión.
+* Moviéndose de derecha a izquierda por cada dimensión una vez alineadas a la derecha, las dimensiones deben:
+  * Ser iguales,
+  * iguales a 1,
+  * o no debe existir.
+:::
+
+::: {.callout-note}
+El ***Broadcasting*** evita que se tenga que almacenar información repetida, lo cual permite que las implementaciones sean más eficientes en términos de memoria. ***Siempre*** que se pueda se debe utilizar ***Broadcasting*** para simplificar un cálculo.
+:::
+
+Más info ver: [Numpy Docs](https://numpy.org/doc/stable/user/basics.broadcasting.html)
+::::
+
+
