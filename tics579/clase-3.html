@@ -155,26 +155,41 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="feed-forward-networks-1" class="slide level2 smaller">
 <h2>Feed Forward Networks</h2>
+<blockquote>
+<p>Son redes neuronales que se caracterizan por tener una arquitectura en la que la información fluye en una sola dirección, desde las entradas hasta las salidas. En general todas las neuronas de una capa están conectadas a todas las neuronas de la siguiente capa, sin ciclos ni conexiones recurrentes.</p>
+</blockquote>
 <dl>
 <dt>Teorema de aproximación Universal</dt>
 <dd>
 <blockquote>
-<p>Se dice que una Red Neuronal puede aproximar <strong><em>cualquier función</em></strong> en una región cerrada.</p>
+<p>Una red neuronal feedforward con al menos una capa oculta y un número finito de neuronas, usando funciones de activación no lineales (como sigmoide, tanh o ReLU), puede aproximar cualquier función continua definida en un conjunto compacto (acotado y cerrado) de <span class="math inline">\(\mathbb{R}^n\)</span> a cualquier nivel de precisión, siempre que se utilicen suficientes neuronas y se ajusten adecuadamente los pesos y sesgos.</p>
 </blockquote>
 </dd>
 </dl>
-<p>Es decir,</p>
-<p><span class="math display">\[\underset{x \in \mathbb{D}}{max}|f(x) - \hat{f(x)}| \le \epsilon\]</span></p>
-<p>con <span class="math inline">\(D \subset \mathbb{R}\)</span> y <span class="math inline">\(\epsilon &gt;0\)</span>.</p>
-<div class="callout callout-important callout-style-simple">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Importante</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>El teorema dice que es posible encontrar aproximar cualquier función.</li>
+<li>El teorema no dice ni cómo se hace ni los recursos necesarios para hacerlo (Número de Neuronas, capas, Hiperparámetros, etc.).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
 <ul>
-<li>Existen muchas otras funciones como Splines, KNN y otras que también tienen esta propiedad.</li>
-<li>Si se escogen puntos suficientemente cercanos, cumplir esta propiedad es trivial.</li>
+<li>Básicamente nos están diciendo que tienes la mejor herramienta que existe, pero es tu responsabilidad saber cómo utilizarla y qué recursos necesitas para lograrlo.</li>
 </ul>
 </div>
 </div>
@@ -182,9 +197,6 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="feed-forward-networks-ffn" class="slide level2 smaller">
 <h2>Feed Forward Networks (FFN)</h2>
-<blockquote>
-<p>Es un tipo de Arquitectura caracterizada por Nodos en un nivel que se conectan con todos los nodos del siguiente nivel. Este es probablemente el tipo de Arquitectura de Red Neuronal más común.</p>
-</blockquote>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -207,158 +219,20 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-1/nn_arq.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-1/nn_arq.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
-</div><div class="column" style="font-size: 70%;">
-<h3 id="comunmente">Comunmente</h3>
-<ul>
-<li>Cada suma-producto de parámetros e inputs corresponde a una capa. Nosotros llamamos capas de parámetros a cada grupo de conexiones.</li>
-<li>Cada nodo corresponde a una Neurona. Nosotros consideramos que eso es la nueva dimensión a la que se mueve nuestro vector de entrada.
-<ul>
-<li>SPOILER: El número de nodos/neuronas no es importante, nos importan más los parámetros necesarios.</li>
-</ul></li>
-<li>La capa de salida corresponde a nuestra Hipótesis.</li>
-</ul>
-</div></div>
-</section>
-<section id="ffn-formalmente" class="slide level2 smaller">
-<h2>FFN: Formalmente</h2>
-<div class="columns">
-<div class="column">
-<p><span class="math display">\[ Z_1 = X\]</span> <span class="math display">\[Z_{i +1} = \sigma_i(Z_i W_i + b_i)\]</span> <span class="math display">\[h_\theta(X) = Z_{L + 1}\]</span></p>
-<p>con <span class="math inline">\(\theta = \{W_{1:L}, b_{1:L}\}\)</span></p>
-<p>para <span class="math inline">\(i=1,...,L\)</span></p>
 </div><div class="column">
-<div class="callout callout-important callout-style-simple">
+<p>De ahora en adelante utilizaremos las siguiente notación para referirnos a una Red Neuronal Feed Forward:</p>
+<p><span class="math display">\[h_\theta(X) = \sigma_s(Z)\]</span></p>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Logits</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math inline">\(Z_{i}\)</span> corresponde a la salida de la capa <span class="math inline">\(i\)</span>, <span class="math inline">\(W_i\)</span> corresponde al conjunto de parámetros de la capa <span class="math inline">\(i\)</span>, y <span class="math inline">\(b_i\)</span> corresponde al <strong>bias</strong> de la capa <span class="math inline">\(i\)</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li><span class="math inline">\(b_i\)</span> es otro set de parámetros, llamado <strong><em>bias</em></strong> (el cual se traduce como sesgo, pero lo vamos a mantener en inglés para evitar confusiones semánticas).</li>
-<li>Al agregar este componente, ya no se tiene una Transformación Lineal, sino que una <strong><em>Transformación Affine</em></strong>.</li>
-</ul>
+<p>Definiremos <span class="math inline">\(Z=\phi_L(X) W_{L+1} + b_{L+1}^T\)</span> como Logits y corresponden a las activaciones de la última capa antes de aplicar la función de activación de salida <span class="math inline">\(\sigma_s(.)\)</span>.</p>
 </div>
 </div>
 </div>
 </div></div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-2/formal_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-2/formal_nn.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</section>
-<section id="ffn---broadcasting" class="slide level2 smaller">
-<h2>FFN - Broadcasting</h2>
-<p><span class="math display">\[Z_{i + 1} = \sigma_i(Z_i W_i + b_i^T)\]</span></p>
-<p>Si chequeamos las dimensiones:</p>
-<div class="columns">
-<div class="column" style="width:30%;">
-<ul>
-<li><span class="math inline">\(Z_i \in \mathbb{R}^{m \times n_i}\)</span></li>
-</ul>
-</div><div class="column" style="width:40%;">
-<ul>
-<li><span class="math inline">\(W_i \in \mathbb{R}^{n_i \times n_{i+1}}\)</span></li>
-</ul>
-</div><div class="column" style="width:30%;">
-<ul>
-<li>Pero, <span class="math inline">\(b_i \in \mathbb{R}^{n_i+1}\)</span></li>
-</ul>
-</div></div>
-<div class="fragment">
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Tenemos un problema y es que esto hace que las dimensiones no calcen. Esto sería una operación no válida en términos matriciales. Sin embargo es posible realizarla aplicando <strong><em>Broadcasting</em></strong>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Broadcasting</strong></p>
-</div>
-<div class="callout-content">
-<p>Corresponde a una replica de una dimensión de manera de permitir alguna operación que requiera que ciertas dimensiones <strong>calcen</strong>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Broadcasting Rules</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Cada tensor debe tener al menos una dimensión.</li>
-<li>Moviéndose de derecha a izquierda por cada dimensión una vez alineadas a la derecha, las dimensiones deben:
-<ul>
-<li>Ser iguales,</li>
-<li>iguales a 1,</li>
-<li>o no debe existir.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="ffn---broadcasting-1" class="slide level2 smaller">
-<h2>FFN - Broadcasting</h2>
-<blockquote>
-<p>Matemáticamente el Broadcasting en este caso corresponde a:</p>
-</blockquote>
-<p><span class="math display">\[ b_i^T = 1 b_i^T\]</span></p>
-<p>donde 1, es un vector de <strong>unos</strong> de <span class="math inline">\(m \times 1\)</span> y <span class="math inline">\(b_i\)</span> es de dimensión <span class="math inline">\(n_{i+1} \times 1\)</span>, al cuál se está aplicando el producto externo.</p>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>El Broadcasting permitirá que <span class="math inline">\(b_i\)</span> tenga ahora dimensiones <span class="math inline">\(m \times n_{i+1}\)</span>, lo cuál permitirá que la operación de suma se pueda realizar.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>El <strong><em>Broadcasting</em></strong> evita que se tenga que almacenar información repetida, lo cual permite que las implementaciones sean más eficientes en términos de memoria. <strong><em>Siempre</em></strong> que se pueda se debe utilizar <strong><em>Broadcasting</em></strong> para simplificar un cálculo.</p>
-</div>
-</div>
-</div>
-<p>Más info ver: <a href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy Docs</a></p>
-</section></section>
-<section>
-<section id="ya-pero-formalmente-cómo-entrenamos-una-red-neuronal" class="title-slide slide level1 center">
-<h1>Ya pero formalmente, ¿Cómo entrenamos una red Neuronal?</h1>
-
 </section>
 <section id="hiperparámetros-de-una-red-neuronal" class="slide level2 smaller">
 <h2>Hiperparámetros de una Red Neuronal</h2>
@@ -366,71 +240,128 @@ Alfonso Tobar-Arancibia
 <dt>Hiperparámetros</dt>
 <dd>
 <blockquote>
-<p>Valores necesarios para el cómputo de una red neuronal que deben ser determinados por el modelador. Estos valores <em>NO</em> pueden ser aprendidos de manera autónoma por la red neuronal.</p>
+<p>Son las configuraciones externas que no se aprenden durante el entrenamiento, sino que se definen antes de entrenar el modelo y controlan su comportamiento y rendimiento.</p>
 </blockquote>
 </dd>
 </dl>
 <div style="font-size: 120%;">
-<div class="callout callout-important callout-style-simple">
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>🤓 Hiperparámetros de una Red Neuronal</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li><strong><em>Learning Rate</em></strong> (Karpathy Constant: 3e-4)</li>
-<li>¿Cuáles son las <strong><em>dimensiones</em></strong> de los Pesos (Weights) y de los sesgos (Biases)? (De qué tamaño es cada capa)</li>
-<li>¿Qué <strong><em>funciones de Activación</em></strong> se utilizarán?</li>
-<li>¿Qué <strong><em>funciones de perdida</em></strong> se utilizarán?</li>
-<li>¿Qué <strong><em>optimizadores</em></strong> se utilizarán?</li>
-<li>¿Cómo se <strong><em>inicializarán los parámetros</em></strong> de la Red Neuronal?</li>
-<li>¿Cuánto <strong><em>tiempo</em></strong> entrenanaremos nuestro modelo? ¿Cómo sabemos si es que convergió o no?</li>
+<li><strong><em>Learning Rate</em></strong> (Karpathy Constant: 3e-4), valores entre [1e-5, 1e-1] son comunes.</li>
+<li><strong>Número de Capas</strong> y sus respectivas dimensiones (Para Pesos/Weights y Sesgos/Biases).</li>
+<li><strong>Funciones de Activación</strong> para cada capa.</li>
+<li><strong>Función de Pérdida</strong> (Loss Function) a utilizar.</li>
+<li><strong>Optimizador</strong> a utilizar.</li>
+<li><strong>Punto de Partida</strong> de los Parámetros (Inicialización de Pesos y Sesgos).</li>
+<li>¿Cuánto tiempo debo entrenar mi modelo? <strong><em>¿Cómo sabemos si es que convergió o no?</em></strong></li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="tipos-de-hipótesis" class="slide level2 smaller">
-<h2>Tipos de Hipótesis</h2>
+<section id="output-de-una-red-neuronal" class="slide level2 smaller">
+<h2>Output de una Red Neuronal</h2>
 <blockquote>
-<p>En el aprendizaje supervisado contamos principalmente con la resolución de dos tipos de Problemas: Clasificación y Regresión. Dependiendo del tipo de Problema armaremos nuestra hipótesis.</p>
+<p>En el aprendizaje supervisado se abordan principalmente dos tipos de problemas: clasificación y regresión. Según el tipo de problema, la hipótesis debe adoptar una forma distinta en la capa de salida.</p>
 </blockquote>
-<p><span class="math display">\[h_\theta(X) = Z_{L+1} \in \mathbb{R}^{m \times k}\]</span></p>
-<p><br></p>
-<div class="columns">
-<div class="column" style="font-size: 70%;">
-<h3 id="clasificación">Clasificación</h3>
-<ul>
-<li><strong>Clasificación Binaria</strong>: Se requiere un <span class="math inline">\(k=1\)</span>. Se usa una Función Sigmoide para transformar el Output en la probabilidad de que ocurra la clase positiva.</li>
-<li><strong>Clasificación Multiclase</strong>: Se requiere un <span class="math inline">\(k=C\)</span>, donde C es el número de clases a clasificar. Se usa una función Softmax para transformar el output en una distribución de probabilidades.</li>
-<li><strong>Clasificación Multilabel</strong>: Se requiere un <span class="math inline">\(k=C\)</span> donde C es el número de clases a clasificar. Se usa una función Sigmoide para transformar cada clase en probabilidades.</li>
-</ul>
-</div><div class="column" style="font-size: 70%;">
-<h3 id="regresión">Regresión</h3>
-<ul>
-<li><strong>Regresión Simple</strong>: Se requiere un <span class="math inline">\(k=1\)</span>. No requiere de funciones adicionales.</li>
-<li><strong>Regresión Multiple</strong>: Se requiere un <span class="math inline">\(k=V\)</span> con V el número de valores a predecir.</li>
-</ul>
-<div class="callout callout-caution callout-style-simple">
+<div style="font-size: 120%;">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>⚠️ Dimensión de Salida</strong></p>
 </div>
 <div class="callout-content">
-<p>Adicionalmente se pueden utilizar funciones como la sigmoide o ReLU para forzar salidas entre 0 y 1 o entre 0 e <span class="math inline">\(\infty\)</span> respectivamente.</p>
+<p>Está definida por el número de valores a predecir para cada observación. Denominaremos <span class="math inline">\(k\)</span> como la dimensión de salida.</p>
+<p>Para una red de dos capas:</p>
+<p><span class="math display">\[\phi_0(X) = X\]</span> <span class="math display">\[\phi_1(X) = \sigma_1(W_1 \cdot \phi_0(X) + \bar{b_1}^T)\]</span> <span class="math display">\[\phi_2(X) = \sigma_2(W_2 \cdot \phi_1(X) + \bar{b_2}^T)\]</span></p>
+<p>Donde <span class="math inline">\(W_1 \in \mathbb{R}^{n \times d_1}\)</span> y <span class="math inline">\(W_2 \in \mathbb{R}^{d_1 \times k}\)</span> y <span class="math inline">\(b_1 \in \mathbb{R}^{d_1}\)</span> y <span class="math inline">\(b_2 \in \mathbb{R}^{k}\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div style="font-size: 120%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>✅ Activación de la Salida</strong></p>
+</div>
+<div class="callout-content">
+<p>Según el tipo de problema, la capa de salida puede necesitar una función de activación particular que ajuste los resultados al formato correcto. En este sentido, <span class="math inline">\(\sigma_2\)</span> estará determinada por la naturaleza del problema a resolver.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="consejos-para-el-output-de-una-red" class="slide level2 smaller">
+<h2>Consejos para el Output de una Red</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Clasificación Binaria</strong></p>
+</div>
+<div class="callout-content">
+<p>El approach más común utiliza <span class="math inline">\(k=1\)</span> con una <strong><em>Sigmoide</em></strong> para calcular la probabilidad de la clase 1. Otros approach utilizan <span class="math inline">\(k=2\)</span> para calcular la probabilidad de ambas clases (Activando con <strong><em>Softmax</em></strong>).</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Clasificación Multiclase</strong></p>
+</div>
+<div class="callout-content">
+<p>Utiliza <span class="math inline">\(k=C\)</span> donde C es el número de clases a clasificar. Se usa una función <strong><em>Softmax</em></strong> para transformar el output en una distribución de probabilidades.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Clasificación Multilabel</strong></p>
+</div>
+<div class="callout-content">
+<p>Se requiere un <span class="math inline">\(k=C\)</span> donde C es el número de clases a clasificar. Se usa una función <strong><em>Sigmoide</em></strong> para transformar cada clase en probabilidades.</p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Regresión Simple</strong></p>
+</div>
+<div class="callout-content">
+<p>Se requiere un <span class="math inline">\(k=1\)</span>. Típicamente no requiere de funciones adicionales aunque a veces se agregan funciones para acotar la salida.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Regresión Multiple</strong></p>
+</div>
+<div class="callout-content">
+<p>Se requiere un <span class="math inline">\(k=V\)</span> con V el número de valores a predecir. Se deben tener las mismas consideraciones para acotar la salida.</p>
 </div>
 </div>
 </div>
 </div></div>
 <div class="fragment">
-<div class="callout callout-tip callout-style-simple">
+<div class="callout callout-none no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>👀 Muy Importante</strong></p>
 </div>
 <div class="callout-content">
-<p>Normalmente las funciones necesarias en la capa de salida van embebidas en la Loss Function. Normalmente estas funciones sí deben aplicarse al momento de la <strong><em>Predicción del modelo</em></strong>.</p>
+<p>En la mayoría de las implementaciones en Código la activación de la salida va embebida en la Loss Function. Por lo tanto, no es necesario aplicar una función de activación explícita en la capa de salida. Aunque sí deben aplicarse al momento de la <strong><em>Predicción del modelo</em></strong>.</p>
 </div>
 </div>
 </div>
@@ -441,76 +372,203 @@ Alfonso Tobar-Arancibia
 <dl>
 <dt>Activation Functions</dt>
 <dd>
-Corresponden a las funciones que agregarán características no lineales a nuestra hipótesis, impidiendo la composición de transformaciones lineales (o Affine).
+Corresponden a las funciones que agregarán características no lineales a cada activación, impidiendo la composición de transformaciones Affine.
 </dd>
 </dl>
-<div class="callout callout-tip callout-style-simple">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
+<div class="callout-title">
+<p><strong>🤓 Convención para Código</strong></p>
+</div>
+<div class="callout-content">
+<p>En Pytorch, nunca aplicaremos una función de activación a la capa de salida.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
+<p><strong>Cuidado</strong></p>
+</div>
 <div class="callout-content">
-<p>Como convención, las funciones de activación sólo se aplicarán a las <strong>Hidden Layers</strong>. Es decir <span class="math inline">\(\sigma_{L+1}(x) = x\)</span>.</p>
+<p>Otros frameworks como Tensorflow, Keras, etc. utilizan una convención distinta y aplican funciones de activación a la capa de salida.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-caution callout-style-simple">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>¿Puedo aplicar distintas Funciones de Activación a cada Neurona?</strong></p>
 </div>
 <div class="callout-content">
-<p>Otras convenciones utilizan funciones de activación para la capa de salida. Esto bajo el abánico de Pytorch no es correcto ya que la Activación de la última capa esta embebida en la <strong>Loss Function</strong> (Recordar como Softmax es parte del Cross Entropy).</p>
-<p>Ahora, sí es posible utilizar <strong>funciones de Activación</strong> a la salida de una predicción, pero dichas funciones tienen otro propósito y no son del todo estrictamente necesarias.</p>
+<p>Puedo, pero no se hace. Complicaría muchísimo la implementación.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong><em>¿Puedo aplicar distintas Funciones de Activación a cada Neurona?</em></strong></p>
-</div>
-</div>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Para ver más Activation Functions y detalles de su funcionamiento, ir directamente a la <a href="https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity">Documentación de Pytorch</a>.</p>
-</div>
-</div>
-</div>
+<p><a href="https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity">Activation Functions in Pytorch</a>.</p>
 </section>
 <section id="funciones-de-activación-1" class="slide level2 smaller">
 <h2>Funciones de Activación</h2>
+<h3 id="sigmoide">Sigmoide</h3>
+<div class="columns">
+<div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-3/activation_funcs_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-3/activation_funcs_1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-1/sigmoid.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-1/sigmoid.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
-<h4 id="derivadas">Derivadas:</h4>
-<div class="columns">
-<div class="column" style="width:30%;">
-<ul>
-<li>Sigmoide: <span class="math inline">\(g'(z) = g(z)(1 - g(z))\)</span></li>
-</ul>
-</div><div class="column" style="width:30%;">
-<ul>
-<li>Tanh: <span class="math inline">\(g'(z) = 1 - g^2(z)\)</span></li>
-</ul>
 </div><div class="column" style="width:40%;">
+<div style="font-size: 120%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Definición</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\sigma(z) = \frac{1}{1 + e^{-z}}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Propiedades</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li>ReLU: <span class="math inline">\(g'(z) =
-\begin{cases}
-0,  &amp; \text{if $z \le$ 0} \\[2ex]
-1, &amp; \text{if $z &gt; 0$}
-\end{cases}\)</span></li>
+<li>Acota la salida entre 0 y 1.</li>
+<li>Su derivada es <span class="math inline">\(\sigma'(z) = \sigma(z)(1 - \sigma(z))\)</span>.</li>
+<li>Su gradiente es general es muy pequeño, lo que lleva a problemas de <strong><em>Vanishing Gradient</em></strong>.</li>
+<li>Su principal uso es en la capa de salida para problemas de clasificación binaria y Clasificación Multilabel.</li>
 </ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="funciones-de-activación-2" class="slide level2 smaller">
+<h2>Funciones de Activación</h2>
+<h3 id="softmax">Softmax</h3>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/softmax.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-3/softmax.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<div style="font-size: 120%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Definición</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[S_i(z) = \frac{e^{z_i}}{\sum_{j=1}^k e^{z_j}}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Propiedades</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Transofrma un vector en una distribución de probabilidad.</li>
+<li>Su principal uso es en la capa de salida para problemas de clasificación multiclase. Es por lejos la función de activación más utilizada en la salida, pero en casos más avanzados también en Mecanismos de Atención.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="funciones-de-activación-3" class="slide level2 smaller">
+<h2>Funciones de Activación</h2>
+<h3 id="tanh">Tanh</h3>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/tanh.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-3/tanh.jpg" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<div style="font-size: 120%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Definición</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[Tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Propiedades</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Acota su salida entre -1 y 1.</li>
+<li>Su derivada es <span class="math inline">\(Tanh'(z) = 1 - Tanh^2(z)\)</span>.</li>
+<li>Su gradiente normalmente es más grande que el de la Sigmoide, pero aún así puede llevar a problemas de <strong><em>Vanishing Gradient</em></strong>.</li>
+<li>A pesar de estar un poco en desuso, tiene un rol protagónico en las <code>Redes Recurrentes</code> (RNNs).</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="funciones-de-activación-4" class="slide level2 smaller">
+<h2>Funciones de Activación</h2>
+<h3 id="relu-rectified-linear-unit">ReLU (Rectified Linear Unit)</h3>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/relu.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-3/relu.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<div style="font-size: 120%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Definición</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[ReLU(z) = max(0, z)\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Propiedades</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Acota su salida entre 0 e <span class="math inline">\(\infty\)</span>.</li>
+<li>Su derivada es <span class="math inline">\(ReLU'(z) = \begin{cases}
+1,  &amp; \text{if $z \ge$ 0} \\
+0 &amp; \text{if $z &lt; 0$}
+\end{cases}\)</span></li>
+<li>Es la función de activación más utilizada en la actualidad, principalmente en las capas ocultas de las Redes Neuronales.</li>
+<li>Se hizo extremadamente popular por su simplicidad y efectividad en <code>Redes Convolucionales</code> (CNNs).</li>
+</ul>
+</div>
+</div>
+</div>
 </div></div>
 </section>
 <section id="funciones-de-activación-modernas" class="slide level2 smaller">
@@ -520,7 +578,7 @@ Corresponden a las funciones que agregarán características no lineales a nuest
 <h3 id="leaky-relu">Leaky ReLU</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-3/leaky_relu.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-3/leaky_relu.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-3/leaky_relu.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-3/leaky_relu.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
 <p><span class="math display">\[g(z) = max(0.1z, z)\]</span></p>
@@ -528,61 +586,134 @@ Corresponden a las funciones que agregarán características no lineales a nuest
 <h3 id="parametrized-relu-prelu">Parametrized ReLU (PReLU)</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-3/prelu.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-3/prelu.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-3/prelu.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-3/prelu.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
 <p><span class="math display">\[g(z) = max(az, z)\]</span></p>
 </div></div>
 </section>
-<section id="funciones-de-activación-2" class="slide level2 smaller">
+<section id="funciones-de-activación-5" class="slide level2 smaller">
 <h2>Funciones de Activación</h2>
 <div class="columns">
 <div class="column">
 <h3 id="elu">ELU</h3>
-<p><a href="img/clase-3/elu.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-3/elu.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a> <span class="math inline">\(g(z) =
+<p><a href="img/clase-3/elu.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-3/elu.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a> <span class="math inline">\(g(z) =
 \begin{cases}
 z,  &amp; \text{if $z \ge$ 0} \\[2ex]
 \alpha(e^{z}-1), &amp; \text{if $z &lt; 0$}
 \end{cases}\)</span></p>
 </div><div class="column">
 <h3 id="gelu">GELU</h3>
-<p><a href="img/clase-3/gelu.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-3/gelu.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a> <span class="math display">\[\begin{align} g(z) &amp;= z \cdot \Phi(z) \\
+<p><a href="img/clase-3/gelu.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-3/gelu.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a> <span class="math display">\[\begin{align} g(z) &amp;= z \cdot \Phi(z) \\
 g(z)&amp;= 0.5 \cdot z \cdot \left(1 + Tanh\left(\sqrt{2/\pi}\right) \cdot \left(z + 0.044715 \cdot z^3\right)\right)\end{align}\]</span></p>
 </div></div>
 </section>
-<section id="funciones-de-activación-3" class="slide level2 smaller">
+<section id="funciones-de-activación-6" class="slide level2 smaller">
 <h2>Funciones de Activación</h2>
 <div class="columns">
 <div class="column">
 <h3 id="selu">SELU</h3>
-<p><a href="img/clase-3/selu.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-3/selu.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a> <span class="math display">\[ g(z) = scale \cdot (max(0,z) + min(0,\alpha(e^z - 1)))\]</span></p>
+<p><a href="img/clase-3/selu.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-3/selu.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a> <span class="math display">\[ g(z) = scale \cdot (max(0,z) + min(0,\alpha(e^z - 1)))\]</span></p>
 <p>con <span class="math inline">\(\alpha=1.6732632423543772848170429916717\)</span> y <span class="math inline">\(scale = 1.0507009873554804934193349852946\)</span></p>
 </div><div class="column">
 <h3 id="swish">Swish</h3>
-<p><a href="img/clase-3/swish.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-3/swish.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a> <span class="math display">\[g(z) = z \cdot sigmoid(z)\]</span></p>
+<p><a href="img/clase-3/swish.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-3/swish.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a> <span class="math display">\[g(z) = z \cdot sigmoid(z)\]</span></p>
 </div></div>
 </section>
-<section id="loss-functions" class="slide level2 smaller">
-<h2>Loss Functions</h2>
+<section id="loss-functions-clasificación" class="slide level2 smaller">
+<h2>Loss Functions: Clasificación</h2>
 <blockquote>
-<p>Al igual que el caso de la Hipótesis, la Loss Function dependerá del tipo de problema a resolver. Existen muchas Loss Functions, pero los más comunes para problemas generales son las siguientes:</p>
+<p>Son las encargadas de medir el error entre la predicción del modelo y el valor real. En general, se busca minimizar la Loss Function durante el entrenamiento del modelo.</p>
 </blockquote>
-<h5 id="clasificación-binaria-binary-cross-entropy">Clasificación Binaria: Binary Cross Entropy</h5>
-<p><span class="math display">\[BCE_i = - \left[y_i \cdot log(h(x_i)) + (1-y_i) log(1-h(x_i))\right]\]</span></p>
-<p>donde <span class="math inline">\(h(x)\)</span> corresponde a un valor de probabilidad de la clase positiva (debe ir entre 0 y 1).</p>
+<div style="font-size: 120%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Clasificación Binaria: Binary Cross Entropy</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[BCE(Z) = - \frac{1}{m}\left[y^T log(\sigma(Z)) + (1-y)^T log(1-\sigma(Z))\right]\]</span></p>
+<p>Donde <span class="math inline">\(Z\)</span> corresponden a los Logits del Modelo.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>En Pytorch se suele utilizar <code>BCEWithLogitsLoss</code> ya que aplica una función Sigmoide a la capa de salida además de ser una clase numericamente más estable. Esto garantiza que la salida de la Red tiene valores entre 0 y 1 como se necesita.</p>
+<p>En Pytorch esta función se llama <code>BCEWithLogitsLoss</code>.</p>
 </div>
 </div>
 </div>
-<h5 id="clasificación-multiclase-crossentropy">Clasificación Multiclase: CrossEntropy</h5>
-<p><span class="math display">\[CE_i = -log \left(\frac{exp(h_{(i=y)}(x_i))}{\sum_{j=1}^k exp(h_j(x_i))}\right)\]</span></p>
-<div class="callout callout-important callout-style-simple">
+<div style="font-size: 120%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🤓 Logits</strong></p>
+</div>
+<div class="callout-content">
+<p>Se refiere a las activaciones finales del modelo antes de aplicar la función de activación.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>👊 Clasificación Multilabel: BCEWithLogitsLoss</strong></p>
+</div>
+<div class="callout-content">
+<p>En Pytorch se suele utilizar <code>BCEWithLogitsLoss</code> ya que combina una sigmoide a cada activación de la salida.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="loss-functions-clasificación-1" class="slide level2 smaller">
+<h2>Loss Functions: Clasificación</h2>
+<div style="font-size: 120%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Clasificación Multiclase: CrossEntropy</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[CE(Z)= \frac{1}{m}Tr(Y^T \hat{Y})\]</span></p>
+<p>Donde <span class="math inline">\(Tr(.)\)</span> es la traza de una matriz e <span class="math inline">\(Y \in \{0,1\}^{m \times k}\)</span> es la codificación One-Hot de las etiquetas y <span class="math inline">\(\hat{Y} = Softmax(Z)\)</span>, donde <span class="math inline">\(Z\)</span> son los Logits del modelo.</p>
+</div>
+</div>
+</div>
+</div>
+<div style="font-size: 120%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🤓 Traza (<span class="math inline">\(Tr(.)\)</span>)</strong></p>
+</div>
+<div class="callout-content">
+<p>Corresponde a la suma de los elementos de la diagonal principal de una matriz.</p>
+</div>
+</div>
+</div>
+</div>
+<div style="font-size: 120%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Derivada</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\frac{\partial CE(X)}{\partial Z} = \frac{1}{m}\left(Softmax(Z) - Y\right)\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -593,204 +724,350 @@ g(z)&amp;= 0.5 \cdot z \cdot \left(1 + Tanh\left(\sqrt{2/\pi}\right) \cdot \left
 </div>
 </div>
 </section>
-<section id="loss-functions-1" class="slide level2 smaller">
-<h2>Loss Functions</h2>
-<h5 id="clasificación-multilabel-crossentropy">Clasificación Multilabel: CrossEntropy</h5>
-<p>Para este tipo de problema se debería aplicar un Negative LogLoss combinado con la salidas de una red que van entre 0 y 1 (es decir, que se aplica una Sigmoide)</p>
-<div class="callout callout-important callout-style-simple">
+<section id="loss-functions-regresión" class="slide level2 smaller">
+<h2>Loss Functions: Regresión</h2>
+<div style="font-size: 120%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Regresión: Mean Squared Error (MSELoss)</strong></p>
 </div>
 <div class="callout-content">
-<p>En Pytorch se suele utilizar <code>BCEWithLogitsLoss</code> ya que combina aplica una función Softmax a la capa de salida y permite resultados de más de una dimensión.</p>
+<p><span class="math display">\[MSE(Z) = \frac{1}{m}||Z - \bar{y}||^2\]</span></p>
+<p>Donde <span class="math inline">\(||.||\)</span> corresponde a la norma Euclideana e <span class="math inline">\(\bar{y} \in \mathbb{R}^{m \times 1}\)</span>.</p>
 </div>
 </div>
 </div>
-<h5 id="regresión-1">Regresión</h5>
-<div class="columns">
-<div class="column">
-<ul>
-<li>Mean Absolute Error o L1Loss</li>
-</ul>
-<p><span class="math display">\[L1_i = |y_i - h(x_i)|\]</span></p>
-</div><div class="column">
-<ul>
-<li>Mean Squared Error Loss o L2Loss</li>
-</ul>
-<p><span class="math display">\[L2_i = (y_i - h(x_i))^2\]</span></p>
-</div></div>
-<div class="callout callout-important callout-style-simple">
+</div>
+<div style="font-size: 120%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Derivada</strong></p>
 </div>
 <div class="callout-content">
-<p>Es importante recordar que en general se debe calcular un valor agregado de la Loss Function. En Pytorch a esto se le llama <code>reduction</code>. Donde el más utilizado es <code>reduction="mean"</code>. Es decir,</p>
-<p><span class="math display">\[l = \frac{1}{m}\sum_{i=1}^m L_i\]</span></p>
+<p><span class="math display">\[\frac{\partial MSE(Z)}{\partial Z} = \frac{2}{m}(Z - \bar{y})\]</span></p>
+</div>
 </div>
 </div>
 </div>
 </section>
-<section id="optimizers" class="slide level2 smaller">
-<h2>Optimizers</h2>
+<section id="loss-functions-regresión-1" class="slide level2 smaller">
+<h2>Loss Functions: Regresión</h2>
+<div style="font-size: 120%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Regresión: Mean Absolute Error (L1Loss)</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[L1Loss(Z) = \frac{1}{m}|Z - \bar{y}|\]</span></p>
+<p>Donde <span class="math inline">\(||.||\)</span> corresponde a la norma Euclideana y <span class="math inline">\(\bar{y} \in \mathbb{R}^{m \times 1}\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div style="font-size: 120%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Derivada</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\frac{\partial L1Loss(Z)}{\partial Z} = \frac{1}{m}sign(Z-\bar{y})\]</span></p>
+<p><span class="math display">\[\operatorname{sign}(z) =
+\begin{cases}
++1 &amp; \text{si  z &gt; 0},\\[2mm]
+0 &amp; \text{si z = 0},\\[1mm]
+-1 &amp; \text{si z &lt; 0}
+\end{cases}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="optimizers-gradient-descent" class="slide level2 smaller">
+<h2>Optimizers: Gradient Descent</h2>
+<div style="font-size: 80%;">
 <blockquote>
 <p>Gradient Descent corresponde al algoritmo de Optimización más popular, pero no necesariamente el más eficiente. Distintas variantes han ido apareciendo para ir mejorando eventuales deficiencias de la proposición inicial.</p>
 </blockquote>
-<h4 id="normal-gradient-descent">Normal Gradient Descent</h4>
-<p><span class="math display">\[\theta := \theta - \frac{\alpha}{m}\nabla_\theta l(h_\theta(X), y), \text{donde $X \in \mathbb{R}^{m \times n}$ e $y \in \mathbb{R}^{m \times 1}$}\]</span></p>
-<div class="callout callout-important callout-style-simple">
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Epochs</strong></p>
 </div>
 <div class="callout-content">
-<p>La dirección del Gradiente utilizando menos puntos debería ser más o menos similar. Sin duda, más ruidoso, pero a la larga debería dirigir en <strong><em>casi</em></strong> la misma dirección. Por lo que podríamos hacer actualizaciones de parámetros utilizando B datos con B &lt;&lt; m.</p>
+<p>Corresponden a la cantidad de iteraciones que se realizan a la Update Rule para que el modelo se optimize.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-tip callout-style-simple">
+<div style="font-size: 120%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Standard Gradient Descent</strong></p>
 </div>
 <div class="callout-content">
-<p>Esto entrega como beneficio, menos requerimientos de memoria, ya que operarían matrices más pequeñas, por lo tanto, requiere de menos RAM tanto en CPU como en GPU.</p>
+<p><span class="math display">\[\theta := \theta - \frac{\alpha}{m}\nabla_\theta L\]</span></p>
 </div>
 </div>
 </div>
-<h5 id="stochastic-gradient-descent-minibatch">Stochastic Gradient Descent (MiniBatch)</h5>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p><span class="math display">\[\theta := \theta - \frac{\alpha}{B}\nabla_\theta l(h_\theta(X), y), \text{donde $X \in \mathbb{R}^{B \times n}$ e $y \in \mathbb{R}^{B \times 1}$}\]</span></p>
-</div><div class="column" style="width:40%;">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
 </div>
-<div class="callout-content">
-<p>Se van tomando <span class="math inline">\(B\)</span> muestras de manera incremental hasta utilizar la totalidad de datos de entrenamiento</p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="sgd-with-momentum" class="slide level2 smaller">
-<h2>SGD with Momentum</h2>
-<h4 id="update-rule">Update Rule</h4>
-<p><span class="math display">\[u_{t + 1} = \beta u_t + (1-\beta) \nabla_\theta f(\theta_t)\]</span> <span class="math display">\[\theta_{t+1} = \theta_t - \alpha u_{t + 1}\]</span></p>
-<p>donde <span class="math inline">\(0&lt;\beta&lt;1\)</span>, pero normalmente <span class="math inline">\(\beta=0.9\)</span>.</p>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Este cálculo se denomina un Exponential Moving Average de los Gradientes.</p>
-</div>
-</div>
-</div>
-<p><span class="math display">\[\begin{align} u_{t+1}&amp;=(1-\beta)\nabla_\theta f(\theta_{t}) + \beta u_t \\
-u_{t+1}&amp;=(1-\beta)\nabla_\theta f(\theta_{t}) + \beta \left[(1-\beta) \nabla_\theta f(\theta_{t-1}) + \beta u_{t-1}\right] \\
-u_{t+1}&amp;=(1-\beta)\nabla_\theta f(\theta_{t}) + \beta (1-\beta) \nabla_\theta f(\theta_{t-1}) + \beta^2 (1-\beta) \nabla_\theta f(\theta_{t-2})... \\
-\end{align}\]</span></p>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>La componente de momento, está tomando en consideración todos los otros Gradientes en pasos anteriores para escoger correctamente la dirección del Gradiente actual.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="sgd-with-nesterov-momentum" class="slide level2 smaller">
-<h2>SGD with Nesterov Momentum</h2>
-<p><span class="math display">\[u_{t + 1} = \beta u_t + (1-\beta) \nabla_\theta f(\theta_t - \alpha u_t)\]</span> <span class="math display">\[\theta_{t+1} = \theta_t - \alpha u_{t + 1}\]</span></p>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Notar que la lógica es casi la misma, sólo que el Gradiente se evalúa en un <strong><em>punto futuro</em></strong>. Es decir, <span class="math inline">\(\theta_t-\alpha u_t\)</span> corresponde al punto siguiente utilizando SGD con Momentum.</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<h4 id="momentum">Momentum</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-3/momentum.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-3/momentum.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<h4 id="nesterov">Nesterov</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-3/nesterov.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-3/nesterov.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="métodos-adaptativos-adagrad" class="slide level2">
-<h2>Métodos Adaptativos: Adagrad</h2>
-<blockquote>
-<p>¿Qué tal, si la tasa de aprendizaje se va adaptando en el tiempo y deja de ser estática?</p>
-</blockquote>
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout callout-caution callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Idea</strong></p>
+<p><strong>Importante</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Normalizar por la historia de los gradientes al cuadrado.</li>
+<li>En Deep Learning, los conjuntos de datos suelen ser tan grandes que calcular el gradiente sobre todos ellos es inviable por memoria y tiempo de cómputo.</li>
+<li>Adicionalmente no basta con calcular el gradiente una vez, sino que se debe hacer varias veces según el número de Epochs definido.</li>
+<li>Practicar Standard Gradient Descent en la práctica es muy poco común, ya que no es eficiente.</li>
 </ul>
+</div>
+</div>
+</div>
+</section>
+<section id="minibatch-gradient-descent" class="slide level2 smaller">
+<h2>Minibatch Gradient Descent</h2>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Los <code>minibatches</code> permiten estimar el gradiente con un subconjunto de datos, manteniendo la dirección correcta para actualizar los parámetros de manera más eficiente. Se realiza en un subconjunto de <span class="math inline">\(B\)</span> datos donde <span class="math inline">\(B &lt;&lt; m\)</span>.</p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[\theta := \theta - \frac{\alpha}{B}\nabla_\theta L\]</span></p>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>👀 Importante</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(X \in \mathbb{R}^{B \times n}\)</span> e <span class="math inline">\(y \in \mathbb{R}^{B \times 1}\)</span> son versiones reducidas de los datos totales. Se deben hacer suficientes <code>minibatches</code> para utilizar todos los datos.</li>
+<li>Cada actualización de parámetros ahora se le denomina <code>step</code>.</li>
+<li>Cuando todos losd <code>minibatches</code> han sido utilizados, se dice que se ha completado una <code>epoch</code>.</li>
+<li>Es común utilizar un <code>minibatch</code> de tamaño 32, 64 o 128.</li>
+<li>A veces se deshecha el último <code>minibatch</code> si no tiene el tamaño completo para evitar problemas de estabilidad de graientes.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Pros</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Permite optimizar utilizando menos recursos computacionales.</li>
+<li>Al actualizar los parámetros de manera más frecuente, se puede converger más rápido.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Contras</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Si <span class="math inline">\(B\)</span> es muy pequeño, el gradiente puede ser muy ruidoso y no converger.</li>
+<li>El entrenamiento toma más tiempo que el Standard Gradient Descent.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="sgd-with-momentum" class="slide level2 smaller">
+<h2>SGD with Momentum</h2>
+<div class="columns">
+<div class="column" style="font-size: 90%;">
+<h4 id="update-rule">Update Rule</h4>
+<p><span class="math display">\[\theta_{t+1} = \theta_t - \alpha v_{t + 1}\]</span> <span class="math display">\[v_{t+1} = \beta v_{t} + (1-\beta) \nabla_\theta L(\theta_{t+1})\]</span></p>
+<p>donde <span class="math inline">\(0&lt;\beta&lt;1\)</span>, pero normalmente <span class="math inline">\(\beta=0.9\)</span>.</p>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/momentum_update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-3/momentum_update.png" class="quarto-figure quarto-figure-center" style="width:45.0%"></a></p>
+</figure>
+</div>
+</div></div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>☝️ Intuición</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Este cálculo se denomina un Exponential Moving Average de los Gradientes. Y se puede interpretar como una especie de velocidad del gradiente. Su objetivo es ponderar con un cierto porcentaje el gradiente actual y el gradiente anterior.</li>
+<li><span class="math inline">\(v_{0} = 0\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<p><span class="math display">\[\begin{align} v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta v_t \\
+v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta \left[(1-\beta) \nabla_\theta L(\theta_{t-1}) + \beta v_{t-1}\right] \\
+v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\theta L(\theta_{t-1}) + \beta^2 (1-\beta) \nabla_\theta L(\theta_{t-2})... \\
+\end{align}\]</span></p>
+</section>
+<section id="sgd-with-nesterov-momentum" class="slide level2 smaller">
+<h2>SGD with Nesterov Momentum</h2>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[\theta_{t+1} = \theta_t - \alpha u_{t + 1}\]</span> <span class="math display">\[v_{t + 1} = \beta v_t + (1-\beta) \nabla_\theta f(\theta_{t+1} + \beta v_t)\]</span></p>
+<p>donde <span class="math inline">\(0&lt;\beta&lt;1\)</span>, pero normalmente <span class="math inline">\(\beta=0.9\)</span>.</p>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/nesterov_update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-3/nesterov_update.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+</div></div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>☝️ Intuición</strong></p>
+</div>
+<div class="callout-content">
+<p>El método de Nesterov “mira hacia adelante” en la dirección del momentum antes de calcular el gradiente, lo que le da una corrección más precisa y evita en parte el sobrepaso de mínimos. En este caso <span class="math inline">\(\theta_{t+1} + \beta v_t\)</span> es el punto “futuro” para calcular el gradiente.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="efecto-del-momentum-en-el-update-rule" class="slide level2 smaller">
+<h2>Efecto del Momentum en el Update Rule</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/momentum_effect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-3/momentum_effect.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>☝️ Intuición</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>El SGD tiende a ser más oscilante.</li>
+<li>El SGD con Momentum tiende a ser más suave y rápido debido a la inercia recibida por el término de momentum.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="métodos-adaptativos-adagrad" class="slide level2 smaller">
+<h2>Métodos Adaptativos: Adagrad</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>☝️ Intuición</strong></p>
+</div>
+<div class="callout-content">
+<p>¿Qué tal, si el learning rate se va adaptando en el tiempo y deja de ser estática?</p>
 </div>
 </div>
 </div>
 <p><span class="math display">\[r_{t+1} = r_t + \nabla_\theta f(\theta_t)^2\]</span> <span class="math display">\[\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{r_{t+1}}}\nabla_\theta f(\theta_t)\]</span></p>
-</section>
-<section id="métodos-adaptativos-rmsprop" class="slide level2">
-<h2>Métodos Adaptativos: RMSProp</h2>
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Idea</strong></p>
+<p><strong>Efecto</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Normalizar por el Exponential Moving Average de los Gradientes al cuadrado.</li>
+<li>Parámetros con gradientes grandes <span class="math inline">\(\rightarrow\)</span> tasa de aprendizaje disminuye más rápido.</li>
+<li>Parámetros con gradientes pequeños <span class="math inline">\(\rightarrow\)</span> tasa de aprendizaje se mantiene más alta.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Pros</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Util cuando hay parámetros que se actualizan con distinta freciencia.</li>
+<li>Acelera la convergencia en direcciones poco exploradas.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Contras</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Como el denominador acumula gradientes al cuadrado, la tasa de aprendizaje puede llegar a volverse muy pequeña <span class="math inline">\(\rightarrow\)</span> el entrenamiento se <strong><em>“frena”</em></strong> antes de llegar al óptimo.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="métodos-adaptativos-rmsprop" class="slide level2 smaller">
+<h2>Métodos Adaptativos: RMSProp</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>☝️ Intuición</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Normalizar por el Exponential Moving Average de los Gradientes al cuadrado para controlar el efecto de reducción del learning rate.</li>
 </ul>
 </div>
 </div>
 </div>
 <p><span class="math display">\[s_{t+1} = \beta r_t + (1-\beta) \nabla_\theta f(\theta_t)^2\]</span> <span class="math display">\[\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{s_{t+1}}}\nabla_\theta f(\theta_t)\]</span></p>
-</section>
-<section id="métodos-adaptativos-adam" class="slide level2">
-<h2>Métodos Adaptativos: Adam</h2>
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Idea</strong></p>
+<p><strong>Pros</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Combinar Descenso con Momentum y RMSProp.</li>
+<li>Normalización adaptativa: cada parámetro tiene su propia tasa de aprendizaje ajustada dinámicamente.</li>
+<li>A diferencia de Adagrad, el denominador no crece indefinidamente porque el promedio exponencial “olvida” gradientes antiguos. Esto permite seguir aprendiendo incluso después de muchos pasos.</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Contras</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Depende mucho de la elección de su hiperparámetro <span class="math inline">\(\beta\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="métodos-adaptativos-adam" class="slide level2 smaller">
+<h2>Métodos Adaptativos: Adam</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>☝️ Intuición</strong></p>
+</div>
+<div class="callout-content">
+<p>Se mantiene el Exponential Moving average para: Los gradientes (como utilizando momentum), los gradientes al cuadrado (como RMSprop).</p>
 </div>
 </div>
 </div>
@@ -801,19 +1078,34 @@ u_{t+1}&amp;=(1-\beta)\nabla_\theta f(\theta_{t}) + \beta (1-\beta) \nabla_\thet
 <h5 id="correcciones-iniciales">Correcciones Iniciales</h5>
 <p><span class="math display">\[v'_{t+1} = \frac{v_{t+1}}{1-\beta_1^{t+1}}\]</span> <span class="math display">\[s'_{t+1} = \frac{v_{t+1}}{1-\beta_2^{t+1}}\]</span></p>
 </div></div>
-<div class="callout callout-important callout-style-simple">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Pros</strong></p>
 </div>
 <div class="callout-content">
-<p>Pytorch utiliza 0.9 y 0.999 como valores de <span class="math inline">\(\beta_1\)</span> y <span class="math inline">\(\beta_2\)</span> respectivamente.</p>
+<ul>
+<li>Combina momentum + RMSprop + corrección <span class="math inline">\(\rightarrow\)</span> rápido, estable.</li>
+<li>Es por lejos el optimizador más usado.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Contras</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Sensible a la elección de sus hiperparámetros <span class="math inline">\(\beta_1\)</span> y <span class="math inline">\(\beta_2\)</span>. Pytorch utiliza 0.9 y 0.999 como valores de <span class="math inline">\(\beta_1\)</span> y <span class="math inline">\(\beta_2\)</span> respectivamente.</li>
+</ul>
 </div>
 </div>
 </div>
 </section></section>
 <section id="eso-es-todo-amigos" class="title-slide slide level1 center">
-<h1>Eso es todo amigos</h1>
+<h1>👊 Eso es todo amigos</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">

@@ -483,8 +483,8 @@ Alfonso Tobar-Arancibia
 <div class="columns">
 <div class="column" style="width:70%;">
 <p><span class="math display">\[\frac{\partial L}{\partial p} = -\frac{1}{m} \left[\frac{y^T}{p} - \frac{1 -y)^T}{(1-p)}\right] = \frac{1}{m} \left[\frac{p-y}{p(1-p)}\right]\]</span></p>
-<p><span class="math display">\[\frac{\partial L}{\partial \phi_2} = \frac{\partial L}{\partial p} \cdot \sigma'(\phi_2)=\frac{1}{m} \left[\frac{p-y}{p(1-p)}\right] p (1-p) = \frac{1}{m} \left[p-y\right]\]</span></p>
-<p><span class="math display">\[\frac{\partial L}{\partial b_2} = \frac{\partial L}{\partial \phi_2} \cdot 1_m = \frac{1}{m} 1_m^T \left[p-y\right]\]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial \phi_2} = \frac{\partial L}{\partial p} \frac{\partial p}{\partial \phi_2} = \frac{1}{m} \left[\frac{p-y}{p(1-p)}\right] p (1-p) = \frac{1}{m} \left[p-y\right]\]</span></p>
+<p><span class="math display">\[\frac{\partial L}{\partial b_2} = \frac{\partial L}{\partial \phi_2} \frac{\partial \phi_2}{\partial b_2} = \frac{1}{m} 1_m^T \left[p-y\right]\]</span></p>
 <p><span class="math display">\[\frac{\partial L}{\partial v} = \frac{\partial L}{\partial \phi_2} \frac{\partial \phi_2}{\partial v} = \frac{\partial L}{\partial \phi_2}\]</span></p>
 <p><span class="math display">\[\frac{\partial L}{\partial W_2} = \frac{\partial L}{\partial v} \frac{\partial v}{\partial W_2} = \frac{\partial L}{\partial v} \cdot Z_1= \frac{1}{m} Z_1^T \left[p-y\right]\]</span></p>
 </div><div class="column fragment" style="width:30%;">
@@ -595,9 +595,65 @@ Alfonso Tobar-Arancibia
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a>
 <p></p>
 </div>
+</section>
 
+<section>
+<section id="anexo" class="title-slide slide level1 center">
+<h1>Anexo</h1>
 
 </section>
+<section id="broadcasting-rules" class="slide level2 smaller">
+<h2>Broadcasting Rules</h2>
+<div style="font-size: 120%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Broadcasting</strong></p>
+</div>
+<div class="callout-content">
+<p>Corresponde a una replica de una dimensión de manera de permitir alguna operación que requiera que ciertas dimensiones <strong>calcen</strong>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Broadcasting Rules</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Cada tensor debe tener al menos una dimensión.</li>
+<li>Moviéndose de derecha a izquierda por cada dimensión una vez alineadas a la derecha, las dimensiones deben:
+<ul>
+<li>Ser iguales,</li>
+<li>iguales a 1,</li>
+<li>o no debe existir.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El <strong><em>Broadcasting</em></strong> evita que se tenga que almacenar información repetida, lo cual permite que las implementaciones sean más eficientes en términos de memoria. <strong><em>Siempre</em></strong> que se pueda se debe utilizar <strong><em>Broadcasting</em></strong> para simplificar un cálculo.</p>
+</div>
+</div>
+</div>
+<p>Más info ver: <a href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy Docs</a></p>
+</div>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="../logo-uai-blanco.jpeg" class="slide-logo"></p>
