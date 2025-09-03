@@ -208,6 +208,7 @@ Alfonso Tobar-Arancibia
 <li>Capas Lineales: Probablemente por su denominación en Pytorch.</li>
 <li>Capas/Redes Densas: Probablemente por su denominación en Tensorflow.</li>
 <li>Multilayer Perceptron: O también conocido como MLP, debido a que es la generalización del Perceptrón, la primera propuesta de Redes Neuronales de Rosenblatt en 1958.</li>
+<li>Projection Layers: Probablemente por su denominación en algunos papers. Se usa en el contexto de proyectar de <span class="math inline">\(n\)</span> dimensiones a <span class="math inline">\(d\)</span> dimensiones.</li>
 </ul>
 </div>
 </div>
@@ -853,11 +854,10 @@ g(z)&amp;= 0.5 \cdot z \cdot \left(1 + Tanh\left(\sqrt{2/\pi}\right) \cdot \left
 </div>
 <div class="callout-content">
 <ul>
-<li><span class="math inline">\(X \in \mathbb{R}^{B \times n}\)</span> e <span class="math inline">\(y \in \mathbb{R}^{B \times 1}\)</span> son versiones reducidas de los datos totales. Se deben hacer suficientes <code>minibatches</code> para utilizar todos los datos.</li>
-<li>Cada actualización de parámetros ahora se le denomina <code>step</code>.</li>
-<li>Cuando todos losd <code>minibatches</code> han sido utilizados, se dice que se ha completado una <code>epoch</code>.</li>
-<li>Es común utilizar un <code>minibatch</code> de tamaño 32, 64 o 128.</li>
-<li>A veces se deshecha el último <code>minibatch</code> si no tiene el tamaño completo para evitar problemas de estabilidad de graientes.</li>
+<li><span class="math inline">\(X \in \mathbb{R}^{B \times n}\)</span> e <span class="math inline">\(y \in \mathbb{R}^{B \times 1}\)</span> son versiones reducidas de los datos totales. Se deben hacer suficientes <code>minibatches</code> para utilizar todos los datos. El minibatch se implementa en Pytorch utilizando el <code>DataLoader</code>. Cada actualización de parámetros ahora se le denomina <code>step</code>.</li>
+<li>Cuando todos los <code>minibatches</code> han sido utilizados, se dice que se ha completado una <code>epoch</code>.</li>
+<li>Es común utilizar un <code>minibatch</code> de tamaño 32, 64, 128, etc.</li>
+<li>A veces se deshecha el último <code>minibatch</code> (remanente) si no tiene el tamaño completo para evitar problemas de estabilidad de gradientes.</li>
 </ul>
 </div>
 </div>
@@ -999,7 +999,7 @@ v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\thet
 </div>
 <div class="callout-content">
 <ul>
-<li>Util cuando hay parámetros que se actualizan con distinta freciencia.</li>
+<li>Util cuando hay parámetros que se actualizan con distinta frecuencia.</li>
 <li>Acelera la convergencia en direcciones poco exploradas.</li>
 </ul>
 </div>
