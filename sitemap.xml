@@ -125,31 +125,39 @@
     <lastmod>2025-08-20T22:22:49.694Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/CNN-pytorch.html</loc>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/CNN-pytorch.html</loc>
     <lastmod>2025-08-05T16:18:37.050Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/transformers.html</loc>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/transformers.html</loc>
     <lastmod>2025-08-05T16:18:37.158Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/control-5.html</loc>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/control-5.html</loc>
     <lastmod>2025-08-05T16:18:37.052Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/reg_log.html</loc>
+    <lastmod>2025-09-03T22:47:09.772Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-11.html</loc>
     <lastmod>2025-08-05T16:18:36.937Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Intro_pytorch_2.html</loc>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Intro_Pytorch.html</loc>
+    <lastmod>2025-09-03T22:46:46.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/Intro_pytorch_2.html</loc>
     <lastmod>2025-08-05T16:18:37.051Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/pretrained-models.html</loc>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/pretrained-models.html</loc>
     <lastmod>2025-08-05T16:18:37.158Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Intro_pytorch.html</loc>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/Intro_pytorch.html</loc>
     <lastmod>2025-08-22T17:35:58.731Z</lastmod>
   </url>
   <url>
@@ -186,7 +194,7 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579-labs.html</loc>
-    <lastmod>2025-08-06T23:08:44.186Z</lastmod>
+    <lastmod>2025-09-03T22:48:41.890Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-11.html</loc>
