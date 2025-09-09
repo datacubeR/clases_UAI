@@ -684,8 +684,8 @@ g(z)&amp;= 0.5 \cdot z \cdot \left(1 + Tanh\left(\sqrt{2/\pi}\right) \cdot \left
 <p><strong>Clasificación Multiclase: CrossEntropy</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[CE(Z)= \frac{1}{m}Tr(Y^T \hat{Y})\]</span></p>
-<p>Donde <span class="math inline">\(Tr(.)\)</span> es la traza de una matriz e <span class="math inline">\(Y \in \{0,1\}^{m \times k}\)</span> es la codificación One-Hot de las etiquetas y <span class="math inline">\(\hat{Y} = Softmax(Z)\)</span>, donde <span class="math inline">\(Z\)</span> son los Logits del modelo.</p>
+<p><span class="math display">\[CE(Z)= -\frac{1}{m}Tr(Y^T Log(\hat{Y}))\]</span></p>
+<p>Donde <span class="math inline">\(Tr(.)\)</span> es la traza de una matriz e <span class="math inline">\(Y \in \{0,1\}^{m \times k}\)</span> es la codificación One-Hot de las etiquetas e <span class="math inline">\(\hat{Y} = Softmax(Z)\)</span>, donde <span class="math inline">\(Z\)</span> son los Logits del modelo.</p>
 </div>
 </div>
 </div>
@@ -709,7 +709,7 @@ g(z)&amp;= 0.5 \cdot z \cdot \left(1 + Tanh\left(\sqrt{2/\pi}\right) \cdot \left
 <p><strong>Derivada</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[\frac{\partial CE(X)}{\partial Z} = \frac{1}{m}\left(Softmax(Z) - Y\right)\]</span></p>
+<p><span class="math display">\[\frac{\partial CE(X)}{\partial Z} = \frac{1}{m}\left(\hat{Y} - Y\right)\]</span></p>
 </div>
 </div>
 </div>
@@ -724,6 +724,10 @@ g(z)&amp;= 0.5 \cdot z \cdot \left(1 + Tanh\left(\sqrt{2/\pi}\right) \cdot \left
 </div>
 </div>
 </div>
+</section>
+<section id="ejemplo-de-cross-entropy-loss" class="slide level2">
+<h2>Ejemplo de Cross Entropy Loss</h2>
+<p>TODO:</p>
 </section>
 <section id="loss-functions-regresión" class="slide level2 smaller">
 <h2>Loss Functions: Regresión</h2>
@@ -1076,7 +1080,7 @@ v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\thet
 <p><span class="math display">\[v_{t+1} = \beta_1 v_t + (1-\beta_1) \nabla_\theta f(\theta_t)\]</span> <span class="math display">\[s_{t+1} = \beta_2 s_t + (1-\beta_2) \nabla_\theta f(\theta_t)^2\]</span> <span class="math display">\[\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{s'_{t+1}}} v'_{t+1}\]</span></p>
 </div><div class="column">
 <h5 id="correcciones-iniciales">Correcciones Iniciales</h5>
-<p><span class="math display">\[v'_{t+1} = \frac{v_{t+1}}{1-\beta_1^{t+1}}\]</span> <span class="math display">\[s'_{t+1} = \frac{v_{t+1}}{1-\beta_2^{t+1}}\]</span></p>
+<p><span class="math display">\[v'_{t+1} = \frac{v_{t+1}}{1-\beta_1^{t+1}}\]</span> <span class="math display">\[s'_{t+1} = \frac{s_{t+1}}{1-\beta_2^{t+1}}\]</span></p>
 </div></div>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
