@@ -1,6 +1,6 @@
 ---
 title: "TICS-579-Deep Learning"
-subtitle: "Clase 4: Introducción a Pytorch"
+subtitle: "Clase 4: Model Training"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -22,6 +22,103 @@ format:
     highlight-style: arrow
     pdf-separate-fragments: true
 ---
+
+## Entrenamiento de la Red {.smaller}
+
+
+> A diferencia de un Modelo de Machine Learning, las Redes Neuronales se entrenan de manera progresiva (se espera una mejora en cada Epoch). Si nuestra Arquitectura es apropiada nosotros deberíamos esperar que el `Loss` de nuestra ***red siempre disminuya***. ¿Por qué?
+
+:::{.callout-tip .fragment icon=false appearance="default"}
+## 💡 Dado que el entrenamiento es progresivo, el modelo puede retomar su entrenamiento desde un set de pesos dados.
+:::
+
+::: {.callout-warning .fragment icon=false appearance="default"}
+## **¿Siempre buscamos la Red que tenga el mejor Loss de Entrenamiento?** ***¿Cuál es la diferencia entre el `Loss` y el `Rendimento del Modelo`?***
+:::
+
+::: {.callout-important .fragment icon=false appearance="default"}
+## Al igual que en los modelos de Machine Learning debemos evitar a toda costa el Overfitting. ¿Qué es el overfitting?
+:::
+
+## Entrenamiento de la Red {.smaller}
+
+Bias-Variance Tradeoff (Dilema Sesgo-Varianza)
+: > Probablemente el concepto más importante para determinar si un modelo tiene potencial o no. Corresponden a dos tipos de errores que pueden sufrir los modelos de ML. 
+
+::: {.columns .fragment}
+::: {.column .callout-note appearance="default" icon=false}
+## Bias
+Corresponde al sesgo, y tiene que ver con la diferencia entre el valor real y el valor predicho. Bajo sesgo implica una mejor predicción.
+:::
+::: {.column .callout-caution appearance="default" icon=false}
+## Variance
+Corresponde a la varianza y tiene que ver con la dispersión de los valores predichos. Baja Varianza implica un modelo más estable y menos flexible.
+:::
+
+::: {.callout-important .fragment appearance="default" icon=false}
+## En general hay que buscar el equilibrio entre ambos tipos de errores:
+
+* Alto Sesgo y baja Varianza: **Underfitting**. 
+* Bajo Sesgo y Alta Varianza: **Overfitting**. 
+
+:::
+:::
+
+## Model Validation {.smaller}
+
+Validación Cruzada
+: > Se refiere al proceso de entrenar un modelo en una cierta porción de los datos, pero validar sus rendimiento y capacidad de ***generalización*** en un set de datos ***no vistos*** por el modelo al momento de entrenar. 
+
+::::{style="font-size: 120%;"}
+::: {.callout-warning icon=false appearance="default" }
+## ***¿Qué es la Generalización?***
+:::
+
+::: {.callout-note icon=false appearance="default" }
+## Los dos métodos más populares que se usan en Machine Learning son **Holdout** y **K-Fold.** Más métodos se pueden encontrar en los [docs de Scikit-Learn](https://scikit-learn.org/stable/modules/cross_validation.html). 
+:::
+
+::: {.callout-important icon=false appearance="default" }
+## Debido a los volúmenes de datos utilizados, el esquema de validación más utilizado es el **Holdout**.
+:::
+::::
+
+## Model Validation: Holdout {.smaller}
+
+::: {.columns}
+::: {.column}
+
+![](img/clase-4/data_split.png){.lightbox fig-align="center"}
+:::
+::: {.column}
+
+::: {.callout-note appearance="default" icon="false"}
+## **Train**
+Corresponde a la porción de utilizado para que el modelo aprenda.
+:::
+::: {.callout-important appearance="default" icon="false"}
+## **Validation**
+Corresponde a la porción de datos no vistos por el modelo durante el entrenamiento. Se utiliza para medir el nivel de generalización del modelo.
+:::
+::: {.callout-caution appearance="default" icon="false"}
+## **Test**
+Se utiliza para evaluar reportando una métrica de diseño del Modelo.
+:::
+
+::: {.callout-caution}
+A diferencia de un modelo de Machine Learning el proceso de validación del modelo se realiza en conjunto con el entrenamiento. Es decir, se entrena y valida el modelo Epoch a Epoch.
+:::
+:::
+::: 
+
+## Model Validation: K-Fold {.smaller}
+
+![](img/clase-4/k-fold.png){.lightbox fig-align="center" width="60%"}
+
+::: {.callout-important}
+Corresponde al proceso de Holdout pero repetido $K$ veces.
+:::
+
 # ¿Qué es Pytorch?
 
 ## Pytorch {.smaller}
@@ -35,350 +132,603 @@ import torch.nn as nn
 import torch.nn.functional as F
 ```
 
-::: {.callout-important}
+::: {.callout-important appearance="default" icon=false}
+## 👀
 * `torch` es donde se encuentran la mayoría de funciones básicas para manipular tensores.
 * `torch.nn` es donde se encuentran los módulos necesarios para poder crear redes neuronales (neural networks). Cada módulo es una clase en Python.
-* `torch.nn.functional` es donde se encontrarán las versiones funcionales de elementos de `torch.nn`.
+* `torch.nn.functional` es donde se encontrarán `utility functions` además de versiones funcionales de elementos de `torch.nn`. 
 :::
-
-
-## GPU {.smaller}
-
-::: {.callout-note}
-* Su principal ventaja es que puede ejecutarse en GPU, lo cual entrega una ventaja comparativa enorme (Muchos más núcleos).
-:::
-::: {.callout-important}
-* Las GPUs están programadas en CUDA, una variante de C++ que es muy complicado de entender. Por lo que los mensajes de error son sumamente crípticos. Se recomienda desarrollar en CPU, y cambiar a GPU sólo cuando sea necesario ejecutar libre de errores.
-:::
-
-```{.python}
-## Permite automáticamente reconocer si es que existe GPU en el sistema y de existir lo asigna.
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-```
-
-::: {.callout-note}
-* El código de arriba es particularmente útil para Google Colab o plataformas que permitan activar o desactivar GPUs.
-* También es posible definirlo de manera manual en caso de querer debuggear algo en particular.
-:::
-
-## Mapeando lo aprendido con Pytorch {.smaller}
-
-![](img/clase-2/formal_nn.png){.lightbox fig-align="center" width="80%"}  
-
-::: {style="font-size: 70%;"}
-* Supongamos el caso particular en el cual queremos resolver un problema de clasificación binaria. ¿Cuánto valdría $k$ y cuál sería la **Loss Function** a utilizar?
-* Supongamos que queremos transformar una Matriz $X$ de 1000 registros y 10 variables. Además tenemos un vector $y$ el cuál queremos predecir. 
-* Supongamos que queremos llevar a 32 variables, luego a 64 para luego generar nuestra predicción. 
-* Supongamos además que queremos usar como función de activación la función ReLU  en ambas capas de transformación.
-:::
-::: {.callout-caution .fragment}
-¿Cómo definimos los 3 elementos principales de una red? 
-:::
-::: {.callout-tip .fragment}
-(***Hipótesis***, ***Loss Function*** y ***Optimizador***)
-:::
-
-
-## nn.Module 
-
-::: {style="font-size: 70%;"}
-
-> En Pytorch, cada parte de una red es una clase.
-
-::: {.callout-tip}
-* Una clase tiene la ventaja de que es un objeto mutable que puede almacenar estados en su interior. En el caso particular de una red neuronal, ¿qué **estado** será importante que guarde?
-:::
-
-::: {.callout-important}
-Una vez que un módulo es instanciado, acepta tensores de entrada y devuelve tensores de salida. 
-:::
-
-nn.Linear()
-: Corresponde a la Red más básica de Pytorch y permite realizar ***Transformaciones Affine***.
-:::
-
-```{.python }
-fc = nn.Linear(in_features, out_features, bias=True)
-```
-
-::: {style="font-size: 70%;"}
-* **in_features** es la dimensión inicial ($n_i$).
-* **out_features** la dimensión a la que se quiere llevar ($n_{i+1}$).
-
-::: {.callout-tip}
-De manera análoga, `nn.ReLU()` será el módulo que representará una función de activación ReLU. 
-:::
-:::
-
-::: {.callout-important .fragment}
-Pero, ¿Cómo combinamos distintos módulos para crear una sóla arquitectura que represente nuestra Hipótesis?
-:::
-
-
-## Hipótesis
-
-::: {style="font-size: 70%;"}
-Para poder crear una Hipótesis en Pytorch podemos combinar cada Módulo entra clase que herede desde `nn.Module`.
-:::
-
-```{.python }
-class MyNeuralNetwork(nn.Module):
-    def __init__(self,):
-        pass
-    def forward(self,x):
-        pass
-```
-
-<br>
-
-::: {style="font-size: 70%;"}
-* La red neuronal ***siempre debe heredar*** `nn.Module`. Esto permitirá que transformar la clase en Módulos que pueden combinarse para crear Arquitecturas cada vez más complejas.
-* **\_\_init\_\_()** corresponde al constructor. Acá se deben definir todos los parámetros de entrada (similar a una función), con la que se instanciará la clase.
-* **forward()** corresponde a la definición del ***forward pass** de la red en cuestión.
-:::
-
-## Hipótesis: `__init__()`
-
-```{.python }
-class MyNeuralNetwork(nn.Module):
-    def __init__(self,*):
-        super().__init__()
-        self.w1 = nn.Linear(10,32)
-        self.w2 = nn.Linear(32,64)
-        self.w3 = nn.Linear(64,1)
-        self.relu_1= nn.ReLU()
-        self.relu_2= nn.ReLU()
-```
-
-<br>
-
-::: {style="font-size: 70%;"}
-* Siempre el primer elemento de una red neuronal la inicialización del `nn.Module` mediante el `super().__init__()`.
-* Es importante notar que todos los elementos dentro de la clase deben tener el prefijo `self`. Esto permite que estos elementos puedan estar disponibles en cualquier método de la clase. 
-* Es posible inicializar elementos mediante parámetros (representado por *) para que la red sea flexible y reutilizable. La convención es que todos los métodos tienen que tener como primer parámetro la palabra `self` y luego pueden tener otros parámetros.
-:::
-
-## Hipótesis: `forward()` {auto-animate="true"}
-
-```{.python }
-class MyNeuralNetwork(nn.Module):
-    def __init__(self,*):
-        super().__init__()
-        self.w1 = nn.Linear(10,32)
-        self.w2 = nn.Linear(32,64)
-        self.w3 = nn.Linear(64,1)
-        self.relu_1= nn.ReLU()
-        self.relu_2= nn.ReLU()
-    def forward(self,x):
-        x = self.w1(x)
-        x = self.relu_1(x)
-        x = self.w2(x)
-        x = self.relu_2(x)
-        x = self.w3(x)
-        return x
-
-```
-::: {style="font-size: 70%;"}
-* La método `forward` representa el ***forward pass** de la red e indica cómo están conectadas las distintas etapas de la red. 
-* En este caso $x$ representa una instancia/registro que va pasando por la red. 
-:::
-
-## Loss Function y Optimizer
-
-::: {style="font-size: 70%;"}
-Loss Function
-: > La nomenclatura utilizada en Pytorch para referirse a la definición de la función de Pérdida es el `criterion`. Es decir, el criterio con el que se mide la pérdida. Más Loss Functions se pueden encontrar [acá](https://pytorch.org/docs/stable/nn.html#loss-functions).
-
-
-Optimizador
-: > La nomenclatura utilizada en Pytorch para referirse al optimizador a utilizar es `optimizer`. Éste se importa desde `torch.optim` y debe recibir como argumentos `model.parameters()` y **al menos** el `learning_rate`. Todos los optimizers pueden encontrarse [acá](https://pytorch.org/docs/stable/optim.html#algorithms).
-:::
-
-
-```{.python }
-model = MyNeuralNetwork()
-criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr = 3e-4)
-```
-
-## Training Loop
-
-
-::: {style="font-size: 50%;"}
-Definiremos como `Training Loop` al proceso en el cual entrenaremos el modelo.
-:::
-
-```{.python code-line-numbers="|2-3|5-6|8-9|11-12|14-15|17-18|1|"}
-for e in range(EPOCHS):
-    ## Fijar el modelo en Modo Entrenamiento
-    model.train()
-
-    ## Fijar Gradientes en 0
-    optimizer.zero_grad()
-
-    ## Forward Pass
-    preds = model(X)
-
-    ## Cálculo del Loss (Ojo, primero va la predicción y luego el target). Ver Docs.
-    loss = criterion(preds, y)
-
-    ## Cálculo de Gradientes
-    loss.backward()
-
-    ## Update Rule
-    optimizer.step()
-```
-
-::: {.callout-important style="font-size: 60%;"}
-* `.zero_grad()` fijan los gradientes a cero, ya que Pytorch acumula gradientes siempre. Es importante que en cada epoch todos los gradientes acumulados vuelvan a cero para una siguiente optimización.
-* En el caso de querer dejar en zero los gradientes de un tensor, y no del optimizador, se puede usar `.zero_()`.
-:::
-
-## Inferencia
-
-::: {style="font-size: 70%;"}
-> Para generar predicciones basta con generar un `Forward Pass` con el modelo ya entrenado. Dependiendo del modelo, es posible que sea necesario aplicar un `post-procesamiento`.
-:::
-
-<br>
-
-```{.python code-line-numbers="|1-2|4-7|9-10|12-13|"}
-## Fijar el Modelo en Evaluación.
-model.eval()
-
-## Evita que Pytorch calcule Gradientes ya que no es necesario.
-with torch.no_grad():
-    ## Cálculo de la salida del modelo (h)
-    h = model(X)
-
-## Cálculo de Probabilidades (si es que fuera necesario)
-y_proba = torch.sigmoid(h)
-
-## Clasificación propiamente tal
-y_preds = torch.where(y_proba>=0.5, 1,0)
-```
-
-## Mini-Batching
-
-::: {style="font-size: 80%;"}
-::: {.callout-warning}
-* Rara vez los datos vienen en formato de Tensor de Pytorch. Por lo tanto, el dataset (tablas, imágenes, videos, texto, audio, etc) debe ser llevado a formato Tensor, lo cual puede ser un proceso bastante costoso y que consume muchos recursos.
-:::
-
-::: {.callout-important}
-* Además, la cantidad de datos necesaria para poder entrenar un modelo de Deep Learning normalmente es alta. Lo cual limita el cierto Hardware al no contar con la capacidad necesaria.
-:::
-
-
-Mini-Batching
-: Se refiere a aplicar un proceso de Optimización Estocástica, con sólo una muestra de los datos. Se basa en que el gradiente de la suma de las muestras es equivalente al gradiente total.
-
-Para ello Pytorch introduce los conceptos de Dataset y DataLoader para implementar conversión y carga de datos `on-the-fly`.
-
-:::
-
-<br>
-```{.python code-line-numbers=""}
-from torch.utils.data import Dataset, DataLoader
-```
-
-## Mini-Batching: Dataset
-
-> Pytorch necesita crear una clase que herede de `Dataset` y que  permita tomar elementos uno a uno y transformarlos en Tensores. Este clase debe tener al menos 3 métodos: `__init__`, `__len__` y `__getitem__`.
-
-::: {.callout-tip}
-Supongamos que nuestros datos iniciales estaban en Numpy. 
-:::
-
-```{.python }
-class MyDataSet(Dataset):
-    def __init__(self, X,y):
-        self.X = X
-        self.y = y
-    def __len__(self):
-        return len(self.X)
-    def __getitem__(self,idx):
-        features = torch.from_numpy(self.X[idx])
-        target = torch.from_numpy(self.y[idx])
-        return features, target
-```
-
-## Model Registry {.smaller}
-
-> Cada vez que nosotros llamamos un objeto modelo (que herede de `nn.Module`) este modelo mostrará el model `registry`. El `registry` permitirá ver todos los elementos que son parte del modelo. Para que un elemento sea parte del registro, debe haber sido definido como `self.----`.
-
-![](img/clase-4/model_registry.png){.lightbox width="60%" fig-align="center"}
-
-::: {.callout-important}
-* Si es que se define un elemento como `self.---` debe definirse como un nn.Module y no como un `F.---`
-* Además se puede acceder a cualquier elemento/atributo mediante el comando `model.atributo`.
-:::
-
-## Model Registry 
-
-::: {style="font-size: 80%;"}
-![](img/clase-4/model_atributtes.png){.lightbox width="40%" fig-align="center"}
-
-::: {.callout-note}
-* Es posible acceder a los datos de Parámetros y Bias de una capa linear utilizando:
-:::
-
-```{.python }
-model.w1.weights.data
-model.w1.bias.data
-```
 
 ::: {.callout-tip appearance="default"}
-## Idea:
-* Podría utilizarse esto para poder definir valores iniciales de capas de parámetros y de bias.
-:::
+## 👀 Una versión funcional es capaz de replicar la operación de un módulo pero no tiene la capacidad de almacenar los parámetros aprendidos.
 :::
 
+## Pytorch en GPU {.smaller}
 
-```{.python }
-class MyNeuralNetwork(nn.Module):
-    def __init__(self, *):
-        self.w1 = ...
-        self.relu = ...
-        self.model.w1.weights.data = tensor([...])
-        self.model.w1.bias.data = tensor([...])
+La principal ventaja de frameworks como Pytorch es su ejecución en GPU, la cual ofrece una enorme capacidad de cómputo por la gran cantidad de núcleos.
+
+:::{.callout-tip appearance="default" style="font-size: 120%;" icon=false}
+## 🤓 Las GPUs usan CUDA (una variante compleja de C++), por lo que los errores suelen ser crípticos. Por ello se recomienda desarrollar en CPU y pasar a GPU solo cuando el código ya funcione correctamente y sea necesario entrenar.
+:::
+
+```{.python style="font-size: 120%;"}
+## Permite automáticamente reconocer si es que existe GPU en el sistema 
+## y de existir lo asigna como el dispositivo de entrenamiento.
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+```
+:::{.callout-note appearance="default" style="font-size: 120%;" icon=false}
+## 🖥️ El código anterior es particularmente útil para plataformas como Google Colab donde se permite activar o desactivar el uso de GPU.
+:::
+
+```{.python style="font-size: 120%;"}
+## Fija el dispositivo de entrenamiento a CPU
+device = torch.device("cpu")
+```
+
+## Convenciones: Modelo {.smaller}
+
+::::{.columns}
+:::{.column}
+::: {.callout-caution style="font-size: 90%;" icon=false appearance="default"} 
+## Una capa en Pytorch
+* Son elementos importados desde `torch.nn`.
+* Estos módulos deben ser instanciados para luego ser utilizados.
+* Cada capa tiene guarda sus parámetros como `atributos`: 
+  * `.weight.data` y `.bias.data` (para los pesos y bias respectivos).
+  * **Ojo**: Pytorch utiliza los parámetros de manera transpuesta a como lo aprendimos en clases.
+
+:::
+
+```{.python style="font-size: 120%;"}
+## Ejemplo de un capa de parámetros en Pytorch
+## Proyecta desde 4 dimensiones a 12 dimensiones
+fc1 = nn.Linear(in_features = 4, out_features=12)
+
+## Forward Pass:
+## Calcula las activaciones de la capa
+fc1(X)
+
+```
+
+:::{.callout-note style="font-size: 90%;" icon=false appearance="default"}
+## Output: Activaciones de la capa
+:::
+```
+tensor([[ 0.2620, -0.5313,  0.3907,  ..., -0.0451, -1.2113, -2.9476],
+        [-1.2096, -0.2586, -0.1372,  ...,  0.1342, -1.1130, -1.4764],
+        [-1.7676, -0.3754, -0.3786,  ...,  0.2964, -1.2234, -1.6176],
+        ...,
+        [-2.1432, -0.3500, -0.5168,  ...,  0.3048, -1.1075, -1.1932],
+        [-2.6030,  0.0033, -0.6494,  ...,  0.8202, -1.6117, -1.0077],
+        [ 0.1126, -0.4532,  0.3573,  ...,  0.0660, -1.0688, -2.4856]],
+       grad_fn=<AddmmBackward0>)
+```
+:::
+:::{.column}
+
+::: {.callout-tip style="font-size: 90%;" icon=false appearance="default"} 
+## Un clase en Pytorch permite crear redes más complejas y poseen 2 métodos principales:
+  * Todas las clases deben heredar de `nn.Module`.
+
+* `__init__()`:
+  * Se inicializan los módulos con `super().__init__()`.
+  * Se definen las capas de la red como atributos de la clase.
+    * self.nombre_de_la_capa = nn.Capa(...)
+    * self.funcion = nn.Funcion(...)
+* `forward()`:
+  * Define como se conectan las capas en el Forward Pass.
+
+:::
+
+```{.python style="font-size: 110%;"}
+class MLP(nn.Module):
+  def __init__(self, in_features, out_features):
+    super().__init__()
     
-    def forward(self,x):
-        ...
+    ## Defincición de capas
+    self.fc1 = nn.Linear(in_features, out_features)
+
+  def forward(self,x):
+    x = self.fc1(x)
+    return x
+
+model = MLP(in_features=4, out_features = 12)
+model(X)
 ```
-
-## Mini-Batching: Dataloader 
-
-::: {style="font-size: 70%;"}
-> El Dataloader permitirá ir cargando los datos en memoria en un cierto `batch_size`. La idea es no generar cuellos de botella por falta de memoria disponible. 
 :::
 
-```{.python }
-data = MyDataset(X,y)
-train_loader = DataLoader(data, batch_size=32, pin_memory=True,num_workers=12, shuffle=True)
+::::
+
+## Crear modelos más complejos {.smaller}
+
+::::{.columns}
+
+:::{.column width="60%"}
+
+```{.python style="font-size: 120%;"}
+class MLP2(nn.Module):
+  def __init__(self, in_features, out_features):
+    super().__init__()
+    self.fc1 = nn.Linear(in_features, out_features)
+    self.relu = nn.ReLU(inplace = True)
+    self.fc2 = nn.Linear(out_features, 1)
+
+  def forward(self,x):
+    x = self.fc1(x)
+    x = self.relu(x)
+    x = self.fc2(x)
+    return x
+
+class SuperMLP(nn.Module):
+  def __init__(self):
+    super().__init__()
+    self.mlp1 = MLP(in_features=4, out_features=12)
+    self.mlp2 = MLP2(in_features=12, out_features=8)
+  def forward(self, x):
+    x = self.mlp1(x)
+    x = self.mlp2(x)
+    return x
+
+super_model = SuperMLP()
+logits = super_model(X)
+logits.shape
 ```
-::: {style="font-size: 70%;"}
+
+:::
+
+:::{.column width="40%"}
+::: {.callout-caution style="font-size: 90%;" icon=false appearance="default"} 
+## Es posible combinar distintos `nn.Module` en un sólo modelo.
+:::
+
+![](img/clase-4/super_mlp.png){.lightbox fig-align="center" width="90%"}
+
+```{.python style="font-size: 90%;"}
+super_model
+```
+```
+SuperMLP(
+  (mlp1): MLP(
+    (fc1): Linear(in_features=4, out_features=12, bias=True)
+  )
+  (mlp2): MLP2(
+    (fc1): Linear(in_features=12, out_features=8, bias=True)
+    (relu): ReLU()
+    (fc2): Linear(in_features=8, out_features=1, bias=True)
+  )
+)
+```
+:::
+::::
+
+## Visualización del Modelo {.smaller}
+
+::::{.columns}
+
+:::{.column width="55%"}
+![](img/clase-4/super_mlp.png){.lightbox fig-align="center" width="90%"}
+:::
+
+:::{.column width="45%"}
+
+
+```{.python style="font-size: 90%;"}
+super_model
+```
+```
+SuperMLP(
+  (mlp1): MLP(
+    (fc1): Linear(in_features=4, out_features=12, bias=True)
+  )
+  (mlp2): MLP2(
+    (fc1): Linear(in_features=12, out_features=8, bias=True)
+    (relu): ReLU()
+    (fc2): Linear(in_features=8, out_features=1, bias=True)
+  )
+)
+```
+
+```{.python style="font-size: 90%;"}
+from torchinfo import summary
+summary(super_model)
+```
+```
+=================================================================
+Layer (type:depth-idx)                   Param #
+=================================================================
+SuperMLP                                 --
+├─MLP: 1-1                               --
+│    └─Linear: 2-1                       60
+├─MLP2: 1-2                              --
+│    └─Linear: 2-2                       104
+│    └─ReLU: 2-3                         --
+│    └─Linear: 2-4                       9
+=================================================================
+Total params: 173
+Trainable params: 173
+Non-trainable params: 0
+=================================================================
+```
+:::
+::::
+
+## Convenciones: Optimizador y Loss Function {.smaller}
+
+:::{.callout-important icon=false appearance="default"}
+## Loss Function
+* El `Loss Function` a utilizar le llamaremos `criterion`.
+:::
+```{.python style="font-size: 120%;"}
+criterion = nn.BCEWithLogitsLoss()
+```
+
+:::{.callout-caution icon=false appearance="default"}
+## Optimizer
+* El Optimizador lo llamaremos `optimizer` y se importa desde torch.optim.
+* Además el optimizador debe ser instanciado junto con los parámetros del modelo y la tasa de aprendizaje `lr` (learning rate).
+:::
+
+```{.python style="font-size: 120%;"}
+optimizer = torch.optim.Adam(super_model.parameters(), lr = 3e-4)
+```
+
+
+## Training Loop {.smaller}
+
+
+::::{.columns}
+:::{.column}
+```{.python code-line-numbers="|4|5|8|9|11|14|17|" style="font-size: 120%;"}
+loss_history = []
+for e in range(epochs):
+  # Definición del modo del Modelo
+  super_model.train()
+  optimizer.zero_grad()
+
+  # Forward Pass
+  logits = super_model(X)
+  loss = criterion(logits, y)
+  ## Calcula los gradientes (Backward Pass)
+  loss.backward()
+
+  # Actualización de los Pesos
+  optimizer.step()
+
+  # Log del Modelo
+  loss_history.append(loss.item())
+```
+:::
+:::{.column}
+![](img/clase-4/training_loop.png){.lightbox fig-align="center"} 
+
+:::
+::::
+
+
+:::{.callout-note style="font-size: 90%;" icon=false appearance="default"}
+## Elementos clave del Training Loop
+* Pytorch requiere fijar el Modo de la Red. Para entrenar se utiliza `model.train()`.
+  * Pytorch tiene la costumbre de Acumular Gradientes. Por lo tanto, antes de cada Loop, se deben reiniciar los gradientes a cero utilizando `optimizer.zero_grad()`.
+* El Forward Pass lo llamaremos con `logits = super_model(X)`. Esto permite calcular los Logits y las variables intermedias necesarias para el Backward Pass.
+* El error/loss de la red lo calculamos con `loss = criterion(logits, y)`.
+* El cálculo de gradientes lo llamaremos `loss.backward()`. Esto calcula los gradientes y los acumula en cada parámetro del modelo.
+* El optimizador lo llamaremos `optimizer`. Y llamaremos al proceso de actualizar pesos como `optimizer.step()`.
+:::
+
+## Validation Loop {.smaller}
+
+::::{.columns}
+:::{.column}
+
+```{.python code-line-numbers="2,20-28" style="font-size: 120%;"}
+loss_history = []
+val_loss_history = []
+for e in range(epochs):
+  # Definición del modo del Modelo
+  super_model.train()
+  optimizer.zero_grad()
+
+  # Forward Pass
+  logits = super_model(X)
+  loss = criterion(logits, y)
+  ## Calcula los gradientes (Backward Pass)
+  loss.backward()
+
+  # Actualización de los Pesos
+  optimizer.step()
+
+  # Log de Entrenamiento
+  loss_history.append(loss.item())
+
+  # Validation Loop
+  super_model.eval()
+
+  # Evita cálculo de gradientes
+  with torch.no_grad():
+    val_logits = super_model(X_val)
+    val_loss = criterion(val_logits, y_val)
+    # Log de Validación
+    val_loss_history.append(val_loss.item())
+```
+
+:::
+:::{.column}
+![](img/clase-4/validation_loop.png){.lightbox fig-align="center"} 
+
+:::{.callout-note style="font-size: 80%;" icon=false appearance="default"}
+## Elementos clave del Validation Loop
+* Se debe fijar el modo del modelo a evaluación con `model.eval()`. No es necesario calcular gradientes en Validación ya que no hay actualización de parámetros.
+  * `with torch.no_grad():` desactiva el cálculo de gradientes.
+* El Forward Pass lo llamaremos con `val_logits = super_model(X_val)`. Esto permite calcular los Logits para poder calcular el loss de Validación.
+* El error/loss de la red lo calculamos como `val_loss = criterion(val_logits, y_val)`.
+:::
+
+:::
+::::
+
+## Model Evaluation {.smaller}
+
+:::{style="font-size: 75%;"}
+> Nos referimos a la evaluación del modelo como la medición de la performance esperada por nuestro modelo. La Evaluación del Modelo se realiza en torno a una métrica definida a priori por el modelador. La métrica a utilizar está íntimamente ligada al problema a resolver.
+:::
+
+::: {.columns}
+::: {.column}
+#### Clasificación
+
+* $Accuracy = \frac{1}{m} \sum_{i = 1}^m 1\{y_i = \hat{y_i}\}$
+* $Precision = \frac{TP}{TP + FP}$
+* $Recall = \frac{TP}{TP + FN}$
+* $F1-Score = 2 \cdot \frac{Precision \cdot Recall}{Precision + Recall}$
+:::
+
+
+::: {.column}
+#### Regresión
+* $RMSE = \frac{1}{m} \sum_{i=1}^m (y_i-\hat{y_i})^2$
+* $MAE = \frac{1}{m} \sum_{i=1}^m |y_i - \hat{y_i}|$
+* $MAPE = 100 \cdot \frac{1}{m} \sum_{i=1}^m \frac{|y_i-\hat{y_i}|}{max(\epsilon,y_i)}$
+* $SMAPE = \frac{2}{m} \sum_{i=1}^2 \frac{|y_i - \hat{y_i}  |}{max(|y_i + \hat{y_i}|,\epsilon)}$
+:::
+::: 
+
+
+::: {.callout-warning icon=false appearance="default"}
+## 🤓
+Las métricas presentadas son las básicas para clasificación y regresión. Existen otras más específicas según el campo:
+
+* IoU en segmentación semántica,
+* MAP@k en recomendación,
+* BLEU o ROUGE en NLP, etc.
+* Una lista extensa puede consultarse en [Torchmetrics](https://lightning.ai/docs/torchmetrics/stable/all-metrics.html)
+.
+:::
+
+## Training-Validation Loop + Evaluación {.smaller}
+
+::::{.columns}
+:::{.column}
+
+```{.python code-line-numbers="4-5,15-17,25-27" style="font-size: 120%;"}
+loss_history, val_loss_history = [], []
+train_metric_history, val_metric_history = [], []
+for e in range():
+  train_metric = BinaryAccuracy()
+  val_metric = BinaryAccuracy()
+
+  ## Training Loop
+  super_model.train()
+  optimizer.zero_grad()
+  logits = super_model(X)
+  loss = criterion(logits, y)
+  loss.backward()
+  optimizer.step()
+  loss_history.append(loss.item())
+  acc = train_metric(logits, y)
+  train_metric_history.append(acc)
+  tr_acc = train_metric.compute()
+
+  # Validation Loop
+  super_model.eval()
+  with torch.no_grad():
+    val_logits = super_model(X_val)
+    val_loss = criterion(val_logits, y_val)
+    val_loss_history.append(val_loss.item())
+    acc = train_metric(val_logits, y_val)
+    val_metric_history.append(acc)
+    val_acc = test_metric.compute()
+
+```
+
+:::
+:::{.column}
+![](img/clase-4/val_loop_metrics.png){.lightbox fig-align="center"} 
+
+:::{.callout-caution style="font-size: 80%;" icon=false appearance="default"}
+## Elementos clave de este loop
+* Adicional al cálculo de Loss se calcula alguna métrica de interés para el problema.
+* Se pueden loguear cuantas métricas se deseen.
+:::
+
+:::
+::::
+
+## Monitoreo de un Modelo: Validation Curve {.smaller}
+
+
+::: {.columns}
+::: {.column width="60%"}
+![](img/clase-4/validation_curve.png){.lightbox fig-align="center"}
+:::
+::: {.column width="40%"}
 ::: {.callout-important}
-Esto implica que nuestro Training Loop deberá sufrir ciertas modificaciones para ir actualizandose por Batch y no sólo por Epoch.
-:::
+Es importante ser capaz de identificar el momento exacto en el cual el momento comienza su overfitting. Para ello se utiliza el **"Checkpointing"**. 
 :::
 
-```{.python }
-for e in range(EPOCHS):
-    train_loss = []
+::: {.callout-note appearance="default"}
+## Checkpoint
+
+* Corresponde a un snapshot del modelo a un cierto punto. En la **práctica** se almacenan los parámetros del **mejor modelo** y del **último Epoch**.
+:::
+
+::: {.callout-tip appearance="default"}
+## EarlyStopping
+
+* Teoricamente, una vez que la red Neuronal alcanza el punto de Overfitting ya no tiene sentido seguir el entrenamiento. Por lo tanto es posible detener el entrenamiento bajo una cierta condición.
+:::
+:::
+::: 
+
+## Entrenamiento Eficiente: Pytorch Dataset {.smaller}
+
+Pytorch posee varias estrategias para hacer más eficiente el entrenamiento de Redes Neuronales. Dentro de las estrategias más comunes está el entrenamiento en GPU en Mini Batches.
+
+:::{.callout-caution icon=false appearance="default"}
+### Pytorch Dataset
+
+Corresponde a una clase que hereda de torch.utils.data.Dataset, la cual define la forma en que se cargan los datos. Su principal ventaja es que permite realizar una carga perezosa (lazy loading), es decir, los datos se leen únicamente en el momento en que son requeridos.
+:::
+
+::::{.columns}
+:::{.column}
+```{.python}
+from torch.utils.data import Dataset
+
+class ExampleDataset(Dataset):
+  def __init__(self, x,y):
+    ## Convertimos a numpy arrays
+    self.X = x.to_numpy()
+    self.y = y.values
+
+  def __len__(self):
+    return len(self.X)
+
+  def __getitem__(self, idx):
+    return dict(
+        ## Tranformarmos cada índice en Tensor de Floats.
+        x=torch.from_numpy(self.X)[idx].float(),
+        y=torch.from_numpy(self.y)[idx].float()
+        )
+
+train_data = ExampleDataset(X_train, y_train)
+val_data = ExampleDataset(X_val, y_val)
+```
+:::
+:::{.column}
+:::{.callout-note icon=false appearance="default"}
+## `__init__`: Inicializa el dataset solicitando los datos requeridos.
+:::
+:::{.callout-tip icon=false appearance="default"}
+## `__len__`: Define como se calcula la cantidad de muestras del dataset.
+:::
+:::{.callout-important icon=false appearance="default"}
+## `__getitem__`: Define qué devuelve el elemento $i$ del dataset. Es decir **train_data[i]** o **val_data[i]**.
+:::
+:::
+::::
+
+## Entrenamiento Eficiente: Pytorch Dataloader {.smaller}
+
+:::{.callout-caution icon=false appearance="default"}
+### Pytorch Dataloader
+
+Corresponde a una clase que permite cargar los datos por batch. Además permite paralelizar la carga de datos utilizando múltiples workers y controlar aspectos como qué hacer con el último batch (si es que no es completo) o si es necesario mezclar los datos (shuffling). La instancia del Dataloader también es **lazy.**
+:::
+
+```{.python style="font-size: 120%;"}
+train_loader=DataLoader(train_data, batch_size=32, num_workers=10, pin_memory=True, drop_last=True, shuffle=True)
+val_loader=DataLoader(val_data, batch_size=32, num_workers=10, pin_memory=True, shuffle=False)
+```
+
+:::{style="font-size: 70%;"}
+* **batch_size**: Tamaño del mini-batch.
+* **num_workers**: Número de procesos a utilizar para cargar los datos.
+* **pin_memory**: Si es True, las GPU destinan un espacio especial en memoria para acelerar la transferencia de datos.
+* **drop_last**: Si es True, se descarta el último batch si no es completo.
+* **shuffle**: Si es True, se mezclan los datos en cada epoch.
+:::
+
+
+:::{.callout-caution icon=false appearance="default"}
+## Para entrenar en GPU es necesario que el modelo y los datos estén GPU. 
+:::
+
+:::{.callout-tip icon=false appearance="default"}
+## Para pasar el modelo a la GPU se utiliza `super_model.to(device)`.
+:::
+
+:::{.callout-note icon=false appearance="default"}
+## Para pasar los datos a la GPU se utiliza `X.to(device)` o `y.to(device)`.
+:::
+
+## Training-Validation Loop + Dataloader {.smaller}
+ 
+::::{.columns}
+:::{.column}
+```{.python code-line-numbers="|1-2|3|4|5-6|8|9|10|11-17|15|19-21|19|23|24-25|26-30|30|32-34|32|36-37|" style="font-size: 95%;"}
+  epoch_loss=dict(train=[], val=[])
+  epoch_metric=dict(train=[], val=[])
+  super_model.to(device)
+  for e in range(epochs):
+    train_metric, val_metric = BinaryAccuracy(), BinaryAccuracy()
+    batch_loss=dict(train=[], val=[])
 
     model.train()
     for batch in train_loader:
-        X, y = batch
-        optimizer.zero_grad()
-        preds = model(X)
-        loss = criterion(preds, y)
-        loss.backward()
-        optimizer.step()
-        train_loss.append(loss.item())
-    print(f"Loss para Epoch {e}: {np.mean(train_loss)}")
+      X, y = batch["x"].to(device), batch["y"].to(device)
+      optimizer.zero_grad()
+      logits = super_model(X)
+      loss = criterion(logits, y)
+      loss.backward()
+      acc = train_metric(logits, y)
+      optimizer.step()
+      batch_loss["train"].append(loss.item())
+
+    tr_acc = train_metric.compute()
+    train_epoch_loss = np.mean(batch_loss["train"])
+    epoch_metric["train"].append(tr_acc)
+
+    model.eval()
+    with torch.no_grad():
+      for batch in val_loader:
+        X, y = batch["x"].to(device), batch["y"].to(device)
+        logits = super_model(X)
+        loss = criterion(logits, y)
+        batch_loss["val"].append(loss.item())
+        acc = val_metric(logits, y)
+
+      val_acc = val_metric.compute()
+      val_epoch_loss = np.mean(batch_loss["val"])
+      epoch_metric["val"].append(val_acc)
+
+    epoch_loss["train"].append(train_epoch_loss)
+    epoch_loss["val"].append(val_epoch_loss)
+
 ```
-# Continuará
+:::
+:::{.column}
+:::{.callout-note style="font-size: 80%;" icon=false appearance="default"}
+## 👀 Detalles clave de este loop
+
+* Tanto para el Training Loop como para el Validation Loop se itera sobre el `DataLoader` en la GPU.
+* Se definen métricas dentro de la Epoch. Las cuales serán utilizadas para calcular por batch y por epoch (utilizando `.compute()`).
+* Se definen métricas separadas para entrenamiento y validación.
+* Normalmente se loguean el Loss y una o más métricas por Epoch para construir las curvas de validación.
+:::
+
+:::{.callout-warning style="font-size: 80%;" appearance="default"}
+## Detach
+En ocasiones no es posible convertir un tensor a un valor numérico (float, int, etc) si es que el tensor requiere gradientes. En estos casos es necesario "desconectar" el tensor del grafo de cómputo utilizando `.detach()` y luego conviertiendolo a Numpy.
+:::
+
+```{.python}
+data.detach().numpy()
+```
+
+:::
+::::
+
+# 🎊 Estamos listos para entrenar Redes Neuronales 🎊
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0

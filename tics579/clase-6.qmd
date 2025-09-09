@@ -61,6 +61,7 @@ Esta operación se puede hacer mediante [StandardScaler](https://scikit-learn.or
 :::
 ::: 
 
+
 ## Normalización (Batch Norm) {.smaller}
 
 [Paper 2015: Batch Normalization](https://arxiv.org/pdf/1502.03167)

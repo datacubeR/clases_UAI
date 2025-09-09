@@ -370,9 +370,9 @@ En Pytorch se suele utilizar `BCEWithLogitsLoss` ya que combina una sigmoide a c
 
 :::{.callout-note appearance="default" icon=false style="font-size: 120%;"}
 ## Clasificación Multiclase: CrossEntropy
-$$CE(Z)= \frac{1}{m}Tr(Y^T \hat{Y})$$
+$$CE(Z)= -\frac{1}{m}Tr(Y^T Log(\hat{Y}))$$
 
-Donde $Tr(.)$ es la traza de una matriz e $Y \in \{0,1\}^{m \times k}$ es la codificación One-Hot de las etiquetas y $\hat{Y} = Softmax(Z)$, donde $Z$ son los Logits del modelo.
+Donde $Tr(.)$ es la traza de una matriz e $Y \in \{0,1\}^{m \times k}$ es la codificación One-Hot de las etiquetas e $\hat{Y} = Softmax(Z)$, donde $Z$ son los Logits del modelo.
 :::
 
 :::{.callout-tip appearance="default" icon=false style="font-size: 120%;"}
@@ -382,14 +382,16 @@ Corresponde a la suma de los elementos de la diagonal principal de una matriz.
 
 :::{.callout-warning appearance="default" icon=false style="font-size: 120%;"}
 ## Derivada
-$$\frac{\partial CE(X)}{\partial Z} = \frac{1}{m}\left(Softmax(Z) - Y\right)$$
+$$\frac{\partial CE(X)}{\partial Z} = \frac{1}{m}\left(\hat{Y} - Y\right)$$
 :::
 
 ::: {.callout-tip}
 En Pytorch se suele utilizar `CrossEntropyLoss` ya que combina aplica una función Softmax a la capa de salida además de ser una clase numericamente más estable.
 :::
 
+## Ejemplo de Cross Entropy Loss
 
+TODO:
 
 ## Loss Functions: Regresión {.smaller}
 
@@ -613,7 +615,7 @@ $$\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{s'_{t+1}}} v'_{t+1}$$
 ##### Correcciones Iniciales
 
 $$v'_{t+1} = \frac{v_{t+1}}{1-\beta_1^{t+1}}$$
-$$s'_{t+1} = \frac{v_{t+1}}{1-\beta_2^{t+1}}$$
+$$s'_{t+1} = \frac{s_{t+1}}{1-\beta_2^{t+1}}$$
 :::
 ::: 
 

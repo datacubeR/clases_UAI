@@ -11,4 +11,5 @@
 
 .reveal code {
     color: #ff5555;
+    max-height: 100% !important;
 }
