@@ -23,19 +23,80 @@ format:
     pdf-separate-fragments: true
 ---
 
-## Entrenamiento de un Modelo {.smaller}
+## Potenciales problemas al Entrenar un Modelo {.smaller}
 
 > El entrenamiento de un modelo tiene demasiadas variables que pueden influir en el éxito del modelo. Algunos aspectos relevantes a los que hay que poner énfasis al momento de entrenar:
 
-* Overfitting
-* Convergencia/Tiempo de Convergencia
-* Generalización
-* Optimización de Recursos Computacionales/Hardware.
+* Lidiar con Variables Categóricas
+* Escala de las Variables
+* Determinar convergencia
+* Combatir el Overfitting
+* Determinar Generalización
+* Optimizar Recursos Computacionales/Hardware.
 * Prevenir problemas de Vanishing Gradient y Exploding Gradients.
 
 ::: {.callout-note}
 Muchas de las técnicas que veremos acá permiten abordar mejoras en nuestros modelos para uno o más aspectos de los mencionados anteriormente.
 :::
+
+## Categorical Variables: One Hot Encoding {.smaller}
+
+Hasta ahora hemos asumido que las variables de entrada son numéricas. Pero en la práctica es muy común encontrarse con variables categóricas. En Deep Learning existen dos técnicas para lidiar con este tipo de variables: One-Hot-Encoding y el uso de Embeddings.
+
+::::{.columns}
+:::{.column}
+:::{.callout-tip icon=false appearance="default"}
+## 📋 One-Hot-Encoding
+* Permite una representación dispersa (sparse) de las variables categóricas. Consiste en crear una columna por cada categoría, y asignar un 1 o un 0 dependiendo si la instancia pertenece o no a dicha categoría.
+
+* Es una representación estática sin parámetros entrenables asociados.
+
+* Genera tantas columnas/features nuevas como categorías existan en la variable original. Por lo tanto, puede generar problemas de dimensionalidad si existen muchas categorías.
+:::
+:::
+:::{.column}
+![](img/clase-5/ohe_example.png){.lightbox fig-align="center" width="90%"}
+:::
+::::
+
+
+## Categorical Variables: Embeddings {.smaller}
+
+::::{.columns}
+:::{.column}
+:::{.callout-important icon=false appearance="default"}
+## 🗞️ Embeddings
+* Un embedding es una representación numérica de un objeto (palabra, imagen, nodo, etc.) en un espacio vectorial de menor dimensión que captura sus características y relaciones de manera útil para un modelo de machine learning. 
+
+* En lugar de trabajar con las categorías crudas, los **embeddings** convierten esos datos en vectores de números reales. De esta forma, objetos similares quedan representados por vectores cercanos.
+
+* Los vectores son aprendidos por el modelo durante el entrenamiento, de tal manera que la representación aprendida es la optima para el problema específico a resolver. Es decir, agrega parámetros entrenables al modelo.
+:::
+
+:::
+:::{.column}
+![](img/clase-5/emb_example.png){.lightbox fig-align="center"}
+:::
+
+::::
+
+En Pytorch esto se puede realizar mediante: `nn.Embedding()`. 
+
+::: {style="font-size: 150%;"}
+
+```{.python }
+nn.Embedding(num_embeddings, embedding_dim)
+```
+:::
+
+* **num_embeddings**: Corresponde al número de categórías.
+* **embedding_dim**: El número de dimensiones en el cual se quiere representar.
+
+::: {.callout-important}
+* Este proceso tiene parámetros entrenables asociados.
+:::
+
+
 
 ## Normalización
 
@@ -426,26 +487,6 @@ En Pytorch se puede implementar como `F.one_hot()`, pero mi recomendación es ut
 
 ![](img/clase-6/one_hot.png){.lightbox fig-align="center"}
 
-## Categorical Variables {.smaller}
-
-Embeddings
-: Es una representación de Densa de los Datos. Corresponde a una representación a en un espacio dimensional definido que es aprendido por la misma red. La representación aprendida considera aspectos como la similaridad la cual se refleja como una medida de distancia.
-
-En Pytorch esto se puede realizar mediante: `nn.Embedding()`. 
-
-::: {style="font-size: 150%;"}
-
-```{.python }
-nn.Embedding(num_embeddings, embedding_dim)
-```
-:::
-
-* **num_embeddings**: Corresponde al número de categórías.
-* **embedding_dim**: El número de dimensiones en el cual se quiere representar.
-
-::: {.callout-important}
-* Este proceso tiene parámetros entrenables asociados.
-:::
 
 # That's all Folks
 

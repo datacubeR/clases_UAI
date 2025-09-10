@@ -116,7 +116,7 @@ A diferencia de un modelo de Machine Learning el proceso de validación del mode
 ![](img/clase-4/k-fold.png){.lightbox fig-align="center" width="60%"}
 
 ::: {.callout-important}
-Corresponde al proceso de Holdout pero repetido $K$ veces.
+Corresponde al proceso de Holdout pero repetido $K$ veces. ***No es tan utilizado en Deep Learning debido a los altos costos computacionales***.
 :::
 
 # ¿Qué es Pytorch?
@@ -143,29 +143,8 @@ import torch.nn.functional as F
 ## 👀 Una versión funcional es capaz de replicar la operación de un módulo pero no tiene la capacidad de almacenar los parámetros aprendidos.
 :::
 
-## Pytorch en GPU {.smaller}
 
-La principal ventaja de frameworks como Pytorch es su ejecución en GPU, la cual ofrece una enorme capacidad de cómputo por la gran cantidad de núcleos.
-
-:::{.callout-tip appearance="default" style="font-size: 120%;" icon=false}
-## 🤓 Las GPUs usan CUDA (una variante compleja de C++), por lo que los errores suelen ser crípticos. Por ello se recomienda desarrollar en CPU y pasar a GPU solo cuando el código ya funcione correctamente y sea necesario entrenar.
-:::
-
-```{.python style="font-size: 120%;"}
-## Permite automáticamente reconocer si es que existe GPU en el sistema 
-## y de existir lo asigna como el dispositivo de entrenamiento.
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-```
-:::{.callout-note appearance="default" style="font-size: 120%;" icon=false}
-## 🖥️ El código anterior es particularmente útil para plataformas como Google Colab donde se permite activar o desactivar el uso de GPU.
-:::
-
-```{.python style="font-size: 120%;"}
-## Fija el dispositivo de entrenamiento a CPU
-device = torch.device("cpu")
-```
-
-## Convenciones: Modelo {.smaller}
+## Pytorch: Modelo {.smaller}
 
 ::::{.columns}
 :::{.column}
@@ -239,7 +218,7 @@ model(X)
 
 ::::
 
-## Crear modelos más complejos {.smaller}
+## Pytorch: Crear modelos más complejos {.smaller}
 
 ::::{.columns}
 
@@ -301,7 +280,7 @@ SuperMLP(
 :::
 ::::
 
-## Visualización del Modelo {.smaller}
+## Pytorch: Visualización del Modelo {.smaller}
 
 ::::{.columns}
 
@@ -352,7 +331,7 @@ Non-trainable params: 0
 :::
 ::::
 
-## Convenciones: Optimizador y Loss Function {.smaller}
+## Pytorch: Optimizador y Loss Function {.smaller}
 
 :::{.callout-important icon=false appearance="default"}
 ## Loss Function
@@ -373,7 +352,7 @@ optimizer = torch.optim.Adam(super_model.parameters(), lr = 3e-4)
 ```
 
 
-## Training Loop {.smaller}
+## Pytorch: Training Loop {.smaller}
 
 
 ::::{.columns}
@@ -415,7 +394,7 @@ for e in range(epochs):
 * El optimizador lo llamaremos `optimizer`. Y llamaremos al proceso de actualizar pesos como `optimizer.step()`.
 :::
 
-## Validation Loop {.smaller}
+## Pytorch: Validation Loop {.smaller}
 
 ::::{.columns}
 :::{.column}
@@ -466,7 +445,7 @@ for e in range(epochs):
 :::
 ::::
 
-## Model Evaluation {.smaller}
+## Pytorch: Model Evaluation {.smaller}
 
 :::{style="font-size: 75%;"}
 > Nos referimos a la evaluación del modelo como la medición de la performance esperada por nuestro modelo. La Evaluación del Modelo se realiza en torno a una métrica definida a priori por el modelador. La métrica a utilizar está íntimamente ligada al problema a resolver.
@@ -504,7 +483,7 @@ Las métricas presentadas son las básicas para clasificación y regresión. Exi
 .
 :::
 
-## Training-Validation Loop + Evaluación {.smaller}
+## Pytorch: Training-Validation Loop + Evaluación {.smaller}
 
 ::::{.columns}
 :::{.column}
@@ -579,6 +558,27 @@ Es importante ser capaz de identificar el momento exacto en el cual el momento c
 :::
 ::: 
 
+## Entrenamiento Eficiente: GPU {.smaller}
+
+La principal ventaja de frameworks como Pytorch es su ejecución en GPU, la cual ofrece una enorme capacidad de cómputo por la gran cantidad de núcleos.
+
+:::{.callout-tip appearance="default" style="font-size: 120%;" icon=false}
+## 🤓 Las GPUs usan CUDA (una variante compleja de C++), por lo que los errores suelen ser crípticos. Por ello se recomienda desarrollar en CPU y pasar a GPU solo cuando el código ya funcione correctamente y sea necesario entrenar.
+:::
+
+```{.python style="font-size: 120%;"}
+## Permite automáticamente reconocer si es que existe GPU en el sistema 
+## y de existir lo asigna como el dispositivo de entrenamiento.
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+```
+:::{.callout-note appearance="default" style="font-size: 120%;" icon=false}
+## 🖥️ El código anterior es particularmente útil para plataformas como Google Colab donde se permite activar o desactivar el uso de GPU.
+:::
+
+```{.python style="font-size: 120%;"}
+## Fija el dispositivo de entrenamiento a CPU
+device = torch.device("cpu")
+```
 ## Entrenamiento Eficiente: Pytorch Dataset {.smaller}
 
 Pytorch posee varias estrategias para hacer más eficiente el entrenamiento de Redes Neuronales. Dentro de las estrategias más comunes está el entrenamiento en GPU en Mini Batches.
@@ -586,7 +586,7 @@ Pytorch posee varias estrategias para hacer más eficiente el entrenamiento de R
 :::{.callout-caution icon=false appearance="default"}
 ### Pytorch Dataset
 
-Corresponde a una clase que hereda de torch.utils.data.Dataset, la cual define la forma en que se cargan los datos. Su principal ventaja es que permite realizar una carga perezosa (lazy loading), es decir, los datos se leen únicamente en el momento en que son requeridos.
+Corresponde a una clase que hereda de `torch.utils.data.Dataset,` la cual define la forma en que se cargan los datos. Su principal ventaja es que permite realizar una carga perezosa (lazy loading), es decir, los datos se leen únicamente en el momento en que son requeridos.
 :::
 
 ::::{.columns}
@@ -636,6 +636,7 @@ Corresponde a una clase que permite cargar los datos por batch. Además permite 
 :::
 
 ```{.python style="font-size: 120%;"}
+from torch.utils.data import DataLoader
 train_loader=DataLoader(train_data, batch_size=32, num_workers=10, pin_memory=True, drop_last=True, shuffle=True)
 val_loader=DataLoader(val_data, batch_size=32, num_workers=10, pin_memory=True, shuffle=False)
 ```
@@ -661,7 +662,7 @@ val_loader=DataLoader(val_data, batch_size=32, num_workers=10, pin_memory=True, 
 ## Para pasar los datos a la GPU se utiliza `X.to(device)` o `y.to(device)`.
 :::
 
-## Training-Validation Loop + Dataloader {.smaller}
+## Pytorch: Training-Validation Loop + Dataloader {.smaller}
  
 ::::{.columns}
 :::{.column}
@@ -727,6 +728,226 @@ data.detach().numpy()
 
 :::
 ::::
+
+## Categorical Variables: One Hot Encoding {.smaller}
+
+Hasta ahora hemos asumido que las variables de entrada son numéricas. Pero en la práctica es muy común encontrarse con variables categóricas. En Deep Learning existen dos técnicas para lidiar con este tipo de variables: One-Hot-Encoding y el uso de Embeddings.
+
+::::{.columns}
+:::{.column}
+:::{.callout-tip icon=false appearance="default"}
+## 📋 One-Hot-Encoding
+* Permite una representación dispersa (sparse) de las variables categóricas. Consiste en crear una columna por cada categoría, y asignar un 1 o un 0 dependiendo si la instancia pertenece o no a dicha categoría.
+
+* Es una representación estática sin parámetros entrenables asociados.
+
+* Genera tantas columnas/features nuevas como categorías existan en la variable original. Por lo tanto, puede generar problemas de dimensionalidad si existen muchas categorías.
+:::
+:::
+:::{.column}
+![](img/clase-4/ohe_example.png){.lightbox fig-align="center" width="90%"}
+:::
+::::
+
+
+## Categorical Variables: Embeddings {.smaller}
+
+::::{.columns}
+:::{.column}
+:::{.callout-important icon=false appearance="default"}
+## 🗞️ Embeddings
+* Un embedding es una representación numérica de un objeto (palabra, imagen, nodo, etc.) en un espacio vectorial de menor dimensión que captura sus características y relaciones de manera útil para un modelo de machine learning. 
+
+* En lugar de trabajar con las categorías crudas, los **embeddings** convierten esos datos en vectores de números reales. De esta forma, objetos similares quedan representados por vectores cercanos.
+
+* Los vectores son aprendidos por el modelo durante el entrenamiento, de tal manera que la representación aprendida es la optima para el problema específico a resolver. Es decir, agrega parámetros entrenables al modelo.
+:::
+
+:::
+:::{.column}
+![](img/clase-4/emb_example.png){.lightbox fig-align="center"}
+:::
+
+::::
+
+## Aplicación en Pytorch {.smaller}
+
+
+::::{.columns}
+:::{.column}
+
+:::{.callout-important icon=false appearance="default"}
+## One Hot Encoding
+Se puede utilizar directamente en Pytorch utilizando `F.one_hot()`. En general esto se hace fuera del modelo y no es una capa entrenable.
+:::
+
+
+:::{.callout-warning icon=false appearance="default"}
+## Embedding
+Este caso sí es una capa entrenable y se aplica en Pytorch como una capa más del modelo utilizando `nn.Embedding()`.
+:::
+
+```{.python style="font-size: 140%;"}
+nn.Embedding(num_embeddings, embedding_dim)
+```
+* **num_embeddings**: Corresponde al número de categórías.
+* **embedding_dim**: El número de dimensiones en el cual se quiere representar.
+
+
+
+:::
+:::{.column}
+![](img/clase-4/embedding_net_example.png){.lightbox fig-align="center" width="80%"}
+
+:::{.callout-tip icon=false appearance="default"}
+## 🤓 Projection Layer
+En algunos casos se agrega una Projection Layer (capa lineal) en las variables numéricas a una nueva dimensión (Esto ya que el Embedding lleva a las variables categóricas a una dimensión diferente). Esto permite que el modelo aprenda una representación conjunta de las variables numéricas y categóricas. Luego las capas de proyección y embedding se concatenan y se pasan a las capas siguientes.
+:::
+:::
+::::
+
+
+
+## Embedding: Ejemplo {.smaller}
+
+::::{.columns}
+:::{.column}
+
+$$e=Emb(X)$$
+$$\phi1 = e \cdot W1$$
+$$Z = \phi_1 = + 1_m b^T$$
+$$p = \sigma(Z)$$
+$$L = \frac{-1}{m}\left[y^T log(p) + (1-y)^T log(1-p)\right]$$
+
+:::{.callout-warning icon=false appearance="default"}
+## 🤓 No haremos la derivación completa, sólo nos enfocaremos en el Gradiente del Embedding.
+:::
+
+
+:::
+:::{.column}
+![](img/clase-4/emb_graph.png){.lightbox fig-align="center"}
+:::
+::::
+
+## Embedding: Ejemplo {.smaller}
+
+$$\frac{\partial L}{\partial Z} = \frac{1}{m} \cdot [p - y]$$
+$$\frac{\partial L}{\partial \phi_1} = \frac{1}{m} \cdot [p - y]$$
+$$\frac{\partial L}{\partial e} = \frac{\partial L}{\partial \phi_1} \cdot \frac{\partial \phi_1}{\partial e}= \frac{1}{m}[p-y] \cdot W_1^T $$
+$$\frac{\partial}{\partial E} = \frac{\partial L}{\partial e} \cdot \frac{\partial e}{\partial E} = \frac{1}{m} [p-y] \cdot W_1^T \cdot \frac{\partial e}{\partial E}$$
+
+:::{.callout-note icon=false appearance="default"}
+## ¿Cuánto vale $\frac{\partial e}{\partial E}$?
+
+$$\frac{\partial e}{\partial E} = S^T$$
+
+Donde $S$ es es la matriz One-Hot-Encoding de tamaño $m \times C$ donde C es el número de categorías.
+:::
+
+## Embedding: Ejemplo Numérico {.smaller}
+
+
+::::{.columns}
+:::{.column width="30%"}
+![](img/clase-4/data_emb.png){.lightbox fig-align="center"}
+
+:::
+
+:::{.column width="30%"}
+
+![](img/clase-4/emb_matrix.png){.lightbox fig-align="center"}
+
+$$
+e = \begin{bmatrix}
+0.1000 & 0.2000 & 0.3000 \\
+0.4000 & 0.0000 & -0.1000 \\
+0.2000 & -0.2000 & 0.1000 \\
+0.4000 & 0.0000 & -0.1000
+\end{bmatrix}
+$$
+
+:::
+:::{.column width="40%"}
+
+![](img/clase-4/one_hot_matrix){.lightbox fig-align="center"}
+
+:::
+::::
+
+## Embedding: Ejemplo Numérico {.smaller}
+
+::::{.columns}
+:::{.column width="30%"}
+
+$$
+\phi_1 = \begin{bmatrix}
+0.0300 \\
+0.1900 \\
+0.1600 \\
+0.1900
+\end{bmatrix}
+$$
+
+$$
+Z = \begin{bmatrix}
+0.1300 \\
+0.2900 \\
+0.2600 \\
+0.2900
+\end{bmatrix}
+$$
+
+$$
+p = \begin{bmatrix}
+0.5325 \\
+0.5720 \\
+0.5646 \\
+0.5720
+\end{bmatrix}
+$$
+
+:::
+:::{.column .fragment width="70%"}
+
+$$
+\begin{align}
+\frac{\partial L}{\partial E} &= \frac{1}{m} S^T \cdot [p - y] \cdot W_1^T\\
+&= \frac{1}{4} \cdot 
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 1 \\
+0 & 0 & 1 & 0
+\end{bmatrix} \cdot
+\left[\begin{bmatrix}
+0.5325 \\
+0.5720 \\
+0.5646 \\
+0.5720
+\end{bmatrix} -
+\begin{bmatrix}
+1.0 \\
+0.0 \\
+1.0 \\
+0.0
+\end{bmatrix}
+\right] \cdot \begin{bmatrix}
+0.5 & -0.25 & 0.1
+\end{bmatrix}\\
+&=\begin{bmatrix}
+-0.0584 & 0.0292 & -0.0117 \\
+0.0000 & -0.0000 & 0.0000 \\
+0.0000 & -0.0000 & 0.0000 \\
+0.1430 & -0.0715 & 0.0286 \\
+-0.0544 & 0.0272 & -0.0109
+\end{bmatrix}
+\end{align}
+$$
+:::
+::::
+
 
 # 🎊 Estamos listos para entrenar Redes Neuronales 🎊
 

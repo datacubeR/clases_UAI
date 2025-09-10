@@ -16,6 +16,7 @@ Práctico| Colab
 :----:|-----|
 Regresión Logística|[![](tics579/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics579/notebooks/reg_log.ipynb)
 Intro Pytorch|[![](tics579/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics579/notebooks/Intro_Pytorch.ipynb)
+Gradiente de un Embedding|[![](tics579/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics579/notebooks/Emb_grad.ipynb)
 <!-- Intro Pytorch|[![](tics579/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics579/notebooks/Intro_pytorch.ipynb) -->
 <!-- Intro Pytorch 2|[![](tics579/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics579/notebooks/Intro_pytorch_2.ipynb) -->
 <!-- CNN|[![](tics579/thumbnails/colab.svg)](https://colab.research.google.com/github/datacubeR/clases_UAI/blob/main/tics579/notebooks/CNN-pytorch.ipynb) -->
