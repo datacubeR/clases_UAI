@@ -214,16 +214,18 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="entrenamiento-de-un-modelo" class="slide level2 smaller">
-<h2>Entrenamiento de un Modelo</h2>
+<section id="potenciales-problemas-al-entrenar-un-modelo" class="slide level2 smaller">
+<h2>Potenciales problemas al Entrenar un Modelo</h2>
 <blockquote>
 <p>El entrenamiento de un modelo tiene demasiadas variables que pueden influir en el éxito del modelo. Algunos aspectos relevantes a los que hay que poner énfasis al momento de entrenar:</p>
 </blockquote>
 <ul>
-<li>Overfitting</li>
-<li>Convergencia/Tiempo de Convergencia</li>
-<li>Generalización</li>
-<li>Optimización de Recursos Computacionales/Hardware.</li>
+<li>Lidiar con Variables Categóricas</li>
+<li>Escala de las Variables</li>
+<li>Determinar convergencia</li>
+<li>Combatir el Overfitting</li>
+<li>Determinar Generalización</li>
+<li>Optimizar Recursos Computacionales/Hardware.</li>
 <li>Prevenir problemas de Vanishing Gradient y Exploding Gradients.</li>
 </ul>
 <div class="callout callout-note callout-style-simple">
@@ -233,6 +235,79 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="callout-content">
 <p>Muchas de las técnicas que veremos acá permiten abordar mejoras en nuestros modelos para uno o más aspectos de los mencionados anteriormente.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="categorical-variables-one-hot-encoding" class="slide level2 smaller">
+<h2>Categorical Variables: One Hot Encoding</h2>
+<p>Hasta ahora hemos asumido que las variables de entrada son numéricas. Pero en la práctica es muy común encontrarse con variables categóricas. En Deep Learning existen dos técnicas para lidiar con este tipo de variables: One-Hot-Encoding y el uso de Embeddings.</p>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>📋 One-Hot-Encoding</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><p>Permite una representación dispersa (sparse) de las variables categóricas. Consiste en crear una columna por cada categoría, y asignar un 1 o un 0 dependiendo si la instancia pertenece o no a dicha categoría.</p></li>
+<li><p>Es una representación estática sin parámetros entrenables asociados.</p></li>
+<li><p>Genera tantas columnas/features nuevas como categorías existan en la variable original. Por lo tanto, puede generar problemas de dimensionalidad si existen muchas categorías.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-5/ohe_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-5/ohe_example.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="categorical-variables-embeddings" class="slide level2 smaller">
+<h2>Categorical Variables: Embeddings</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🗞️ Embeddings</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><p>Un embedding es una representación numérica de un objeto (palabra, imagen, nodo, etc.) en un espacio vectorial de menor dimensión que captura sus características y relaciones de manera útil para un modelo de machine learning.</p></li>
+<li><p>En lugar de trabajar con las categorías crudas, los <strong>embeddings</strong> convierten esos datos en vectores de números reales. De esta forma, objetos similares quedan representados por vectores cercanos.</p></li>
+<li><p>Los vectores son aprendidos por el modelo durante el entrenamiento, de tal manera que la representación aprendida es la optima para el problema específico a resolver. Es decir, agrega parámetros entrenables al modelo.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-5/emb_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-5/emb_example.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+<p>En Pytorch esto se puede realizar mediante: <code>nn.Embedding()</code>.</p>
+<div style="font-size: 150%;">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>nn.Embedding(num_embeddings, embedding_dim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>num_embeddings</strong>: Corresponde al número de categórías.</li>
+<li><strong>embedding_dim</strong>: El número de dimensiones en el cual se quiere representar.</li>
+</ul>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Este proceso tiene parámetros entrenables asociados.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -280,13 +355,13 @@ Alfonso Tobar-Arancibia
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-6/normalize.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-6/normalize.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/nn_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-6/nn_example.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/nn_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-6/nn_example.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div></div>
@@ -297,7 +372,7 @@ Alfonso Tobar-Arancibia
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-6/normalize.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-6/normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-6/normalize.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
@@ -312,7 +387,7 @@ Alfonso Tobar-Arancibia
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/post_normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-6/post_normalize.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></a></p>
+<p><a href="img/clase-6/post_normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-6/post_normalize.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
@@ -354,20 +429,20 @@ Alfonso Tobar-Arancibia
 <h2>Normalización (Batch Norm)</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/batch_norm_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-6/batch_norm_nn.png" class="quarto-figure quarto-figure-center" style="width:58.0%"></a></p>
+<p><a href="img/clase-6/batch_norm_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-6/batch_norm_nn.png" class="quarto-figure quarto-figure-center" style="width:58.0%"></a></p>
 </figure>
 </div>
 <div class="columns">
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/Z1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-6/Z1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-6/Z1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-6/Z1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/Z2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-6/Z2.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+<p><a href="img/clase-6/Z2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-6/Z2.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
 </figure>
 </div>
 </div></div>
@@ -420,13 +495,13 @@ Alfonso Tobar-Arancibia
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/batch_norm_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-6/batch_norm_nn.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-6/batch_norm_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-6/batch_norm_nn.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 <h4 id="z2-norm">Z2 norm</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/Z2_norm.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-6/Z2_norm.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-6/Z2_norm.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-6/Z2_norm.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 <div class="fragment" data-fragment-index="1">
@@ -614,12 +689,12 @@ Alfonso Tobar-Arancibia
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/Z1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-6/Z1.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/Z1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-6/Z1.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/Z2_ly.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-6/Z2_ly.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/Z2_ly.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-6/Z2_ly.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column fragment">
@@ -639,7 +714,7 @@ Alfonso Tobar-Arancibia
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/Z2_post_ly.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-6/Z2_post_ly.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/Z2_post_ly.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-6/Z2_post_ly.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div></div>
@@ -853,37 +928,8 @@ Corresponde a la representación mediante dummy variables. Normalmente se consid
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/one_hot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-6/one_hot.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/one_hot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-6/one_hot.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
-</div>
-</section>
-<section id="categorical-variables-1" class="slide level2 smaller">
-<h2>Categorical Variables</h2>
-<dl>
-<dt>Embeddings</dt>
-<dd>
-Es una representación de Densa de los Datos. Corresponde a una representación a en un espacio dimensional definido que es aprendido por la misma red. La representación aprendida considera aspectos como la similaridad la cual se refleja como una medida de distancia.
-</dd>
-</dl>
-<p>En Pytorch esto se puede realizar mediante: <code>nn.Embedding()</code>.</p>
-<div style="font-size: 150%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>nn.Embedding(num_embeddings, embedding_dim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><strong>num_embeddings</strong>: Corresponde al número de categórías.</li>
-<li><strong>embedding_dim</strong>: El número de dimensiones en el cual se quiere representar.</li>
-</ul>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Este proceso tiene parámetros entrenables asociados.</li>
-</ul>
-</div>
-</div>
 </div>
 </section>
 <section id="thats-all-folks" class="title-slide slide level1 center">
