@@ -389,9 +389,49 @@ $$\frac{\partial CE(X)}{\partial Z} = \frac{1}{m}\left(\hat{Y} - Y\right)$$
 En Pytorch se suele utilizar `CrossEntropyLoss` ya que combina aplica una función Softmax a la capa de salida además de ser una clase numericamente más estable.
 :::
 
-## Ejemplo de Cross Entropy Loss
+## Ejemplo de Cálculo Cross Entropy Loss {.smaller}
 
-TODO:
+
+
+::::{.columns}
+:::{.column}
+![](img/clase-3/ce_example.png){.lightbox fig-align="center"}
+
+$$Y = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+0 & 1 & 0
+\end{bmatrix}$$
+
+:::
+:::{.column}
+
+$$Log(\hat{Y}) = \begin{bmatrix}
+-0.1054 & -2.9957 & -2.9957 \\
+-4.6052 & -0.2357 & -1.6094 \\
+-0.1054 & -2.9957 & -2.9957 \\
+-4.6052 & -0.0202 & -4.6052
+\end{bmatrix}
+$$
+
+$$Y^T \cdot Log(\hat{Y}) = \begin{bmatrix}
+-0.1054 & ... & ... \\
+... & -0.2357 - 0.0202 & ... \\
+... & ... & -2.9957
+\end{bmatrix}
+$$
+
+:::{.callout-tip appearance="default" icon=false style="font-size: 100%;"}
+## Atención
+Cada elemento de la diagonal acumula la contribución a la pérdida correspondiente a esa clase por parte de cada registro. Por ejemplo: la columna 1 contiene únicamente la pérdida del primer registro; la columna 2 acumula la pérdida del segundo y cuarto registro; y la columna 3 contiene solo la pérdida del tercer registro.
+
+**SPOILER**: El logaritmo de los logits corresponde a la pérdida de cada registro.
+
+La pérdida total la da la Traza de la matriz resultante. Luego la pérdida es: $\frac{1}{4} [-0.1054 + (-0.2357 - 0.0202) + (-2.9957)] = 0.8392$.
+:::
+:::
+::::
 
 ## Loss Functions: Regresión {.smaller}
 
