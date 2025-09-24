@@ -202,19 +202,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="9de3958b-75c6-42f4-a8a4-b803328faca4">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_iris</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(<span class="dv">0</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_iris(as_frame<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> data[<span class="st">"data"</span>]</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"target"</span>] <span class="op">=</span> data[<span class="st">"target"</span>]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.sample(frac<span class="op">=</span><span class="dv">1</span>,random_state <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<div id="df-61164313-41df-4d53-960a-96f40b8255c1" class="colab-df-container">
+<div id="cell-2" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>capture</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install torchinfo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="8ecceaa6-c385-4bcb-b3cb-d679806ad207" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_iris</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(<span class="dv">0</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_iris(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> data[<span class="st">"data"</span>]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"target"</span>] <span class="op">=</span> data[<span class="st">"target"</span>]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.sample(frac<span class="op">=</span><span class="dv">1</span>,random_state <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div id="df-700895ac-fedd-4f4a-a976-ed6be86af10b" class="colab-df-container">
     <div>
 
 
@@ -326,7 +330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-61164313-41df-4d53-960a-96f40b8255c1')" title="Convert this dataframe to an interactive table." style="display:none;">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-700895ac-fedd-4f4a-a976-ed6be86af10b')" title="Convert this dataframe to an interactive table." style="display:none;">
 
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
     <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
@@ -376,12 +380,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
     <script>
       const buttonEl =
-        document.querySelector('#df-61164313-41df-4d53-960a-96f40b8255c1 button.colab-df-convert');
+        document.querySelector('#df-700895ac-fedd-4f4a-a976-ed6be86af10b button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-61164313-41df-4d53-960a-96f40b8255c1');
+        const element = document.querySelector('#df-700895ac-fedd-4f4a-a976-ed6be86af10b');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -401,8 +405,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 
 
-    <div id="df-c2eb3875-4b71-478d-8056-7570df669471">
-      <button class="colab-df-quickchart" onclick="quickchart('df-c2eb3875-4b71-478d-8056-7570df669471')" title="Suggest charts" style="display:none;">
+    <div id="df-842d389e-3230-464a-9d99-1be7531b4847">
+      <button class="colab-df-quickchart" onclick="quickchart('df-842d389e-3230-464a-9d99-1be7531b4847')" title="Suggest charts" style="display:none;">
 
 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
     <g>
@@ -518,14 +522,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         }
         (() => {
           let quickchartButtonEl =
-            document.querySelector('#df-c2eb3875-4b71-478d-8056-7570df669471 button');
+            document.querySelector('#df-842d389e-3230-464a-9d99-1be7531b4847 button');
           quickchartButtonEl.style.display =
             google.colab.kernel.accessAllowed ? 'block' : 'none';
         })();
       </script>
     </div>
 
-  <div id="id_eec33d94-80fb-4053-9b93-3a88db3c4b62">
+  <div id="id_1eaf4c53-d6c9-4520-a274-cd6d10636151">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -566,7 +570,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_eec33d94-80fb-4053-9b93-3a88db3c4b62 button.colab-df-generate');
+        document.querySelector('#id_1eaf4c53-d6c9-4520-a274-cd6d10636151 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -581,21 +585,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="c58da018-372c-43fe-8b18-3af9318b9c6c">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span><span class="st">"target"</span>).to_numpy()</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df.target.values</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="e200cb9c-4d4e-46c4-ffd0-bd44d6659df6" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span><span class="st">"target"</span>).to_numpy()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df.target.values</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X.shape)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(150, 4)
 (150,)</code></pre>
 </div>
 </div>
-<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="22f37d55-4644-4f75-d2f0-7a380348db30">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> torch.from_numpy(X).<span class="bu">float</span>()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> torch.from_numpy(y).<span class="bu">float</span>()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>X, y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="c792807a-d616-43ca-da14-fd169f6fe1ec" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> torch.from_numpy(X).<span class="bu">float</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> torch.from_numpy(y).<span class="bu">float</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>X, y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>(tensor([[5.8000, 4.0000, 1.2000, 0.2000],
          [5.1000, 2.5000, 3.0000, 1.1000],
          [6.6000, 3.0000, 4.4000, 1.4000],
@@ -759,11 +763,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="feed-forward-networks-en-pytorch" class="level2">
 <h2 class="anchored" data-anchor-id="feed-forward-networks-en-pytorch">Feed Forward Networks en Pytorch</h2>
-<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="152a310a-412c-4934-ea7e-84b295ec82c4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fc1 <span class="op">=</span> nn.Linear(in_features <span class="op">=</span> <span class="dv">4</span>, out_features<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>activation_pytorch <span class="op">=</span> fc1(X)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>activation_pytorch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="d4aa7127-a904-405c-be84-291625b0ac59" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fc1 <span class="op">=</span> nn.Linear(in_features <span class="op">=</span> <span class="dv">4</span>, out_features<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>phi1_py <span class="op">=</span> fc1(X)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>phi1_py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>tensor([[ 0.2620, -0.5313,  0.3907,  ..., -0.0451, -1.2113, -2.9476],
         [-1.2096, -0.2586, -0.1372,  ...,  0.1342, -1.1130, -1.4764],
         [-1.7676, -0.3754, -0.3786,  ...,  0.2964, -1.2234, -1.6176],
@@ -774,23 +778,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
        grad_fn=&lt;AddmmBackward0&gt;)</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="4955ea98-9f68-4d80-d8db-e8577126632c">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>W1 <span class="op">=</span> fc1.weight.data</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>b1 <span class="op">=</span> fc1.bias.data</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>W1.shape, b1.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="5d69f4f4-fd71-4dcd-8c69-dde715df5d14" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>W1 <span class="op">=</span> fc1.weight.data</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>b1 <span class="op">=</span> fc1.bias.data</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>W1.shape, b1.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>(torch.Size([12, 4]), torch.Size([12]))</code></pre>
 </div>
 </div>
-<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="0b49330b-8487-46e1-a89e-6ebed026b2cc">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>phi1 <span class="op">=</span> X<span class="op">@</span>W1.T <span class="op">+</span> b1</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(phi1.shape)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>phi1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="d8ff575c-0be7-4284-f070-0dc0b2c7c647" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>phi1 <span class="op">=</span> X<span class="op">@</span>W1.T <span class="op">+</span> b1</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(phi1.shape)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>phi1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>torch.Size([150, 12])</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>tensor([[ 0.2620, -0.5313,  0.3907,  ..., -0.0451, -1.2113, -2.9476],
         [-1.2096, -0.2586, -0.1372,  ...,  0.1342, -1.1130, -1.4764],
         [-1.7676, -0.3754, -0.3786,  ...,  0.2964, -1.2234, -1.6176],
@@ -800,10 +804,347 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         [ 0.1126, -0.4532,  0.3573,  ...,  0.0660, -1.0688, -2.4856]])</code></pre>
 </div>
 </div>
-<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="a64f79c4-ed67-4218-a81b-bb024fe01593">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>torch.equal(activation_pytorch, phi1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="c6621453-b831-4849-db7f-28972e20201d" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>torch.equal(phi1_py, phi1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>True</code></pre>
+</div>
+</div>
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="120a5044-1303-4a91-c54d-0cd9e0a30d2b" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Si creamos más capas</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>relu <span class="op">=</span> nn.ReLU()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>z1 <span class="op">=</span> relu(phi1_py)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>fc2 <span class="op">=</span> nn.Linear(<span class="dv">12</span>,<span class="dv">20</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>phi2_py <span class="op">=</span> fc2(z1)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>relu2 <span class="op">=</span> nn.ReLU()</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>z2 <span class="op">=</span> relu2(phi2_py)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>fc3 <span class="op">=</span> nn.Linear(<span class="dv">20</span>,<span class="dv">1</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> fc3(z2)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>tensor([[0.0850],
+        [0.1158],
+        [0.1566],
+        [0.0927],
+        [0.2101],
+        [0.1749],
+        [0.1780],
+        [0.1111],
+        [0.0875],
+        [0.1876],
+        [0.1431],
+        [0.1079],
+        [0.1764],
+        [0.1703],
+        [0.1568],
+        [0.0786],
+        [0.1356],
+        [0.1595],
+        [0.0958],
+        [0.0805],
+        [0.1339],
+        [0.1579],
+        [0.1655],
+        [0.0855],
+        [0.1789],
+        [0.1475],
+        [0.0927],
+        [0.0964],
+        [0.1454],
+        [0.1455],
+        [0.1592],
+        [0.1807],
+        [0.1270],
+        [0.1677],
+        [0.1730],
+        [0.0929],
+        [0.1187],
+        [0.0888],
+        [0.1514],
+        [0.1430],
+        [0.1736],
+        [0.0900],
+        [0.1135],
+        [0.1655],
+        [0.1514],
+        [0.1747],
+        [0.1051],
+        [0.0871],
+        [0.0843],
+        [0.1457],
+        [0.0904],
+        [0.0880],
+        [0.2179],
+        [0.1765],
+        [0.1688],
+        [0.1699],
+        [0.1546],
+        [0.1765],
+        [0.1714],
+        [0.1549],
+        [0.0912],
+        [0.1499],
+        [0.1511],
+        [0.0821],
+        [0.0808],
+        [0.1797],
+        [0.0874],
+        [0.1639],
+        [0.1772],
+        [0.1592],
+        [0.1480],
+        [0.1977],
+        [0.1634],
+        [0.0973],
+        [0.1044],
+        [0.1513],
+        [0.1682],
+        [0.1127],
+        [0.2040],
+        [0.1336],
+        [0.0932],
+        [0.0867],
+        [0.0922],
+        [0.1885],
+        [0.0770],
+        [0.1495],
+        [0.1565],
+        [0.1666],
+        [0.0918],
+        [0.0980],
+        [0.1359],
+        [0.0856],
+        [0.1628],
+        [0.1517],
+        [0.1817],
+        [0.1753],
+        [0.1148],
+        [0.1973],
+        [0.2119],
+        [0.1443],
+        [0.1055],
+        [0.1398],
+        [0.0755],
+        [0.1205],
+        [0.1652],
+        [0.0952],
+        [0.1488],
+        [0.1006],
+        [0.0988],
+        [0.2011],
+        [0.1616],
+        [0.1898],
+        [0.0869],
+        [0.0984],
+        [0.1725],
+        [0.0835],
+        [0.1564],
+        [0.0875],
+        [0.1696],
+        [0.1412],
+        [0.0823],
+        [0.1862],
+        [0.0677],
+        [0.1573],
+        [0.0784],
+        [0.1177],
+        [0.0900],
+        [0.0870],
+        [0.0843],
+        [0.1211],
+        [0.0690],
+        [0.1613],
+        [0.1546],
+        [0.0893],
+        [0.1653],
+        [0.1524],
+        [0.1139],
+        [0.1670],
+        [0.1564],
+        [0.0975],
+        [0.0891],
+        [0.1415],
+        [0.1435],
+        [0.1634],
+        [0.1231],
+        [0.1523],
+        [0.1727],
+        [0.1327],
+        [0.1852],
+        [0.0836]], grad_fn=&lt;AddmmBackward0&gt;)</code></pre>
+</div>
+</div>
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="2760a4d3-644b-493e-f52b-7882974f1697" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NNet(nn.Module):</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n, d1<span class="op">=</span><span class="dv">12</span>, d2<span class="op">=</span><span class="dv">20</span>, k<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc1 <span class="op">=</span> nn.Linear(n, d1)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc2 <span class="op">=</span> nn.Linear(d1,d2)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc3 <span class="op">=</span> nn.Linear(d2, k)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.relu1 <span class="op">=</span> nn.ReLU(inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.relu2 <span class="op">=</span> nn.ReLU(inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> forward(<span class="va">self</span>,x):</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.fc1(x)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.relu1(x)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.fc2(x)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.relu2(x)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.fc3(x)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> NNet(n<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>model(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>tensor([[0.4225],
+        [0.3099],
+        [0.4244],
+        [0.3862],
+        [0.5377],
+        [0.4182],
+        [0.4358],
+        [0.3707],
+        [0.3167],
+        [0.4410],
+        [0.3486],
+        [0.3905],
+        [0.4519],
+        [0.4207],
+        [0.3808],
+        [0.2955],
+        [0.3573],
+        [0.3610],
+        [0.3648],
+        [0.3387],
+        [0.3516],
+        [0.3486],
+        [0.4267],
+        [0.3441],
+        [0.4791],
+        [0.3598],
+        [0.4078],
+        [0.3664],
+        [0.3981],
+        [0.3786],
+        [0.3935],
+        [0.4814],
+        [0.3439],
+        [0.3998],
+        [0.3508],
+        [0.3738],
+        [0.3278],
+        [0.3528],
+        [0.4068],
+        [0.4307],
+        [0.4275],
+        [0.3512],
+        [0.3751],
+        [0.4109],
+        [0.4209],
+        [0.4984],
+        [0.4038],
+        [0.3504],
+        [0.3104],
+        [0.3223],
+        [0.3482],
+        [0.3832],
+        [0.5226],
+        [0.4387],
+        [0.4878],
+        [0.3950],
+        [0.3841],
+        [0.4044],
+        [0.5107],
+        [0.3713],
+        [0.3318],
+        [0.3410],
+        [0.3853],
+        [0.3159],
+        [0.3131],
+        [0.4110],
+        [0.3173],
+        [0.3880],
+        [0.4202],
+        [0.4357],
+        [0.3651],
+        [0.4308],
+        [0.3818],
+        [0.3680],
+        [0.3675],
+        [0.4083],
+        [0.4207],
+        [0.2951],
+        [0.4059],
+        [0.3323],
+        [0.3797],
+        [0.3225],
+        [0.3870],
+        [0.4364],
+        [0.2862],
+        [0.3840],
+        [0.3978],
+        [0.3757],
+        [0.3587],
+        [0.3446],
+        [0.3702],
+        [0.3234],
+        [0.4800],
+        [0.3959],
+        [0.5014],
+        [0.4184],
+        [0.3843],
+        [0.4071],
+        [0.4771],
+        [0.3584],
+        [0.4290],
+        [0.3623],
+        [0.2731],
+        [0.3332],
+        [0.4469],
+        [0.3426],
+        [0.4300],
+        [0.3464],
+        [0.3354],
+        [0.4121],
+        [0.3441],
+        [0.4349],
+        [0.3365],
+        [0.3613],
+        [0.3855],
+        [0.3050],
+        [0.3586],
+        [0.3178],
+        [0.4101],
+        [0.2957],
+        [0.3084],
+        [0.4098],
+        [0.2840],
+        [0.3637],
+        [0.2827],
+        [0.3348],
+        [0.2927],
+        [0.3516],
+        [0.3198],
+        [0.2940],
+        [0.3236],
+        [0.3795],
+        [0.3906],
+        [0.3423],
+        [0.4344],
+        [0.3649],
+        [0.3702],
+        [0.4594],
+        [0.3586],
+        [0.3681],
+        [0.3249],
+        [0.4128],
+        [0.3846],
+        [0.4782],
+        [0.3537],
+        [0.4073],
+        [0.4174],
+        [0.3947],
+        [0.4221],
+        [0.3450]], grad_fn=&lt;AddmmBackward0&gt;)</code></pre>
 </div>
 </div>
 </section>
@@ -815,23 +1156,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>El <code>__init__()</code> es lo que se llama un constructor. Es donde se inicializarán todos las capas que serán utilizadas por el modelo.</p></li>
 <li><p>El <code>forward()</code> se encarga de indicar como se conecta cada capa.</p></li>
 </ul>
-<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="88321fe4-ea34-439a-8b52-126f156a6ae0">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MLP(nn.Module):</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, in_features, out_features):</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc1 <span class="op">=</span> nn.Linear(in_features, out_features)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Esto permite garantizar que las capas lineales se inicializan igual</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc1.weight.data <span class="op">=</span> W1</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc1.bias.data <span class="op">=</span> b1</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> forward(<span class="va">self</span>,x):</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.fc1(x)</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> MLP(in_features<span class="op">=</span><span class="dv">4</span>, out_features <span class="op">=</span> <span class="dv">12</span>)</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>model(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="a8561290-2be5-48ad-ea55-498bea7b7d3f" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MLP(nn.Module):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, in_features, out_features):</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc1 <span class="op">=</span> nn.Linear(in_features, out_features)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Esto permite iniciar las capas con una matriz de parámetros arbitraria.</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc1.weight.data <span class="op">=</span> W1</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc1.bias.data <span class="op">=</span> b1</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> forward(<span class="va">self</span>,x):</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.fc1(x)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> MLP(in_features<span class="op">=</span><span class="dv">4</span>, out_features <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>model(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>tensor([[ 0.2620, -0.5313,  0.3907,  ..., -0.0451, -1.2113, -2.9476],
         [-1.2096, -0.2586, -0.1372,  ...,  0.1342, -1.1130, -1.4764],
         [-1.7676, -0.3754, -0.3786,  ...,  0.2964, -1.2234, -1.6176],
@@ -845,235 +1186,256 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>La gracia de poder utilizar el <code>nn.Module</code> es poder combinar Módulos para crear Módulos más grandes.</p>
 </blockquote>
-<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="a0aa7af4-3cda-4578-c324-049e128a6e28">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MLP2(nn.Module):</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, in_features, out_features):</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc1 <span class="op">=</span> nn.Linear(in_features, out_features)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.relu <span class="op">=</span> nn.ReLU(inplace <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc2 <span class="op">=</span> nn.Linear(out_features, <span class="dv">1</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> forward(<span class="va">self</span>,x):</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.fc1(x)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.relu(x)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.fc2(x)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SuperMLP(nn.Module):</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.mlp1 <span class="op">=</span> MLP(in_features<span class="op">=</span><span class="dv">4</span>, out_features<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.mlp2 <span class="op">=</span> MLP2(in_features<span class="op">=</span><span class="dv">12</span>, out_features<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.mlp1(x)</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.mlp2(x)</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>super_model <span class="op">=</span> SuperMLP()</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>logits <span class="op">=</span> super_model(X)</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>logits.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="6cf1df55-b054-4491-88bd-2c35f4a5a417" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MLP2(nn.Module):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, in_features, out_features):</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc1 <span class="op">=</span> nn.Linear(in_features, out_features)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.relu <span class="op">=</span> nn.ReLU(inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.fc2 <span class="op">=</span> nn.Linear(out_features, <span class="dv">1</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> forward(<span class="va">self</span>,x):</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.fc1(x)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.relu(x)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.fc2(x)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SuperMLP(nn.Module):</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.mlp1 <span class="op">=</span> MLP(in_features<span class="op">=</span><span class="dv">4</span>, out_features<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.mlp2 <span class="op">=</span> MLP2(in_features<span class="op">=</span><span class="dv">12</span>, out_features<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.mlp1(x)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="va">self</span>.mlp2(x)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>super_model <span class="op">=</span> SuperMLP()</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>logits <span class="op">=</span> super_model(X)</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>logits.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>torch.Size([150, 1])</code></pre>
 </div>
 </div>
-<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="cf9dfed4-5d07-4975-adbb-ae337bfcd49f">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> torch.sigmoid(logits)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code>tensor([[0.7422],
-        [0.7184],
-        [0.7528],
-        [0.7390],
-        [0.7915],
-        [0.7581],
-        [0.7759],
-        [0.7312],
-        [0.7083],
-        [0.7764],
-        [0.7313],
-        [0.7379],
-        [0.7709],
-        [0.7558],
-        [0.7447],
-        [0.7044],
-        [0.7303],
-        [0.7411],
-        [0.7285],
-        [0.7139],
-        [0.7249],
-        [0.7383],
-        [0.7592],
-        [0.7227],
-        [0.7692],
-        [0.7350],
-        [0.7414],
-        [0.7299],
-        [0.7367],
-        [0.7487],
-        [0.7455],
-        [0.7820],
-        [0.7233],
-        [0.7587],
-        [0.7583],
-        [0.7284],
-        [0.7223],
-        [0.7208],
-        [0.7493],
-        [0.7500],
-        [0.7679],
-        [0.7240],
-        [0.7295],
-        [0.7527],
-        [0.7481],
-        [0.7732],
-        [0.7378],
-        [0.7221],
-        [0.7085],
-        [0.7287],
-        [0.7190],
-        [0.7276],
-        [0.7924],
-        [0.7712],
-        [0.7643],
-        [0.7609],
-        [0.7514],
-        [0.7565],
-        [0.7709],
-        [0.7363],
-        [0.7142],
-        [0.7427],
-        [0.7506],
-        [0.7033],
-        [0.7091],
-        [0.7654],
-        [0.7143],
-        [0.7537],
-        [0.7665],
-        [0.7560],
-        [0.7339],
-        [0.7797],
-        [0.7525],
-        [0.7272],
-        [0.7203],
-        [0.7461],
-        [0.7575],
-        [0.7091],
-        [0.7741],
-        [0.7263],
-        [0.7298],
-        [0.7094],
-        [0.7326],
-        [0.7716],
-        [0.6999],
-        [0.7415],
-        [0.7532],
-        [0.7505],
-        [0.7227],
-        [0.7239],
-        [0.7273],
-        [0.7068],
-        [0.7664],
-        [0.7434],
-        [0.7755],
-        [0.7714],
-        [0.7327],
-        [0.7718],
-        [0.7902],
-        [0.7368],
-        [0.7523],
-        [0.7326],
-        [0.6877],
-        [0.7201],
-        [0.7596],
-        [0.7223],
-        [0.7507],
-        [0.7292],
-        [0.7134],
-        [0.7747],
-        [0.7474],
-        [0.7747],
-        [0.7156],
-        [0.7302],
-        [0.7550],
-        [0.7048],
-        [0.7456],
-        [0.7076],
-        [0.7626],
-        [0.7258],
-        [0.7073],
-        [0.7710],
-        [0.6949],
-        [0.7375],
-        [0.6974],
-        [0.7179],
-        [0.7019],
-        [0.7214],
-        [0.7074],
-        [0.7098],
-        [0.7171],
-        [0.7460],
-        [0.7433],
-        [0.7175],
-        [0.7575],
-        [0.7367],
-        [0.7337],
-        [0.7611],
-        [0.7456],
-        [0.7230],
-        [0.7084],
-        [0.7350],
-        [0.7408],
-        [0.7617],
-        [0.7255],
-        [0.7453],
-        [0.7581],
-        [0.7400],
-        [0.7744],
-        [0.7181]], grad_fn=&lt;SigmoidBackward0&gt;)</code></pre>
+<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="cb353236-748b-4049-a537-878c4423ca25" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> torch.sigmoid(logits)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>tensor([[0.5518],
+        [0.5677],
+        [0.5614],
+        [0.5608],
+        [0.5575],
+        [0.5630],
+        [0.5629],
+        [0.5700],
+        [0.5631],
+        [0.5624],
+        [0.5650],
+        [0.5660],
+        [0.5612],
+        [0.5624],
+        [0.5640],
+        [0.5612],
+        [0.5641],
+        [0.5655],
+        [0.5627],
+        [0.5560],
+        [0.5648],
+        [0.5663],
+        [0.5615],
+        [0.5603],
+        [0.5600],
+        [0.5648],
+        [0.5566],
+        [0.5626],
+        [0.5622],
+        [0.5638],
+        [0.5631],
+        [0.5597],
+        [0.5645],
+        [0.5636],
+        [0.5676],
+        [0.5586],
+        [0.5656],
+        [0.5575],
+        [0.5619],
+        [0.5627],
+        [0.5622],
+        [0.5609],
+        [0.5636],
+        [0.5631],
+        [0.5608],
+        [0.5620],
+        [0.5613],
+        [0.5591],
+        [0.5622],
+        [0.5673],
+        [0.5595],
+        [0.5544],
+        [0.5593],
+        [0.5619],
+        [0.5607],
+        [0.5640],
+        [0.5640],
+        [0.5644],
+        [0.5606],
+        [0.5643],
+        [0.5628],
+        [0.5665],
+        [0.5635],
+        [0.5570],
+        [0.5593],
+        [0.5635],
+        [0.5641],
+        [0.5643],
+        [0.5634],
+        [0.5612],
+        [0.5643],
+        [0.5639],
+        [0.5648],
+        [0.5613],
+        [0.5625],
+        [0.5618],
+        [0.5622],
+        [0.5671],
+        [0.5652],
+        [0.5656],
+        [0.5579],
+        [0.5604],
+        [0.5572],
+        [0.5624],
+        [0.5610],
+        [0.5637],
+        [0.5631],
+        [0.5649],
+        [0.5590],
+        [0.5697],
+        [0.5632],
+        [0.5578],
+        [0.5603],
+        [0.5626],
+        [0.5606],
+        [0.5636],
+        [0.5621],
+        [0.5654],
+        [0.5616],
+        [0.5657],
+        [0.5621],
+        [0.5642],
+        [0.5620],
+        [0.5650],
+        [0.5601],
+        [0.5666],
+        [0.5602],
+        [0.5716],
+        [0.5666],
+        [0.5652],
+        [0.5670],
+        [0.5625],
+        [0.5587],
+        [0.5651],
+        [0.5652],
+        [0.5624],
+        [0.5656],
+        [0.5624],
+        [0.5632],
+        [0.5689],
+        [0.5612],
+        [0.5647],
+        [0.5564],
+        [0.5652],
+        [0.5621],
+        [0.5647],
+        [0.5668],
+        [0.5583],
+        [0.5590],
+        [0.5675],
+        [0.5566],
+        [0.5647],
+        [0.5630],
+        [0.5601],
+        [0.5611],
+        [0.5647],
+        [0.5631],
+        [0.5597],
+        [0.5656],
+        [0.5601],
+        [0.5609],
+        [0.5635],
+        [0.5633],
+        [0.5595],
+        [0.5648],
+        [0.5622],
+        [0.5626],
+        [0.5624],
+        [0.5636],
+        [0.5572]], grad_fn=&lt;SigmoidBackward0&gt;)</code></pre>
 </div>
 </div>
 </section>
 <section id="entrenamiento-de-un-modelo" class="level2">
 <h2 class="anchored" data-anchor-id="entrenamiento-de-un-modelo">Entrenamiento de un Modelo</h2>
-<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="bae3463d-ec71-4d1d-fc47-321f22aa334d">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>super_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="23718b3b-9b1f-4dc2-8d43-22719917a866" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchinfo <span class="im">import</span> summary</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>summary(super_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>=================================================================
+Layer (type:depth-idx)                   Param #
+=================================================================
+SuperMLP                                 --
+├─MLP: 1-1                               --
+│    └─Linear: 2-1                       60
+├─MLP2: 1-2                              --
+│    └─Linear: 2-2                       104
+│    └─ReLU: 2-3                         --
+│    └─Linear: 2-4                       9
+=================================================================
+Total params: 173
+Trainable params: 173
+Non-trainable params: 0
+=================================================================</code></pre>
+</div>
+</div>
+<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="186367fa-a4b6-4ee0-e524-141ba96f4417" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>super_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>SuperMLP(
   (mlp1): MLP(
     (fc1): Linear(in_features=4, out_features=12, bias=True)
   )
   (mlp2): MLP2(
     (fc1): Linear(in_features=12, out_features=8, bias=True)
-    (relu): ReLU()
+    (relu): ReLU(inplace=True)
     (fc2): Linear(in_features=8, out_features=1, bias=True)
   )
 )</code></pre>
 </div>
 </div>
-<div id="cell-17" class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>criterion <span class="op">=</span> nn.BCEWithLogitsLoss()</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> torch.optim.Adam(super_model.parameters(), lr <span class="op">=</span> <span class="fl">3e-4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-21" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>criterion <span class="op">=</span> nn.BCEWithLogitsLoss()</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> torch.optim.Adam(super_model.parameters(), lr <span class="op">=</span> <span class="fl">3e-4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="b945669e-90a9-4d5a-9345-ece718f6c124">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>loss_history <span class="op">=</span> []</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> e <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Epoch: "</span>, e<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define el modo del Modelo</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  super_model.train()</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  optimizer.zero_grad()</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Forward Pass</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  logits <span class="op">=</span> super_model(X)</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Logits Shape: "</span>, logits.shape)</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Target Shape: "</span>, y.shape)</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  loss <span class="op">=</span> criterion(logits, y.unsqueeze(<span class="op">-</span><span class="dv">1</span>))</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Calcula los gradientes (Backward Pass)</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  loss.backward()</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Actualización de los Pesos.</span></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  optimizer.step()</span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  loss_history.append(loss.item())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-outputid="296f841c-0c7b-4e87-88b4-baf6ddd008ef" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>loss_history <span class="op">=</span> []</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> e <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Epoch: "</span>, e<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define el modo del Modelo</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  super_model.train()</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  optimizer.zero_grad()</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Forward Pass</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  logits <span class="op">=</span> super_model(X)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Logits Shape: "</span>, logits.shape)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Target Shape: "</span>, y.shape)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  loss <span class="op">=</span> criterion(logits, y.unsqueeze(<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">## Calcula los gradientes (Backward Pass)</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  loss.backward()</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Actualización de los Pesos.</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  optimizer.step()</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  loss_history.append(loss.item())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch:  1
 Logits Shape:  torch.Size([150, 1])
@@ -1227,18 +1589,18 @@ Logits Shape:  torch.Size([150, 1])
 Target Shape:  torch.Size([150])</code></pre>
 </div>
 </div>
-<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:448}}" data-outputid="192e7497-dfee-45a5-8c0d-329568744fff">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>plt.plot(loss_history)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(loss_history[<span class="op">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:447}}" data-outputid="dc217283-21fe-49cf-e682-c580186f7690" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>plt.plot(loss_history)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(loss_history[<span class="op">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.00767595274373889</code></pre>
+<pre><code>0.4633480906486511</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Intro_Pytorch_files/figure-html/cell-15-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="Intro_Pytorch_files/figure-html/cell-19-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>

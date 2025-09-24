@@ -725,9 +725,50 @@ g(z)&amp;= 0.5 \cdot z \cdot \left(1 + Tanh\left(\sqrt{2/\pi}\right) \cdot \left
 </div>
 </div>
 </section>
-<section id="ejemplo-de-cross-entropy-loss" class="slide level2">
-<h2>Ejemplo de Cross Entropy Loss</h2>
-<p>TODO:</p>
+<section id="ejemplo-de-cálculo-cross-entropy-loss" class="slide level2 smaller">
+<h2>Ejemplo de Cálculo Cross Entropy Loss</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-3/ce_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-3/ce_example.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><span class="math display">\[Y = \begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0
+\end{bmatrix}\]</span></p>
+</div><div class="column">
+<p><span class="math display">\[Log(\hat{Y}) = \begin{bmatrix}
+-0.1054 &amp; -2.9957 &amp; -2.9957 \\
+-4.6052 &amp; -0.2357 &amp; -1.6094 \\
+-0.1054 &amp; -2.9957 &amp; -2.9957 \\
+-4.6052 &amp; -0.0202 &amp; -4.6052
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[Y^T \cdot Log(\hat{Y}) = \begin{bmatrix}
+-0.1054 &amp; ... &amp; ... \\
+... &amp; -0.2357 - 0.0202 &amp; ... \\
+... &amp; ... &amp; -2.9957
+\end{bmatrix}
+\]</span></p>
+<div style="font-size: 100%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Atención</strong></p>
+</div>
+<div class="callout-content">
+<p>Cada elemento de la diagonal acumula la contribución a la pérdida correspondiente a esa clase por parte de cada registro. Por ejemplo: la columna 1 contiene únicamente la pérdida del primer registro; la columna 2 acumula la pérdida del segundo y cuarto registro; y la columna 3 contiene solo la pérdida del tercer registro.</p>
+<p><strong>SPOILER</strong>: El logaritmo de los logits corresponde a la pérdida de cada registro.</p>
+<p>La pérdida total la da la Traza de la matriz resultante. Luego la pérdida es: <span class="math inline">\(\frac{1}{4} [-0.1054 + (-0.2357 - 0.0202) + (-2.9957)] = 0.8392\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div></div>
 </section>
 <section id="loss-functions-regresión" class="slide level2 smaller">
 <h2>Loss Functions: Regresión</h2>
@@ -903,7 +944,7 @@ g(z)&amp;= 0.5 \cdot z \cdot \left(1 + Tanh\left(\sqrt{2/\pi}\right) \cdot \left
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-3/momentum_update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-3/momentum_update.png" class="quarto-figure quarto-figure-center" style="width:45.0%"></a></p>
+<p><a href="img/clase-3/momentum_update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-3/momentum_update.png" class="quarto-figure quarto-figure-center" style="width:45.0%"></a></p>
 </figure>
 </div>
 </div></div>
@@ -934,7 +975,7 @@ v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\thet
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-3/nesterov_update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-3/nesterov_update.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-3/nesterov_update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-3/nesterov_update.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 </div></div>
@@ -953,7 +994,7 @@ v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\thet
 <h2>Efecto del Momentum en el Update Rule</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-3/momentum_effect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-3/momentum_effect.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-3/momentum_effect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-3/momentum_effect.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
