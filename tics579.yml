@@ -57,39 +57,29 @@
   subtitle: "Clase 4: Model Training"
   author: "Alfonso Tobar-Arancibia"
   date: 2025-09-11
-  image: tics579/thumbnails/clase-5.png
+  image: tics579/thumbnails/clase-4.png
   path: tics579/clase-4.qmd
   categories:
   - slides
 
-
-# - title: "Clase 5"
-#   subtitle: "Clase 5: Model Training"
-#   author: "Alfonso Tobar-Arancibia"
-#   date: 2024-09-12
-#   image: tics579/thumbnails/clase-5.png
-#   path: tics579/clase-5.qmd
-#   categories:
-#    - slides
-#
-# - title: "Clase 6"
-#   subtitle: "Clase 6: Training Tips & Tricks"
-#   author: "Alfonso Tobar-Arancibia"
-#   date: 2024-09-26
-#   image: tics579/thumbnails/clase-6.png
-#   path: tics579/clase-6.qmd
-#   categories:
-#    - slides
+- title: "Clase 5"
+  subtitle: "Clase 5: Training Tips & Tricks"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2025-10-22
+  image: tics579/thumbnails/clase-5.png
+  path: tics579/clase-5.qmd
+  categories:
+   - slides
 #
 #
-# - title: "Clase 7"
-#   subtitle: "Clase 7: Redes Convolucionales"
-#   author: "Alfonso Tobar-Arancibia"
-#   date: 2024-10-03
-#   image: tics579/thumbnails/clase-7.png
-#   path: tics579/clase-7.qmd
-#   categories:
-#    - slides
+- title: "Clase 6"
+  subtitle: "Clase 6: Redes Convolucionales"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2025-10-22
+  image: tics579/thumbnails/clase-6.png
+  path: tics579/clase-6.qmd
+  categories:
+   - slides
 #
 #
 # - title: "Clase 8"

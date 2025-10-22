@@ -1,6 +1,6 @@
 ---
 title: "TICS-579-Deep Learning"
-subtitle: "Clase 6: Training Tips & Tricks"
+subtitle: "Clase 6: Redes Convolucionales"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -23,472 +23,456 @@ format:
     pdf-separate-fragments: true
 ---
 
-## Potenciales problemas al Entrenar un Modelo {.smaller}
+## Limitaciones de las FFN {.smaller}
 
-> El entrenamiento de un modelo tiene demasiadas variables que pueden influir en el éxito del modelo. Algunos aspectos relevantes a los que hay que poner énfasis al momento de entrenar:
+::::{.columns}
+:::{.column}
+![](img/clase-6/MNIST.png){.lightbox fig-align="center" width="70%"}
+:::
+:::{.column}
+![](img/clase-6/MNIST_net.png){.lightbox fig-align="center" width="70%"}
+:::
+::::
 
-* Lidiar con Variables Categóricas
-* Escala de las Variables
-* Determinar convergencia
-* Combatir el Overfitting
-* Determinar Generalización
-* Optimizar Recursos Computacionales/Hardware.
-* Prevenir problemas de Vanishing Gradient y Exploding Gradients.
+::: {.columns}
+::: {.column}
+#### Número de Parametros: 
+* $W_1 = 784 \cdot 256 + 256 = 200960$
+* $W_2 = 256 \cdot 128 + 128 = 32896$
+* $W_3 = 128 \cdot 10 + 10 = 1290$
+* Total = 235,146.
+:::
+::: {.column}
+![](img/clase-7/MNIST_params_MLP.png){.lightbox fig-align="center"}
+
+::: {.callout-tip .fragment}
+¿Y si tengo una imágen de $512 \times 512$? **67,143,306** de parámetros.
+:::
+:::
+::: 
+
+## Limitaciones de las FFN {.smaller}
+
+::: {.columns}
+::: {.column}
+![](img/clase-7/translation_invariance.png){.lightbox fig-align="center"}
+:::
+::: {.column .fragment}
+Translation Invariance
+: Se refiere a la capacidad de poder detectar un patrón/objeto en diferentes posiciones de la imágen.
+
+:::{.callout-caution appearance="default" icon="false"}
+## Spoiler: Las FFN no tienen esta propiedad.
+:::
+:::
+::: 
+
+::: {.columns .fragment}
+::: {.column}
+![](img/clase-7/translation_invariance.gif){.lightbox fig-align="center"}
+:::
+::: {.column}
+::: {.callout-important}
+Las FFN no son capaces de ver patrones globales sino que se enfocan en el valor preciso de una feature. Si el objeto cambia de posición las features cambian a valores completamente distintos haciendo que la red tenga mayor tendencia al error.
+:::
+:::
+::: 
+
+## Imágenes {.smaller}
+
+Imagen
+: Definiremos una imágen como un Tensor de Orden 3, en el cual se representa H, W y C (Altura, Ancho y Canales). 
+
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-7/channels.png){.lightbox fig-align="center"}
+:::
+::: {.column width="30%"}
+![](img/clase-7/rgb.jpeg){.lightbox fig-align="center" width="50%"}
+:::
+::: {.column width="30%"}
+![](img/clase-7/medical.png){.lightbox fig-align="center"}
+![](img/clase-7/satellite.jpeg){.lightbox fig-align="center"}
+:::
+::: 
+
+::: {.callout-important}
+La convención más común es utilizar imágenes de 24-bits 3 canales de $2^8$ valores (es decir 8-bits) que representan la intensidad de los colores Rojo (R), Verde (G) y Azul (B). Las dimensiones de $H$ y $W$ definen la resolución en píxeles de la imágen.
+:::
+
+## Imágenes {.smaller}
+
+> Para importar imágenes en Pytorch existen distintas librerías como PIL u OpenCV. Ambas usan la convención de $(H,W,C)$, la diferencia está en el orden de los canales. PIL utiliza la convención RGB, mientras que OpenCV utiliza BGR por lo que se necesitan algunas transformaciones adicionales.
+
+::: {.callout-important}
+Lamentablemente la convención que escogió Pytorch es que una imágen tiene (C, H, W), es decir, primero canales, y luego alto y ancho. Normalmente las librerías no usan esta convención por lo que una permutación o transposición de dimensiones va a ser necesario casi la mayoría de las veces.
+:::
+
+::: {.columns}
+::: {.column width="25%"}
+```{.python}
+image = torch.tensor(...)
+```
+![](img/clase-7/foto.png){.lightbox fig-align="center"}
+
+:::
+::: {.column width="25%"}
+```{.python}
+image[0,:,:]
+imagen[0] # alternativa
+```
+![](img/clase-7/foto_red.png){.lightbox fig-align="center"}
+:::
+::: {.column width="25%"}
+```{.python}
+image[1,:,:]
+imagen[1] # alternativa
+```
+![](img/clase-7/foto_green.png){.lightbox fig-align="center"}
+:::
+::: {.column width="25%"}
+```{.python}
+image[2,:,:]
+imagen[2] # alternativa
+```
+![](img/clase-7/foto_blue.png){.lightbox fig-align="center"}
+:::
+::: 
+
+## Imágenes 
+
+
+::: {.columns}
+::: {.column}
+::: {.callout-important}
+Cuando tenemos un batch de imágenes entonces tendremos un Tensor de Orden 4 dimensiones (B,C,H,W), donde $B$ representa el Batch Size, $C$ el número de Canales, $H$ el alto y $W$ el ancho.
+:::
+
+::: {.callout-tip}
+Luego un Tensor de Dimensiones (32,3,224,512) implica que tenemos 32 imágenes RGB de dimensiones $224\times512$.
+:::
+:::
+::: {.column}
+![](img/clase-7/image_batch.jpg){.lightbox fig-align="center"}
+:::
+::: 
+
+## Redes Convolucionales: Definición e Inspiración {.smaller}
+
+Redes Convolucionales (CNN)
+: Son un tipo de red neuronal cuyos parámetros entrenables son filtros (también llamados Kernels) que aprenden a detectar patrones en los datos de entrada. Aplicando estos Kernels se generan feature maps, que representan la presenecia y localización de ciertos patrones.
 
 ::: {.callout-note}
-Muchas de las técnicas que veremos acá permiten abordar mejoras en nuestros modelos para uno o más aspectos de los mencionados anteriormente.
+Existe el mito de que las Redes Convolucionales se inspiraron en el funcionamiento del Cortex Visual humano. **No sé si es tan así**.
+
+El mito dice que las CNNs fueron diseñadas para imitar el cortex visual humano. Esto viene de los trabajos de Hubel y Wiesel (década de 1960), que estudiaron cómo las neuronas en la corteza visual de gatos respondían a estímulos:
+
+* Descubrieron neuronas simples que respondían a líneas en cierta orientación y posición.
+* Descubrieron neuronas complejas que respondían a patrones similares, pero en distintas posiciones (invarianza local).
 :::
 
-## Categorical Variables: One Hot Encoding {.smaller}
-
-Hasta ahora hemos asumido que las variables de entrada son numéricas. Pero en la práctica es muy común encontrarse con variables categóricas. En Deep Learning existen dos técnicas para lidiar con este tipo de variables: One-Hot-Encoding y el uso de Embeddings.
-
-::::{.columns}
-:::{.column}
-:::{.callout-tip icon=false appearance="default"}
-## 📋 One-Hot-Encoding
-* Permite una representación dispersa (sparse) de las variables categóricas. Consiste en crear una columna por cada categoría, y asignar un 1 o un 0 dependiendo si la instancia pertenece o no a dicha categoría.
-
-* Es una representación estática sin parámetros entrenables asociados.
-
-* Genera tantas columnas/features nuevas como categorías existan en la variable original. Por lo tanto, puede generar problemas de dimensionalidad si existen muchas categorías.
-:::
-:::
-:::{.column}
-![](img/clase-5/ohe_example.png){.lightbox fig-align="center" width="90%"}
-:::
-::::
-
-
-## Categorical Variables: Embeddings {.smaller}
-
-::::{.columns}
-:::{.column}
-:::{.callout-important icon=false appearance="default"}
-## 🗞️ Embeddings
-* Un embedding es una representación numérica de un objeto (palabra, imagen, nodo, etc.) en un espacio vectorial de menor dimensión que captura sus características y relaciones de manera útil para un modelo de machine learning. 
-
-* En lugar de trabajar con las categorías crudas, los **embeddings** convierten esos datos en vectores de números reales. De esta forma, objetos similares quedan representados por vectores cercanos.
-
-* Los vectores son aprendidos por el modelo durante el entrenamiento, de tal manera que la representación aprendida es la optima para el problema específico a resolver. Es decir, agrega parámetros entrenables al modelo.
+::: {.callout-caution}
+***¿Por qué necesitamos Redes Convolucionales?*** Evitar la sobreparametrización. ¿Por qué esto es un problema?
 :::
 
+## Redes Convolucionales: Definición e Inspiración {.smaller}
+
+:::{.callout-warning appearance="default" icon="false"}
+## 🔔 Importancia
+No es exagerado afirmar que las CNNs han sido la arquitectura más influyente en Deep Learning, ya que han impulsado avances importantes en tareas de visión por computador, como clasificación de imágenes, detección de objetos y segmentación semántica. Además, contribuyeron a que el Deep Learning ganara popularidad en la industria tecnológica y superara la época conocida como el AI Winter.
 :::
-:::{.column}
-![](img/clase-5/emb_example.png){.lightbox fig-align="center"}
+
+::: {.columns}
+::: {.column}
+### 🗓️ Algunos hitos importantes:
+* **1990**: Yann LeCun et al. propone uno de los primeros intentos de CNN, el cual va agregando features más simples en features más complejas progresivamente.
+* **1998**: Yann LeCun, propone LeNet-5 con 2 redes convolucionales y 3 FFN.
+* **2012**: Krizhevsky, Sutskever y Hinton proponen AlexNet (5 capas convolucionales y 3 FFN), el cual obtiene **SOTA performance** en ImageNet.
+:::
+::: {.column}
+![](img/clase-7/alexnet-paper.png){.lightbox fig-align="center"}
+:::
+::: 
+
+## Entendiendo el Kernel {.smaller}
+
+::: {.columns}
+::: {.column}
+
+##### Gaussian Blur
+![](img/clase-7/gaussian_blur.png){.lightbox fig-align="center" width="70%"}
+
+
+##### Líneas Horizontales
+![](img/clase-7/horizontal_lines.png){.lightbox fig-align="center" width="70%"}
+
+##### Bordes
+![](img/clase-7/bordes.png){.lightbox fig-align="center" width="70%"}
+
+:::
+::: {.column}
+::: {.callout-note appearance="default"}
+## Kernel
+
+El Kernel va a ser el set de parámetros que la red convolucional va a aprender. En palabras sencillas, la misma red aprende cuáles son los aspectos más relevantes de la imagen que le permitirán entender cómo clasificar o detectar elementos en ella.
+
 :::
 
-::::
+::: {.callout-important}
+El Kernel se aplica a todos los canales a la vez, lo cuál inicialmente lo hace ver como una operación bastante costosa computacionalmente.
+:::
 
-En Pytorch esto se puede realizar mediante: `nn.Embedding()`. 
+::: {.callout-tip}
+El Kernel introduce el primer hiperparámetro de las CNN que es el **Kernel Size**. En general son cuadrados, y de dimensión impar.
+:::
+:::
+::: 
 
-::: {style="font-size: 150%;"}
+## Entendiendo la Convolución {.smaller}
 
-```{.python }
-nn.Embedding(num_embeddings, embedding_dim)
+Convolución
+: Corresponde a una operación para extraer **features maps** en la cual un filtro o kernel se va desplazando en cada sección de los datos (secuencia, imagen o video). 
+
+
+::: {.callout-caution appearance="default" icon="false"}
+## Ojo
+Esto es nuevamente un término marketero, porque no es una Convolucional real, sino una operación llamada **Cross Correlation**.
+:::
+
+Feature Map
+: Corresponde a la salida de una convolución (equivalente a la Activación) y es un nuevo tensor que captura ciertas características del dato (secuencia, imagen o video). Cuando se trata de imágenes, captura features como bordes, cambios de textura, color, formas, o elementos más pequeños.
+
+
+::: {.columns}
+::: {.column width="65%"}
+![](img/clase-7/convolution.gif){.lightbox fig-align="center" width="80%"}
+:::
+::: {.column width="35%"}
+<br>
+
+::: {.callout-warning}
+Es importante notar que los features maps son de una **tamaño menor a la entrada** debido a la operación de Convolución.
+:::
+::: {.callout-important}
+Se obtendrán tantos feature maps como filtros se apliquen.
+:::
+:::
+::: 
+
+
+
+## Hiperparámetros de la Convolución {.smaller}
+
+::: {.columns}
+::: {.column width="30%"}
+
+![](img/clase-7/stride.gif){.lightbox fig-align="center"}
+
+::: {.callout-note appearance="default" icon="false"}
+## Stride
+
+Se refiere a la cantidad de pasos que el kernel avanza sobre la imagen de entrada. Un ***stride*** mayor genera feature maps más pequeños y con menos detalles, mientras que un stride menor conserva más información, aunque aumenta el número de operaciones requeridas.
+:::
+:::
+::: {.column width="40%"}
+![](img/clase-7/convolution_padding.gif){.lightbox fig-align="center" width="130%"}
+
+::: {.callout-tip appearance="default" icon="false"}
+## Padding
+
+Se trata de un relleno que facilita el desplazamiento del kernel, evitando que la convolución reduzca demasiado la dimensionalidad y permitiendo que se tenga en cuenta la información de los bordes de la imagen. Cuando no se aplica padding se denomina **"valid"**, y cuando se agregan píxeles suficientes para mantener la misma dimensión se llama ***"same"***.
+
+
+
+:::
+:::
+::: {.column width="30%"}
+![](img/clase-7/dilation.gif){.lightbox fig-align="center"}
+
+::: {.callout-important appearance="default" icon="false"}
+## Dilation
+
+Se refiere a los espacios (gaps) que se introducen entre los elementos del kernel al aplicarlo. Usar dilation permite aumentar el campo receptivo de la convolución, capturando más contexto sin necesidad de incrementar el tamaño del kernel. Un valor de 1 indica que no se aplica ***dilation.***
+:::
+:::
+::: 
+
+## Convolución en Pytorch 
+
+::: {style="font-size: 110%;"}
+```{.python}
+nn.Conv2d(in_channels, out_channels, kernel_size, stride=1,padding=0,dilation=1)
 ```
 :::
 
-* **num_embeddings**: Corresponde al número de categórías.
-* **embedding_dim**: El número de dimensiones en el cual se quiere representar.
-
-::: {.callout-important}
-* Este proceso tiene parámetros entrenables asociados.
+::: {style="font-size: 80%;"}
+::: {.callout-tip appearance="default" icon="false"}
+## Input
+Este tipo de redes no requiere que se le den las dimensiones de las entradas, pero sí espera recibir tensores de dimensión $(N,C_{in}, H_{in},W_{in})$.
 :::
 
+::: {.callout-important appearance="default" icon="false"}
+## Output
+La Red convolucional devuelve un Tensor de Dimensiones $(N,C_{out}, H_{out}, W_{out})$. Donde:
 
-
-## Normalización
-
-> En general el término Normalización está muy trillado y en la práctica se utiliza para referirse a muchos temas distintos. Algunas definiciones conocidas:
-
-::: {.columns}
-
-::: {.column}
-### Normalización
-
-$$x_{i\_norm} = \frac{x_i-x_{min}}{x_{max} - x_{min}}$$
-Esta operación se puede hacer mediante [MinMaxScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html) de Scikit-Learn.
+$$H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor$$
+$$W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor$$
 :::
 
-
-::: {.column}
-### Estandarización
-
-$$ x_{i\_est} = \frac{x_i - E[x]}{\sqrt(Var[x])}$$
-
-Esta operación se puede hacer mediante [StandardScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html) de Scikit-Learn.
-
-:::
-::: 
-
-
-## Normalización (Batch Norm) {.smaller}
-
-[Paper 2015: Batch Normalization](https://arxiv.org/pdf/1502.03167)
-
-::: {.callout-caution appearance="default" style="font-size: 90%;"}
-## ¿Por qué?
-* Acelera el entrenamiento
-* Disminuye la importancia de los Parámetros iniciales.
-* Regulariza el modelo (un poquito)
-* Resuelve el problema de [Internal Covariate Shift](https://machinelearning.wtf/terms/internal-covariate-shift/).
-:::
-
-#### Ejemplo: Supongamos que dado la altura y la edad queremos predecir si será deportista de alto rendimiento.
-
-::: {.columns}
-::: {.column}
-![](img/clase-6/normalize.png){.lightbox fig-align="center"}
-:::
-::: {.column}
-![](img/clase-6/nn_example.png){.lightbox fig-align="center"}
-
-:::
-::: 
-
-## Normalización (Batch Norm) {.smaller}
-
-::: {.columns style="font-size: 90%;"}
-::: {.column}
-![](img/clase-6/normalize.png){.lightbox fig-align="center" width="80%"}
-
-:::
-::: {.column}
-* Cambios en Altura son mucho más pequeños que en Edad debido al rango.
-* Toma más tiempo optimizar (requiere parámetros más pequeños)
-* Si el learning rate es alto puede diverger.
-* Si el learning rate es bajo implica que demora mucho más en converger.
-
-:::
-::: 
-
-::: {.columns style="font-size: 110%;" .fragment}
-::: {.column}
-![](img/clase-6/post_normalize.png){.lightbox fig-align="center" width="55%"} 
-:::
-::: {.column}
-::: {.callout-tip appearance="default"}
-## Pros
-
-* Sin importar el punto inicial, el mínimo se encuentra **casi** a la misma distancia.  
-* Es posible utilizar un learning rate más grande sin miedo a diverger.
-:::
-::: {.callout-important appearance="default"}
-## Cons
-* Más cálculos y parámetros involucrados
-
-:::
-:::
-::: 
-
-## Normalización (Batch Norm) {.smaller}
-
-![](img/clase-6/batch_norm_nn.png){.lightbox fig-align="center" width="58%"} 
-
-::: {.columns}
-::: {.column}
-![](img/clase-6/Z1.png){.lightbox fig-align="center" width="60%"}
-
-:::
-::: {.column}
-
-![](img/clase-6/Z2.png){.lightbox fig-align="center" width="100%"}
-
-:::
-::: 
-
-## Normalización (Batch Norm) {.smaller}
-
-::: {.columns}
-::: {.column}
-::: {.callout-tip appearance="default"}
-## Cálculo de Estadísticos
-
-$$ \mu_B = \frac{1}{B} \sum_{i=1}^B z^{(i)} = \frac{1}{3}(4 + 7 + 5) = 5.33$$
-$$ \sigma_B^2 = \frac{1}{B} \sum_{i=1}^B (z^{(i)} - \mu_B)^2 = 1.555$$
-
-:::
-::: {.callout-warning appearance="default"}
-## Normalización
-$$\widehat{z^{(i)}} = \frac{z^{(i)} - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}$$
-:::
-::: {.callout-note appearance="default" .fragment fragment-index=1}
-## Scale and Shift: $\gamma$ y $\beta$ son parámetros.
-$$BN_{\gamma,\beta}(z_i)= \gamma \widehat{z_i} + \beta $$
-:::
-:::
-::: {.column}
-
-![](img/clase-6/batch_norm_nn.png){.lightbox fig-align="center" width="70%"} 
-
-#### Z2 norm
-![](img/clase-6/Z2_norm.png){.lightbox fig-align="center" width="70%"}
-
-::: {.callout-note appearance="default" .fragment fragment-index=1}
-Donde $\gamma$ y $\beta$ son parámetros aprendidos durante el entrenamiento.
-:::
-
-:::
-::: 
-
-## Normalización (Batch Norm): Test Time {.smaller}
-
-::: {.callout-caution appearance="default"}
-## Problema
-
-La predicción de una instancia $i$ específica, ahora depende de otros elementos dentro del Batch. ***¿Cómo funciona entonces el modelo en Test Time?***
-:::
-
-::: {.callout-tip}
-Se estiman valores de $\mu_B$ y $\sigma_B$ para usar en inferencia basados en los valores obtenidos en entrenamiento.
-:::
-
-::: {.columns}
-::: {.column}
-::: {.callout-tip appearance="default"}
-## Estimación de Estadísticos
-
-* $\mu_B^{inf} = E[\mu_B^{j}]$, $j = 1,...,B$
-* $\sigma_B^{inf} = \frac{m}{m-1}E[\mu_B^{j}]$, $j = 1,...,B$
-:::
-:::
-::: {.column}
-::: {.callout-warning appearance="default"}
-## Normalización
-$$\widehat{z^{(i)}} = \frac{z^{(i)} - \mu_B^{inf}}{\sqrt{(\sigma_B^{inf})^2 + \epsilon}}$$
-:::
-:::
-::: 
-
-::: {.callout-note appearance="default"}
-## Scale and Shift: $\gamma$ y $\beta$ son parámetros.
-$$BN_{\gamma,\beta}(z_i)= \gamma \widehat{z_i} + \beta $$
-:::
-::: {.callout-important}
-Los parámetros $\gamma$ y $\beta$ son los aprendidos durante el proceso de entrenamiento.
-:::
-
-## Normalización (Batch Norm): Consejos {.smaller}
-
-* Andrew Ng propone utilizar BatchNorm justo antes de la función de Activacion.
-* El paper original también propone su uso justo antes de la activación.
-* Francoise Chollet, creador de Keras dice que los autores del paper en realidad lo utilizaron después de la función de activación.
-* Adicionalmente existen benchmarks que muestran mejoras usando BatchNorm después de las funciones de activación.
-
-::: {.callout-note}
-Entonces, la posición del BatchNorm termina siendo parte de la Arquitectura, y se debe comprobar donde tiene un mejor efecto.
 :::
 
 ::: {.callout-warning}
-Batchnorm tiene efectos distintos al momento de entrenar o de evaluar/predecir en un modelo. Por lo tanto, de usar Batchnorm es imperativo utilizar los modos `model.train()` y `model.eval()` de manera apropiada.
+Es importante tener noción del tamaño de la imagen para poder escoger un *kernel_size* que recorra la imagen completa y que no deje partes sin convolucionar.
 :::
 
-## Normalización: Layer Norm {.smaller}
+## Partes de una CNN: Pooling {.smaller}
 
-[Paper 2016: Layer Normalization](https://arxiv.org/abs/1607.06450)
-
-::: {.callout-important appearance="default"}
-## Batch Norm tiene algunos problemas:
-* Muy difícil de calcular en datos secuenciales (lo veremos más adelante).
-* Inestable cuando el Batch Size es muy pequeño.
-* Difícil de Paralelizar.
-:::
-
-::: {.callout-tip appearance="default"}
-## Beneficios de Layer Norm
-* Puede trabajar con secuencias.
-* No tiene problemas para trabajar con cualquier tipo de Batch Size.
-* Se puede paralelizar, lo cuál es útil en redes como las RNN.
-:::
+Pooling
+: El Pooling es una operación de agregación que permite ir disminuyendo el tamaño de las entradas. De esta manera la red puede comenzar a especializarse en aspectos cada vez más finos. 
 
 ::: {.callout-note}
-* En este caso se realiza la normalización por **capa** o por **Data Point** (instancia). 
-* Además son el elementos cruciales en las Arquitecturas de Transformers.
+El Pooling también se aplica de manera móvil como una convolución. Pero a diferencia de esta normalmente no genera traslape.
 :::
-
-
-## Normalización: Layer Norm {.smaller}
-
-::: {.columns}
-::: {.column}
-![](img/clase-6/Z1.png){.lightbox fig-align="center"}
-
-![](img/clase-6/Z2_ly.png){.lightbox fig-align="center"}
-:::
-::: {.column .fragment}
-$$ \mu_{norm} = \frac{1}{n_i} \sum_{j=1}^{n_i} z_j = \frac{1}{4}(4 + 9 + 6 + 7) = 6.5$$
-$$ \sigma_{norm}^2 = \frac{1}{n_i} \sum_{j=1}^{n_i} (z_j - \mu_B)^2 = 3.25$$
-
-::: {.callout-warning appearance="default"}
-## Normalización
-$$\widehat{z_j} = \frac{z_j - \mu_{norm}}{\sqrt{\sigma_{norm}^2 + \epsilon}}$$
-:::
-![](img/clase-6/Z2_post_ly.png){.lightbox fig-align="center"}
-:::
-::: 
-
-## Regularización L2 aka Weight Decay {.smaller}
-
-[Paper 1991: Weight Decay](https://proceedings.neurips.cc/paper/1991/file/8eefcfdf5990e441f0fb6f3fad709e21-Paper.pdf)
-
-::: {style="font-size: 80%;"}
-> En general el gran problema de las Redes Neuronales es el ***Overfitting***. Esto porque las redes neuronales normalmente se denominan como **Overparametrized Models**. ***¿Qué significa esto?***
-
-Weight Decay
-: > Corresponde a una penalización que se da a los modelos para limitar su complejidad y asegurar que pueda generalizar correctamente en datos no vistos. 
-
-$$ \underset{W_{i:L}}{minimize} \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}),y^{(i)}) + \frac{\lambda}{2} \sum_{i=1}^L ||W_i||_f^2$$
-
-Eso implica una transformación a nuestro ***Update Rule***:
-
-$$W_i := W_i - \alpha \nabla \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}),y^{(i)}) - \alpha \lambda W_i = (1-\alpha\lambda)W_i - \alpha \nabla l(h_\theta(x^{(i)}),y^{(i)})$$
-:::
-
-
-::: {.columns}
-::: {.column}
 ::: {.callout-tip}
-Se puede ver que los pesos (weights) se ***contraen*** (decaen) antes de actualizarse en la dirección del gradiente.
+Acá se introduce otro hiperparámetro que es el Pooling Size. En general es cuadrado pero de dimensión par.
 :::
+
+![](img/clase-7/pooling.png){.lightbox fig-align="center" width="35%"} 
+
+
+## Pooling in Pytorch {.smaller}
+
+::: {style="font-size: 150%;"}
+```{.python}
+nn.AvgPool2d(kernel_size, stride=None,padding=0)
+nn.MaxPool2d(kernel_size, stride=None,padding=0, dilation=1)
+```
 :::
-::: {.column}
-::: {.callout-important}
-Por alguna razón Pytorch decidió implementarlo como una propiedad de los ***Optimizers*** cuando en realidad debió ser de la Loss Function.
-:::
-:::
-::: 
 
-## Dropout {.smaller}
-
-[Paper 2014: Dropout](https://paperswithcode.com/paper/dropout-a-simple-way-to-prevent-neural)
-
-::: {style="font-size: 80%;"}
-> A diferencia de la estrategia anterior, este tipo de regularización se aplica a las activaciones de la red (resultados de la Transformación Affine, previo a la transformación no lineal). 
-
-Definiremos el Dropout como:
-
-$$Z_{i+1} = \sigma(W_i^T Z_i + b_i)$$
-$$\widehat{Z_{i+1}} = D(Z_{i+1})$$
-
-donde $D$ implica la aplicación de Dropout a la capa $i+1$. El elemento $j$ de la capa $\widehat{Z_i}$ se calcula como:
-
-$$(\widehat{Z_{i+1}})_j = \begin{cases}
-\frac{(Z_{i+1})_j}{1-p}  & \text{with prob 1-p} \\
-0, & \text{with prob p}
-\end{cases}$$
-
-$p$ se conoce como el `Dropout Rate`.
-
-::: {.callout-important}
-El factor $\frac{1}{1-p}$ se aplica para mantener la varianza estable luego de haber eliminado activaciones con probabilidad $p$.
-:::
+::: {.callout-important appearance="default" }
+## Ojo
+`stride=None` implica `stride = kernel_size`.
 :::
 
 ::: {.callout-warning}
-Dropout se aplica normalmente al momento de entrenar el modelo. Por lo tanto, de usar Dropout es imperativo cambiar al modo `model.eval()` al momento de predecir.
+Importante mencionar que Average Pooling no permite Dilation.
 :::
 
+$$H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor$$
+$$W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor$$
 
-## Weights Initialization {.smaller}
-
-[Paper 2010: Xavier Initialization](https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf)
-[Paper 2015: Kaiming Initialization](https://arxiv.org/abs/1502.01852)
-
-Hemos hablado que los métodos basados en SGD normalmente utilizan valores aleatorios para partir su entrenamiento, lo cual deja un poco al azar el éxito de un proceso de entrenamiento.
-
-Existen diversos estudios de cómo `inicializar` los parámetros para una convergencia óptima. Algunas de las inicializaciones son:
-
-::: {.callout-note appearance="default"}
-## Activaciones Triviales
-* Constante
-* Sólo unos
-* Sólo Zeros
-:::
-
-## Weights Initialization {.smaller}
+## Arquitectura de una CNN {.smaller}
 
 ::: {.columns}
-::: {.column}
-#### Xavier o Glorot Uniforme
-
-Se inicia con valores provenientes de una distribución uniforme: $\mathcal{U}(-a,a)$
-
-$$ a = gain \cdot \sqrt{\frac{6}{fan_{in} + fan_{out}}}$$
+::: {.column width="60%"}
+![](img/clase-7/CNN-arch.png){.lightbox fig-align="center" width="60%"} 
 :::
-::: {.column}
-
-#### Xavier o Glorot Normal
-
-Se inicia con valores provenientes de una distribución uniforme: $\mathcal{N}(0,std^2)$
-
-$$ std = gain \cdot \sqrt{\frac{2}{fan_{in} + fan_{out}}}$$
+::: {.column width="40%"}
+::: {.callout-note appearance="default" icon="false"}
+## Feature Extractor - Encoder - Backbone
+Corresponde al bloque que contiene CNNs que se encargará de extraer features. 
 :::
-::: 
-
-::: {.callout-note}
-* $fan_{in}$ corresponde al número de conexiones que entran a una neurona. Mientras que $fan_{out}$ corresponde al número de neuronas que salen de dicha neurona.
-* $fan\_mode$ corresponde a la elección de $fan_{in}$ o $fan_{out}$.
+::: {.callout-warning appearance="default" icon="false"}
+## Flatten
+Corresponde a una Operación Intermedia que dejará todos los píxeles de la imagen como un vector fila que puede ser tomado por la FFN. En estricto rigor prepara las features generadas por la CNN para ser usadas en la parte final de la red.
 :::
 
-::: {.columns}
-::: {.column}
-#### Kaiming (aka He) Uniforme
-
-Se inicia con valores provenientes de una distribución uniforme: $\mathcal{U}(-bound,bound)$
-
-$$ bound = gain \cdot \sqrt{\frac{3}{fan\_mode}}$$
-:::
-::: {.column}
-
-#### Kaiming (aka He) Normal
-
-Se inicia con valores provenientes de una distribución uniforme: $\mathcal{N}(0,std^2)$
-
-$$std =\sqrt{\frac{gain}{fan\_mode}}$$
-:::
-::: 
-
-## Training Control {.smaller}
-
-El entrenamiento de una red neuronal puede tomar mucho tiempo. Es por eso que algunas buenas prácticas serían:
-
-* Disponer de resultados preliminares aunque el entrenamiento no haya terminado. 
-* Guardar los pesos del mejor modelo obtenido en el proceso de entrenamiento.
-* Evitar entrenar pasado el punto de Overfitting. 
-  * Aunque hay nuevas ideas de lo que se llama el [grokking](https://www.linkedin.com/feed/update/urn:li:activity:7214966566696718336?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7214966566696718336%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29).
-
-
-::: {.columns}
-::: {.column}
-::: {.callout-tip appearance="default"}
-#### Early Stopping
-* Se refiere al proceso de detener el entrenamiento luego de `patience` epochs sin mejorar el validation loss u otro criterio.
-:::
-:::
-::: {.column}
-::: {.callout-note appearance="default"}
-#### Checkpointing
-* Corresponde al proceso de guardar los parámetros obtenidos en un epoch en específico. Normalmente se guarda la mejor epoch y la última, pero se puede generar algún criterio.
+::: {.callout-tip appearance="default" icon="false"}
+## Prediction Head - Head - MLP
+Corresponde a una FFN que tomará las features aprendidas por la CNN y generará una predicción.
 :::
 :::
 ::: 
 
-## Categorical Variables {.smaller}
+## MNIST con CNN {.smaller}
 
-> Es importante mencionar que normalmente no se utilizan redes neuronales para poder entrenar datos tabulares. Pero de hacerlo, es muy probable que nos encontremos con variables categóricas. Para ello existen dos técnicas que son las más comunes en redes neuronales.
+![](img/clase-7/CNN_MNIST_arch.png){.lightbox fig-align="center" width="75%"} 
 
-One Hot Encoder
-: Corresponde a la representación mediante dummy variables. Normalmente se considera una representación `Sparse` de los datos. 
+::: {.columns}
+::: {.column}
+![](img/clase-7/CNN_params.png){.lightbox fig-align="center"} 
+:::
+::: {.column}
+::: {.callout-warning}
+* El número de Parámetros para una Red Convolucional con muchas más capas bajó considerablemente, de 67M a 373K de Parámetros para una imagen de $512 \times 512$.
+:::
+:::
+::: 
 
-::: {.callout-important}
-En Pytorch se puede implementar como `F.one_hot()`, pero mi recomendación es utilizar las herramientas de Scikit-Learn para evitar `Data Leakage`.
+## Variante en 1d {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+Conv1d
+: Corresponde a la variante de una dimensión, en la cual la entrada corresponden a secuencias de elementos como podrían ser series de tiempo, audio o hasta cadenas de texto.
+
+::: {.callout-note icon="false"}
+
+En este caso la implementación en Pytorch es similar a la 2D sólo que esperando tensores de dimensiones $(N,C_{in}, L_{in})$, donde $C_{in}$ corresponde al número de canales, que en el caso de series de tiempo equivale a features, y $L_{in}$ corresponde al largo de la secuencia.
 :::
 
-![](img/clase-6/one_hot.png){.lightbox fig-align="center"}
+::: {.callout-important icon="false"}
+La salida de la Conv1d tendrá dimensiones $(N,C_{out},L_{out})$ con:
+
+$$L_{out} = \left\lfloor \frac{L_{in} + 2 \cdot padding - dilation \cdot (kernel\_size - 1) - 1}{stride} + 1 \right\rfloor$$
+
+:::
+:::
+::: {.column width="40%"}
+
+![](img/clase-7/time_series.png){.lightbox fig-align="center" width="80%"} 
+
+![](img/clase-7/audio.png){.lightbox fig-align="center" width="80%"} 
+:::
+::: 
 
 
-# That's all Folks
+## Variante en 3d {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+Conv3d
+: Corresponde a la variante de tres dimensiones, en la cual la entrada corresponde a secuencias de imágenes, es decir, videos. 
+
+::: {.callout-note icon="false"}
+Este caso también es similar sólo que se esperan tensores de dimensiones $(N, C_{in}, D_{in}, H_{in}, W_{in})$ donde $C_in$ corresponde al número de canales, $D$ en el caso de un video corresponde al número de frames de tamaño $H_{in} \times W_{in}$.
+:::
+
+::: {.callout-important icon="false"}
+La salida de la Conv1d tendrá dimensiones $(N,C_{out},D_{out},H_{out},W_{out})$ con:
+
+$$D_{out} = \left\lfloor \frac{D_{in} + 2 \cdot padding[0] - dilation[0] \cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor$$
+$$H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor$$
+$$W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[2] - dilation[2]\cdot (kernel\_size[2] - 1) - 1}{stride[2]} + 1 \right\rfloor$$
+
+:::
+:::
+::: {.column width="40%"}
+
+
+![](img/clase-6/frame-rates.jpg){.lightbox fig-align="center"} 
+:::
+::: 
+
+
+## Ejemplos de Arquitecturas
+
+::: {.columns}
+::: {.column width="30%"}
+![](img/clase-7/resnet.png){.lightbox fig-align="center" width="70%"} 
+:::
+::: {.column width="40%"}
+![](img/clase-7/lenet.png){.lightbox fig-align="center"} 
+![](img/clase-7/VGG16.png){.lightbox fig-align="center"}  
+:::
+::: {.column width="30%"}
+![](img/clase-7/EfficientNet.png){.lightbox fig-align="center" width="70%"} 
+:::
+::: 
+
+
+# Class Dismissed
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
