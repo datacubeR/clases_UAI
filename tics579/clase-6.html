@@ -200,7 +200,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-579-Deep Learning</h1>
-  <p class="subtitle">Clase 6: Training Tips &amp; Tricks</p>
+  <p class="subtitle">Clase 6: Redes Convolucionales</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -214,541 +214,84 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="potenciales-problemas-al-entrenar-un-modelo" class="slide level2 smaller">
-<h2>Potenciales problemas al Entrenar un Modelo</h2>
-<blockquote>
-<p>El entrenamiento de un modelo tiene demasiadas variables que pueden influir en el éxito del modelo. Algunos aspectos relevantes a los que hay que poner énfasis al momento de entrenar:</p>
-</blockquote>
-<ul>
-<li>Lidiar con Variables Categóricas</li>
-<li>Escala de las Variables</li>
-<li>Determinar convergencia</li>
-<li>Combatir el Overfitting</li>
-<li>Determinar Generalización</li>
-<li>Optimizar Recursos Computacionales/Hardware.</li>
-<li>Prevenir problemas de Vanishing Gradient y Exploding Gradients.</li>
-</ul>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Muchas de las técnicas que veremos acá permiten abordar mejoras en nuestros modelos para uno o más aspectos de los mencionados anteriormente.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="categorical-variables-one-hot-encoding" class="slide level2 smaller">
-<h2>Categorical Variables: One Hot Encoding</h2>
-<p>Hasta ahora hemos asumido que las variables de entrada son numéricas. Pero en la práctica es muy común encontrarse con variables categóricas. En Deep Learning existen dos técnicas para lidiar con este tipo de variables: One-Hot-Encoding y el uso de Embeddings.</p>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>📋 One-Hot-Encoding</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><p>Permite una representación dispersa (sparse) de las variables categóricas. Consiste en crear una columna por cada categoría, y asignar un 1 o un 0 dependiendo si la instancia pertenece o no a dicha categoría.</p></li>
-<li><p>Es una representación estática sin parámetros entrenables asociados.</p></li>
-<li><p>Genera tantas columnas/features nuevas como categorías existan en la variable original. Por lo tanto, puede generar problemas de dimensionalidad si existen muchas categorías.</p></li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/ohe_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-5/ohe_example.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="categorical-variables-embeddings" class="slide level2 smaller">
-<h2>Categorical Variables: Embeddings</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>🗞️ Embeddings</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><p>Un embedding es una representación numérica de un objeto (palabra, imagen, nodo, etc.) en un espacio vectorial de menor dimensión que captura sus características y relaciones de manera útil para un modelo de machine learning.</p></li>
-<li><p>En lugar de trabajar con las categorías crudas, los <strong>embeddings</strong> convierten esos datos en vectores de números reales. De esta forma, objetos similares quedan representados por vectores cercanos.</p></li>
-<li><p>Los vectores son aprendidos por el modelo durante el entrenamiento, de tal manera que la representación aprendida es la optima para el problema específico a resolver. Es decir, agrega parámetros entrenables al modelo.</p></li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-5/emb_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-5/emb_example.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div></div>
-<p>En Pytorch esto se puede realizar mediante: <code>nn.Embedding()</code>.</p>
-<div style="font-size: 150%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>nn.Embedding(num_embeddings, embedding_dim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><strong>num_embeddings</strong>: Corresponde al número de categórías.</li>
-<li><strong>embedding_dim</strong>: El número de dimensiones en el cual se quiere representar.</li>
-</ul>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Este proceso tiene parámetros entrenables asociados.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="normalización" class="slide level2">
-<h2>Normalización</h2>
-<blockquote>
-<p>En general el término Normalización está muy trillado y en la práctica se utiliza para referirse a muchos temas distintos. Algunas definiciones conocidas:</p>
-</blockquote>
-<div class="columns">
-<div class="column">
-<h3 id="normalización-1">Normalización</h3>
-<p><span class="math display">\[x_{i\_norm} = \frac{x_i-x_{min}}{x_{max} - x_{min}}\]</span> Esta operación se puede hacer mediante <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html">MinMaxScaler</a> de Scikit-Learn.</p>
-</div><div class="column">
-<h3 id="estandarización">Estandarización</h3>
-<p><span class="math display">\[ x_{i\_est} = \frac{x_i - E[x]}{\sqrt(Var[x])}\]</span></p>
-<p>Esta operación se puede hacer mediante <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">StandardScaler</a> de Scikit-Learn.</p>
-</div></div>
-</section>
-<section id="normalización-batch-norm" class="slide level2 smaller">
-<h2>Normalización (Batch Norm)</h2>
-<p><a href="https://arxiv.org/pdf/1502.03167">Paper 2015: Batch Normalization</a></p>
-<div style="font-size: 90%;">
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>¿Por qué?</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Acelera el entrenamiento</li>
-<li>Disminuye la importancia de los Parámetros iniciales.</li>
-<li>Regulariza el modelo (un poquito)</li>
-<li>Resuelve el problema de <a href="https://machinelearning.wtf/terms/internal-covariate-shift/">Internal Covariate Shift</a>.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<h4 id="ejemplo-supongamos-que-dado-la-altura-y-la-edad-queremos-predecir-si-será-deportista-de-alto-rendimiento.">Ejemplo: Supongamos que dado la altura y la edad queremos predecir si será deportista de alto rendimiento.</h4>
+<section id="limitaciones-de-las-ffn" class="slide level2 smaller">
+<h2>Limitaciones de las FFN</h2>
 <div class="columns">
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-6/normalize.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/MNIST.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-6/MNIST.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/nn_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-6/nn_example.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/MNIST_net.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-6/MNIST_net.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div></div>
-</section>
-<section id="normalización-batch-norm-1" class="slide level2 smaller">
-<h2>Normalización (Batch Norm)</h2>
-<div class="columns" style="font-size: 90%;">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-6/normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-6/normalize.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<ul>
-<li>Cambios en Altura son mucho más pequeños que en Edad debido al rango.</li>
-<li>Toma más tiempo optimizar (requiere parámetros más pequeños)</li>
-<li>Si el learning rate es alto puede diverger.</li>
-<li>Si el learning rate es bajo implica que demora mucho más en converger.</li>
-</ul>
-</div></div>
-<div class="columns fragment" style="font-size: 110%;">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-6/post_normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-6/post_normalize.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Pros</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Sin importar el punto inicial, el mínimo se encuentra <strong>casi</strong> a la misma distancia.<br>
-</li>
-<li>Es posible utilizar un learning rate más grande sin miedo a diverger.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-important callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Cons</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Más cálculos y parámetros involucrados</li>
-</ul>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="normalización-batch-norm-2" class="slide level2 smaller">
-<h2>Normalización (Batch Norm)</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-6/batch_norm_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-6/batch_norm_nn.png" class="quarto-figure quarto-figure-center" style="width:58.0%"></a></p>
-</figure>
-</div>
 <div class="columns">
 <div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-6/Z1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-6/Z1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
+<h4 id="número-de-parametros">Número de Parametros:</h4>
+<ul>
+<li><span class="math inline">\(W_1 = 784 \cdot 256 + 256 = 200960\)</span></li>
+<li><span class="math inline">\(W_2 = 256 \cdot 128 + 128 = 32896\)</span></li>
+<li><span class="math inline">\(W_3 = 128 \cdot 10 + 10 = 1290\)</span></li>
+<li>Total = 235,146.</li>
+</ul>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/Z2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-6/Z2.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
+<p><a href="img/clase-7/MNIST_params_MLP.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-7/MNIST_params_MLP.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div></div>
-</section>
-<section id="normalización-batch-norm-3" class="slide level2 smaller">
-<h2>Normalización (Batch Norm)</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Cálculo de Estadísticos</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[ \mu_B = \frac{1}{B} \sum_{i=1}^B z^{(i)} = \frac{1}{3}(4 + 7 + 5) = 5.33\]</span> <span class="math display">\[ \sigma_B^2 = \frac{1}{B} \sum_{i=1}^B (z^{(i)} - \mu_B)^2 = 1.555\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Normalización</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[\widehat{z^{(i)}} = \frac{z^{(i)} - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}\]</span></p>
-</div>
-</div>
-</div>
-<div class="fragment" data-fragment-index="1">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Scale and Shift: <span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span> son parámetros.</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[BN_{\gamma,\beta}(z_i)= \gamma \widehat{z_i} + \beta \]</span></p>
-</div>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-6/batch_norm_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-6/batch_norm_nn.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-<h4 id="z2-norm">Z2 norm</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-6/Z2_norm.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-6/Z2_norm.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-<div class="fragment" data-fragment-index="1">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Donde <span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span> son parámetros aprendidos durante el entrenamiento.</p>
-</div>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="normalización-batch-norm-test-time" class="slide level2 smaller">
-<h2>Normalización (Batch Norm): Test Time</h2>
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Problema</strong></p>
-</div>
-<div class="callout-content">
-<p>La predicción de una instancia <span class="math inline">\(i\)</span> específica, ahora depende de otros elementos dentro del Batch. <strong><em>¿Cómo funciona entonces el modelo en Test Time?</em></strong></p>
-</div>
-</div>
-</div>
+<div class="fragment">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Se estiman valores de <span class="math inline">\(\mu_B\)</span> y <span class="math inline">\(\sigma_B\)</span> para usar en inferencia basados en los valores obtenidos en entrenamiento.</p>
+<p>¿Y si tengo una imágen de <span class="math inline">\(512 \times 512\)</span>? <strong>67,143,306</strong> de parámetros.</p>
 </div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Estimación de Estadísticos</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><span class="math inline">\(\mu_B^{inf} = E[\mu_B^{j}]\)</span>, <span class="math inline">\(j = 1,...,B\)</span></li>
-<li><span class="math inline">\(\sigma_B^{inf} = \frac{m}{m-1}E[\mu_B^{j}]\)</span>, <span class="math inline">\(j = 1,...,B\)</span></li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Normalización</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[\widehat{z^{(i)}} = \frac{z^{(i)} - \mu_B^{inf}}{\sqrt{(\sigma_B^{inf})^2 + \epsilon}}\]</span></p>
 </div>
 </div>
 </div>
 </div></div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Scale and Shift: <span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span> son parámetros.</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[BN_{\gamma,\beta}(z_i)= \gamma \widehat{z_i} + \beta \]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Los parámetros <span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span> son los aprendidos durante el proceso de entrenamiento.</p>
-</div>
-</div>
-</div>
 </section>
-<section id="normalización-batch-norm-consejos" class="slide level2 smaller">
-<h2>Normalización (Batch Norm): Consejos</h2>
-<ul>
-<li>Andrew Ng propone utilizar BatchNorm justo antes de la función de Activacion.</li>
-<li>El paper original también propone su uso justo antes de la activación.</li>
-<li>Francoise Chollet, creador de Keras dice que los autores del paper en realidad lo utilizaron después de la función de activación.</li>
-<li>Adicionalmente existen benchmarks que muestran mejoras usando BatchNorm después de las funciones de activación.</li>
-</ul>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Entonces, la posición del BatchNorm termina siendo parte de la Arquitectura, y se debe comprobar donde tiene un mejor efecto.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Batchnorm tiene efectos distintos al momento de entrenar o de evaluar/predecir en un modelo. Por lo tanto, de usar Batchnorm es imperativo utilizar los modos <code>model.train()</code> y <code>model.eval()</code> de manera apropiada.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="normalización-layer-norm" class="slide level2 smaller">
-<h2>Normalización: Layer Norm</h2>
-<p><a href="https://arxiv.org/abs/1607.06450">Paper 2016: Layer Normalization</a></p>
-<div class="callout callout-important callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Batch Norm tiene algunos problemas:</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Muy difícil de calcular en datos secuenciales (lo veremos más adelante).</li>
-<li>Inestable cuando el Batch Size es muy pequeño.</li>
-<li>Difícil de Paralelizar.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Beneficios de Layer Norm</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Puede trabajar con secuencias.</li>
-<li>No tiene problemas para trabajar con cualquier tipo de Batch Size.</li>
-<li>Se puede paralelizar, lo cuál es útil en redes como las RNN.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>En este caso se realiza la normalización por <strong>capa</strong> o por <strong>Data Point</strong> (instancia).</li>
-<li>Además son el elementos cruciales en las Arquitecturas de Transformers.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="normalización-layer-norm-1" class="slide level2 smaller">
-<h2>Normalización: Layer Norm</h2>
+<section id="limitaciones-de-las-ffn-1" class="slide level2 smaller">
+<h2>Limitaciones de las FFN</h2>
 <div class="columns">
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/Z1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-6/Z1.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-6/Z2_ly.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-6/Z2_ly.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-7/translation_invariance.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-7/translation_invariance.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column fragment">
-<p><span class="math display">\[ \mu_{norm} = \frac{1}{n_i} \sum_{j=1}^{n_i} z_j = \frac{1}{4}(4 + 9 + 6 + 7) = 6.5\]</span> <span class="math display">\[ \sigma_{norm}^2 = \frac{1}{n_i} \sum_{j=1}^{n_i} (z_j - \mu_B)^2 = 3.25\]</span></p>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Normalización</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[\widehat{z_j} = \frac{z_j - \mu_{norm}}{\sqrt{\sigma_{norm}^2 + \epsilon}}\]</span></p>
-</div>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-6/Z2_post_ly.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-6/Z2_post_ly.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="regularización-l2-aka-weight-decay" class="slide level2 smaller">
-<h2>Regularización L2 aka Weight Decay</h2>
-<p><a href="https://proceedings.neurips.cc/paper/1991/file/8eefcfdf5990e441f0fb6f3fad709e21-Paper.pdf">Paper 1991: Weight Decay</a></p>
-<div style="font-size: 80%;">
-<blockquote>
-<p>En general el gran problema de las Redes Neuronales es el <strong><em>Overfitting</em></strong>. Esto porque las redes neuronales normalmente se denominan como <strong>Overparametrized Models</strong>. <strong><em>¿Qué significa esto?</em></strong></p>
-</blockquote>
 <dl>
-<dt>Weight Decay</dt>
+<dt>Translation Invariance</dt>
 <dd>
-<blockquote>
-<p>Corresponde a una penalización que se da a los modelos para limitar su complejidad y asegurar que pueda generalizar correctamente en datos no vistos.</p>
-</blockquote>
+Se refiere a la capacidad de poder detectar un patrón/objeto en diferentes posiciones de la imágen.
 </dd>
 </dl>
-<p><span class="math display">\[ \underset{W_{i:L}}{minimize} \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}),y^{(i)}) + \frac{\lambda}{2} \sum_{i=1}^L ||W_i||_f^2\]</span></p>
-<p>Eso implica una transformación a nuestro <strong><em>Update Rule</em></strong>:</p>
-<p><span class="math display">\[W_i := W_i - \alpha \nabla \frac{1}{m} \sum_{i=1}^m l(h_\theta(x^{(i)}),y^{(i)}) - \alpha \lambda W_i = (1-\alpha\lambda)W_i - \alpha \nabla l(h_\theta(x^{(i)}),y^{(i)})\]</span></p>
-</div>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-style-simple">
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Spoiler: Las FFN no tienen esta propiedad.</strong></p>
 </div>
 <div class="callout-content">
-<p>Se puede ver que los pesos (weights) se <strong><em>contraen</em></strong> (decaen) antes de actualizarse en la dirección del gradiente.</p>
+
 </div>
 </div>
+</div>
+</div></div>
+<div class="columns fragment">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/translation_invariance.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-7/translation_invariance.gif" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
 </div>
 </div><div class="column">
 <div class="callout callout-important callout-style-simple">
@@ -757,34 +300,380 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Por alguna razón Pytorch decidió implementarlo como una propiedad de los <strong><em>Optimizers</em></strong> cuando en realidad debió ser de la Loss Function.</p>
+<p>Las FFN no son capaces de ver patrones globales sino que se enfocan en el valor preciso de una feature. Si el objeto cambia de posición las features cambian a valores completamente distintos haciendo que la red tenga mayor tendencia al error.</p>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="dropout" class="slide level2 smaller">
-<h2>Dropout</h2>
-<p><a href="https://paperswithcode.com/paper/dropout-a-simple-way-to-prevent-neural">Paper 2014: Dropout</a></p>
-<div style="font-size: 80%;">
-<blockquote>
-<p>A diferencia de la estrategia anterior, este tipo de regularización se aplica a las activaciones de la red (resultados de la Transformación Affine, previo a la transformación no lineal).</p>
-</blockquote>
-<p>Definiremos el Dropout como:</p>
-<p><span class="math display">\[Z_{i+1} = \sigma(W_i^T Z_i + b_i)\]</span> <span class="math display">\[\widehat{Z_{i+1}} = D(Z_{i+1})\]</span></p>
-<p>donde <span class="math inline">\(D\)</span> implica la aplicación de Dropout a la capa <span class="math inline">\(i+1\)</span>. El elemento <span class="math inline">\(j\)</span> de la capa <span class="math inline">\(\widehat{Z_i}\)</span> se calcula como:</p>
-<p><span class="math display">\[(\widehat{Z_{i+1}})_j = \begin{cases}
-\frac{(Z_{i+1})_j}{1-p}  &amp; \text{with prob 1-p} \\
-0, &amp; \text{with prob p}
-\end{cases}\]</span></p>
-<p><span class="math inline">\(p\)</span> se conoce como el <code>Dropout Rate</code>.</p>
+<section id="imágenes" class="slide level2 smaller">
+<h2>Imágenes</h2>
+<dl>
+<dt>Imagen</dt>
+<dd>
+Definiremos una imágen como un Tensor de Orden 3, en el cual se representa H, W y C (Altura, Ancho y Canales).
+</dd>
+</dl>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/channels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-7/channels.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/rgb.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-7/rgb.jpeg" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<p><a href="img/clase-7/medical.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-7/medical.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-7/satellite.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-7/satellite.jpeg" class="quarto-figure quarto-figure-center"></a></p>
+</div></div>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>El factor <span class="math inline">\(\frac{1}{1-p}\)</span> se aplica para mantener la varianza estable luego de haber eliminado activaciones con probabilidad <span class="math inline">\(p\)</span>.</p>
+<p>La convención más común es utilizar imágenes de 24-bits 3 canales de <span class="math inline">\(2^8\)</span> valores (es decir 8-bits) que representan la intensidad de los colores Rojo (R), Verde (G) y Azul (B). Las dimensiones de <span class="math inline">\(H\)</span> y <span class="math inline">\(W\)</span> definen la resolución en píxeles de la imágen.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="imágenes-1" class="slide level2 smaller">
+<h2>Imágenes</h2>
+<blockquote>
+<p>Para importar imágenes en Pytorch existen distintas librerías como PIL u OpenCV. Ambas usan la convención de <span class="math inline">\((H,W,C)\)</span>, la diferencia está en el orden de los canales. PIL utiliza la convención RGB, mientras que OpenCV utiliza BGR por lo que se necesitan algunas transformaciones adicionales.</p>
+</blockquote>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Lamentablemente la convención que escogió Pytorch es que una imágen tiene (C, H, W), es decir, primero canales, y luego alto y ancho. Normalmente las librerías no usan esta convención por lo que una permutación o transposición de dimensiones va a ser necesario casi la mayoría de las veces.</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:25%;">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>image <span class="op">=</span> torch.tensor(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/foto.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-7/foto.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:25%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>image[<span class="dv">0</span>,:,:]</span>
+<span id="cb2-2"><a></a>imagen[<span class="dv">0</span>] <span class="co"># alternativa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/foto_red.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-7/foto_red.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:25%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>image[<span class="dv">1</span>,:,:]</span>
+<span id="cb3-2"><a></a>imagen[<span class="dv">1</span>] <span class="co"># alternativa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/foto_green.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-7/foto_green.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:25%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>image[<span class="dv">2</span>,:,:]</span>
+<span id="cb4-2"><a></a>imagen[<span class="dv">2</span>] <span class="co"># alternativa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/foto_blue.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-7/foto_blue.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="imágenes-2" class="slide level2">
+<h2>Imágenes</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Cuando tenemos un batch de imágenes entonces tendremos un Tensor de Orden 4 dimensiones (B,C,H,W), donde <span class="math inline">\(B\)</span> representa el Batch Size, <span class="math inline">\(C\)</span> el número de Canales, <span class="math inline">\(H\)</span> el alto y <span class="math inline">\(W\)</span> el ancho.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Luego un Tensor de Dimensiones (32,3,224,512) implica que tenemos 32 imágenes RGB de dimensiones <span class="math inline">\(224\times512\)</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/image_batch.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-7/image_batch.jpg" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="redes-convolucionales-definición-e-inspiración" class="slide level2 smaller">
+<h2>Redes Convolucionales: Definición e Inspiración</h2>
+<dl>
+<dt>Redes Convolucionales (CNN)</dt>
+<dd>
+Son un tipo de red neuronal cuyos parámetros entrenables son filtros (también llamados Kernels) que aprenden a detectar patrones en los datos de entrada. Aplicando estos Kernels se generan feature maps, que representan la presenecia y localización de ciertos patrones.
+</dd>
+</dl>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Existe el mito de que las Redes Convolucionales se inspiraron en el funcionamiento del Cortex Visual humano. <strong>No sé si es tan así</strong>.</p>
+<p>El mito dice que las CNNs fueron diseñadas para imitar el cortex visual humano. Esto viene de los trabajos de Hubel y Wiesel (década de 1960), que estudiaron cómo las neuronas en la corteza visual de gatos respondían a estímulos:</p>
+<ul>
+<li>Descubrieron neuronas simples que respondían a líneas en cierta orientación y posición.</li>
+<li>Descubrieron neuronas complejas que respondían a patrones similares, pero en distintas posiciones (invarianza local).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong><em>¿Por qué necesitamos Redes Convolucionales?</em></strong> Evitar la sobreparametrización. ¿Por qué esto es un problema?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="redes-convolucionales-definición-e-inspiración-1" class="slide level2 smaller">
+<h2>Redes Convolucionales: Definición e Inspiración</h2>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🔔 Importancia</strong></p>
+</div>
+<div class="callout-content">
+<p>No es exagerado afirmar que las CNNs han sido la arquitectura más influyente en Deep Learning, ya que han impulsado avances importantes en tareas de visión por computador, como clasificación de imágenes, detección de objetos y segmentación semántica. Además, contribuyeron a que el Deep Learning ganara popularidad en la industria tecnológica y superara la época conocida como el AI Winter.</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<h3 id="algunos-hitos-importantes">🗓️ Algunos hitos importantes:</h3>
+<ul>
+<li><strong>1990</strong>: Yann LeCun et al.&nbsp;propone uno de los primeros intentos de CNN, el cual va agregando features más simples en features más complejas progresivamente.</li>
+<li><strong>1998</strong>: Yann LeCun, propone LeNet-5 con 2 redes convolucionales y 3 FFN.</li>
+<li><strong>2012</strong>: Krizhevsky, Sutskever y Hinton proponen AlexNet (5 capas convolucionales y 3 FFN), el cual obtiene <strong>SOTA performance</strong> en ImageNet.</li>
+</ul>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/alexnet-paper.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-7/alexnet-paper.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="entendiendo-el-kernel" class="slide level2 smaller">
+<h2>Entendiendo el Kernel</h2>
+<div class="columns">
+<div class="column">
+<h5 id="gaussian-blur">Gaussian Blur</h5>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/gaussian_blur.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-7/gaussian_blur.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<h5 id="líneas-horizontales">Líneas Horizontales</h5>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/horizontal_lines.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-7/horizontal_lines.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<h5 id="bordes">Bordes</h5>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/bordes.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-7/bordes.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Kernel</strong></p>
+</div>
+<div class="callout-content">
+<p>El Kernel va a ser el set de parámetros que la red convolucional va a aprender. En palabras sencillas, la misma red aprende cuáles son los aspectos más relevantes de la imagen que le permitirán entender cómo clasificar o detectar elementos en ella.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El Kernel se aplica a todos los canales a la vez, lo cuál inicialmente lo hace ver como una operación bastante costosa computacionalmente.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El Kernel introduce el primer hiperparámetro de las CNN que es el <strong>Kernel Size</strong>. En general son cuadrados, y de dimensión impar.</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="entendiendo-la-convolución" class="slide level2 smaller">
+<h2>Entendiendo la Convolución</h2>
+<dl>
+<dt>Convolución</dt>
+<dd>
+Corresponde a una operación para extraer <strong>features maps</strong> en la cual un filtro o kernel se va desplazando en cada sección de los datos (secuencia, imagen o video).
+</dd>
+</dl>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Ojo</strong></p>
+</div>
+<div class="callout-content">
+<p>Esto es nuevamente un término marketero, porque no es una Convolucional real, sino una operación llamada <strong>Cross Correlation</strong>.</p>
+</div>
+</div>
+</div>
+<dl>
+<dt>Feature Map</dt>
+<dd>
+Corresponde a la salida de una convolución (equivalente a la Activación) y es un nuevo tensor que captura ciertas características del dato (secuencia, imagen o video). Cuando se trata de imágenes, captura features como bordes, cambios de textura, color, formas, o elementos más pequeños.
+</dd>
+</dl>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/convolution.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-7/convolution.gif" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:35%;">
+<p><br></p>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Es importante notar que los features maps son de una <strong>tamaño menor a la entrada</strong> debido a la operación de Convolución.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Se obtendrán tantos feature maps como filtros se apliquen.</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="hiperparámetros-de-la-convolución" class="slide level2 smaller">
+<h2>Hiperparámetros de la Convolución</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/stride.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-7/stride.gif" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Stride</strong></p>
+</div>
+<div class="callout-content">
+<p>Se refiere a la cantidad de pasos que el kernel avanza sobre la imagen de entrada. Un <strong><em>stride</em></strong> mayor genera feature maps más pequeños y con menos detalles, mientras que un stride menor conserva más información, aunque aumenta el número de operaciones requeridas.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/convolution_padding.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-7/convolution_padding.gif" class="quarto-figure quarto-figure-center" style="width:130.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Padding</strong></p>
+</div>
+<div class="callout-content">
+<p>Se trata de un relleno que facilita el desplazamiento del kernel, evitando que la convolución reduzca demasiado la dimensionalidad y permitiendo que se tenga en cuenta la información de los bordes de la imagen. Cuando no se aplica padding se denomina <strong>“valid”</strong>, y cuando se agregan píxeles suficientes para mantener la misma dimensión se llama <strong><em>“same”</em></strong>.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/dilation.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-7/dilation.gif" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Dilation</strong></p>
+</div>
+<div class="callout-content">
+<p>Se refiere a los espacios (gaps) que se introducen entre los elementos del kernel al aplicarlo. Usar dilation permite aumentar el campo receptivo de la convolución, capturando más contexto sin necesidad de incrementar el tamaño del kernel. Un valor de 1 indica que no se aplica <strong><em>dilation.</em></strong></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="convolución-en-pytorch" class="slide level2">
+<h2>Convolución en Pytorch</h2>
+<div style="font-size: 110%;">
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>nn.Conv2d(in_channels, out_channels, kernel_size, stride<span class="op">=</span><span class="dv">1</span>,padding<span class="op">=</span><span class="dv">0</span>,dilation<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div style="font-size: 80%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Input</strong></p>
+</div>
+<div class="callout-content">
+<p>Este tipo de redes no requiere que se le den las dimensiones de las entradas, pero sí espera recibir tensores de dimensión <span class="math inline">\((N,C_{in}, H_{in},W_{in})\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Output</strong></p>
+</div>
+<div class="callout-content">
+<p>La Red convolucional devuelve un Tensor de Dimensiones <span class="math inline">\((N,C_{out}, H_{out}, W_{out})\)</span>. Donde:</p>
+<p><span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor\]</span></p>
 </div>
 </div>
 </div>
@@ -795,145 +684,239 @@ Alfonso Tobar-Arancibia
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Dropout se aplica normalmente al momento de entrenar el modelo. Por lo tanto, de usar Dropout es imperativo cambiar al modo <code>model.eval()</code> al momento de predecir.</p>
+<p>Es importante tener noción del tamaño de la imagen para poder escoger un <em>kernel_size</em> que recorra la imagen completa y que no deje partes sin convolucionar.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="weights-initialization" class="slide level2 smaller">
-<h2>Weights Initialization</h2>
-<p><a href="https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">Paper 2010: Xavier Initialization</a> <a href="https://arxiv.org/abs/1502.01852">Paper 2015: Kaiming Initialization</a></p>
-<p>Hemos hablado que los métodos basados en SGD normalmente utilizan valores aleatorios para partir su entrenamiento, lo cual deja un poco al azar el éxito de un proceso de entrenamiento.</p>
-<p>Existen diversos estudios de cómo <code>inicializar</code> los parámetros para una convergencia óptima. Algunas de las inicializaciones son:</p>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Activaciones Triviales</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Constante</li>
-<li>Sólo unos</li>
-<li>Sólo Zeros</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="weights-initialization-1" class="slide level2 smaller">
-<h2>Weights Initialization</h2>
-<div class="columns">
-<div class="column">
-<h4 id="xavier-o-glorot-uniforme">Xavier o Glorot Uniforme</h4>
-<p>Se inicia con valores provenientes de una distribución uniforme: <span class="math inline">\(\mathcal{U}(-a,a)\)</span></p>
-<p><span class="math display">\[ a = gain \cdot \sqrt{\frac{6}{fan_{in} + fan_{out}}}\]</span></p>
-</div><div class="column">
-<h4 id="xavier-o-glorot-normal">Xavier o Glorot Normal</h4>
-<p>Se inicia con valores provenientes de una distribución uniforme: <span class="math inline">\(\mathcal{N}(0,std^2)\)</span></p>
-<p><span class="math display">\[ std = gain \cdot \sqrt{\frac{2}{fan_{in} + fan_{out}}}\]</span></p>
-</div></div>
+<section id="partes-de-una-cnn-pooling" class="slide level2 smaller">
+<h2>Partes de una CNN: Pooling</h2>
+<dl>
+<dt>Pooling</dt>
+<dd>
+El Pooling es una operación de agregación que permite ir disminuyendo el tamaño de las entradas. De esta manera la red puede comenzar a especializarse en aspectos cada vez más finos.
+</dd>
+</dl>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<ul>
-<li><span class="math inline">\(fan_{in}\)</span> corresponde al número de conexiones que entran a una neurona. Mientras que <span class="math inline">\(fan_{out}\)</span> corresponde al número de neuronas que salen de dicha neurona.</li>
-<li><span class="math inline">\(fan\_mode\)</span> corresponde a la elección de <span class="math inline">\(fan_{in}\)</span> o <span class="math inline">\(fan_{out}\)</span>.</li>
-</ul>
+<p>El Pooling también se aplica de manera móvil como una convolución. Pero a diferencia de esta normalmente no genera traslape.</p>
 </div>
 </div>
 </div>
-<div class="columns">
-<div class="column">
-<h4 id="kaiming-aka-he-uniforme">Kaiming (aka He) Uniforme</h4>
-<p>Se inicia con valores provenientes de una distribución uniforme: <span class="math inline">\(\mathcal{U}(-bound,bound)\)</span></p>
-<p><span class="math display">\[ bound = gain \cdot \sqrt{\frac{3}{fan\_mode}}\]</span></p>
-</div><div class="column">
-<h4 id="kaiming-aka-he-normal">Kaiming (aka He) Normal</h4>
-<p>Se inicia con valores provenientes de una distribución uniforme: <span class="math inline">\(\mathcal{N}(0,std^2)\)</span></p>
-<p><span class="math display">\[std =\sqrt{\frac{gain}{fan\_mode}}\]</span></p>
-</div></div>
-</section>
-<section id="training-control" class="slide level2 smaller">
-<h2>Training Control</h2>
-<p>El entrenamiento de una red neuronal puede tomar mucho tiempo. Es por eso que algunas buenas prácticas serían:</p>
-<ul>
-<li>Disponer de resultados preliminares aunque el entrenamiento no haya terminado.</li>
-<li>Guardar los pesos del mejor modelo obtenido en el proceso de entrenamiento.</li>
-<li>Evitar entrenar pasado el punto de Overfitting.
-<ul>
-<li>Aunque hay nuevas ideas de lo que se llama el <a href="https://www.linkedin.com/feed/update/urn:li:activity:7214966566696718336?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7214966566696718336%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29">grokking</a>.</li>
-</ul></li>
-</ul>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Early Stopping</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Se refiere al proceso de detener el entrenamiento luego de <code>patience</code> epochs sin mejorar el validation loss u otro criterio.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Checkpointing</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Corresponde al proceso de guardar los parámetros obtenidos en un epoch en específico. Normalmente se guarda la mejor epoch y la última, pero se puede generar algún criterio.</li>
-</ul>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="categorical-variables" class="slide level2 smaller">
-<h2>Categorical Variables</h2>
-<blockquote>
-<p>Es importante mencionar que normalmente no se utilizan redes neuronales para poder entrenar datos tabulares. Pero de hacerlo, es muy probable que nos encontremos con variables categóricas. Para ello existen dos técnicas que son las más comunes en redes neuronales.</p>
-</blockquote>
-<dl>
-<dt>One Hot Encoder</dt>
-<dd>
-Corresponde a la representación mediante dummy variables. Normalmente se considera una representación <code>Sparse</code> de los datos.
-</dd>
-</dl>
-<div class="callout callout-important callout-style-simple">
+<div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>En Pytorch se puede implementar como <code>F.one_hot()</code>, pero mi recomendación es utilizar las herramientas de Scikit-Learn para evitar <code>Data Leakage</code>.</p>
+<p>Acá se introduce otro hiperparámetro que es el Pooling Size. En general es cuadrado pero de dimensión par.</p>
 </div>
 </div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/one_hot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-6/one_hot.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-7/pooling.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-7/pooling.png" class="quarto-figure quarto-figure-center" style="width:35.0%"></a></p>
 </figure>
 </div>
 </section>
-<section id="thats-all-folks" class="title-slide slide level1 center">
-<h1>That’s all Folks</h1>
+<section id="pooling-in-pytorch" class="slide level2 smaller">
+<h2>Pooling in Pytorch</h2>
+<div style="font-size: 150%;">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>nn.AvgPool2d(kernel_size, stride<span class="op">=</span><span class="va">None</span>,padding<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-2"><a></a>nn.MaxPool2d(kernel_size, stride<span class="op">=</span><span class="va">None</span>,padding<span class="op">=</span><span class="dv">0</span>, dilation<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Ojo</strong></p>
+</div>
+<div class="callout-content">
+<p><code>stride=None</code> implica <code>stride = kernel_size</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Importante mencionar que Average Pooling no permite Dilation.</p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor\]</span></p>
+</section>
+<section id="arquitectura-de-una-cnn" class="slide level2 smaller">
+<h2>Arquitectura de una CNN</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/CNN-arch.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-7/CNN-arch.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Feature Extractor - Encoder - Backbone</strong></p>
+</div>
+<div class="callout-content">
+<p>Corresponde al bloque que contiene CNNs que se encargará de extraer features.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Flatten</strong></p>
+</div>
+<div class="callout-content">
+<p>Corresponde a una Operación Intermedia que dejará todos los píxeles de la imagen como un vector fila que puede ser tomado por la FFN. En estricto rigor prepara las features generadas por la CNN para ser usadas en la parte final de la red.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Prediction Head - Head - MLP</strong></p>
+</div>
+<div class="callout-content">
+<p>Corresponde a una FFN que tomará las features aprendidas por la CNN y generará una predicción.</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="mnist-con-cnn" class="slide level2 smaller">
+<h2>MNIST con CNN</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/CNN_MNIST_arch.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-7/CNN_MNIST_arch.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></a></p>
+</figure>
+</div>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/CNN_params.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-7/CNN_params.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>El número de Parámetros para una Red Convolucional con muchas más capas bajó considerablemente, de 67M a 373K de Parámetros para una imagen de <span class="math inline">\(512 \times 512\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="variante-en-1d" class="slide level2 smaller">
+<h2>Variante en 1d</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<dl>
+<dt>Conv1d</dt>
+<dd>
+Corresponde a la variante de una dimensión, en la cual la entrada corresponden a secuencias de elementos como podrían ser series de tiempo, audio o hasta cadenas de texto.
+</dd>
+</dl>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>En este caso la implementación en Pytorch es similar a la 2D sólo que esperando tensores de dimensiones <span class="math inline">\((N,C_{in}, L_{in})\)</span>, donde <span class="math inline">\(C_{in}\)</span> corresponde al número de canales, que en el caso de series de tiempo equivale a features, y <span class="math inline">\(L_{in}\)</span> corresponde al largo de la secuencia.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>La salida de la Conv1d tendrá dimensiones <span class="math inline">\((N,C_{out},L_{out})\)</span> con:</p>
+<p><span class="math display">\[L_{out} = \left\lfloor \frac{L_{in} + 2 \cdot padding - dilation \cdot (kernel\_size - 1) - 1}{stride} + 1 \right\rfloor\]</span></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/time_series.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-7/time_series.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/audio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-7/audio.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="variante-en-3d" class="slide level2 smaller">
+<h2>Variante en 3d</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<dl>
+<dt>Conv3d</dt>
+<dd>
+Corresponde a la variante de tres dimensiones, en la cual la entrada corresponde a secuencias de imágenes, es decir, videos.
+</dd>
+</dl>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Este caso también es similar sólo que se esperan tensores de dimensiones <span class="math inline">\((N, C_{in}, D_{in}, H_{in}, W_{in})\)</span> donde <span class="math inline">\(C_in\)</span> corresponde al número de canales, <span class="math inline">\(D\)</span> en el caso de un video corresponde al número de frames de tamaño <span class="math inline">\(H_{in} \times W_{in}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>La salida de la Conv1d tendrá dimensiones <span class="math inline">\((N,C_{out},D_{out},H_{out},W_{out})\)</span> con:</p>
+<p><span class="math display">\[D_{out} = \left\lfloor \frac{D_{in} + 2 \cdot padding[0] - dilation[0] \cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[2] - dilation[2]\cdot (kernel\_size[2] - 1) - 1}{stride[2]} + 1 \right\rfloor\]</span></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/frame-rates.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-6/frame-rates.jpg" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="ejemplos-de-arquitecturas" class="slide level2">
+<h2>Ejemplos de Arquitecturas</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/resnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-7/resnet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<p><a href="img/clase-7/lenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="img/clase-7/lenet.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-7/VGG16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32"><img data-src="img/clase-7/VGG16.png" class="quarto-figure quarto-figure-center"></a></p>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/EfficientNet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-33"><img data-src="img/clase-7/EfficientNet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="class-dismissed" class="title-slide slide level1 center">
+<h1>Class Dismissed</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">

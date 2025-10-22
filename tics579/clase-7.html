@@ -200,7 +200,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-579-Deep Learning</h1>
-  <p class="subtitle">Clase 7: Redes Convolucionales</p>
+  <p class="subtitle">Clase 6: Redes Convolucionales</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -1194,7 +1194,7 @@ Corresponde a la variante de tres dimensiones, en la cual la entrada corresponde
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/datacubeR\.github\.io\/clases_UAI\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

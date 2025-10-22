@@ -504,55 +504,39 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-<pre><code>tensor([[ 0.2620, -0.5313,  0.3907,  ..., -0.0451, -1.2113, -2.9476],
-        [-1.2096, -0.2586, -0.1372,  ...,  0.1342, -1.1130, -1.4764],
-        [-1.7676, -0.3754, -0.3786,  ...,  0.2964, -1.2234, -1.6176],
-        ...,
-        [-2.1432, -0.3500, -0.5168,  ...,  0.3048, -1.1075, -1.1932],
-        [-2.6030,  0.0033, -0.6494,  ...,  0.8202, -1.6117, -1.0077],
-        [ 0.1126, -0.4532,  0.3573,  ...,  0.0660, -1.0688, -2.4856]],
-       grad_fn=&lt;AddmmBackward0&gt;)</code></pre>
-</div><div class="column">
-<div style="font-size: 90%;">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Un clase en Pytorch permite crear redes más complejas y poseen 2 métodos principales:</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><p>Todas las clases deben heredar de <code>nn.Module</code>.</p></li>
-<li><p><code>__init__()</code>:</p>
-<ul>
-<li>Se inicializan los módulos con <code>super().__init__()</code>.</li>
-<li>Se definen las capas de la red como atributos de la clase.
-<ul>
-<li>self.nombre_de_la_capa = nn.Capa(…)</li>
-<li>self.funcion = nn.Funcion(…)</li>
-</ul></li>
-</ul></li>
-<li><p><code>forward()</code>:</p>
-<ul>
-<li>Define como se conectan las capas en el Forward Pass.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sourceCode" id="cb4" style="font-size: 110%;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">class</span> MLP(nn.Module):</span>
-<span id="cb4-2"><a></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, in_features, out_features):</span>
-<span id="cb4-3"><a></a>    <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb4-4"><a></a>    </span>
-<span id="cb4-5"><a></a>    <span class="co">## Defincición de capas</span></span>
-<span id="cb4-6"><a></a>    <span class="va">self</span>.fc1 <span class="op">=</span> nn.Linear(in_features, out_features)</span>
-<span id="cb4-7"><a></a></span>
-<span id="cb4-8"><a></a>  <span class="kw">def</span> forward(<span class="va">self</span>,x):</span>
-<span id="cb4-9"><a></a>    x <span class="op">=</span> <span class="va">self</span>.fc1(x)</span>
-<span id="cb4-10"><a></a>    <span class="cf">return</span> x</span>
-<span id="cb4-11"><a></a></span>
-<span id="cb4-12"><a></a>model <span class="op">=</span> MLP(in_features<span class="op">=</span><span class="dv">4</span>, out_features <span class="op">=</span> <span class="dv">12</span>)</span>
-<span id="cb4-13"><a></a>model(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code></code></pre>
+<p>tensor([[ 0.2620, -0.5313, 0.3907, …, -0.0451, -1.2113, -2.9476], [-1.2096, -0.2586, -0.1372, …, 0.1342, -1.1130, -1.4764], [-1.7676, -0.3754, -0.3786, …, 0.2964, -1.2234, -1.6176], …, [-2.1432, -0.3500, -0.5168, …, 0.3048, -1.1075, -1.1932], [-2.6030, 0.0033, -0.6494, …, 0.8202, -1.6117, -1.0077], [ 0.1126, -0.4532, 0.3573, …, 0.0660, -1.0688, -2.4856]], grad_fn=<addmmbackward0>)</addmmbackward0></p>
+<pre><code>:::
+:::{.column}
+
+::: {.callout-tip style="font-size: 90%;" icon=false appearance="default"} 
+## Un clase en Pytorch permite crear redes más complejas y poseen 2 métodos principales:
+  * Todas las clases deben heredar de `nn.Module`.
+
+* `__init__()`:
+  * Se inicializan los módulos con `super().__init__()`.
+  * Se definen las capas de la red como atributos de la clase.
+    * self.nombre_de_la_capa = nn.Capa(...)
+    * self.funcion = nn.Funcion(...)
+* `forward()`:
+  * Define como se conectan las capas en el Forward Pass.
+
+:::
+
+```{.python style="font-size: 110%;"}
+class MLP(nn.Module):
+  def __init__(self, in_features, out_features):
+    super().__init__()
+    
+    ## Defincición de capas
+    self.fc1 = nn.Linear(in_features, out_features)
+
+  def forward(self,x):
+    x = self.fc1(x)
+    return x
+
+model = MLP(in_features=4, out_features = 12)
+model(X)</code></pre>
 </div></div>
 </section>
 <section id="pytorch-crear-modelos-más-complejos" class="slide level2 smaller">

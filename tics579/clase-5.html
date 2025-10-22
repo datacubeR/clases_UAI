@@ -200,7 +200,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-579-Deep Learning</h1>
-  <p class="subtitle">Clase 4: Model Training</p>
+  <p class="subtitle">Clase 5: Training Tips &amp; Tricks</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -214,359 +214,97 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="entrenamiento-de-la-red" class="slide level2 smaller">
-<h2>Entrenamiento de la Red</h2>
-<blockquote>
-<p>A diferencia de un Modelo de Machine Learning, las Redes Neuronales se entrenan de manera progresiva (se espera una mejora en cada Epoch). Si nuestra Arquitectura es apropiada nosotros deberíamos esperar que el <code>Loss</code> de nuestra <strong><em>red siempre disminuya</em></strong>. ¿Por qué?</p>
-</blockquote>
-<div class="fragment">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>💡 Dado que el entrenamiento es progresivo, el modelo puede retomar su entrenamiento desde un set de pesos dados.</strong></p>
+<section id="machine-learning-vs-deep-learning-workflow" class="slide level2 smaller">
+<h2>Machine Learning vs Deep Learning Workflow</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-5/ML_vs_DL.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-5/ML_vs_DL.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
 </div>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-warning no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong><strong>¿Siempre buscamos la Red que tenga el mejor Loss de Entrenamiento?</strong> <strong><em>¿Cuál es la diferencia entre el <code>Loss</code> y el <code>Rendimento del Modelo</code>?</em></strong></strong></p>
-</div>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Al igual que en los modelos de Machine Learning debemos evitar a toda costa el Overfitting. ¿Qué es el overfitting?</strong></p>
-</div>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="entrenamiento-de-la-red-1" class="slide level2 smaller">
-<h2>Entrenamiento de la Red</h2>
-<dl>
-<dt>Bias-Variance Tradeoff (Dilema Sesgo-Varianza)</dt>
-<dd>
-<blockquote>
-<p>Probablemente el concepto más importante para determinar si un modelo tiene potencial o no. Corresponden a dos tipos de errores que pueden sufrir los modelos de ML.</p>
-</blockquote>
-</dd>
-</dl>
-<div class="columns fragment">
-<div class="column">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Bias</strong></p>
-</div>
-<div class="callout-content">
-<p>Corresponde al sesgo, y tiene que ver con la diferencia entre el valor real y el valor predicho. Bajo sesgo implica una mejor predicción.</p>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-caution no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Variance</strong></p>
-</div>
-<div class="callout-content">
-<p>Corresponde a la varianza y tiene que ver con la dispersión de los valores predichos. Baja Varianza implica un modelo más estable y menos flexible.</p>
-</div>
-</div>
-</div>
-</div><div class="fragment">
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>En general hay que buscar el equilibrio entre ambos tipos de errores:</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Alto Sesgo y baja Varianza: <strong>Underfitting</strong>.</li>
-<li>Bajo Sesgo y Alta Varianza: <strong>Overfitting</strong>.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="model-validation" class="slide level2 smaller">
-<h2>Model Validation</h2>
-<dl>
-<dt>Validación Cruzada</dt>
-<dd>
-<blockquote>
-<p>Se refiere al proceso de entrenar un modelo en una cierta porción de los datos, pero validar sus rendimiento y capacidad de <strong><em>generalización</em></strong> en un set de datos <strong><em>no vistos</em></strong> por el modelo al momento de entrenar.</p>
-</blockquote>
-</dd>
-</dl>
-<div style="font-size: 120%;">
-<div class="callout callout-warning no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong><strong><em>¿Qué es la Generalización?</em></strong></strong></p>
-</div>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Los dos métodos más populares que se usan en Machine Learning son <strong>Holdout</strong> y <strong>K-Fold.</strong> Más métodos se pueden encontrar en los <a href="https://scikit-learn.org/stable/modules/cross_validation.html">docs de Scikit-Learn</a>.</strong></p>
-</div>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Debido a los volúmenes de datos utilizados, el esquema de validación más utilizado es el <strong>Holdout</strong>.</strong></p>
-</div>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="model-validation-holdout" class="slide level2 smaller">
-<h2>Model Validation: Holdout</h2>
 <div class="columns">
 <div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/data_split.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-4/data_split.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Machine Learning</strong></p>
+</div>
+<div class="callout-content">
+<p>El proceso completo de entrenamiento del modelo se divide en dos etapas: preprocesamiento de datos y entrenamiento del modelo.</p>
+</div>
+</div>
 </div>
 </div><div class="column">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong><strong>Train</strong></strong></p>
-</div>
-<div class="callout-content">
-<p>Corresponde a la porción de utilizado para que el modelo aprenda.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong><strong>Validation</strong></strong></p>
-</div>
-<div class="callout-content">
-<p>Corresponde a la porción de datos no vistos por el modelo durante el entrenamiento. Se utiliza para medir el nivel de generalización del modelo.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-caution no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong><strong>Test</strong></strong></p>
-</div>
-<div class="callout-content">
-<p>Se utiliza para evaluar reportando una métrica de diseño del Modelo.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>A diferencia de un modelo de Machine Learning el proceso de validación del modelo se realiza en conjunto con el entrenamiento. Es decir, se entrena y valida el modelo Epoch a Epoch.</p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="model-validation-k-fold" class="slide level2 smaller">
-<h2>Model Validation: K-Fold</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/k-fold.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-4/k-fold.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Corresponde al proceso de Holdout pero repetido <span class="math inline">\(K\)</span> veces.</p>
-</div>
-</div>
-</div>
-</section>
-<section>
-<section id="qué-es-pytorch" class="title-slide slide level1 center">
-<h1>¿Qué es Pytorch?</h1>
-
-</section>
-<section id="pytorch" class="slide level2 smaller">
-<h2>Pytorch</h2>
-<blockquote>
-<p>Es una librería de manipulación de Tensores especializada en Deep Learning. Provee principalmente, manipulación de tensores (igual que Numpy, pero en GPU), además de Autograd (calcula derivadas de manera automática).</p>
-</blockquote>
-<p>Para poder comenzar a utilizarlo se requieren normalmente 3 imports:</p>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|2|3|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> torch</span>
-<span id="cb1-2"><a></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
-<span id="cb1-3"><a></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>👀</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><code>torch</code> es donde se encuentran la mayoría de funciones básicas para manipular tensores.</li>
-<li><code>torch.nn</code> es donde se encuentran los módulos necesarios para poder crear redes neuronales (neural networks). Cada módulo es una clase en Python.</li>
-<li><code>torch.nn.functional</code> es donde se encontrarán <code>utility functions</code> además de versiones funcionales de elementos de <code>torch.nn</code>.</li>
-</ul>
-</div>
-</div>
-</div>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>👀 Una versión funcional es capaz de replicar la operación de un módulo pero no tiene la capacidad de almacenar los parámetros aprendidos.</strong></p>
+<p><strong>Deep Learning</strong></p>
 </div>
 <div class="callout-content">
-
+<p>El entrenamiento del modelo abarca tres etapas: preprocesamiento de datos, diseño de la arquitectura y entrenamiento propiamente tal como uno solo.</p>
 </div>
 </div>
 </div>
+</div></div>
 </section>
-<section id="pytorch-en-gpu" class="slide level2 smaller">
-<h2>Pytorch en GPU</h2>
-<p>La principal ventaja de frameworks como Pytorch es su ejecución en GPU, la cual ofrece una enorme capacidad de cómputo por la gran cantidad de núcleos.</p>
-<div style="font-size: 120%;">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>🤓 Las GPUs usan CUDA (una variante compleja de C++), por lo que los errores suelen ser crípticos. Por ello se recomienda desarrollar en CPU y pasar a GPU solo cuando el código ya funcione correctamente y sea necesario entrenar.</strong></p>
-</div>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-</div>
-<div class="sourceCode" id="cb2" style="font-size: 120%;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co">## Permite automáticamente reconocer si es que existe GPU en el sistema y de existir lo asigna.</span></span>
-<span id="cb2-2"><a></a>device <span class="op">=</span> torch.device(<span class="st">"cuda"</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">"cpu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div style="font-size: 120%;">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>🖥️ El código anterior es particularmente útil para plataformas como Google Colab donde se permite activar o desactivar el uso de GPU.</strong></p>
-</div>
-<div class="callout-content">
-
-</div>
-</div>
-</div>
-</div>
-<div class="sourceCode" id="cb3" style="font-size: 120%;"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co">## Fija el entrenamiento en CPU.</span></span>
-<span id="cb3-2"><a></a>device <span class="op">=</span> torch.device(<span class="st">"cpu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="training-validation-loop" class="slide level2 smaller">
-<h2>Training-Validation Loop</h2>
-<blockquote>
-<p>Corresponde a la modificación del Training Loop con el Objetivo de Entrenar y Validar de manera simultánea.</p>
-</blockquote>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/forward_train.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-4/forward_train.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Se realiza un Forward Pass con datos de <strong>Train</strong> y se calcula el Loss asociado. Internamente, Pytorch comienza a acumular Gradientes.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="training-validation-loop-1" class="slide level2 smaller">
-<h2>Training-Validation Loop</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/backward_train.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-4/backward_train.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Se realiza un Backward Pass, se aplican los gradientes y se aplica el Update Rule.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="training-validation-loop-2" class="slide level2 smaller">
-<h2>Training-Validation Loop</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/forward_val.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-4/forward_val.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Se realiza un nuevo Forward Pass, pero esta vez con los datos de <strong>Validación</strong>. En este caso Pytorch internamente sigue acumulando gradientes, lo cual no es correcto. Para ello se debe utilizar un <code>with torch.no_grad()</code>. Se calcula un Validation Loss.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="monitoreo-de-un-modelo-validation-curve" class="slide level2 smaller">
-<h2>Monitoreo de un Modelo: Validation Curve</h2>
+<section id="preprocesamiento" class="slide level2">
+<h2>Preprocesamiento</h2>
+<p>Algunos de los problemas más comunes para los que se requieren preprocesamientos en Deep Learning son:</p>
 <div class="columns">
-<div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-4/validation_curve.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-4/validation_curve.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:40%;">
-<div class="callout callout-important callout-style-simple">
+<div class="column">
+<div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
+<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
+<p><strong>Encoding de Variables Categóricas</strong></p>
+</div>
 <div class="callout-content">
-<p>Es importante ser capaz de identificar el momento exacto en el cual el momento comienza su overfitting. Para ello se utiliza el <strong>“Checkpointing”</strong>.</p>
+<ul>
+<li>One Hot Encoding</li>
+<li>Embeddings</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Problemas de Escala:</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Estandarización</li>
+<li>Normalización</li>
+<li>Normalization Layers</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Problemas de Convergencia y combate contra el Overfitting:</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Regularización L2 (Weight Decay)</li>
+<li>Dropout</li>
+<li>Weights Initialization</li>
+</ul>
 </div>
 </div>
 </div>
@@ -576,11 +314,420 @@ Alfonso Tobar-Arancibia
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Checkpoint</strong></p>
+<p><strong>Problemas de Recursos Computacionales:</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Corresponde a un snapshot del modelo a un cierto punto. En la <strong>práctica</strong> se almacenan los parámetros del <strong>mejor modelo</strong> y del <strong>último Epoch</strong>.</li>
+<li>Checkpointing</li>
+<li>Early Stopping</li>
+<li>Gradient Accumulation</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="problemas-de-escala-1" class="slide level2 smaller">
+<h2>Problemas de Escala</h2>
+<blockquote>
+<p>En general el término Normalización está muy trillado y en la práctica se utiliza para referirse a muchos temas distintos. Algunas definiciones conocidas:</p>
+</blockquote>
+<div class="columns">
+<div class="column">
+<h3 id="normalización">Normalización</h3>
+<p><span class="math display">\[x_{i\_norm} = \frac{x_i-x_{min}}{x_{max} - x_{min}}\]</span> Esta operación se puede hacer mediante <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html">MinMaxScaler</a> de Scikit-Learn.</p>
+</div><div class="column">
+<h3 id="estandarización">Estandarización</h3>
+<p><span class="math display">\[ x_{i\_est} = \frac{x_i - E[x]}{\sqrt(Var[x])}\]</span></p>
+<p>Esta operación se puede hacer mediante <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">StandardScaler</a> de Scikit-Learn.</p>
+</div></div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>👀 Ojo</strong></p>
+</div>
+<div class="callout-content">
+<p>La implementación de este tipo de técnicas normalmente requiere librerías externas a Pytorch (como Scikit-Learn o Feature Engine). Por lo que no es tan común en prácticas más avanzadas del área.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Alerta de Data Leakage</strong></p>
+</div>
+<div class="callout-content">
+<p>Utilizar estas estrategias externas pueden producir problemas de Data Leakage cuando se hace entrenamiento por Mini-Batches que es lo más común. Para evitar esto, lo más común es utilizar Normalization Layers dentro de la misma Arquitectura de la Red Neuronal.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="normalization-layers-batch-normalization" class="slide level2 smaller">
+<h2>Normalization Layers: Batch Normalization</h2>
+<p><a href="https://arxiv.org/pdf/1502.03167">Ioffe &amp; Szegedy, 2015: Batch Normalization</a></p>
+<blockquote>
+<p>Consiste en la primera implementación de una Normalización para cada Batch.</p>
+</blockquote>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Pros</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Resuelve el problema de <a href="https://machinelearning.wtf/terms/internal-covariate-shift/">Internal Covariate Shift</a>.</li>
+<li>Disminuye la importancia de los Parámetros iniciales e inicio del aprendizaje.</li>
+<li>Genera un modelo más estable debido a que las activaciones están normalizadas.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Cons</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Genera más parámetros entrenables y, por ende, más cálculos en la red.</li>
+<li>Se complica el proceso de inferencia (test time).</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+<section id="internal-covariate-shift" style="font-size: 80%;">
+<h4>Internal Covariate Shift</h4>
+<ul>
+<li>Al entrenar una red neuronal, cada capa depende de las salidas (activaciones) de la capa anterior.</li>
+<li>Durante el entrenamiento, esas salidas cambian porque sus pesos se están actualizando, lo que implica que la distribución de entrada que ve cada capa está cambiando constantemente. Esto es lo que se conoce como <code>internal covariate shift</code>.</li>
+</ul>
+<blockquote>
+<p>Esto significa que cada capa debe adaptarse continuamente a nuevas distribuciones de entrada, lo que ralentiza el entrenamiento y dificulta la convergencia.</p>
+</blockquote>
+</section>
+</section>
+<section id="normalization-layers-batch-norm-punto-de-partida" class="slide level2 smaller">
+<h2>Normalization Layers: Batch Norm, Punto de Partida</h2>
+<h4 id="ejemplo-supongamos-que-dado-la-altura-y-la-edad-queremos-predecir-si-será-deportista-de-alto-rendimiento.">Ejemplo: Supongamos que dado la altura y la edad queremos predecir si será deportista de alto rendimiento.</h4>
+<div class="columns" style="font-size: 90%;">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-6/normalize.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observaciones</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Rango de Edad es mucho mayor que el de Altura.</li>
+<li>Cambios en Altura deben ser mucho más pequeños que en Edad debido al rango.</li>
+<li>Si el learning rate es alto puede diverger si nos movemos en la dirección de altura.</li>
+<li>Si el learning rate es bajo, podría demorar mucho más en converger si nos movemos en la dirección de edad.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/post_normalize.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-6/post_normalize.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Observaciones</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Sin importar el punto inicial, el mínimo se encuentra <strong>casi</strong> a la misma distancia.<br>
+</li>
+<li>Es posible utilizar un learning rate más grande sin miedo a diverger.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="batch-norm-implementación-forward-pass" class="slide level2 smaller">
+<h2>Batch Norm: Implementación (Forward Pass)</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p>Supongamos el siguiente Batch de tamaño <span class="math inline">\(B=15\)</span> con 3 features:</p>
+<p><span class="math display">\[
+X = \begin{bmatrix}
+16 &amp; 14 &amp; 12 \\
+15 &amp; 3  &amp; 15 \\
+16 &amp; 7  &amp; 6  \\
+14 &amp; 3  &amp; 16 \\
+4  &amp; 4  &amp; 18 \\
+8  &amp; 11 &amp; 9  \\
+18 &amp; 18 &amp; 14 \\
+5  &amp; 17 &amp; 11 \\
+15 &amp; 9  &amp; 11 \\
+10 &amp; 7  &amp; 7
+\end{bmatrix}
+\]</span></p>
+</div><div class="column" style="width:70%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>1. Calcular estadísticos de cada Batch: Promedio y Varianza.</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\mu_B = \begin{bmatrix}
+12.1 &amp; 9.3 &amp; 11.9
+\end{bmatrix}
+\]</span> <span class="math display">\[
+\sigma^2_B=\begin{bmatrix}
+22.29 &amp; 27.81 &amp; 13.69
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\sigma^2_B\)</span> corresponde a la varianza sesgada (dividida por N).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>2. Calcular normalización de cada Batch.</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[x_{norm} = \frac{X - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>3. Calcular Activación</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[h = \gamma \odot x_{norm} + \beta\]</span></p>
+<p>Por defecto, Pytorch considera que <span class="math inline">\(\gamma = \begin{bmatrix}
+1 &amp; ... &amp; 1
+\end{bmatrix}\)</span> y <span class="math inline">\(\beta = \begin{bmatrix}
+0 &amp; ... &amp; 0
+\end{bmatrix}\)</span>.</p>
+<p>Luego <span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span> son parámetros entrenables por el modelo. Tanto <span class="math inline">\(\gamma\)</span> como <span class="math inline">\(\beta\)</span> tienen la misma dimensión que el número de features (en este caso 3).</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="batch-norm-implementación-forward-pass-1" class="slide level2 smaller">
+<h2>Batch Norm: Implementación (Forward Pass)</h2>
+<div class="columns">
+<div class="column">
+<h4 id="cálculo-manual">Cálculo Manual</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>eps <span class="op">=</span> <span class="fl">1e-5</span></span>
+<span id="cb1-2"><a></a>batch_mean <span class="op">=</span> X.mean(dim<span class="op">=</span><span class="dv">0</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-3"><a></a>batch_var_train <span class="op">=</span> X.var(dim<span class="op">=</span><span class="dv">0</span>, unbiased<span class="op">=</span><span class="va">False</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-4"><a></a>x_norm <span class="op">=</span> (X<span class="op">-</span>batch_mean)<span class="op">/</span>torch.sqrt(batch_var_train <span class="op">+</span> eps)</span>
+<span id="cb1-5"><a></a>w <span class="op">=</span> torch.tensor([<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>])</span>
+<span id="cb1-6"><a></a>b <span class="op">=</span> torch.tensor([<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>])</span>
+<span id="cb1-7"><a></a>w<span class="op">*</span>x_norm <span class="op">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>============================================================
+Forward Pass Train obtenido Manualmente
+============================================================
+tensor([[ 0.8261,  0.8912,  0.0270],
+        [ 0.6142, -1.1946,  0.8378],
+        [ 0.8261, -0.4361, -1.5946],
+        [ 0.4024, -1.1946,  1.1081],
+        [-1.7157, -1.0050,  1.6486],
+        [-0.8684,  0.3224, -0.7838],
+        [ 1.2497,  1.6498,  0.5676],
+        [-1.5038,  1.4601, -0.2432],
+        [ 0.6142, -0.0569, -0.2432],
+        [-0.4448, -0.4361, -1.3243]])
+</code></pre>
+</div><div class="column">
+<h4 id="cálculo-en-pytorch">Cálculo en Pytorch</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>bn <span class="op">=</span> nn.BatchNorm1d(<span class="dv">3</span>)</span>
+<span id="cb3-2"><a></a><span class="co">## Importantísimo ya que BatchNorm tiene distinto </span></span>
+<span id="cb3-3"><a></a><span class="co">## funcionamiento en Modo Train y Eval</span></span>
+<span id="cb3-4"><a></a>bn.train()</span>
+<span id="cb3-5"><a></a>output_pytorch<span class="op">=</span> bn(X)</span>
+<span id="cb3-6"><a></a>output_pytorch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>============================================================
+Forward Pass en Modo Train utilizando Pytorch
+============================================================
+tensor([[ 0.8261,  0.8912,  0.0270],
+        [ 0.6142, -1.1946,  0.8378],
+        [ 0.8261, -0.4361, -1.5946],
+        [ 0.4024, -1.1946,  1.1081],
+        [-1.7157, -1.0050,  1.6486],
+        [-0.8684,  0.3224, -0.7838],
+        [ 1.2497,  1.6498,  0.5676],
+        [-1.5038,  1.4601, -0.2432],
+        [ 0.6142, -0.0569, -0.2432],
+        [-0.4448, -0.4361, -1.3243]], grad_fn=&lt;NativeBatchNormBackward0&gt;)</code></pre>
+</div></div>
+</section>
+<section id="batch-norm-implementación-test-time" class="slide level2 smaller">
+<h2>Batch Norm: Implementación (Test Time)</h2>
+<h4 id="problema">Problema</h4>
+<p>La predicción de una instancia <span class="math inline">\(i\)</span> específica, ahora depende de otros elementos dentro del Batch.</p>
+<p><strong><em>¿Cómo funciona entonces el modelo en Test Time?</em></strong></p>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>1. Calcular running mean y running var.</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[
+\begin{aligned}
+\mu_{running} &amp;= (1 - \alpha) \mu_{running} + \mu_B \\
+s^2_{running} &amp;= (1 - \alpha) \cdot s^2_{running} + s^2_B
+\end{aligned}
+\]</span></p>
+<p><strong>Ojo</strong>: En este caso se usa la Varianza insesgada (dividida por N-1). <span class="math inline">\(\alpha\)</span> es un hiperparámetro que mide la contribución del Batch actual a los estadísticos globales. Por defecto en Pytorch <span class="math inline">\(\alpha = 0.1\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>2. Calcular normalización de cada Batch.</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[x_{norm}^{test} = \frac{X - \mu_{running}}{\sqrt{s_{running}^2 + \epsilon}}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>3. Calcular Activación</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[h = \gamma \cdot x_{norm}^{test} + \beta\]</span></p>
+<p>En este caso, <span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span> son parámetros aprendidos durante el entrenamiento.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="batch-norm-implementación-test-time-1" class="slide level2 smaller">
+<h2>Batch Norm: Implementación (Test Time)</h2>
+<div class="columns">
+<div class="column">
+<h4 id="cálculo-manual-1">Cálculo Manual</h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>batch_var_eval <span class="op">=</span> X.var(dim<span class="op">=</span><span class="dv">0</span>, unbiased<span class="op">=</span><span class="va">True</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a>alpha <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb5-4"><a></a>rm <span class="op">=</span> (<span class="dv">1</span><span class="op">-</span>alpha)<span class="op">*</span>torch.tensor([<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>]) <span class="op">+</span> alpha<span class="op">*</span>batch_mean</span>
+<span id="cb5-5"><a></a>rv <span class="op">=</span> (<span class="dv">1</span><span class="op">-</span>alpha)<span class="op">*</span>torch.tensor([<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>]) <span class="op">+</span> alpha<span class="op">*</span>batch_var_eval</span>
+<span id="cb5-6"><a></a></span>
+<span id="cb5-7"><a></a>x_normalized_eval <span class="op">=</span> (X <span class="op">-</span> rm)<span class="op">/</span>torch.sqrt(rv <span class="op">+</span> eps)</span>
+<span id="cb5-8"><a></a>bn.weight.data<span class="op">*</span>x_normalized_eval<span class="op">+</span>bn.bias.data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>============================================================
+Test Time: 
+============================================================
+Media: 
+tensor([[1.2100, 0.9300, 1.1900]])
+Varianza: 
+tensor([[3.3767, 3.9900, 2.4211]])
+Forward Pass en Modo Evaluación obtenido de manera manual...
+============================================================
+tensor([[ 8.0487,  6.5432,  6.9473],
+        [ 7.5045,  1.0363,  8.8753],
+        [ 8.0487,  3.0388,  3.0913],
+        [ 6.9603,  1.0363,  9.5180],
+        [ 1.5183,  1.5369, 10.8034],
+        [ 3.6951,  5.0413,  5.0193],
+        [ 9.1370,  8.5457,  8.2327],
+        [ 2.0625,  8.0451,  6.3046],
+        [ 7.5045,  4.0400,  6.3046],
+        [ 4.7835,  3.0388,  3.7339]])</code></pre>
+</div><div class="column">
+<h4 id="cálculo-en-pytorch-1">Cálculo en Pytorch</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>bn.<span class="bu">eval</span>()</span>
+<span id="cb7-2"><a></a>bn(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>============================================================
+Forward Pass en Modo Evaluación usando Pytorch...
+============================================================
+tensor([[ 8.0487,  6.5432,  6.9473],
+        [ 7.5045,  1.0363,  8.8753],
+        [ 8.0487,  3.0388,  3.0913],
+        [ 6.9603,  1.0363,  9.5180],
+        [ 1.5183,  1.5369, 10.8034],
+        [ 3.6951,  5.0413,  5.0193],
+        [ 9.1370,  8.5457,  8.2327],
+        [ 2.0625,  8.0451,  6.3046],
+        [ 7.5045,  4.0400,  6.3046],
+        [ 4.7835,  3.0388,  3.7339]], grad_fn=&lt;NativeBatchNormBackward0&gt;)</code></pre>
+</div></div>
+</section>
+<section id="batch-norm-consejos" class="slide level2 smaller">
+<h2>Batch Norm: Consejos</h2>
+<ul>
+<li>Andrew Ng propone utilizar BatchNorm justo antes de la función de Activacion.</li>
+<li>El paper original también propone su uso justo antes de la activación.</li>
+<li>Francoise Chollet, creador de Keras dice que los autores del paper en realidad lo utilizaron después de la función de activación.</li>
+<li>Adicionalmente existen benchmarks que muestran mejoras usando BatchNorm después de las funciones de activación.</li>
+</ul>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Entonces, la posición del BatchNorm termina siendo parte de la Arquitectura, y se debe comprobar donde tiene un mejor efecto.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Batchnorm tiene efectos distintos al momento de entrenar o de evaluar/predecir en un modelo. Por lo tanto, de usar Batchnorm es imperativo utilizar los modos <code>model.train()</code> y <code>model.eval()</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="normalización-layer-norm" class="slide level2 smaller">
+<h2>Normalización: Layer Norm</h2>
+<p><a href="https://arxiv.org/abs/1607.06450">Ley, Ryan, Hinton, 2016: Layer Normalization</a></p>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Batch Norm tiene algunos problemas:</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Muy difícil de calcular en datos secuenciales (lo veremos más adelante).</li>
+<li>Inestable cuando el Batch Size es muy pequeño.</li>
+<li>Difícil de Paralelizar.</li>
 </ul>
 </div>
 </div>
@@ -591,75 +738,427 @@ Alfonso Tobar-Arancibia
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>EarlyStopping</strong></p>
+<p><strong>Beneficios de Layer Norm</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Teoricamente, una vez que la red Neuronal alcanza el punto de Overfitting ya no tiene sentido seguir el entrenamiento. Por lo tanto es posible detener el entrenamiento bajo una cierta condición.</li>
+<li>Puede trabajar con secuencias (Esencial para Transformers).</li>
+<li>No tiene problemas para trabajar con cualquier tipo de Batch Size.</li>
+<li>Se puede paralelizar, lo cuál es útil en redes como las RNN.</li>
 </ul>
 </div>
 </div>
 </div>
-</div></div>
-</section>
-<section id="model-evaluation" class="slide level2 smaller">
-<h2>Model Evaluation</h2>
-<blockquote>
-<p>La Evaluación del Modelo se hará en torno a una métrica definida a priori por el modelador.</p>
-</blockquote>
-<div class="callout callout-important callout-style-simple">
+<div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>La métrica a utilizar está íntimamente ligada al tipo de modelo.</p>
+<ul>
+<li>En este caso se realiza la normalización por instancia y no por Batch.</li>
+</ul>
 </div>
 </div>
 </div>
+</section>
+<section id="normalización-layer-norm-1" class="slide level2 smaller">
+<h2>Normalización: Layer Norm</h2>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>1. Calcular estadísticos de cada Instancia: Promedio y Varianza.</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\mu = \begin{bmatrix}
+14.0000 &amp; 11.0000 &amp; 9.6667 &amp; 11.0000 &amp; 8.6667 &amp; 9.3333 &amp; 16.6667 &amp; 11.0000 &amp; 11.6667 &amp; 8.0000
+\end{bmatrix}^T
+\]</span></p>
+<p><span class="math display">\[
+\sigma^2 = \begin{bmatrix}
+2.6667 &amp; 32.0000 &amp; 20.2222 &amp; 32.6667 &amp; 43.5556 &amp; 1.5556 &amp; 3.5556 &amp; 24.0000 &amp; 6.2222 &amp; 2.0000
+\end{bmatrix}^T
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\sigma^2_B\)</span> corresponde a la varianza sesgada (dividida por N).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>2. Calcular normalización de cada Instancia.</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[x_{norm} = \frac{X - \mu}{\sqrt{\sigma^2 + \epsilon}}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>3. Calcular Activación</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[h = \gamma \odot x_{norm} + \beta\]</span></p>
+<p>Por defecto, Pytorch considera que <span class="math inline">\(\gamma = \begin{bmatrix}
+1 &amp; ... &amp; 1
+\end{bmatrix}\)</span> y <span class="math inline">\(\beta = \begin{bmatrix}
+0 &amp; ... &amp; 0
+\end{bmatrix}\)</span>.</p>
+<p>Luego <span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span> son parámetros entrenables por el modelo. Tanto <span class="math inline">\(\gamma\)</span> como <span class="math inline">\(\beta\)</span> tienen la misma dimensión que el número de features (en este caso 3).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="layer-norm-implementación-forward-pass" class="slide level2 smaller">
+<h2>Layer Norm: Implementación (Forward Pass)</h2>
 <div class="columns">
 <div class="column">
-<h4 id="clasificación">Clasificación</h4>
-<ul>
-<li><span class="math inline">\(Accuracy = \frac{1}{m} \sum_{i = 1}^m 1\{y_i = \hat{y_i}\}\)</span></li>
-<li><span class="math inline">\(Precision = \frac{TP}{TP + FP}\)</span></li>
-<li><span class="math inline">\(Recall = \frac{TP}{TP + FN}\)</span></li>
-<li><span class="math inline">\(F1-Score = 2 \cdot \frac{Precision \cdot Recall}{Precision + Recall}\)</span></li>
-</ul>
+<h4 id="cálculo-manual-2">Cálculo Manual</h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>eps <span class="op">=</span> <span class="fl">1e-5</span></span>
+<span id="cb9-2"><a></a>sample_mean <span class="op">=</span> X.mean(dim<span class="op">=</span><span class="dv">1</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-3"><a></a>sample_var <span class="op">=</span> X.var(dim<span class="op">=</span><span class="dv">1</span>, unbiased<span class="op">=</span><span class="va">False</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-4"><a></a>x_normalized <span class="op">=</span> (X <span class="op">-</span> sample_mean) <span class="op">/</span> torch.sqrt(sample_var <span class="op">+</span> eps)</span>
+<span id="cb9-5"><a></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">60</span>)</span>
+<span id="cb9-6"><a></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">60</span>)</span>
+<span id="cb9-7"><a></a>ln.weight.data<span class="op">*</span>x_normalized <span class="op">+</span> ln.bias.data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>============================================================
+Forward Pass Obtenido de manera Manual
+============================================================
+tensor([[ 1.2247,  0.0000, -1.2247],
+        [ 0.7071, -1.4142,  0.7071],
+        [ 1.4084, -0.5930, -0.8154],
+        [ 0.5249, -1.3997,  0.8748],
+        [-0.7071, -0.7071,  1.4142],
+        [-1.0690,  1.3363, -0.2673],
+        [ 0.7071,  0.7071, -1.4142],
+        [-1.2247,  1.2247,  0.0000],
+        [ 1.3363, -1.0690, -0.2673],
+        [ 1.4142, -0.7071, -0.7071]])</code></pre>
 </div><div class="column">
-<h4 id="regresión">Regresión</h4>
-<ul>
-<li><span class="math inline">\(RMSE = \frac{1}{m} \sum_{i=1}^m (y_i-\hat{y_i})^2\)</span></li>
-<li><span class="math inline">\(MAE = \frac{1}{m} \sum_{i=1}^m |y_i - \hat{y_i}|\)</span></li>
-<li><span class="math inline">\(MAPE = 100 \cdot \frac{1}{m} \sum_{i=1}^m \frac{|y_i-\hat{y_i}|}{max(\epsilon,y_i)}\)</span></li>
-<li><span class="math inline">\(SMAPE = \frac{2}{m} \sum_{i=1}^2 \frac{|y_i - \hat{y_i}  |}{max(|y_i + \hat{y_i}|,\epsilon)}\)</span></li>
-</ul>
+<h4 id="cálculo-en-pytorch-2">Cálculo en Pytorch</h4>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>ln <span class="op">=</span> nn.LayerNorm(<span class="dv">3</span>)</span>
+<span id="cb11-2"><a></a>output_pytorch <span class="op">=</span> ln(X)</span>
+<span id="cb11-3"><a></a>output_pytorch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>============================================================
+Forward Pass obtenido utilizando Pytorch
+============================================================
+tensor([[ 1.2247,  0.0000, -1.2247],
+        [ 0.7071, -1.4142,  0.7071],
+        [ 1.4084, -0.5930, -0.8154],
+        [ 0.5249, -1.3997,  0.8748],
+        [-0.7071, -0.7071,  1.4142],
+        [-1.0690,  1.3363, -0.2673],
+        [ 0.7071,  0.7071, -1.4142],
+        [-1.2247,  1.2247,  0.0000],
+        [ 1.3363, -1.0690, -0.2673],
+        [ 1.4142, -0.7071, -0.7071]], grad_fn=&lt;NativeLayerNormBackward0&gt;)</code></pre>
 </div></div>
-<div class="callout callout-warning callout-style-simple">
+</section>
+<section id="normalization-rmsnorm" class="slide level2 smaller">
+<h2>Normalization: RMSNorm</h2>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>1. Calcular Root Mean Square de cada Instancia.</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>Las métricas acá explicadas son métricas básicas de cualquier modelo general de Clasificación y Regresión. Existen muchas otras métricas que son específicas para campos específicos. IoU por ejemplo es una Métrica de Segmentación Semántica, Map@k es una métrica para modelos de Recomendación, Bleu o Rouge son métricas para NLP, etc. Para ver millones de métricas pueden ver las <a href="https://lightning.ai/docs/torchmetrics/stable/all-metrics.html">docs de Torchmetrics</a>.</li>
-</ul>
+<p><span class="math display">\[RMS(X)= \sqrt{\frac{1}{d} \sum_{i=1}^{d} X^2 + \epsilon}\]</span></p>
 </div>
 </div>
 </div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>2. Calcular normalización de cada Instancia.</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[x_{norm} = \frac{X}{RMS(X)}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>3. Calcular Activación</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[h = \gamma \odot x_{norm}\]</span></p>
+<p>Por defecto, Pytorch considera que <span class="math inline">\(\gamma = \begin{bmatrix}
+1 &amp; ... &amp; 1
+\end{bmatrix}\)</span>.</p>
+<p>Luego <span class="math inline">\(\gamma\)</span> son parámetros entrenables por el modelo. <span class="math inline">\(\gamma\)</span> tienen la misma dimensión que el número de features (en este caso 3).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="rmsnorm-implementación" class="slide level2 smaller">
+<h2>RMSNorm: Implementación</h2>
+<div class="columns">
+<div class="column">
+<h4 id="cálculo-manual-3">Cálculo Manual</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>rms <span class="op">=</span> torch.sqrt((X<span class="op">**</span><span class="dv">2</span>).mean(dim<span class="op">=</span><span class="dv">1</span>, keepdims <span class="op">=</span> <span class="va">True</span>))</span>
+<span id="cb13-2"><a></a>rms_layer.weight.data<span class="op">*</span>X<span class="op">/</span>rms</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>============================================================
+Forward Pass Obtenido de manera Manual
+============================================================
+tensor([[1.1352, 0.9933, 0.8514],
+        [1.2127, 0.2425, 1.2127],
+        [1.5007, 0.6566, 0.5628],
+        [1.1294, 0.2420, 1.2907],
+        [0.3672, 0.3672, 1.6524],
+        [0.8496, 1.1682, 0.9558],
+        [1.0732, 1.0732, 0.8347],
+        [0.4152, 1.4118, 0.9135],
+        [1.2573, 0.7544, 0.9220],
+        [1.2309, 0.8616, 0.8616]])</code></pre>
+</div><div class="column">
+<h4 id="cálculo-en-pytorch-3">Cálculo en Pytorch</h4>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>rms_layer <span class="op">=</span> nn.RMSNorm(<span class="dv">3</span>)</span>
+<span id="cb15-2"><a></a>rms_layer(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>============================================================
+Forward Pass Obtenido utilizando Pytorch
+============================================================
+tensor([[1.1352, 0.9933, 0.8514],
+        [1.2127, 0.2425, 1.2127],
+        [1.5007, 0.6566, 0.5628],
+        [1.1294, 0.2420, 1.2907],
+        [0.3672, 0.3672, 1.6524],
+        [0.8496, 1.1682, 0.9558],
+        [1.0732, 1.0732, 0.8347],
+        [0.4152, 1.4118, 0.9135],
+        [1.2573, 0.7544, 0.9220],
+        [1.2309, 0.8616, 0.8616]], grad_fn=&lt;MulBackward0&gt;)</code></pre>
+</div></div>
+</section>
+<section id="regularización-l2-aka-weight-decay" class="slide level2 smaller">
+<h2>Regularización L2 aka Weight Decay</h2>
+<p><a href="https://proceedings.neurips.cc/paper/1991/file/8eefcfdf5990e441f0fb6f3fad709e21-Paper.pdf">Paper 1991: Weight Decay</a></p>
+<blockquote>
+<p>En general, el principal problema de las redes neuronales es el overfitting, ya que estas redes suelen ser consideradas modelos sobredimensionados (overparameterized models). ¿Qué implica esto exactamente?</p>
+</blockquote>
+<dl>
+<dt>Weight Decay</dt>
+<dd>
+<blockquote>
+<p>Corresponde a una penalización que se da a los modelos para limitar su complejidad y asegurar que pueda generalizar correctamente en datos no vistos.</p>
+</blockquote>
+</dd>
+</dl>
+<p><span class="math display">\[ \underset{W_{i:L}}{minimize} \frac{1}{m} L + \frac{\lambda}{2} \sum_{i=1}^L ||W_i||_f^2\]</span></p>
+</section>
+<section id="regularización-l2-aka-weight-decay-1" class="slide level2 smaller">
+<h2>Regularización L2 aka Weight Decay</h2>
+<p>Eso implica una transformación a nuestro <strong><em>Update Rule</em></strong>:</p>
+<p><span class="math display">\[W_i := W_i - \alpha \frac{1}{m} \nabla L - \alpha \lambda W_i = (1-\alpha\lambda)W_i - \alpha \nabla L\]</span></p>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Es posible utilizar métricas para ir <strong><em>monitoreando</em></strong> el progreso del modelo Epoch a Epoch.</p>
+<p>Se puede ver que los pesos (weights) se <strong><em>contraen</em></strong> (decaen) antes de actualizarse en la dirección del gradiente. Lo que genera parámetros más pequeños y, por ende, un modelo más simple.</p>
 </div>
 </div>
 </div>
-</section></section>
-<section id="continuará" class="title-slide slide level1 center">
-<h1>Continuará</h1>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Por alguna razón Pytorch decidió implementarlo como una propiedad de los <strong><em>Optimizers</em></strong> cuando en realidad debió ser de la Loss Function.</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb17" style="font-size: 150%"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>torch.optim.Adam(model.parameters(), lr<span class="op">=</span><span class="fl">3e-4</span>, weight_decay<span class="op">=</span><span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En este caso 0.3 corresponde al valor de <span class="math inline">\(\lambda\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="dropout" class="slide level2 smaller">
+<h2>Dropout</h2>
+<p><a href="https://jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf">Paper 2014: Dropout</a></p>
+<p>Definiremos el Dropout como:</p>
+<p><span class="math display">\[D(h)= \begin{cases}
+h  &amp; \text{con prob 1-p} \\
+0, &amp; \text{con prob p}
+\end{cases}\]</span></p>
+<p>donde <span class="math inline">\(D\)</span> implica la aplicación de Dropout a la activación <span class="math inline">\(h\)</span>. <span class="math inline">\(p\)</span> se conoce como el <code>Dropout Rate</code>.</p>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El factor <span class="math inline">\(\frac{1}{1-p}\)</span> se aplica para mantener la varianza estable luego de haber eliminado activaciones con probabilidad <span class="math inline">\(p\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Dropout se aplica normalmente al momento de entrenar el modelo. Por lo tanto, de usar Dropout es imperativo cambiar al modo <code>model.eval()</code> al momento de predecir.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="weights-initialization" class="slide level2 smaller">
+<h2>Weights Initialization</h2>
+<p><a href="https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">Paper 2010: Xavier Initialization</a></p>
+<p><a href="https://arxiv.org/abs/1502.01852">Paper 2015: Kaiming Initialization</a></p>
+<p>Hasta ahora, hemos inicializado los pesos de las redes neuronales de forma aleatoria. Sin embargo, diversos estudios han explorado estrategias de inicialización de los parámetros para lograr una convergencia más eficiente. Entre las técnicas más comunes se encuentran:</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Activaciones Triviales</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Constante</li>
+<li>Sólo unos</li>
+<li>Sólo Zeros</li>
+<li>Con Distribución Uniforme</li>
+<li>Con Distribución Normal</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="weights-initialization-1" class="slide level2 smaller">
+<h2>Weights Initialization</h2>
+<div class="columns">
+<div class="column">
+<h4 id="xavier-o-glorot-uniforme">Xavier o Glorot Uniforme</h4>
+<p>Se inicia con valores provenientes de una distribución uniforme: <span class="math inline">\(\mathcal{U}(-a,a)\)</span></p>
+<p><span class="math display">\[ a = gain \cdot \sqrt{\frac{6}{fan_{in} + fan_{out}}}\]</span></p>
+</div><div class="column">
+<h4 id="xavier-o-glorot-normal">Xavier o Glorot Normal</h4>
+<p>Se inicia con valores provenientes de una distribución Normal: <span class="math inline">\(\mathcal{N}(0,std^2)\)</span></p>
+<p><span class="math display">\[ std = gain \cdot \sqrt{\frac{2}{fan_{in} + fan_{out}}}\]</span></p>
+</div></div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(fan_{in}\)</span> corresponde al número de conexiones que entran a una neurona. Mientras que <span class="math inline">\(fan_{out}\)</span> corresponde al número de neuronas que salen de dicha neurona.</li>
+<li><span class="math inline">\(fan\_mode\)</span> corresponde a la elección de <span class="math inline">\(fan_{in}\)</span> o <span class="math inline">\(fan_{out}\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<h4 id="kaiming-aka-he-uniforme">Kaiming (aka He) Uniforme</h4>
+<p>Se inicia con valores provenientes de una distribución Normal: <span class="math inline">\(\mathcal{U}(-bound,bound)\)</span></p>
+<p><span class="math display">\[ bound = gain \cdot \sqrt{\frac{3}{fan\_mode}}\]</span></p>
+</div><div class="column">
+<h4 id="kaiming-aka-he-normal">Kaiming (aka He) Normal</h4>
+<p>Se inicia con valores provenientes de una distribución uniforme: <span class="math inline">\(\mathcal{N}(0,std^2)\)</span></p>
+<p><span class="math display">\[std =\sqrt{\frac{gain}{fan\_mode}}\]</span></p>
+</div></div>
+</section>
+<section id="checkpointing" class="slide level2 smaller">
+<h2>Checkpointing</h2>
+<p>Entrenar una red neuronal puede requerir una gran cantidad de tiempo y recursos computacionales. Por ello, es una buena práctica <strong>guardar los pesos del modelo en distintos momentos del entrenamiento</strong>, con el fin de no perder el progreso alcanzado ante posibles imprevistos (como un corte de energía o un fallo del sistema).</p>
+<p>Esto ofrece varias ventajas, entre ellas:</p>
+<ul>
+<li>Poder disponer de resultados intermedios incluso si el entrenamiento aún no finaliza.</li>
+<li>Almacenar los pesos correspondientes al <strong>mejor modelo</strong> obtenido durante el proceso de entrenamiento.</li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Checkpoints</strong></p>
+</div>
+<div class="callout-content">
+<p>Pytorch permite el uso de Checkpointing de manera sencilla mediante la función <code>torch.save()</code> y <code>torch.load()</code>.</p>
+<p>Algunas estrategias comunes de Checkpointing son:</p>
+<ul>
+<li>Guardar el modelo cada cierto número de epochs.</li>
+<li>Guardar el modelo cuando se alcanza un nuevo mejor desempeño en el conjunto de validación.</li>
+<li>Guardar tanto el modelo como el optimizador para poder reanudar el entrenamiento desde el último checkpoint. En especial cuando existen restricciones de tiempo en el uso de recursos computacionales.</li>
+<li>Guardar el modelo antes de alcanzar el Overfitting.</li>
+<li>Guardar el modelo final al concluir el entrenamiento.</li>
+<li>Guardar modelos intermedios para analizar si se va por buen camino.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="early-stopping" class="slide level2 smaller">
+<h2>Early Stopping</h2>
+<div style="font-size: 80%;">
+<p>El Early Stopping consiste en monitorear el rendimiento sobre un conjunto de validación durante el entrenamiento y detener el proceso cuando el rendimiento comienza a empeorar. De esta manera, se evita invertir tiempo y recursos computacionales en seguir entrenando un modelo que ya no mejora su capacidad de generalización.</p>
+</div>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Grokking</strong></p>
+</div>
+<div class="callout-content">
+<p>Un nuevo concepto que anda dando vuelta en el último tiempo es el <a href="https://www.linkedin.com/feed/update/urn:li:activity:7214966566696718336?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3Aactivity%3A7214966566696718336%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29">grokking</a>. El cuál es una mejora del performance del modelo pasado el punto de overfitting. Por lo que el Early Stopping podría impedir que se alcance este punto.</p>
+</div>
+</div>
+</div>
+<p>En general este proceso detiene el entrenamiento luego de <code>patience</code> epochs sin mejorar el validation loss u otro criterio. Una lógica simple para implementarlo es agregar lo siguiente al training loop:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="co"># ---- Early Stopping ----</span></span>
+<span id="cb18-2"><a></a>    <span class="cf">if</span> val_loss <span class="op">&lt;</span> best_val_loss:</span>
+<span id="cb18-3"><a></a>        best_val_loss <span class="op">=</span> val_loss</span>
+<span id="cb18-4"><a></a>        best_model_state <span class="op">=</span> model.state_dict()</span>
+<span id="cb18-5"><a></a>        counter <span class="op">=</span> <span class="dv">0</span>  <span class="co"># resetea paciencia</span></span>
+<span id="cb18-6"><a></a>    <span class="cf">else</span>:</span>
+<span id="cb18-7"><a></a>        counter <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb18-8"><a></a>        <span class="cf">if</span> counter <span class="op">&gt;=</span> patience:</span>
+<span id="cb18-9"><a></a>            <span class="bu">print</span>(<span class="ss">f"Early stopping en epoch </span><span class="sc">{</span>epoch<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-10"><a></a>            <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gradient-accumulation" class="slide level2 smaller">
+<h2>Gradient Accumulation</h2>
+<blockquote>
+<p>Otra estrategia para enfrentar limitaciones de memoria es el Gradient Accumulation. Esta técnica permite simular batch sizes más grandes al acumular los gradientes durante varios pasos. De esta forma, se obtienen resultados equivalentes a los de un entrenamiento con batches grandes, pero utilizando menos recursos computacionales (a costa de requerir más iteraciones o epochs).</p>
+</blockquote>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="co">## Training with Accumulation</span></span>
+<span id="cb19-2"><a></a>epochs<span class="op">=</span><span class="dv">80</span></span>
+<span id="cb19-3"><a></a>accumulation_steps<span class="op">=</span><span class="dv">4</span></span>
+<span id="cb19-4"><a></a>model.zero_grad()                                   <span class="co"># Resetea Gradientes Iniciales</span></span>
+<span id="cb19-5"><a></a><span class="cf">for</span> e <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
+<span id="cb19-6"><a></a>  logits <span class="op">=</span> model(X)                     </span>
+<span id="cb19-7"><a></a>  loss <span class="op">=</span> criterion(logits, y.unsqueeze(<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb19-8"><a></a>  <span class="bu">print</span>(<span class="ss">f"Epoch: </span><span class="sc">{</span>e<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">. Loss: </span><span class="sc">{</span>loss<span class="sc">.</span>item()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb19-9"><a></a>  loss <span class="op">=</span> loss <span class="op">/</span> accumulation_steps                <span class="co"># Normaliza Loss</span></span>
+<span id="cb19-10"><a></a>  loss.backward()                                 <span class="co"># Backward pass </span></span>
+<span id="cb19-11"><a></a>  <span class="co"># (Recordar que Pytorch Acumula Gradientes hasta que se use .zero_grad())</span></span>
+<span id="cb19-12"><a></a>  <span class="cf">if</span> (e<span class="op">+</span><span class="dv">1</span>) <span class="op">%</span> accumulation_steps <span class="op">==</span> <span class="dv">0</span>:             </span>
+<span id="cb19-13"><a></a>      optimizer.step()                            <span class="co"># Se actualizan pesos sólo cada ciertos steps</span></span>
+<span id="cb19-14"><a></a>      model.zero_grad()                           <span class="co"># Y ahora se resetea</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="thats-all-folks" class="title-slide slide level1 center">
+<h1>That’s all Folks</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -956,7 +1455,7 @@ Alfonso Tobar-Arancibia
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
+            var filterRegex = new RegExp("https:\/\/datacubeR\.github\.io\/clases_UAI\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
