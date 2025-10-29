@@ -216,35 +216,49 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="limitaciones-de-las-ffn" class="slide level2 smaller">
 <h2>Limitaciones de las FFN</h2>
+<p>Sin duda las Redes Feed Forward son una herramienta poderosa para resolver problemas de clasificación y regresión. Sin embargo, presentan ciertas limitaciones cuando se aplican a datos con estructuras espaciales o temporales, como imágenes o secuencias de texto.</p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>⚠️ Pérdida de estructura espacial o secuencial</strong></p>
+</div>
+<div class="callout-content">
+<p>Cada registro es considerado de manera independiente, sin tener en cuenta la relación espacial o secuencial entre los datos.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>☢️ Gran cantidad de parámetros</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
 <div class="columns">
-<div class="column">
+<div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/MNIST.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-6/MNIST.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-6/MNIST.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-6/MNIST.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div><div class="column">
+</div><div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/MNIST_net.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-6/MNIST_net.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-6/MNIST_net.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-6/MNIST_net.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div></div>
-<div class="columns">
-<div class="column">
-<h4 id="número-de-parametros">Número de Parametros:</h4>
+</div><div class="column" style="width:30%;">
+<h4 id="número-de-parametros">Número de Parametros</h4>
+<h4 id="imagen-28x28784-píxeles">(Imagen: 28x28=784 píxeles):</h4>
 <ul>
 <li><span class="math inline">\(W_1 = 784 \cdot 256 + 256 = 200960\)</span></li>
 <li><span class="math inline">\(W_2 = 256 \cdot 128 + 128 = 32896\)</span></li>
 <li><span class="math inline">\(W_3 = 128 \cdot 10 + 10 = 1290\)</span></li>
 <li>Total = 235,146.</li>
 </ul>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/MNIST_params_MLP.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-7/MNIST_params_MLP.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
 <div class="fragment">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
@@ -261,74 +275,83 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="limitaciones-de-las-ffn-1" class="slide level2 smaller">
 <h2>Limitaciones de las FFN</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/translation_invariance.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-7/translation_invariance.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🚧 Ineficiencia en el aprendizaje de patrones locales</strong></p>
 </div>
-</div><div class="column fragment">
+<div class="callout-content">
 <dl>
 <dt>Translation Invariance</dt>
 <dd>
 Se refiere a la capacidad de poder detectar un patrón/objeto en diferentes posiciones de la imágen.
 </dd>
 </dl>
-<div class="callout callout-caution no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Spoiler: Las FFN no tienen esta propiedad.</strong></p>
-</div>
-<div class="callout-content">
-
+<p><strong><em>Problema</em></strong>: Un perrito centrado, desplazado a la izquierda o a la derecha debería seguir siendo reconocido como un perrito. Para una FFN, las features que describen los perritos desplazados son completamente distintos.</p>
 </div>
 </div>
 </div>
-</div></div>
-<div class="columns fragment">
-<div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/translation_invariance.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-7/translation_invariance.gif" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/translation_invariance.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-6/translation_invariance.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="limitaciones-de-las-ffn-2" class="slide level2 smaller">
+<h2>Limitaciones de las FFN</h2>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>⛔ Escalabilidad Limitada</strong></p>
+</div>
+<div class="callout-content">
+<p>Su alto número de parámetros sumado a la incapacidad de capturar patrones espaciales o temporales hace que las FFN no escalen bien a datos complejos como imágenes de alta resolución o secuencias largas haciendo que su rendimiento disminuya considerablemente y no sean aplicables por sí solas a casos reales.</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<h4 id="imagenes-actuales-cada-vez-más-grandes">Imagenes actuales cada vez más grandes</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/image_diff.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-6/image_diff.jpg" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Las FFN no son capaces de ver patrones globales sino que se enfocan en el valor preciso de una feature. Si el objeto cambia de posición las features cambian a valores completamente distintos haciendo que la red tenga mayor tendencia al error.</p>
-</div>
-</div>
+<h4 id="textos-actuales-cada-vez-más-largos">Textos actuales cada vez más largos</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/text_diff.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-6/text_diff.jpg" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
 </div>
 </div></div>
 </section>
 <section id="imágenes" class="slide level2 smaller">
 <h2>Imágenes</h2>
+<div class="columns">
+<div class="column">
 <dl>
 <dt>Imagen</dt>
 <dd>
-Definiremos una imágen como un Tensor de Orden 3, en el cual se representa H, W y C (Altura, Ancho y Canales).
+Definiremos una imágen como un Tensor de Orden 3. Normalmente cada dimensión representa H, W y C (Altura, Ancho y Canales).
 </dd>
 </dl>
-<div class="columns">
-<div class="column" style="width:40%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Convención en Pytorch</strong></p>
+</div>
+<div class="callout-content">
+<p>Pytorch utiliza la convención (C, H, W) para representar imágenes, donde C es el número de canales, H es la altura y W es el ancho de la imagen. Es decir, un Tensor de Dimensiones (3, 512, 512)</p>
+</div>
+</div>
+</div>
+</div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/channels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-7/channels.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/channels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-6/channels.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/rgb.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-7/rgb.jpeg" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:30%;">
-<p><a href="img/clase-7/medical.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-7/medical.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-7/satellite.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-7/satellite.jpeg" class="quarto-figure quarto-figure-center"></a></p>
 </div></div>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
@@ -336,73 +359,71 @@ Definiremos una imágen como un Tensor de Orden 3, en el cual se representa H, W
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>La convención más común es utilizar imágenes de 24-bits 3 canales de <span class="math inline">\(2^8\)</span> valores (es decir 8-bits) que representan la intensidad de los colores Rojo (R), Verde (G) y Azul (B). Las dimensiones de <span class="math inline">\(H\)</span> y <span class="math inline">\(W\)</span> definen la resolución en píxeles de la imágen.</p>
+<p>La convención más común es utilizar imágenes de 24-bits, es decir 3 canales de <span class="math inline">\(2^8\)</span> valores (8-bits por canal). Es por eso que el valor de los píxeles va de 0 a 255 y representan la intensidad del color del canal que representan.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="imágenes-1" class="slide level2 smaller">
 <h2>Imágenes</h2>
+<div style="font-size: 80%;">
 <blockquote>
-<p>Para importar imágenes en Pytorch existen distintas librerías como PIL u OpenCV. Ambas usan la convención de <span class="math inline">\((H,W,C)\)</span>, la diferencia está en el orden de los canales. PIL utiliza la convención RGB, mientras que OpenCV utiliza BGR por lo que se necesitan algunas transformaciones adicionales.</p>
+<p>Librerías como <code>PIL</code> u <code>OpenCV</code> permiten importar imágenes en Python. Ambas usan la convención de <span class="math inline">\((H,W,C)\)</span>, la diferencia está en el orden de los canales. <code>PIL</code> utiliza la convención RGB, mientras que <code>OpenCV</code> utiliza BGR por lo que se necesitan algunas transformaciones adicionales.</p>
 </blockquote>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
 </div>
-<div class="callout-content">
-<p>Lamentablemente la convención que escogió Pytorch es que una imágen tiene (C, H, W), es decir, primero canales, y luego alto y ancho. Normalmente las librerías no usan esta convención por lo que una permutación o transposición de dimensiones va a ser necesario casi la mayoría de las veces.</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:25%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>image <span class="op">=</span> torch.tensor(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/foto.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-7/foto.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:25%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>image[<span class="dv">0</span>,:,:]</span>
-<span id="cb2-2"><a></a>imagen[<span class="dv">0</span>] <span class="co"># alternativa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/foto_red.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-7/foto_red.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:25%;">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>image[<span class="dv">1</span>,:,:]</span>
-<span id="cb3-2"><a></a>imagen[<span class="dv">1</span>] <span class="co"># alternativa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/foto_green.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-7/foto_green.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:25%;">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>image[<span class="dv">2</span>,:,:]</span>
-<span id="cb4-2"><a></a>imagen[<span class="dv">2</span>] <span class="co"># alternativa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/foto_blue.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-7/foto_blue.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="imágenes-2" class="slide level2">
-<h2>Imágenes</h2>
 <div class="columns">
 <div class="column">
-<div class="callout callout-important callout-style-simple">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/Kira_channels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-6/Kira_channels.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<h4 id="ejemplo-para-importar-imágenes-con-pil-y-pytorch">Ejemplo para importar imágenes con PIL y Pytorch</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb1-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a></a><span class="im">import</span> torch</span>
+<span id="cb1-4"><a></a>path <span class="op">=</span> <span class="st">"path/to/imagen.png"</span></span>
+<span id="cb1-5"><a></a>img <span class="op">=</span> Image.<span class="bu">open</span>(path)</span>
+<span id="cb1-6"><a></a></span>
+<span id="cb1-7"><a></a><span class="co"># Convierte a Tensor y cambia a (C,H,W)</span></span>
+<span id="cb1-8"><a></a>torch_image<span class="op">=</span> torch.from_numpy(np.array(img)).permute(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>)  </span>
+<span id="cb1-9"><a></a>torch_image.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(3,1200,1200)</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a></a></span>
+<span id="cb3-3"><a></a><span class="co">## Imágen en canal Rojo</span></span>
+<span id="cb3-4"><a></a>plt.imshow(torch_image[<span class="dv">0</span>].numpy(), cmap<span class="op">=</span><span class="st">"Reds"</span>)</span>
+<span id="cb3-5"><a></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb3-6"><a></a>plt.show()</span>
+<span id="cb3-7"><a></a><span class="co">## Imágen en canal Verde</span></span>
+<span id="cb3-8"><a></a>plt.imshow(torch_image[<span class="dv">1</span>].numpy(),cmap<span class="op">=</span><span class="st">"Greens"</span>)</span>
+<span id="cb3-9"><a></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb3-10"><a></a>plt.show()</span>
+<span id="cb3-11"><a></a><span class="co">## Imágen en canal Azul</span></span>
+<span id="cb3-12"><a></a>plt.imshow(torch_image[<span class="dv">2</span>].numpy(), cmap<span class="op">=</span><span class="st">"Blues"</span>)</span>
+<span id="cb3-13"><a></a>plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb3-14"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+</section>
+<section id="batch-de-imágenes" class="slide level2 smaller">
+<h2>Batch de Imágenes</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Conjunto/Set/Batch de Imágenes</strong></p>
 </div>
 <div class="callout-content">
-<p>Cuando tenemos un batch de imágenes entonces tendremos un Tensor de Orden 4 dimensiones (B,C,H,W), donde <span class="math inline">\(B\)</span> representa el Batch Size, <span class="math inline">\(C\)</span> el número de Canales, <span class="math inline">\(H\)</span> el alto y <span class="math inline">\(W\)</span> el ancho.</p>
+<p>Se define como un Tensor de Orden 4. En Pytorch esto se representa como N, C, H, W (Número de Imágenes, Canales, Altura y Ancho).</p>
 </div>
 </div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/image_batch.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-6/image_batch.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
 </div>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
@@ -414,11 +435,45 @@ Definiremos una imágen como un Tensor de Orden 3, en el cual se representa H, W
 </div>
 </div>
 </div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/image_batch.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-7/image_batch.jpg" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
+</div><div class="column" style="width:40%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co">## Simulación de 2 imágenes RGB de 5x5 píxeles</span></span>
+<span id="cb4-2"><a></a>torch.randint(<span class="dv">0</span>,<span class="dv">256</span>, (<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div style="font-size: 90%;">
+<pre><code>tensor([[[[248, 240, 146,  73, 228],
+          [ 79, 125, 191, 203, 133],
+          [202,  12, 237, 109,  62],
+          [133, 227, 148,  78, 229],
+          [121, 247, 202,  51,   3]],
+
+         [[253,  28,  20, 144, 255],
+          [115, 132, 114,  45, 164],
+          [ 57, 238, 117, 250,  41],
+          [ 58,  73,  29, 253, 240],
+          [246,  84,  93,   2, 145]],
+
+         [[ 83,   4, 144, 126, 202],
+          [ 98, 235,  55,  83, 104],
+          [ 21, 185,  27, 102, 117],
+          [255, 133,  23,  83, 150],
+          [ 49, 152,  81, 233,  98]]],
+-----------------------------------------------
+        [[[216,  92, 251, 214, 178],
+          [252,  48,  88,  82,  79],
+          [168, 208, 223,   9, 169],
+          [145, 148, 254, 128, 156],
+          [238, 175, 233, 136, 118]],
+
+         [[112,  68, 143,  93, 150],
+          [ 32, 103,  97,  93, 223],
+          [205,  56,  90,  24, 108],
+          [ 13, 135,  98,  20,  93],
+          [ 20,  91,  37,  81,  10]],
+
+         [[109, 145,  90, 243,  63],
+          [103, 134, 130,  11,  72],
+          [132, 163, 153,  26, 255],
+          [ 45, 228,  26, 169, 212],
+          [ 34, 211, 229,  82, 201]]]])</code></pre>
 </div>
 </div></div>
 </section>
@@ -427,9 +482,12 @@ Definiremos una imágen como un Tensor de Orden 3, en el cual se representa H, W
 <dl>
 <dt>Redes Convolucionales (CNN)</dt>
 <dd>
-Son un tipo de red neuronal cuyos parámetros entrenables son filtros (también llamados Kernels) que aprenden a detectar patrones en los datos de entrada. Aplicando estos Kernels se generan feature maps, que representan la presenecia y localización de ciertos patrones.
+Son un tipo de red neuronal cuyos parámetros entrenables son filtros (también llamados <strong><em>Kernels</em></strong>) que aprenden a detectar patrones en los datos de entrada.
 </dd>
 </dl>
+<p>El resultado de una Convolucional es un <strong><em>feature map</em></strong>, el cual representa la presencia y localización de ciertos patrones visuales.</p>
+<div class="columns">
+<div class="column">
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -445,32 +503,39 @@ Son un tipo de red neuronal cuyos parámetros entrenables son filtros (también 
 </div>
 </div>
 </div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/visual_cat.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-6/visual_cat.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="redes-convolucionales-definición-e-inspiración-1" class="slide level2 smaller">
+<h2>Redes Convolucionales: Definición e Inspiración</h2>
 <div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p><strong><em>¿Por qué necesitamos Redes Convolucionales?</em></strong> Evitar la sobreparametrización. ¿Por qué esto es un problema?</p>
+<p><strong><em>¿Por qué necesitamos las Redes Convolucionales?</em></strong> Evitar la sobreparametrización. ¿Por qué esto es un problema?</p>
 </div>
 </div>
 </div>
-</section>
-<section id="redes-convolucionales-definición-e-inspiración-1" class="slide level2 smaller">
-<h2>Redes Convolucionales: Definición e Inspiración</h2>
 <div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <p><strong>🔔 Importancia</strong></p>
 </div>
 <div class="callout-content">
-<p>No es exagerado afirmar que las CNNs han sido la arquitectura más influyente en Deep Learning, ya que han impulsado avances importantes en tareas de visión por computador, como clasificación de imágenes, detección de objetos y segmentación semántica. Además, contribuyeron a que el Deep Learning ganara popularidad en la industria tecnológica y superara la época conocida como el AI Winter.</p>
+<p>No es exagerado afirmar que las CNNs han sido la arquitectura más influyente en Deep Learning, ya que han impulsado avances importantes en tareas de visión por computador, como clasificación de imágenes, detección de objetos y segmentación semántica. Además, contribuyeron a que el Deep Learning ganara popularidad en la industria tecnológica y superara la época conocida como el <strong><em>AI Winter</em></strong>.</p>
 </div>
 </div>
 </div>
 <div class="columns">
 <div class="column">
-<h3 id="algunos-hitos-importantes">🗓️ Algunos hitos importantes:</h3>
+<h4 id="algunos-hitos-importantes">🗓️ Algunos hitos importantes:</h4>
 <ul>
 <li><strong>1990</strong>: Yann LeCun et al.&nbsp;propone uno de los primeros intentos de CNN, el cual va agregando features más simples en features más complejas progresivamente.</li>
 <li><strong>1998</strong>: Yann LeCun, propone LeNet-5 con 2 redes convolucionales y 3 FFN.</li>
@@ -479,31 +544,137 @@ Son un tipo de red neuronal cuyos parámetros entrenables son filtros (también 
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/alexnet-paper.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-7/alexnet-paper.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/alexnet-paper.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-6/alexnet-paper.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div></div>
 </section>
-<section id="entendiendo-el-kernel" class="slide level2 smaller">
-<h2>Entendiendo el Kernel</h2>
+<section id="convolutional-neural-network-cnns" class="slide level2 smaller">
+<h2>Convolutional Neural Network (CNNs)</h2>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Architectura General</strong></p>
+</div>
+<div class="callout-content">
+<p>Una Convolutional Neural Network (CNN) está formada por múltiples capas que colaboran para identificar y extraer características significativas de las imágenes, con el fin de clasificarlas o detectar objetos dentro de ellas.</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/CNN-arch.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-7/CNN-arch.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Feature Extractor - Encoder - Backbone</strong></p>
+</div>
+<div class="callout-content">
+<p>Corresponde al bloque en el que se detectan características o patrones relevantes de la imagen. En este bloque es donde se aplican normalmente las operaciones de <strong><em>Convolución</em></strong> y <strong><em>Pooling</em></strong>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Flatten</strong></p>
+</div>
+<div class="callout-content">
+<p>Corresponde a una operación intermedia que aplana los feature maps generadas para ser utilizados como features de entrada para ser utilizados por la parte final de la red.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Prediction Head - Head - MLP</strong></p>
+</div>
+<div class="callout-content">
+<p>Corresponde a una FFN que tomará las features aprendidas por la CNN y generará una predicción.</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="la-convolución" class="slide level2 smaller">
+<h2>La Convolución</h2>
+<div style="font-size: 80%;">
+<dl>
+<dt>Convolución</dt>
+<dd>
+Corresponde a una operación que permite extraer <strong><em>feature maps</em></strong>, donde un filtro o kernel se desplaza sobre distintas secciones de los datos, ya sea una secuencia, una imagen o un video, para capturar sus patrones más relevantes.
+</dd>
+</dl>
+</div>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>☝️Atención</strong></p>
+</div>
+<div class="callout-content">
+<p>Esto es nuevamente un término marketero, porque no es una Convolucional real, sino una operación llamada <strong>Cross Correlation</strong>.</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/convolution.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-6/convolution.gif" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+<div style="font-size: 80%;">
+<dl>
+<dt>Feature Map</dt>
+<dd>
+Corresponde a la salida de una convolución (equivalente a la Activación) y es un nuevo tensor que captura ciertas características del dato (secuencia, imagen o video). Cuando se trata de imágenes, captura features como bordes, cambios de textura, color, formas, o elementos más pequeños.
+</dd>
+</dl>
+</div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Es importante notar que los features maps son de una <strong>tamaño menor a la entrada</strong> debido a la operación de Convolución.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Se obtendrán tantos feature maps como filtros se apliquen. Esto es otro hiperparámetro de la Red Convolucional que se conoce como los canales de salida o <strong><em>out_channels</em></strong>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="el-filtro-o-kernel" class="slide level2 smaller">
+<h2>El filtro o Kernel</h2>
 <div class="columns">
 <div class="column">
 <h5 id="gaussian-blur">Gaussian Blur</h5>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/gaussian_blur.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-7/gaussian_blur.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-6/gaussian_blur.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-6/gaussian_blur.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></a></p>
 </figure>
 </div>
 <h5 id="líneas-horizontales">Líneas Horizontales</h5>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/horizontal_lines.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-7/horizontal_lines.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-6/horizontal_lines.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-6/horizontal_lines.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></a></p>
 </figure>
 </div>
 <h5 id="bordes">Bordes</h5>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/bordes.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-7/bordes.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-6/bordes.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-6/bordes.png" class="quarto-figure quarto-figure-center" style="width:65.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
@@ -516,7 +687,8 @@ Son un tipo de red neuronal cuyos parámetros entrenables son filtros (también 
 <p><strong>Kernel</strong></p>
 </div>
 <div class="callout-content">
-<p>El Kernel va a ser el set de parámetros que la red convolucional va a aprender. En palabras sencillas, la misma red aprende cuáles son los aspectos más relevantes de la imagen que le permitirán entender cómo clasificar o detectar elementos en ella.</p>
+<p>Corresponde a una matriz pequeña que permite detectar patrones específicos en la imagen al aplicarse de manera móvil sobre ella. Estos Kernel solías estudiarse y diseñarse manualmente para tareas específicas como detección de bordes, desenfoque, realce de contraste, entre otros.</p>
+<p>En una red convolucional, el kernel es un conjunto de pesos que se ajustan durante el proceso de entrenamiento para identificar características relevantes en las imágenes. Es decir, la CNN aprende qué Kernels son más importantes para la tarea que se está resolviendo.</p>
 </div>
 </div>
 </div>
@@ -542,56 +714,61 @@ Son un tipo de red neuronal cuyos parámetros entrenables son filtros (también 
 </div>
 </div></div>
 </section>
-<section id="entendiendo-la-convolución" class="slide level2 smaller">
-<h2>Entendiendo la Convolución</h2>
-<dl>
-<dt>Convolución</dt>
-<dd>
-Corresponde a una operación para extraer <strong>features maps</strong> en la cual un filtro o kernel se va desplazando en cada sección de los datos (secuencia, imagen o video).
-</dd>
-</dl>
-<div class="callout callout-caution no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Ojo</strong></p>
-</div>
-<div class="callout-content">
-<p>Esto es nuevamente un término marketero, porque no es una Convolucional real, sino una operación llamada <strong>Cross Correlation</strong>.</p>
-</div>
-</div>
-</div>
+<section id="feature-maps" class="slide level2 smaller">
+<h2>Feature Maps</h2>
+<div style="font-size: 80%;">
 <dl>
 <dt>Feature Map</dt>
 <dd>
 Corresponde a la salida de una convolución (equivalente a la Activación) y es un nuevo tensor que captura ciertas características del dato (secuencia, imagen o video). Cuando se trata de imágenes, captura features como bordes, cambios de textura, color, formas, o elementos más pequeños.
 </dd>
 </dl>
+</div>
 <div class="columns">
-<div class="column" style="width:65%;">
+<div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/convolution.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-7/convolution.gif" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-6/feature_maps.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-6/feature_maps.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div><div class="column" style="width:35%;">
-<p><br></p>
-<div class="callout callout-warning callout-style-simple">
+</div><div class="column" style="width:40%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Básicamente los feature maps son imágenes que resaltan ciertos patrones aprendidos por los kernels.</strong></p>
 </div>
 <div class="callout-content">
-<p>Es importante notar que los features maps son de una <strong>tamaño menor a la entrada</strong> debido a la operación de Convolución.</p>
+
 </div>
 </div>
 </div>
-<div class="callout callout-important callout-style-simple">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>A medida que avanzamos en las capas convolucionales, los feature maps tienden a capturar patrones más complejos y abstractos.</strong></p>
 </div>
 <div class="callout-content">
-<p>Se obtendrán tantos feature maps como filtros se apliquen.</p>
+
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Cada feature map es de tamaño más pequeño que la imagen original, pero contiene información más relevante para la tarea de clasificación o detección.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Se obtendrán tantos feature maps como filtros se apliquen. Esto es otro hiperparámetro de la Red Convolucional que se conoce como los canales de salida o <strong><em>out_channels</em></strong>.</strong></p>
+</div>
+<div class="callout-content">
+
 </div>
 </div>
 </div>
@@ -603,7 +780,7 @@ Corresponde a la salida de una convolución (equivalente a la Activación) y es 
 <div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/stride.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-7/stride.gif" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/stride.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-6/stride.gif" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -612,14 +789,14 @@ Corresponde a la salida de una convolución (equivalente a la Activación) y es 
 <p><strong>Stride</strong></p>
 </div>
 <div class="callout-content">
-<p>Se refiere a la cantidad de pasos que el kernel avanza sobre la imagen de entrada. Un <strong><em>stride</em></strong> mayor genera feature maps más pequeños y con menos detalles, mientras que un stride menor conserva más información, aunque aumenta el número de operaciones requeridas.</p>
+<p>Hace referencia al número de posiciones que el kernel se desplaza sobre la imagen de entrada en cada paso. Un <strong><em>stride</em></strong> más grande produce feature maps más pequeños y con menos detalle, mientras que un stride más pequeño preserva mayor información, aunque incrementa la cantidad de operaciones necesarias.</p>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/convolution_padding.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-7/convolution_padding.gif" class="quarto-figure quarto-figure-center" style="width:130.0%"></a></p>
+<p><a href="img/clase-6/convolution_padding.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-6/convolution_padding.gif" class="quarto-figure quarto-figure-center" style="width:130.0%"></a></p>
 </figure>
 </div>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
@@ -628,14 +805,14 @@ Corresponde a la salida de una convolución (equivalente a la Activación) y es 
 <p><strong>Padding</strong></p>
 </div>
 <div class="callout-content">
-<p>Se trata de un relleno que facilita el desplazamiento del kernel, evitando que la convolución reduzca demasiado la dimensionalidad y permitiendo que se tenga en cuenta la información de los bordes de la imagen. Cuando no se aplica padding se denomina <strong>“valid”</strong>, y cuando se agregan píxeles suficientes para mantener la misma dimensión se llama <strong><em>“same”</em></strong>.</p>
+<p>Consiste en añadir un relleno alrededor de la imagen de entrada para facilitar el desplazamiento del kernel y evitar que la convolución reduzca en exceso sus dimensiones. Este relleno también permite conservar la información presente en los bordes de la imagen. Cuando no se aplica padding, la operación se denomina <strong><em>“valid”</em></strong>, mientras que si se agregan los píxeles necesarios para mantener el tamaño original, se conoce como <strong><em>“same”</em></strong>.</p>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/dilation.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-7/dilation.gif" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/dilation.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-6/dilation.gif" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
@@ -644,17 +821,16 @@ Corresponde a la salida de una convolución (equivalente a la Activación) y es 
 <p><strong>Dilation</strong></p>
 </div>
 <div class="callout-content">
-<p>Se refiere a los espacios (gaps) que se introducen entre los elementos del kernel al aplicarlo. Usar dilation permite aumentar el campo receptivo de la convolución, capturando más contexto sin necesidad de incrementar el tamaño del kernel. Un valor de 1 indica que no se aplica <strong><em>dilation.</em></strong></p>
+<p>Hace referencia a los espacios o intervalos que se insertan entre los elementos del kernel durante la convolución. El uso de dilation permite ampliar el campo receptivo de la red, capturando un mayor contexto sin aumentar el tamaño del kernel. Un valor de 1 indica que no se aplica <strong><em>dilation</em></strong>.</p>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="convolución-en-pytorch" class="slide level2">
+<section id="convolución-en-pytorch" class="slide level2 smaller">
 <h2>Convolución en Pytorch</h2>
-<div style="font-size: 110%;">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>nn.Conv2d(in_channels, out_channels, kernel_size, stride<span class="op">=</span><span class="dv">1</span>,padding<span class="op">=</span><span class="dv">0</span>,dilation<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div style="font-size: 130%;">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>nn.Conv2d(in_channels, out_channels, kernel_size, stride<span class="op">=</span><span class="dv">1</span>,padding<span class="op">=</span><span class="dv">0</span>,dilation<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div style="font-size: 80%;">
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -688,6 +864,7 @@ Corresponde a la salida de una convolución (equivalente a la Activación) y es 
 </div>
 </div>
 </div>
+</div>
 </section>
 <section id="partes-de-una-cnn-pooling" class="slide level2 smaller">
 <h2>Partes de una CNN: Pooling</h2>
@@ -713,22 +890,21 @@ El Pooling es una operación de agregación que permite ir disminuyendo el tama�
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Acá se introduce otro hiperparámetro que es el Pooling Size. En general es cuadrado pero de dimensión par.</p>
+<p>Acá se introduce otro hiperparámetro que es el <strong><em>Pooling Size</em></strong>. En general es cuadrado y de dimensión par, y utiliza un stride del mismo tamaño que el <strong><em>Pooling Size</em></strong> para evitar traslapes.</p>
 </div>
 </div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/pooling.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-7/pooling.png" class="quarto-figure quarto-figure-center" style="width:35.0%"></a></p>
+<p><a href="img/clase-7/pooling.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-7/pooling.png" class="quarto-figure quarto-figure-center" style="width:35.0%"></a></p>
 </figure>
 </div>
 </section>
 <section id="pooling-in-pytorch" class="slide level2 smaller">
 <h2>Pooling in Pytorch</h2>
-<div style="font-size: 150%;">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>nn.AvgPool2d(kernel_size, stride<span class="op">=</span><span class="va">None</span>,padding<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb6-2"><a></a>nn.MaxPool2d(kernel_size, stride<span class="op">=</span><span class="va">None</span>,padding<span class="op">=</span><span class="dv">0</span>, dilation<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div style="font-size: 90%;">
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>nn.AvgPool2d(kernel_size, stride<span class="op">=</span><span class="va">None</span>,padding<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb7-2"><a></a>nn.MaxPool2d(kernel_size, stride<span class="op">=</span><span class="va">None</span>,padding<span class="op">=</span><span class="dv">0</span>, dilation<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -738,7 +914,30 @@ El Pooling es una operación de agregación que permite ir disminuyendo el tama�
 <p><strong>Ojo</strong></p>
 </div>
 <div class="callout-content">
-<p><code>stride=None</code> implica <code>stride = kernel_size</code>.</p>
+<ul>
+<li>Pytorch llama también <code>kernel_size</code> al tamaño del Pooling.</li>
+<li><code>stride=None</code> implica <code>stride = kernel_size</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>MaxPool</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>AvgPool</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - kernel\_size[0]}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - kernel\_size[1]}{stride[1]} + 1 \right\rfloor\]</span></p>
 </div>
 </div>
 </div>
@@ -748,69 +947,45 @@ El Pooling es una operación de agregación que permite ir disminuyendo el tama�
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Importante mencionar que Average Pooling no permite Dilation.</p>
+<p>El Average Pool no permite Dilation.</p>
 </div>
 </div>
 </div>
-<p><span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor\]</span></p>
+</div>
 </section>
-<section id="arquitectura-de-una-cnn" class="slide level2 smaller">
-<h2>Arquitectura de una CNN</h2>
+<section id="adaptivepooling" class="slide level2 smaller">
+<h2>AdaptivePooling</h2>
+<blockquote>
+<p>La mayoría de las arquitecturas CNN modernas aplican un procedimiento llamado <strong><em>Adaptive Pooling</em></strong> antes de la etapa de predicción (FFN). Independientemente del tamaño de la imagen de entrada, el Adaptive Pooling siempre genera una salida de tamaño fijo, ya que ajusta sus parámetros para asegurar que la dimensión de salida sea la deseada.</p>
+</blockquote>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>nn.AdaptiveAvgPool2d(output_size)</span>
+<span id="cb8-2"><a></a>nn.AdaptiveMaxPool2d(output_size, return_indices<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><code>return_indices=True</code> permite devolver en qué posiciones se encontraron los valores máximos, lo cual es útil para operaciones de <strong><em>unpooling</em></strong> para revertir el proceso de pooling.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</section>
+<section id="mnist-con-cnn" class="slide level2 smaller">
+<h2>MNIST con CNN</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/CNN-arch.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-7/CNN-arch.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-6/CNN_MNIST_arch.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-6/CNN_MNIST_arch.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:40%;">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Feature Extractor - Encoder - Backbone</strong></p>
-</div>
-<div class="callout-content">
-<p>Corresponde al bloque que contiene CNNs que se encargará de extraer features.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-warning no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Flatten</strong></p>
-</div>
-<div class="callout-content">
-<p>Corresponde a una Operación Intermedia que dejará todos los píxeles de la imagen como un vector fila que puede ser tomado por la FFN. En estricto rigor prepara las features generadas por la CNN para ser usadas en la parte final de la red.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Prediction Head - Head - MLP</strong></p>
-</div>
-<div class="callout-content">
-<p>Corresponde a una FFN que tomará las features aprendidas por la CNN y generará una predicción.</p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="mnist-con-cnn" class="slide level2 smaller">
-<h2>MNIST con CNN</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/CNN_MNIST_arch.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-7/CNN_MNIST_arch.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></a></p>
+<p><a href="img/clase-6/CNN_params.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-6/CNN_params.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/CNN_params.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-7/CNN_params.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
 <div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -824,6 +999,332 @@ El Pooling es una operación de agregación que permite ir disminuyendo el tama�
 </div>
 </div>
 </div></div>
+</section>
+<section id="grafo-cnn-sencilla" class="slide level2 smaller">
+<h2>Grafo CNN sencilla</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/conv_graph.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-6/conv_graph.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co">## Una Imagen de 1 Canal de Tamaño 6x6</span></span>
+<span id="cb9-2"><a></a>X <span class="op">=</span> torch.tensor([</span>
+<span id="cb9-3"><a></a>        [[[<span class="fl">7.</span>, <span class="fl">6.</span>, <span class="fl">8.</span>, <span class="fl">5.</span>, <span class="fl">1.</span>, <span class="fl">3.</span>],</span>
+<span id="cb9-4"><a></a>          [<span class="fl">8.</span>, <span class="fl">6.</span>, <span class="fl">5.</span>, <span class="fl">3.</span>, <span class="fl">5.</span>, <span class="fl">5.</span>],</span>
+<span id="cb9-5"><a></a>          [<span class="fl">9.</span>, <span class="fl">1.</span>, <span class="fl">1.</span>, <span class="fl">5.</span>, <span class="fl">3.</span>, <span class="fl">5.</span>],</span>
+<span id="cb9-6"><a></a>          [<span class="fl">4.</span>, <span class="fl">5.</span>, <span class="fl">5.</span>, <span class="fl">9.</span>, <span class="fl">2.</span>, <span class="fl">6.</span>],</span>
+<span id="cb9-7"><a></a>          [<span class="fl">9.</span>, <span class="fl">5.</span>, <span class="fl">3.</span>, <span class="fl">1.</span>, <span class="fl">2.</span>, <span class="fl">2.</span>],</span>
+<span id="cb9-8"><a></a>          [<span class="fl">4.</span>, <span class="fl">4.</span>, <span class="fl">8.</span>, <span class="fl">8.</span>, <span class="fl">9.</span>, <span class="fl">8.</span>]]]</span>
+<span id="cb9-9"><a></a>])</span>
+<span id="cb9-10"><a></a>X.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(1,1,6,6)</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>C_out <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb11-2"><a></a>N, C_in, H, W <span class="op">=</span> X.shape</span>
+<span id="cb11-3"><a></a>kH, kW <span class="op">=</span> (<span class="dv">3</span>,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="co">## 2 filtros de un Canal de tamaño 3x3</span></span>
+<span id="cb12-2"><a></a>given_w <span class="op">=</span> torch.tensor([</span>
+<span id="cb12-3"><a></a>        [[[<span class="op">-</span><span class="fl">1.</span>,  <span class="fl">0.</span>,  <span class="fl">1.</span>],</span>
+<span id="cb12-4"><a></a>          [ <span class="fl">0.</span>, <span class="op">-</span><span class="fl">1.</span>,  <span class="fl">1.</span>],</span>
+<span id="cb12-5"><a></a>          [ <span class="fl">0.</span>,  <span class="fl">0.</span>,  <span class="fl">1.</span>]]],</span>
+<span id="cb12-6"><a></a></span>
+<span id="cb12-7"><a></a>        [[[<span class="op">-</span><span class="fl">1.</span>, <span class="op">-</span><span class="fl">1.</span>,  <span class="fl">0.</span>],</span>
+<span id="cb12-8"><a></a>          [ <span class="fl">1.</span>,  <span class="fl">0.</span>,  <span class="fl">0.</span>],</span>
+<span id="cb12-9"><a></a>          [ <span class="fl">1.</span>,  <span class="fl">1.</span>,  <span class="fl">0.</span>]]]])</span>
+<span id="cb12-10"><a></a>given_w.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(2,1,3,3)</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>given_bias <span class="op">=</span> torch.tensor([<span class="fl">1.</span>, <span class="fl">1.</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+</section>
+<section id="grafo-cnn-sencilla-convolución" class="slide level2 smaller">
+<h2>Grafo CNN sencilla: Convolución</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/convolution.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-6/convolution.gif" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="kw">def</span> calculate_out(X, k_size<span class="op">=</span>(<span class="dv">3</span>,<span class="dv">3</span>), stride<span class="op">=</span><span class="dv">1</span>, dilation<span class="op">=</span><span class="dv">1</span>, padding<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb15-2"><a></a>  kH, kW <span class="op">=</span> k_size</span>
+<span id="cb15-3"><a></a>  N, in_channels, H_in, W_in <span class="op">=</span> X.shape</span>
+<span id="cb15-4"><a></a>  out_H <span class="op">=</span> np.floor((H_in <span class="op">+</span><span class="dv">2</span><span class="op">*</span>padding<span class="op">-</span>dilation<span class="op">*</span>(kH<span class="op">-</span><span class="dv">1</span>)<span class="op">-</span><span class="dv">1</span>)<span class="op">/</span>stride <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb15-5"><a></a>  out_W <span class="op">=</span> np.floor((W_in <span class="op">+</span><span class="dv">2</span><span class="op">*</span>padding<span class="op">-</span>dilation<span class="op">*</span>(kW<span class="op">-</span><span class="dv">1</span>)<span class="op">-</span><span class="dv">1</span>)<span class="op">/</span>stride <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb15-6"><a></a>  <span class="cf">return</span> <span class="bu">int</span>(out_H), <span class="bu">int</span>(out_W)</span>
+<span id="cb15-7"><a></a></span>
+<span id="cb15-8"><a></a>H_out, W_out <span class="op">=</span> calculate_out(X, k_size <span class="op">=</span> (kH,kW))</span>
+<span id="cb15-9"><a></a>H_out, W_out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(4,4)</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a>O <span class="op">=</span> torch.zeros((N, C_out, H_out, W_out))</span>
+<span id="cb17-2"><a></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb17-3"><a></a>    <span class="cf">for</span> co <span class="kw">in</span> <span class="bu">range</span>(C_out):</span>
+<span id="cb17-4"><a></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(H_out):</span>
+<span id="cb17-5"><a></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(W_out):</span>
+<span id="cb17-6"><a></a>                <span class="co"># submatriz de tamaño kH x kW</span></span>
+<span id="cb17-7"><a></a>                patch <span class="op">=</span> X[n, :, i:i<span class="op">+</span>kH, j:j<span class="op">+</span>kW]</span>
+<span id="cb17-8"><a></a>                O[n, co, i, j] <span class="op">=</span> (patch <span class="op">*</span> given_w[co]).<span class="bu">sum</span>() <span class="op">+</span> given_bias[co]</span>
+<span id="cb17-9"><a></a>O</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>tensor([[[[  5.,   5.,  -1.,  -4.],
+          [ -4.,  -7.,  -1.,  -6.],
+          [ -1., -10.,   6.,  -8.],
+          [ -9.,  -8.,  -6.,  -6.]],
+
+         [[ -3.,   5.,   3.,  -6.],
+          [ -3.,  -7.,   3., -13.],
+          [ -5., -12.,   4.,  -7.],
+          [ -9.,  -4.,  -6.,  -5.]]]])</code></pre>
+</div></div>
+<div class="callout callout-caution callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Este proceso es <strong><em>extremadamente ineficiente</em></strong> computacionalmente hablando. Por lo que se utiliza un proceso equivalente llamado <strong><em>im2col</em></strong>.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</section>
+<section id="im2col" class="slide level2 smaller">
+<h2>im2col</h2>
+<blockquote>
+<p><strong><em>im2col</em></strong> es un algoritmo que permite transformar la operación de convolución en una operación de multiplicación de matrices, lo cual es computacionalmente más eficiente. En este caso los parches que requieren la convolución se aplanan y se organizan en columnas de una nueva matriz.</p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/im2col.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-6/im2col.gif" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<p>El procedimiento en Pytorch se realiza de la siguiente manera:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="co">## Cada columna es un patche aplanado de 3x3. 16 patches en total.</span></span>
+<span id="cb19-2"><a></a>X_col <span class="op">=</span> F.unfold(X, kernel_size<span class="op">=</span>(kH, kW))  <span class="co"># (1, 9, 16) (N,kH*kW,n_patches)</span></span>
+<span id="cb19-3"><a></a><span class="bu">print</span>(<span class="ss">f"X_col shape: </span><span class="sc">{</span>X_col<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb19-4"><a></a>X_col</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>X_col shape: torch.Size([1, 9, 16])
+tensor([[[7., 6., 8., 5., 8., 6., 5., 3., 9., 1., 1., 5., 4., 5., 5., 9.],
+         [6., 8., 5., 1., 6., 5., 3., 5., 1., 1., 5., 3., 5., 5., 9., 2.],
+         [8., 5., 1., 3., 5., 3., 5., 5., 1., 5., 3., 5., 5., 9., 2., 6.],
+         [8., 6., 5., 3., 9., 1., 1., 5., 4., 5., 5., 9., 9., 5., 3., 1.],
+         [6., 5., 3., 5., 1., 1., 5., 3., 5., 5., 9., 2., 5., 3., 1., 2.],
+         [5., 3., 5., 5., 1., 5., 3., 5., 5., 9., 2., 6., 3., 1., 2., 2.],
+         [9., 1., 1., 5., 4., 5., 5., 9., 9., 5., 3., 1., 4., 4., 8., 8.],
+         [1., 1., 5., 3., 5., 5., 9., 2., 5., 3., 1., 2., 4., 8., 8., 9.],
+         [1., 5., 3., 5., 5., 9., 2., 6., 3., 1., 2., 2., 8., 8., 9., 8.]]])</code></pre>
+</div></div>
+</section>
+<section id="im2col-1" class="slide level2 smaller">
+<h2>im2col</h2>
+<p>¿Qué pasa si ahora aplanamos los filtros también?</p>
+<div class="columns">
+<div class="column">
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="co">## Dejamos cada filtro como una fila</span></span>
+<span id="cb21-2"><a></a>W_row <span class="op">=</span> given_w.reshape(C_out, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb21-3"><a></a><span class="bu">print</span>(W_row.shape)</span>
+<span id="cb21-4"><a></a>W_row</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(2,9)
+tensor([[ 1.,  1.,  0., -1.,  1., -1.,  0., -1., -1.],
+        [ 1.,  1.,  0., -1.,  1., -1., -1.,  0., -1.]])</code></pre>
+</div><div class="column">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>💭 Luego La convolución se puede pensar como una transformación lineal aplicada a parches aplanados de la imagen de entrada. Es decir cada parches es transformado linealmente por los filtros aplanados, generando una nueva representación de la imagen (un feature map).</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</div></div>
+<div style="font-size: 110%;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Entonces podemos expresar la convolución como una multiplicación de matrices muy similar a una FFN:</p>
+<p><span class="math display">\[H_{col} = W_{row} \cdot X_{col} + b \cdot 1_{C_{in}*kH*KW}^T \]</span></p>
+<p>Donde <span class="math inline">\(b\)</span> tiene dimensiones <span class="math inline">\(C_{out} \times 1\)</span> y <span class="math inline">\(1^T_{C_{in}*kH*kW}\)</span> tiene dimensiones <span class="math inline">\(1 \times C_{in}*kH*kW\)</span>. Aunque es más sencillo pensar el <span class="math inline">\(b\)</span> como un vector que se le aplica <strong>Broadcasting</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<p>Luego para volver a la forma de la imagen basta con hacer un reshape:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>H <span class="op">=</span> H_col.reshape(N, C_out, H_out, W_out)</span>
+<span id="cb23-2"><a></a><span class="bu">print</span>(H.shape)</span>
+<span id="cb23-3"><a></a>H</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(1, 2, 4, 4)</code></pre>
+</div><div class="column">
+<pre><code>tensor([[[[  5.,   5.,  -1.,  -4.],
+          [ -4.,  -7.,  -1.,  -6.],
+          [ -1., -10.,   6.,  -8.],
+          [ -9.,  -8.,  -6.,  -6.]],
+
+         [[ -3.,   5.,   3.,  -6.],
+          [ -3.,  -7.,   3., -13.],
+          [ -5., -12.,   4.,  -7.],
+          [ -9.,  -4.,  -6.,  -5.]]]])</code></pre>
+</div></div>
+</section>
+<section id="pooling" class="slide level2 smaller">
+<h2>Pooling</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<h4 id="nuevamente-necesitamos-hacer-un-im2col-para-poder-hacer-el-pooling-como-una-multiplicación-de-matrices.">Nuevamente necesitamos hacer un <code>im2col</code> para poder hacer el pooling como una multiplicación de matrices.</h4>
+<h4 id="eso-implica-que-h-quedará-como">Eso implica que H quedará como:</h4>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a></a>pool_size <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb26-2"><a></a>H_pool, W_pool <span class="op">=</span> calculate_out(H, k_size<span class="op">=</span>(<span class="dv">2</span>,<span class="dv">2</span>),stride<span class="op">=</span><span class="dv">2</span>) </span>
+<span id="cb26-3"><a></a><span class="co">## (2,2)</span></span>
+<span id="cb26-4"><a></a>h_col <span class="op">=</span> F.unfold(H, kernel_size<span class="op">=</span>pool_size, stride<span class="op">=</span>pool_size)</span>
+<span id="cb26-5"><a></a><span class="bu">print</span>(h_col.shape)</span>
+<span id="cb26-6"><a></a>h_col</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(1,8,4)
+tensor([[[  5.,  -1.,  -1.,   6.],
+         [  5.,  -4., -10.,  -8.],
+         [ -4.,  -1.,  -9.,  -6.],
+         [ -7.,  -6.,  -8.,  -6.],
+         [ -3.,   3.,  -5.,   4.],
+         [  5.,  -6., -12.,  -7.],
+         [ -3.,   3.,  -9.,  -6.],
+         [ -7., -13.,  -4.,  -5.]]])</code></pre>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>😱Notar como la operación de im2col genera parches para todos los canales a la vez. Por lo tanto es necesario separar por canales para aplicar el pooling.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</div><div class="column" style="width:52%;">
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="co">## Tenemos 2 canales de 4 por cada uno</span></span>
+<span id="cb28-2"><a></a><span class="co">## al cuál debemos aplicar el máximo.</span></span>
+<span id="cb28-3"><a></a>h_col_reshaped <span class="op">=</span> h_col.reshape(N, C_out, pool_size<span class="op">*</span>pool_size, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb28-4"><a></a>h_col_reshaped</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(1,2,4,4)
+tensor([[[[  5.,  -1.,  -1.,   6.],
+          [  5.,  -4., -10.,  -8.],
+          [ -4.,  -1.,  -9.,  -6.],
+          [ -7.,  -6.,  -8.,  -6.]],
+
+         [[ -3.,   3.,  -5.,   4.],
+          [  5.,  -6., -12.,  -7.],
+          [ -3.,   3.,  -9.,  -6.],
+          [ -7., -13.,  -4.,  -5.]]]])
+</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a></a><span class="co">## Calculamos el máximo de cada columna (que es un parche de 2x2)</span></span>
+<span id="cb30-2"><a></a><span class="co">## Además guardamos la posición del máximo</span></span>
+<span id="cb30-3"><a></a>M_flat, pool_indices <span class="op">=</span> h_col_reshaped.<span class="bu">max</span>(dim<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb30-4"><a></a>M_flat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>tensor([[[ 5., -1., -1.,  6.],
+         [ 5.,  3., -4.,  4.]]])</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a></a><span class="co">## Recuperamos la forma del feature map luego del pooling</span></span>
+<span id="cb32-2"><a></a>M <span class="op">=</span> M_flat.reshape(N, C_out, H_pool, W_pool)</span>
+<span id="cb32-3"><a></a><span class="bu">print</span>(M.shape)</span>
+<span id="cb32-4"><a></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(1,2,2,2)
+tensor([[[[ 5., -1.],
+          [-1.,  6.]],
+
+         [[ 5.,  3.],
+          [-4.,  4.]]]])</code></pre>
+</div></div>
+</section>
+<section id="flatten-y-ffn" class="slide level2 smaller">
+<h2>Flatten y FFN</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a>f <span class="op">=</span> M.reshape(N, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb34-2"><a></a><span class="bu">print</span>(f.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>tensor([[ 5., -1., -1.,  6.,  5.,  3., -4.,  4.]])</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a></a>Z <span class="op">=</span> f <span class="op">@</span> W_fc <span class="op">+</span> b_fc</span>
+<span id="cb36-2"><a></a>Z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>tensor([[18.]])</code></pre>
+<h4 id="utilizando-nn.module">Utilizando <code>nn.Module</code></h4>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a></a><span class="kw">class</span> Conv(nn.Module):</span>
+<span id="cb38-2"><a></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb38-3"><a></a>      <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb38-4"><a></a>      <span class="va">self</span>.conv <span class="op">=</span> nn.Conv2d(in_channels<span class="op">=</span><span class="dv">1</span>, out_channels<span class="op">=</span><span class="dv">2</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, bias<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb38-5"><a></a>      <span class="va">self</span>.conv.weight.data <span class="op">=</span> given_w</span>
+<span id="cb38-6"><a></a>      <span class="va">self</span>.conv.bias.data <span class="op">=</span> given_bias</span>
+<span id="cb38-7"><a></a>      <span class="va">self</span>.max_pool <span class="op">=</span> nn.MaxPool2d(kernel_size<span class="op">=</span><span class="dv">2</span>, return_indices<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb38-8"><a></a>      <span class="va">self</span>.fc <span class="op">=</span> nn.Linear(<span class="dv">8</span>, <span class="dv">1</span>)</span>
+<span id="cb38-9"><a></a>      nn.init.ones_(<span class="va">self</span>.fc.weight)</span>
+<span id="cb38-10"><a></a>      nn.init.ones_(<span class="va">self</span>.fc.bias)</span>
+<span id="cb38-11"><a></a>      <span class="va">self</span>.flatten <span class="op">=</span> nn.Flatten()</span>
+<span id="cb38-12"><a></a></span>
+<span id="cb38-13"><a></a>  <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb38-14"><a></a>      x <span class="op">=</span> <span class="va">self</span>.conv(x)</span>
+<span id="cb38-15"><a></a>      x, <span class="va">self</span>.indices <span class="op">=</span> <span class="va">self</span>.max_pool(x)</span>
+<span id="cb38-16"><a></a>      x <span class="op">=</span> <span class="va">self</span>.flatten(x)</span>
+<span id="cb38-17"><a></a>      x <span class="op">=</span> <span class="va">self</span>.fc(x)</span>
+<span id="cb38-18"><a></a>      <span class="cf">return</span> x</span>
+<span id="cb38-19"><a></a></span>
+<span id="cb38-20"><a></a>model <span class="op">=</span> Conv()</span>
+<span id="cb38-21"><a></a><span class="co"># Forward con PyTorch</span></span>
+<span id="cb38-22"><a></a>logits <span class="op">=</span> model(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>tensor([[18.]])</code></pre>
+</div><div class="column" style="width:30%;">
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a></a><span class="co"># Linear</span></span>
+<span id="cb40-2"><a></a>W_fc <span class="op">=</span> torch.ones(<span class="dv">8</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>tensor([[1.],
+        [1.],
+        [1.],
+        [1.],
+        [1.],
+        [1.],
+        [1.],
+        [1.]])
+</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a></a>b_fc <span class="op">=</span> torch.ones(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>tensor([1.])</code></pre>
+</div></div>
+</section>
+<section id="le-interesa-calcular-los-gradientes" class="slide level2">
+<h2>¿Le interesa calcular los gradientes?</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Calcular los gradientes de una CNN se simplifica bastante utilizando el enfoque de <code>im2col</code>, ya que la convolución se ha transformado en una multiplicación de matrices. Esto permite aplicar los conceptos que aprendimos en la primera parte del curso.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Aún así aparecen conceptos que escapan del conocimiento del Cálculo que conocemos, como por ejemplo el Gradiente del <code>im2col</code> (que Spoiler, es el algoritmo <code>col2im</code>).</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Échele una miradita al notebook de la clase, hay muchas horas de esfuerzo invertidas ahí.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
 </section>
 <section id="variante-en-1d" class="slide level2 smaller">
 <h2>Variante en 1d</h2>
@@ -853,12 +1354,12 @@ Corresponde a la variante de una dimensión, en la cual la entrada corresponden 
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/time_series.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-7/time_series.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-7/time_series.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-7/time_series.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/audio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-7/audio.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-7/audio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-7/audio.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
 </div></div>
@@ -891,32 +1392,13 @@ Corresponde a la variante de tres dimensiones, en la cual la entrada corresponde
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/frame-rates.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-6/frame-rates.jpg" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/frame-rates.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-6/frame-rates.jpg" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div></div>
 </section>
-<section id="ejemplos-de-arquitecturas" class="slide level2">
-<h2>Ejemplos de Arquitecturas</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/resnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-7/resnet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:40%;">
-<p><a href="img/clase-7/lenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="img/clase-7/lenet.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-7/VGG16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32"><img data-src="img/clase-7/VGG16.png" class="quarto-figure quarto-figure-center"></a></p>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/EfficientNet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-33"><img data-src="img/clase-7/EfficientNet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="class-dismissed" class="title-slide slide level1 center">
-<h1>Class Dismissed</h1>
+<section id="terminamos" class="title-slide slide level1 center">
+<h1>🥵 Terminamos</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">

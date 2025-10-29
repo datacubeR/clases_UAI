@@ -200,7 +200,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-579-Deep Learning</h1>
-  <p class="subtitle">Clase 6: Redes Convolucionales</p>
+  <p class="subtitle">Clase 7: Transfer Learning y Data Augmentation</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -214,350 +214,199 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="limitaciones-de-las-ffn" class="slide level2 smaller">
-<h2>Limitaciones de las FFN</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/MNIST_nn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-7/MNIST_nn.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
+<section id="arquitecturas-famosas" class="slide level2 smaller">
+<h2>Arquitecturas Famosas</h2>
+<div data-styyle="font-size: 70%;">
+<p>Crear arquitecturas de CNN desde cero es una tarea compleja y que requiere de mucho conocimiento y experiencia. Afortunadamente, existen diversas arquitecturas famosas que han sido probadas y testeadas en el tiempo, las cuáles pueden ser utilizadas como <strong><em>backbones</em></strong> para distintas tareas de Visión por Computador.</p>
 </div>
 <div class="columns">
-<div class="column">
-<h4 id="número-de-parametros">Número de Parametros:</h4>
-<ul>
-<li><span class="math inline">\(W_1 = 784 \cdot 256 + 256 = 200960\)</span></li>
-<li><span class="math inline">\(W_2 = 256 \cdot 128 + 128 = 32896\)</span></li>
-<li><span class="math inline">\(W_3 = 128 \cdot 10 + 10 = 1290\)</span></li>
-<li>Total = 235146.</li>
-</ul>
-</div><div class="column">
+<div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/MNIST_params_MLP.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-7/MNIST_params_MLP.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-7/resnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-7/resnet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
-<div class="fragment">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>¿Y si tengo una imágen de <span class="math inline">\(512 \times 512\)</span>? <strong>67,143,306</strong> de parámetros.</p>
-</div>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="limitaciones-de-las-ffn-1" class="slide level2 smaller">
-<h2>Limitaciones de las FFN</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/translation_invariance.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-7/translation_invariance.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column fragment">
-<dl>
-<dt>Translation Invariance</dt>
-<dd>
-Se refiere a la capacidad de poder detectar un patrón/objeto en diferentes posiciones de la imágen.
-</dd>
-</dl>
-</div></div>
-<div class="columns fragment">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/translation_invariance.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-7/translation_invariance.gif" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Las FFN no son capaces de ver patrones globales sino que se enfocan en el valor preciso de una feature. Si el objeto cambia de posición las features cambian a valores completamente distintos haciendo que la red tenga mayor tendencia al error.</p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="imágenes" class="slide level2 smaller">
-<h2>Imágenes</h2>
-<dl>
-<dt>Imagen</dt>
-<dd>
-Definiremos una imágen como un Tensor de Tres dimensiones, en el cual se representa H, W y C (Altura, Ancho y Canales).
-</dd>
-</dl>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/channels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-7/channels.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
+</div><div class="column" style="width:40%;">
+<p><a href="img/clase-7/lenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-7/lenet.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-7/VGG16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-7/VGG16.png" class="quarto-figure quarto-figure-center"></a></p>
 </div><div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/rgb.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-7/rgb.jpeg" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+<p><a href="img/clase-7/EfficientNet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-7/EfficientNet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
-</div><div class="column" style="width:30%;">
-<p><a href="img/clase-7/medical.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-7/medical.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-7/satellite.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-7/satellite.jpeg" class="quarto-figure quarto-figure-center"></a></p>
 </div></div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>La convención más común es utilizar imágenes de 24-bits 3 canales de <span class="math inline">\(2^8\)</span> valores (es decir 8-bits) que representan la intensidad de los colores Rojo (R), Verde (G) y Azul (B). Las dimensiones de <span class="math inline">\(H\)</span> y <span class="math inline">\(W\)</span> definen la resolución en píxeles de la imágen.</p>
-</div>
-</div>
-</div>
 </section>
-<section id="imágenes-1" class="slide level2 smaller">
-<h2>Imágenes</h2>
+<section id="lenet-5-lecun-et-al.-1998" class="slide level2 smaller">
+<h2>LeNet-5 (LeCun et al., 1998)</h2>
 <blockquote>
-<p>Para importar imágenes en Pytorch existen distintas librerías como PIL u OpenCV. Ambas usan la convención de <span class="math inline">\((H,W,C)\)</span>, la diferencia está en el orden de los canels. PIL utiliza la convención RGB, mientras que OpenCV utiliza BGR por lo que se necesitan algunas convenciones adicionales.</p>
+<p>Probablemente la primera arquitectura famosa en poder realizar tareas importantes de reconocimiento de imagen. Diseñada especialmente para reconocimiento de dígitos, introduce los bloques de convolución más pooling para luego conectarse con FFN.</p>
 </blockquote>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Lamentablemente la convención que escogió Pytorch es que una imágen tiene (C, H, W), es decir, primero canales, y luego alto y ancho. Normalmente las librerías no usan esta convención por lo que una permutación o transposición de dimensiones va a ser necesario casi la mayoría de las veces.</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:25%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>image <span class="op">=</span> torch.tensor(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/foto.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-7/foto.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-7/lenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-7/lenet.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-</div><div class="column" style="width:25%;">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>image[<span class="dv">0</span>,:,:]</span>
-<span id="cb2-2"><a></a>imagen[<span class="dv">0</span>] <span class="co"># alternativa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/foto_red.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-7/foto_red.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:25%;">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>image[<span class="dv">1</span>,:,:]</span>
-<span id="cb3-2"><a></a>imagen[<span class="dv">1</span>] <span class="co"># alternativa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/foto_green.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-7/foto_green.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:25%;">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>image[<span class="dv">2</span>,:,:]</span>
-<span id="cb4-2"><a></a>imagen[<span class="dv">2</span>] <span class="co"># alternativa</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/foto_blue.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-7/foto_blue.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="imágenes-2" class="slide level2 smaller">
-<h2>Imágenes</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Cuando tenemos un batch de imágenes entonces tendremos un Tensor de 4 dimensiones de dimensiones (N,C,H,W), donde <span class="math inline">\(N\)</span> representa el Batch Size, <span class="math inline">\(C\)</span> el número de Canales, <span class="math inline">\(H\)</span> el alto y <span class="math inline">\(W\)</span> el ancho.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Luego un Tensor de Dimensiones (32,3,224,512) implica que tenemos 32 imágenes RGB de dimensiones <span class="math inline">\(224\times512\)</span>.</p>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/image_batch.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-7/image_batch.jpg" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div></div>
-<h4 id="indexing">Indexing</h4>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Al tener tantas dimensiones elegir elementos se vuelve un poco complicado. En general se utilizarán sólo los primeros dos índices, el primero para escoger la imágen y el segundo para escoger el canal. En general Pytorch permite usar sólo el primer index y obviar el resto. Pero no permite hacer lo mismo con los siguientes.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="redes-convolucionales-definición-e-inspiración" class="slide level2 smaller">
-<h2>Redes Convolucionales: Definición e Inspiración</h2>
-<dl>
-<dt>Redes Convolucionales (CNN)</dt>
-<dd>
-Son un tipo distinto de Redes Neuronales donde sus <strong><em>parámetros</em></strong> aprenden <strong><em>“feature maps”</em></strong> de los datos. Principalemente se aplican en imágenes, pero pueden aplicarse para secuencias unidimensionales o secuencias de imágenes (videos).
-</dd>
-</dl>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Existe el mito de que las Redes Convolucionales se inspiraron en el funcionamiento del Cortex Visual humano. <strong>No sé si es tan así</strong>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong><em>¿Por qué necesitamos Redes Convolucionales?</em></strong> Evitar la sobreparametrización. ¿Por qué esto es un problema?</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<h3 id="timeline">Timeline</h3>
-<ul>
-<li><strong>1990</strong>: Yann LeCun et al.&nbsp;propone uno de los primeros intentos de CNN, el cual va agregando features más simples en features más complejas progresivamente.</li>
-<li><strong>1998</strong>: Yann LeCun, propone LeNet-5 con 2 redes convolucionales y 3 FFN.</li>
-<li><strong>2012</strong>: Alex Krizhevsky et al.&nbsp;propone AlexNet (5 capas convolucionales y 3 FFN), el cual obtiene <strong>SOTA performance</strong> en ImageNet.</li>
-</ul>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/alexnet-paper.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-7/alexnet-paper.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="partes-de-una-cnn" class="slide level2 smaller">
-<h2>Partes de una CNN</h2>
-<dl>
-<dt>Convolución</dt>
-<dd>
-Corresponde a una operación para extraer <strong>features maps</strong> en la cual un filtro o kernel se va desplazando en cada sección de los datos (secuencia, imagen o video).
-</dd>
-</dl>
 <div class="callout callout-caution no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Ojo</strong></p>
+<p><strong>Adaptive Pooling</strong></p>
 </div>
 <div class="callout-content">
-<p>Esto es nuevamente un término marketero, porque no es una Convolucional real, sino una operación llamada <strong>Cross Correlation</strong>.</p>
+<p>La mayoría de arquitecturas más modernas utiliza una capa llamada Adaptive Pooling antes del proceso de Flatten. El Adaptive Pooling es una especie de Pooling inverso, donde uno define el tamaño del output, y automáticamente se calcula el Kernel, Stride, Padding, etc. necesario para obtener ese tamaño.</p>
+<p>Eso garantiza que cualquier tamaño de imagen puede pasar por la red sin romper las dimensiones necesarias para la transición al MLP.</p>
 </div>
 </div>
 </div>
-<dl>
-<dt>Feature Map</dt>
-<dd>
-Corresponde a la salida de una convolución y es un nuevo tensor que captura ciertas características del dato (secuencia, imagen o video). Cuando se trata de imágenes normalmente es capaz de detectar bordes, cambios de textura, color, formas, o elementos más pequeños.
-</dd>
-</dl>
-<div class="columns">
-<div class="column" style="width:65%;">
+</section>
+<section id="alexnext-krizhevsky-sutskever-y-hinton-2012" class="slide level2 smaller">
+<h2>AlexNext (Krizhevsky, Sutskever y Hinton, 2012)</h2>
+<blockquote>
+<p>Ganó el concurso Imagenet (ILSVRC) en 2012 por un largo margen (algo impensado para ese tiempo). Introdujo los conceptos de ReLU, Dropout y Aceleración por GPU. Esta arquitectura está disponible en <code>torchvision</code>.</p>
+</blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/convolution.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-7/convolution.gif" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-7/alexnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-7/alexnet.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
-</div><div class="column" style="width:35%;">
-<p><br></p>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Es importante notar que los features maps son de una <strong>dimensionalidad menor a la entrada</strong> debido a la operación de Convolución.</p>
-</div>
-</div>
-</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> torchvision</span>
+<span id="cb1-2"><a></a>torchvision.models.alexnet(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Se obtendrán tantos feature maps como filtros se apliquen.</p>
+<p>La arquitectura de Torchvision está inspirada en una <strong><em>versión alternativa</em></strong> de Alexnet. Esto probablemente <em>no será</em> corregido ya que no es una arquitectura que se utilice comunmente en la actualidad.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="vggnet-simonyan-zisserman-2014" class="slide level2 smaller">
+<h2>VGGNet (Simonyan, Zisserman, 2014)</h2>
+<blockquote>
+<p>Presentaron las primeras redes relativamente profundas con Kernels pequeños de <span class="math inline">\(3 \times 3\)</span>. Su propuesta incluye Redes de hasta 19 capas.</p>
+</blockquote>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/VGG16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-7/VGG16.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> torchvision</span>
+<span id="cb2-2"><a></a>torchvision.models.vgg16(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span>
+<span id="cb2-3"><a></a><span class="co">## Versión con Batchnorm</span></span>
+<span id="cb2-4"><a></a>torchvision.models.vgg16_bn(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><code>torchvision</code> incluye las arquitecturas de 11, 13, 16 y 19 capas, además de variantes que incluyen Batchnorm (que en eltiempo del paper no existían aún).</p>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="entendiendo-el-kernel" class="slide level2 smaller">
-<h2>Entendiendo el Kernel</h2>
+<section id="googlenetinception-szegedy-et-al.-2014" class="slide level2 smaller">
+<h2>GoogleNet/Inception (Szegedy et al., 2014)</h2>
 <div class="columns">
-<div class="column">
-<h5 id="gaussian-blur">Gaussian Blur</h5>
+<div class="column" style="font-size: 80%;">
+<blockquote>
+<p>Introduce las <em>“Pointwise Convolutions”</em> (Convoluciones de 1x1) que permiten reducir la complejidad de canales (mediante una combinación lineal) manteniendo las dimensiones de la imagen. Además introduce los Inception Modules, que combinan resultados de Kernels de distinto tamaño. Fue la Arquitectura ganadora de ILSVRC 2014.</p>
+</blockquote>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> torchvision</span>
+<span id="cb3-2"><a></a>torchvision.models.googlenet(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/gaussian_blur.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-7/gaussian_blur.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-7/googlenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-7/googlenet.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-<h5 id="líneas-horizontales">Líneas Horizontales</h5>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/horizontal_lines.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-7/horizontal_lines.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-<h5 id="bordes">Bordes</h5>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/bordes.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-7/bordes.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="callout callout-note callout-titled callout-style-default">
+</div><div class="column" style="width:40%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Kernel</strong></p>
+<p><strong>1x1 Convolutions</strong></p>
 </div>
 <div class="callout-content">
-<p>El Kernel va a ser el set de parámetros que la red convolucional va a aprender. En palabras sencillas, la misma red aprende cuáles son los aspectos más relevantes de la imagen que le permitirán entender cómo clasificar o detectar elementos en ella.</p>
+<p>Las convoluciones de 1×1 representan una de las principales novedades de este paper. Para cada posición espacial (h, w), la convolución no combina píxeles adyacentes, sino que realiza una combinación lineal entre los diferentes canales de entrada.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-important callout-style-simple">
+<p><a href="img/clase-7/1x1_convs_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-7/1x1_convs_1.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-7/1x1_convs_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-7/1x1_convs_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</div></div>
+</section>
+<section id="resnet-he-et-al.-2015" class="slide level2 smaller">
+<h2>Resnet (He et al., 2015)</h2>
+<div class="columns">
+<div class="column" style="width:20%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/resnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-7/resnet.png" class="quarto-figure quarto-figure-center" style="width:45.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:80%;">
+<blockquote>
+<p>Introduce las conexiones residuales, lo cual permite evitar el problema del <strong><em>vanishing gradient</em></strong> para redes muy profundas. Es la Arquitectura ganadora de ILSVRC 2015.</p>
+</blockquote>
+<div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>El Kernel se aplica a todos los canales a la vez, lo cuál inicialmente lo hace ver como una operación bastante costosa computacionalmente.</p>
+<p>Esta arquitectura se puede encontrar tanto en <code>torchvision</code> como <code>timm</code>. Recomiendo <code>timm</code>, ya que hay muchas más variantes, mejor mantención y procesos de entrenamiento actualizados.</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> timm</span>
+<span id="cb4-2"><a></a>model <span class="op">=</span> timm.create_model(<span class="st">"resnet50"</span>, pretrained <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a><span class="co">## Listar todas las versiones de Resnet disponibles</span></span>
+<span id="cb4-5"><a></a>timm.list_models(<span class="st">"resnet*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br></p>
+<h4 id="conexiones-residuales">Conexiones Residuales</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/residual.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-7/residual.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="efficientnet-tan-le-2019" class="slide level2 smaller">
+<h2>EfficientNet (Tan, Le, 2019)</h2>
+<blockquote>
+<p>Introducen el concepto de <strong><em>Compound Scaling</em></strong> que permite cambiar la escala de profundidad (número de capas en la red), ancho (número de canales en cada capa) y resolución (dimensiones de la imagen) para poder mejorar la performance. Permite crear resultados al nivel del estado del arte con muchísimos menos parámetros.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/efficientnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-7/efficientnet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">import</span> timm</span>
+<span id="cb5-2"><a></a>model <span class="op">=</span> timm.create_model(<span class="st">"efficientnet_b0"</span>, pretrained <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb5-3"><a></a></span>
+<span id="cb5-4"><a></a><span class="co">## Listar todas las versiones de Resnet disponibles</span></span>
+<span id="cb5-5"><a></a>timm.list_models(<span class="st">"efficientnet*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pre-training" class="slide level2 smaller">
+<h2>Pre-training</h2>
+<dl>
+<dt>Imagenet</dt>
+<dd>
+Es un dataset que contiene aproximadamente 14 millones de imágenes anotadas manualmente. Fue empleado en la competencia ImageNet Large Scale Visual Recognition Challenge (ILSVRC) entre los años 2010 y 2017, la cual impulsó importantes avances en el estado del arte del reconocimiento visual.
+</dd>
+</dl>
+<p>Las imágenes presentan resoluciones variadas, que van desde <span class="math inline">\(4288 \times 2848\)</span> hasta <span class="math inline">\(75 \times 56\)</span> píxeles. Además, se encuentran normalizadas restando la media por canal <span class="math inline">\([0.485,0.456,0.406]\)</span> y dividiendo por la desviación estándar correspondiente <span class="math inline">\([0.229,0.224,0.225]\)</span>.</p>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🤔</strong></p>
+</div>
+<div class="callout-content">
+<p>Las dos variantes más conocidas son <strong><em>ImageNet-1K,</em></strong> que contiene 1.281.167, 50.000 y 100.000 imágenes para los conjuntos de train, validation y test, respectivamente, distribuidas en 1000 categorías; y <strong><em>ImageNet-21K</em></strong>, que incluye 14.197.122 imágenes organizadas en 21.841 clases.</p>
 </div>
 </div>
 </div>
@@ -567,337 +416,245 @@ Corresponde a la salida de una convolución y es un nuevo tensor que captura cie
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>El Kernel introduce el primer hiperparámetro de las CNN que es el <strong>Kernel Size</strong>. En general son cuadrados, y de dimensión impar.</p>
+<p>Debido a la relevancia y complejidad de este conjunto de datos, la mayoría de los backbones han sido preentrenados en él. Gracias a esto, las distintas arquitecturas <em>“aprenden a ver”</em> a partir del conocimiento adquirido mediante este dataset.</p>
 </div>
 </div>
 </div>
-</div></div>
-</section>
-<section id="hiperparámetros-de-la-convolución" class="slide level2 smaller">
-<h2>Hiperparámetros de la Convolución</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/stride.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-7/stride.gif" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Stride</strong></p>
-</div>
-<div class="callout-content">
-<p>Corresponde a la cantidad de pasos en que se mueve el Kernel. Un <strong><em>stride</em></strong> más grande implica feature maps más pequeños y menos detalles. <strong><em>Strides</em></strong> más pequeños retiene más detalles, pero implica un mayor número de operaciones.</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/convolution_padding.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-7/convolution_padding.gif" class="quarto-figure quarto-figure-center" style="width:130.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Padding</strong></p>
-</div>
-<div class="callout-content">
-<p>Corresponde a un relleno para dar mayor movimiento del kernel. Permite evitar la reducción de dimensionalidad por parte de la convolución además de considerar la información de los bordes de la imagen. Se llama <strong><em>“valid”</em></strong> a no usar padding, y <strong><em>“same”</em></strong> a agregar suficientes píxeles para evitar la reducción de dimensión.</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/dilation.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-7/dilation.gif" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Dilation</strong></p>
-</div>
-<div class="callout-content">
-<p>En este caso se tienen gaps al momento de aplicar el Kernel. Normalmente aplicar <strong><em>dilation</em></strong> aumenta el campo receptivo de la convolución capturando más contexto sin la necesidad de aumentar el kernel size. 1 implica sin <strong><em>dilation</em></strong>.</p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="convolución-en-pytorch" class="slide level2">
-<h2>Convolución en Pytorch</h2>
-<div style="font-size: 110%;">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>nn.Conv2d(in_channels, out_channels, kernel_size, stride<span class="op">=</span><span class="dv">1</span>,padding<span class="op">=</span><span class="dv">0</span>,dilation<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div style="font-size: 80%;">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Input</strong></p>
-</div>
-<div class="callout-content">
-<p>Este tipo de redes no requiere que se le den las dimensiones de la imagen, pero sí espera recibir tensores de dimensión <span class="math inline">\((N,C_{in}, H_{in},W_{in})\)</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Output</strong></p>
-</div>
-<div class="callout-content">
-<p>La Red convolucional devuelve un Tensor de Dimensiones <span class="math inline">\((N,C_{out}, H_{out}, W_{out})\)</span>. Donde:</p>
-<p><span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor\]</span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Es importante tener noción del tamaño de la imagen para poder escoger un <em>kernel_size</em> que recorra la imagen completa y que no deje partes sin convolucionar.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="partes-de-una-cnn-pooling" class="slide level2 smaller">
-<h2>Partes de una CNN: Pooling</h2>
-<dl>
-<dt>Pooling</dt>
-<dd>
-El Pooling es una operación de agregación que permite ir disminuyendo la dimensionalidad. De esta manera la red puede comenzar a especializarse en aspectos cada vez más finos.
-</dd>
-</dl>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>El Pooling también se aplica de manera móvil como una convolución. Pero a diferencia de esta normalmente no genera traslape.</p>
+<p>Debido a que muchas arquitecturas pueden/saben ver en un dataset tan complejo como Imagenet. <strong><em>¿Sería posible utilizar ese conocimiento en otro dataset?</em></strong></p>
 </div>
 </div>
 </div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Acá se introduce otro hiperparámetro que es el Pooling Size. En general es cuadrado pero de dimensión par.</p>
-</div>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/pooling.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-7/pooling.png" class="quarto-figure quarto-figure-center" style="width:35.0%"></a></p>
-</figure>
+<div class="fragment">
+<h3 id="entering-transfer-learning">Entering Transfer Learning</h3>
 </div>
 </section>
-<section id="pooling-in-pytorch" class="slide level2 smaller">
-<h2>Pooling in Pytorch</h2>
-<div style="font-size: 150%;">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>nn.AvgPool2d(kernel_size, stride<span class="op">=</span><span class="va">None</span>,padding<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb6-2"><a></a>nn.MaxPool2d(kernel_size, stride<span class="op">=</span><span class="va">None</span>,padding<span class="op">=</span><span class="dv">0</span>, dilation<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-important callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ojo</strong></p>
-</div>
-<div class="callout-content">
-<p><code>stride=None</code> implica <code>stride = kernel_size</code>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Importante mencionar que Average Pooling no permite Dilation.</p>
-</div>
-</div>
-</div>
-<p><span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor\]</span></p>
-</section>
-<section id="arquitectura-de-una-cnn" class="slide level2 smaller">
-<h2>Arquitectura de una CNN</h2>
+<section id="transfer-learning" class="slide level2 smaller">
+<h2>Transfer Learning</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/CNN-arch.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-7/CNN-arch.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-7/transfer_learning.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-7/transfer_learning.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Feature Extractor - Encoder - Backbone</strong></p>
+<p><strong>Dataset Público/alta complejidad</strong></p>
 </div>
 <div class="callout-content">
-<p>Corresponde al bloque de que generalmente contiene CNNs que se encargará de extraer features.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-warning no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Flatten</strong></p>
-</div>
-<div class="callout-content">
-<p>Corresponde a una Operación Intermedia que dejará todos los píxeles de la imagen como un vector fila que puede ser tomado por la FFN.</p>
+<p>Normalmente se utilizan datos públicos y de alta complejidad y se utiliza para <strong><em>pre-entrenar</em></strong> una arquitectura.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Prediction Head - Head - MLP</strong></p>
+<p><strong>Pre-entrenamiento</strong></p>
 </div>
 <div class="callout-content">
-<p>Corresponde a una FFN que tomará las features aprendidas por la CNN y generará una predicción.</p>
+<p>Se entrena una arquitectura para una tarea en específico con los detalles del dataset a utilizar.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Fine-Tuning</strong></p>
+</div>
+<div class="callout-content">
+<p>Se carga la arquitectura pre-entrenada, con los pesos obtenidos en el pre-entrenamiento y se ajusta el prediction head para la nueva tarea y se vuelve a entrenar el modelo.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Freezing Layers</strong></p>
+</div>
+<div class="callout-content">
+<p>Se refiere a congelar los parámetros del <strong>backbone</strong> pre-entrenado, es decir, estos no se actualizan. Este paso es opcional, y en ocasiones puede funcionar de mejor manera que un <strong><em>Full-Fine-Tuning</em></strong></p>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="mnist-con-cnn" class="slide level2 smaller">
-<h2>MNIST con CNN</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/CNN_MNIST_arch.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-7/CNN_MNIST_arch.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></a></p>
-</figure>
-</div>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/CNN_params.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-7/CNN_params.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="callout callout-warning callout-style-simple">
+<section id="image-preprocessing-y-data-augmentation" class="slide level2 smaller">
+<h2>Image Preprocessing y Data Augmentation</h2>
+<blockquote>
+<p>En general el proceso de Preprocesamiento de Imágenes es bastante más engorroso que el de datos tabulares. Afortunadamente Pytorch tiene algunos <code>utilities</code> que permiten hacer el proceso más sencillo:</p>
+</blockquote>
+<dl>
+<dt>ImageFolder</dt>
+<dd>
+Permite cargar imágenes de un Path en específico. Dentro de esa carpeta <code>ImageFolder</code> considerará cada carpeta como una clase y los elementos (imágenes) dentro de dicha clase como instancia de la clase en cuestión.
+</dd>
+</dl>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">from</span> torchvision.dataset <span class="im">import</span> ImageFolder</span>
+<span id="cb6-2"><a></a></span>
+<span id="cb6-3"><a></a>train_data <span class="op">=</span> ImageFolder(<span class="st">"path/to/train/images"</span>, transform <span class="op">=</span> <span class="va">None</span>)</span>
+<span id="cb6-4"><a></a>validation_data <span class="op">=</span> ImageFolder(<span class="st">"path/to/validation/images"</span>, transform <span class="op">=</span> <span class="va">None</span>)</span>
+<span id="cb6-5"><a></a>test_data <span class="op">=</span> ImageFolder(<span class="st">"path/to/test/images"</span>, transform <span class="op">=</span> <span class="va">None</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
+<p>Además <code>ImageFolder</code> posee un parámetro llamado transform en el cuál se pueden ingresar transformaciones a los datos para realizar procesos de Data Augmentation.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Ojo</strong></p>
+</div>
+<div class="callout-content">
+<p><code>ImageFolder</code> entrega los datos como una Imagen PIL. Por lo tanto, es necesario aplicar procesamientos que permitan su transformación en Tensor.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="data-augmentation" class="slide level2 smaller">
+<h2>Data Augmentation</h2>
+<div class="columns">
+<div class="column" style="font-size: 70%;">
+<p>Corresponde a un proceso de generación de datos sintéticos. Este proceso se puede utilizar para:</p>
 <ul>
-<li>El número de Parámetros para una Red con muchas más capas bajó considerablemente, de 67M a 373K de Parámetros.</li>
+<li>Permite la generación de datos adicionales debido a escasez por costo o disponibilidad de ellos. Ejemplo: Datos médicos.</li>
+<li>Genera variedad de datos, que entrega al modelo un mayor poder de generalización en datos no vistos.</li>
+<li>Al introducir mayor variabilidad en los datos entrega una mayor robustez ante el overfitting (Regularización).</li>
+<li>Simular condiciones adversas para el modelo en la cuál se quiera generar robustez.
+<ul>
+<li>Ej: Se tiene un modelo de reconocimiento de vehículos, pero que tiene que funcionar en condiciones de niebla.</li>
+</ul></li>
 </ul>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="variante-en-1d" class="slide level2 smaller">
-<h2>Variante en 1d</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<dl>
-<dt>Conv1d</dt>
-<dd>
-Corresponde a la variante de una dimensión, en la cual la entrada corresponden a secuencias de elementos como podrían ser series de tiempo, audio o hasta cadenas de texto.
-</dd>
-</dl>
-<div class="callout callout-note no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p>En este caso la implementación en Pytorch es similar a la 2D sólo que esperando tensores de dimensiones <span class="math inline">\((N,C_{in}, L_{in})\)</span>, donde <span class="math inline">\(C_{in}\)</span> corresponde al número de canales, que en el caso de series de tiempo equivale a features, y <span class="math inline">\(L_{in}\)</span> corresponde al largo de la secuencia.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p>La salida de la Conv1d tendrá dimensiones <span class="math inline">\((N,C_{out},L_{out})\)</span> con:</p>
-<p><span class="math display">\[L_{out} = \left\lfloor \frac{L_{in} + 2 \cdot padding - dilation \cdot (kernel\_size - 1) - 1}{stride} + 1 \right\rfloor\]</span></p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/time_series.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-7/time_series.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/audio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-7/audio.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="variante-en-3d" class="slide level2 smaller">
-<h2>Variante en 3d</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<dl>
-<dt>Conv3d</dt>
-<dd>
-Corresponde a la variante de tres dimensiones, en la cual la entrada corresponde a secuencias de imágenes, es decir, videos.
-</dd>
-</dl>
-<div class="callout callout-note no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p>Este caso también es similar sólo que se esperan tensores de dimensiones <span class="math inline">\((N, C_{in}, D_{in}, H_{in}, W_{in})\)</span> donde <span class="math inline">\(C_in\)</span> corresponde al número de canales, <span class="math inline">\(D\)</span> en el caso de un video corresponde al número de frames de tamaño <span class="math inline">\(H_{in} \times W_{in}\)</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p>La salida de la Conv1d tendrá dimensiones <span class="math inline">\((N,C_{out},D_{out},H_{out},W_{out})\)</span> con:</p>
-<p><span class="math display">\[D_{out} = \left\lfloor \frac{D_{in} + 2 \cdot padding[0] - dilation[0] \cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor\]</span> <span class="math display">\[H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor\]</span> <span class="math display">\[W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[2] - dilation[2]\cdot (kernel\_size[2] - 1) - 1}{stride[2]} + 1 \right\rfloor\]</span></p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/time_series.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-7/time_series.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/audio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-7/audio.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="ejemplos-de-arquitecturas" class="slide level2">
-<h2>Ejemplos de Arquitecturas</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-7/resnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="img/clase-7/resnet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:40%;">
-<p><a href="img/clase-7/lenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="img/clase-7/lenet.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-7/VGG16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32"><img data-src="img/clase-7/VGG16.png" class="quarto-figure quarto-figure-center"></a></p>
 </div><div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/EfficientNet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-33"><img data-src="img/clase-7/EfficientNet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-7/augmentations.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-7/augmentations.jpg" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
 </figure>
 </div>
 </div></div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Albumentations</strong></p>
+</div>
+<div class="callout-content">
+<p>Existen diversas librerías que permiten generar Aumento de Datos. La librerías más famosas son Albumentations y Kornia. Albumentations, permite transformaciones extremadamente eficientes en CPU, mientras que Kornia hace lo mismo pero en GPU. Debido a las limitaciones de GPU que contamos, utilizaremos Albumentations, de manera tal de balancear procesamiento tanto en CPU como en GPU.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Normalmente este tipo de transformaciones entrega mejores resultados cuando se generan de manera aleatoria y <code>on-the-fly</code>. Es decir, se genera el aumento de datos en la carga de datos durante el entrenamiento.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="class-dismissed" class="title-slide slide level1 center">
-<h1>Class Dismissed</h1>
+<section id="transformaciones-básicas" class="slide level2 smaller">
+<h2>Transformaciones Básicas</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">import</span> albumentations <span class="im">as</span> A</span>
+<span id="cb7-2"><a></a><span class="im">from</span> albumentations.pytorch.transforms <span class="im">import</span> ToTensorV2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Albumentations espera que la imagen venga como Numpy Array. Además es una librería bastante quisquillosa, por lo que toma un rato acostumbrarse. Pero su eficiencia y utilidad hace que valga la pena.</p>
+</div>
+</div>
+</div>
+<dl>
+<dt>A.Compose()</dt>
+<dd>
+Permite generar Pipelines de Transformación. Es decir, irá aplicando transformaciones una a una.
+</dd>
+<dt>A.ToFloat()</dt>
+<dd>
+Transforma los datos en tipo Float. Esto a veces es necesario cuando hay incompatibilidad de data types en ciertos módulos.
+</dd>
+<dt>ToTensorV2()</dt>
+<dd>
+Transforma a Tensor de Pytorch. Existe una versión <code>ToTensor()</code> pero está deprecada y no debería usarse.
+</dd>
+<dt>A.Normalize()</dt>
+<dd>
+Permite normalizar imágenes según su proceso de pre-entrenamiento. Normalmente estos provienen de pre-entrenamiento en Imagenet por lo que se debe normalizar con <span class="math inline">\(mean=[0.485,0.456,0.406]\)</span> y <span class="math inline">\(SD=[0.229,0.224,0.225]\)</span>.
+</dd>
+<dt>A.Resize()</dt>
+<dd>
+Se utiliza para estandarizar el tamaño de las imágenes. Imágenes más grandes permiten mejores resultados pero son computacionalmente más costosas.
+</dd>
+</dl>
+</section>
+<section id="transformaciones-probabilísticas" class="slide level2 smaller">
+<h2>Transformaciones Probabilísticas</h2>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Como su nombre lo indica, la transformación se aplicará con una cierta probabilidad, lo que permitirá que cada epoch haya mayor variabilidad.</p>
+</div>
+</div>
+</div>
+<dl>
+<dt><a href="https://explore.albumentations.ai/transform/RandomCrop">A.CenterCrop/A.RandomCrop</a></dt>
+<dd>
+Genera un Crop de la imagen o al centro o Random. Esto logrará que los elementos de la imagen cambien de posición.
+</dd>
+<dt><a href="https://explore.albumentations.ai/transform/VerticalFlip">A.VerticalFlip</a></dt>
+<dd>
+Genera Flip Vertical.
+</dd>
+<dt><a href="https://explore.albumentations.ai/transform/HorizontalFlip">A.HorizontalFlip</a></dt>
+<dd>
+Genera Flip Horizontal.
+</dd>
+<dt><a href="https://explore.albumentations.ai/transform/Rotate">A.Rotate</a></dt>
+<dd>
+Genera rotaciones aleatorias entre un ángulo mínimo y máximo.
+</dd>
+</dl>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Existen un sinnúmero de transformaciones que se pueden aplicar. La lista completa se puede encontrar <a href="https://explore.albumentations.ai/">acá</a>. Y existen transformaciones que incluso permiten simular niebla, lluvia, nieve, sepia, Zoom, y variados otros efectos.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Aplicar estas transformaciones es de extremo cuidado ya que para tareas más complejas como Semantic Segmentation, Object Detection, Keypoint Detection, se debe aplicar dichas transformaciones también a las etiquetas.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="terminamos-con-las-cnn" class="title-slide slide level1 center">
+<h1>Terminamos con las CNN</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -1194,7 +951,7 @@ Corresponde a la variante de tres dimensiones, en la cual la entrada corresponde
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
+            var filterRegex = new RegExp("https:\/\/datacubeR\.github\.io\/clases_UAI\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

@@ -200,7 +200,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-579-Deep Learning</h1>
-  <p class="subtitle">Clase 8: Transfer Learning y Data Augmentation</p>
+  <p class="subtitle">Clase 7: Transfer Learning y Data Augmentation</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -214,10 +214,27 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section>
-<section id="arquitecturas-famosas" class="title-slide slide level1 center">
-<h1>Arquitecturas Famosas</h1>
-
+<section id="arquitecturas-famosas" class="slide level2 smaller">
+<h2>Arquitecturas Famosas</h2>
+<div data-styyle="font-size: 70%;">
+<p>Crear arquitecturas de CNN desde cero es una tarea compleja y que requiere de mucho conocimiento y experiencia. Afortunadamente, existen diversas arquitecturas famosas que han sido probadas y testeadas en el tiempo, las cuáles pueden ser utilizadas como <strong><em>backbones</em></strong> para distintas tareas de Visión por Computador.</p>
+</div>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/resnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-7/resnet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<p><a href="img/clase-7/lenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-7/lenet.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-7/VGG16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-7/VGG16.png" class="quarto-figure quarto-figure-center"></a></p>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-7/EfficientNet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-7/EfficientNet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div></div>
 </section>
 <section id="lenet-5-lecun-et-al.-1998" class="slide level2 smaller">
 <h2>LeNet-5 (LeCun et al., 1998)</h2>
@@ -226,7 +243,7 @@ Alfonso Tobar-Arancibia
 </blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/lenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-7/lenet.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-7/lenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-7/lenet.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-caution no-icon callout-titled callout-style-default">
@@ -248,7 +265,7 @@ Alfonso Tobar-Arancibia
 </blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/alexnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-8/alexnet.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-8/alexnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-8/alexnet.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> torchvision</span>
@@ -273,7 +290,7 @@ Alfonso Tobar-Arancibia
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/VGG16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-7/VGG16.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-7/VGG16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-7/VGG16.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column">
@@ -302,15 +319,24 @@ Alfonso Tobar-Arancibia
 </blockquote>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> torchvision</span>
 <span id="cb3-2"><a></a>torchvision.models.googlenet(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:40%;">
-<h4 id="x1-convolutions">1x1 Convolutions</h4>
-<p><a href="img/clase-8/1x1_convs_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-8/1x1_convs_1.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-8/1x1_convs_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-8/1x1_convs_2.png" class="quarto-figure quarto-figure-center"></a></p>
-</div></div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/googlenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-8/googlenet.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></a></p>
+<p><a href="img/clase-8/googlenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-8/googlenet.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
+</div><div class="column" style="width:40%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>1x1 Convolutions</strong></p>
+</div>
+<div class="callout-content">
+<p>Las convoluciones de 1×1 representan una de las principales novedades de este paper. Para cada posición espacial (h, w), la convolución no combina píxeles adyacentes, sino que realiza una combinación lineal entre los diferentes canales de entrada.</p>
+</div>
+</div>
+</div>
+<p><a href="img/clase-8/1x1_convs_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-8/1x1_convs_1.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-8/1x1_convs_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-8/1x1_convs_2.png" class="quarto-figure quarto-figure-center"></a></p>
+</div></div>
 </section>
 <section id="resnet-he-et-al.-2015" class="slide level2 smaller">
 <h2>Resnet (He et al., 2015)</h2>
@@ -318,7 +344,7 @@ Alfonso Tobar-Arancibia
 <div class="column" style="width:20%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/resnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-8/resnet.png" class="quarto-figure quarto-figure-center" style="width:45.0%"></a></p>
+<p><a href="img/clase-8/resnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-8/resnet.png" class="quarto-figure quarto-figure-center" style="width:45.0%"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:80%;">
@@ -344,7 +370,7 @@ Alfonso Tobar-Arancibia
 <h4 id="conexiones-residuales">Conexiones Residuales</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/residual.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-8/residual.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+<p><a href="img/clase-8/residual.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-8/residual.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
 </figure>
 </div>
 </div></div>
@@ -356,7 +382,7 @@ Alfonso Tobar-Arancibia
 </blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/efficientnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-8/efficientnet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-8/efficientnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-8/efficientnet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">import</span> timm</span>
@@ -370,18 +396,17 @@ Alfonso Tobar-Arancibia
 <dl>
 <dt>Imagenet</dt>
 <dd>
-Corresponde a un dataset de cerca de 14M de imágenes con que fueron anotados a mano. Este dataset se utilizó para la competencia de ImageNet Large Scale Visual Recognition Challenge (ILSVRC) desde el año 2010 al 2017, el cuál generó innumerables avances en el estado del arte. Normalmente las imágenes tienen rangos entre <span class="math inline">\(4288 \times 2848\)</span> hasta <span class="math inline">\(75 \times 56\)</span>. Las imágenes se encuentran normalizadas restando medias por canal de <span class="math inline">\([0.485,0.456,0.406]\)</span> y divididas por SD de <span class="math inline">\([0.229,0.224,0.225]\)</span>.
+Es un dataset que contiene aproximadamente 14 millones de imágenes anotadas manualmente. Fue empleado en la competencia ImageNet Large Scale Visual Recognition Challenge (ILSVRC) entre los años 2010 y 2017, la cual impulsó importantes avances en el estado del arte del reconocimiento visual.
 </dd>
 </dl>
-<div class="callout callout-important callout-style-simple">
+<p>Las imágenes presentan resoluciones variadas, que van desde <span class="math inline">\(4288 \times 2848\)</span> hasta <span class="math inline">\(75 \times 56\)</span> píxeles. Además, se encuentran normalizadas restando la media por canal <span class="math inline">\([0.485,0.456,0.406]\)</span> y dividiendo por la desviación estándar correspondiente <span class="math inline">\([0.229,0.224,0.225]\)</span>.</p>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>🤔</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>Las dos variantes más conocidas son el ImageNet-1K que tiene 1.281.167, 50.000 y 100.000 imágenes para train, validation y test set con 1000 categorías y el ImageNet-21K que tiene 14.197.122 imágenes con 21.841 clases.</li>
-</ul>
+<p>Las dos variantes más conocidas son <strong><em>ImageNet-1K,</em></strong> que contiene 1.281.167, 50.000 y 100.000 imágenes para los conjuntos de train, validation y test, respectivamente, distribuidas en 1000 categorías; y <strong><em>ImageNet-21K</em></strong>, que incluye 14.197.122 imágenes organizadas en 21.841 clases.</p>
 </div>
 </div>
 </div>
@@ -391,7 +416,7 @@ Corresponde a un dataset de cerca de 14M de imágenes con que fueron anotados a 
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Debido a la importancia y complejidad de este dataset es que la mayoría de los backbones han sido pre-entrenados con este él. Por lo que las distintas arquitecturas <strong><em>“pueden ver”</em></strong> gracias a este dataset.</p>
+<p>Debido a la relevancia y complejidad de este conjunto de datos, la mayoría de los backbones han sido preentrenados en él. Gracias a esto, las distintas arquitecturas <em>“aprenden a ver”</em> a partir del conocimiento adquirido mediante este dataset.</p>
 </div>
 </div>
 </div>
@@ -415,7 +440,7 @@ Corresponde a un dataset de cerca de 14M de imágenes con que fueron anotados a 
 <div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/transfer_learning.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-8/transfer_learning.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-8/transfer_learning.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-8/transfer_learning.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:40%;">
@@ -493,7 +518,7 @@ Permite cargar imágenes de un Path en específico. Dentro de esa carpeta <code>
 <p><strong>Ojo</strong></p>
 </div>
 <div class="callout-content">
-<p>Image Folder entrega los datos como una Imagen PIL. Por lo tanto, es necesario aplicar procesamientos que permitan su transformación en Tensor.</p>
+<p><code>ImageFolder</code> entrega los datos como una Imagen PIL. Por lo tanto, es necesario aplicar procesamientos que permitan su transformación en Tensor.</p>
 </div>
 </div>
 </div>
@@ -515,7 +540,7 @@ Permite cargar imágenes de un Path en específico. Dentro de esa carpeta <code>
 </div><div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/augmentations.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-8/augmentations.jpg" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+<p><a href="img/clase-8/augmentations.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-8/augmentations.jpg" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
 </figure>
 </div>
 </div></div>
@@ -627,9 +652,9 @@ Genera rotaciones aleatorias entre un ángulo mínimo y máximo.
 </div>
 </div>
 </div>
-</section></section>
-<section id="class-dismissed" class="title-slide slide level1 center">
-<h1>Class Dismissed</h1>
+</section>
+<section id="terminamos-con-las-cnn" class="title-slide slide level1 center">
+<h1>Terminamos con las CNN</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -926,7 +951,7 @@ Genera rotaciones aleatorias entre un ángulo mínimo y máximo.
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/datacubeR\.github\.io\/clases_UAI\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
