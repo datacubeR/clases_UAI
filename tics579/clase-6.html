@@ -874,6 +874,8 @@ Corresponde a la salida de una convolución (equivalente a la Activación) y es 
 El Pooling es una operación de agregación que permite ir disminuyendo el tamaño de las entradas. De esta manera la red puede comenzar a especializarse en aspectos cada vez más finos.
 </dd>
 </dl>
+<div class="columns">
+<div class="column">
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -894,11 +896,13 @@ El Pooling es una operación de agregación que permite ir disminuyendo el tama�
 </div>
 </div>
 </div>
+</div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/pooling.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-7/pooling.png" class="quarto-figure quarto-figure-center" style="width:35.0%"></a></p>
+<p><a href="img/clase-6/pooling_gif.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-6/pooling_gif.gif" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
+</div></div>
 </section>
 <section id="pooling-in-pytorch" class="slide level2 smaller">
 <h2>Pooling in Pytorch</h2>
@@ -958,6 +962,8 @@ El Pooling es una operación de agregación que permite ir disminuyendo el tama�
 <blockquote>
 <p>La mayoría de las arquitecturas CNN modernas aplican un procedimiento llamado <strong><em>Adaptive Pooling</em></strong> antes de la etapa de predicción (FFN). Independientemente del tamaño de la imagen de entrada, el Adaptive Pooling siempre genera una salida de tamaño fijo, ya que ajusta sus parámetros para asegurar que la dimensión de salida sea la deseada.</p>
 </blockquote>
+<div class="columns">
+<div class="column">
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>nn.AdaptiveAvgPool2d(output_size)</span>
 <span id="cb8-2"><a></a>nn.AdaptiveMaxPool2d(output_size, return_indices<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
@@ -970,6 +976,13 @@ El Pooling es una operación de agregación que permite ir disminuyendo el tama�
 </div>
 </div>
 </div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-6/pooling.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-6/pooling.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
 </section>
 <section id="mnist-con-cnn" class="slide level2 smaller">
 <h2>MNIST con CNN</h2>
@@ -977,13 +990,13 @@ El Pooling es una operación de agregación que permite ir disminuyendo el tama�
 <div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/CNN_MNIST_arch.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-6/CNN_MNIST_arch.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/CNN_MNIST_arch.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-6/CNN_MNIST_arch.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/CNN_params.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-6/CNN_params.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/CNN_params.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-6/CNN_params.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-warning callout-style-simple">
@@ -1006,7 +1019,7 @@ El Pooling es una operación de agregación que permite ir disminuyendo el tama�
 <div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/conv_graph.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-6/conv_graph.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/conv_graph.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-6/conv_graph.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:40%;">
@@ -1044,7 +1057,7 @@ El Pooling es una operación de agregación que permite ir disminuyendo el tama�
 <div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/convolution.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-6/convolution.gif" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/convolution.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-6/convolution.gif" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:60%;">
@@ -1100,7 +1113,7 @@ El Pooling es una operación de agregación que permite ir disminuyendo el tama�
 <div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/im2col.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-6/im2col.gif" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/im2col.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-6/im2col.gif" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div><div class="column" style="width:60%;">
@@ -1354,12 +1367,12 @@ Corresponde a la variante de una dimensión, en la cual la entrada corresponden 
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/time_series.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="img/clase-7/time_series.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-7/time_series.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-7/time_series.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/audio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="img/clase-7/audio.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-7/audio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-7/audio.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
 </div></div>
@@ -1392,7 +1405,7 @@ Corresponde a la variante de tres dimensiones, en la cual la entrada corresponde
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-6/frame-rates.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="img/clase-6/frame-rates.jpg" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-6/frame-rates.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="img/clase-6/frame-rates.jpg" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div></div>

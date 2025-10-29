@@ -1763,7 +1763,7 @@
     "href": "tics579/clase-6.html#partes-de-una-cnn-pooling",
     "title": "TICS-579-Deep Learning",
     "section": "Partes de una CNN: Pooling",
-    "text": "Partes de una CNN: Pooling\n\nPooling\n\nEl Pooling es una operación de agregación que permite ir disminuyendo el tamaño de las entradas. De esta manera la red puede comenzar a especializarse en aspectos cada vez más finos.\n\n\n\n\n\n\n\n\nEl Pooling también se aplica de manera móvil como una convolución. Pero a diferencia de esta normalmente no genera traslape.\n\n\n\n\n\n\n\n\n\nAcá se introduce otro hiperparámetro que es el Pooling Size. En general es cuadrado y de dimensión par, y utiliza un stride del mismo tamaño que el Pooling Size para evitar traslapes."
+    "text": "Partes de una CNN: Pooling\n\nPooling\n\nEl Pooling es una operación de agregación que permite ir disminuyendo el tamaño de las entradas. De esta manera la red puede comenzar a especializarse en aspectos cada vez más finos.\n\n\n\n\n\n\n\n\n\n\nEl Pooling también se aplica de manera móvil como una convolución. Pero a diferencia de esta normalmente no genera traslape.\n\n\n\n\n\n\n\n\n\nAcá se introduce otro hiperparámetro que es el Pooling Size. En general es cuadrado y de dimensión par, y utiliza un stride del mismo tamaño que el Pooling Size para evitar traslapes."
   },
   {
     "objectID": "tics579/clase-6.html#pooling-in-pytorch",
@@ -1777,7 +1777,7 @@
     "href": "tics579/clase-6.html#adaptivepooling",
     "title": "TICS-579-Deep Learning",
     "section": "AdaptivePooling",
-    "text": "AdaptivePooling\n\nLa mayoría de las arquitecturas CNN modernas aplican un procedimiento llamado Adaptive Pooling antes de la etapa de predicción (FFN). Independientemente del tamaño de la imagen de entrada, el Adaptive Pooling siempre genera una salida de tamaño fijo, ya que ajusta sus parámetros para asegurar que la dimensión de salida sea la deseada.\n\nnn.AdaptiveAvgPool2d(output_size)\nnn.AdaptiveMaxPool2d(output_size, return_indices=False)\n\n\n\nreturn_indices=True permite devolver en qué posiciones se encontraron los valores máximos, lo cual es útil para operaciones de unpooling para revertir el proceso de pooling."
+    "text": "AdaptivePooling\n\nLa mayoría de las arquitecturas CNN modernas aplican un procedimiento llamado Adaptive Pooling antes de la etapa de predicción (FFN). Independientemente del tamaño de la imagen de entrada, el Adaptive Pooling siempre genera una salida de tamaño fijo, ya que ajusta sus parámetros para asegurar que la dimensión de salida sea la deseada.\n\n\n\nnn.AdaptiveAvgPool2d(output_size)\nnn.AdaptiveMaxPool2d(output_size, return_indices=False)\n\n\n\nreturn_indices=True permite devolver en qué posiciones se encontraron los valores máximos, lo cual es útil para operaciones de unpooling para revertir el proceso de pooling."
   },
   {
     "objectID": "tics579/clase-6.html#mnist-con-cnn",
