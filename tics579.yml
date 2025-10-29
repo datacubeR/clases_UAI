@@ -70,26 +70,26 @@
   path: tics579/clase-5.qmd
   categories:
    - slides
-#
-#
+
+
 - title: "Clase 6"
   subtitle: "Clase 6: Redes Convolucionales"
   author: "Alfonso Tobar-Arancibia"
-  date: 2025-10-22
+  date: 2025-10-30
   image: tics579/thumbnails/clase-6.png
   path: tics579/clase-6.qmd
   categories:
    - slides
-#
-#
-# - title: "Clase 8"
-#   subtitle: "Clase 8: Transfer Learning y Data Augmentation"
-#   author: "Alfonso Tobar-Arancibia"
-#   date: 2024-10-10
-#   image: tics579/thumbnails/clase-8.png
-#   path: tics579/clase-8.qmd
-#   categories:
-#    - slides
+
+
+- title: "Clase 7"
+  subtitle: "Clase 7: Transfer Learning y Data Augmentation"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2025-10-30
+  image: tics579/thumbnails/clase-7.png
+  path: tics579/clase-7.qmd
+  categories:
+   - slides
 #
 #
 # - title: "Clase 9"

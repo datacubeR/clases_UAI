@@ -25,144 +25,227 @@ format:
 
 ## Limitaciones de las FFN {.smaller}
 
-::::{.columns}
-:::{.column}
-![](img/clase-6/MNIST.png){.lightbox fig-align="center" width="70%"}
-:::
-:::{.column}
-![](img/clase-6/MNIST_net.png){.lightbox fig-align="center" width="70%"}
-:::
-::::
+Sin duda las Redes Feed Forward son una herramienta poderosa para resolver problemas de clasificación y regresión. Sin embargo, presentan ciertas limitaciones cuando se aplican a datos con estructuras espaciales o temporales, como imágenes o secuencias de texto.
 
-::: {.columns}
-::: {.column}
-#### Número de Parametros: 
+:::{.callout-note appearance="default" icon="false"}
+## ⚠️ Pérdida de estructura espacial o secuencial
+
+Cada registro es considerado de manera independiente, sin tener en cuenta la relación espacial o secuencial entre los datos.
+:::
+
+:::{.callout-warning appearance="default" icon="false"}
+## ☢️ Gran cantidad de parámetros
+:::
+
+::::{.columns}
+:::{.column width="30%"}
+![](img/clase-6/MNIST.png){.lightbox fig-align="center"} 
+:::
+:::{.column width="30%"}
+![](img/clase-6/MNIST_net.png){.lightbox fig-align="center"}
+:::
+
+:::{.column width="30%"}
+
+#### Número de Parametros 
+
+#### (Imagen: 28x28=784 píxeles):
 * $W_1 = 784 \cdot 256 + 256 = 200960$
 * $W_2 = 256 \cdot 128 + 128 = 32896$
 * $W_3 = 128 \cdot 10 + 10 = 1290$
 * Total = 235,146.
-:::
-::: {.column}
-![](img/clase-7/MNIST_params_MLP.png){.lightbox fig-align="center"}
+
 
 ::: {.callout-tip .fragment}
 ¿Y si tengo una imágen de $512 \times 512$? **67,143,306** de parámetros.
 :::
 :::
-::: 
+::::
 
 ## Limitaciones de las FFN {.smaller}
 
-::: {.columns}
-::: {.column}
-![](img/clase-7/translation_invariance.png){.lightbox fig-align="center"}
-:::
-::: {.column .fragment}
+:::{.callout-caution appearance="default" icon="false"}
+## 🚧 Ineficiencia en el aprendizaje de patrones locales
+
 Translation Invariance
 : Se refiere a la capacidad de poder detectar un patrón/objeto en diferentes posiciones de la imágen.
 
-:::{.callout-caution appearance="default" icon="false"}
-## Spoiler: Las FFN no tienen esta propiedad.
-:::
-:::
-::: 
+***Problema***: Un perrito centrado, desplazado a la izquierda o a la derecha debería seguir siendo reconocido como un perrito. Para una FFN, las features que describen los perritos desplazados son completamente distintos. 
 
-::: {.columns .fragment}
-::: {.column}
-![](img/clase-7/translation_invariance.gif){.lightbox fig-align="center"}
 :::
-::: {.column}
-::: {.callout-important}
-Las FFN no son capaces de ver patrones globales sino que se enfocan en el valor preciso de una feature. Si el objeto cambia de posición las features cambian a valores completamente distintos haciendo que la red tenga mayor tendencia al error.
+
+![](img/clase-6/translation_invariance.png){.lightbox fig-align="center"}
+
+
+## Limitaciones de las FFN {.smaller}
+
+:::{.callout-important appearance="default" icon="false"}
+## ⛔ Escalabilidad Limitada
+
+Su alto número de parámetros sumado a la incapacidad de capturar patrones espaciales o temporales hace que las FFN no escalen bien a datos complejos como imágenes de alta resolución o secuencias largas haciendo que su rendimiento disminuya considerablemente y no sean aplicables por sí solas a casos reales.
 :::
+
+
+::::{.columns}
+:::{.column}
+#### Imagenes actuales cada vez más grandes
+![](img/clase-6/image_diff.jpg){.lightbox fig-align="center"}
 :::
-::: 
+:::{.column}
+#### Textos actuales cada vez más largos
+![](img/clase-6/text_diff.jpg){.lightbox fig-align="center"}
+:::
+::::
 
 ## Imágenes {.smaller}
 
+
+::::{.columns}
+:::{.column}
 Imagen
-: Definiremos una imágen como un Tensor de Orden 3, en el cual se representa H, W y C (Altura, Ancho y Canales). 
+: Definiremos una imágen como un Tensor de Orden 3. Normalmente cada dimensión representa H, W y C (Altura, Ancho y Canales). 
+
+:::{.callout-note appearance="default" icon="false"}
+## Convención en Pytorch
+Pytorch utiliza la convención (C, H, W) para representar imágenes, donde C es el número de canales, H es la altura y W es el ancho de la imagen. Es decir, un Tensor de Dimensiones (3, 512, 512)
+:::
+
+:::
+
+:::{.column}
+![](img/clase-6/channels.png){.lightbox fig-align="center" width="70%"}
+:::
+::::
 
 
-::: {.columns}
-::: {.column width="40%"}
-![](img/clase-7/channels.png){.lightbox fig-align="center"}
-:::
-::: {.column width="30%"}
-![](img/clase-7/rgb.jpeg){.lightbox fig-align="center" width="50%"}
-:::
-::: {.column width="30%"}
-![](img/clase-7/medical.png){.lightbox fig-align="center"}
-![](img/clase-7/satellite.jpeg){.lightbox fig-align="center"}
-:::
-::: 
+
 
 ::: {.callout-important}
-La convención más común es utilizar imágenes de 24-bits 3 canales de $2^8$ valores (es decir 8-bits) que representan la intensidad de los colores Rojo (R), Verde (G) y Azul (B). Las dimensiones de $H$ y $W$ definen la resolución en píxeles de la imágen.
+La convención más común es utilizar imágenes de 24-bits, es decir 3 canales de $2^8$ valores (8-bits por canal). Es por eso que el valor de los píxeles va de 0 a 255 y representan la intensidad del color del canal que representan.
 :::
 
 ## Imágenes {.smaller}
 
-> Para importar imágenes en Pytorch existen distintas librerías como PIL u OpenCV. Ambas usan la convención de $(H,W,C)$, la diferencia está en el orden de los canales. PIL utiliza la convención RGB, mientras que OpenCV utiliza BGR por lo que se necesitan algunas transformaciones adicionales.
-
-::: {.callout-important}
-Lamentablemente la convención que escogió Pytorch es que una imágen tiene (C, H, W), es decir, primero canales, y luego alto y ancho. Normalmente las librerías no usan esta convención por lo que una permutación o transposición de dimensiones va a ser necesario casi la mayoría de las veces.
+:::{style="font-size: 80%;"}
+> Librerías como `PIL` u `OpenCV` permiten importar imágenes en Python. Ambas usan la convención de $(H,W,C)$, la diferencia está en el orden de los canales. `PIL` utiliza la convención RGB, mientras que `OpenCV` utiliza BGR por lo que se necesitan algunas transformaciones adicionales.
 :::
 
-::: {.columns}
-::: {.column width="25%"}
+::::{.columns}
+:::{.column}
+![](img/clase-6/Kira_channels.png){.lightbox fig-align="center" width="80%"}
+:::
+:::{.column}
+#### Ejemplo para importar  imágenes con PIL y Pytorch
+
 ```{.python}
-image = torch.tensor(...)
-```
-![](img/clase-7/foto.png){.lightbox fig-align="center"}
+from PIL import Image
+import numpy as np
+import torch
+path = "path/to/imagen.png"
+img = Image.open(path)
 
-:::
-::: {.column width="25%"}
+# Convierte a Tensor y cambia a (C,H,W)
+torch_image= torch.from_numpy(np.array(img)).permute(2,0,1)  
+torch_image.shape
+```
+```
+(3,1200,1200)
+```
+
 ```{.python}
-image[0,:,:]
-imagen[0] # alternativa
-```
-![](img/clase-7/foto_red.png){.lightbox fig-align="center"}
-:::
-::: {.column width="25%"}
-```{.python}
-image[1,:,:]
-imagen[1] # alternativa
-```
-![](img/clase-7/foto_green.png){.lightbox fig-align="center"}
-:::
-::: {.column width="25%"}
-```{.python}
-image[2,:,:]
-imagen[2] # alternativa
-```
-![](img/clase-7/foto_blue.png){.lightbox fig-align="center"}
-:::
-::: 
+import matplotlib.pyplot as plt
 
-## Imágenes 
-
-
-::: {.columns}
-::: {.column}
-::: {.callout-important}
-Cuando tenemos un batch de imágenes entonces tendremos un Tensor de Orden 4 dimensiones (B,C,H,W), donde $B$ representa el Batch Size, $C$ el número de Canales, $H$ el alto y $W$ el ancho.
+## Imágen en canal Rojo
+plt.imshow(torch_image[0].numpy(), cmap="Reds")
+plt.axis("off")
+plt.show()
+## Imágen en canal Verde
+plt.imshow(torch_image[1].numpy(),cmap="Greens")
+plt.axis("off")
+plt.show()
+## Imágen en canal Azul
+plt.imshow(torch_image[2].numpy(), cmap="Blues")
+plt.axis("off")
+plt.show()
+```
 :::
+::::
+
+## Batch de Imágenes {.smaller}
+
+::::{.columns}
+
+:::{.column width="60%"}
+
+:::{.callout-note appearance="default" icon="false"}
+## Conjunto/Set/Batch de Imágenes
+Se define como un Tensor de Orden 4. En Pytorch esto se representa como N, C, H, W (Número de Imágenes, Canales, Altura y Ancho). 
+:::
+![](img/clase-6/image_batch.png){.lightbox fig-align="center" width="60%"}
 
 ::: {.callout-tip}
 Luego un Tensor de Dimensiones (32,3,224,512) implica que tenemos 32 imágenes RGB de dimensiones $224\times512$.
 :::
+
 :::
-::: {.column}
-![](img/clase-7/image_batch.jpg){.lightbox fig-align="center"}
+:::{.column width="40%"}
+
+```{.python}
+## Simulación de 2 imágenes RGB de 5x5 píxeles
+torch.randint(0,256, (2,3,5,5))
+```
+:::{style="font-size: 90%;"}
+```
+tensor([[[[248, 240, 146,  73, 228],
+          [ 79, 125, 191, 203, 133],
+          [202,  12, 237, 109,  62],
+          [133, 227, 148,  78, 229],
+          [121, 247, 202,  51,   3]],
+
+         [[253,  28,  20, 144, 255],
+          [115, 132, 114,  45, 164],
+          [ 57, 238, 117, 250,  41],
+          [ 58,  73,  29, 253, 240],
+          [246,  84,  93,   2, 145]],
+
+         [[ 83,   4, 144, 126, 202],
+          [ 98, 235,  55,  83, 104],
+          [ 21, 185,  27, 102, 117],
+          [255, 133,  23,  83, 150],
+          [ 49, 152,  81, 233,  98]]],
+-----------------------------------------------
+        [[[216,  92, 251, 214, 178],
+          [252,  48,  88,  82,  79],
+          [168, 208, 223,   9, 169],
+          [145, 148, 254, 128, 156],
+          [238, 175, 233, 136, 118]],
+
+         [[112,  68, 143,  93, 150],
+          [ 32, 103,  97,  93, 223],
+          [205,  56,  90,  24, 108],
+          [ 13, 135,  98,  20,  93],
+          [ 20,  91,  37,  81,  10]],
+
+         [[109, 145,  90, 243,  63],
+          [103, 134, 130,  11,  72],
+          [132, 163, 153,  26, 255],
+          [ 45, 228,  26, 169, 212],
+          [ 34, 211, 229,  82, 201]]]])
+```
 :::
-::: 
+:::
+::::
+
 
 ## Redes Convolucionales: Definición e Inspiración {.smaller}
 
 Redes Convolucionales (CNN)
-: Son un tipo de red neuronal cuyos parámetros entrenables son filtros (también llamados Kernels) que aprenden a detectar patrones en los datos de entrada. Aplicando estos Kernels se generan feature maps, que representan la presenecia y localización de ciertos patrones.
+: Son un tipo de red neuronal cuyos parámetros entrenables son filtros (también llamados ***Kernels***) que aprenden a detectar patrones en los datos de entrada. 
 
+El resultado de una Convolucional es un ***feature map***, el cual representa la presencia y localización de ciertos patrones visuales. 
+
+::::{.columns}
+:::{.column}
 ::: {.callout-note}
 Existe el mito de que las Redes Convolucionales se inspiraron en el funcionamiento del Cortex Visual humano. **No sé si es tan así**.
 
@@ -172,51 +255,114 @@ El mito dice que las CNNs fueron diseñadas para imitar el cortex visual humano.
 * Descubrieron neuronas complejas que respondían a patrones similares, pero en distintas posiciones (invarianza local).
 :::
 
-::: {.callout-caution}
-***¿Por qué necesitamos Redes Convolucionales?*** Evitar la sobreparametrización. ¿Por qué esto es un problema?
 :::
+:::{.column}
+![](img/clase-6/visual_cat.png){.lightbox fig-align="center" width="90%"}
+:::
+::::
+
 
 ## Redes Convolucionales: Definición e Inspiración {.smaller}
 
+::: {.callout-caution}
+***¿Por qué necesitamos las Redes Convolucionales?*** Evitar la sobreparametrización. ¿Por qué esto es un problema?
+:::
+
 :::{.callout-warning appearance="default" icon="false"}
 ## 🔔 Importancia
-No es exagerado afirmar que las CNNs han sido la arquitectura más influyente en Deep Learning, ya que han impulsado avances importantes en tareas de visión por computador, como clasificación de imágenes, detección de objetos y segmentación semántica. Además, contribuyeron a que el Deep Learning ganara popularidad en la industria tecnológica y superara la época conocida como el AI Winter.
+No es exagerado afirmar que las CNNs han sido la arquitectura más influyente en Deep Learning, ya que han impulsado avances importantes en tareas de visión por computador, como clasificación de imágenes, detección de objetos y segmentación semántica. Además, contribuyeron a que el Deep Learning ganara popularidad en la industria tecnológica y superara la época conocida como el ***AI Winter***.
 :::
 
 ::: {.columns}
 ::: {.column}
-### 🗓️ Algunos hitos importantes:
+#### 🗓️ Algunos hitos importantes:
 * **1990**: Yann LeCun et al. propone uno de los primeros intentos de CNN, el cual va agregando features más simples en features más complejas progresivamente.
 * **1998**: Yann LeCun, propone LeNet-5 con 2 redes convolucionales y 3 FFN.
 * **2012**: Krizhevsky, Sutskever y Hinton proponen AlexNet (5 capas convolucionales y 3 FFN), el cual obtiene **SOTA performance** en ImageNet.
 :::
 ::: {.column}
-![](img/clase-7/alexnet-paper.png){.lightbox fig-align="center"}
+![](img/clase-6/alexnet-paper.png){.lightbox fig-align="center"}
 :::
 ::: 
 
-## Entendiendo el Kernel {.smaller}
+## Convolutional Neural Network (CNNs){.smaller}
+
+:::{.callout-important appearance="default" icon="false"}
+## Architectura General
+Una Convolutional Neural Network (CNN) está formada por múltiples capas que colaboran para identificar y extraer características significativas de las imágenes, con el fin de clasificarlas o detectar objetos dentro de ellas.
+:::
+
+::: {.columns}
+::: {.column width="60%"}
+![](img/clase-7/CNN-arch.png){.lightbox fig-align="center" width="60%"} 
+:::
+::: {.column width="40%"}
+::: {.callout-note appearance="default" icon="false"}
+## Feature Extractor - Encoder - Backbone
+Corresponde al bloque en el que se detectan características o patrones relevantes de la imagen. En este bloque es donde se aplican normalmente las operaciones de ***Convolución*** y ***Pooling***.
+:::
+
+::: {.callout-warning appearance="default" icon="false"}
+## Flatten
+Corresponde a una operación intermedia que aplana los feature maps generadas para ser utilizados como features de entrada para ser utilizados por la parte final de la red.
+:::
+
+::: {.callout-tip appearance="default" icon="false"}
+## Prediction Head - Head - MLP
+Corresponde a una FFN que tomará las features aprendidas por la CNN y generará una predicción.
+:::
+:::
+::: 
+
+## La Convolución {.smaller}
+
+:::{style="font-size: 80%;"}
+Convolución
+: Corresponde a una operación que permite extraer ***feature maps***, donde un filtro o kernel se desplaza sobre distintas secciones de los datos, ya sea una secuencia, una imagen o un video, para capturar sus patrones más relevantes.
+:::
+
+
+::: {.callout-caution appearance="default" icon="false"}
+## ☝️Atención
+Esto es nuevamente un término marketero, porque no es una Convolucional real, sino una operación llamada **Cross Correlation**.
+:::
+
+![](img/clase-6/convolution.gif){.lightbox fig-align="center" width="80%"}
+
+
+:::{style="font-size: 80%;"}
+Feature Map
+: Corresponde a la salida de una convolución (equivalente a la Activación) y es un nuevo tensor que captura ciertas características del dato (secuencia, imagen o video). Cuando se trata de imágenes, captura features como bordes, cambios de textura, color, formas, o elementos más pequeños.
+:::
+
+::: {.callout-warning}
+Es importante notar que los features maps son de una **tamaño menor a la entrada** debido a la operación de Convolución.
+:::
+::: {.callout-important}
+Se obtendrán tantos feature maps como filtros se apliquen. Esto es otro hiperparámetro de la Red Convolucional que se conoce como los canales de salida o ***out_channels***.
+:::
+## El filtro o Kernel {.smaller}
 
 ::: {.columns}
 ::: {.column}
 
 ##### Gaussian Blur
-![](img/clase-7/gaussian_blur.png){.lightbox fig-align="center" width="70%"}
+![](img/clase-6/gaussian_blur.png){.lightbox fig-align="center" width="65%"}
 
 
 ##### Líneas Horizontales
-![](img/clase-7/horizontal_lines.png){.lightbox fig-align="center" width="70%"}
+![](img/clase-6/horizontal_lines.png){.lightbox fig-align="center" width="65%"}
 
 ##### Bordes
-![](img/clase-7/bordes.png){.lightbox fig-align="center" width="70%"}
+![](img/clase-6/bordes.png){.lightbox fig-align="center" width="65%"}
 
 :::
 ::: {.column}
 ::: {.callout-note appearance="default"}
 ## Kernel
+Corresponde a una matriz pequeña que permite detectar patrones específicos en la imagen al aplicarse de manera móvil sobre ella. Estos Kernel solías estudiarse y diseñarse manualmente para tareas específicas como detección de bordes, desenfoque, realce de contraste, entre otros.
 
-El Kernel va a ser el set de parámetros que la red convolucional va a aprender. En palabras sencillas, la misma red aprende cuáles son los aspectos más relevantes de la imagen que le permitirán entender cómo clasificar o detectar elementos en ella.
-
+En una red convolucional, el kernel es un conjunto de pesos que se ajustan durante el proceso de entrenamiento para identificar características relevantes en las imágenes. Es decir, la CNN aprende qué Kernels son más importantes para la tarea que se está resolviendo.
 :::
 
 ::: {.callout-important}
@@ -229,37 +375,36 @@ El Kernel introduce el primer hiperparámetro de las CNN que es el **Kernel Size
 :::
 ::: 
 
-## Entendiendo la Convolución {.smaller}
 
-Convolución
-: Corresponde a una operación para extraer **features maps** en la cual un filtro o kernel se va desplazando en cada sección de los datos (secuencia, imagen o video). 
+## Feature Maps {.smaller}
 
-
-::: {.callout-caution appearance="default" icon="false"}
-## Ojo
-Esto es nuevamente un término marketero, porque no es una Convolucional real, sino una operación llamada **Cross Correlation**.
-:::
-
+:::{style="font-size: 80%;"}
 Feature Map
 : Corresponde a la salida de una convolución (equivalente a la Activación) y es un nuevo tensor que captura ciertas características del dato (secuencia, imagen o video). Cuando se trata de imágenes, captura features como bordes, cambios de textura, color, formas, o elementos más pequeños.
+:::
 
 
-::: {.columns}
-::: {.column width="65%"}
-![](img/clase-7/convolution.gif){.lightbox fig-align="center" width="80%"}
+::::{.columns}
+:::{.column width="60%"}
+![](img/clase-6/feature_maps.png){.lightbox fig-align="center"}
 :::
-::: {.column width="35%"}
-<br>
+:::{.column width="40%"}
+:::{.callout-tip appearance="default" icon="false"}
+### Básicamente los feature maps son imágenes que resaltan ciertos patrones aprendidos por los kernels.
+:::
 
-::: {.callout-warning}
-Es importante notar que los features maps son de una **tamaño menor a la entrada** debido a la operación de Convolución.
+:::{.callout-warning appearance="default" icon="false"}
+### A medida que avanzamos en las capas convolucionales, los feature maps tienden a capturar patrones más complejos y abstractos.
 :::
-::: {.callout-important}
-Se obtendrán tantos feature maps como filtros se apliquen.
+:::{.callout-important appearance="default" icon="false"}
+### Cada feature map es de tamaño más pequeño que la imagen original, pero contiene información más relevante para la tarea de clasificación o detección.
 :::
-:::
-::: 
 
+:::{.callout-caution appearance="default" icon="false"}
+## Se obtendrán tantos feature maps como filtros se apliquen. Esto es otro hiperparámetro de la Red Convolucional que se conoce como los canales de salida o ***out_channels***.
+:::
+:::
+::::
 
 
 ## Hiperparámetros de la Convolución {.smaller}
@@ -267,44 +412,43 @@ Se obtendrán tantos feature maps como filtros se apliquen.
 ::: {.columns}
 ::: {.column width="30%"}
 
-![](img/clase-7/stride.gif){.lightbox fig-align="center"}
+![](img/clase-6/stride.gif){.lightbox fig-align="center"}
 
 ::: {.callout-note appearance="default" icon="false"}
 ## Stride
-
-Se refiere a la cantidad de pasos que el kernel avanza sobre la imagen de entrada. Un ***stride*** mayor genera feature maps más pequeños y con menos detalles, mientras que un stride menor conserva más información, aunque aumenta el número de operaciones requeridas.
+Hace referencia al número de posiciones que el kernel se desplaza sobre la imagen de entrada en cada paso.
+Un ***stride*** más grande produce feature maps más pequeños y con menos detalle, mientras que un stride más pequeño preserva mayor información, aunque incrementa la cantidad de operaciones necesarias.
 :::
 :::
 ::: {.column width="40%"}
-![](img/clase-7/convolution_padding.gif){.lightbox fig-align="center" width="130%"}
+![](img/clase-6/convolution_padding.gif){.lightbox fig-align="center" width="130%"}
 
 ::: {.callout-tip appearance="default" icon="false"}
 ## Padding
-
-Se trata de un relleno que facilita el desplazamiento del kernel, evitando que la convolución reduzca demasiado la dimensionalidad y permitiendo que se tenga en cuenta la información de los bordes de la imagen. Cuando no se aplica padding se denomina **"valid"**, y cuando se agregan píxeles suficientes para mantener la misma dimensión se llama ***"same"***.
-
-
-
+Consiste en añadir un relleno alrededor de la imagen de entrada para facilitar el desplazamiento del kernel y evitar que la convolución reduzca en exceso sus dimensiones.
+Este relleno también permite conservar la información presente en los bordes de la imagen.
+Cuando no se aplica padding, la operación se denomina ***"valid"***, mientras que si se agregan los píxeles necesarios para mantener el tamaño original, se conoce como ***"same"***.
 :::
 :::
 ::: {.column width="30%"}
-![](img/clase-7/dilation.gif){.lightbox fig-align="center"}
+![](img/clase-6/dilation.gif){.lightbox fig-align="center"}
 
 ::: {.callout-important appearance="default" icon="false"}
 ## Dilation
 
-Se refiere a los espacios (gaps) que se introducen entre los elementos del kernel al aplicarlo. Usar dilation permite aumentar el campo receptivo de la convolución, capturando más contexto sin necesidad de incrementar el tamaño del kernel. Un valor de 1 indica que no se aplica ***dilation.***
+Hace referencia a los espacios o intervalos que se insertan entre los elementos del kernel durante la convolución.
+El uso de dilation permite ampliar el campo receptivo de la red, capturando un mayor contexto sin aumentar el tamaño del kernel. Un valor de 1 indica que no se aplica ***dilation***.
 :::
 :::
 ::: 
 
-## Convolución en Pytorch 
 
-::: {style="font-size: 110%;"}
+## Convolución en Pytorch {.smaller}
+
+:::: {style="font-size: 130%;"}
 ```{.python}
 nn.Conv2d(in_channels, out_channels, kernel_size, stride=1,padding=0,dilation=1)
 ```
-:::
 
 ::: {style="font-size: 80%;"}
 ::: {.callout-tip appearance="default" icon="false"}
@@ -325,6 +469,7 @@ $$W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (k
 ::: {.callout-warning}
 Es importante tener noción del tamaño de la imagen para poder escoger un *kernel_size* que recorra la imagen completa y que no deje partes sin convolucionar.
 :::
+::::
 
 ## Partes de una CNN: Pooling {.smaller}
 
@@ -335,7 +480,7 @@ Pooling
 El Pooling también se aplica de manera móvil como una convolución. Pero a diferencia de esta normalmente no genera traslape.
 :::
 ::: {.callout-tip}
-Acá se introduce otro hiperparámetro que es el Pooling Size. En general es cuadrado pero de dimensión par.
+Acá se introduce otro hiperparámetro que es el ***Pooling Size***. En general es cuadrado y de dimensión par, y utiliza un stride del mismo tamaño que el ***Pooling Size*** para evitar traslapes.
 :::
 
 ![](img/clase-7/pooling.png){.lightbox fig-align="center" width="35%"} 
@@ -343,62 +488,441 @@ Acá se introduce otro hiperparámetro que es el Pooling Size. En general es cua
 
 ## Pooling in Pytorch {.smaller}
 
-::: {style="font-size: 150%;"}
+:::: {style="font-size: 90%;"}
 ```{.python}
 nn.AvgPool2d(kernel_size, stride=None,padding=0)
 nn.MaxPool2d(kernel_size, stride=None,padding=0, dilation=1)
 ```
-:::
 
 ::: {.callout-important appearance="default" }
 ## Ojo
-`stride=None` implica `stride = kernel_size`.
+* Pytorch llama también `kernel_size` al tamaño del Pooling.
+* `stride=None` implica `stride = kernel_size`.
+:::
+
+
+:::{.callout-tip appearance="default" icon="false"}
+#### MaxPool
+$$H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor$$
+$$W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor$$
+:::
+
+:::{.callout-note appearance="default" icon="false"}
+#### AvgPool
+$$H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - kernel\_size[0]}{stride[0]} + 1 \right\rfloor$$
+$$W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - kernel\_size[1]}{stride[1]} + 1 \right\rfloor$$
 :::
 
 ::: {.callout-warning}
-Importante mencionar que Average Pooling no permite Dilation.
+El Average Pool no permite Dilation.
 :::
+::::
 
-$$H_{out} = \left\lfloor \frac{H_{in} + 2 \cdot padding[0] - dilation[0]\cdot (kernel\_size[0] - 1) - 1}{stride[0]} + 1 \right\rfloor$$
-$$W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[1] - dilation[1]\cdot (kernel\_size[1] - 1) - 1}{stride[1]} + 1 \right\rfloor$$
+## AdaptivePooling {.smaller}
 
-## Arquitectura de una CNN {.smaller}
+> La mayoría de las arquitecturas CNN modernas aplican un procedimiento llamado ***Adaptive Pooling*** antes de la etapa de predicción (FFN).
+Independientemente del tamaño de la imagen de entrada, el Adaptive Pooling siempre genera una salida de tamaño fijo, ya que ajusta sus parámetros para asegurar que la dimensión de salida sea la deseada.
 
-::: {.columns}
-::: {.column width="60%"}
-![](img/clase-7/CNN-arch.png){.lightbox fig-align="center" width="60%"} 
-:::
-::: {.column width="40%"}
-::: {.callout-note appearance="default" icon="false"}
-## Feature Extractor - Encoder - Backbone
-Corresponde al bloque que contiene CNNs que se encargará de extraer features. 
-:::
-::: {.callout-warning appearance="default" icon="false"}
-## Flatten
-Corresponde a una Operación Intermedia que dejará todos los píxeles de la imagen como un vector fila que puede ser tomado por la FFN. En estricto rigor prepara las features generadas por la CNN para ser usadas en la parte final de la red.
-:::
 
-::: {.callout-tip appearance="default" icon="false"}
-## Prediction Head - Head - MLP
-Corresponde a una FFN que tomará las features aprendidas por la CNN y generará una predicción.
+```{.python}
+nn.AdaptiveAvgPool2d(output_size)
+nn.AdaptiveMaxPool2d(output_size, return_indices=False)
+```
+:::{.callout-tip appearance="default" icon="false"}
+## `return_indices=True` permite devolver en qué posiciones se encontraron los valores máximos, lo cual es útil para operaciones de ***unpooling*** para revertir el proceso de pooling.
 :::
-:::
-::: 
 
 ## MNIST con CNN {.smaller}
 
-![](img/clase-7/CNN_MNIST_arch.png){.lightbox fig-align="center" width="75%"} 
 
 ::: {.columns}
-::: {.column}
-![](img/clase-7/CNN_params.png){.lightbox fig-align="center"} 
+::: {.column width="60%"}
+
+![](img/clase-6/CNN_MNIST_arch.png){.lightbox fig-align="center"}
+
 :::
-::: {.column}
+::: {.column width="40%"}
+
+![](img/clase-6/CNN_params.png){.lightbox fig-align="center"}
+
 ::: {.callout-warning}
 * El número de Parámetros para una Red Convolucional con muchas más capas bajó considerablemente, de 67M a 373K de Parámetros para una imagen de $512 \times 512$.
 :::
 :::
 ::: 
+
+## Grafo CNN sencilla {.smaller}
+
+
+::::{.columns}
+:::{.column width="60%"}
+![](img/clase-6/conv_graph.png){.lightbox fig-align="center"}
+:::
+:::{.column width="40%"}
+```{.python}
+## Una Imagen de 1 Canal de Tamaño 6x6
+X = torch.tensor([
+        [[[7., 6., 8., 5., 1., 3.],
+          [8., 6., 5., 3., 5., 5.],
+          [9., 1., 1., 5., 3., 5.],
+          [4., 5., 5., 9., 2., 6.],
+          [9., 5., 3., 1., 2., 2.],
+          [4., 4., 8., 8., 9., 8.]]]
+])
+X.shape
+```
+```
+(1,1,6,6)
+```
+
+```{.python}
+C_out = 2
+N, C_in, H, W = X.shape
+kH, kW = (3,3)
+```
+
+```{.python}
+## 2 filtros de un Canal de tamaño 3x3
+given_w = torch.tensor([
+        [[[-1.,  0.,  1.],
+          [ 0., -1.,  1.],
+          [ 0.,  0.,  1.]]],
+
+        [[[-1., -1.,  0.],
+          [ 1.,  0.,  0.],
+          [ 1.,  1.,  0.]]]])
+given_w.shape
+```
+```
+(2,1,3,3)
+```
+
+```{.python}
+given_bias = torch.tensor([1., 1.])
+```
+
+
+
+:::
+::::
+
+
+## Grafo CNN sencilla: Convolución  {.smaller}
+
+::::{.columns}
+:::{.column width="40%"}
+![](img/clase-6/convolution.gif){.lightbox fig-align="center"} 
+:::
+:::{.column width="60%"}
+```{.python}
+def calculate_out(X, k_size=(3,3), stride=1, dilation=1, padding=0):
+  kH, kW = k_size
+  N, in_channels, H_in, W_in = X.shape
+  out_H = np.floor((H_in +2*padding-dilation*(kH-1)-1)/stride + 1)
+  out_W = np.floor((W_in +2*padding-dilation*(kW-1)-1)/stride + 1)
+  return int(out_H), int(out_W)
+
+H_out, W_out = calculate_out(X, k_size = (kH,kW))
+H_out, W_out
+```
+
+```
+(4,4)
+```
+
+```{.python}
+O = torch.zeros((N, C_out, H_out, W_out))
+for n in range(N):
+    for co in range(C_out):
+        for i in range(H_out):
+            for j in range(W_out):
+                # submatriz de tamaño kH x kW
+                patch = X[n, :, i:i+kH, j:j+kW]
+                O[n, co, i, j] = (patch * given_w[co]).sum() + given_bias[co]
+O
+```
+```
+tensor([[[[  5.,   5.,  -1.,  -4.],
+          [ -4.,  -7.,  -1.,  -6.],
+          [ -1., -10.,   6.,  -8.],
+          [ -9.,  -8.,  -6.,  -6.]],
+
+         [[ -3.,   5.,   3.,  -6.],
+          [ -3.,  -7.,   3., -13.],
+          [ -5., -12.,   4.,  -7.],
+          [ -9.,  -4.,  -6.,  -5.]]]])
+```
+:::
+::::
+
+:::{.callout-caution}
+## Este proceso es ***extremadamente ineficiente*** computacionalmente hablando. Por lo que se utiliza un proceso equivalente llamado ***im2col***.
+:::
+
+## im2col {.smaller}
+
+> ***im2col*** es un algoritmo que permite transformar la operación de convolución en una operación de multiplicación de matrices, lo cual es computacionalmente más eficiente. En este caso los parches que requieren la convolución se aplanan y se organizan en columnas de una nueva matriz.
+
+::::{.columns}
+:::{.column width="40%"}
+![](img/clase-6/im2col.gif){.lightbox fig-align="center"} 
+:::
+:::{.column width="60%"}
+El procedimiento en Pytorch se realiza de la siguiente manera:
+```{.python}
+## Cada columna es un patche aplanado de 3x3. 16 patches en total.
+X_col = F.unfold(X, kernel_size=(kH, kW))  # (1, 9, 16) (N,kH*kW,n_patches)
+print(f"X_col shape: {X_col.shape}")
+X_col
+```
+```
+X_col shape: torch.Size([1, 9, 16])
+tensor([[[7., 6., 8., 5., 8., 6., 5., 3., 9., 1., 1., 5., 4., 5., 5., 9.],
+         [6., 8., 5., 1., 6., 5., 3., 5., 1., 1., 5., 3., 5., 5., 9., 2.],
+         [8., 5., 1., 3., 5., 3., 5., 5., 1., 5., 3., 5., 5., 9., 2., 6.],
+         [8., 6., 5., 3., 9., 1., 1., 5., 4., 5., 5., 9., 9., 5., 3., 1.],
+         [6., 5., 3., 5., 1., 1., 5., 3., 5., 5., 9., 2., 5., 3., 1., 2.],
+         [5., 3., 5., 5., 1., 5., 3., 5., 5., 9., 2., 6., 3., 1., 2., 2.],
+         [9., 1., 1., 5., 4., 5., 5., 9., 9., 5., 3., 1., 4., 4., 8., 8.],
+         [1., 1., 5., 3., 5., 5., 9., 2., 5., 3., 1., 2., 4., 8., 8., 9.],
+         [1., 5., 3., 5., 5., 9., 2., 6., 3., 1., 2., 2., 8., 8., 9., 8.]]])
+```
+:::
+::::
+
+
+## im2col {.smaller}
+
+¿Qué pasa si ahora aplanamos los filtros también?
+
+::::{.columns}
+:::{.column}
+```{.python}
+## Dejamos cada filtro como una fila
+W_row = given_w.reshape(C_out, -1)
+print(W_row.shape)
+W_row
+```
+
+```
+(2,9)
+tensor([[ 1.,  1.,  0., -1.,  1., -1.,  0., -1., -1.],
+        [ 1.,  1.,  0., -1.,  1., -1., -1.,  0., -1.]])
+```
+:::
+:::{.column}
+:::{.callout-warning appearance="default" icon="false"}
+## 💭 Luego La convolución se puede pensar como una transformación lineal aplicada a parches aplanados de la imagen de entrada. Es decir cada parches es transformado linealmente por los filtros aplanados, generando una nueva representación de la imagen (un feature map).
+:::
+:::
+::::
+
+:::{.callout-tip style="font-size: 110%;"}
+Entonces podemos expresar la convolución como una multiplicación de matrices muy similar a una FFN:
+
+$$H_{col} = W_{row} \cdot X_{col} + b \cdot 1_{C_{in}*kH*KW}^T $$
+
+Donde $b$ tiene dimensiones $C_{out} \times 1$ y $1^T_{C_{in}*kH*kW}$ tiene dimensiones $1 \times C_{in}*kH*kW$. Aunque es más sencillo pensar el $b$ como un vector que se le aplica **Broadcasting**.
+:::
+
+::::{.columns}
+:::{.column}
+Luego para volver a la forma de la imagen basta con hacer un reshape:
+
+```{.python}
+H = H_col.reshape(N, C_out, H_out, W_out)
+print(H.shape)
+H
+```
+```
+(1, 2, 4, 4)
+```
+:::
+:::{.column}
+```
+tensor([[[[  5.,   5.,  -1.,  -4.],
+          [ -4.,  -7.,  -1.,  -6.],
+          [ -1., -10.,   6.,  -8.],
+          [ -9.,  -8.,  -6.,  -6.]],
+
+         [[ -3.,   5.,   3.,  -6.],
+          [ -3.,  -7.,   3., -13.],
+          [ -5., -12.,   4.,  -7.],
+          [ -9.,  -4.,  -6.,  -5.]]]])
+```
+:::
+::::
+
+
+## Pooling {.smaller}
+
+::::{.columns}
+:::{.column width="48%"}
+#### Nuevamente necesitamos hacer un `im2col` para poder hacer el pooling como una multiplicación de matrices. 
+#### Eso implica que H quedará como:
+```{.python}
+pool_size = 2
+H_pool, W_pool = calculate_out(H, k_size=(2,2),stride=2) 
+## (2,2)
+h_col = F.unfold(H, kernel_size=pool_size, stride=pool_size)
+print(h_col.shape)
+h_col
+```
+```
+(1,8,4)
+tensor([[[  5.,  -1.,  -1.,   6.],
+         [  5.,  -4., -10.,  -8.],
+         [ -4.,  -1.,  -9.,  -6.],
+         [ -7.,  -6.,  -8.,  -6.],
+         [ -3.,   3.,  -5.,   4.],
+         [  5.,  -6., -12.,  -7.],
+         [ -3.,   3.,  -9.,  -6.],
+         [ -7., -13.,  -4.,  -5.]]])
+```
+
+:::{.callout-important appearance="default" icon="false"}
+## 😱Notar como la operación de im2col genera parches para todos los canales a la vez. Por lo tanto es necesario separar por canales para aplicar el pooling.
+:::
+:::
+:::{.column width="52%"}
+```{.python}
+## Tenemos 2 canales de 4 por cada uno
+## al cuál debemos aplicar el máximo.
+h_col_reshaped = h_col.reshape(N, C_out, pool_size*pool_size, -1)
+h_col_reshaped
+```
+```
+(1,2,4,4)
+tensor([[[[  5.,  -1.,  -1.,   6.],
+          [  5.,  -4., -10.,  -8.],
+          [ -4.,  -1.,  -9.,  -6.],
+          [ -7.,  -6.,  -8.,  -6.]],
+
+         [[ -3.,   3.,  -5.,   4.],
+          [  5.,  -6., -12.,  -7.],
+          [ -3.,   3.,  -9.,  -6.],
+          [ -7., -13.,  -4.,  -5.]]]])
+
+```
+```{.python}
+## Calculamos el máximo de cada columna (que es un parche de 2x2)
+## Además guardamos la posición del máximo
+M_flat, pool_indices = h_col_reshaped.max(dim=2)
+M_flat
+```
+```
+tensor([[[ 5., -1., -1.,  6.],
+         [ 5.,  3., -4.,  4.]]])
+```
+
+```{.python}
+## Recuperamos la forma del feature map luego del pooling
+M = M_flat.reshape(N, C_out, H_pool, W_pool)
+print(M.shape)
+M
+```
+
+```
+(1,2,2,2)
+tensor([[[[ 5., -1.],
+          [-1.,  6.]],
+
+         [[ 5.,  3.],
+          [-4.,  4.]]]])
+```
+:::
+::::
+
+## Flatten y FFN {.smaller}
+
+::::{.columns}
+:::{.column width="70%"}
+```{.python}
+f = M.reshape(N, -1)
+print(f.shape)
+```
+
+```
+tensor([[ 5., -1., -1.,  6.,  5.,  3., -4.,  4.]])
+```
+
+```{.python}
+Z = f @ W_fc + b_fc
+Z
+```
+```
+tensor([[18.]])
+```
+
+#### Utilizando `nn.Module`
+```{.python}
+class Conv(nn.Module):
+  def __init__(self):
+      super().__init__()
+      self.conv = nn.Conv2d(in_channels=1, out_channels=2, kernel_size=3, bias=True)
+      self.conv.weight.data = given_w
+      self.conv.bias.data = given_bias
+      self.max_pool = nn.MaxPool2d(kernel_size=2, return_indices=True)
+      self.fc = nn.Linear(8, 1)
+      nn.init.ones_(self.fc.weight)
+      nn.init.ones_(self.fc.bias)
+      self.flatten = nn.Flatten()
+
+  def forward(self, x):
+      x = self.conv(x)
+      x, self.indices = self.max_pool(x)
+      x = self.flatten(x)
+      x = self.fc(x)
+      return x
+
+model = Conv()
+# Forward con PyTorch
+logits = model(X)
+
+```
+```
+tensor([[18.]])
+```
+:::
+:::{.column width="30%"}
+```{.python}
+# Linear
+W_fc = torch.ones(8, 1)
+```
+```
+tensor([[1.],
+        [1.],
+        [1.],
+        [1.],
+        [1.],
+        [1.],
+        [1.],
+        [1.]])
+
+```
+```{.python}
+b_fc = torch.ones(1)
+```
+```
+tensor([1.])
+```
+:::
+::::
+
+## ¿Le interesa calcular los gradientes? 
+
+:::{.callout-note appearance="default" icon="false"}
+## Calcular los gradientes de una CNN se simplifica bastante utilizando el enfoque de `im2col`, ya que la convolución se ha transformado en una multiplicación de matrices. Esto permite aplicar los conceptos que aprendimos en la primera parte del curso.
+:::
+
+:::{.callout-tip appearance="default" icon="false"}
+## Aún así aparecen conceptos que escapan del conocimiento del Cálculo que conocemos, como por ejemplo el Gradiente del `im2col` (que Spoiler, es el algoritmo `col2im`).
+:::
+
+:::{.callout-important appearance="default" icon="false"}
+### Échele una miradita al notebook de la clase, hay muchas horas de esfuerzo invertidas ahí.
+:::
+
 
 ## Variante en 1d {.smaller}
 
@@ -455,24 +979,7 @@ $$W_{out} = \left\lfloor \frac{W_{in} + 2 \cdot padding[2] - dilation[2]\cdot (k
 :::
 ::: 
 
-
-## Ejemplos de Arquitecturas
-
-::: {.columns}
-::: {.column width="30%"}
-![](img/clase-7/resnet.png){.lightbox fig-align="center" width="70%"} 
-:::
-::: {.column width="40%"}
-![](img/clase-7/lenet.png){.lightbox fig-align="center"} 
-![](img/clase-7/VGG16.png){.lightbox fig-align="center"}  
-:::
-::: {.column width="30%"}
-![](img/clase-7/EfficientNet.png){.lightbox fig-align="center" width="70%"} 
-:::
-::: 
-
-
-# Class Dismissed
+# 🥵 Terminamos
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0

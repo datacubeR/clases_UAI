@@ -309,8 +309,8 @@ La predicción de una instancia $i$ específica, ahora depende de otros elemento
 ## 1. Calcular running mean y running var.
 $$
 \begin{aligned}
-\mu_{running} &= (1 - \alpha) \mu_{running} + \mu_B \\
-s^2_{running} &= (1 - \alpha) \cdot s^2_{running} + s^2_B
+\mu_{running} &= (1 - \alpha) \mu_{running} + \alpha \cdot \mu_B \\
+s^2_{running} &= (1 - \alpha) \cdot s^2_{running} + \alpha \cdot s^2_B
 \end{aligned}
 $$
 
@@ -644,7 +644,7 @@ En este caso 0.3 corresponde al valor de $\lambda$.
 Definiremos el Dropout como:
 
 $$D(h)= \begin{cases}
-h  & \text{con prob 1-p} \\
+\frac{h}{1-p}  & \text{con prob 1-p} \\
 0, & \text{con prob p}
 \end{cases}$$
 
@@ -705,7 +705,7 @@ $$ std = gain \cdot \sqrt{\frac{2}{fan_{in} + fan_{out}}}$$
 ::: {.column}
 #### Kaiming (aka He) Uniforme
 
-Se inicia con valores provenientes de una distribución Normal: $\mathcal{U}(-bound,bound)$
+Se inicia con valores provenientes de una distribución Uniforme: $\mathcal{U}(-bound,bound)$
 
 $$ bound = gain \cdot \sqrt{\frac{3}{fan\_mode}}$$
 :::
@@ -713,7 +713,7 @@ $$ bound = gain \cdot \sqrt{\frac{3}{fan\_mode}}$$
 
 #### Kaiming (aka He) Normal
 
-Se inicia con valores provenientes de una distribución uniforme: $\mathcal{N}(0,std^2)$
+Se inicia con valores provenientes de una distribución Normal: $\mathcal{N}(0,std^2)$
 
 $$std =\sqrt{\frac{gain}{fan\_mode}}$$
 :::
@@ -758,7 +758,7 @@ En general este proceso detiene el entrenamiento luego de `patience` epochs sin 
 
 ```{.python}
 # ---- Early Stopping ----
-    if val_loss < best_val_loss:
+    if val_loss > best_val_loss:
         best_val_loss = val_loss
         best_model_state = model.state_dict()
         counter = 0  # resetea paciencia
@@ -775,7 +775,6 @@ En general este proceso detiene el entrenamiento luego de `patience` epochs sin 
 
 ```{.python}
 ## Training with Accumulation
-epochs=80
 accumulation_steps=4
 model.zero_grad()                                   # Resetea Gradientes Iniciales
 for e in range(epochs):

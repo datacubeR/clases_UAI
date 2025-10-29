@@ -1,6 +1,6 @@
 ---
 title: "TICS-579-Deep Learning"
-subtitle: "Clase 8: Transfer Learning y Data Augmentation"
+subtitle: "Clase 7: Transfer Learning y Data Augmentation"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -23,7 +23,26 @@ format:
     pdf-separate-fragments: true
 ---
 
-# Arquitecturas Famosas
+## Arquitecturas Famosas {.smaller}
+
+:::{styyle="font-size: 70%;"}
+Crear arquitecturas de CNN desde cero es una tarea compleja y que requiere de mucho conocimiento y experiencia. Afortunadamente, existen diversas arquitecturas famosas que han sido probadas y testeadas en el tiempo, las cuáles pueden ser utilizadas como ***backbones*** para distintas tareas de Visión por Computador.
+:::
+
+
+::: {.columns}
+::: {.column width="30%"}
+![](img/clase-7/resnet.png){.lightbox fig-align="center" width="70%"} 
+:::
+::: {.column width="40%"}
+![](img/clase-7/lenet.png){.lightbox fig-align="center"} 
+![](img/clase-7/VGG16.png){.lightbox fig-align="center"}  
+:::
+::: {.column width="30%"}
+![](img/clase-7/EfficientNet.png){.lightbox fig-align="center" width="70%"} 
+:::
+::: 
+
 
 ## LeNet-5 (LeCun et al., 1998) {.smaller}
 
@@ -36,14 +55,13 @@ format:
 La mayoría de arquitecturas más modernas utiliza una capa llamada Adaptive Pooling antes del proceso de Flatten. El Adaptive Pooling es una especie de Pooling inverso, donde uno define el tamaño del output, y automáticamente se calcula el Kernel, Stride, Padding, etc. necesario para obtener ese tamaño.
 
 Eso garantiza que cualquier tamaño de imagen puede pasar por la red sin romper las dimensiones necesarias para la transición al MLP.
-
 :::
 
 ## AlexNext (Krizhevsky, Sutskever y Hinton, 2012) {.smaller}
 
 > Ganó el concurso Imagenet (ILSVRC) en 2012 por un largo margen (algo impensado para ese tiempo). Introdujo los conceptos de ReLU, Dropout y Aceleración por GPU. Esta arquitectura está disponible en `torchvision`.
 
-![](img/clase-8/alexnet.png){.lightbox fig-align="center" width="60%"} 
+![](img/clase-7/alexnet.png){.lightbox fig-align="center" width="60%"} 
 
 ```{.python}
 import torchvision
@@ -86,22 +104,26 @@ import torchvision
 torchvision.models.googlenet(weights = "IMAGENET1K_V1")
 ```
 
+![](img/clase-7/googlenet.png){.lightbox fig-align="center"} 
 :::
 ::: {.column width=40%}
-#### 1x1 Convolutions
 
-![](img/clase-8/1x1_convs_1.png){.lightbox fig-align="center"} 
-![](img/clase-8/1x1_convs_2.png){.lightbox fig-align="center"} 
+:::{.callout-note appearance="default" icon="false"}
+#### 1x1 Convolutions
+Las convoluciones de 1×1 representan una de las principales novedades de este paper. Para cada posición espacial (h, w), la convolución no combina píxeles adyacentes, sino que realiza una combinación lineal entre los diferentes canales de entrada.
+:::
+
+![](img/clase-7/1x1_convs_1.png){.lightbox fig-align="center"} 
+![](img/clase-7/1x1_convs_2.png){.lightbox fig-align="center"} 
 :::
 ::: 
 
-![](img/clase-8/googlenet.png){.lightbox fig-align="center" width="55%"} 
 
 ## Resnet (He et al., 2015) {.smaller}
 
 :::: {.columns}
 ::: {.column width="20%"}
-![](img/clase-8/resnet.png){.lightbox fig-align="center" width="45%"}  
+![](img/clase-7/resnet.png){.lightbox fig-align="center" width="45%"}  
 :::
 ::: {.column width="80%"}
 > Introduce las conexiones residuales, lo cual permite evitar el problema del ***vanishing gradient*** para redes muy profundas. Es la Arquitectura ganadora de ILSVRC 2015.
@@ -121,7 +143,7 @@ timm.list_models("resnet*")
 
 #### Conexiones Residuales
 
-![](img/clase-8/residual.png){.lightbox fig-align="center" width="40%"}  
+![](img/clase-7/residual.png){.lightbox fig-align="center" width="40%"}  
 
 :::
 :::: 
@@ -130,7 +152,7 @@ timm.list_models("resnet*")
 
 > Introducen el concepto de ***Compound Scaling*** que permite cambiar la escala de profundidad (número de capas en la red), ancho (número de canales en cada capa) y resolución (dimensiones de la imagen) para poder mejorar la performance. Permite crear resultados al nivel del estado del arte con muchísimos menos parámetros.
 
-![](img/clase-8/efficientnet.png){.lightbox fig-align="center" width="70%"}  
+![](img/clase-7/efficientnet.png){.lightbox fig-align="center" width="70%"}  
 
 ```{.python}
 import timm
@@ -143,14 +165,17 @@ timm.list_models("efficientnet*")
 ## Pre-training {.smaller}
 
 Imagenet
-: Corresponde a un dataset de cerca de 14M de imágenes con que fueron anotados a mano. Este dataset se utilizó para la competencia de ImageNet Large Scale Visual Recognition Challenge (ILSVRC) desde el año 2010 al 2017, el cuál generó innumerables avances en el estado del arte. Normalmente las imágenes tienen rangos entre $4288 \times 2848$ hasta $75 \times 56$. Las imágenes se encuentran normalizadas restando medias por canal de $[0.485,0.456,0.406]$ y divididas por SD de $[0.229,0.224,0.225]$.
+: Es un dataset que contiene aproximadamente 14 millones de imágenes anotadas manualmente. Fue empleado en la competencia ImageNet Large Scale Visual Recognition Challenge (ILSVRC) entre los años 2010 y 2017, la cual impulsó importantes avances en el estado del arte del reconocimiento visual.
 
-::: {.callout-important}
-* Las dos variantes más conocidas son el ImageNet-1K que tiene 1.281.167, 50.000 y 100.000 imágenes para train, validation y test set con 1000 categorías y el ImageNet-21K que tiene 14.197.122 imágenes con 21.841 clases.
+Las imágenes presentan resoluciones variadas, que van desde $4288 \times 2848$ hasta $75 \times 56$ píxeles. Además, se encuentran normalizadas restando la media por canal $[0.485,0.456,0.406]$ y dividiendo por la desviación estándar correspondiente $[0.229,0.224,0.225]$.
+
+::: {.callout-important appearance="default" icon="false"}
+## 🤔
+Las dos variantes más conocidas son ***ImageNet-1K,*** que contiene 1.281.167, 50.000 y 100.000 imágenes para los conjuntos de train, validation y test, respectivamente, distribuidas en 1000 categorías; y ***ImageNet-21K***, que incluye 14.197.122 imágenes organizadas en 21.841 clases.
 :::
 
 ::: {.callout-tip}
-Debido a la importancia y complejidad de este dataset es que la mayoría de los backbones han sido pre-entrenados con este él. Por lo que las distintas arquitecturas ***"pueden ver"*** gracias a este dataset.
+Debido a la relevancia y complejidad de este conjunto de datos, la mayoría de los backbones han sido preentrenados en él. Gracias a esto, las distintas arquitecturas *"aprenden a ver"* a partir del conocimiento adquirido mediante este dataset.
 :::
 
 ::: {.callout-note}
@@ -165,7 +190,7 @@ Debido a que muchas arquitecturas pueden/saben ver en un dataset tan complejo co
 
 ::: {.columns}
 ::: {.column width="60%"}
-![](img/clase-8/transfer_learning.png){.lightbox fig-align="center"}  
+![](img/clase-7/transfer_learning.png){.lightbox fig-align="center"}  
 :::
 ::: {.column width="40%"}
 ::: {.callout-note appearance="default" icon="false"}
@@ -211,7 +236,7 @@ Además `ImageFolder` posee un parámetro llamado transform en el cuál se puede
 
 ::: {.callout-important appearance="default" icon="false"}
 ## Ojo
-Image Folder entrega los datos como una Imagen PIL. Por lo tanto, es necesario aplicar procesamientos que permitan su transformación en Tensor.
+`ImageFolder` entrega los datos como una Imagen PIL. Por lo tanto, es necesario aplicar procesamientos que permitan su transformación en Tensor.
 :::
 
 ## Data Augmentation {.smaller}
@@ -228,7 +253,7 @@ Corresponde a un proceso de generación de datos sintéticos. Este proceso se pu
     * Ej: Se tiene un modelo de reconocimiento de vehículos, pero que tiene que funcionar en condiciones de niebla.
 :::
 ::: {.column width="30%"}
-![](img/clase-8/augmentations.jpg){.lightbox fig-align="center" width="90%"}  
+![](img/clase-7/augmentations.jpg){.lightbox fig-align="center" width="90%"}  
 :::
 ::: 
 
@@ -294,7 +319,7 @@ Existen un sinnúmero de transformaciones que se pueden aplicar. La lista comple
 Aplicar estas transformaciones es de extremo cuidado ya que para tareas más complejas como Semantic Segmentation, Object Detection, Keypoint Detection, se debe aplicar dichas transformaciones también a las etiquetas. 
 :::
 
-# Class Dismissed
+# Terminamos con las CNN
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
