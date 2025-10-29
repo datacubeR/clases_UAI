@@ -476,14 +476,20 @@ Es importante tener noción del tamaño de la imagen para poder escoger un *kern
 Pooling
 : El Pooling es una operación de agregación que permite ir disminuyendo el tamaño de las entradas. De esta manera la red puede comenzar a especializarse en aspectos cada vez más finos. 
 
+::::{.columns}
+:::{.column}
 ::: {.callout-note}
 El Pooling también se aplica de manera móvil como una convolución. Pero a diferencia de esta normalmente no genera traslape.
 :::
 ::: {.callout-tip}
 Acá se introduce otro hiperparámetro que es el ***Pooling Size***. En general es cuadrado y de dimensión par, y utiliza un stride del mismo tamaño que el ***Pooling Size*** para evitar traslapes.
 :::
+:::
+:::{.column}
+![](img/clase-6/pooling_gif.gif){.lightbox fig-align="center"}
+:::
+::::
 
-![](img/clase-7/pooling.png){.lightbox fig-align="center" width="35%"} 
 
 
 ## Pooling in Pytorch {.smaller}
@@ -524,6 +530,8 @@ El Average Pool no permite Dilation.
 Independientemente del tamaño de la imagen de entrada, el Adaptive Pooling siempre genera una salida de tamaño fijo, ya que ajusta sus parámetros para asegurar que la dimensión de salida sea la deseada.
 
 
+::::{.columns}
+:::{.column}
 ```{.python}
 nn.AdaptiveAvgPool2d(output_size)
 nn.AdaptiveMaxPool2d(output_size, return_indices=False)
@@ -531,6 +539,12 @@ nn.AdaptiveMaxPool2d(output_size, return_indices=False)
 :::{.callout-tip appearance="default" icon="false"}
 ## `return_indices=True` permite devolver en qué posiciones se encontraron los valores máximos, lo cual es útil para operaciones de ***unpooling*** para revertir el proceso de pooling.
 :::
+:::
+:::{.column}
+![](img/clase-6/pooling.png){.lightbox fig-align="center"}
+:::
+::::
+
 
 ## MNIST con CNN {.smaller}
 
