@@ -1039,13 +1039,13 @@ El Pooling es una operación de agregación que permite ir disminuyendo el tama�
 <span id="cb11-3"><a></a>kH, kW <span class="op">=</span> (<span class="dv">3</span>,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="co">## 2 filtros de un Canal de tamaño 3x3</span></span>
 <span id="cb12-2"><a></a>given_w <span class="op">=</span> torch.tensor([</span>
-<span id="cb12-3"><a></a>        [[[<span class="op">-</span><span class="fl">1.</span>,  <span class="fl">0.</span>,  <span class="fl">1.</span>],</span>
-<span id="cb12-4"><a></a>          [ <span class="fl">0.</span>, <span class="op">-</span><span class="fl">1.</span>,  <span class="fl">1.</span>],</span>
-<span id="cb12-5"><a></a>          [ <span class="fl">0.</span>,  <span class="fl">0.</span>,  <span class="fl">1.</span>]]],</span>
+<span id="cb12-3"><a></a>        [[[<span class="fl">1.</span>,  <span class="fl">1.</span>,  <span class="fl">0.</span>],</span>
+<span id="cb12-4"><a></a>          [ <span class="op">-</span><span class="fl">1.</span>, <span class="fl">1.</span>,  <span class="op">-</span><span class="fl">1.</span>],</span>
+<span id="cb12-5"><a></a>          [ <span class="fl">0.</span>,  <span class="op">-</span><span class="fl">1.</span>,  <span class="op">-</span><span class="fl">1.</span>]]],</span>
 <span id="cb12-6"><a></a></span>
-<span id="cb12-7"><a></a>        [[[<span class="op">-</span><span class="fl">1.</span>, <span class="op">-</span><span class="fl">1.</span>,  <span class="fl">0.</span>],</span>
-<span id="cb12-8"><a></a>          [ <span class="fl">1.</span>,  <span class="fl">0.</span>,  <span class="fl">0.</span>],</span>
-<span id="cb12-9"><a></a>          [ <span class="fl">1.</span>,  <span class="fl">1.</span>,  <span class="fl">0.</span>]]]])</span>
+<span id="cb12-7"><a></a>        [[[<span class="fl">1.</span>, <span class="fl">1.</span>,  <span class="fl">0.</span>],</span>
+<span id="cb12-8"><a></a>          [<span class="op">-</span><span class="fl">1.</span>,  <span class="fl">1.</span>,  <span class="op">-</span><span class="fl">1.</span>],</span>
+<span id="cb12-9"><a></a>          [ <span class="op">-</span><span class="fl">1.</span>,  <span class="fl">0.</span>,  <span class="op">-</span><span class="fl">1.</span>]]]])</span>
 <span id="cb12-10"><a></a>given_w.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>(2,1,3,3)</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>given_bias <span class="op">=</span> torch.tensor([<span class="fl">1.</span>, <span class="fl">1.</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
