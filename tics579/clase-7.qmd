@@ -1,6 +1,6 @@
 ---
 title: "TICS-579-Deep Learning"
-subtitle: "Clase 7: Transfer Learning y Data Augmentation"
+subtitle: "Clase 7: Transfer Learning y Image Augmentation"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
