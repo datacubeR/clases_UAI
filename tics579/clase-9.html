@@ -200,7 +200,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-579-Deep Learning</h1>
-  <p class="subtitle">Clase 9: Redes Recurrentes</p>
+  <p class="subtitle">Clase 9: Manipulación de Datos de Texto</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -214,728 +214,475 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="datos-secuenciales" class="slide level2 smaller">
-<h2>Datos Secuenciales</h2>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Hasta ahora, asumimos que todos nuestros datos son <strong><em>i.i.d</em></strong>. Pero en la realidad existen datos que contienen una secuencia temporal y que debe ser considerada al momento de modelarlos.</p>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<h4 id="time-series">Time Series</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/timeseries.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-9/timeseries.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
-<h4 id="audio">Audio</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/audio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-9/audio.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<h4 id="text">Text</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/text.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-9/text.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-<h4 id="genoma">Genoma</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/genom.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-9/genom.jpeg" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="datos-secuenciales-1" class="slide level2 smaller">
-<h2>Datos Secuenciales</h2>
-<blockquote>
-<p>También pudiesen existir datos “multimodales”, donde por ejemplo, se combinan secuencias con imágenes.</p>
-</blockquote>
-<div class="columns">
-<div class="column">
-<h4 id="image-time-series">Image Time Series</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/image_ts.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-9/image_ts.jpg" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<h4 id="video">Video</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/video.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-9/video.gif" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="modelamiento-de-una-secuencia" class="slide level2 smaller">
-<h2>Modelamiento de una secuencia</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/sequence_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-9/sequence_example.png" class="quarto-figure quarto-figure-center" style="width:35.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>En este caso consideramos que <span class="math inline">\(x_t\)</span> corresponde a la instancia de un dato en el tiempo <span class="math inline">\(t\)</span> asociado a un target <span class="math inline">\(y_t\)</span>. Además tenemos cierta dependencia entre los elementos en <span class="math inline">\(t\)</span> y <span class="math inline">\(t+1\)</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Es importante notar que <span class="math inline">\(x_t\)</span> no tiene por qué ser un escalar, sino que puede ser un vector de constituidos por varios features.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ojo</strong></p>
-</div>
-<div class="callout-content">
-<p>Un dato corresponde una secuencia de elementos, por lo tanto <span class="math inline">\(x = [x_1,x_2,...x_L]\)</span>, donde <span class="math inline">\(L\)</span> es el largo de la secuencia.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="modelamiento-de-una-secuencia-ejemplo" class="slide level2 smaller">
-<h2>Modelamiento de una secuencia: Ejemplo</h2>
-<h4 id="part-of-speech-tagging">Part of Speech Tagging</h4>
-<div class="r-stack">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/pos.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-9/pos.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/pos_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-9/pos_2.png" class="fragment quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Es importante recalcar que la correcta descripción de cada palabra depende del contexto en el que se está usando y no sólo la palabra en sí misma.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="speech-recognition" class="slide level2">
-<h2>Speech Recognition</h2>
-<blockquote>
-<p>El contexto ayuda a interpretar cuál es la manera correcta de interpretar el sonido emitido.</p>
-</blockquote>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/meme_speech.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-9/meme_speech.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</section>
-<section id="recurrent-neural-networks" class="slide level2 smaller">
-<h2>Recurrent Neural Networks</h2>
-<dl>
-<dt>RNN</dt>
-<dd>
-Corresponden a un tipo de red neuronal diseñada para procesar secuencias de datos manteniendo en memoria los inputs previos. A diferencia de los otros tipos de redes que procesan datos de manera independiente, acá existen conexiones cíclicas que permiten retener información en el tiempo.
-</dd>
-</dl>
-<h3 id="ejemplo">Ejemplo</h3>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/forecast_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-9/forecast_example.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Pros</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Pueden tomar secuencias de distinto tamaño (Largo) como predictores de un problema.</li>
-<li>Toman como antecedentes los puntos pasados como referencia para las predicciones futuras.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Cons</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Se van complicando a medida que las secuencias son cada vez más largas.</li>
-<li>Vanishing/Exploding Gradients Problem.</li>
-</ul>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="rnns" class="slide level2 smaller">
-<h2>RNNs</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/RNN_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-9/RNN_example.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Supongamos los siguientes parámetros para nuestro modelo:</p>
-<ul>
-<li><span class="math inline">\(W_1\)</span> = 1.8</li>
-<li><span class="math inline">\(W_2\)</span> = -0.5</li>
-<li><span class="math inline">\(W_3\)</span> = 1.1</li>
-<li><span class="math inline">\(sigma(\cdot) = ReLU(\cdot)\)</span></li>
-<li>Consideraremos los bias como 0.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/rnn_output.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-9/rnn_output.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ojo</strong></p>
-</div>
-<div class="callout-content">
-<p>Esta es solamente una secuencia de largo 9.</p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="unrolled-rnn" class="slide level2 smaller">
-<h2>Unrolled RNN</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/rnn_unroll.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-9/rnn_unroll.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>El <strong><em>“Unrollment”</em></strong> o el desenrollar la Red, se refiere a generar copias de las redes que irán recibiendo las salidas de las capas en un <span class="math inline">\(t\)</span> anterior. Estos valores, conocidos como <strong><em>“hidden state”</em></strong>, irán alimentando las siguientes copias considerando los casos anteriores. Sólo el último output es el que nos interesa para la predicción.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Todos los parámetros de la red (Weights and Biases), son compartidos por cada una de las copias realizadas.</li>
-<li>Se realizarán tantas copias como el largo de la secuencia. Esto permite que pase toda la secuencia “de una sola vez”.</li>
-<li>Sin importar cuantas copias se realicen, el número de parámetros NO aumenta.</li>
-</ul>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="rnn-formalmente" class="slide level2 smaller">
-<h2>RNN formalmente</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/rnn_formal.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-9/rnn_formal.png" class="quarto-figure quarto-figure-center" style="width:45.0%"></a></p>
-</figure>
-</div>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p>donde:</p>
-<p><span class="math display">\[h_t = f(W_{hh} \cdot h_{t-1} + W_{hx} \cdot x_t + b_h)\]</span> <span class="math display">\[y_t = g(W_{yh}\cdot h_{t} + b_y)\]</span></p>
-</div><div class="column" style="width:30%;">
-<ul>
-<li><span class="math inline">\(h_t \in \mathbb{R}^d\)</span></li>
-<li><span class="math inline">\(x_t \in \mathbb{R}^n\)</span></li>
-<li><span class="math inline">\(y_t \in \mathbb{R}^k\)</span></li>
-</ul>
-</div><div class="column" style="width:30%;">
-<ul>
-<li><span class="math inline">\(W_{hh} \in \mathbb{R}^{d \times d}\)</span></li>
-<li><span class="math inline">\(W_{hx} \in \mathbb{R}^{d \times n}\)</span></li>
-<li><span class="math inline">\(W_{yh} \in \mathbb{R}^{k \times d}\)</span></li>
-<li><span class="math inline">\(b_h \in \mathbb{R}^d\)</span></li>
-<li><span class="math inline">\(b_y \in \mathbb{R}^k\)</span></li>
-</ul>
-</div></div>
-</section>
-<section id="stacking-rnns" class="slide level2 smaller">
-<h2>Stacking RNNs</h2>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/stacking_RNN.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-9/stacking_RNN.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Es posible juntar varias capas recurrentes, para que las salidas de una alimenten un siguiente Hidden State, y que luego de algunas capas efectivamente se llegue a las salidas de interés.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>A diferencia de otro tipos de Redes como las Convolucionales o FFN, la profundidad en este tipo de redes es de bastante menos impacto.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>OJO</strong></p>
-</div>
-<div class="callout-content">
-<p>No existen salidas intermedias, sino que los Hidden States de capas anteriores son utilizados directamente como inputs de los hidden states posteriores.</p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="vanishingexploding-gradients" class="slide level2 smaller">
-<h2>Vanishing/Exploding Gradients</h2>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<ul>
-<li>Entre más larga se la secuencia (más unrolls se realicen), más difícil es entrenar la red.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/exploding-vanishing_gradient.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-9/exploding-vanishing_gradient.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<p><span class="math display">\[Output = Input \times W_2^{N_{Unroll}}\]</span></p>
-<ul>
-<li><p>Si <span class="math inline">\(W_2\)</span> corresponde a parámetros muy pequeños (menores a 1), entonces, el gradiente se desvanecerá (vanishing gradient).</p></li>
-<li><p>Si <span class="math inline">\(W_2\)</span> corresponde a parámetros muy grandes (mayores a 1), entonces, el gradiente explotará (exploding gradient).</p></li>
-</ul>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Esto ocurre ya que si intentamos derivar la función de pérdida con respecto a alguno de los parámetros, eventualmente <span class="math inline">\(W_2^{N_unroll}\)</span> aparecerá en la ecuación, provocando dicho efecto en el gradiente.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Esta es quizás la razón más importante del por qué <code>Vanilla RNNs</code> son usadas rara vez en la práctica. Lo importante histórica de este tipo de redes es que abrieron las puertas a sistemas más modernos que hoy en día sí son usados (LSTMs, y Transformers).</p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="lstm-formalmente" class="slide level2 smaller">
-<h2>LSTM: Formalmente</h2>
-<dl>
-<dt>LSTMs</dt>
-<dd>
-Es un tipo de Red Neuronal Recurrente que está diseñada para capturar dependencias de largo rango en datos secuenciales abordando algunas de las limitaciones de las RNNs tradicionales, tales como el <code>vanishing gradient problem</code>.
-</dd>
-</dl>
-<div class="columns">
-<div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/LSTM_formal.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-9/LSTM_formal.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Corresponde a la misma forma de una RNN, sólo que el “hidden state” se divide en dos partes: <span class="math inline">\(h_t\)</span> y <span class="math inline">\(C_t\)</span>, llamados “hidden state” y “cell state” respectivamente.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>La manera de calcular el “Hidden State” y el “Cell State” es muchísimo más engorrosa.</p>
-</div>
-</div>
-</div>
-</div></div>
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Spoiler: El Hidden y Cell State está compuesto por multiples set de parámetros a los cuales se les dan los nombres de <code>forget gate</code>, <code>input gate</code>, <code>cell gate</code> y <code>output gate</code>. Su interpretabilidad nunca ha logrado ser completamente explicada.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="long-short-term-memory-rnns-1997" class="slide level2 smaller">
-<h2>Long Short-Term Memory RNNs (1997)</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/LSTM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-9/LSTM.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="columns">
-<div class="column" style="font-size: 80%;">
-<ul>
-<li><p>La LSTM está regida por las siguientes ecuaciones:</p></li>
-<li><p><span class="math display">\[i_t = \sigma(W_{ii}x_t) + b_{ii} + W_{hi}h_{t-1} + b_{hi}\]</span></p></li>
-<li><p><span class="math display">\[f_t = \sigma(W_{if}x_t + b_{if} + W_{hf}h_{t-1} + b_{hf})\]</span></p></li>
-<li><p><span class="math display">\[g_t = tanh(W_{ig}x_t + b_{ig} + W_{hg}h_{t-1} + b_{hg})\]</span></p></li>
-<li><p><span class="math display">\[o_t = \sigma(W_{io}x_t + b_{io} + W_{ho}h_{t-1} + b_{ho})\]</span></p></li>
-<li><p><span class="math display">\[c_t = f_t \odot c_{t-1} + i_t \odot g_t\]</span></p></li>
-<li><p><span class="math display">\[h_t = o_t \odot tanh(c_t)\]</span></p></li>
-</ul>
-</div><div class="column">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Todas estos elementos <span class="math inline">\(i_t,f_t, g_t,o_t, c_t,h_t \in \mathbb{R}^d\)</span>, donde <span class="math inline">\(d\)</span> corresponde a la “hidden dimension”.</p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="lstm-forget-gate" class="slide level2">
-<h2>LSTM: Forget Gate</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/forget_gate.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-9/forget_gate.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
-</figure>
-</div>
-<div style="font-size: 85%;">
-<div class="callout callout-caution no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Forget Gate</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Corresponde a una red neuronal que indica qué informacion debe ser descartada del <code>Cell State</code>.</li>
-<li>Básicamente combina la secuencia en el tiempo t y el hidden state anterior.</li>
-<li>Luego se le aplica una Sigmoide que indicará el <code>porcentaje</code> a olvidar.</li>
-</ul>
-<p><span class="math display">\[f_t = \sigma(W_{if}x_t + b_{if} + W_{hf}h_{t-1} + b_{hf})\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="lstm-input-y-cell-gate" class="slide level2">
-<h2>LSTM: Input y Cell Gate</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/input_gate.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-9/input_gate.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></a></p>
-</figure>
-</div>
-<div style="font-size: 70%;">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Input Gate</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Controla Cuánta información debe ingresar al <code>Cell State</code>.</li>
-</ul>
-<p><span class="math display">\[i_t = \sigma(W_{ii}x_t) + b_{ii} + W_{hi}h_{t-1} + b_{hi}\]</span></p>
-</div>
-</div>
-</div>
-</div>
-<div style="font-size: 70%">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Cell Gate</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Representa los potenciales nuevos candidatos a entrar al <code>Cell State</code>.</li>
-</ul>
-<p><span class="math display">\[g_t = tanh(W_{ig}x_t + b_{ig} + W_{hg}h_{t-1} + b_{hg})\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="output-gate-y-hidden-state" class="slide level2">
-<h2>Output Gate y Hidden State</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/output_gate.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-9/output_gate.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></a></p>
-</figure>
-</div>
-<div style="font-size: 70%;">
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Output Gate</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><p>Determina qué “porcentaje” de información del “Cell State” debe salir como “Hidden State” para el tiempo <span class="math inline">\(t\)</span> actual.</p></li>
-<li><p><span class="math display">\[o_t = \sigma(W_{io}x_t + b_{io} + W_{ho}h_{t-1} + b_{ho})\]</span></p></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div style="font-size: 70%;">
+<section id="natural-language-processing-nlp" class="slide level2 smaller">
+<h2>Natural Language Processing (NLP)</h2>
 <div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Hidden State</strong></p>
+<p><strong>🔔</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>Corresponde a las dependencias del tiempo anterior que se van traspasando en cada time step.</li>
-<li>Adicionalmente el Hidden State corresponde a la salida de la red para el tiempo <span class="math inline">\(t\)</span>.</li>
-</ul>
-<p><span class="math display">\[h_t = o_t \odot tanh(c_t)\]</span></p>
+<p>El Natural Language Processing (NLP) es el área que se dedica al análisis y procesamiento de Texto. Existe una variedad de tareaas que se pueden abordar utilizando técnicas de Deep Learning tales como:</p>
 </div>
 </div>
 </div>
-</div>
-</section>
-<section id="cell-state" class="slide level2">
-<h2>Cell State</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-9/cell_state.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="img/clase-9/cell_state.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
-</figure>
-</div>
-<div style="font-size: 90%;">
-<div class="callout callout-none no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Cell State</strong></p>
-</div>
-<div class="callout-content">
-<p>Representa la principal innovación de este tipo de redes ya que permite recordar dependencias de largo plazo (es decir time steps anteriores en secuencias largas). Esto ya que el Cell State puede avanzar casi sin interacciones lineales (no hay parámetros que influyen en ella, por lo que no es afectada por problemas de gradientes).</p>
-<p><span class="math display">\[c_t = f_t \odot c_{t-1} + i_t \odot g_t\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="gated-recurrent-unit-2014" class="slide level2 smaller">
-<h2>Gated Recurrent Unit (2014)</h2>
-<dl>
-<dt>GRU</dt>
-<dd>
-Corresponde a otro tipo de Arquitectura Recurrente, similar a la LSTM, pero con una estructura más simplificada en la cuál se mantiene sólo un “Hidden State” y se tienen menos gates.
-</dd>
-</dl>
 <div class="columns">
-<div class="column">
+<div class="column" style="width:30%;">
+<p><a href="img/clase-10/sentiment_analysis.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-10/sentiment_analysis.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-10/summarization.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-10/summarization.jpg" class="quarto-figure quarto-figure-center"></a></p>
+</div><div class="column" style="width:40%;">
+<p><a href="img/clase-10/ner.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-10/ner.jpg" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-10/neural_translation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-10/neural_translation.png" class="quarto-figure quarto-figure-center"></a></p>
+</div><div class="column" style="width:30%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/GRU.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="img/clase-9/GRU.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-10/question_answering.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-10/question_answering.jpg" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-<div class="callout callout-caution no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Hidden State</strong></p>
-</div>
-<div class="callout-content">
-<p>Representa la potencial actualización del “Hidden State”.</p>
-<p><span class="math display">\[h_t = (1-z_t) \odot n_t + z_t \odot h_{t-1}\]</span></p>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Update Gate</strong></p>
-</div>
-<div class="callout-content">
-<p>Controla qué porcentaje del “hidden state” previo se lleva al siguiente paso.</p>
-<p><span class="math display">\[z_t = \sigma(W_{iz} x_t + b_{iz} + W_{hz}h_{t-1} + b_{hz})\]</span></p>
-</div>
-</div>
+</div></div>
+</section>
+<section id="speech-recognition" class="slide level2">
+<h2>Speech Recognition</h2>
+<p>Dada la naturaleza secuencial del lenguaje, el contexto ayuda a interpretar cuál es la manera correcta de interpretar el sonido emitido.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/meme_speech.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-9/meme_speech.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
 </div>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Reset Gate</strong></p>
+<p><strong>El problema</strong></p>
 </div>
 <div class="callout-content">
-<p>Controla cuánta información del pasado se debe olvidar.</p>
-<p><span class="math display">\[r_t = \sigma(W_{ir} x_t + b_{ir} + W_{hr}h_{t-1} + b_{hr})\]</span></p>
+<p>¿Cómo hacemos que una red neuronal entienda y procese el texto?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="proceso-de-tokenización-y-embedding" class="slide level2 smaller">
+<h2>Proceso de Tokenización y Embedding</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Tokenización</strong></p>
+</div>
+<div class="callout-content">
+<p>El proceso de Tokenización permite transformar texto en datos numéricos. Cada dato numérico se mapea con un “trozo de texto”. Normalmente los modelos van asociados a la tokenización con la que fueron entrenados. Cambiar la tokenización puede generar gran degradación.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Candidate Hidden State</strong></p>
+<p><strong>Embedding</strong></p>
 </div>
 <div class="callout-content">
-<p>Representa la potencial actualización del “Hidden State”.</p>
-<p><span class="math display">\[n_t = tanh(W_{in} x_t + b_{in} + r_t \odot (W_{hn} h_{t-1} + b_{hn}))\]</span></p>
+<p>Corresponde el proceso en el que los Tokens se transforman en vectores densos en las cuales la distancia entre ellos representa una noción de similaridad.</p>
 </div>
 </div>
+</div>
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<ul>
+<li>En este caso la frase <strong><em>“Frog on a log” </em></strong> es separada en Tokens (en este caso cada token es una palabra).</li>
+<li>Luego cada Token es mapeado a un Token id proveniente de un vocabulario. <strong><em>¿Qué es un vocabulario?</em></strong></li>
+<li>Los embeddings en este caso representan una secuencia de largo 7 con 3 dimensiones.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/tokenization_process.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-10/tokenization_process.jpg" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
 </div>
 </div></div>
 </section>
-<section id="bidirectional-rnns" class="slide level2 smaller">
-<h2>Bidirectional RNNs</h2>
-<p>Existen ocasiones en las que se requiere no sólo el contexto de los tiempos anteriores, sino también de los posteriores. Por ejemplo, problemas de traducción.</p>
-<blockquote>
-<p>Para ello existen las redes bidireccionales, en la cual se agrega una segunda capa pero que mueve los hidden state en el otro sentido.</p>
-</blockquote>
-<div class="columns">
-<div class="column">
+<section id="embeddings" class="slide level2 smaller">
+<h2>Embeddings</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-9/bidirectional.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="img/clase-9/bidirectional.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-10/embedding_space.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-10/embedding_space.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>¿Por qué es tan importante el uso de Embeddings?</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Primero porque son entrenables. Es decir la red puede aprender cuál es la mejor manera de representar palabras.</li>
+<li>Existen embeddings pre-entrenados, es decir, se puede hacer transfer learning de embeddings.</li>
+<li>La red puede aprender relaciones semánticas entre palabras, algo imposible utilizando otras representaciones.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="un-tensor-de-texto" class="slide level2 smaller">
+<h2>Un tensor de Texto</h2>
+<div class="columns">
+<div class="column">
+<h4 id="tokenización-1">Tokenización</h4>
+<p>Suponiendo un Tensor de Entrada que representa 4 frases de 6 Tokens cada una:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>X <span class="op">=</span> torch.tensor([[<span class="dv">42</span>, <span class="dv">67</span>, <span class="dv">76</span>, <span class="dv">14</span>, <span class="dv">26</span>, <span class="dv">35</span>],</span>
+<span id="cb1-2"><a></a>        [<span class="dv">20</span>, <span class="dv">24</span>, <span class="dv">50</span>, <span class="dv">13</span>, <span class="dv">78</span>, <span class="dv">14</span>],</span>
+<span id="cb1-3"><a></a>        [<span class="dv">10</span>, <span class="dv">54</span>, <span class="dv">31</span>, <span class="dv">72</span>, <span class="dv">15</span>, <span class="dv">95</span>],</span>
+<span id="cb1-4"><a></a>        [<span class="dv">67</span>,  <span class="dv">6</span>, <span class="dv">49</span>, <span class="dv">76</span>, <span class="dv">73</span>, <span class="dv">11</span>]])</span>
+<span id="cb1-5"><a></a><span class="bu">print</span>(X.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>(4, 6)</code></pre>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>👀 Una palabra no necesariamente es un solo Token. <a href="https://tiktokenizer.vercel.app/?model=meta-llama%2FMeta-Llama-3-8B">Ver acá</a></strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🚨 La tokenización depende del vocabulario utilizado. La Tokenización va de la mano con el embedding y con el modelo a utilizar.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
 </div><div class="column">
+<h4 id="embedding-1">Embedding</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>emb <span class="op">=</span> nn.Embedding(<span class="dv">100</span>, <span class="dv">3</span>)</span>
+<span id="cb3-2"><a></a>output <span class="op">=</span> emb(X)</span>
+<span id="cb3-3"><a></a><span class="bu">print</span>(<span class="st">"Shape de un Embedding:"</span>, output.shape)</span>
+<span id="cb3-4"><a></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>tensor([[[-1.4391,  0.5214,  1.0414],
+         [-0.8293, -1.0809, -0.7839],
+         [ 0.6427,  0.5742,  0.5867],
+         [-1.0759,  0.5357,  1.1754],
+         [ 0.2191,  0.5526, -0.6788],
+         [ 0.5069, -0.4752, -0.4920]],
+
+        [[-0.5644,  1.0563, -1.4692],
+         [-0.1976,  1.2683,  1.2243],
+         [-0.5855, -0.3900,  0.9812],
+         [-0.4459, -1.2024,  0.7078],
+         [-0.9109, -0.5291, -0.8051],
+         [-1.0759,  0.5357,  1.1754]],
+
+        [[-1.3864, -1.2862, -0.8371],
+         [-1.4510, -0.7861, -0.9563],
+         [ 0.2332,  4.0356,  1.2795],
+         [-1.5754,  2.2508,  1.0012],
+         [ 0.5612, -0.4527, -0.7718],
+         [ 0.3714, -0.0047,  0.0795]],
+
+        [[-0.8293, -1.0809, -0.7839],
+         [ 1.5736, -0.8455,  1.3123],
+         [ 1.1179, -1.2956,  0.0503],
+         [ 0.6427,  0.5742,  0.5867],
+         [ 1.3642,  0.6333,  0.4050],
+         [-0.9224,  1.8113,  0.1606]]])</code></pre>
+</div></div>
+</section>
+<section id="tokens-especiales" class="slide level2 smaller">
+<h2>Tokens Especiales</h2>
+<p>Cada modelo puede incluir el tipo de Tokenización que más le acomode. Además cada tokenización suele incluir tokens especiales que ayudan a la red a entender mejor el contexto o a resolver problemas intrínsecos del modelamiento de secuencias. Algunos de estos Tokens especiales son:</p>
+<ul>
+<li><pad> : Token utilizado para rellenar secuencias más cortas y que todas tengan el mismo largo.</pad></li>
+<li><sos> <bos> : Start of Sequence/Beginning of Sequence. Token que indica el inicio de una secuencia.</bos></sos></li>
+<li><eos> : End of Sequence. Token que indica el final de una secuencia.</eos></li>
+<li><unk> : Unknown Token. Token utilizado para representar palabras fuera del vocabulario.</unk></li>
+<li><mask> : Token utilizado en tareas de Masked Language Modeling (MLM) para indicar palabras que deben ser predichas por el modelo.</mask></li>
+<li><sep> : Separator Token. Utilizado para separar diferentes partes de una secuencia, como en tareas de preguntas y respuestas.</sep></li>
+<li><cls> : Classification Token. Utilizado en tareas de clasificación para representar toda la secuencia.</cls></li>
+</ul>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🚩 Ojo</strong></p>
+</div>
+<div class="callout-content">
+<p>Exiten tantos tokens especiales como tokenizadores y modelos existen. Siempre revisar la documentación del modelo a utilizar. Algunos también indican roles como por ejemplo en el caso de un asistente, se indica el rol del asistente, del usuario, y prompts de sistemas.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="problema-de-las-rnn-comunes" class="slide level2 smaller">
+<h2>Problema de las RNN comunes</h2>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>A pesar de las habilidades de las RNN, estas no son suficientes para distintas tareas de NLP.</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/rnn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-10/rnn.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p>Las RNN inicialmente toman cada elemento de una secuencia y generan un output para cada entrada. Esto genera ciertas limitantes en tareas como Machine Translation, donde por ejemplo, el modelo asume que la traducción es uno a uno, lo cuál no es necesariamente cierto.</p>
+</section>
+<section id="machine-translation-ejemplo-del-inglés" class="slide level2 smaller">
+<h2>Machine Translation: Ejemplo del Inglés</h2>
+<p>Supongamos que necesitamos hacer la siguiente traducción:</p>
+<dl>
+<dt>Inglés</dt>
+<dd>
+<blockquote>
+<p>Hi, my name is Alfonso</p>
+</blockquote>
+</dd>
+</dl>
+<div class="fragment">
+<dl>
+<dt>Español</dt>
+<dd>
+<blockquote>
+<p>Hola, mi nombre es Alfonso</p>
+</blockquote>
+</dd>
+</dl>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
+<p>Este tipo de traducción es uno a uno. Cada input puede tener asociado una salida de manera directa puede realizarse de manera directa con una RNN.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="machine-translation-ejemplo-del-inglés-1" class="slide level2 smaller">
+<h2>Machine Translation: Ejemplo del Inglés</h2>
+<dl>
+<dt>Inglés</dt>
+<dd>
+<blockquote>
+<p>Would you help me prepare something for tomorrow?</p>
+</blockquote>
+</dd>
+</dl>
+<div class="fragment">
+<dl>
+<dt>Español</dt>
+<dd>
+<blockquote>
+<p>¿Me ayudarías a preparar algo para mañana?</p>
+</blockquote>
+</dd>
+</dl>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>⛔ Problemas</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li>En este caso la capa amarilla será la encargada de detectar dependencias del pasado.</li>
-<li>Mientras que la capa verde será la encargada de traer dependencias desde el futuro.</li>
+<li>La traducción no es uno. De hecho en inglés se utilizan 8 palabras y 1 signo de puntuación. En español se traduce en 7 palabras y 2 signos de puntuación.</li>
+<li><em>“Would”</em> no tiene equivalente en español.</li>
+<li><em>“a”</em> no tiene equivalente en el inglés.</li>
+<li><em>“Me”</em> se traduce como <em>“me”</em> en inglés pero en vez de ir al inicio, va continuación de <em>“help”</em>.</li>
+<li>“<em>¿</em>” no existe en inglés.</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="callout callout-important callout-style-simple">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
+<div class="callout-title">
+<p><strong>🔔</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Otros idiomas como el Alemán o el Ruso, tienen fusión de palabras o declinaciones que hacen la traducción mucho más difícil.</li>
+<li>Es por ello que se requiere una cierta libertad entre los tokens de entradas y los tokens de salida.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="soluciones-redes-convolucionales" class="slide level2 smaller">
+<h2>Soluciones: Redes Convolucionales</h2>
+<p>Una potencial solución se puede dar por medio de Redes Convolucionales de 1D. En este caso las redes convolucionales tienen la ventaja de poder mirar tanto al pasado como al futuro de manera móvil.</p>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/conv1d.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-10/conv1d.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
+<p><strong>Ventajas</strong></p>
+</div>
 <div class="callout-content">
-<p>Los hidden states pueden ser capas Vanilla RNN, LSTM o GRUs.</p>
+<ul>
+<li>Pueden tomar contexto desde el inicio y desde el final.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Desventajas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Su campo receptivo es mucho más acotado y depende del número de capas y el largo del Kernel lo cual repercute directamente en el número de parámetros del modelo.</li>
+<li>No tienen estado latente (o memoria) que almacena contexto.</li>
+<li>No es útil para modelos de generación (ya que ve contexto desde el futuro).</li>
+</ul>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="pytorch-layers" class="slide level2">
-<h2>Pytorch Layers</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>nn.RNN(input_size, hidden_size, num_layers<span class="op">=</span><span class="dv">1</span>, batch_first<span class="op">=</span><span class="va">False</span>, </span>
-<span id="cb1-2"><a></a>        dropout<span class="op">=</span><span class="dv">0</span>, bidirectional<span class="op">=</span><span class="va">False</span>, nonlinearity<span class="op">=</span><span class="st">"tanh"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a>nn.LSTM(input_size, hidden_size, num_layers<span class="op">=</span><span class="dv">1</span>, batch_first<span class="op">=</span><span class="va">False</span>, </span>
-<span id="cb2-2"><a></a>        dropout<span class="op">=</span><span class="dv">0</span>, bidirectional<span class="op">=</span><span class="va">False</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>nn.GRU(input_size, hidden_size, num_layers<span class="op">=</span><span class="dv">1</span>, batch_first<span class="op">=</span><span class="va">False</span>, </span>
-<span id="cb3-2"><a></a>        dropout<span class="op">=</span><span class="dv">0</span>, bidirectional<span class="op">=</span><span class="va">False</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div style="font-size: 60%;">
-<ul>
-<li><strong>input_size</strong>: Corresponde al número de features de la secuencia.</li>
-<li><strong>hidden_size</strong>: Corresponde al número de dimensiones del hidden state.</li>
-<li><strong>num_layers</strong>: Corresponderá al número de capas recurrentes a apilar, por defecto 1.</li>
-<li><strong>batch_first</strong>: Este siempre deben fijarlo como True, de esa manera se espera que los tensores a recibir siempre tengan el batch como primera dimensión. Por defecto False.
-<ul>
-<li>Luego RNNs esperan tensores de tamaño <span class="math inline">\((N,L,H_{in})\)</span>. Donde <span class="math inline">\(N\)</span> es el batch_size, <span class="math inline">\(L\)</span> es el largo de secuencia y <span class="math inline">\(H_in\)</span> es el <code>input_size</code>.</li>
-</ul></li>
-<li><strong>dropout</strong>: Cantidad de dropout a aplicar a la salida de cada capa, excepto la última. Por defecto 0.</li>
-<li><strong>bidirectional</strong>: Indica si se hace la red Bidireccional o no. Por defecto <code>False</code>.</li>
-<li><strong>nonlinearity</strong>: Función de activación a utilizar para activar cada matriz de peso. Puede ser <strong><em>“tanh”</em></strong> o <strong><em>“relu”</em></strong>. Sólo para Vanilla RNN.</li>
-</ul>
+<section id="soluciones-arquitecturas-encoder-decoder" class="slide level2 smaller">
+<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
+<dl>
+<dt>Encoder</dt>
+<dd>
+Corresponde a una arquitectura que permitirá tomar datos de entrada y codificarlos en una representación numérica (normalmente como hidden states, embeddings o logits).
+</dd>
+<dt>Decoder</dt>
+<dd>
+Corresponde a una arquitectura que toma una representación codificada de datos (normalmente generado por un encoder) y la transforma nuevamente en una salida con un formato comprensible y no solamente una “simple etiqueta”.
+</dd>
+</dl>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/autoencoder.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-10/autoencoder.jpeg" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Este tipo de arquitecturas son quizás las más populares hoy en día y tienen aplicaciones en distintos dominios.</p>
+</div>
+</div>
 </div>
 </section>
-<section id="shas-tá" class="title-slide slide level1 center">
-<h1>Sha’s tá</h1>
+<section id="soluciones-arquitecturas-encoder-decoder-1" class="slide level2 smaller">
+<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Una arquitectura Encoder-Decoder convolucional permite devolver una imagen como salida. Este ejemplo se conoce como Segmentación Semántica.</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/conv_enc-dec.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-10/conv_enc-dec.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</section>
+<section id="soluciones-arquitecturas-encoder-decoder-2" class="slide level2 smaller">
+<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Una arquitectura recurrente permite devolver una secuencia como salida. La cual puede utilizarse para generación o traducción de texto.</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/rnn_enc-dec.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-10/rnn_enc-dec.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Ventajas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Permite “desligarse” de la predicción uno a uno. El Encoder resuelve una tarea many (la secuencia) to one (un hidden state) y el Decoder resuelve una tarea one (hidden state) to many (secuencia de salida).</li>
+<li>La salida de este tipo de modelos depende principalmente del contexto almacenado en el Hidden State/Bottleneck.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Desventajas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Dado los problemas de Vanishing/Exploding Gradients es ingenuo pensar que todo el contexto de una frase vive en el último hidden state.</li>
+<li>Aún así, son una buena primera aproximación al problema.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="soluciones-arquitecturas-encoder-decoder-3" class="slide level2 smaller">
+<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/neural_translation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-10/neural_translation.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Ojo</strong></p>
+</div>
+<div class="callout-content">
+<p>El último Hidden State del Encoder se utilizará como Hidden State inicial del Decoder.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="entrenamiento" class="slide level2">
+<h2>Entrenamiento</h2>
+</section>
+<section id="teacher-forcing" class="slide level2 smaller">
+<h2>Teacher Forcing</h2>
+</section>
+<section id="padding" class="slide level2">
+<h2>Padding</h2>
+<h3 id="beam-search">Beam Search</h3>
+<h3 class="smaller" id="greedy-search">Greedy Search</h3>
+</section>
+<section id="eso-sería-por-hoy" class="title-slide slide level1 center">
+<h1>Eso sería por hoy 😊</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">

@@ -86,7 +86,7 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579.html</loc>
-    <lastmod>2025-08-13T20:48:15.330Z</lastmod>
+    <lastmod>2025-11-12T22:37:01.008Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411.html</loc>
@@ -101,100 +101,112 @@
     <lastmod>2025-08-07T00:02:47.258Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-4-legacy.html</loc>
-    <lastmod>2025-09-08T21:04:25.906Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-8.html</loc>
+    <lastmod>2025-11-12T21:52:46.479Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-P1.html</loc>
-    <lastmod>2025-08-11T15:27:30.203Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-9.html</loc>
-    <lastmod>2025-08-05T16:18:36.937Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-6.html</loc>
-    <lastmod>2025-11-04T11:25:45.860Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-5.html</loc>
-    <lastmod>2025-10-27T20:50:34.074Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/legacy.html</loc>
-    <lastmod>2025-08-20T22:22:49.694Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/CNN.html</loc>
-    <lastmod>2025-10-29T21:09:03.010Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/CNN-pytorch.html</loc>
-    <lastmod>2025-08-05T16:18:37.050Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/transformers.html</loc>
-    <lastmod>2025-08-05T16:18:37.158Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/control-5.html</loc>
-    <lastmod>2025-08-05T16:18:37.052Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/reg_log.html</loc>
-    <lastmod>2025-09-03T22:47:09.772Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Intro_Pytorch.html</loc>
-    <lastmod>2025-09-24T20:41:04.122Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-11.html</loc>
-    <lastmod>2025-08-05T16:18:36.937Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Emb_grad.html</loc>
-    <lastmod>2025-10-27T20:43:48.575Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/Intro_pytorch_2.html</loc>
-    <lastmod>2025-08-05T16:18:37.051Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/pretrained-models.html</loc>
-    <lastmod>2025-08-05T16:18:37.158Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/Intro_pytorch.html</loc>
-    <lastmod>2025-08-22T17:35:58.731Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Training_Tricks.html</loc>
-    <lastmod>2025-10-22T20:54:26.501Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-2.html</loc>
-    <lastmod>2025-09-03T22:12:42.854Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-7.html</loc>
-    <lastmod>2025-10-29T20:41:05.712Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-4.html</loc>
-    <lastmod>2025-10-22T15:34:08.853Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-3.html</loc>
-    <lastmod>2025-09-24T21:19:57.475Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-10.html</loc>
+    <lastmod>2025-11-12T22:26:31.680Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-1.html</loc>
     <lastmod>2025-08-20T21:28:43.517Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-10.html</loc>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-3.html</loc>
+    <lastmod>2025-09-24T21:19:57.475Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-4.html</loc>
+    <lastmod>2025-10-22T15:34:08.853Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-7.html</loc>
+    <lastmod>2025-11-12T22:37:36.348Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-2.html</loc>
+    <lastmod>2025-09-03T22:12:42.854Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/RNNs.html</loc>
+    <lastmod>2025-11-12T21:30:37.799Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Training_Tricks.html</loc>
+    <lastmod>2025-10-22T20:54:26.501Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/Intro_pytorch.html</loc>
+    <lastmod>2025-08-22T17:35:58.731Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/pretrained-models.html</loc>
+    <lastmod>2025-08-05T16:18:37.158Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/Intro_pytorch_2.html</loc>
+    <lastmod>2025-08-05T16:18:37.051Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Emb_grad.html</loc>
+    <lastmod>2025-10-27T20:43:48.575Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-11.html</loc>
     <lastmod>2025-08-05T16:18:36.937Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Intro_Pytorch.html</loc>
+    <lastmod>2025-09-24T20:41:04.122Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/reg_log.html</loc>
+    <lastmod>2025-09-03T22:47:09.772Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/control-5.html</loc>
+    <lastmod>2025-08-05T16:18:37.052Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/transformers.html</loc>
+    <lastmod>2025-08-05T16:18:37.158Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/CNN-pytorch.html</loc>
+    <lastmod>2025-08-05T16:18:37.050Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Texto.html</loc>
+    <lastmod>2025-11-12T22:05:48.060Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/CNN.html</loc>
+    <lastmod>2025-10-29T21:09:03.010Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/legacy.html</loc>
+    <lastmod>2025-08-20T22:22:49.694Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-5.html</loc>
+    <lastmod>2025-10-27T20:50:34.074Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-6.html</loc>
+    <lastmod>2025-11-04T11:25:45.860Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-9.html</loc>
+    <lastmod>2025-11-12T22:31:03.804Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-P1.html</loc>
+    <lastmod>2025-08-11T15:27:30.203Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-4-legacy.html</loc>
+    <lastmod>2025-09-08T21:04:25.906Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-P2.html</loc>
@@ -206,7 +218,7 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579-labs.html</loc>
-    <lastmod>2025-10-29T20:17:15.706Z</lastmod>
+    <lastmod>2025-11-12T22:32:41.262Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-11.html</loc>

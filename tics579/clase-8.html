@@ -200,7 +200,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-579-Deep Learning</h1>
-  <p class="subtitle">Clase 7: Transfer Learning y Data Augmentation</p>
+  <p class="subtitle">Clase 8: Redes Recurrentes</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -214,447 +214,848 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="arquitecturas-famosas" class="slide level2 smaller">
-<h2>Arquitecturas Famosas</h2>
-<div data-styyle="font-size: 70%;">
-<p>Crear arquitecturas de CNN desde cero es una tarea compleja y que requiere de mucho conocimiento y experiencia. Afortunadamente, existen diversas arquitecturas famosas que han sido probadas y testeadas en el tiempo, las cuáles pueden ser utilizadas como <strong><em>backbones</em></strong> para distintas tareas de Visión por Computador.</p>
+<section id="datos-secuenciales" class="slide level2 smaller">
+<h2>Datos Secuenciales</h2>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Hasta ahora, hemos asumido que los datos con los que trabajamos son independientes e idénticamente distribuidos (i.i.d). Sin embargo, en muchos casos, los datos tienen una estructura secuencial que debe ser considerada al momento de modelarlos. Algunos ejemplos comunes de datos secuenciales incluyen:</p>
+</div>
+</div>
 </div>
 <div class="columns">
-<div class="column" style="width:30%;">
+<div class="column">
+<h4 id="time-series-precios-de-acciones-datos-meteorológicos-etc">Time Series (precios de acciones, datos meteorológicos, etc)</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/resnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-7/resnet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-8/timeseries.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-8/timeseries.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
-</div><div class="column" style="width:40%;">
-<p><a href="img/clase-7/lenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-7/lenet.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-7/VGG16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-7/VGG16.png" class="quarto-figure quarto-figure-center"></a></p>
-</div><div class="column" style="width:30%;">
+<h4 id="audio-grabaciones-de-voz-música-etc">Audio (grabaciones de voz, música, etc)</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/EfficientNet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-7/EfficientNet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+<p><a href="img/clase-8/audio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-8/audio.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<h4 id="texto-oraciones-documentos-etc">Texto (oraciones, documentos, etc)</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/text.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-8/text.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<h4 id="genoma-secuencias-de-adn-etc.">Genoma (secuencias de ADN, etc.)</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/genom.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-8/genom.jpeg" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 </div></div>
 </section>
-<section id="lenet-5-lecun-et-al.-1998" class="slide level2 smaller">
-<h2>LeNet-5 (LeCun et al., 1998)</h2>
+<section id="datos-secuenciales-1" class="slide level2 smaller">
+<h2>Datos Secuenciales</h2>
 <blockquote>
-<p>Probablemente la primera arquitectura famosa en poder realizar tareas importantes de reconocimiento de imagen. Diseñada especialmente para reconocimiento de dígitos, introduce los bloques de convolución más pooling para luego conectarse con FFN.</p>
+<p>También pudiesen existir datos “multimodales”, donde por ejemplo, se combinan secuencias con imágenes.</p>
 </blockquote>
+<div class="columns">
+<div class="column">
+<h4 id="image-time-series">Image Time Series</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/lenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-7/lenet.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-8/image_ts.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-8/image_ts.jpg" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-<div class="callout callout-caution no-icon callout-titled callout-style-default">
+</div><div class="column">
+<h4 id="video">Video</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/video.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-8/video.gif" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="cómo-se-ven-datos-secuenciales-reales" class="slide level2 smaller">
+<h2>¿Cómo se ven datos secuenciales reales?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/forecast_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-8/forecast_example.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Adaptive Pooling</strong></p>
+<p><strong>Supongamos el siguiente ejemplo:</strong></p>
 </div>
 <div class="callout-content">
-<p>La mayoría de arquitecturas más modernas utiliza una capa llamada Adaptive Pooling antes del proceso de Flatten. El Adaptive Pooling es una especie de Pooling inverso, donde uno define el tamaño del output, y automáticamente se calcula el Kernel, Stride, Padding, etc. necesario para obtener ese tamaño.</p>
-<p>Eso garantiza que cualquier tamaño de imagen puede pasar por la red sin romper las dimensiones necesarias para la transición al MLP.</p>
+<ul>
+<li>Buscamos predecir el porcentaje de retorno de la inversión en función de los retornos obtenidos en días anteriores.</li>
+<li>En este ejemplo, la acción “Azul” cuenta con un historial de 10 días, mientras que la acción “Roja” dispone únicamente de 5 días de historial.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Nos gustaría poder entrenar un modelo capaz de trabajar con datos de entrada de distintas longitudes (secuencias de tamaño variable).</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Queremos que el modelo sea capaz de utilizar información pasada para realizar predicciones sobre valores futuros.</strong></p>
+</div>
+<div class="callout-content">
+
 </div>
 </div>
 </div>
 </section>
-<section id="alexnext-krizhevsky-sutskever-y-hinton-2012" class="slide level2 smaller">
-<h2>AlexNext (Krizhevsky, Sutskever y Hinton, 2012)</h2>
-<blockquote>
-<p>Ganó el concurso Imagenet (ILSVRC) en 2012 por un largo margen (algo impensado para ese tiempo). Introdujo los conceptos de ReLU, Dropout y Aceleración por GPU. Esta arquitectura está disponible en <code>torchvision</code>.</p>
-</blockquote>
+<section id="redes-neuronales-recurrentes-rnns" class="slide level2 smaller">
+<h2>Redes Neuronales Recurrentes (RNNs)</h2>
+<dl>
+<dt>RNN</dt>
+<dd>
+Corresponden a un tipo de red neuronal diseñada para procesar secuencias de datos manteniendo en memoria los inputs previos. A diferencia de los otros tipos de redes que procesan datos de manera independiente, acá existen conexiones cíclicas que permiten retener información en el tiempo.
+</dd>
+</dl>
+<div class="columns">
+<div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-8/alexnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-8/alexnet.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-8/simple_RNN.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-8/simple_RNN.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> torchvision</span>
-<span id="cb1-2"><a></a>torchvision.models.alexnet(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<p><span class="math display">\[h_t = f(x_t \cdot W_{ih}^T + b_{ih} + h_{t-1} \cdot W_{hh}^T + b_{hh})\]</span></p>
+<div class="callout callout-caution callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>En la implementación original <span class="math inline">\(f\)</span> corresponde a la <span class="math inline">\(tanh(\cdot)\)</span>.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="recurrent-neural-networks" class="slide level2 smaller">
+<h2>Recurrent Neural Networks</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Pros</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Pueden tomar secuencias de distinto tamaño (Largo) como predictores de un problema.</li>
+<li>Toman como antecedentes los puntos pasados como referencia para las predicciones futuras.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Cons</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Se van complicando a medida que las secuencias son cada vez más largas.</li>
+<li>Vanishing/Exploding Gradients Problem.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Nomenclatura</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>A las salidas de una RNN se les suele llamar Hidden State (<span class="math inline">\(h_t\)</span>) o Estado Oculto. Este representa la memoria de la red en el tiempo <span class="math inline">\(t\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🚨 Una RNN tiene dos set de parámetros: <span class="math inline">\(W_{ih}\)</span> y <span class="math inline">\(b_{ih}\)</span>, los cuales representan la transformación entre los valores de entrada y el estado oculto, y <span class="math inline">\(W_{hh}\)</span> y <span class="math inline">\(b_{hh}\)</span> los que representan la transformación entre el estado oculto previo y el actual (Feedback Loop).</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>👀 Es importante mencionar que las RNN son aplicadas a la secuencia elemento a elemento.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</section>
+<section id="implementación-básica-de-una-rnn" class="slide level2 smaller">
+<h2>Implementación Básica de una RNN</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>rnn <span class="op">=</span> nn.RNN(input_size<span class="op">=</span><span class="dv">1</span>, hidden_size<span class="op">=</span><span class="dv">2</span>, num_layers<span class="op">=</span><span class="dv">1</span>, batch_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a><span class="kw">def</span> forward_pass_rnn(x):</span>
+<span id="cb1-4"><a></a>    N, L, D <span class="op">=</span> x.shape </span>
+<span id="cb1-5"><a></a>    h<span class="op">=</span>[<span class="dv">0</span>]</span>
+<span id="cb1-6"><a></a>    <span class="cf">for</span> seq_id <span class="kw">in</span> <span class="bu">range</span>(L):</span>
+<span id="cb1-7"><a></a>        h.append(torch.tanh(x[:,seq_id,:]<span class="op">*</span>rnn.weight_ih_l0 <span class="op">+</span> rnn.bias_ih_l0 <span class="op">+</span> h[<span class="op">-</span><span class="dv">1</span>]<span class="op">*</span>rnn.weight_hh_l0 <span class="op">+</span> rnn.bias_hh_l0))</span>
+<span id="cb1-8"><a></a>    <span class="cf">return</span> h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br></p>
+<div class="columns">
+<div class="column">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Una secuencia de (3,1)</span></span>
+<span id="cb2-2"><a></a>x1 <span class="op">=</span> torch.tensor([[[<span class="fl">2.</span>],</span>
+<span id="cb2-3"><a></a>                    [<span class="fl">7.</span>],</span>
+<span id="cb2-4"><a></a>                    [<span class="fl">6.</span>]]])</span>
+<span id="cb2-5"><a></a>forward_pass_rnn(x1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>tensor([[0.4727, 0.1731]],
+        [[ 0.9106, -0.9335]],
+        [[ 0.7067, -0.9780]])
+
+Shape: (1,3,2)</code></pre>
+</div><div class="column">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Una secuencia de (2,1)</span></span>
+<span id="cb4-2"><a></a>x2 <span class="op">=</span> torch.tensor([[[<span class="fl">4.</span>],</span>
+<span id="cb4-3"><a></a>                    [<span class="fl">6.</span>]]]))</span>
+<span id="cb4-4"><a></a>forward_pass_rnn(x2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>tensor([[ 0.6634, -0.4728]]),
+        [[ 0.7876, -0.9505]])
+
+Shape: (1,2,2)</code></pre>
+</div></div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🚨 Básicamente la RNN genera una transformación affine por cada time step <span class="math inline">\(t\)</span> agregando información de su <strong><em>memoria pasada</em></strong>. Es decir, cada elemento de la secuencia es transformado y llevado a un número de dimensiones igual a <code>hidden_size</code>.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</section>
+<section id="unrolling-rnn" class="slide level2 smaller">
+<h2>Unrolling RNN</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/rnn_unroll.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-8/rnn_unroll.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>☝️ Nomenclatura en Pytorch</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>El output <span class="math inline">\(y_t\)</span> tiene al mismo valor que <span class="math inline">\(h_t\)</span>. Se utiliza nomenclatura distinta para diferenciar de una salida directa a un valor que será utilizado como input en el siguiente time step.</li>
+<li><span class="math inline">\(h_0\)</span> corresponde al hidden state inicial y tiene por defecto un vector de ceros.</li>
+<li><span class="math inline">\(W_ih\)</span> y <span class="math inline">\(b_ih\)</span> son los parámetros que proyectan la entrada <span class="math inline">\(x_t\)</span> al hidden size. Mientras que <span class="math inline">\(W_hh\)</span> y <span class="math inline">\(b_hh\)</span> son los parámetros que proyectan el hidden state previo <span class="math inline">\(h_{t-1}\)</span> al hidden state actual.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>📢 Unrolling de una RNN</strong></p>
+</div>
+<div class="callout-content">
+<p>El unrolling consiste en representar una RNN como una secuencia virtual de capas conectadas que permite ver la relación entre los elementos de cada time step. Es importante notar que los parámetros se comparten, es decir, cada una de las capas tiene los mismos pesos y bias.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="vanishingexploding-gradients" class="slide level2 smaller">
+<h2>Vanishing/Exploding Gradients</h2>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<ul>
+<li>Entre más larga se la secuencia (más unrolls se realicen), más difícil es entrenar la red debido a dos posibles problemas: el <code>vanishing gradient problem</code> y el <code>exploding gradient problem</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/exploding-vanishing_gradient.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-9/exploding-vanishing_gradient.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<p><span class="math display">\[Gradiente = f(Input \times W_2^{N_{Unroll}})\]</span></p>
+<ul>
+<li><p>Cuando los valores de <span class="math inline">\(W_2\)</span> son muy pequeños (menores que 1), el gradiente tiende a desvanecerse (vanishing gradient).</p></li>
+<li><p>En cambio, si los valores de <span class="math inline">\(W_2\)</span> son muy grandes (mayores que 1), el gradiente tiende a explotar (exploding gradient).</p></li>
+</ul>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>$W_2^{N_unroll} aparece en la ecuación al momento de comenzar a derivar de manera recursiva.</p>
+</div>
+</div>
+</div>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>La arquitectura de Torchvision está inspirada en una <strong><em>versión alternativa</em></strong> de Alexnet. Esto probablemente <em>no será</em> corregido ya que no es una arquitectura que se utilice comunmente en la actualidad.</p>
+<p>Las <code>Vanilla RNNs</code> se utilizan muy poco en la práctica; sin embargo, tienen una relevancia histórica significativa, ya que sentaron las bases para el desarrollo de arquitecturas más avanzadas, como las LSTMs y los Transformers.</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="tipos-de-tareas-a-resolver-en-datos-secuenciales" class="slide level2 smaller">
+<h2>Tipos de Tareas a Resolver en Datos Secuenciales</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/sequence_modeling.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-8/sequence_modeling.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🔔 Dependiendo de la Tarea de Interés esta se puede clasificar dependiendo de la cantidad de Inputs y la Cantidad de Output.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>One to Many</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Generación de Texto</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Many to One</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Sentiment Analysis</li>
+<li>Time Series Forecasting</li>
+<li>Time Series Classification</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Many to Many</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Part of Speech Tagging</li>
+<li>Machine Translation</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="algunos-ejemplos-de-arquitecturas" class="slide level2 smaller">
+<h2>Algunos Ejemplos de Arquitecturas</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>✨✨ <strong><em>Part of Speech Tagging</em></strong>: Entrego una Secuencia de Largo L y obtengo una Secuencia de Largo L con Clases Asociadas.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">class</span> POSTaggingRNN(nn.Module):</span>
+<span id="cb6-2"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_size, hidden_size, output_size):</span>
+<span id="cb6-3"><a></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb6-4"><a></a>        <span class="va">self</span>.rnn <span class="op">=</span> nn.RNN(</span>
+<span id="cb6-5"><a></a>            input_size<span class="op">=</span>input_size,</span>
+<span id="cb6-6"><a></a>            hidden_size<span class="op">=</span>hidden_size,</span>
+<span id="cb6-7"><a></a>            num_layers<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb6-8"><a></a>            batch_first<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb6-9"><a></a>        )</span>
+<span id="cb6-10"><a></a>        <span class="va">self</span>.fc <span class="op">=</span> nn.Linear(hidden_size, output_size)</span>
+<span id="cb6-11"><a></a></span>
+<span id="cb6-12"><a></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb6-13"><a></a>        rnn_out, hn <span class="op">=</span> <span class="va">self</span>.rnn(x)</span>
+<span id="cb6-14"><a></a>        <span class="bu">print</span>(<span class="st">"Tamaño del Output de RNN: "</span>, hn.shape)</span>
+<span id="cb6-15"><a></a>        logits <span class="op">=</span> <span class="va">self</span>.fc(rnn_out)</span>
+<span id="cb6-16"><a></a>        <span class="cf">return</span> logits</span>
+<span id="cb6-17"><a></a></span>
+<span id="cb6-18"><a></a></span>
+<span id="cb6-19"><a></a>model <span class="op">=</span> POSTaggingRNN(input_size<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb6-20"><a></a>                    hidden_size<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb6-21"><a></a>                    output_size<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb6-22"><a></a>output <span class="op">=</span> model(x1)</span>
+<span id="cb6-23"><a></a><span class="bu">print</span>(<span class="st">"Shape del Output Final: "</span>, output.shape)</span>
+<span id="cb6-24"><a></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Tamaño del Output de RNN:  torch.Size([1, 1, 4])
+Shape del Output Final:  torch.Size([1, 3, 3])
+tensor([[[-0.6526,  0.2722,  0.2755],
+         [-1.1120,  0.7727,  0.4798],
+         [-1.0416,  0.7447,  0.4793]]])</code></pre>
+</div><div class="column">
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>✨✨ <strong><em>Sentiment Analysis</em></strong>: Entrego una Secuencia de Largo L y obtengo una Clase Final (Positiva, Negativa, Neutra).</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="kw">class</span> SentimentAnalysisRNN(nn.Module):</span>
+<span id="cb8-2"><a></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_size, hidden_size, output_size):</span>
+<span id="cb8-3"><a></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb8-4"><a></a>        <span class="va">self</span>.rnn <span class="op">=</span> nn.RNN(</span>
+<span id="cb8-5"><a></a>            input_size<span class="op">=</span>input_size,</span>
+<span id="cb8-6"><a></a>            hidden_size<span class="op">=</span>hidden_size,</span>
+<span id="cb8-7"><a></a>            num_layers<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb8-8"><a></a>            batch_first<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb8-9"><a></a>        )</span>
+<span id="cb8-10"><a></a>        <span class="va">self</span>.fc <span class="op">=</span> nn.Linear(hidden_size, output_size)</span>
+<span id="cb8-11"><a></a></span>
+<span id="cb8-12"><a></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb8-13"><a></a>        rnn_out, hn <span class="op">=</span> <span class="va">self</span>.rnn(x)</span>
+<span id="cb8-14"><a></a>        <span class="bu">print</span>(<span class="st">"Tamaño del Hidden State del RNN: "</span>, hn.shape)</span>
+<span id="cb8-15"><a></a>        logits <span class="op">=</span> <span class="va">self</span>.fc(hn)</span>
+<span id="cb8-16"><a></a>        <span class="cf">return</span> logits</span>
+<span id="cb8-17"><a></a></span>
+<span id="cb8-18"><a></a></span>
+<span id="cb8-19"><a></a>model <span class="op">=</span> SentimentAnalysisRNN(input_size<span class="op">=</span><span class="dv">1</span>, </span>
+<span id="cb8-20"><a></a>                            hidden_size<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb8-21"><a></a>                            output_size<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb8-22"><a></a>output <span class="op">=</span> torch.softmax(model(x1), dim<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb8-23"><a></a><span class="bu">print</span>(<span class="st">"Shape del Output Final: "</span>, output.shape)</span>
+<span id="cb8-24"><a></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Tamaño del Hidden State del RNN:  torch.Size([1, 1, 4])
+Shape del Output Final:  torch.Size([1, 1, 3])
+tensor([[[0.0866, 0.5169, 0.3965]]])</code></pre>
+</div></div>
+</section>
+<section id="stacking-rnns" class="slide level2 smaller">
+<h2>Stacking RNNs</h2>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/stacking_rnn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-8/stacking_rnn.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Es posible juntar varias capas recurrentes, para que las salidas de una alimenten un siguiente Hidden State, y que luego de algunas capas efectivamente se llegue a las salidas de interés.</p>
+<p>Debido a que hacer esto es complicado esto viene integrado en la implementación en Pytorch mediante el parámetro <code>num_layers</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>OJO</strong></p>
+</div>
+<div class="callout-content">
+<p>No existen salidas intermedias, sino que los Hidden States de capas anteriores son utilizados directamente como inputs de los hidden states posteriores.</p>
+<p>En Pytorch los Hidden States se devuelven concatenados. Es común utilizar el último Hidden State, es decir, la última salida de la última capa como Input Features para una capa Fully Connected.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>A diferencia de otro tipos de Redes como las Convolucionales o FFN, la profundidad en este tipo de redes es de bastante menos impacto.</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="variantes-de-rnns-lstm-1997" class="slide level2 smaller">
+<h2>Variantes de RNNs: LSTM (1997)</h2>
+<dl>
+<dt>LSTM (Long Short-Term Memory)</dt>
+<dd>
+Es un tipo de Red Neuronal Recurrente que está diseñada para capturar dependencias de largo plazo abordando algunas de las limitaciones de las RNNs tradicionales, tales como el <code>vanishing gradient problem</code>.
+</dd>
+</dl>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-8/LSTM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-8/LSTM.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Posee un funcionamiento similar a la RNN, sólo que el “hidden state” se divide en dos partes: <span class="math inline">\(h_t\)</span> y <span class="math inline">\(C_t\)</span>, llamados <code>hidden state</code> (corto plazo) y <code>cell state</code> (largo plazo) respectivamente.</p>
+</div>
+</div>
+</div>
+</div></div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Spoiler</strong>: El Hidden y Cell State está compuesto por multiples set de parámetros a los cuales se les dan los nombres de <code>forget gate</code>, <code>input gate</code>, <code>cell gate</code> y <code>output gate</code>. Su interpretabilidad nunca ha logrado ser completamente explicada.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="vggnet-simonyan-zisserman-2014" class="slide level2 smaller">
-<h2>VGGNet (Simonyan, Zisserman, 2014)</h2>
+<section id="variantes-de-rnns-lstm-1997-1" class="slide level2 smaller">
+<h2>Variantes de RNNs: LSTM (1997)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/LSTM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-9/LSTM.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<div class="columns">
+<div class="column" style="font-size: 80%;">
+<ul>
+<li><p>La LSTM está regida por las siguientes ecuaciones:</p></li>
+<li><p><span class="math display">\[i_t = \sigma(W_{ii}x_t + b_{ii} + W_{hi}h_{t-1} + b_{hi})\]</span></p></li>
+<li><p><span class="math display">\[f_t = \sigma(W_{if}x_t + b_{if} + W_{hf}h_{t-1} + b_{hf})\]</span></p></li>
+<li><p><span class="math display">\[g_t = tanh(W_{ig}x_t + b_{ig} + W_{hg}h_{t-1} + b_{hg})\]</span></p></li>
+<li><p><span class="math display">\[o_t = \sigma(W_{io}x_t + b_{io} + W_{ho}h_{t-1} + b_{ho})\]</span></p></li>
+<li><p><span class="math display">\[c_t = f_t \odot c_{t-1} + i_t \odot g_t\]</span></p></li>
+<li><p><span class="math display">\[h_t = o_t \odot tanh(c_t)\]</span></p></li>
+</ul>
+</div><div class="column">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Todas estos elementos <span class="math inline">\(i_t,f_t, g_t,o_t, c_t,h_t \in \mathbb{R}^d\)</span>, donde <span class="math inline">\(d\)</span> es el “hidden_size”.</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="lstm-forget-gate" class="slide level2">
+<h2>LSTM: Forget Gate</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/forget_gate.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-9/forget_gate.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
+</div>
+<div style="font-size: 85%;">
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Forget Gate</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Corresponde a una red neuronal que indica qué informacion debe ser descartada del <code>Cell State</code>.</li>
+<li>Básicamente combina la secuencia en el tiempo t y el hidden state anterior.</li>
+<li>Luego se le aplica una Sigmoide que indicará el <code>porcentaje</code> a olvidar.</li>
+</ul>
+<p><span class="math display">\[f_t = \sigma(W_{if}x_t + b_{if} + W_{hf}h_{t-1} + b_{hf})\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="lstm-input-y-cell-gate" class="slide level2">
+<h2>LSTM: Input y Cell Gate</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/input_gate.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-9/input_gate.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></a></p>
+</figure>
+</div>
+<div style="font-size: 70%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Input Gate</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Controla Cuánta información debe ingresar al <code>Cell State</code>.</li>
+</ul>
+<p><span class="math display">\[i_t = \sigma(W_{ii}x_t + b_{ii} + W_{hi}h_{t-1} + b_{hi})\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div style="font-size: 70%">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Cell Gate</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Representa los potenciales nuevos candidatos a entrar al <code>Cell State</code>.</li>
+</ul>
+<p><span class="math display">\[g_t = tanh(W_{ig}x_t + b_{ig} + W_{hg}h_{t-1} + b_{hg})\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="output-gate-y-hidden-state" class="slide level2">
+<h2>Output Gate y Hidden State</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/output_gate.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-9/output_gate.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></a></p>
+</figure>
+</div>
+<div style="font-size: 70%;">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Output Gate</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><p>Determina qué “porcentaje” de información del “Cell State” debe salir como “Hidden State” para el tiempo <span class="math inline">\(t\)</span> actual.</p></li>
+<li><p><span class="math display">\[o_t = \sigma(W_{io}x_t + b_{io} + W_{ho}h_{t-1} + b_{ho})\]</span></p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div style="font-size: 70%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Hidden State</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Corresponde a las dependencias del tiempo anterior que se van traspasando en cada time step.</li>
+<li>Adicionalmente el Hidden State corresponde a la salida de la red para el tiempo <span class="math inline">\(t\)</span>.</li>
+</ul>
+<p><span class="math display">\[h_t = o_t \odot tanh(c_t)\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="cell-state" class="slide level2">
+<h2>Cell State</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/cell_state.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-9/cell_state.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
+</div>
+<div style="font-size: 90%;">
+<div class="callout callout-none no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Cell State</strong></p>
+</div>
+<div class="callout-content">
+<p>Representa la principal innovación de este tipo de redes ya que permite recordar dependencias de largo plazo (es decir time steps anteriores en secuencias largas). Esto ya que el Cell State puede avanzar casi sin interacciones lineales (no hay parámetros que influyen en ella, por lo que no es afectada por problemas de gradientes).</p>
+<p><span class="math display">\[c_t = f_t \odot c_{t-1} + i_t \odot g_t\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="variantes-de-rnns-gru-2014" class="slide level2 smaller">
+<h2>Variantes de RNNs: GRU (2014)</h2>
+<dl>
+<dt>GRU (Gated Recurrent Unit)</dt>
+<dd>
+Corresponde a otro tipo de Arquitectura Recurrente, similar a la LSTM, pero con una estructura más simplificada en la cuál se mantiene sólo un “Hidden State” y se tienen menos gates.
+</dd>
+</dl>
+<div class="columns">
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-9/GRU.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-9/GRU.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Hidden State</strong></p>
+</div>
+<div class="callout-content">
+<p>Representa la potencial actualización del “Hidden State”.</p>
+<p><span class="math display">\[h_t = (1-z_t) \odot n_t + z_t \odot h_{t-1}\]</span></p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Update Gate</strong></p>
+</div>
+<div class="callout-content">
+<p>Controla qué porcentaje del “hidden state” previo se lleva al siguiente paso.</p>
+<p><span class="math display">\[z_t = \sigma(W_{iz} x_t + b_{iz} + W_{hz}h_{t-1} + b_{hz})\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Reset Gate</strong></p>
+</div>
+<div class="callout-content">
+<p>Controla cuánta información del pasado se debe olvidar.</p>
+<p><span class="math display">\[r_t = \sigma(W_{ir} x_t + b_{ir} + W_{hr}h_{t-1} + b_{hr})\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Candidate Hidden State</strong></p>
+</div>
+<div class="callout-content">
+<p>Representa la potencial actualización del “Hidden State”.</p>
+<p><span class="math display">\[n_t = tanh(W_{in} x_t + b_{in} + r_t \odot (W_{hn} h_{t-1} + b_{hn}))\]</span></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="bidirectional-rnns" class="slide level2 smaller">
+<h2>Bidirectional RNNs</h2>
+<p>Existen ocasiones en las que se requiere no sólo el contexto de los tiempos anteriores, sino también de los posteriores. Por ejemplo, problemas de traducción.</p>
 <blockquote>
-<p>Presentaron las primeras redes relativamente profundas con Kernels pequeños de <span class="math inline">\(3 \times 3\)</span>. Su propuesta incluye Redes de hasta 19 capas.</p>
+<p>Para ello existen las redes bidireccionales, en la cual se agrega una segunda capa pero que mueve los hidden state en el otro sentido.</p>
 </blockquote>
 <div class="columns">
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-7/VGG16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-7/VGG16.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-9/bidirectional.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-9/bidirectional.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> torchvision</span>
-<span id="cb2-2"><a></a>torchvision.models.vgg16(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span>
-<span id="cb2-3"><a></a><span class="co">## Versión con Batchnorm</span></span>
-<span id="cb2-4"><a></a>torchvision.models.vgg16_bn(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><code>torchvision</code> incluye las arquitecturas de 11, 13, 16 y 19 capas, además de variantes que incluyen Batchnorm (que en eltiempo del paper no existían aún).</p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="googlenetinception-szegedy-et-al.-2014" class="slide level2 smaller">
-<h2>GoogleNet/Inception (Szegedy et al., 2014)</h2>
-<div class="columns">
-<div class="column" style="font-size: 80%;">
-<blockquote>
-<p>Introduce las <em>“Pointwise Convolutions”</em> (Convoluciones de 1x1) que permiten reducir la complejidad de canales (mediante una combinación lineal) manteniendo las dimensiones de la imagen. Además introduce los Inception Modules, que combinan resultados de Kernels de distinto tamaño. Fue la Arquitectura ganadora de ILSVRC 2014.</p>
-</blockquote>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> torchvision</span>
-<span id="cb3-2"><a></a>torchvision.models.googlenet(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/googlenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-8/googlenet.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:40%;">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>1x1 Convolutions</strong></p>
-</div>
-<div class="callout-content">
-<p>Las convoluciones de 1×1 representan una de las principales novedades de este paper. Para cada posición espacial (h, w), la convolución no combina píxeles adyacentes, sino que realiza una combinación lineal entre los diferentes canales de entrada.</p>
-</div>
-</div>
-</div>
-<p><a href="img/clase-8/1x1_convs_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-8/1x1_convs_1.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-8/1x1_convs_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-8/1x1_convs_2.png" class="quarto-figure quarto-figure-center"></a></p>
-</div></div>
-</section>
-<section id="resnet-he-et-al.-2015" class="slide level2 smaller">
-<h2>Resnet (He et al., 2015)</h2>
-<div class="columns">
-<div class="column" style="width:20%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/resnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-8/resnet.png" class="quarto-figure quarto-figure-center" style="width:45.0%"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:80%;">
-<blockquote>
-<p>Introduce las conexiones residuales, lo cual permite evitar el problema del <strong><em>vanishing gradient</em></strong> para redes muy profundas. Es la Arquitectura ganadora de ILSVRC 2015.</p>
-</blockquote>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Esta arquitectura se puede encontrar tanto en <code>torchvision</code> como <code>timm</code>. Recomiendo <code>timm</code>, ya que hay muchas más variantes, mejor mantención y procesos de entrenamiento actualizados.</p>
-</div>
-</div>
-</div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> timm</span>
-<span id="cb4-2"><a></a>model <span class="op">=</span> timm.create_model(<span class="st">"resnet50"</span>, pretrained <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb4-3"><a></a></span>
-<span id="cb4-4"><a></a><span class="co">## Listar todas las versiones de Resnet disponibles</span></span>
-<span id="cb4-5"><a></a>timm.list_models(<span class="st">"resnet*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><br></p>
-<h4 id="conexiones-residuales">Conexiones Residuales</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/residual.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-8/residual.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="efficientnet-tan-le-2019" class="slide level2 smaller">
-<h2>EfficientNet (Tan, Le, 2019)</h2>
-<blockquote>
-<p>Introducen el concepto de <strong><em>Compound Scaling</em></strong> que permite cambiar la escala de profundidad (número de capas en la red), ancho (número de canales en cada capa) y resolución (dimensiones de la imagen) para poder mejorar la performance. Permite crear resultados al nivel del estado del arte con muchísimos menos parámetros.</p>
-</blockquote>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/efficientnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-8/efficientnet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
-</figure>
-</div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">import</span> timm</span>
-<span id="cb5-2"><a></a>model <span class="op">=</span> timm.create_model(<span class="st">"efficientnet_b0"</span>, pretrained <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb5-3"><a></a></span>
-<span id="cb5-4"><a></a><span class="co">## Listar todas las versiones de Resnet disponibles</span></span>
-<span id="cb5-5"><a></a>timm.list_models(<span class="st">"efficientnet*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="pre-training" class="slide level2 smaller">
-<h2>Pre-training</h2>
-<dl>
-<dt>Imagenet</dt>
-<dd>
-Es un dataset que contiene aproximadamente 14 millones de imágenes anotadas manualmente. Fue empleado en la competencia ImageNet Large Scale Visual Recognition Challenge (ILSVRC) entre los años 2010 y 2017, la cual impulsó importantes avances en el estado del arte del reconocimiento visual.
-</dd>
-</dl>
-<p>Las imágenes presentan resoluciones variadas, que van desde <span class="math inline">\(4288 \times 2848\)</span> hasta <span class="math inline">\(75 \times 56\)</span> píxeles. Además, se encuentran normalizadas restando la media por canal <span class="math inline">\([0.485,0.456,0.406]\)</span> y dividiendo por la desviación estándar correspondiente <span class="math inline">\([0.229,0.224,0.225]\)</span>.</p>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>🤔</strong></p>
-</div>
-<div class="callout-content">
-<p>Las dos variantes más conocidas son <strong><em>ImageNet-1K,</em></strong> que contiene 1.281.167, 50.000 y 100.000 imágenes para los conjuntos de train, validation y test, respectivamente, distribuidas en 1000 categorías; y <strong><em>ImageNet-21K</em></strong>, que incluye 14.197.122 imágenes organizadas en 21.841 clases.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Debido a la relevancia y complejidad de este conjunto de datos, la mayoría de los backbones han sido preentrenados en él. Gracias a esto, las distintas arquitecturas <em>“aprenden a ver”</em> a partir del conocimiento adquirido mediante este dataset.</p>
-</div>
-</div>
-</div>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Debido a que muchas arquitecturas pueden/saben ver en un dataset tan complejo como Imagenet. <strong><em>¿Sería posible utilizar ese conocimiento en otro dataset?</em></strong></p>
-</div>
-</div>
-</div>
-<div class="fragment">
-<h3 id="entering-transfer-learning">Entering Transfer Learning</h3>
-</div>
-</section>
-<section id="transfer-learning" class="slide level2 smaller">
-<h2>Transfer Learning</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/transfer_learning.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-8/transfer_learning.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:40%;">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Dataset Público/alta complejidad</strong></p>
-</div>
-<div class="callout-content">
-<p>Normalmente se utilizan datos públicos y de alta complejidad y se utiliza para <strong><em>pre-entrenar</em></strong> una arquitectura.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Pre-entrenamiento</strong></p>
-</div>
-<div class="callout-content">
-<p>Se entrena una arquitectura para una tarea en específico con los detalles del dataset a utilizar.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Fine-Tuning</strong></p>
-</div>
-<div class="callout-content">
-<p>Se carga la arquitectura pre-entrenada, con los pesos obtenidos en el pre-entrenamiento y se ajusta el prediction head para la nueva tarea y se vuelve a entrenar el modelo.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-caution no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Freezing Layers</strong></p>
-</div>
-<div class="callout-content">
-<p>Se refiere a congelar los parámetros del <strong>backbone</strong> pre-entrenado, es decir, estos no se actualizan. Este paso es opcional, y en ocasiones puede funcionar de mejor manera que un <strong><em>Full-Fine-Tuning</em></strong></p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="image-preprocessing-y-data-augmentation" class="slide level2 smaller">
-<h2>Image Preprocessing y Data Augmentation</h2>
-<blockquote>
-<p>En general el proceso de Preprocesamiento de Imágenes es bastante más engorroso que el de datos tabulares. Afortunadamente Pytorch tiene algunos <code>utilities</code> que permiten hacer el proceso más sencillo:</p>
-</blockquote>
-<dl>
-<dt>ImageFolder</dt>
-<dd>
-Permite cargar imágenes de un Path en específico. Dentro de esa carpeta <code>ImageFolder</code> considerará cada carpeta como una clase y los elementos (imágenes) dentro de dicha clase como instancia de la clase en cuestión.
-</dd>
-</dl>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">from</span> torchvision.dataset <span class="im">import</span> ImageFolder</span>
-<span id="cb6-2"><a></a></span>
-<span id="cb6-3"><a></a>train_data <span class="op">=</span> ImageFolder(<span class="st">"path/to/train/images"</span>, transform <span class="op">=</span> <span class="va">None</span>)</span>
-<span id="cb6-4"><a></a>validation_data <span class="op">=</span> ImageFolder(<span class="st">"path/to/validation/images"</span>, transform <span class="op">=</span> <span class="va">None</span>)</span>
-<span id="cb6-5"><a></a>test_data <span class="op">=</span> ImageFolder(<span class="st">"path/to/test/images"</span>, transform <span class="op">=</span> <span class="va">None</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Además <code>ImageFolder</code> posee un parámetro llamado transform en el cuál se pueden ingresar transformaciones a los datos para realizar procesos de Data Augmentation.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Ojo</strong></p>
-</div>
-<div class="callout-content">
-<p><code>ImageFolder</code> entrega los datos como una Imagen PIL. Por lo tanto, es necesario aplicar procesamientos que permitan su transformación en Tensor.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="data-augmentation" class="slide level2 smaller">
-<h2>Data Augmentation</h2>
-<div class="columns">
-<div class="column" style="font-size: 70%;">
-<p>Corresponde a un proceso de generación de datos sintéticos. Este proceso se puede utilizar para:</p>
 <ul>
-<li>Permite la generación de datos adicionales debido a escasez por costo o disponibilidad de ellos. Ejemplo: Datos médicos.</li>
-<li>Genera variedad de datos, que entrega al modelo un mayor poder de generalización en datos no vistos.</li>
-<li>Al introducir mayor variabilidad en los datos entrega una mayor robustez ante el overfitting (Regularización).</li>
-<li>Simular condiciones adversas para el modelo en la cuál se quiera generar robustez.
-<ul>
-<li>Ej: Se tiene un modelo de reconocimiento de vehículos, pero que tiene que funcionar en condiciones de niebla.</li>
-</ul></li>
+<li>En este caso la capa amarilla será la encargada de detectar dependencias del pasado.</li>
+<li>Mientras que la capa verde será la encargada de traer dependencias desde el futuro.</li>
 </ul>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-8/augmentations.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-8/augmentations.jpg" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
-</figure>
-</div>
-</div></div>
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Albumentations</strong></p>
-</div>
-<div class="callout-content">
-<p>Existen diversas librerías que permiten generar Aumento de Datos. La librerías más famosas son Albumentations y Kornia. Albumentations, permite transformaciones extremadamente eficientes en CPU, mientras que Kornia hace lo mismo pero en GPU. Debido a las limitaciones de GPU que contamos, utilizaremos Albumentations, de manera tal de balancear procesamiento tanto en CPU como en GPU.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Normalmente este tipo de transformaciones entrega mejores resultados cuando se generan de manera aleatoria y <code>on-the-fly</code>. Es decir, se genera el aumento de datos en la carga de datos durante el entrenamiento.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="transformaciones-básicas" class="slide level2 smaller">
-<h2>Transformaciones Básicas</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">import</span> albumentations <span class="im">as</span> A</span>
-<span id="cb7-2"><a></a><span class="im">from</span> albumentations.pytorch.transforms <span class="im">import</span> ToTensorV2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Albumentations espera que la imagen venga como Numpy Array. Además es una librería bastante quisquillosa, por lo que toma un rato acostumbrarse. Pero su eficiencia y utilidad hace que valga la pena.</p>
-</div>
-</div>
-</div>
-<dl>
-<dt>A.Compose()</dt>
-<dd>
-Permite generar Pipelines de Transformación. Es decir, irá aplicando transformaciones una a una.
-</dd>
-<dt>A.ToFloat()</dt>
-<dd>
-Transforma los datos en tipo Float. Esto a veces es necesario cuando hay incompatibilidad de data types en ciertos módulos.
-</dd>
-<dt>ToTensorV2()</dt>
-<dd>
-Transforma a Tensor de Pytorch. Existe una versión <code>ToTensor()</code> pero está deprecada y no debería usarse.
-</dd>
-<dt>A.Normalize()</dt>
-<dd>
-Permite normalizar imágenes según su proceso de pre-entrenamiento. Normalmente estos provienen de pre-entrenamiento en Imagenet por lo que se debe normalizar con <span class="math inline">\(mean=[0.485,0.456,0.406]\)</span> y <span class="math inline">\(SD=[0.229,0.224,0.225]\)</span>.
-</dd>
-<dt>A.Resize()</dt>
-<dd>
-Se utiliza para estandarizar el tamaño de las imágenes. Imágenes más grandes permiten mejores resultados pero son computacionalmente más costosas.
-</dd>
-</dl>
-</section>
-<section id="transformaciones-probabilísticas" class="slide level2 smaller">
-<h2>Transformaciones Probabilísticas</h2>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Como su nombre lo indica, la transformación se aplicará con una cierta probabilidad, lo que permitirá que cada epoch haya mayor variabilidad.</p>
-</div>
-</div>
-</div>
-<dl>
-<dt><a href="https://explore.albumentations.ai/transform/RandomCrop">A.CenterCrop/A.RandomCrop</a></dt>
-<dd>
-Genera un Crop de la imagen o al centro o Random. Esto logrará que los elementos de la imagen cambien de posición.
-</dd>
-<dt><a href="https://explore.albumentations.ai/transform/VerticalFlip">A.VerticalFlip</a></dt>
-<dd>
-Genera Flip Vertical.
-</dd>
-<dt><a href="https://explore.albumentations.ai/transform/HorizontalFlip">A.HorizontalFlip</a></dt>
-<dd>
-Genera Flip Horizontal.
-</dd>
-<dt><a href="https://explore.albumentations.ai/transform/Rotate">A.Rotate</a></dt>
-<dd>
-Genera rotaciones aleatorias entre un ángulo mínimo y máximo.
-</dd>
-</dl>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Existen un sinnúmero de transformaciones que se pueden aplicar. La lista completa se puede encontrar <a href="https://explore.albumentations.ai/">acá</a>. Y existen transformaciones que incluso permiten simular niebla, lluvia, nieve, sepia, Zoom, y variados otros efectos.</p>
+<p>Los hidden states pueden ser capas Vanilla RNN, LSTM o GRUs.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-caution callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Aplicar estas transformaciones es de extremo cuidado ya que para tareas más complejas como Semantic Segmentation, Object Detection, Keypoint Detection, se debe aplicar dichas transformaciones también a las etiquetas.</p>
-</div>
-</div>
+</div></div>
+</section>
+<section id="pytorch-layers" class="slide level2">
+<h2>Pytorch Layers</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a>nn.RNN(input_size, hidden_size, num_layers<span class="op">=</span><span class="dv">1</span>, batch_first<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb10-2"><a></a>        dropout<span class="op">=</span><span class="dv">0</span>, bidirectional<span class="op">=</span><span class="va">False</span>, nonlinearity<span class="op">=</span><span class="st">"tanh"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>nn.LSTM(input_size, hidden_size, num_layers<span class="op">=</span><span class="dv">1</span>, batch_first<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb11-2"><a></a>        dropout<span class="op">=</span><span class="dv">0</span>, bidirectional<span class="op">=</span><span class="va">False</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>nn.GRU(input_size, hidden_size, num_layers<span class="op">=</span><span class="dv">1</span>, batch_first<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb12-2"><a></a>        dropout<span class="op">=</span><span class="dv">0</span>, bidirectional<span class="op">=</span><span class="va">False</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div style="font-size: 60%;">
+<ul>
+<li><strong>input_size</strong>: Corresponde al número de features de la secuencia.</li>
+<li><strong>hidden_size</strong>: Corresponde al número de dimensiones del hidden state.</li>
+<li><strong>num_layers</strong>: Corresponderá al número de capas recurrentes a apilar, por defecto 1.</li>
+<li><strong>batch_first</strong>: Este siempre deben fijarlo como True, de esa manera se espera que los tensores a recibir siempre tengan el batch como primera dimensión. Por defecto False.
+<ul>
+<li>Luego RNNs esperan tensores de tamaño <span class="math inline">\((N,L,H_{in})\)</span>. Donde <span class="math inline">\(N\)</span> es el batch_size, <span class="math inline">\(L\)</span> es el largo de secuencia y <span class="math inline">\(H_in\)</span> es el <code>input_size</code>.</li>
+</ul></li>
+<li><strong>dropout</strong>: Cantidad de dropout a aplicar a la salida de cada capa, excepto la última. Por defecto 0.</li>
+<li><strong>bidirectional</strong>: Indica si se hace la red Bidireccional o no. Por defecto <code>False</code>.</li>
+<li><strong>nonlinearity</strong>: Función de activación a utilizar para activar cada matriz de peso. Puede ser <strong><em>“tanh”</em></strong> o <strong><em>“relu”</em></strong>. Sólo para Vanilla RNN.</li>
+</ul>
 </div>
 </section>
-<section id="terminamos-con-las-cnn" class="title-slide slide level1 center">
-<h1>Terminamos con las CNN</h1>
+<section id="eso-sería-por-hoy" class="title-slide slide level1 center">
+<h1>Eso sería por hoy 😊</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
@@ -951,7 +1352,7 @@ Genera rotaciones aleatorias entre un ángulo mínimo y máximo.
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
+            var filterRegex = new RegExp("https:\/\/datacubeR\.github\.io\/clases_UAI\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
