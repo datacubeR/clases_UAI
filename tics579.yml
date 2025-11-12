@@ -83,7 +83,7 @@
 
 
 - title: "Clase 7"
-  subtitle: "Clase 7: Transfer Learning y Data Augmentation"
+  subtitle: "Clase 7: Transfer Learning y Image Augmentation"
   author: "Alfonso Tobar-Arancibia"
   date: 2025-10-30
   image: tics579/thumbnails/clase-7.png
@@ -92,14 +92,23 @@
    - slides
 #
 #
-# - title: "Clase 9"
-#   subtitle: "Clase 9: Redes Recurrentes"
-#   author: "Alfonso Tobar-Arancibia"
-#   date: 2024-10-24
-#   image: tics579/thumbnails/clase-9.png
-#   path: tics579/clase-9.qmd
-#   categories:
-#    - slides
+- title: "Clase 8"
+  subtitle: "Clase 8: Redes Recurrentes"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2025-11-13
+  image: tics579/thumbnails/clase-8.png
+  path: tics579/clase-8.qmd
+  categories:
+   - slides
+
+- title: "Clase 9"
+  subtitle: "Clase 9: Manipulacion de Datos de Texto"
+  author: "Alfonso Tobar-Arancibia"
+  date: 2025-11-13
+  image: tics579/thumbnails/clase-9.jpg
+  path: tics579/clase-9.qmd
+  categories:
+   - slides
 #
 # - title: "Clase 10"
 #   subtitle: "Clase 10: Mecanismos de Atención"

@@ -1,6 +1,6 @@
 ---
 title: "TICS-579-Deep Learning"
-subtitle: "Clase 9: Redes Recurrentes"
+subtitle: "Clase 9: Manipulación de Datos de Texto"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -23,453 +23,464 @@ format:
     pdf-separate-fragments: true
 ---
 
-## Datos Secuenciales {.smaller}
+## Natural Language Processing (NLP) {.smaller}
 
-
-::: {.callout-note}
-Hasta ahora, asumimos que todos nuestros datos son ***i.i.d***. Pero en la realidad existen datos que contienen una secuencia temporal y que debe ser considerada al momento de modelarlos.
-
+::: {.callout-warning appearance="default" icon="false"}
+## 🔔
+El Natural Language Processing (NLP) es el área que se dedica al análisis y procesamiento de Texto. Existe una variedad de tareaas que se pueden abordar utilizando técnicas de Deep Learning tales como:
 :::
-::: {.columns}
-::: {.column}
 
-#### Time Series 
-![](img/clase-9/timeseries.png){.lightbox fig-align="center" width="50%"} 
-
-#### Audio
-![](img/clase-9/audio.png){.lightbox fig-align="center" width="70%"} 
-:::
-::: {.column}
-#### Text 
-![](img/clase-9/text.png){.lightbox fig-align="center" width="70%"} 
-
-#### Genoma
-![](img/clase-9/genom.jpeg){.lightbox fig-align="center" width="50%"} 
-:::
-::: 
-
-
-## Datos Secuenciales {.smaller}
-
-> También pudiesen existir datos "multimodales", donde por ejemplo, se combinan secuencias con imágenes.
 
 ::: {.columns}
-::: {.column}
-#### Image Time Series
-![](img/clase-9/image_ts.jpg){.lightbox fig-align="center"} 
+::: {.column width="30%"}
+![](img/clase-10/sentiment_analysis.png){.lightbox fig-align="center"} 
+![](img/clase-10/summarization.jpg){.lightbox fig-align="center"} 
 :::
-::: {.column}
-#### Video
-
-![](img/clase-9/video.gif){.lightbox fig-align="center"} 
+::: {.column width="40%"}
+![](img/clase-10/ner.jpg){.lightbox fig-align="center"} 
+![](img/clase-10/neural_translation.png){.lightbox fig-align="center"} 
+:::
+::: {.column width="30%"}
+![](img/clase-10/question_answering.jpg){.lightbox fig-align="center"} 
 :::
 ::: 
-
-## Modelamiento de una secuencia {.smaller}
-
-![](img/clase-9/sequence_example.png){.lightbox fig-align="center" width="35%"} 
-
-
-::: {.callout-tip}
-En este caso consideramos que $x_t$ corresponde a la instancia de un dato en el tiempo $t$ asociado a un target $y_t$. Además tenemos cierta dependencia entre los elementos en $t$ y $t+1$.
-:::
-
-::: {.callout-important}
-Es importante notar que $x_t$ no tiene por qué ser un escalar, sino que puede ser un vector de constituidos por varios features.
-:::
-
-::: {.callout-warning appearance="default"}
-## Ojo
-Un dato corresponde una secuencia de elementos, por lo tanto $x = [x_1,x_2,...x_L]$, donde $L$ es el largo de la secuencia.
-:::
-
-## Modelamiento de una secuencia: Ejemplo {.smaller}
-
-#### Part of Speech Tagging
-
-::: {.r-stack}
-
-![](img/clase-9/pos.png){.lightbox fig-align="center" } 
-
-![](img/clase-9/pos_2.png){.lightbox fig-align="center" .fragment} 
-
-:::
-
-::: {.callout-note .fragment}
-Es importante recalcar que la correcta descripción de cada palabra depende del contexto en el que se está usando y no sólo la palabra en sí misma.
-:::
 
 ## Speech Recognition
 
-> El contexto ayuda a interpretar cuál es la manera correcta de interpretar el sonido emitido.
+Dada la naturaleza secuencial del lenguaje, el contexto ayuda a interpretar cuál es la manera correcta de interpretar el sonido emitido.
 
 ![](img/clase-9/meme_speech.png){.lightbox fig-align="center" } 
 
+::: {.callout-important appearance="default" icon="false"}
+## El problema
+¿Cómo hacemos que una red neuronal entienda y procese el texto?
+:::
 
-## Recurrent Neural Networks {.smaller}
-
-RNN
-: Corresponden a un tipo de red neuronal diseñada para procesar secuencias de datos manteniendo en memoria los inputs previos. A diferencia de los otros tipos de redes que procesan datos de manera independiente, acá existen conexiones cíclicas que permiten retener información en el tiempo.
-
-### Ejemplo
+## Proceso de Tokenización y Embedding {.smaller}
 
 ::: {.columns}
-::: {.column}
-![](img/clase-9/forecast_example.png){.lightbox fig-align="center" } 
-:::
-::: {.column}
-::: {.callout-tip icon="false" appearance="default"}
-## Pros
-* Pueden tomar secuencias de distinto tamaño (Largo) como predictores de un problema.
-* Toman como antecedentes los puntos pasados como referencia para las predicciones futuras.
-:::
-::: {.callout-important icon="false" appearance="default"}
-## Cons
-* Se van complicando a medida que las secuencias son cada vez más largas.
-* Vanishing/Exploding Gradients Problem.
-:::
-:::
-::: 
-
-## RNNs {.smaller}
-
-
-::: {.columns}
-::: {.column width="60%"}
-![](img/clase-9/RNN_example.png){.lightbox fig-align="center" width="70%"} 
-
-::: {.callout-note}
-Supongamos los siguientes parámetros para nuestro modelo:
-
-* $W_1$ = 1.8
-* $W_2$ = -0.5
-* $W_3$ = 1.1
-* $sigma(\cdot) = ReLU(\cdot)$
-* Consideraremos los bias como 0.
-:::
-:::
-::: {.column width="40%"}
-
-![](img/clase-9/rnn_output.png){.lightbox fig-align="center" width="55%"} 
-
-::: {.callout-warning appearance="default"}
-## Ojo
-Esta es solamente una secuencia de largo 9.
-
-:::
-:::
-::: 
-
-## Unrolled RNN {.smaller}
-
-::: {.columns}
-::: {.column}
-![](img/clase-9/rnn_unroll.png){.lightbox fig-align="center" width="55%"} 
-:::
-::: {.column}
-::: {.callout-tip}
-* El ***"Unrollment"*** o el desenrollar la Red, se refiere a generar copias de las redes que irán recibiendo las salidas de las capas en un $t$ anterior. Estos valores, conocidos como ***"hidden state"***, irán alimentando las siguientes copias considerando los casos anteriores. Sólo el último output es el que nos interesa  para la predicción.
-
-:::
-::: {.callout-important}
-* Todos los parámetros de la red (Weights and Biases), son compartidos por cada una de las copias realizadas.
-* Se realizarán tantas copias como el largo de la secuencia. Esto permite que pase toda la secuencia "de una sola vez".
-* Sin importar cuantas copias se realicen, el número de parámetros NO aumenta.
-:::
-:::
-::: 
-
-## RNN formalmente {.smaller}
-
-![](img/clase-9/rnn_formal.png){.lightbox fig-align="center" width="45%"} 
-
-::: {.columns}
-::: {.column width="40%"}
-donde: 
-
-$$h_t = f(W_{hh} \cdot h_{t-1} + W_{hx} \cdot x_t + b_h)$$
-$$y_t = g(W_{yh}\cdot h_{t} + b_y)$$
-
-:::
-::: {.column width="30%"}
-* $h_t \in \mathbb{R}^d$
-* $x_t \in \mathbb{R}^n$
-* $y_t \in \mathbb{R}^k$
-:::
-::: {.column width="30%"}
-* $W_{hh} \in \mathbb{R}^{d \times d}$
-* $W_{hx} \in \mathbb{R}^{d \times n}$
-* $W_{yh} \in \mathbb{R}^{k \times d}$
-* $b_h \in \mathbb{R}^d$
-* $b_y \in \mathbb{R}^k$
-:::
-::: 
-
-## Stacking RNNs {.smaller}
-
-::: {.columns}
-::: {.column}
-![](img/clase-9/stacking_RNN.png){.lightbox fig-align="center" width="80%"} 
-:::
-::: {.column}
-::: {.callout-tip}
-Es posible juntar varias capas recurrentes, para que las salidas de una alimenten un siguiente Hidden State, y que luego de algunas capas efectivamente se llegue a las salidas de interés.
-:::
-
-::: {.callout-caution}
-A diferencia de otro tipos de Redes como las Convolucionales o FFN, la profundidad en este tipo de redes es de bastante menos impacto.
-:::
-
-::: {.callout-warning appearance="default"}
-## OJO
-No existen salidas intermedias, sino que los Hidden States de capas anteriores son utilizados directamente como inputs de los hidden states posteriores.
-:::
-:::
-::: 
-
-
-## Vanishing/Exploding Gradients {.smaller}
-
-::: {.callout-warning}
-* Entre más larga se la secuencia (más unrolls se realicen), más difícil es entrenar la red.
-:::
-
-
-::: {.columns}
-::: {.column}
-![](img/clase-9/exploding-vanishing_gradient.png){.lightbox fig-align="center" width="60%"} 
-:::
-::: {.column}
-$$Output = Input \times W_2^{N_{Unroll}}$$
-
-* Si $W_2$ corresponde a parámetros muy pequeños (menores a 1), entonces, el gradiente se desvanecerá (vanishing gradient).
-
-* Si $W_2$ corresponde a parámetros muy grandes (mayores a 1), entonces, el gradiente explotará (exploding gradient).
-
-::: {.callout-caution}
-Esto ocurre ya que si intentamos derivar la función de pérdida con respecto a alguno de los parámetros, eventualmente $W_2^{N_unroll}$ aparecerá en la ecuación, provocando dicho efecto en el gradiente.
-:::
-::: {.callout-important}
-Esta es quizás la razón más importante del por qué `Vanilla RNNs` son usadas rara vez en la práctica. Lo importante histórica de este tipo de redes es que abrieron las puertas a sistemas más modernos que hoy en día sí son usados (LSTMs, y Transformers).
-:::
-:::
-::: 
-
-
-## LSTM: Formalmente {.smaller}
-
-LSTMs
-: Es un tipo de Red Neuronal Recurrente que está diseñada para capturar dependencias de largo rango en datos secuenciales abordando algunas de las limitaciones de las RNNs tradicionales, tales como el `vanishing gradient problem`.
-
-::: {.columns}
-::: {.column}
-![](img/clase-9/LSTM_formal.png){.lightbox fig-align="center"} 
-:::
-::: {.column}
-::: {.callout-tip}
-Corresponde a la misma forma de una RNN, sólo que el "hidden state" se divide en dos partes: $h_t$ y $C_t$, llamados "hidden state" y "cell state" respectivamente.
-:::
-
-::: {.callout-important}
-La manera de calcular el "Hidden State" y el "Cell State" es muchísimo más engorrosa.
-:::
-:::
-::: 
-
-::: {.callout-warning}
-Spoiler: El Hidden y Cell State está compuesto por multiples set de parámetros a los cuales se les dan los nombres de `forget gate`, `input gate`, `cell gate` y `output gate`. Su interpretabilidad nunca ha logrado ser completamente explicada.
-:::
-
-
-## Long Short-Term Memory RNNs (1997) {.smaller}
-
-
-![](img/clase-9/LSTM.png){.lightbox fig-align="center"} 
-
-::: {.columns}
-::: {.column style="font-size: 80%;"}
-* La LSTM está regida por las siguientes ecuaciones:
-
-* $$i_t = \sigma(W_{ii}x_t) + b_{ii} + W_{hi}h_{t-1} + b_{hi}$$
-* $$f_t = \sigma(W_{if}x_t + b_{if} + W_{hf}h_{t-1} + b_{hf})$$
-* $$g_t = tanh(W_{ig}x_t + b_{ig} + W_{hg}h_{t-1} + b_{hg})$$
-* $$o_t = \sigma(W_{io}x_t + b_{io} + W_{ho}h_{t-1} + b_{ho})$$ 
-* $$c_t = f_t \odot c_{t-1} + i_t \odot g_t$$
-* $$h_t = o_t \odot tanh(c_t)$$
-:::
-::: {.column}
-::: {.callout-important}
-Todas estos elementos $i_t,f_t, g_t,o_t, c_t,h_t \in \mathbb{R}^d$, donde $d$ corresponde a la "hidden dimension".
-:::
-:::
-::: 
-
-## LSTM: Forget Gate 
-
-
-![](img/clase-9/forget_gate.png){.lightbox fig-align="center" width="40%"} 
-
-::: {.callout-caution appearance="default" icon="false" style="font-size: 85%;"}
-## Forget Gate
-* Corresponde a una red neuronal que indica qué informacion debe ser descartada del `Cell State`.
-* Básicamente combina la secuencia en el tiempo t y el hidden state anterior.
-* Luego se le aplica una Sigmoide que indicará el `porcentaje` a olvidar.
-
-$$f_t = \sigma(W_{if}x_t + b_{if} + W_{hf}h_{t-1} + b_{hf})$$
-:::
-
-
-
-## LSTM: Input y Cell Gate 
-
-![](img/clase-9/input_gate.png){.lightbox fig-align="center" width="30%"} 
-
-::: {.callout-tip appearance="default" icon="false" style="font-size: 70%;"}
-
-## Input Gate
-* Controla Cuánta información debe ingresar al `Cell State`.
-
-$$i_t = \sigma(W_{ii}x_t) + b_{ii} + W_{hi}h_{t-1} + b_{hi}$$
-:::
-
-
-
-::: {.callout-note appearance="default" icon="false" style="font-size: 70%"}
-## Cell Gate
-* Representa los potenciales nuevos candidatos a entrar al `Cell State`.
-
-$$g_t = tanh(W_{ig}x_t + b_{ig} + W_{hg}h_{t-1} + b_{hg})$$
-:::
-
-## Output Gate y Hidden State
-
-![](img/clase-9/output_gate.png){.lightbox fig-align="center" width="30%"} 
-
-::: {.callout-important appearance="default" icon="false" style="font-size: 70%;"}
-## Output Gate
-* Determina qué "porcentaje" de información del "Cell State" debe salir como "Hidden State" para el tiempo $t$ actual.
-
-* $$o_t = \sigma(W_{io}x_t + b_{io} + W_{ho}h_{t-1} + b_{ho})$$ 
-:::
-
-::: {.callout-warning appearance="default" icon="false" style="font-size: 70%;"}
-## Hidden State
-* Corresponde a las dependencias del tiempo anterior que se van traspasando en cada time step.
-* Adicionalmente el Hidden State corresponde a la salida de la red para el tiempo $t$.
-
-$$h_t = o_t \odot tanh(c_t)$$
-:::
-
-
-## Cell State
-
-![](img/clase-9/cell_state.png){.lightbox fig-align="center" width="40%"} 
-
-::: {.callout appearance="default" icon="false" style="font-size: 90%;"}
-
-## Cell State
-
-Representa la principal innovación de este tipo de redes ya que permite recordar dependencias de largo plazo (es decir time steps anteriores en secuencias largas). Esto ya que el Cell State puede avanzar casi sin interacciones lineales (no hay parámetros que influyen en ella, por lo que no es afectada por problemas de gradientes).
-
-$$c_t = f_t \odot c_{t-1} + i_t \odot g_t$$
-:::
-
-## Gated Recurrent Unit (2014) {.smaller}
-
-GRU
-: Corresponde a otro tipo de Arquitectura Recurrente, similar a la LSTM, pero con una estructura más simplificada en la cuál se mantiene sólo un "Hidden State" y se tienen menos gates.
-
-::: {.columns}
-::: {.column}
-![](img/clase-9/GRU.png){.lightbox fig-align="center" width="80%"} 
-
-::: {.callout-caution appearance="default" icon="false"}
-## Hidden State
-
-Representa la potencial actualización del "Hidden State".
-
-$$h_t = (1-z_t) \odot n_t + z_t \odot h_{t-1}$$
-:::
-:::
 ::: {.column}
 ::: {.callout-tip appearance="default" icon="false"}
-## Update Gate
+## Tokenización
 
-Controla qué porcentaje del "hidden state" previo se lleva al siguiente paso.
-
-$$z_t = \sigma(W_{iz} x_t + b_{iz} + W_{hz}h_{t-1} + b_{hz})$$
-:::
-
-::: {.callout-important appearance="default" icon="false"}
-## Reset Gate
-
-Controla cuánta información del pasado se debe olvidar. 
-
-$$r_t = \sigma(W_{ir} x_t + b_{ir} + W_{hr}h_{t-1} + b_{hr})$$
+El proceso de Tokenización permite transformar texto en datos numéricos. Cada dato numérico se mapea con un "trozo de texto". Normalmente los modelos van asociados a la tokenización con la que fueron entrenados. Cambiar la tokenización puede generar gran degradación.
 :::
 
 ::: {.callout-note appearance="default" icon="false"}
-##  Candidate Hidden State
-
-Representa la potencial actualización del "Hidden State".
-
-$$n_t = tanh(W_{in} x_t + b_{in} + r_t \odot (W_{hn} h_{t-1} + b_{hn}))$$
+## Embedding
+Corresponde el proceso en el que los Tokens se transforman en vectores densos en las cuales la distancia entre ellos representa una noción de similaridad.
 :::
-
+::: {.callout-important icon="false"}
+* En este caso la frase ***"Frog on a log" *** es separada en Tokens (en este caso cada token es una palabra). 
+* Luego cada Token es mapeado a un Token id proveniente de un vocabulario. ***¿Qué es un vocabulario?***
+* Los embeddings en este caso representan una secuencia de largo 7 con 3 dimensiones.
+:::
+:::
+::: {.column}
+![](img/clase-10/tokenization_process.jpg){.lightbox fig-align="center"} 
 :::
 ::: 
 
-## Bidirectional RNNs {.smaller}
+## Embeddings {.smaller}
 
-Existen ocasiones en las que se requiere no sólo el contexto de los tiempos anteriores, sino también de los posteriores. Por ejemplo, problemas de traducción.
+![](img/clase-10/embedding_space.png){.lightbox fig-align="center" width="80%"} 
 
-> Para ello existen las redes bidireccionales, en la cual se agrega una segunda capa pero que mueve los hidden state en el otro sentido.
+::: {.callout-tip appearance="default"}
+## ¿Por qué es tan importante el uso de Embeddings?
+* Primero porque son entrenables. Es decir la red puede aprender cuál es la mejor manera de representar palabras.
+* Existen embeddings pre-entrenados, es decir, se puede hacer transfer learning de embeddings.
+* La red puede aprender relaciones semánticas entre palabras, algo imposible utilizando otras representaciones.
+
+:::
+
+## Un tensor de Texto {.smaller}
 
 ::: {.columns}
 ::: {.column}
-![](img/clase-9/bidirectional.png){.lightbox fig-align="center" width="80%"}  
-:::
-::: {.column}
-::: {.callout-note}
-* En este caso la capa amarilla será la encargada de detectar dependencias del pasado.
-* Mientras que la capa verde será la encargada de traer dependencias desde el futuro.
+#### Tokenización
+
+Suponiendo un Tensor de Entrada que representa 4 frases de 6 Tokens cada una:
+```{.python}
+X = torch.tensor([[42, 67, 76, 14, 26, 35],
+        [20, 24, 50, 13, 78, 14],
+        [10, 54, 31, 72, 15, 95],
+        [67,  6, 49, 76, 73, 11]])
+print(X.shape)
+```
+```
+(4, 6)
+```
+::: {.callout-tip appearance="default" icon="false"}
+## 👀 Una palabra no necesariamente es un solo Token. [Ver acá](https://tiktokenizer.vercel.app/?model=meta-llama%2FMeta-Llama-3-8B)
 :::
 
-::: {.callout-important}
-Los hidden states pueden ser capas Vanilla RNN, LSTM o GRUs.
+::: {.callout-important appearance="default" icon="false"}
+## 🚨 La tokenización depende del vocabulario utilizado. La Tokenización va de la mano con el embedding y con el modelo a utilizar.
+:::
+:::
+::: {.column}
+#### Embedding
+```{.python}
+emb = nn.Embedding(100, 3)
+output = emb(X)
+print("Shape de un Embedding:", output.shape)
+output
+```
+```
+tensor([[[-1.4391,  0.5214,  1.0414],
+         [-0.8293, -1.0809, -0.7839],
+         [ 0.6427,  0.5742,  0.5867],
+         [-1.0759,  0.5357,  1.1754],
+         [ 0.2191,  0.5526, -0.6788],
+         [ 0.5069, -0.4752, -0.4920]],
+
+        [[-0.5644,  1.0563, -1.4692],
+         [-0.1976,  1.2683,  1.2243],
+         [-0.5855, -0.3900,  0.9812],
+         [-0.4459, -1.2024,  0.7078],
+         [-0.9109, -0.5291, -0.8051],
+         [-1.0759,  0.5357,  1.1754]],
+
+        [[-1.3864, -1.2862, -0.8371],
+         [-1.4510, -0.7861, -0.9563],
+         [ 0.2332,  4.0356,  1.2795],
+         [-1.5754,  2.2508,  1.0012],
+         [ 0.5612, -0.4527, -0.7718],
+         [ 0.3714, -0.0047,  0.0795]],
+
+        [[-0.8293, -1.0809, -0.7839],
+         [ 1.5736, -0.8455,  1.3123],
+         [ 1.1179, -1.2956,  0.0503],
+         [ 0.6427,  0.5742,  0.5867],
+         [ 1.3642,  0.6333,  0.4050],
+         [-0.9224,  1.8113,  0.1606]]])
+```
+:::
+::: 
+
+## Tokens Especiales {.smaller}
+
+Cada modelo puede incluir el tipo de Tokenización que más le acomode. Además cada tokenización suele incluir tokens especiales que ayudan a la red a entender mejor el contexto o a resolver problemas intrínsecos del modelamiento de secuencias. Algunos de estos Tokens especiales son:
+
+* \<PAD\> : Token utilizado para rellenar secuencias más cortas y que todas tengan el mismo largo.
+* \<SOS\> o \<BOS\> : Start of Sequence/Beginning of Sequence. Token que indica el inicio de una secuencia. 
+* \<EOS\> : End of Sequence. Token que indica el final de una secuencia.
+* \<UNK\> : Unknown Token. Token utilizado para representar palabras fuera del vocabulario.
+* \<MASK\> : Token utilizado en tareas de Masked Language Modeling (MLM) para indicar palabras que deben ser predichas por el modelo.
+* \<SEP\> : Separator Token. Utilizado para separar diferentes partes de una secuencia, como en tareas de preguntas y respuestas.
+* \<CLS\> : Classification Token. Utilizado en tareas de clasificación para representar toda la secuencia.
+
+::: {.callout-caution appearance="default" icon="false"}
+## 🚩 Ojo
+Exiten tantos tokens especiales como tokenizadores y modelos existen. Siempre revisar la documentación del modelo a utilizar. Algunos también indican roles como por ejemplo en el caso de un asistente, se indica el rol del asistente, del usuario, y prompts de sistemas. 
+:::
+
+## Problema de las RNN comunes {.smaller}
+
+::: {.callout-warning}
+A pesar de las habilidades de las RNN, estas no son suficientes para distintas tareas de NLP.
+:::
+
+![](img/clase-10/rnn.png){.lightbox fig-align="center"} 
+
+Las RNN inicialmente toman cada elemento de una secuencia y generan un output para cada entrada. Esto genera ciertas limitantes en tareas como Machine Translation, donde por ejemplo, el modelo asume que la traducción es uno a uno, lo cuál no es necesariamente cierto.
+
+
+## Machine Translation: Ejemplo del Inglés {.smaller}
+
+Supongamos que necesitamos hacer la siguiente traducción:
+
+Inglés 
+: > Hi, my name is Alfonso
+
+:::{.fragment}
+
+Español
+: > Hola, mi nombre es Alfonso
+
+::: {.callout-note}
+Este tipo de traducción es uno a uno. Cada input puede tener asociado una salida de manera directa puede realizarse de manera directa con una RNN.
+:::
+:::
+
+## Machine Translation: Ejemplo del Inglés {.smaller}
+
+Inglés
+: > Would you help me prepare something for tomorrow?
+
+:::{.fragment}
+Español
+: > ¿Me ayudarías a preparar algo para mañana?
+
+::: {.callout-important appearance="default" icon="false"}
+# ⛔ Problemas
+
+* La traducción no es uno. De hecho en inglés se utilizan 8 palabras y 1 signo de puntuación. En español se traduce en 7 palabras y 2 signos de puntuación.
+* *"Would"* no tiene equivalente en español. 
+* *"a"* no tiene equivalente en el inglés. 
+* *"Me"* se traduce como *"me"* en inglés pero en vez de ir al inicio, va continuación de *"help"*.
+* "*¿*" no existe en inglés.
+
+:::
+
+::: {.callout-warning appearance="default" icon="false"}
+## 🔔
+* Otros idiomas como el Alemán o el Ruso, tienen fusión de palabras o declinaciones que hacen la traducción mucho más difícil. 
+* Es por ello que se requiere una cierta libertad entre los tokens de entradas y los tokens de salida.
+:::
+:::
+
+
+## Soluciones: Redes Convolucionales {.smaller}
+
+Una potencial solución se puede dar por medio de Redes Convolucionales de 1D. En este caso las redes convolucionales tienen la ventaja de poder mirar tanto al pasado como al futuro de manera móvil.
+
+::: {.columns}
+::: {.column}
+![](img/clase-10/conv1d.png){.lightbox fig-align="center" width="80%"} 
+:::
+::: {.column}
+::: {.callout-note appearance="default"}
+## Ventajas
+* Pueden tomar contexto desde el inicio y desde el final.
+
+:::
+::: {.callout-important appearance="default"}
+## Desventajas
+* Su campo receptivo es mucho más acotado y depende del número de capas y el largo del Kernel lo cual repercute directamente en el número de parámetros del modelo.
+* No tienen estado latente (o memoria) que almacena contexto.
+* No es útil para modelos de generación (ya que ve contexto desde el futuro).
 :::
 :::
 ::: 
 
-## Pytorch Layers 
+## Soluciones: Arquitecturas Encoder-Decoder {.smaller}
 
-```{.python}
-nn.RNN(input_size, hidden_size, num_layers=1, batch_first=False, 
-        dropout=0, bidirectional=False, nonlinearity="tanh")
-```
-```{.python}
-nn.LSTM(input_size, hidden_size, num_layers=1, batch_first=False, 
-        dropout=0, bidirectional=False) 
-```
+Encoder
+: Corresponde a una arquitectura que permitirá tomar datos de entrada y codificarlos en una representación numérica (normalmente como hidden states, embeddings o logits).
 
-```{.python}
-nn.GRU(input_size, hidden_size, num_layers=1, batch_first=False, 
-        dropout=0, bidirectional=False) 
-```
-:::{style="font-size: 60%;"}
+Decoder
+: Corresponde a una arquitectura que toma una representación codificada de datos (normalmente generado por un encoder) y la transforma nuevamente en una salida con un formato comprensible y no solamente una "simple etiqueta".
 
-* **input_size**: Corresponde al número de features de la secuencia. 
-* **hidden_size**: Corresponde al número de dimensiones del hidden state.
-* **num_layers**: Corresponderá al número de capas recurrentes a apilar, por defecto 1.
-* **batch_first**: Este siempre deben fijarlo como True, de esa manera se espera que los tensores a recibir siempre tengan el batch como primera dimensión. Por defecto False.
-    * Luego RNNs esperan tensores de tamaño $(N,L,H_{in})$. Donde $N$ es el batch_size, $L$ es el largo de secuencia y $H_in$ es el `input_size`.
-* **dropout**: Cantidad de dropout a aplicar a la salida de cada capa, excepto la última. Por defecto 0.
-* **bidirectional**: Indica si se hace la red Bidireccional o no. Por defecto `False`.
-* **nonlinearity**: Función de activación a utilizar para activar cada matriz de peso. Puede ser ***"tanh"*** o ***"relu"***. Sólo para Vanilla RNN.
+![](img/clase-10/autoencoder.jpeg){.lightbox fig-align="center"} 
+
+::: {.callout-note}
+Este tipo de arquitecturas son quizás las más populares hoy en día y tienen aplicaciones en distintos dominios.
+:::
+
+## Soluciones: Arquitecturas Encoder-Decoder {.smaller}
+
+::: {.callout-note}
+Una arquitectura Encoder-Decoder convolucional permite devolver una imagen como salida. Este ejemplo se conoce como Segmentación Semántica.
+:::
+
+![](img/clase-10/conv_enc-dec.png){.lightbox fig-align="center"} 
+
+
+## Soluciones: Arquitecturas Encoder-Decoder {.smaller}
+
+::: {.callout-note}
+Una arquitectura recurrente permite devolver una secuencia como salida. La cual puede utilizarse para generación o traducción de texto.
+:::
+
+![](img/clase-10/neural_translation.png){.lightbox fig-align="center" width="80%"} 
+
+::: {.callout-note appearance="default" icon="false"}
+## Ventajas
+* Permite "desligarse" de la predicción uno a  uno. El Encoder resuelve una tarea many (la secuencia) to one (un hidden state) y el Decoder resuelve una tarea one (hidden state) to many (secuencia de salida).
+* La salida de este tipo de modelos depende principalmente del contexto almacenado en el Hidden State/Bottleneck ya que se utiliza como Hidden State inicial del Decoder.
+:::
+
+::: {.callout-important appearance="default" icon="false"}
+## Desventajas
+* Dado los problemas de Vanishing/Exploding Gradients es ingenuo pensar que todo el contexto de una frase vive en el último hidden state.
+* Aún así, son una buena primera aproximación al problema.
 :::
 
 
-# Sha's tá
+## Ejemplo: Traducción de Texto {.smaller}
+
+Supongamos que queremos traducir la frase **How are you?** al español.
+
+::: {.r-stack}
+![](img/clase-9/translation_1.png){.lightbox .fragment fragment-index=1} 
+
+![](img/clase-9/translation_2.png){.lightbox .fragment fragment-index=2} 
+
+![](img/clase-9/translation_3.png){.lightbox .fragment fragment-index=3} 
+
+:::
+
+::: {.callout-note .fragment fragment-index=1 appearance="default" icon="false"}
+## Para comenzar el Proceso de Traducción se debe ingresar la Frase a Traducir al Encoder y luego dar inicio a la Traducción en el Decoder mediante el Token Especial \<SOS\>.
+:::
+
+::: {.callout-warning .fragment fragment-index=2 appearance="default" icon="false"}
+## \<SOS\> genera como primera predicción el token **¿** el cuál será utilizado como segundo input del Decoder. Esto nos entrega como predicción el token **Cómo**. Que a su vez se utiliza como el tercer input del Decoder y nos entrega el Token **estás**. 
+
+Este proceso de conoce como ***Predicción/Generación Autoregresiva***.
+:::
+
+::: {.callout-important .fragment fragment-index=3 appearance="default" icon="false"}
+## Este proceso de repite hasta que nos encontramos con el Token Especial \<EOS\>, el cuál nos indica que debemos dejar de generar.
+:::
+
+## Trucos de Entrenamiento {.smaller}
+
+El entrenamiento de una RNN puede ser muy ineficiente y "trabado" si es que no se utilizan ciertos trucos.  Algunos de estos trucos son:
+
+#### Teacher Forcing
+
+![](img/clase-9/teacher_forcing.png){.lightbox }  
+
+::: {.callout-tip appearance="default" icon="false"}
+## ☝️ Dado que al momento de comenzar el entrenamiento el modelo no tiene por qué traducir correctamente, es que al Decoder se le entrega el Token correcto en vez de la predicción del modelo. Esto permite que el modelo aprenda más rápido y de mejor manera.
+:::
+
+::: {.callout-important appearance="default" icon="false"}
+## 🚨 Normalmente esto se hace de manera pseudoaleatoria utilizando un `teacher_forcing_ratio`. Ojo con el ***Exposure Bias***
+:::
+
+## Trucos de Inferencia: Greedy Search {.smaller}
+
+#### Estrategias para escoger el siguiente token
+Al momento de generar texto, la salida de cada step del Decoder tendrá una distribución de probabilidad sobre el vocabulario. Existen distintas estrategias para escoger el siguiente token a utilizar:
+
+#### Greedy Search
+
+![](img/clase-9/greedy_search.png){.lightbox }  
+
+::: {.callout-tip appearance="default" icon="false"}
+## 🙂 En este caso Greedy Search escoge el Token con mayor probabilidad en cada step y lo utiliza como el siguiente input del Decoder.
+
+En este caso, la probabilidad máxima en el primer step es p4, luego al ingresar p4 como input, la probabilidad máxima es p2, y así sucesivamente.
+:::
+
+
+## Trucos de Inferencia: Beam Search {.smaller}
+
+#### Beam Search
+
+En este caso se pueden escoger múltiples caminos en vez de solamente el de mayor probabilidad. Por ejemplo, si se escogen 2 caminos (beam width = 2), en el primer step se escogen los tokens con probabilidad p4 y p3. Luego en el segundo step, se generan las siguientes probabilidades para los distintos caminos. Acá se escoge el camino con la mayor probabilidad conjunta. 
+
+
+![](img/clase-9/beam_search.png){.lightbox }  
+
+## Ejemplo: Greedy vs Beam Search {.smaller}
+
+Supongamos queremos traducir la frase **"Good Night"** al español.
+
+::: {.columns}
+::: {.column}
+
+#### Supongamos que la predicción para el Token \<SOS\> es la siguiente:
+::::{style="font-size: 110%;"}
+
+| Token | Probabilidad |
+|-------|--------------|
+| good  | 0.45         |
+| nice  | 0.15         |
+| well  | 0.10         |
+| hello | 0.30         |
+::::
+:::
+
+::: {.column}
+::: {.callout-important appearance="default" icon="false"}
+## Greedy Search diría que la predicción de la primera palabra es **good** (p=0.45)
+:::
+
+::: {.callout-tip appearance="default" icon="false"}
+## Beam Search con width=2 diría lo siguiente:
+
+* Beam 1: good (p=0.45)
+* Beam 2: hello (p=0.30)
+:::
+:::
+::: 
+
+
+## Ejemplo: Greedy vs Beam Search {.smaller}
+
+::: {.columns}
+::: {.column}
+#### Prediciendo para "good"
+| Secuencia       | Cálculo             | Resultado |
+|-----------------|----------------------|-----------|
+| good night      | 0.45 × 0.40          | 0.18      |
+| good evening    | 0.45 × 0.58          | 0.261     |
+| good bye        | 0.45 × 0.02          | 0.009     |
+
+<br>
+
+#### Prediciendo para "hello"
+
+| Secuencia        | Cálculo             | Resultado |
+|------------------|----------------------|-----------|
+| hello night       | 0.30 × 0.10          | 0.03      |
+| hello evening     | 0.30 × 0.15          | 0.045     |
+| hello there       | 0.30 × 0.5          | 0.15     |
+
+:::
+
+::: {.column}
+::: {.callout-important appearance="default" icon="false"}
+## Greedy Search diría que la predicción de la segunda palabra es 
+:::
+
+::: {.callout-tip appearance="default" icon="false"}
+## Beam Search con width=2 diría lo siguiente:
+
+* Beam 1: good night (p=0.18)
+* Beam 2: good evening (p=0.261)
+
+:::
+::: {.callout-caution appearance="default" icon="false"}
+## En este caso, ambas opciones son traducciones válidas. Además, puede combinarse con un muestreo probabilístico para introducir mayor diversidad en los resultados.
+:::
+
+:::
+:::
+
+## Trucos de Inferencia: Top-k Sampling {.smaller}
+
+Supongamos que tenemos la siguiente distribución de Probabilidad sobre un vocabulario:
+
+::: {.callout-tip appearance="default" icon="false"}
+## Top-k Sampling
+Se escogerá aleatoriamente entre los k tokens con mayor probabilidad. Esto introduce diversidad en la generación.
+:::
+
+::: {.callout-important appearance="default" icon="false"}
+## Temperatura
+Corresponde a un parámetro que permite controlar la "concentración" de la distribución de probabilidad. A mayor temperatura, más uniforme será la distribución. A menor temperatura, más concentrada estará la distribución en los tokens con mayor probabilidad.
+:::
+
+::: {.columns}
+::: {.column style="font-size: 70%"}
+| token | logit | logit/T=1.5 | prob T=1.5 |logit/T=4 | prob T=4 |
+|-------|-------|---------|---------|---------|---------|
+| the   | 5.0   |3.33    | 0.53    | 1.25    | 0.32    |
+| and   | 4.0   |2.67    | 0.27    | 1    | 0.25    |
+| a     | 3.0   |2.00    | 0.14    | 0.75       | 0.20    |
+| dog   | 1.0   |0.67    | 0.04    | 0.25    | 0.12    |
+| fast  | 0.5   |0.33    | 0.02    | 0.13    | 0.11    |
+:::
+::: {.column}
+::: {.callout-note appearance="default" icon="false"}
+Se puede ver que a medida que la temperatura aumenta, la distribución de probabilidad se vuelve más uniforme. Es decir la probabilidad de cualquiera de los tokens aparezca aumenta. 
+:::
+
+::: {.callout-important appearance="default" icon="false"}
+## 🚨Otra forma de verlo es que la probabilidad de que no ocurra el más token más probable es mucho mayor.
+
+Por ejemplo con T=1.5 la probabilidad de que no ocurra "the" es 0.47, mientras que con T=4 es 0.68.
+:::
+:::
+::: 
+
+
+# Terminamos RNNs 😊
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0

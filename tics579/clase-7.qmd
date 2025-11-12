@@ -1,6 +1,6 @@
 ---
 title: "TICS-579-Deep Learning"
-subtitle: "Clase 7: Transfer Learning y Data Augmentation"
+subtitle: "Clase 7: Transfer Learning y Image Augmentation"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -25,7 +25,7 @@ format:
 
 ## Arquitecturas Famosas {.smaller}
 
-:::{styyle="font-size: 70%;"}
+:::{style="font-size: 70%;"}
 Crear arquitecturas de CNN desde cero es una tarea compleja y que requiere de mucho conocimiento y experiencia. Afortunadamente, existen diversas arquitecturas famosas que han sido probadas y testeadas en el tiempo, las cuáles pueden ser utilizadas como ***backbones*** para distintas tareas de Visión por Computador.
 :::
 
