@@ -397,13 +397,13 @@ Alfonso Tobar-Arancibia
 <h2>Tokens Especiales</h2>
 <p>Cada modelo puede incluir el tipo de Tokenización que más le acomode. Además cada tokenización suele incluir tokens especiales que ayudan a la red a entender mejor el contexto o a resolver problemas intrínsecos del modelamiento de secuencias. Algunos de estos Tokens especiales son:</p>
 <ul>
-<li><pad> : Token utilizado para rellenar secuencias más cortas y que todas tengan el mismo largo.</pad></li>
-<li><sos> <bos> : Start of Sequence/Beginning of Sequence. Token que indica el inicio de una secuencia.</bos></sos></li>
-<li><eos> : End of Sequence. Token que indica el final de una secuencia.</eos></li>
-<li><unk> : Unknown Token. Token utilizado para representar palabras fuera del vocabulario.</unk></li>
-<li><mask> : Token utilizado en tareas de Masked Language Modeling (MLM) para indicar palabras que deben ser predichas por el modelo.</mask></li>
-<li><sep> : Separator Token. Utilizado para separar diferentes partes de una secuencia, como en tareas de preguntas y respuestas.</sep></li>
-<li><cls> : Classification Token. Utilizado en tareas de clasificación para representar toda la secuencia.</cls></li>
+<li>&lt;PAD&gt; : Token utilizado para rellenar secuencias más cortas y que todas tengan el mismo largo.</li>
+<li>&lt;SOS&gt; o &lt;BOS&gt; : Start of Sequence/Beginning of Sequence. Token que indica el inicio de una secuencia.</li>
+<li>&lt;EOS&gt; : End of Sequence. Token que indica el final de una secuencia.</li>
+<li>&lt;UNK&gt; : Unknown Token. Token utilizado para representar palabras fuera del vocabulario.</li>
+<li>&lt;MASK&gt; : Token utilizado en tareas de Masked Language Modeling (MLM) para indicar palabras que deben ser predichas por el modelo.</li>
+<li>&lt;SEP&gt; : Separator Token. Utilizado para separar diferentes partes de una secuencia, como en tareas de preguntas y respuestas.</li>
+<li>&lt;CLS&gt; : Classification Token. Utilizado en tareas de clasificación para representar toda la secuencia.</li>
 </ul>
 <div class="callout callout-caution no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -622,7 +622,7 @@ Corresponde a una arquitectura que toma una representación codificada de datos 
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-10/rnn_enc-dec.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-10/rnn_enc-dec.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-10/neural_translation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-10/neural_translation.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
 </figure>
 </div>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -633,7 +633,7 @@ Corresponde a una arquitectura que toma una representación codificada de datos 
 <div class="callout-content">
 <ul>
 <li>Permite “desligarse” de la predicción uno a uno. El Encoder resuelve una tarea many (la secuencia) to one (un hidden state) y el Decoder resuelve una tarea one (hidden state) to many (secuencia de salida).</li>
-<li>La salida de este tipo de modelos depende principalmente del contexto almacenado en el Hidden State/Bottleneck.</li>
+<li>La salida de este tipo de modelos depende principalmente del contexto almacenado en el Hidden State/Bottleneck ya que se utiliza como Hidden State inicial del Decoder.</li>
 </ul>
 </div>
 </div>
@@ -652,37 +652,359 @@ Corresponde a una arquitectura que toma una representación codificada de datos 
 </div>
 </div>
 </section>
-<section id="soluciones-arquitecturas-encoder-decoder-3" class="slide level2 smaller">
-<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-10/neural_translation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-10/neural_translation.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
+<section id="ejemplo-traducción-de-texto" class="slide level2 smaller">
+<h2>Ejemplo: Traducción de Texto</h2>
+<p>Supongamos que queremos traducir la frase <strong>How are you?</strong> al español.</p>
+<div class="r-stack">
+<p><a href="img/clase-9/translation_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-9/translation_1.png" class="fragment" data-fragment-index="1"></a></p>
+<p><a href="img/clase-9/translation_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-9/translation_2.png" class="fragment" data-fragment-index="2"></a></p>
+<p><a href="img/clase-9/translation_3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-9/translation_3.png" class="fragment" data-fragment-index="3"></a></p>
+</div>
+<div class="fragment" data-fragment-index="1">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Para comenzar el Proceso de Traducción se debe ingresar la Frase a Traducir al Encoder y luego dar inicio a la Traducción en el Decoder mediante el Token Especial &lt;SOS&gt;.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="2">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>&lt;SOS&gt; genera como primera predicción el token <strong>¿</strong> el cuál será utilizado como segundo input del Decoder. Esto nos entrega como predicción el token <strong>Cómo</strong>. Que a su vez se utiliza como el tercer input del Decoder y nos entrega el Token <strong>estás</strong>.</strong></p>
+</div>
+<div class="callout-content">
+<p>Este proceso de conoce como <strong><em>Predicción/Generación Autoregresiva</em></strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="3">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Este proceso de repite hasta que nos encontramos con el Token Especial &lt;EOS&gt;, el cuál nos indica que debemos dejar de generar.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="trucos-de-entrenamiento" class="slide level2 smaller">
+<h2>Trucos de Entrenamiento</h2>
+<p>El entrenamiento de una RNN puede ser muy ineficiente y “trabado” si es que no se utilizan ciertos trucos. Algunos de estos trucos son:</p>
+<h4 id="teacher-forcing">Teacher Forcing</h4>
+<p><a href="img/clase-9/teacher_forcing.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-9/teacher_forcing.png"></a></p>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>☝️ Dado que al momento de comenzar el entrenamiento el modelo no tiene por qué traducir correctamente, es que al Decoder se le entrega el Token correcto en vez de la predicción del modelo. Esto permite que el modelo aprenda más rápido y de mejor manera.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
 </div>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Ojo</strong></p>
+<p><strong>🚨 Normalmente esto se hace de manera pseudoaleatoria utilizando un <code>teacher_forcing_ratio</code>. Ojo con el <strong><em>Exposure Bias</em></strong></strong></p>
 </div>
 <div class="callout-content">
-<p>El último Hidden State del Encoder se utilizará como Hidden State inicial del Decoder.</p>
+
 </div>
 </div>
 </div>
 </section>
-<section id="entrenamiento" class="slide level2">
-<h2>Entrenamiento</h2>
+<section id="trucos-de-inferencia-greedy-search" class="slide level2 smaller">
+<h2>Trucos de Inferencia: Greedy Search</h2>
+<h4 id="estrategias-para-escoger-el-siguiente-token">Estrategias para escoger el siguiente token</h4>
+<p>Al momento de generar texto, la salida de cada step del Decoder tendrá una distribución de probabilidad sobre el vocabulario. Existen distintas estrategias para escoger el siguiente token a utilizar:</p>
+<h4 id="greedy-search">Greedy Search</h4>
+<p><a href="img/clase-9/greedy_search.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-9/greedy_search.png"></a></p>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🙂 En este caso Greedy Search escoge el Token con mayor probabilidad en cada step y lo utiliza como el siguiente input del Decoder.</strong></p>
+</div>
+<div class="callout-content">
+<p>En este caso, la probabilidad máxima en el primer step es p4, luego al ingresar p4 como input, la probabilidad máxima es p2, y así sucesivamente.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="teacher-forcing" class="slide level2 smaller">
-<h2>Teacher Forcing</h2>
+<section id="trucos-de-inferencia-beam-search" class="slide level2 smaller">
+<h2>Trucos de Inferencia: Beam Search</h2>
+<h4 id="beam-search">Beam Search</h4>
+<p>En este caso se pueden escoger múltiples caminos en vez de solamente el de mayor probabilidad. Por ejemplo, si se escogen 2 caminos (beam width = 2), en el primer step se escogen los tokens con probabilidad p4 y p3. Luego en el segundo step, se generan las siguientes probabilidades para los distintos caminos. Acá se escoge el camino con la mayor probabilidad conjunta.</p>
+<p><a href="img/clase-9/beam_search.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-9/beam_search.png"></a></p>
 </section>
-<section id="padding" class="slide level2">
-<h2>Padding</h2>
-<h3 id="beam-search">Beam Search</h3>
-<h3 class="smaller" id="greedy-search">Greedy Search</h3>
+<section id="ejemplo-greedy-vs-beam-search" class="slide level2 smaller">
+<h2>Ejemplo: Greedy vs Beam Search</h2>
+<p>Supongamos queremos traducir la frase <strong>“Good Night”</strong> al español.</p>
+<div class="columns">
+<div class="column">
+<h4 id="supongamos-que-la-predicción-para-el-token-sos-es-la-siguiente">Supongamos que la predicción para el Token &lt;SOS&gt; es la siguiente:</h4>
+<div style="font-size: 110%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Token</th>
+<th>Probabilidad</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>good</td>
+<td>0.45</td>
+</tr>
+<tr class="even">
+<td>nice</td>
+<td>0.15</td>
+</tr>
+<tr class="odd">
+<td>well</td>
+<td>0.10</td>
+</tr>
+<tr class="even">
+<td>hello</td>
+<td>0.30</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div><div class="column">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Greedy Search diría que la predicción de la primera palabra es <strong>good</strong> (p=0.45)</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Beam Search con width=2 diría lo siguiente:</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Beam 1: good (p=0.45)</li>
+<li>Beam 2: hello (p=0.30)</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
 </section>
-<section id="eso-sería-por-hoy" class="title-slide slide level1 center">
-<h1>Eso sería por hoy 😊</h1>
+<section id="ejemplo-greedy-vs-beam-search-1" class="slide level2 smaller">
+<h2>Ejemplo: Greedy vs Beam Search</h2>
+<div class="columns">
+<div class="column">
+<h4 id="prediciendo-para-good">Prediciendo para “good”</h4>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Secuencia</th>
+<th>Cálculo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>good night</td>
+<td>0.45 × 0.40</td>
+<td>0.18</td>
+</tr>
+<tr class="even">
+<td>good evening</td>
+<td>0.45 × 0.58</td>
+<td>0.261</td>
+</tr>
+<tr class="odd">
+<td>good bye</td>
+<td>0.45 × 0.02</td>
+<td>0.009</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<h4 id="prediciendo-para-hello">Prediciendo para “hello”</h4>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Secuencia</th>
+<th>Cálculo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>hello night</td>
+<td>0.30 × 0.10</td>
+<td>0.03</td>
+</tr>
+<tr class="even">
+<td>hello evening</td>
+<td>0.30 × 0.15</td>
+<td>0.045</td>
+</tr>
+<tr class="odd">
+<td>hello there</td>
+<td>0.30 × 0.5</td>
+<td>0.15</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Greedy Search diría que la predicción de la segunda palabra es</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Beam Search con width=2 diría lo siguiente:</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Beam 1: good night (p=0.18)</li>
+<li>Beam 2: good evening (p=0.261)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>En este caso, ambas opciones son traducciones válidas. Además, puede combinarse con un muestreo probabilístico para introducir mayor diversidad en los resultados.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="trucos-de-inferencia-top-k-sampling" class="slide level2 smaller">
+<h2>Trucos de Inferencia: Top-k Sampling</h2>
+<p>Supongamos que tenemos la siguiente distribución de Probabilidad sobre un vocabulario:</p>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Top-k Sampling</strong></p>
+</div>
+<div class="callout-content">
+<p>Se escogerá aleatoriamente entre los k tokens con mayor probabilidad. Esto introduce diversidad en la generación.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Temperatura</strong></p>
+</div>
+<div class="callout-content">
+<p>Corresponde a un parámetro que permite controlar la “concentración” de la distribución de probabilidad. A mayor temperatura, más uniforme será la distribución. A menor temperatura, más concentrada estará la distribución en los tokens con mayor probabilidad.</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="font-size: 70%">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>token</th>
+<th>logit</th>
+<th>logit/T=1.5</th>
+<th>prob T=1.5</th>
+<th>logit/T=4</th>
+<th>prob T=4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>the</td>
+<td>5.0</td>
+<td>3.33</td>
+<td>0.53</td>
+<td>1.25</td>
+<td>0.32</td>
+</tr>
+<tr class="even">
+<td>and</td>
+<td>4.0</td>
+<td>2.67</td>
+<td>0.27</td>
+<td>1</td>
+<td>0.25</td>
+</tr>
+<tr class="odd">
+<td>a</td>
+<td>3.0</td>
+<td>2.00</td>
+<td>0.14</td>
+<td>0.75</td>
+<td>0.20</td>
+</tr>
+<tr class="even">
+<td>dog</td>
+<td>1.0</td>
+<td>0.67</td>
+<td>0.04</td>
+<td>0.25</td>
+<td>0.12</td>
+</tr>
+<tr class="odd">
+<td>fast</td>
+<td>0.5</td>
+<td>0.33</td>
+<td>0.02</td>
+<td>0.13</td>
+<td>0.11</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Se puede ver que a medida que la temperatura aumenta, la distribución de probabilidad se vuelve más uniforme. Es decir la probabilidad de cualquiera de los tokens aparezca aumenta.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>🚨Otra forma de verlo es que la probabilidad de que no ocurra el más token más probable es mucho mayor.</strong></p>
+</div>
+<div class="callout-content">
+<p>Por ejemplo con T=1.5 la probabilidad de que no ocurra “the” es 0.47, mientras que con T=4 es 0.68.</p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="terminamos-rnns" class="title-slide slide level1 center">
+<h1>Terminamos RNNs 😊</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
