@@ -1,6 +1,6 @@
 ---
 title: "TICS-579-Deep Learning"
-subtitle: "Clase 10: Mecanismos de Atención"
+subtitle: "Clase 10: Transformers"
 author: Alfonso Tobar-Arancibia
 institute: <alfonso.tobar.a@edu.uai.cl>
 format:
@@ -23,395 +23,891 @@ format:
     pdf-separate-fragments: true
 ---
 
-## Datos de Texto {.smaller}
+## Transformers (Attention is all you need, 2017) {.smaller}
 
-Los datos de texto corresponden a un caso particular de datos secuenciales. En este caso, dependiendo del idioma, las dependencias pueden venir tanto del pasado como del futuro. Consideramos texto libre como una secuencia de Strings, el cuál es inteligible para seres humanos pero no necesariamente para un computador.
+::: {.columns}
+::: {.column width="60%"}
+Transformers
+: Corresponden a la arquitectura más moderna diseñada al día de hoy. Está basado en mecanismos de atención y posee hasta 4 tipos de atención distintos.
 
-::: {.callout-tip}
-Es probablemente el tipo de dato más abundante, aunque también uno de los más sensible al ruido (variabilidad, idioma, tono, formalidad, etc.).
+::: {.callout-note appearance="default" icon="false"}
+## Ventajas
+
+* No tiene problemas de "memoria" para modelar dependencias de largo plazo.
+* Permite procesamiento en paralelo (No requiere entregar elementos de la secuencia uno a uno).
+* Su bajísimo ***inductive bias*** le permite adaptarse a distintos dominios.
+* No es necesario utilizar el transformer completo para un problema en específico.
 :::
+
+::: {.callout-important appearance="default" icon="false"}
+## Desventajas
+
+* Apto sólo para datos secuenciales.
+* Las secuencias deben de ser del mismo largo.
+* Alta demanda de recursos computacionales GPU y/o TPUs para entrenamiento distribuido.
+* Data hungry.
+* ~~Limitaciones de secuencias muy largas por restricciones de memoria computacional.~~
+:::
+:::
+::: {.column width="40%"}
+![](img/clase-10/transformer.png){.lightbox fig-align="center"}   
+:::
+::: 
+
+## Encoder {.smaller}
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-11/encoder.png){.lightbox fig-align="center" width="70%"}   
+:::
+::: {.column width="60%"}
+::: {.callout-tip appearance="default" icon="false"}
+## Objetivo
+Codificar y comprimir información en Logits que puedan ser usados para clasificar o para ser utilizados por un Decoder.
+:::
+::: {.callout-important appearance="default" icon="false"}
+## Forward Pass en el Encoder
+* El embedding asociado a una secuencia se bifurca en 4 ramas:
+  * Residual Connection
+  * Query
+  * Key
+  * Value
+* Query, Key y Value ingresan al ***Multihead Attention***.
+* La salida del Multihead Attention + el Residual Connection pasan por un LayerNorm.
+* Nueva bifurcación. 
+  * Una parte entra a un MLP 
+  * Otra va como skip connection.
+* La salida del MLP + la Residual Connection pasan por un segundo LayerNorm para generar la salida del Encoder.
+
+:::
+::: {.callout-caution appearance="default" icon="false"}
+## ⚠️ Con el tiempo han aparecido distintas variantes del Transformer (pre y post normalización, distintas variantes de la atención y del positional Encodeing), pero la idea general se mantiene. 
+:::
+
+:::
+::: 
+
+## Decoder {.smaller}
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-11/decoder.png){.lightbox fig-align="center" width="70%"}   
+:::
+::: {.column width="60%"}
+::: {.callout-tip appearance="default" icon="false"}
+## Objetivo
+Tomar información de entrada y generar una salida fijándose sólo en tokens pasados. 
+:::
+::: {.callout-important appearance="default" icon="false"}
+## Forward Pass en el Decoder
+* El embedding asociado a una secuencia se bifurca en 4 ramas:
+  * Residual Connection
+  * Query
+  * Key
+  * Value
+* Query, Key y Value ingresan al ***Causal Multihead Attention***.
+* La salida del Causal Multihead Attention + el Residual Connection pasan por LayerNorm.
+* Se pasa por un ***Cross Attention*** (esto podría ser opcional).
+  * Key y Value provienen del Encoder como contexto.
+  * La salida del Causal Multihead Attention se utiliza como Query.
+* Nueva bifurcación.
+  * Una parte entra a un MLP 
+  * Otra va como skip connection.
+* La salida del MLP + la Residual Connection pasan por LayerNorm para generar el Output.
+
+:::
+
+:::
+::: 
+
+## Ejemplo: Tokenización y Embedding {.smaller}
 
 :::: {.columns}
 ::: {.column}
-::: {.callout-caution appearance="default" icon="false"}
-## El problema
-Los computadores, y por ende los modelos, no pueden entender strings. El computador ***sólo puede entender datos numéricos***.
-:::
+Supongamos que tenemos la siguiente frase: 
 
-::: {.callout-important}
-Para poder manipular texto dentro de un modelo será necesario un pre-procesamiento que permita transformar el texto en datos numéricos que un modelo pueda entender.
+> Me gusta la pizza de Pepperoni
+
+Suponiendo cada palabra como un token, tenemos una secuencia de largo $L=6$. Su tokenización podría ser algo como:
+
+> [105,6587,5475,301,708,358]
+
+::: {.callout-important appearance="default" icon="false"}
+## Dependiendo del modelo también aplica la adición de tokens especiales según corresponda.
 :::
 
 ::: {.callout-note}
-La disciplina encargada de desarrollar modelos asociado a lenguaje/texto es conocida como ***Procesamiento de Lenguaje Natural*** (NLP en inglés).
-:::
+## Luego cada token es transformado en un Embedding. En el caso del paper original, el embedding tiene $d_{model}=512$ dimensiones.
 :::
 
+::: {.callout-caution}
+En la sección 3.4 del paper se menciona que los parámetros de los embeddings son multiplicados por $\sqrt{d_{model}}$.
+:::
+:::
 ::: {.column}
-![](img/clase-10/wordcloud.jpeg){.lightbox fig-align="center"} 
+![](img/clase-10/embed_example.png){.lightbox fig-align="center"}   
 :::
 ::::
 
-## Tareas asociadas a NLP
-
-::: {.columns}
-::: {.column width="30%"}
-![](img/clase-10/sentiment_analysis.png){.lightbox fig-align="center"} 
-![](img/clase-10/summarization.jpg){.lightbox fig-align="center"} 
-:::
-::: {.column width="40%"}
-![](img/clase-10/ner.jpg){.lightbox fig-align="center"} 
-![](img/clase-10/neural_translation.png){.lightbox fig-align="center"} 
-:::
-::: {.column width="30%"}
-![](img/clase-10/question_answering.jpg){.lightbox fig-align="center"} 
-:::
-::: 
-
-## Proceso de Tokenización y Embedding {.smaller}
+## Positional Encoder {.smaller}
 
 ::: {.columns}
 ::: {.column}
-::: {.callout-tip appearance="default" icon="false"}
-## Tokenización
-
-El proceso de Tokenización permite transformar texto en datos numéricos. Cada dato numérico se mapea con un "trozo de texto". Normalmente los modelos van asociados a la tokenización con la que fueron entrenados. Cambiar la tokenización puede generar gran degradación.
+::: {.callout-caution}
+Un potencial problema que puede tener un transformer es reconocer el orden de las frases. 
 :::
-
-::: {.callout-note appearance="default" icon="false"}
-## Embedding
-Corresponde el proceso en el que los Tokens se transforman en vectores densos en las cuales la distancia entre ellos representa una noción de similaridad.
-:::
-::: {.callout-important icon="false"}
-* En este caso la frase ***"Frog on a log" *** es separada en Tokens (en este caso cada token es una palabra). 
-* Luego cada Token es mapeado a un Token id proveniente de un vocabulario. ***¿Qué es un vocabulario?***
-* Los embeddings en este caso representan una secuencia de largo 7 con 3 dimensiones.
-:::
-:::
-::: {.column}
-![](img/clase-10/tokenization_process.jpg){.lightbox fig-align="center"} 
-:::
-::: 
-
-## Embeddings {.smaller}
-
-![](img/clase-10/embedding_space.png){.lightbox fig-align="center" width="80%"} 
-
-::: {.callout-tip appearance="default"}
-## ¿Por qué es tan importante el uso de Embeddings?
-* Primero porque son entrenables. Es decir la red puede aprender cuál es la mejor manera de representar palabras.
-* Existen embeddings pre-entrenados, es decir, se puede hacer transfer learning de embeddings.
-* La red puede aprender relaciones semánticas entre palabras, algo imposible utilizando otras representaciones.
-
-:::
-
-## Problema de las RNN {.smaller}
 
 ::: {.callout-warning}
-A pesar de las habilidades de las RNN, estas no son suficientes para distintas tareas de NLP.
+No es lo mismo decir **"El perro del papá mordió al niño"** que **"El perro del niño mordió al papá"**. Las palabras usadas en ambas frases son exactamente las mismas, pero en un orden distinto implican desenlaces distintos. ***¿Cómo podemos entender el concepto de orden si no tenemos recurrencia?***
 :::
-
-![](img/clase-10/rnn.png){.lightbox fig-align="center"} 
-
-Las RNN inicialmente toman cada elemento de una secuencia y generan un output para cada entrada. Esto potencialmente genera ciertas limitantes. Una de ellas es el proceso llamado Machine Translation.
-
 ::: {.callout-important}
-Este es un ejemplo de Modelamiento ***seq2seq*** en el que se utiliza una secuencia de entrada pero se espera también una secuencia de salida.
+Incluso algunos órdenes no tienen tanto sentido lógico: **"El niño del perro mordió al papá"**.
 :::
 
-## Machine Translation: Ejemplo del Inglés {.smaller}
-
-Supongamos que necesitamos hacer la siguiente traducción:
-
-Inglés 
-: > Hi, my name is Alfonso
-
-:::{.fragment}
-
-Español
-: > Hola, mi nombre es Alfonso
-
-::: {.callout-note}
-Este tipo de traducción es uno a uno. Cada input puede tener asociado una salida de manera directa puede realizarse de manera directa con una RNN.
+Positional Encoder
+: > Corresponden a una manera en la que se pueden generar un **vector único** que representa el orden en el que aparece cada token.
 :::
+::: {.column}
+![](img/clase-11/transformer_pe.png){.lightbox fig-align="center" width="75%"}   
 :::
+::: 
 
-## Machine Translation: Ejemplo del Inglés {.smaller}
-
-Inglés
-: > Would you help me prepare something for tomorrow?
-
-:::{.fragment}
-Español
-: > ¿Me ayudarías a preparar algo para mañana?
-
-::: {.callout-warning appearance="default"}
-# Problemas
-
-* La traducción no es uno. De hecho en inglés se utilizan 8 palabras y 1 signo de puntuación. En español se traduce en 7 palabras y 2 signos de puntuación.
-* *"Would"* no tiene equivalente en español. 
-* *"a"* no tiene equivalente en el inglés. 
-* *"Me"* se traduce como *"me"* en inglés pero en vez de ir al inicio, va al final de *"help"*.
-* "*¿*" no existe en inglés.
-
-:::
-
-::: {.callout-important}
-* Otros idiomas como el Alemán o el Ruso, tienen fusión de palabras o declinaciones que hacen la traducción mucho más difícil. 
-* Es por ello que se requiere una cierta libertad entre los tokens de entradas y los tokens de salida.
-:::
-:::
-
-## Soluciones: Redes Convolucionales {.smaller}
-
-Una potencial solución se puede dar por medio de Redes Convolucionales de 1D. En este caso las redes convolucionales tienen la ventaja de poder mirar tanto al pasado como al futuro de manera móvil.
+## Positional Encoder {.smaller}
 
 ::: {.columns}
 ::: {.column}
-![](img/clase-10/conv1d.png){.lightbox fig-align="center" width="80%"} 
+$$PE_{(pos,2i)} = sin\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$
+$$PE_{(pos,2i+1)} = cos\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$
 :::
 ::: {.column}
-::: {.callout-note appearance="default"}
-## Ventajas
-* Pueden tomar contexto desde el inicio y desde el final.
-
+::: {.callout-note icon="false"}
+* $pos$ corresponde a la posición del Token en la secuencia, y $2i$ y $2i+1$ corresponden a las posiciones de la dimensión del embedding de cada token ($d_{model}$). $i$ comienza en 0.
 :::
-::: {.callout-important appearance="default"}
-## Desventajas
-* Su campo receptivo es mucho más acotado y depende del número de capas y el largo del Kernel lo cual repercute directamente en el número de parámetros del modelo.
-* No tienen estado latente (o memoria) que almacena contexto.
-* No es útil para modelos de generación (ya que ve contexto desde el futuro).
+::: {.callout-caution}
+Una forma más clara de ver esto es que la posición está definida por sinusoidales de periodo $2\pi \cdot 10000^{i/d_{model}/2}$.
 :::
 :::
 ::: 
 
-
-## Soluciones: Arquitecturas Encoder-Decoder {.smaller}
-
-Encoder
-: Corresponde a una arquitectura que permitirá tomar datos de entrada y codificarlos en una representación numérica (normalmente como hidden states o como embeddings).
-
-Decoder
-: Corresponde a una arquitectura que toma una representación codificada de datos (normalmente generado por un encoder) y la transforma nuevamente en una salida con un formato comprensible y no solamente una "simple etiqueta".
-
-![](img/clase-10/autoencoder.jpeg){.lightbox fig-align="center"} 
-
-::: {.callout-note}
-Este tipo de arquitecturas son quizás las más populares hoy en día y tienen aplicaciones en distintos dominios.
+::: {.callout-warning}
+El positional encoder debe tener el mismo tamaño que el Embedding para que se puedan sumar.
 :::
 
-## Soluciones: Arquitecturas Encoder-Decoder {.smaller}
+::: {.callout-tip appearance="default" icon="false"}
+## Estabilidad numérica
+Por temas de estabilidad el argumento del $sin(\cdot)$ y $cos(\cdot)$ se suele implementar como: 
+$$pos \cdot exp\left[-\frac{2i}{d_{model}} log(10000)\right]$$
 
-::: {.callout-note}
-Una arquitectura Encoder-Decoder convolucional permite devolver una imagen como salida. Este ejemplo se conoce como Segmentación Semántica.
 :::
-
-![](img/clase-10/conv_enc-dec.png){.lightbox fig-align="center"} 
-
-
-## Soluciones: Arquitecturas Encoder-Decoder {.smaller}
-
-::: {.callout-note}
-Una arquitectura recurrente permite devolver una secuencia como salida. La cual puede utilizarse para generación o traducción de texto.
-:::
-
-![](img/clase-10/rnn_enc-dec.png){.lightbox fig-align="center"} 
-
-::: {.callout-note appearance="default" icon="false"}
-## Ventajas
-* Permite "desligarse" de la predicción uno a  uno.
-* La salida de este tipo de modelos depende principalmente del contexto almacenado en el Hidden State/Bottleneck.
-:::
-
 ::: {.callout-important appearance="default" icon="false"}
-## Desventajas
-* Dado los problemas de Vanishing/Exploding Gradients es ingenuo pensar que todo el contexto de una frase vive en el último hidden state.
+## Regularización
+La sección 5.4 menciona que se aplica Dropout posterior a sumar los Embeddings con el Positional Encoding. Se utilizo un $P_{drop}=0.1$.
 :::
 
-## Soluciones: Arquitecturas Encoder-Decoder {.smaller}
 
-![](img/clase-10/neural_translation.png){.lightbox fig-align="center" width="80%"} 
+## Positional Encoder: Ejemplo {.smaller}
 
-::: {.callout-important appearance="default" icon="false"}
-## Ojo
-El último Hidden State del Encoder se utilizará como Hidden State inicial del Decoder.
+:::::: {.columns}
+
+Supongamos nuestra secuencia de tokens: [me, gusta, la, pizza, de, pepperoni]
+
+::: {.callout-tip appearance="default" icon="false"}
+## Para simplificar el problema consideremos que nuestros embeddings, y por ende nuestro positional encodings, tienen sólo 4 dimensiones ($d_{model}=4$).
+:::
+::: {.column width="30%"}
+![](img/clase-11/pe_1.png){.lightbox fig-align="center" width="50%"}   
+
+![](img/clase-11/pe_2.png){.lightbox fig-align="center" width="50%"}   
+:::
+::: {.column style="font-size: 70%" width="70%"}
+$$PE_{pos=0} = [sin(0), cos(0), sin(0), cos(0)] = [0, 1, 0, 1]$$
+$$PE_{pos=1} = [sin(\frac{1}{10000^{0/4}}), cos(\frac{1}{10000^{0/4}}), sin(\frac{1}{10000^{2/4}}), cos(\frac{1}{10000^{2/4}})] = [0.8415, 0.5403, 0.0099, 1]$$
+
+$$PE_{pos=2} = [sin(\frac{2}{10000^{0/4}}), cos(\frac{2}{10000^{0/4}}), sin(\frac{2}{10000^{2/4}}), cos(\frac{2}{10000^{2/4}})] = [0.9093, -0.4161, 0.02, 0.9998]$$
+
+$$PE_{pos=3} = [sin(\frac{3}{10000^{0/4}}), cos(\frac{3}{10000^{0/4}}), sin(\frac{3}{10000^{2/4}}), cos(\frac{3}{10000^{2/4}})] = [0.1411, -0.99, 0.03, 1]$$
+
+$$PE_{pos=4} = [sin(\frac{4}{10000^{0/4}}), cos(\frac{4}{10000^{0/4}}), sin(\frac{4}{10000^{2/4}}), cos(\frac{4}{10000^{2/4}})] = [-0.7568, -0.6536, 0.04, 0.9992]$$
+
+$$PE_{pos=5} = [sin(\frac{5}{10000^{0/4}}), cos(\frac{5}{10000^{0/4}}), sin(\frac{5}{10000^{2/4}}), cos(\frac{5}{10000^{2/4}})] = [-0.9589, 0.2837, 0.05, 0.99875]$$
+:::
+::: 
+
+
+
+
+## Positional Encoder: Ejemplo {.smaller}
+
+Por ejemplo, la palabra Pizza quedará definida como:
+
+$$\begin{align}
+Input = Embedding(Pizza) + PE_{pos=3} &= [0.3, -0.2, 0.7, 0.1] + [0.1411, -0.99, 0.03, 1] \\
+&= [0.4411, -1.19, 0.73, 1.1]
+\end{align}$$
+
+::: {.callout-tip appearance="default" icon="false"}
+## Este input ahora almacena la información tanto de la palabra como de su posición relativa en la secuencia.
 :::
 
-## Entrenamiento de una Arquitectura Encoder-Decoder {.smaller}
+:::{.callout-note appearance="default" icon="false"}
+## Todos los Positional Encoding son idénticos para cada posición, y se encargan de realzar o atenuar ciertas dimensiones del embedding según la posición del token en la secuencia. En la implementación original estos vectores son fijos y no entrenables.
+:::
+
+:::{.callout-caution appearance="default" icon="false"}
+## Implementación Eficiente
+En otras implementaciones modernas como los modelos GPT, estos son Embeddings y son entrenables. Cada fila es un embedding de $d_{model}$ dimensiones asociado a cada posición.
+:::
+
+
+## Encoder: Self-Attention {.smaller}
 
 ::: {.columns}
-::: {.column width="60%"}
-![](img/clase-10/seq2seq_training.png){.lightbox fig-align="center"}  
+::: {.column}
+![](img/clase-11/scale_dot_product.png){.lightbox fig-align="center" width="55%"}   
+
+$$Attention(Q,K,V) = Softmax\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) V$$
+
+::: {.callout-note appearance="default" icon="false"}
+## Ejemplo
+*"La sopa se cocinó en la olla y estaba rica"*. *Rica* podría estar refiriéndose a *olla* o a *sopa*. Sabemos que se refiere a la sopa.
+:::
+:::
+::: {.column}
+::: {.callout-warning icon="true"}
+
+El Scaled Dot-Product, más conocido como `Self-Attention`, es el mecanismo clave en las redes neuronales modernas. Permite determinar la atención/relación que existe entre palabras de una misma secuencia.
+:::
+
+::: {.callout-note}
+* Está compuesto por 3 proyecciones lineales las cuales reciben los nombres de Query (Q), Key (K) y Value (V).
+* Estás 3 proyecciones se combinan para poder determinar la atención/relación que cada Token tiene con los otros tokens de una misma secuencia.
+* Varios procesos de `Self-Attention` dan pie al `Multihead Attention`.
+:::
+::: {.callout-important}
+* El `Self-Attention` tiene la capacidad de acceder a toda la secuencia, por ende modelar relaciones a larga distancia.
+* El `Causal Self-Attention`, una variante que se utiliza en el Decoder sólo puede ver la relación con tokens pasados. 
+:::
+::: {.callout-tip}
+* Su característica más importante es que el `Multihead Attention` es paralelizable y no secuencial como las RNN.
+* Tiene capacidad de escalabilidad para secuencias largas. 
+:::
+:::
+::: 
+
+## Encoder: Self-Attention {.smaller}
+
+::: {.callout-caution}
+* Supongamos que tenemos la secuencia *"Me gusta la Pizza de Pepperoni"*. 
+* Utilizaremos $d_{model} = 512$ y $h=8$.
+* El paper utiliza $d_k=d_v=d_{model}/h=64$ para el cálculo de los Attention Weights.
+:::
+
+::: {.columns}
+::: {.column width="40%"}
+$$
+\begin{array}{c c} 
+X = \left[
+\begin{array}{c c c}
+[a_1,...,a_{256}]\\
+[b_1,...,b_{256}]\\
+[c_1,...,c_{256}]\\
+[d_1,...,d_{256}]\\
+[e_1,...,e_{256}]\\
+[f_1,...,f_{256}]\\
+\end{array}
+\right]
+\begin{array}{c c c}Me\\gusta\\la\\pizza\\de\\pepperoni \end{array} &
+\end{array}
+$$
+
+::: {.callout-warning appearance="default" icon="false" .fragment}
+## 👀 Ojito
+
+Esto se debe aplicar a cada secuencia. Por lo tanto se debe agregar una dimensión (como unsqueeze(0)) que contabilice el número de secuencias para $Q$, $K$, y $V$.
 
 :::
-::: {.column width="40%"}
 
+:::
+::: {.column width="60%"}
+
+::: {.callout-important appearance="default" icon="false"}
+## Matrices de Proyección
+
+Definiremos 3 matrices de Proyección. Una matriz de proyección permite llevar transportar un vector $X$ a otro espacio (es decir, son entrenables). En este caso crearemos matrices que puedan multiplicarse con $X$. Por lo tanto irán desde $d_{model}$ hasta $d_q=d_k$ y $d_v$ respectivamente.
+
+* $W_q = (d_{model}, d_k)$ 
+* $W_k = (d_{model}, d_k)$ 
+* $W_v = (d_{model}, d_v)$ 
+:::
+
+::: {.callout-note appearance="default" icon="false"}
+## Dimensiones de Q,K y V
+* $Q = (L, d_k)$
+* $K = (L, d_k)$
+* $V = (L, d_v)$
+* $L$ corresponde a largo de la secuencia (es decir, el número de Tokens)
+:::
+
+:::
+:::
+::: 
+
+## Encoder: Self-Attention {.smaller}
+
+> Siguiendo nuestro ejemplo: $d_k = d_v = 64$
+
+::: {.columns}
+::: {.column width="30%"}
+::: {.callout-note appearance="default" icon="false"}
+## Query (6,64)
+
+$$
+\begin{array}{c c} 
+Q = \left[
+\begin{array}{c c c}
+[qa_1,...,qa_{64}]\\
+[qb_1,...,qb_{64}]\\
+[qc_1,...,qc_{64}]\\
+[qd_1,...,qd_{64}]\\
+[qe_1,...,qe_{64}]\\
+[qf_1,...,qf_{64}]\\
+\end{array}
+\right]
+\end{array}
+$$
+
+:::
+:::
+::: {.column width="30%"}
+::: {.callout-caution appearance="default" icon="false"}
+## Key (6,64)
+
+$$
+\begin{array}{c c} 
+K = \left[
+\begin{array}{c c c}
+[ka_1,...,ka_{64}]\\
+[kb_1,...,kb_{64}]\\
+[kc_1,...,kc_{64}]\\
+[kd_1,...,kd_{64}]\\
+[ke_1,...,ke_{64}]\\
+[kf_1,...,kf_{64}]\\
+\end{array}
+\right]
+\end{array}
+$$
+
+:::
+:::
+::: {.column width="30%"}
+::: {.callout-tip appearance="default" icon="false"}
+## Value (6,64)
+
+$$
+\begin{array}{c c} 
+V = \left[
+\begin{array}{c c c}
+[va_1,...,va_{64}]\\
+[vb_1,...,vb_{64}]\\
+[vc_1,...,vc_{64}]\\
+[vd_1,...,vd_{64}]\\
+[ve_1,...,ve_{64}]\\
+[vf_1,...,vf_{64}]\\
+\end{array}
+\right]
+\end{array}
+$$
+
+:::
+:::
+::: 
+
+::: {.callout-warning appearance="default" icon="false" .fragment}
+## 👀 Ojito
+
+Como esto se aplica a una sola secuencia, la dimensión real de estos tensores debería ser $(1,6,64)$. Ese 1 cambiará si tenemos más secuencias. Pero, ***todas las secuencias deben ser del mismo largo***.
+
+:::
+
+## Encoder: Self-Attention (Scale Dot Product) {.smaller}
+
+::: {.columns}
+::: {.column width="40%"}
+$$\frac{Q \cdot K^T}{\sqrt{d_k}}$$
+
+::: {.callout-important appearance="default" icon="false"}
+## Similaridad
+* $Q \cdot K^T$ representa el producto punto entre $Q$ (un token de referencia que está consultando la atención contra otros tokens) y $K$ (otro token que se compara contra la "query").
+:::
+
+::: {.callout-tip appearance="default" icon="false"}
+## Control de Gradientes
+$\sqrt{d_k}$ es un factor que reduce la escala de los valores para el control de los gradientes. Recordar que esta matriz es de parámetros entrenables.
+:::
+
+:::
+::: {.column width="60%"}
+![](img/clase-11/dot_prod.png){.lightbox fig-align="center"}    
+:::
+::: 
+
+::: {.callout-important appearance="default" icon="false"}
+## Attention
+Dado que el rango de estos valores van de $-\infty$ a $\infty$, es más común aplicar una softmax para poder garantizar que la suma de las atenciones para cada palabra "query" sume 1.
+:::
+
+## Encoder: Self-Attention (Scale Dot Product) {.smaller}
+
+![](img/clase-11/softmax_scale_dot.png){.lightbox fig-align="center" width="50%"}    
+
+::: {.callout-note appearance="default" icon="false"}
+## Attention Weights
+* Tendremos un tensor de $(N,L,L)$ que representa las atenciones entre cada palabra para cada secuencia.
+* Se debe entender cómo qué tan relevante es cada palabra *"key"* para cada palabra *"query"*.
+* Esta matriz permitirá crear embeddings contextualizados, que incluyen la información de la palabra y su contexto de atención.
+:::
+
+## Encoder: Self-Attention (Scale Dot Product) {.smaller}
+
+$$Attention(Q,K,V) = Softmax\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) V$$
+
+![](img/clase-11/self_attention_calculation.png){.lightbox fig-align="center" width="70%"}    
+
+::: {.callout-warning appearance="default" icon="false"}
+## OJO
+* A modo de ejemplo, el elemento en Rojo representa una suma ponderada de la primera dimensión de cada proyección de tokens.
+* El resultado de cada dimensión es una combinación lineal de las dimensiones de cada token.
+* Cada fila corresponde a un embedding contextualizado que tiene información sobre el token y su contexto combinado.
+:::
+
+::: {.callout-important icon="false"}
+***¿Y, estamos seguros que las atenciones/relaciones obtenidas por este algoritmos son (las) únicas/más correctas?***
+:::
+
+
+## Encoder: Multihead Attention {.smaller}
+
+![](img/clase-11/multihead_attention.png){.lightbox fig-align="center" width="23%"}    
+
+::: {.callout-tip appearance="default" icon="false"}
+## Multihead Attention
+Es una extensión del `Self-Attention`. En lugar de calcular sólo ***"una atención"*** sobre el input, genera distintas ***"atenciones"*** en múltiples ***"cabezas"*** independientes. Cada `Attention Head` se encarga de aprender relaciones diferentes, lo que mejora la capacidad del modelo de captar patrones cada vez más complejos.
+:::
+::: {.callout-important}
+Normalmente se calculan entre $h=8$ y $h=12$ attention heads, las cuales se concatenan para luego pasar por una proyección lineal.
+:::
+
+## Encoder: Multihead Attention {.smaller}
+
+::: {.callout-caution icon="false"}
+Si queremos calcular $h=8$ attention heads. Necesitamos 8 $Q$, 8 $K$ y 8 $V$. Por lo tanto, necesitamos 8 matrices de proyección. ***¿Cómo lo paralelizamos?***
+:::
+
+::: {.columns}
+::: {.column}
+::: {.callout-important appearance="default" icon="false"}
+## Implementación en paralelo
+
+Podemos definir en realidad todas las matrices de manera análoga rescribiendo las matrices de proyección para $Q$, $K$ y $V$ como una subdivisión de cada embedding en $h$ cabezas.
+
+*  Por lo tanto si $d_k=d_v=64$ y $h=8$ tendríamos una dimensión total de 512. 
+* $dim(Q) = dim(K) = (L,h \cdot d_k) = (6, 512)$
+* $dim(V) = (L, h \cdot d_v) = (6, 512)$
+* $dim(W_q) = (d_{model}, h, d_k)$
+* $dim(W_k) = (d_{model}, h, d_k)$
+* $dim(W_v) = (d_{model}, h, d_v)$
+
+:::
+:::
+::: {.column}
+::: {.callout-caution appearance="default" icon="false"}
+## Dimensiones de Q, K y V
+* $Q = X \cdot W_q = (6,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,64)$
+* $K = X \cdot W_k = (6,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,64)$
+* $V = X \cdot W_v = (6,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,64)$
+:::
+
+:::
+::: 
+
+## Encoder: Multihead Attention (Independencia) {.smaller}
+
+
+::: {.columns}
+::: {.column}
+
+::: {.callout-warning appearance="default" icon="false"}
+## Independent Heads
+Es importante mencionar que cada cabeza debe ser independiente una de otra para que se pueda paralelizar. Para ello basta con transponer las dos primeras dimensiones.
+
+:::
+::: {.callout-note appearance="default" icon="false"}
+## Query/Key/Value (6, 8, 64) (Previo a Transponer)
+
+$$
+\begin{array}{c c} 
+Q/K/V = \left[
+\begin{array}{c c c}
+\overbrace{[ia_{1},...,ia_{64}]}^{Head 1}, \overbrace{[ia_{65},...,ia_{128}]}^{Head 2}, ..., \overbrace{[ia_{449},...,ia_{512}]}^{Head 8}\\
+[ib_{1},...,ib_{64}],[ib_{65},..., ib_{128}],...[ib_{449},...,ib_{512}]\\
+[ic_{1},...,ic_{64}],[ic_{65},..., ic_{128}],...[ic_{449},...,ic_{512}]\\
+[id_{1},...,id_{64}],[id_{65},..., id_{128}],...[id_{449},...,id_{512}]\\
+[ie_{1},...,ie_{64}],[ie_{65},..., ie_{128}],...[ie_{449},...,ie_{512}]\\
+[if_{1},...,if_{64}],[if_{65},..., if_{128}],...[if_{449},...,if_{512}]\\
+\end{array}
+\right]
+\end{array}
+$$
+
+:::
+::: {.callout-caution icon="false" appearance="default"}
+## OJO
+Esto permite calcular cada Head en paralelo. Este procedimiento se aplica a cada secuencia. Por lo tanto, un Multihead Attention recibe Tensores de dimensión $(N,L,h \cdot d_i)$ con $i=k,v$.
+:::
+:::
+::: {.column}
+::: {.callout-important appearance="default" icon="false"}
+## Query/Key/Value (8,6, 64) (Luego de Transponer)
+
+$$
+Q/K/V = \begin{array}{c c} 
+\left[
+\begin{array}{c c c}
+\text{Head1}\left\{
+\begin{array}{c c c}
+\begin{bmatrix}
+[ia_{1},...,ia_{64}]\\
+[ib_{1},...,ib_{64}]\\
+[ic_{1},...,ic_{64}]\\
+[id_{1},...,id_{64}]\\
+[ie_{1},...,ie_{64}]\\
+[if_{1},...,if_{64}]\\
+\end{bmatrix}
+\end{array}
+\right. \\
+\vdots \\
+\vdots \\
+\text{Head8}\left\{
+\begin{array}{c c c}
+\begin{bmatrix}
+[ia_{449},...,ia_{512}]\\
+[ib_{449},...,ib_{512}]\\
+[ic_{449},...,ic_{512}]\\
+[id_{449},...,id_{512}]\\
+[ie_{449},...,ie_{512}]\\
+[if_{449},...,if_{512}]\\
+\end{bmatrix}
+\end{array}
+\right. \\
+\end{array}
+\right]
+\end{array}
+$$
+
+:::
+::: {.callout-tip}
+## Luego de Transponer, entonces Q/K/V tienen dimensiones $(N, h, L, d_i)$. Luego se puede aplicar el Self-Attention en paralelo para cada cabeza y para cada secuencia.
+:::
+:::
+::: 
+
+## Encoder: Multihead Attention (Concatenación) {.smaller}
+
+::: {.columns}
+::: {.column width="40%"}
+::: {.callout-note appearance="default" icon="false"}
+## Self-Attentions (aka Multihead Attention) (8,6,64)
+
+$$
+MSA = \begin{array}{c c} 
+\left[
+\begin{array}{c c c}
+\text{Head1}\left\{
+\begin{array}{c c c}
+\begin{bmatrix}
+[SAa_1,...,SAa_{64}]\\
+[SAb_1,...,SAb_{64}]\\
+[SAc_1,...,SAc_{64}]\\
+[SAd_1,...,SAd_{64}]\\
+[SAe_1,...,SAe_{64}]\\
+[SAf_1,...,SAf_{64}]\\
+\end{bmatrix}
+\end{array}
+\right. \\
+\vdots \\
+\vdots \\
+\text{Head8}\left\{
+\begin{array}{c c c}
+\begin{bmatrix}
+[SAa_{449},...,SAa_{512}]\\
+[SAb_{449},...,SAb_{512}]\\
+[SAc_{449},...,SAc_{512}]\\
+[SAd_{449},...,SAd_{512}]\\
+[SAe_{449},...,SAe_{512}]\\
+[SAf_{449},...,SAf_{512}]\\
+\end{bmatrix}
+\end{array}
+\right. \\
+\end{array}
+\right]
+\end{array}
+$$
+:::
+:::
+::: {.column width="60%"}
+::: {.callout-important appearance="default" icon="false"}
+## Self-Attention Transpuesto (6,8,64)
+$$
+MSA = \begin{array}{c c} 
+\left[
+\begin{array}{c c c}
+\overbrace{[SAa_1,...,SAa_{64}]}^{Head 1}, \overbrace{[SAa_{65},...,SAa_{128}}^{Head 2}, ..., \overbrace{[SAa_{449},...,SAa_{512}]}^{Head 8}\\
+[SAb_1,...,SAb_{128}],[SAb_{65},..., SAb_{128}],...[SAb_{449},...,SAb_{512}]\\
+[SAc_1,...,SAc_{128}],[SAc_{65},..., SAc_{128}],...[SAc_{449},...,SAc_{512}]\\
+[SAd_1,...,SAd_{128}],[SAd_{65},..., SAd_{128}],...[SAd_{449},...,SAd_{512}]\\
+[SAe_1,...,SAe_{128}],[SAe_{65},..., SAe_{128}],...[SAe_{449},...,SAe_{512}]\\
+[SAf_1,...,SAf_{128}],[SAf_{65},..., SAf_{128}],...[SAf_{449},...,SAf_{512}]\\
+\end{array}
+\right]
+\end{array}
+$$
+
+:::
+
+::: {.callout-tip appearance="default" icon="false"}
+## Self-Attention Concatenado (6,512)
+
+Hint: La concatenación en este caso equivale a un reshape de las dos últimas dimensiones.
+$$
+MSA = \begin{array}{c c} 
+\left[
+\begin{array}{c c c}
+[SAa_1,.....,SAa_{512}]\\
+[SAb_1,.....,SAb_{512}]\\
+[SAc_1,.....,SAc_{512}]\\
+[SAd_1,.....,SAd_{512}]\\
+[SAe_1,.....,SAe_{512}]\\
+[SAf_1,.....,SAf_{512}]\\
+\end{array}
+\right]
+\end{array}
+$$
+
+:::
+
+:::
+::: 
+
+## Encoder: Multihead Attention (Output) {.smaller}
+
+
+::: {.callout-important appearance="default" icon="false"}
+## Head Mixing
+Los outputs de cada cabeza ahora están uno al lado del otro. Por lo tanto, si aplicamos una capa lineal $W^O  de dimensión $(d_v \times h, d_{model}$), estos parámetros entrenables se encargarán de aprender una combinación lineal que mezcle la información aprendida por cada Attention Head de manera óptima.
+
+:::
+::: {.callout-tip appearance="default" icon="false"}
+## Multihead Attention Output (6,512)
+$$
+Multihead(Q,K,V) = \begin{array}{c c} 
+\left[
+\begin{array}{c c c}
+[SAa_1,.....,SAa_{512}]\\
+[SAb_1,.....,SAb_{512}]\\
+[SAc_1,.....,SAc_{512}]\\
+[SAd_1,.....,SAd_{512}]\\
+[SAe_1,.....,SAe_{512}]\\
+[SAf_1,.....,SAf_{512}]\\
+\end{array}
+\right]
+\end{array}
+\cdot W^O
+$$
+:::
+
+::: {.callout-tip}
+## El Multihead Attention Output tiene dimensiones $(N, L, d_{model})$.
+:::
+
+
+## Encoder: Add + LayerNorm {.smaller}
+
+::: {.columns}
+::: {.column}
+![](img/clase-11/add_norm.png){.lightbox fig-align="center" width="70%"}    
+:::
+::: {.column}
+::: {.callout-note appearance="default" icon="false"}
+## Residual Connection (Add&Norm)
+
+Corresponde a una conexión residual. Combina la información de entrada al Multihead y su salida para luego aplicar LayerNorm.
+
+$$Add\&Norm = LayerNorm(X + Multihead(Q,K,V))$$
+
+:::
+::: {.callout-tip appearance="default" icon="false"}
+## LayerNorm
+El LayerNorm calcula el promedio y la varianza por token normalizando las dimensiones del embedding de cada token.
+
+$$X_{norm} = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}}\cdot \gamma + \beta$$
+
+:::
+::: {.callout-important}
+* $\gamma$ y $\beta$ son parámetros entrenables.
+:::
+::: {.callout-important appearance="default" icon="false"}
+## Regularización
+La sección 5.4 menciona que se aplica Dropout posterior a cada sublayer del Encoder (y el Decoder) con $P_{drop}=0.1$.
+:::
+:::
+::: 
+
+## Encoder: Feed Forward (MLP) {.smaller}
+
+::: {.columns}
+::: {.column}
+![](img/clase-11/ffn.png){.lightbox fig-align="center" width="70%"}    
+:::
+::: {.column}
+La sección 3.3 del paper define el bloque Feed Forward de la siguiente manera:
+
+$$FFN(x) = max(0,x \cdot W_1+b_1)W_2 + b_2$$
+
+Donde $W_1 \in \mathbb{R}^{d_{model} \times {d_{ff}}}$ y $W_2 \in \mathbb{R}^{d_{ff} \times {d_{model}}}$. Implementaciones como GPT consideran $d_{ff}=4 \cdot d_{model}$.
+
+
+::: {.callout-note icon="false" appearance="default"} 
+## Arquitectura 
+
+* 2 capas Feed Forward con bias. 
+* Una ReLU como activación intermedia.
+* De acuerdo a la sección 5.4, a la salida incluiría un Dropout con $P_{drop}=0.1$.
+:::
+
+::: {.callout-important appearance="default" icon="false"}
+## Residual Connection (Add&Norm)
+Al igual que en el Multihead Attention, se la salida de esta capa se une con una conexión residual y se pasa por un LayerNorm.
+:::
+:::
+::: 
+
+## Encoder: Output Final {.smaller}
+
+::: {.columns}
+::: {.column}
+![](img/clase-11/encoder.png){.lightbox fig-align="center" width="70%"}    
+:::
+::: {.column}
+::: {.callout-note appearance="default" icon="false"}
+## Encoder Layers
+* La combinación de todos los pasos anteriores constituyen un (1) Encoder. En el caso del paper el Transformer está compuesto de $N=6$ Encoder Layers uno después del otro.
+
+:::
+::: {.callout-important appearance="default" icon="false"}
+## 👀 Ojito
+* Sólo antes de la primera Encoder Layer se aplica el Input Embedding y el Positional Encoding.
+:::
+::: {.callout-note appearance="default" icon="false"}
+## Arquitectura Encoder Only
+Utilizan el output como input de una prediction Head para tareas de clasificación o regresión.
+:::
+
+::: {.callout-tip appearance="default" icon="false"}
+## Arquitectura Encoder-Decoder
+En el caso de estas arquitecturas, entonces el output del Encoder sirve como Keys y Values para el proceso de Cross Attention.
+:::
+:::
+::: 
+
+## Decoder: Causal Self-Attention {.smaller}
+
+
+::: {.columns}
+::: {.column width=20%}
+![](img/clase-11/causal_mh.png){.lightbox fig-align="center" width="70%"}    
+:::
+::: {.column width=80%}
+
+$$Attention(Q,K,V) = Softmax\left(\frac{Q \cdot K^T + Mask}{\sqrt{d_k}}\right) V$$
+
+<br>
+
+::: {.callout-warning}
+Corresponde a una variante del `Self-Attention` en el cuál sólo se presta atención a Tokens pasados, esto para preservar las propiedades auto-regresivas.
+:::
+
+::: {.callout-important}
+## Implementaciones como GPT utilizan una máscara triangular superior de -$\infty$ y 1s en el resto. Luego esta máscara se multiplica antes de aplicar la Softmax.
+:::
+
+:::
+::: 
+
+![](img/clase-11/causal.png){.lightbox fig-align="center" height="110%"}    
+
+
+
+## Decoder: Cross Attention {.smaller}
+
+::: {.columns}
+::: {.column width="40%"}
+![](img/clase-11/cross.png){.lightbox fig-align="center" height="110%"}    
+
+::: {.callout-caution}
+Opcionalmente podría utilizar una Máscara en caso de querer evitar el Look Ahead.
+:::
+
+:::
+::: {.column width="60%"}
+::: {.callout-warning appearance="default" icon="false"}
+## Cross Attention
+
+Este mecanismo permite generar relaciones/atenciones entre dos secuencias de datos distintos. En este caso se relaciona una secuencia *"query"* con elementos *"key"* y *"values"* de otra secuencia. Además `limita` la generación del Decoder.
+:::
+
+
+::: {.callout-note appearance="default" icon="false"}
+## Dimensiones de Q, K y V
+* $Q = X_{decoder} \cdot W_q = (F,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,512)$
+* $K = X_{encoder} \cdot W_k = (6,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,512)$
+* $V = X_{encoder} \cdot W_v = (6,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,512)$
+:::
+:::
+::: 
+
+$$Attention(Q_{decoder},K_{encoder},V_{encoder}) = Softmax\left(\frac{Q_{decoder} \cdot K_{encoder}^T + Mask}{\sqrt{d_k}}\right) V_{encoder}$$
+
+
+## Prediction Head {.smaller}
+
+::: {.columns}
+::: {.column}
+![](img/clase-11/pred_head.png){.lightbox fig-align="center" width="70%"}   
+:::
+::: {.column}
 ::: {.callout-important appearance="default" icon="false"}
 ## Arquitectura
-* RNN Bidireccional
-* Con un Encoder (colores pastel) y un Decoder independientes (colores más oscuros).
+Corresponde a una capa Feed Forward que proyecta desde $d_{model}$ hasta $vocab\_size$ seguida de una Softmax.
+
 :::
-
-::: {.callout-tip icon="false"}
-
-* Tenemos dos frases una en inglés (input) y una en español (output). Ambas frases son claramente de tamaños distintos.
-* Tenemos el token especial `<eos>` (end of sentence) que separa el input del output.
-:::
-
-::: {.callout-warning icon="false"}
-* Los últimos Hidden States del Encoder son los Hidden States iniciales del Decoder. Estos también se conocen como ***Context Vectors***.
-:::
-::: {.callout-note appearance="default" icon="false"}
-## Entrenamiento
-Al momento de entrenarse, las salidas $y1$ e $y2$ pueden ser distintas al valor esperado y deben ir ajustándose epoch a epoch.
-:::
-:::
-::: 
-
-## Inferencia de una Arquitectura Encoder-Decoder {.smaller}
-
-::: {.columns}
-::: {.column width="60%"}
-![](img/clase-10/prediction_seq2seq.png){.lightbox fig-align="center"}  
-:::
-::: {.column width="40%"}
-::: {.callout-warning appearance="default" icon="false"}
-## Predicción
-
-* La predicción se va realizando de ***manera autoregresiva***. Es decir, la predicción del primer step corresponde a la entrada del segundo step y así sucesivamente.
-:::
-::: {.callout-tip icon="false"}
-* La primera entrada siempre será el token especial `<eos>` (otros modelos pueden utilizar otros tokens especiales).
-:::
-::: {.callout-important icon="false"}
-* El modelo irá prediciendo de manera autoregresiva hasta predecir el token `<eos>`.
-:::
-
-::: {.callout-caution appearance="default"}
-## Problema
-* Pensar que todo el contexto se puede almacenar en el último hidden state es un poco ingenuo. 
-* El último hidden state tiene más influencia de las palabras más cercanas y menos de las palabras iniciales (debido al problema de vanishing/exploding gradients).
-:::
-:::
-::: 
-
-
-## Mecanismo de Atención (Bahdanau et al, (2015)) {.smaller}
-
-::: {.columns}
-::: {.column}
-![](img/clase-10/Attention.png){.lightbox fig-align="center" width="75%"}  
-:::
-::: {.column}
-Atención
-: Se refiere a cualquier mecanismo en el que los hidden states se ponderan y combinan para poder utilizarlos como contexto. En otras palabras, el mecanismo busca a qué inputs iniciales debe poner más "atención" para poder generar la predicción.
-
-$$c_i = \sum_{t=1}^T a_{i,t} \cdot h_t$$
-
-
-Donde $c_i$ corresponde al contexto para la predicción del output $i$ y $a_{i,t}$ (que van entre 0 y 1) corresponden a cuánta atención le presta el output $i$ al token $t$.
-
-::: {.callout-important appearance="default"}
-## Ojo
-En el paper original, se interpreta $a_{i,t}$ como cuánto se "alínea" o se parece el estado $h_t$ con $S_{t-1}$.
-:::
-:::
-::: 
-
-## Atención de Bahdanau {.smaller}
-
-$$a_{i,t} = align(h_t, S_{i-1})$$
-![](img/clase-10/bahdanau.png){.lightbox fig-align="center"}  
-
-$$[a_{i,1},...,a_{i,T}] = Softmax([\tilde{a_{i,1}},...\tilde{a_{i,T}}])$$
-
-## Otras formas de Atención
 
 ::: {.callout-tip appearance="default" icon="false"}
-#### 1. Proyecciones Lineales
-$$k_t = W_k \cdot h_t$$
-$$q_{i-1} = W_q \cdot S_{i-1}$$
+## ¿Por qué es necesaria?
+Por que la salida del Decoder tiene dimensiones $(N, L, d_{model})$. Es decir, tenemos $N$ secuencias de largo $L$, donde cada token está representado como un embedding de $d_{model}$ dimensiones, lo cuál no es interpretable por humanos.
+
+Esta capa tiene el objetivo de estimar la probabilidad de que ocurra el siguiente token, de este modo predecir de manera autoregresiva.
+
+Luego la salida del transformer tendrá dimensiones $(N, L, vocab\_size)$, pero la secuencia queda ***desplazada***.
 :::
 
-::: {.callout-warning appearance="default" icon="false"}
-#### 2. Similaridad: Producto Punto es equivalente al Cosine Similarity
-$$\tilde{a}_{i,t} = k_t^T \cdot q_{i-1}$$
+::: {.callout-important}
+## Implementaciones como GPT agregan weight sharing o weighting tying entre la capa de Embedding y la capa final de proyección.
 :::
 
-::: {.callout-important appearance="default" icon="false"}
-#### 3. Normalización:
-$$[a_{i,1},...,a_{i,T}] = Softmax([\tilde{a}_{i,1},...\tilde{a}_{i,T}])$$
-:::
-
-## Transformers: Arquitectura {.smaller}
-
-Transformer
-: Corresponde a la Arquitectura más avanzada que tenemos hoy en día. Está basada en distintos mecanismos de atención.
-
-::: {.columns}
-::: {.column}
-![](img/clase-10/transformer.png){.lightbox fig-align="center" width="60%"}   
-:::
-::: {.column}
-::: {.callout-note appearance="default" icon="false"}
-## Detalles de la Arquitectura
-* Corresponde a un Encoder + un Decoder.
-* Cada uno contiene una capa de Embeddings.
-* Además posee un Positional Encoding para entender el orden de la secuencia.
-* El decoder funciona de manera autoregresiva.
-* Posee 4 tipos de atención.
-:::
 :::
 ::: 
 
-## Transformers: Self y Multihead Attention
-
-::: {.columns}
-::: {.column}
-![](img/clase-10/self_attention.png){.lightbox fig-align="center"}  
-:::
-::: {.column}
-
-::: {.callout-tip appearance="default" icon="false"}
-## Detalles 
-* El self-attention pone atención (aprendiendo la relación) existente entre datos de una misma secuencia. La gran ventaja es que permite la paralelización de cálculos.
-* El Multihead Attention corresponde a la concatenación de varios Self-Attention. Esto permite no "sesgarse" con sólo una forma de poner atención, permitiendo aprender relaciones en distintas direcciones.
-:::
-:::
-::: 
-
-## Transformers: Causal Self Attention
-
-::: {.columns}
-::: {.column}
-![](img/clase-10/causal_self_attention.jpg){.lightbox fig-align="center" width="90%"}  
-:::
-::: {.column}
-
-::: {.callout-tip appearance="default" icon="false"}
-## Detalles 
-* Corresponde a un tipo particular de Self Attention, en el cuál sólo se puede poner atención a valores de secuencia previa (no puede ver al futuro). Esto es particularmente necesario para tareas de generación autoregresiva.
-:::
-:::
-::: 
-
-## Transformers: Cross Attention
-
-::: {.columns}
-::: {.column}
-![](img/clase-10/cross_attention.jpg){.lightbox fig-align="center" width="90%"}  
-:::
-::: {.column}
-
-::: {.callout-tip appearance="default" icon="false"}
-## Detalles 
-* Corresponde a la atención que relaciona información proveniente tanto del Encoder como del Decoder. Muy similar al concepto original de Atención.
-:::
-:::
-::: 
-
-
-# Y... estamos por hoy
+# 🥳 Se acabó
 
 ::: {.footer}
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0

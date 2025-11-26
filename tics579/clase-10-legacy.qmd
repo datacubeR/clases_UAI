@@ -1,0 +1,420 @@
+---
+title: "TICS-579-Deep Learning"
+subtitle: "Clase 10: Mecanismos de Atención"
+author: Alfonso Tobar-Arancibia
+institute: <alfonso.tobar.a@edu.uai.cl>
+format:
+  revealjs:
+    width: 1366
+    height: 768
+    theme: simple
+    slide-number: true
+    controls: true
+    controls-layout: edges
+    controls-back-arrows: faded
+    transition: slide
+    transition-speed: fast
+    chalkboard: true
+    callout-appearance: simple
+    logo: ../logo-uai-blanco.jpeg
+    css: ../logo.css
+    code-copy: true
+    highlight-style: arrow
+    pdf-separate-fragments: true
+---
+
+## Datos de Texto {.smaller}
+
+Los datos de texto corresponden a un caso particular de datos secuenciales. En este caso, dependiendo del idioma, las dependencias pueden venir tanto del pasado como del futuro. Consideramos texto libre como una secuencia de Strings, el cuál es inteligible para seres humanos pero no necesariamente para un computador.
+
+::: {.callout-tip}
+Es probablemente el tipo de dato más abundante, aunque también uno de los más sensible al ruido (variabilidad, idioma, tono, formalidad, etc.).
+:::
+
+:::: {.columns}
+::: {.column}
+::: {.callout-caution appearance="default" icon="false"}
+## El problema
+Los computadores, y por ende los modelos, no pueden entender strings. El computador ***sólo puede entender datos numéricos***.
+:::
+
+::: {.callout-important}
+Para poder manipular texto dentro de un modelo será necesario un pre-procesamiento que permita transformar el texto en datos numéricos que un modelo pueda entender.
+:::
+
+::: {.callout-note}
+La disciplina encargada de desarrollar modelos asociado a lenguaje/texto es conocida como ***Procesamiento de Lenguaje Natural*** (NLP en inglés).
+:::
+:::
+
+::: {.column}
+![](img/clase-10/wordcloud.jpeg){.lightbox fig-align="center"} 
+:::
+::::
+
+## Tareas asociadas a NLP
+
+::: {.columns}
+::: {.column width="30%"}
+![](img/clase-10/sentiment_analysis.png){.lightbox fig-align="center"} 
+![](img/clase-10/summarization.jpg){.lightbox fig-align="center"} 
+:::
+::: {.column width="40%"}
+![](img/clase-10/ner.jpg){.lightbox fig-align="center"} 
+![](img/clase-10/neural_translation.png){.lightbox fig-align="center"} 
+:::
+::: {.column width="30%"}
+![](img/clase-10/question_answering.jpg){.lightbox fig-align="center"} 
+:::
+::: 
+
+## Proceso de Tokenización y Embedding {.smaller}
+
+::: {.columns}
+::: {.column}
+::: {.callout-tip appearance="default" icon="false"}
+## Tokenización
+
+El proceso de Tokenización permite transformar texto en datos numéricos. Cada dato numérico se mapea con un "trozo de texto". Normalmente los modelos van asociados a la tokenización con la que fueron entrenados. Cambiar la tokenización puede generar gran degradación.
+:::
+
+::: {.callout-note appearance="default" icon="false"}
+## Embedding
+Corresponde el proceso en el que los Tokens se transforman en vectores densos en las cuales la distancia entre ellos representa una noción de similaridad.
+:::
+::: {.callout-important icon="false"}
+* En este caso la frase ***"Frog on a log" *** es separada en Tokens (en este caso cada token es una palabra). 
+* Luego cada Token es mapeado a un Token id proveniente de un vocabulario. ***¿Qué es un vocabulario?***
+* Los embeddings en este caso representan una secuencia de largo 7 con 3 dimensiones.
+:::
+:::
+::: {.column}
+![](img/clase-10/tokenization_process.jpg){.lightbox fig-align="center"} 
+:::
+::: 
+
+## Embeddings {.smaller}
+
+![](img/clase-10/embedding_space.png){.lightbox fig-align="center" width="80%"} 
+
+::: {.callout-tip appearance="default"}
+## ¿Por qué es tan importante el uso de Embeddings?
+* Primero porque son entrenables. Es decir la red puede aprender cuál es la mejor manera de representar palabras.
+* Existen embeddings pre-entrenados, es decir, se puede hacer transfer learning de embeddings.
+* La red puede aprender relaciones semánticas entre palabras, algo imposible utilizando otras representaciones.
+
+:::
+
+## Problema de las RNN {.smaller}
+
+::: {.callout-warning}
+A pesar de las habilidades de las RNN, estas no son suficientes para distintas tareas de NLP.
+:::
+
+![](img/clase-10/rnn.png){.lightbox fig-align="center"} 
+
+Las RNN inicialmente toman cada elemento de una secuencia y generan un output para cada entrada. Esto potencialmente genera ciertas limitantes. Una de ellas es el proceso llamado Machine Translation.
+
+::: {.callout-important}
+Este es un ejemplo de Modelamiento ***seq2seq*** en el que se utiliza una secuencia de entrada pero se espera también una secuencia de salida.
+:::
+
+## Machine Translation: Ejemplo del Inglés {.smaller}
+
+Supongamos que necesitamos hacer la siguiente traducción:
+
+Inglés 
+: > Hi, my name is Alfonso
+
+:::{.fragment}
+
+Español
+: > Hola, mi nombre es Alfonso
+
+::: {.callout-note}
+Este tipo de traducción es uno a uno. Cada input puede tener asociado una salida de manera directa puede realizarse de manera directa con una RNN.
+:::
+:::
+
+## Machine Translation: Ejemplo del Inglés {.smaller}
+
+Inglés
+: > Would you help me prepare something for tomorrow?
+
+:::{.fragment}
+Español
+: > ¿Me ayudarías a preparar algo para mañana?
+
+::: {.callout-warning appearance="default"}
+# Problemas
+
+* La traducción no es uno. De hecho en inglés se utilizan 8 palabras y 1 signo de puntuación. En español se traduce en 7 palabras y 2 signos de puntuación.
+* *"Would"* no tiene equivalente en español. 
+* *"a"* no tiene equivalente en el inglés. 
+* *"Me"* se traduce como *"me"* en inglés pero en vez de ir al inicio, va al final de *"help"*.
+* "*¿*" no existe en inglés.
+
+:::
+
+::: {.callout-important}
+* Otros idiomas como el Alemán o el Ruso, tienen fusión de palabras o declinaciones que hacen la traducción mucho más difícil. 
+* Es por ello que se requiere una cierta libertad entre los tokens de entradas y los tokens de salida.
+:::
+:::
+
+## Soluciones: Redes Convolucionales {.smaller}
+
+Una potencial solución se puede dar por medio de Redes Convolucionales de 1D. En este caso las redes convolucionales tienen la ventaja de poder mirar tanto al pasado como al futuro de manera móvil.
+
+::: {.columns}
+::: {.column}
+![](img/clase-10/conv1d.png){.lightbox fig-align="center" width="80%"} 
+:::
+::: {.column}
+::: {.callout-note appearance="default"}
+## Ventajas
+* Pueden tomar contexto desde el inicio y desde el final.
+
+:::
+::: {.callout-important appearance="default"}
+## Desventajas
+* Su campo receptivo es mucho más acotado y depende del número de capas y el largo del Kernel lo cual repercute directamente en el número de parámetros del modelo.
+* No tienen estado latente (o memoria) que almacena contexto.
+* No es útil para modelos de generación (ya que ve contexto desde el futuro).
+:::
+:::
+::: 
+
+
+## Soluciones: Arquitecturas Encoder-Decoder {.smaller}
+
+Encoder
+: Corresponde a una arquitectura que permitirá tomar datos de entrada y codificarlos en una representación numérica (normalmente como hidden states o como embeddings).
+
+Decoder
+: Corresponde a una arquitectura que toma una representación codificada de datos (normalmente generado por un encoder) y la transforma nuevamente en una salida con un formato comprensible y no solamente una "simple etiqueta".
+
+![](img/clase-10/autoencoder.jpeg){.lightbox fig-align="center"} 
+
+::: {.callout-note}
+Este tipo de arquitecturas son quizás las más populares hoy en día y tienen aplicaciones en distintos dominios.
+:::
+
+## Soluciones: Arquitecturas Encoder-Decoder {.smaller}
+
+::: {.callout-note}
+Una arquitectura Encoder-Decoder convolucional permite devolver una imagen como salida. Este ejemplo se conoce como Segmentación Semántica.
+:::
+
+![](img/clase-10/conv_enc-dec.png){.lightbox fig-align="center"} 
+
+
+## Soluciones: Arquitecturas Encoder-Decoder {.smaller}
+
+::: {.callout-note}
+Una arquitectura recurrente permite devolver una secuencia como salida. La cual puede utilizarse para generación o traducción de texto.
+:::
+
+![](img/clase-10/rnn_enc-dec.png){.lightbox fig-align="center"} 
+
+::: {.callout-note appearance="default" icon="false"}
+## Ventajas
+* Permite "desligarse" de la predicción uno a  uno.
+* La salida de este tipo de modelos depende principalmente del contexto almacenado en el Hidden State/Bottleneck.
+:::
+
+::: {.callout-important appearance="default" icon="false"}
+## Desventajas
+* Dado los problemas de Vanishing/Exploding Gradients es ingenuo pensar que todo el contexto de una frase vive en el último hidden state.
+:::
+
+## Soluciones: Arquitecturas Encoder-Decoder {.smaller}
+
+![](img/clase-10/neural_translation.png){.lightbox fig-align="center" width="80%"} 
+
+::: {.callout-important appearance="default" icon="false"}
+## Ojo
+El último Hidden State del Encoder se utilizará como Hidden State inicial del Decoder.
+:::
+
+## Entrenamiento de una Arquitectura Encoder-Decoder {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+![](img/clase-10/seq2seq_training.png){.lightbox fig-align="center"}  
+
+:::
+::: {.column width="40%"}
+
+::: {.callout-important appearance="default" icon="false"}
+## Arquitectura
+* RNN Bidireccional
+* Con un Encoder (colores pastel) y un Decoder independientes (colores más oscuros).
+:::
+
+::: {.callout-tip icon="false"}
+
+* Tenemos dos frases una en inglés (input) y una en español (output). Ambas frases son claramente de tamaños distintos.
+* Tenemos el token especial `<eos>` (end of sentence) que separa el input del output.
+:::
+
+::: {.callout-warning icon="false"}
+* Los últimos Hidden States del Encoder son los Hidden States iniciales del Decoder. Estos también se conocen como ***Context Vectors***.
+:::
+::: {.callout-note appearance="default" icon="false"}
+## Entrenamiento
+Al momento de entrenarse, las salidas $y1$ e $y2$ pueden ser distintas al valor esperado y deben ir ajustándose epoch a epoch.
+:::
+:::
+::: 
+
+## Inferencia de una Arquitectura Encoder-Decoder {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+![](img/clase-10/prediction_seq2seq.png){.lightbox fig-align="center"}  
+:::
+::: {.column width="40%"}
+::: {.callout-warning appearance="default" icon="false"}
+## Predicción
+
+* La predicción se va realizando de ***manera autoregresiva***. Es decir, la predicción del primer step corresponde a la entrada del segundo step y así sucesivamente.
+:::
+::: {.callout-tip icon="false"}
+* La primera entrada siempre será el token especial `<eos>` (otros modelos pueden utilizar otros tokens especiales).
+:::
+::: {.callout-important icon="false"}
+* El modelo irá prediciendo de manera autoregresiva hasta predecir el token `<eos>`.
+:::
+
+::: {.callout-caution appearance="default"}
+## Problema
+* Pensar que todo el contexto se puede almacenar en el último hidden state es un poco ingenuo. 
+* El último hidden state tiene más influencia de las palabras más cercanas y menos de las palabras iniciales (debido al problema de vanishing/exploding gradients).
+:::
+:::
+::: 
+
+
+## Mecanismo de Atención (Bahdanau et al, (2015)) {.smaller}
+
+::: {.columns}
+::: {.column}
+![](img/clase-10/Attention.png){.lightbox fig-align="center" width="75%"}  
+:::
+::: {.column}
+Atención
+: Se refiere a cualquier mecanismo en el que los hidden states se ponderan y combinan para poder utilizarlos como contexto. En otras palabras, el mecanismo busca a qué inputs iniciales debe poner más "atención" para poder generar la predicción.
+
+$$c_i = \sum_{t=1}^T a_{i,t} \cdot h_t$$
+
+
+Donde $c_i$ corresponde al contexto para la predicción del output $i$ y $a_{i,t}$ (que van entre 0 y 1) corresponden a cuánta atención le presta el output $i$ al token $t$.
+
+::: {.callout-important appearance="default"}
+## Ojo
+En el paper original, se interpreta $a_{i,t}$ como cuánto se "alínea" o se parece el estado $h_t$ con $S_{t-1}$.
+:::
+:::
+::: 
+
+## Atención de Bahdanau {.smaller}
+
+$$a_{i,t} = align(h_t, S_{i-1})$$
+![](img/clase-10/bahdanau.png){.lightbox fig-align="center"}  
+
+$$[a_{i,1},...,a_{i,T}] = Softmax([\tilde{a_{i,1}},...\tilde{a_{i,T}}])$$
+
+## Otras formas de Atención
+
+::: {.callout-tip appearance="default" icon="false"}
+#### 1. Proyecciones Lineales
+$$k_t = W_k \cdot h_t$$
+$$q_{i-1} = W_q \cdot S_{i-1}$$
+:::
+
+::: {.callout-warning appearance="default" icon="false"}
+#### 2. Similaridad: Producto Punto es equivalente al Cosine Similarity
+$$\tilde{a}_{i,t} = k_t^T \cdot q_{i-1}$$
+:::
+
+::: {.callout-important appearance="default" icon="false"}
+#### 3. Normalización:
+$$[a_{i,1},...,a_{i,T}] = Softmax([\tilde{a}_{i,1},...\tilde{a}_{i,T}])$$
+:::
+
+## Transformers: Arquitectura {.smaller}
+
+Transformer
+: Corresponde a la Arquitectura más avanzada que tenemos hoy en día. Está basada en distintos mecanismos de atención.
+
+::: {.columns}
+::: {.column}
+![](img/clase-10/transformer.png){.lightbox fig-align="center" width="60%"}   
+:::
+::: {.column}
+::: {.callout-note appearance="default" icon="false"}
+## Detalles de la Arquitectura
+* Corresponde a un Encoder + un Decoder.
+* Cada uno contiene una capa de Embeddings.
+* Además posee un Positional Encoding para entender el orden de la secuencia.
+* El decoder funciona de manera autoregresiva.
+* Posee 4 tipos de atención.
+:::
+:::
+::: 
+
+## Transformers: Self y Multihead Attention
+
+::: {.columns}
+::: {.column}
+![](img/clase-10/self_attention.png){.lightbox fig-align="center"}  
+:::
+::: {.column}
+
+::: {.callout-tip appearance="default" icon="false"}
+## Detalles 
+* El self-attention pone atención (aprendiendo la relación) existente entre datos de una misma secuencia. La gran ventaja es que permite la paralelización de cálculos.
+* El Multihead Attention corresponde a la concatenación de varios Self-Attention. Esto permite no "sesgarse" con sólo una forma de poner atención, permitiendo aprender relaciones en distintas direcciones.
+:::
+:::
+::: 
+
+## Transformers: Causal Self Attention
+
+::: {.columns}
+::: {.column}
+![](img/clase-10/causal_self_attention.jpg){.lightbox fig-align="center" width="90%"}  
+:::
+::: {.column}
+
+::: {.callout-tip appearance="default" icon="false"}
+## Detalles 
+* Corresponde a un tipo particular de Self Attention, en el cuál sólo se puede poner atención a valores de secuencia previa (no puede ver al futuro). Esto es particularmente necesario para tareas de generación autoregresiva.
+:::
+:::
+::: 
+
+## Transformers: Cross Attention
+
+::: {.columns}
+::: {.column}
+![](img/clase-10/cross_attention.jpg){.lightbox fig-align="center" width="90%"}  
+:::
+::: {.column}
+
+::: {.callout-tip appearance="default" icon="false"}
+## Detalles 
+* Corresponde a la atención que relaciona información proveniente tanto del Encoder como del Decoder. Muy similar al concepto original de Atención.
+:::
+:::
+::: 
+
+
+# Y... estamos por hoy
+
+::: {.footer}
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
+
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::
