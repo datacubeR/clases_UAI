@@ -134,7 +134,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">TICS-579-Deep Learning</h1>
-  <p class="subtitle">Clase 10: Mecanismos de Atención</p>
+  <p class="subtitle">Clase 10: Transformers</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -148,489 +148,724 @@ Alfonso Tobar-Arancibia
 </div>
 
 </section>
-<section id="datos-de-texto" class="slide level2 smaller">
-<h2>Datos de Texto</h2>
-<p>Los datos de texto corresponden a un caso particular de datos secuenciales. En este caso, dependiendo del idioma, las dependencias pueden venir tanto del pasado como del futuro. Consideramos texto libre como una secuencia de Strings, el cuál es inteligible para seres humanos pero no necesariamente para un computador.</p>
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Es probablemente el tipo de dato más abundante, aunque también uno de los más sensible al ruido (variabilidad, idioma, tono, formalidad, etc.).</p>
-</div>
-</div>
-</div>
+<section id="transformers-attention-is-all-you-need-2017" class="slide level2 smaller">
+<h2>Transformers (Attention is all you need, 2017)</h2>
 <div class="columns">
-<div class="column">
-<div class="callout callout-caution no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>El problema</strong></p>
-</div>
-<div class="callout-content">
-<p>Los computadores, y por ende los modelos, no pueden entender strings. El computador <strong><em>sólo puede entender datos numéricos</em></strong>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Para poder manipular texto dentro de un modelo será necesario un pre-procesamiento que permita transformar el texto en datos numéricos que un modelo pueda entender.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>La disciplina encargada de desarrollar modelos asociado a lenguaje/texto es conocida como <strong><em>Procesamiento de Lenguaje Natural</em></strong> (NLP en inglés).</p>
-</div>
-</div>
-</div>
-</div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-10/wordcloud.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-10/wordcloud.jpeg" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="tareas-asociadas-a-nlp" class="slide level2">
-<h2>Tareas asociadas a NLP</h2>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p><a href="img/clase-10/sentiment_analysis.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-10/sentiment_analysis.png" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-10/summarization.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-10/summarization.jpg" class="quarto-figure quarto-figure-center"></a></p>
-</div><div class="column" style="width:40%;">
-<p><a href="img/clase-10/ner.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-10/ner.jpg" class="quarto-figure quarto-figure-center"></a> <a href="img/clase-10/neural_translation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-10/neural_translation.png" class="quarto-figure quarto-figure-center"></a></p>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-10/question_answering.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-10/question_answering.jpg" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div></div>
-</section>
-<section id="proceso-de-tokenización-y-embedding" class="slide level2 smaller">
-<h2>Proceso de Tokenización y Embedding</h2>
-<div class="columns">
-<div class="column">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Tokenización</strong></p>
-</div>
-<div class="callout-content">
-<p>El proceso de Tokenización permite transformar texto en datos numéricos. Cada dato numérico se mapea con un “trozo de texto”. Normalmente los modelos van asociados a la tokenización con la que fueron entrenados. Cambiar la tokenización puede generar gran degradación.</p>
-</div>
-</div>
-</div>
+<div class="column" style="width:60%;">
+<dl>
+<dt>Transformers</dt>
+<dd>
+Corresponden a la arquitectura más moderna diseñada al día de hoy. Está basado en mecanismos de atención y posee hasta 4 tipos de atención distintos.
+</dd>
+</dl>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Embedding</strong></p>
+<p><strong>Ventajas</strong></p>
 </div>
-<div class="callout-content">
-<p>Corresponde el proceso en el que los Tokens se transforman en vectores densos en las cuales la distancia entre ellos representa una noción de similaridad.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-style-simple">
-<div class="callout-body">
 <div class="callout-content">
 <ul>
-<li>En este caso la frase <strong><em>“Frog on a log” </em></strong> es separada en Tokens (en este caso cada token es una palabra).</li>
-<li>Luego cada Token es mapeado a un Token id proveniente de un vocabulario. <strong><em>¿Qué es un vocabulario?</em></strong></li>
-<li>Los embeddings en este caso representan una secuencia de largo 7 con 3 dimensiones.</li>
+<li>No tiene problemas de “memoria” para modelar dependencias de largo plazo.</li>
+<li>Permite procesamiento en paralelo (No requiere entregar elementos de la secuencia uno a uno).</li>
+<li>Su bajísimo <strong><em>inductive bias</em></strong> le permite adaptarse a distintos dominios.</li>
+<li>No es necesario utilizar el transformer completo para un problema en específico.</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Desventajas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Apto sólo para datos secuenciales.</li>
+<li>Las secuencias deben de ser del mismo largo.</li>
+<li>Alta demanda de recursos computacionales GPU y/o TPUs para entrenamiento distribuido.</li>
+<li>Data hungry.</li>
+<li><del>Limitaciones de secuencias muy largas por restricciones de memoria computacional.</del></li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-10/transformer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/clase-10/transformer.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="encoder" class="slide level2 smaller">
+<h2>Encoder</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/encoder.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="img/clase-11/encoder.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Objetivo</strong></p>
+</div>
+<div class="callout-content">
+<p>Codificar y comprimir información en Logits que puedan ser usados para clasificar o para ser utilizados por un Decoder.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Forward Pass en el Encoder</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>El embedding asociado a una secuencia se bifurca en 4 ramas:
+<ul>
+<li>Residual Connection</li>
+<li>Query</li>
+<li>Key</li>
+<li>Value</li>
+</ul></li>
+<li>Query, Key y Value ingresan al <strong><em>Multihead Attention</em></strong>.</li>
+<li>La salida del Multihead Attention + el Residual Connection pasan por un LayerNorm.</li>
+<li>Nueva bifurcación.
+<ul>
+<li>Una parte entra a un MLP</li>
+<li>Otra va como skip connection.</li>
+</ul></li>
+<li>La salida del MLP + la Residual Connection pasan por un segundo LayerNorm para generar la salida del Encoder.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>⚠️ Con el tiempo han aparecido distintas variantes del Transformer (pre y post normalización, distintas variantes de la atención y del positional Encodeing), pero la idea general se mantiene.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="decoder" class="slide level2 smaller">
+<h2>Decoder</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/decoder.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-11/decoder.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Objetivo</strong></p>
+</div>
+<div class="callout-content">
+<p>Tomar información de entrada y generar una salida fijándose sólo en tokens pasados.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Forward Pass en el Decoder</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>El embedding asociado a una secuencia se bifurca en 4 ramas:
+<ul>
+<li>Residual Connection</li>
+<li>Query</li>
+<li>Key</li>
+<li>Value</li>
+</ul></li>
+<li>Query, Key y Value ingresan al <strong><em>Causal Multihead Attention</em></strong>.</li>
+<li>La salida del Causal Multihead Attention + el Residual Connection pasan por LayerNorm.</li>
+<li>Se pasa por un <strong><em>Cross Attention</em></strong> (esto podría ser opcional).
+<ul>
+<li>Key y Value provienen del Encoder como contexto.</li>
+<li>La salida del Causal Multihead Attention se utiliza como Query.</li>
+</ul></li>
+<li>Nueva bifurcación.
+<ul>
+<li>Una parte entra a un MLP</li>
+<li>Otra va como skip connection.</li>
+</ul></li>
+<li>La salida del MLP + la Residual Connection pasan por LayerNorm para generar el Output.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="ejemplo-tokenización-y-embedding" class="slide level2 smaller">
+<h2>Ejemplo: Tokenización y Embedding</h2>
+<div class="columns">
+<div class="column">
+<p>Supongamos que tenemos la siguiente frase:</p>
+<blockquote>
+<p>Me gusta la pizza de Pepperoni</p>
+</blockquote>
+<p>Suponiendo cada palabra como un token, tenemos una secuencia de largo <span class="math inline">\(L=6\)</span>. Su tokenización podría ser algo como:</p>
+<blockquote>
+<p>[105,6587,5475,301,708,358]</p>
+</blockquote>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Dependiendo del modelo también aplica la adición de tokens especiales según corresponda.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Luego cada token es transformado en un Embedding. En el caso del paper original, el embedding tiene <span class="math inline">\(d_{model}=512\)</span> dimensiones.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>En la sección 3.4 del paper se menciona que los parámetros de los embeddings son multiplicados por <span class="math inline">\(\sqrt{d_{model}}\)</span>.</p>
 </div>
 </div>
 </div>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-10/tokenization_process.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-10/tokenization_process.jpg" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-10/embed_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="img/clase-10/embed_example.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 </div></div>
 </section>
-<section id="embeddings" class="slide level2 smaller">
-<h2>Embeddings</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-10/embedding_space.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-10/embedding_space.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-tip callout-titled callout-style-default">
+<section id="positional-encoder" class="slide level2 smaller">
+<h2>Positional Encoder</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
-<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>¿Por qué es tan importante el uso de Embeddings?</strong></p>
-</div>
 <div class="callout-content">
-<ul>
-<li>Primero porque son entrenables. Es decir la red puede aprender cuál es la mejor manera de representar palabras.</li>
-<li>Existen embeddings pre-entrenados, es decir, se puede hacer transfer learning de embeddings.</li>
-<li>La red puede aprender relaciones semánticas entre palabras, algo imposible utilizando otras representaciones.</li>
-</ul>
+<p>Un potencial problema que puede tener un transformer es reconocer el orden de las frases.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="problema-de-las-rnn" class="slide level2 smaller">
-<h2>Problema de las RNN</h2>
 <div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>A pesar de las habilidades de las RNN, estas no son suficientes para distintas tareas de NLP.</p>
+<p>No es lo mismo decir <strong>“El perro del papá mordió al niño”</strong> que <strong>“El perro del niño mordió al papá”</strong>. Las palabras usadas en ambas frases son exactamente las mismas, pero en un orden distinto implican desenlaces distintos. <strong><em>¿Cómo podemos entender el concepto de orden si no tenemos recurrencia?</em></strong></p>
 </div>
 </div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Incluso algunos órdenes no tienen tanto sentido lógico: <strong>“El niño del perro mordió al papá”</strong>.</p>
+</div>
+</div>
+</div>
+<dl>
+<dt>Positional Encoder</dt>
+<dd>
+<blockquote>
+<p>Corresponden a una manera en la que se pueden generar un <strong>vector único</strong> que representa el orden en el que aparece cada token.</p>
+</blockquote>
+</dd>
+</dl>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/transformer_pe.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="img/clase-11/transformer_pe.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="positional-encoder-1" class="slide level2 smaller">
+<h2>Positional Encoder</h2>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[PE_{(pos,2i)} = sin\left(\frac{pos}{10000^{2i/d_{model}}}\right)\]</span> <span class="math display">\[PE_{(pos,2i+1)} = cos\left(\frac{pos}{10000^{2i/d_{model}}}\right)\]</span></p>
+</div><div class="column">
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(pos\)</span> corresponde a la posición del Token en la secuencia, y <span class="math inline">\(2i\)</span> y <span class="math inline">\(2i+1\)</span> corresponden a las posiciones de la dimensión del embedding de cada token (<span class="math inline">\(d_{model}\)</span>). <span class="math inline">\(i\)</span> comienza en 0.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Una forma más clara de ver esto es que la posición está definida por sinusoidales de periodo <span class="math inline">\(2\pi \cdot 10000^{i/d_{model}/2}\)</span>.</p>
+</div>
+</div>
+</div>
+</div></div>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>El positional encoder debe tener el mismo tamaño que el Embedding para que se puedan sumar.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Estabilidad numérica</strong></p>
+</div>
+<div class="callout-content">
+<p>Por temas de estabilidad el argumento del <span class="math inline">\(sin(\cdot)\)</span> y <span class="math inline">\(cos(\cdot)\)</span> se suele implementar como: <span class="math display">\[pos \cdot exp\left[-\frac{2i}{d_{model}} log(10000)\right]\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Regularización</strong></p>
+</div>
+<div class="callout-content">
+<p>La sección 5.4 menciona que se aplica Dropout posterior a sumar los Embeddings con el Positional Encoding. Se utilizo un <span class="math inline">\(P_{drop}=0.1\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="positional-encoder-ejemplo" class="slide level2 smaller">
+<h2>Positional Encoder: Ejemplo</h2>
+<div class="columns">
+<p>Supongamos nuestra secuencia de tokens: [me, gusta, la, pizza, de, pepperoni]</p><div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Para simplificar el problema consideremos que nuestros embeddings, y por ende nuestro positional encodings, tienen sólo 4 dimensiones (<span class="math inline">\(d_{model}=4\)</span>).</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/pe_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-11/pe_1.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-10/rnn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-10/rnn.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-11/pe_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="img/clase-11/pe_2.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
-<p>Las RNN inicialmente toman cada elemento de una secuencia y generan un output para cada entrada. Esto potencialmente genera ciertas limitantes. Una de ellas es el proceso llamado Machine Translation.</p>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Este es un ejemplo de Modelamiento <strong><em>seq2seq</em></strong> en el que se utiliza una secuencia de entrada pero se espera también una secuencia de salida.</p>
-</div>
-</div>
-</div>
+</div><div class="column" style="font-size: 70%">
+<p><span class="math display">\[PE_{pos=0} = [sin(0), cos(0), sin(0), cos(0)] = [0, 1, 0, 1]\]</span> <span class="math display">\[PE_{pos=1} = [sin(\frac{1}{10000^{0/4}}), cos(\frac{1}{10000^{0/4}}), sin(\frac{1}{10000^{2/4}}), cos(\frac{1}{10000^{2/4}})] = [0.8415, 0.5403, 0.0099, 1]\]</span></p>
+<p><span class="math display">\[PE_{pos=2} = [sin(\frac{2}{10000^{0/4}}), cos(\frac{2}{10000^{0/4}}), sin(\frac{2}{10000^{2/4}}), cos(\frac{2}{10000^{2/4}})] = [0.9093, -0.4161, 0.02, 0.9998]\]</span></p>
+<p><span class="math display">\[PE_{pos=3} = [sin(\frac{3}{10000^{0/4}}), cos(\frac{3}{10000^{0/4}}), sin(\frac{3}{10000^{2/4}}), cos(\frac{3}{10000^{2/4}})] = [0.1411, -0.99, 0.03, 1]\]</span></p>
+<p><span class="math display">\[PE_{pos=4} = [sin(\frac{4}{10000^{0/4}}), cos(\frac{4}{10000^{0/4}}), sin(\frac{4}{10000^{2/4}}), cos(\frac{4}{10000^{2/4}})] = [-0.7568, -0.6536, 0.04, 0.9992]\]</span></p>
+<p><span class="math display">\[PE_{pos=5} = [sin(\frac{5}{10000^{0/4}}), cos(\frac{5}{10000^{0/4}}), sin(\frac{5}{10000^{2/4}}), cos(\frac{5}{10000^{2/4}})] = [-0.9589, 0.2837, 0.05, 0.99875]\]</span></p>
+</div></div>
 </section>
-<section id="machine-translation-ejemplo-del-inglés" class="slide level2 smaller">
-<h2>Machine Translation: Ejemplo del Inglés</h2>
-<p>Supongamos que necesitamos hacer la siguiente traducción:</p>
-<dl>
-<dt>Inglés</dt>
-<dd>
-<blockquote>
-<p>Hi, my name is Alfonso</p>
-</blockquote>
-</dd>
-</dl>
-<div class="fragment">
-<dl>
-<dt>Español</dt>
-<dd>
-<blockquote>
-<p>Hola, mi nombre es Alfonso</p>
-</blockquote>
-</dd>
-</dl>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Este tipo de traducción es uno a uno. Cada input puede tener asociado una salida de manera directa puede realizarse de manera directa con una RNN.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="machine-translation-ejemplo-del-inglés-1" class="slide level2 smaller">
-<h2>Machine Translation: Ejemplo del Inglés</h2>
-<dl>
-<dt>Inglés</dt>
-<dd>
-<blockquote>
-<p>Would you help me prepare something for tomorrow?</p>
-</blockquote>
-</dd>
-</dl>
-<div class="fragment">
-<dl>
-<dt>Español</dt>
-<dd>
-<blockquote>
-<p>¿Me ayudarías a preparar algo para mañana?</p>
-</blockquote>
-</dd>
-</dl>
-<div class="callout callout-warning callout-titled callout-style-default">
+<section id="positional-encoder-ejemplo-1" class="slide level2 smaller">
+<h2>Positional Encoder: Ejemplo</h2>
+<p>Por ejemplo, la palabra Pizza quedará definida como:</p>
+<p><span class="math display">\[\begin{align}
+Input = Embedding(Pizza) + PE_{pos=3} &amp;= [0.3, -0.2, 0.7, 0.1] + [0.1411, -0.99, 0.03, 1] \\
+&amp;= [0.4411, -1.19, 0.73, 1.1]
+\end{align}\]</span></p>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Problemas</strong></p>
+<p><strong>Este input ahora almacena la información tanto de la palabra como de su posición relativa en la secuencia.</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>La traducción no es uno. De hecho en inglés se utilizan 8 palabras y 1 signo de puntuación. En español se traduce en 7 palabras y 2 signos de puntuación.</li>
-<li><em>“Would”</em> no tiene equivalente en español.</li>
-<li><em>“a”</em> no tiene equivalente en el inglés.</li>
-<li><em>“Me”</em> se traduce como <em>“me”</em> en inglés pero en vez de ir al inicio, va al final de <em>“help”</em>.</li>
-<li>“<em>¿</em>” no existe en inglés.</li>
-</ul>
+
 </div>
 </div>
 </div>
-<div class="callout callout-important callout-style-simple">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="callout-title">
+<p><strong>Todos los Positional Encoding son idénticos para cada posición, y se encargan de realzar o atenuar ciertas dimensiones del embedding según la posición del token en la secuencia. En la implementación original estos vectores son fijos y no entrenables.</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>Otros idiomas como el Alemán o el Ruso, tienen fusión de palabras o declinaciones que hacen la traducción mucho más difícil.</li>
-<li>Es por ello que se requiere una cierta libertad entre los tokens de entradas y los tokens de salida.</li>
-</ul>
+
 </div>
+</div>
+</div>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Implementación Eficiente</strong></p>
+</div>
+<div class="callout-content">
+<p>En otras implementaciones modernas como los modelos GPT, estos son Embeddings y son entrenables. Cada fila es un embedding de <span class="math inline">\(d_{model}\)</span> dimensiones asociado a cada posición.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="soluciones-redes-convolucionales" class="slide level2 smaller">
-<h2>Soluciones: Redes Convolucionales</h2>
-<p>Una potencial solución se puede dar por medio de Redes Convolucionales de 1D. En este caso las redes convolucionales tienen la ventaja de poder mirar tanto al pasado como al futuro de manera móvil.</p>
+<section id="encoder-self-attention" class="slide level2 smaller">
+<h2>Encoder: Self-Attention</h2>
 <div class="columns">
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-10/conv1d.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-10/conv1d.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
+<p><a href="img/clase-11/scale_dot_product.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-11/scale_dot_product.png" class="quarto-figure quarto-figure-center" style="width:55.0%"></a></p>
 </figure>
+</div>
+<p><span class="math display">\[Attention(Q,K,V) = Softmax\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) V\]</span></p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Ejemplo</strong></p>
+</div>
+<div class="callout-content">
+<p><em>“La sopa se cocinó en la olla y estaba rica”</em>. <em>Rica</em> podría estar refiriéndose a <em>olla</em> o a <em>sopa</em>. Sabemos que se refiere a la sopa.</p>
+</div>
+</div>
 </div>
 </div><div class="column">
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
-<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Ventajas</strong></p>
+<div class="callout-content">
+<p>El Scaled Dot-Product, más conocido como <code>Self-Attention</code>, es el mecanismo clave en las redes neuronales modernas. Permite determinar la atención/relación que existe entre palabras de una misma secuencia.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
 <div class="callout-content">
 <ul>
-<li>Pueden tomar contexto desde el inicio y desde el final.</li>
+<li>Está compuesto por 3 proyecciones lineales las cuales reciben los nombres de Query (Q), Key (K) y Value (V).</li>
+<li>Estás 3 proyecciones se combinan para poder determinar la atención/relación que cada Token tiene con los otros tokens de una misma secuencia.</li>
+<li>Varios procesos de <code>Self-Attention</code> dan pie al <code>Multihead Attention</code>.</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout callout-important callout-style-simple">
 <div class="callout-body">
-<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Desventajas</strong></p>
+<div class="callout-content">
+<ul>
+<li>El <code>Self-Attention</code> tiene la capacidad de acceder a toda la secuencia, por ende modelar relaciones a larga distancia.</li>
+<li>El <code>Causal Self-Attention</code>, una variante que se utiliza en el Decoder sólo puede ver la relación con tokens pasados.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
 <div class="callout-content">
 <ul>
-<li>Su campo receptivo es mucho más acotado y depende del número de capas y el largo del Kernel lo cual repercute directamente en el número de parámetros del modelo.</li>
-<li>No tienen estado latente (o memoria) que almacena contexto.</li>
-<li>No es útil para modelos de generación (ya que ve contexto desde el futuro).</li>
+<li>Su característica más importante es que el <code>Multihead Attention</code> es paralelizable y no secuencial como las RNN.</li>
+<li>Tiene capacidad de escalabilidad para secuencias largas.</li>
 </ul>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="soluciones-arquitecturas-encoder-decoder" class="slide level2 smaller">
-<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
-<dl>
-<dt>Encoder</dt>
-<dd>
-Corresponde a una arquitectura que permitirá tomar datos de entrada y codificarlos en una representación numérica (normalmente como hidden states o como embeddings).
-</dd>
-<dt>Decoder</dt>
-<dd>
-Corresponde a una arquitectura que toma una representación codificada de datos (normalmente generado por un encoder) y la transforma nuevamente en una salida con un formato comprensible y no solamente una “simple etiqueta”.
-</dd>
-</dl>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-10/autoencoder.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-10/autoencoder.jpeg" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-note callout-style-simple">
+<section id="encoder-self-attention-1" class="slide level2 smaller">
+<h2>Encoder: Self-Attention</h2>
+<div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Este tipo de arquitecturas son quizás las más populares hoy en día y tienen aplicaciones en distintos dominios.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="soluciones-arquitecturas-encoder-decoder-1" class="slide level2 smaller">
-<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Una arquitectura Encoder-Decoder convolucional permite devolver una imagen como salida. Este ejemplo se conoce como Segmentación Semántica.</p>
-</div>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-10/conv_enc-dec.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-10/conv_enc-dec.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</section>
-<section id="soluciones-arquitecturas-encoder-decoder-2" class="slide level2 smaller">
-<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Una arquitectura recurrente permite devolver una secuencia como salida. La cual puede utilizarse para generación o traducción de texto.</p>
-</div>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-10/rnn_enc-dec.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-10/rnn_enc-dec.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Ventajas</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Permite “desligarse” de la predicción uno a uno.</li>
-<li>La salida de este tipo de modelos depende principalmente del contexto almacenado en el Hidden State/Bottleneck.</li>
+<li>Supongamos que tenemos la secuencia <em>“Me gusta la Pizza de Pepperoni”</em>.</li>
+<li>Utilizaremos <span class="math inline">\(d_{model} = 512\)</span> y <span class="math inline">\(h=8\)</span>.</li>
+<li>El paper utiliza <span class="math inline">\(d_k=d_v=d_{model}/h=64\)</span> para el cálculo de los Attention Weights.</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Desventajas</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Dado los problemas de Vanishing/Exploding Gradients es ingenuo pensar que todo el contexto de una frase vive en el último hidden state.</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="soluciones-arquitecturas-encoder-decoder-3" class="slide level2 smaller">
-<h2>Soluciones: Arquitecturas Encoder-Decoder</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-10/neural_translation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-10/neural_translation.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></a></p>
-</figure>
-</div>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Ojo</strong></p>
-</div>
-<div class="callout-content">
-<p>El último Hidden State del Encoder se utilizará como Hidden State inicial del Decoder.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="entrenamiento-de-una-arquitectura-encoder-decoder" class="slide level2 smaller">
-<h2>Entrenamiento de una Arquitectura Encoder-Decoder</h2>
 <div class="columns">
-<div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-10/seq2seq_training.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-10/seq2seq_training.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:40%;">
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Arquitectura</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>RNN Bidireccional</li>
-<li>Con un Encoder (colores pastel) y un Decoder independientes (colores más oscuros).</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-tip no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<ul>
-<li>Tenemos dos frases una en inglés (input) y una en español (output). Ambas frases son claramente de tamaños distintos.</li>
-<li>Tenemos el token especial <code>&lt;eos&gt;</code> (end of sentence) que separa el input del output.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-warning no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<ul>
-<li>Los últimos Hidden States del Encoder son los Hidden States iniciales del Decoder. Estos también se conocen como <strong><em>Context Vectors</em></strong>.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Entrenamiento</strong></p>
-</div>
-<div class="callout-content">
-<p>Al momento de entrenarse, las salidas <span class="math inline">\(y1\)</span> e <span class="math inline">\(y2\)</span> pueden ser distintas al valor esperado y deben ir ajustándose epoch a epoch.</p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="inferencia-de-una-arquitectura-encoder-decoder" class="slide level2 smaller">
-<h2>Inferencia de una Arquitectura Encoder-Decoder</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-10/prediction_seq2seq.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-10/prediction_seq2seq.png" class="quarto-figure quarto-figure-center"></a></p>
-</figure>
-</div>
-</div><div class="column" style="width:40%;">
+<div class="column" style="width:40%;">
+<p><span class="math display">\[
+\begin{array}{c c}
+X = \left[
+\begin{array}{c c c}
+[a_1,...,a_{256}]\\
+[b_1,...,b_{256}]\\
+[c_1,...,c_{256}]\\
+[d_1,...,d_{256}]\\
+[e_1,...,e_{256}]\\
+[f_1,...,f_{256}]\\
+\end{array}
+\right]
+\begin{array}{c c c}Me\\gusta\\la\\pizza\\de\\pepperoni \end{array} &amp;
+\end{array}
+\]</span></p>
+<div class="fragment">
 <div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Predicción</strong></p>
+<p><strong>👀 Ojito</strong></p>
 </div>
 <div class="callout-content">
+<p>Esto se debe aplicar a cada secuencia. Por lo tanto se debe agregar una dimensión (como unsqueeze(0)) que contabilice el número de secuencias para <span class="math inline">\(Q\)</span>, <span class="math inline">\(K\)</span>, y <span class="math inline">\(V\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Matrices de Proyección</strong></p>
+</div>
+<div class="callout-content">
+<p>Definiremos 3 matrices de Proyección. Una matriz de proyección permite llevar transportar un vector <span class="math inline">\(X\)</span> a otro espacio (es decir, son entrenables). En este caso crearemos matrices que puedan multiplicarse con <span class="math inline">\(X\)</span>. Por lo tanto irán desde <span class="math inline">\(d_{model}\)</span> hasta <span class="math inline">\(d_q=d_k\)</span> y <span class="math inline">\(d_v\)</span> respectivamente.</p>
 <ul>
-<li>La predicción se va realizando de <strong><em>manera autoregresiva</em></strong>. Es decir, la predicción del primer step corresponde a la entrada del segundo step y así sucesivamente.</li>
+<li><span class="math inline">\(W_q = (d_{model}, d_k)\)</span></li>
+<li><span class="math inline">\(W_k = (d_{model}, d_k)\)</span></li>
+<li><span class="math inline">\(W_v = (d_{model}, d_v)\)</span></li>
 </ul>
 </div>
 </div>
 </div>
-<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
+<div class="callout-title">
+<p><strong>Dimensiones de Q,K y V</strong></p>
+</div>
 <div class="callout-content">
 <ul>
-<li>La primera entrada siempre será el token especial <code>&lt;eos&gt;</code> (otros modelos pueden utilizar otros tokens especiales).</li>
+<li><span class="math inline">\(Q = (L, d_k)\)</span></li>
+<li><span class="math inline">\(K = (L, d_k)\)</span></li>
+<li><span class="math inline">\(V = (L, d_v)\)</span></li>
+<li><span class="math inline">\(L\)</span> corresponde a largo de la secuencia (es decir, el número de Tokens)</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+<p>:::</p>
+</section>
+<section id="encoder-self-attention-2" class="slide level2 smaller">
+<h2>Encoder: Self-Attention</h2>
+<blockquote>
+<p>Siguiendo nuestro ejemplo: <span class="math inline">\(d_k = d_v = 64\)</span></p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Query (6,64)</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[
+\begin{array}{c c}
+Q = \left[
+\begin{array}{c c c}
+[qa_1,...,qa_{64}]\\
+[qb_1,...,qb_{64}]\\
+[qc_1,...,qc_{64}]\\
+[qd_1,...,qd_{64}]\\
+[qe_1,...,qe_{64}]\\
+[qf_1,...,qf_{64}]\\
+\end{array}
+\right]
+\end{array}
+\]</span></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Key (6,64)</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[
+\begin{array}{c c}
+K = \left[
+\begin{array}{c c c}
+[ka_1,...,ka_{64}]\\
+[kb_1,...,kb_{64}]\\
+[kc_1,...,kc_{64}]\\
+[kd_1,...,kd_{64}]\\
+[ke_1,...,ke_{64}]\\
+[kf_1,...,kf_{64}]\\
+\end{array}
+\right]
+\end{array}
+\]</span></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Value (6,64)</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[
+\begin{array}{c c}
+V = \left[
+\begin{array}{c c c}
+[va_1,...,va_{64}]\\
+[vb_1,...,vb_{64}]\\
+[vc_1,...,vc_{64}]\\
+[vd_1,...,vd_{64}]\\
+[ve_1,...,ve_{64}]\\
+[vf_1,...,vf_{64}]\\
+\end{array}
+\right]
+\end{array}
+\]</span></p>
+</div>
+</div>
+</div>
+</div></div>
+<div class="fragment">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>👀 Ojito</strong></p>
+</div>
+<div class="callout-content">
+<p>Como esto se aplica a una sola secuencia, la dimensión real de estos tensores debería ser <span class="math inline">\((1,6,64)\)</span>. Ese 1 cambiará si tenemos más secuencias. Pero, <strong><em>todas las secuencias deben ser del mismo largo</em></strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="encoder-self-attention-scale-dot-product" class="slide level2 smaller">
+<h2>Encoder: Self-Attention (Scale Dot Product)</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><span class="math display">\[\frac{Q \cdot K^T}{\sqrt{d_k}}\]</span></p>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Similaridad</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(Q \cdot K^T\)</span> representa el producto punto entre <span class="math inline">\(Q\)</span> (un token de referencia que está consultando la atención contra otros tokens) y <span class="math inline">\(K\)</span> (otro token que se compara contra la “query”).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Control de Gradientes</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\sqrt{d_k}\)</span> es un factor que reduce la escala de los valores para el control de los gradientes. Recordar que esta matriz es de parámetros entrenables.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/dot_prod.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/clase-11/dot_prod.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Attention</strong></p>
+</div>
+<div class="callout-content">
+<p>Dado que el rango de estos valores van de <span class="math inline">\(-\infty\)</span> a <span class="math inline">\(\infty\)</span>, es más común aplicar una softmax para poder garantizar que la suma de las atenciones para cada palabra “query” sume 1.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="encoder-self-attention-scale-dot-product-1" class="slide level2 smaller">
+<h2>Encoder: Self-Attention (Scale Dot Product)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/softmax_scale_dot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="img/clase-11/softmax_scale_dot.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Attention Weights</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Tendremos un tensor de <span class="math inline">\((N,L,L)\)</span> que representa las atenciones entre cada palabra para cada secuencia.</li>
+<li>Se debe entender cómo qué tan relevante es cada palabra <em>“key”</em> para cada palabra <em>“query”</em>.</li>
+<li>Esta matriz permitirá crear embeddings contextualizados, que incluyen la información de la palabra y su contexto de atención.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="encoder-self-attention-scale-dot-product-2" class="slide level2 smaller">
+<h2>Encoder: Self-Attention (Scale Dot Product)</h2>
+<p><span class="math display">\[Attention(Q,K,V) = Softmax\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) V\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/self_attention_calculation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="img/clase-11/self_attention_calculation.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>OJO</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>A modo de ejemplo, el elemento en Rojo representa una suma ponderada de la primera dimensión de cada proyección de tokens.</li>
+<li>El resultado de cada dimensión es una combinación lineal de las dimensiones de cada token.</li>
+<li>Cada fila corresponde a un embedding contextualizado que tiene información sobre el token y su contexto combinado.</li>
 </ul>
 </div>
 </div>
@@ -638,210 +873,626 @@ Corresponde a una arquitectura que toma una representación codificada de datos 
 <div class="callout callout-important no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
-<ul>
-<li>El modelo irá prediciendo de manera autoregresiva hasta predecir el token <code>&lt;eos&gt;</code>.</li>
-</ul>
+<p><strong><em>¿Y, estamos seguros que las atenciones/relaciones obtenidas por este algoritmos son (las) únicas/más correctas?</em></strong></p>
 </div>
 </div>
 </div>
-<div class="callout callout-caution callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Problema</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Pensar que todo el contexto se puede almacenar en el último hidden state es un poco ingenuo.</li>
-<li>El último hidden state tiene más influencia de las palabras más cercanas y menos de las palabras iniciales (debido al problema de vanishing/exploding gradients).</li>
-</ul>
-</div>
-</div>
-</div>
-</div></div>
 </section>
-<section id="mecanismo-de-atención-bahdanau-et-al-2015" class="slide level2 smaller">
-<h2>Mecanismo de Atención (Bahdanau et al, (2015))</h2>
-<div class="columns">
-<div class="column">
+<section id="encoder-multihead-attention" class="slide level2 smaller">
+<h2>Encoder: Multihead Attention</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-10/Attention.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-10/Attention.png" class="quarto-figure quarto-figure-center" style="width:75.0%"></a></p>
+<p><a href="img/clase-11/multihead_attention.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="img/clase-11/multihead_attention.png" class="quarto-figure quarto-figure-center" style="width:23.0%"></a></p>
 </figure>
 </div>
-</div><div class="column">
-<dl>
-<dt>Atención</dt>
-<dd>
-Se refiere a cualquier mecanismo en el que los hidden states se ponderan y combinan para poder utilizarlos como contexto. En otras palabras, el mecanismo busca a qué inputs iniciales debe poner más “atención” para poder generar la predicción.
-</dd>
-</dl>
-<p><span class="math display">\[c_i = \sum_{t=1}^T a_{i,t} \cdot h_t\]</span></p>
-<p>Donde <span class="math inline">\(c_i\)</span> corresponde al contexto para la predicción del output <span class="math inline">\(i\)</span> y <span class="math inline">\(a_{i,t}\)</span> (que van entre 0 y 1) corresponden a cuánta atención le presta el output <span class="math inline">\(i\)</span> al token <span class="math inline">\(t\)</span>.</p>
-<div class="callout callout-important callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Ojo</strong></p>
-</div>
-<div class="callout-content">
-<p>En el paper original, se interpreta <span class="math inline">\(a_{i,t}\)</span> como cuánto se “alínea” o se parece el estado <span class="math inline">\(h_t\)</span> con <span class="math inline">\(S_{t-1}\)</span>.</p>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="atención-de-bahdanau" class="slide level2 smaller">
-<h2>Atención de Bahdanau</h2>
-<p><span class="math display">\[a_{i,t} = align(h_t, S_{i-1})\]</span> <a href="img/clase-10/bahdanau.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-10/bahdanau.png" class="quarto-figure quarto-figure-center"></a></p>
-<p><span class="math display">\[[a_{i,1},...,a_{i,T}] = Softmax([\tilde{a_{i,1}},...\tilde{a_{i,T}}])\]</span></p>
-</section>
-<section id="otras-formas-de-atención" class="slide level2">
-<h2>Otras formas de Atención</h2>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>1. Proyecciones Lineales</strong></p>
+<p><strong>Multihead Attention</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[k_t = W_k \cdot h_t\]</span> <span class="math display">\[q_{i-1} = W_q \cdot S_{i-1}\]</span></p>
+<p>Es una extensión del <code>Self-Attention</code>. En lugar de calcular sólo <strong><em>“una atención”</em></strong> sobre el input, genera distintas <strong><em>“atenciones”</em></strong> en múltiples <strong><em>“cabezas”</em></strong> independientes. Cada <code>Attention Head</code> se encarga de aprender relaciones diferentes, lo que mejora la capacidad del modelo de captar patrones cada vez más complejos.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout callout-important callout-style-simple">
 <div class="callout-body">
-<div class="callout-title">
-<p><strong>2. Similaridad: Producto Punto es equivalente al Cosine Similarity</strong></p>
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[\tilde{a}_{i,t} = k_t^T \cdot q_{i-1}\]</span></p>
-</div>
-</div>
-</div>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>3. Normalización:</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[[a_{i,1},...,a_{i,T}] = Softmax([\tilde{a}_{i,1},...\tilde{a}_{i,T}])\]</span></p>
+<p>Normalmente se calculan entre <span class="math inline">\(h=8\)</span> y <span class="math inline">\(h=12\)</span> attention heads, las cuales se concatenan para luego pasar por una proyección lineal.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="transformers-arquitectura" class="slide level2 smaller">
-<h2>Transformers: Arquitectura</h2>
-<dl>
-<dt>Transformer</dt>
-<dd>
-Corresponde a la Arquitectura más avanzada que tenemos hoy en día. Está basada en distintos mecanismos de atención.
-</dd>
-</dl>
+<section id="encoder-multihead-attention-1" class="slide level2 smaller">
+<h2>Encoder: Multihead Attention</h2>
+<div class="callout callout-caution no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Si queremos calcular <span class="math inline">\(h=8\)</span> attention heads. Necesitamos 8 <span class="math inline">\(Q\)</span>, 8 <span class="math inline">\(K\)</span> y 8 <span class="math inline">\(V\)</span>. Por lo tanto, necesitamos 8 matrices de proyección. <strong><em>¿Cómo lo paralelizamos?</em></strong></p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Implementación en paralelo</strong></p>
+</div>
+<div class="callout-content">
+<p>Podemos definir en realidad todas las matrices de manera análoga rescribiendo las matrices de proyección para <span class="math inline">\(Q\)</span>, <span class="math inline">\(K\)</span> y <span class="math inline">\(V\)</span> como una subdivisión de cada embedding en <span class="math inline">\(h\)</span> cabezas.</p>
+<ul>
+<li>Por lo tanto si <span class="math inline">\(d_k=d_v=64\)</span> y <span class="math inline">\(h=8\)</span> tendríamos una dimensión total de 512.</li>
+<li><span class="math inline">\(dim(Q) = dim(K) = (L,h \cdot d_k) = (6, 512)\)</span></li>
+<li><span class="math inline">\(dim(V) = (L, h \cdot d_v) = (6, 512)\)</span></li>
+<li><span class="math inline">\(dim(W_q) = (d_{model}, h, d_k)\)</span></li>
+<li><span class="math inline">\(dim(W_k) = (d_{model}, h, d_k)\)</span></li>
+<li><span class="math inline">\(dim(W_v) = (d_{model}, h, d_v)\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Dimensiones de Q, K y V</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(Q = X \cdot W_q = (6,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,64)\)</span></li>
+<li><span class="math inline">\(K = X \cdot W_k = (6,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,64)\)</span></li>
+<li><span class="math inline">\(V = X \cdot W_v = (6,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,64)\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="encoder-multihead-attention-independencia" class="slide level2 smaller">
+<h2>Encoder: Multihead Attention (Independencia)</h2>
+<div class="columns">
+<div class="column">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Independent Heads</strong></p>
+</div>
+<div class="callout-content">
+<p>Es importante mencionar que cada cabeza debe ser independiente una de otra para que se pueda paralelizar. Para ello basta con transponer las dos primeras dimensiones.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Query/Key/Value (6, 8, 64) (Previo a Transponer)</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[
+\begin{array}{c c}
+Q/K/V = \left[
+\begin{array}{c c c}
+\overbrace{[ia_{1},...,ia_{64}]}^{Head 1}, \overbrace{[ia_{65},...,ia_{128}]}^{Head 2}, ..., \overbrace{[ia_{449},...,ia_{512}]}^{Head 8}\\
+[ib_{1},...,ib_{64}],[ib_{65},..., ib_{128}],...[ib_{449},...,ib_{512}]\\
+[ic_{1},...,ic_{64}],[ic_{65},..., ic_{128}],...[ic_{449},...,ic_{512}]\\
+[id_{1},...,id_{64}],[id_{65},..., id_{128}],...[id_{449},...,id_{512}]\\
+[ie_{1},...,ie_{64}],[ie_{65},..., ie_{128}],...[ie_{449},...,ie_{512}]\\
+[if_{1},...,if_{64}],[if_{65},..., if_{128}],...[if_{449},...,if_{512}]\\
+\end{array}
+\right]
+\end{array}
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-caution no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>OJO</strong></p>
+</div>
+<div class="callout-content">
+<p>Esto permite calcular cada Head en paralelo. Este procedimiento se aplica a cada secuencia. Por lo tanto, un Multihead Attention recibe Tensores de dimensión <span class="math inline">\((N,L,h \cdot d_i)\)</span> con <span class="math inline">\(i=k,v\)</span>.</p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Query/Key/Value (8,6, 64) (Luego de Transponer)</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[
+Q/K/V = \begin{array}{c c}
+\left[
+\begin{array}{c c c}
+\text{Head1}\left\{
+\begin{array}{c c c}
+\begin{bmatrix}
+[ia_{1},...,ia_{64}]\\
+[ib_{1},...,ib_{64}]\\
+[ic_{1},...,ic_{64}]\\
+[id_{1},...,id_{64}]\\
+[ie_{1},...,ie_{64}]\\
+[if_{1},...,if_{64}]\\
+\end{bmatrix}
+\end{array}
+\right. \\
+\vdots \\
+\vdots \\
+\text{Head8}\left\{
+\begin{array}{c c c}
+\begin{bmatrix}
+[ia_{449},...,ia_{512}]\\
+[ib_{449},...,ib_{512}]\\
+[ic_{449},...,ic_{512}]\\
+[id_{449},...,id_{512}]\\
+[ie_{449},...,ie_{512}]\\
+[if_{449},...,if_{512}]\\
+\end{bmatrix}
+\end{array}
+\right. \\
+\end{array}
+\right]
+\end{array}
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Luego de Transponer, entonces Q/K/V tienen dimensiones <span class="math inline">\((N, h, L, d_i)\)</span>. Luego se puede aplicar el Self-Attention en paralelo para cada cabeza y para cada secuencia.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="encoder-multihead-attention-concatenación" class="slide level2 smaller">
+<h2>Encoder: Multihead Attention (Concatenación)</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Self-Attentions (aka Multihead Attention) (8,6,64)</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[
+MSA = \begin{array}{c c}
+\left[
+\begin{array}{c c c}
+\text{Head1}\left\{
+\begin{array}{c c c}
+\begin{bmatrix}
+[SAa_1,...,SAa_{64}]\\
+[SAb_1,...,SAb_{64}]\\
+[SAc_1,...,SAc_{64}]\\
+[SAd_1,...,SAd_{64}]\\
+[SAe_1,...,SAe_{64}]\\
+[SAf_1,...,SAf_{64}]\\
+\end{bmatrix}
+\end{array}
+\right. \\
+\vdots \\
+\vdots \\
+\text{Head8}\left\{
+\begin{array}{c c c}
+\begin{bmatrix}
+[SAa_{449},...,SAa_{512}]\\
+[SAb_{449},...,SAb_{512}]\\
+[SAc_{449},...,SAc_{512}]\\
+[SAd_{449},...,SAd_{512}]\\
+[SAe_{449},...,SAe_{512}]\\
+[SAf_{449},...,SAf_{512}]\\
+\end{bmatrix}
+\end{array}
+\right. \\
+\end{array}
+\right]
+\end{array}
+\]</span></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Self-Attention Transpuesto (6,8,64)</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[
+MSA = \begin{array}{c c}
+\left[
+\begin{array}{c c c}
+\overbrace{[SAa_1,...,SAa_{64}]}^{Head 1}, \overbrace{[SAa_{65},...,SAa_{128}}^{Head 2}, ..., \overbrace{[SAa_{449},...,SAa_{512}]}^{Head 8}\\
+[SAb_1,...,SAb_{128}],[SAb_{65},..., SAb_{128}],...[SAb_{449},...,SAb_{512}]\\
+[SAc_1,...,SAc_{128}],[SAc_{65},..., SAc_{128}],...[SAc_{449},...,SAc_{512}]\\
+[SAd_1,...,SAd_{128}],[SAd_{65},..., SAd_{128}],...[SAd_{449},...,SAd_{512}]\\
+[SAe_1,...,SAe_{128}],[SAe_{65},..., SAe_{128}],...[SAe_{449},...,SAe_{512}]\\
+[SAf_1,...,SAf_{128}],[SAf_{65},..., SAf_{128}],...[SAf_{449},...,SAf_{512}]\\
+\end{array}
+\right]
+\end{array}
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Self-Attention Concatenado (6,512)</strong></p>
+</div>
+<div class="callout-content">
+<p>Hint: La concatenación en este caso equivale a un reshape de las dos últimas dimensiones. <span class="math display">\[
+MSA = \begin{array}{c c}
+\left[
+\begin{array}{c c c}
+[SAa_1,.....,SAa_{512}]\\
+[SAb_1,.....,SAb_{512}]\\
+[SAc_1,.....,SAc_{512}]\\
+[SAd_1,.....,SAd_{512}]\\
+[SAe_1,.....,SAe_{512}]\\
+[SAf_1,.....,SAf_{512}]\\
+\end{array}
+\right]
+\end{array}
+\]</span></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="encoder-multihead-attention-output" class="slide level2 smaller">
+<h2>Encoder: Multihead Attention (Output)</h2>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Head Mixing</strong></p>
+</div>
+<div class="callout-content">
+<p>Los outputs de cada cabeza ahora están uno al lado del otro. Por lo tanto, si aplicamos una capa lineal $W^O de dimensión <span class="math inline">\((d_v \times h, d_{model}\)</span>), estos parámetros entrenables se encargarán de aprender una combinación lineal que mezcle la información aprendida por cada Attention Head de manera óptima.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Multihead Attention Output (6,512)</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[
+Multihead(Q,K,V) = \begin{array}{c c}
+\left[
+\begin{array}{c c c}
+[SAa_1,.....,SAa_{512}]\\
+[SAb_1,.....,SAb_{512}]\\
+[SAc_1,.....,SAc_{512}]\\
+[SAd_1,.....,SAd_{512}]\\
+[SAe_1,.....,SAe_{512}]\\
+[SAf_1,.....,SAf_{512}]\\
+\end{array}
+\right]
+\end{array}
+\cdot W^O
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>El Multihead Attention Output tiene dimensiones <span class="math inline">\((N, L, d_{model})\)</span>.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</section>
+<section id="encoder-add-layernorm" class="slide level2 smaller">
+<h2>Encoder: Add + LayerNorm</h2>
 <div class="columns">
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-10/transformer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-10/transformer.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+<p><a href="img/clase-11/add_norm.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-11/add_norm.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Detalles de la Arquitectura</strong></p>
+<p><strong>Residual Connection (Add&amp;Norm)</strong></p>
+</div>
+<div class="callout-content">
+<p>Corresponde a una conexión residual. Combina la información de entrada al Multihead y su salida para luego aplicar LayerNorm.</p>
+<p><span class="math display">\[Add\&amp;Norm = LayerNorm(X + Multihead(Q,K,V))\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>LayerNorm</strong></p>
+</div>
+<div class="callout-content">
+<p>El LayerNorm calcula el promedio y la varianza por token normalizando las dimensiones del embedding de cada token.</p>
+<p><span class="math display">\[X_{norm} = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}}\cdot \gamma + \beta\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
 <div class="callout-content">
 <ul>
-<li>Corresponde a un Encoder + un Decoder.</li>
-<li>Cada uno contiene una capa de Embeddings.</li>
-<li>Además posee un Positional Encoding para entender el orden de la secuencia.</li>
-<li>El decoder funciona de manera autoregresiva.</li>
-<li>Posee 4 tipos de atención.</li>
+<li><span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span> son parámetros entrenables.</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Regularización</strong></p>
+</div>
+<div class="callout-content">
+<p>La sección 5.4 menciona que se aplica Dropout posterior a cada sublayer del Encoder (y el Decoder) con <span class="math inline">\(P_{drop}=0.1\)</span>.</p>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="transformers-self-y-multihead-attention" class="slide level2">
-<h2>Transformers: Self y Multihead Attention</h2>
+<section id="encoder-feed-forward-mlp" class="slide level2 smaller">
+<h2>Encoder: Feed Forward (MLP)</h2>
 <div class="columns">
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-10/self_attention.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="img/clase-10/self_attention.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-11/ffn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-11/ffn.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<p>La sección 3.3 del paper define el bloque Feed Forward de la siguiente manera:</p>
+<p><span class="math display">\[FFN(x) = max(0,x \cdot W_1+b_1)W_2 + b_2\]</span></p>
+<p>Donde <span class="math inline">\(W_1 \in \mathbb{R}^{d_{model} \times {d_{ff}}}\)</span> y <span class="math inline">\(W_2 \in \mathbb{R}^{d_{ff} \times {d_{model}}}\)</span>. Implementaciones como GPT consideran <span class="math inline">\(d_{ff}=4 \cdot d_{model}\)</span>.</p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Detalles</strong></p>
+<p><strong>Arquitectura</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>El self-attention pone atención (aprendiendo la relación) existente entre datos de una misma secuencia. La gran ventaja es que permite la paralelización de cálculos.</li>
-<li>El Multihead Attention corresponde a la concatenación de varios Self-Attention. Esto permite no “sesgarse” con sólo una forma de poner atención, permitiendo aprender relaciones en distintas direcciones.</li>
+<li>2 capas Feed Forward con bias.</li>
+<li>Una ReLU como activación intermedia.</li>
+<li>De acuerdo a la sección 5.4, a la salida incluiría un Dropout con <span class="math inline">\(P_{drop}=0.1\)</span>.</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Residual Connection (Add&amp;Norm)</strong></p>
+</div>
+<div class="callout-content">
+<p>Al igual que en el Multihead Attention, se la salida de esta capa se une con una conexión residual y se pasa por un LayerNorm.</p>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="transformers-causal-self-attention" class="slide level2">
-<h2>Transformers: Causal Self Attention</h2>
+<section id="encoder-output-final" class="slide level2 smaller">
+<h2>Encoder: Output Final</h2>
 <div class="columns">
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-10/causal_self_attention.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="img/clase-10/causal_self_attention.jpg" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+<p><a href="img/clase-11/encoder.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-11/encoder.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Detalles</strong></p>
+<p><strong>Encoder Layers</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Corresponde a un tipo particular de Self Attention, en el cuál sólo se puede poner atención a valores de secuencia previa (no puede ver al futuro). Esto es particularmente necesario para tareas de generación autoregresiva.</li>
+<li>La combinación de todos los pasos anteriores constituyen un (1) Encoder. En el caso del paper el Transformer está compuesto de <span class="math inline">\(N=6\)</span> Encoder Layers uno después del otro.</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>👀 Ojito</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Sólo antes de la primera Encoder Layer se aplica el Input Embedding y el Positional Encoding.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Arquitectura Encoder Only</strong></p>
+</div>
+<div class="callout-content">
+<p>Utilizan el output como input de una prediction Head para tareas de clasificación o regresión.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Arquitectura Encoder-Decoder</strong></p>
+</div>
+<div class="callout-content">
+<p>En el caso de estas arquitecturas, entonces el output del Encoder sirve como Keys y Values para el proceso de Cross Attention.</p>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="transformers-cross-attention" class="slide level2">
-<h2>Transformers: Cross Attention</h2>
+<section id="decoder-causal-self-attention" class="slide level2 smaller">
+<h2>Decoder: Causal Self-Attention</h2>
+<div class="columns">
+<div class="column" style="width:20%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/causal_mh.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="img/clase-11/causal_mh.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:80%;">
+<p><span class="math display">\[Attention(Q,K,V) = Softmax\left(\frac{Q \cdot K^T + Mask}{\sqrt{d_k}}\right) V\]</span></p>
+<p><br></p>
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Corresponde a una variante del <code>Self-Attention</code> en el cuál sólo se presta atención a Tokens pasados, esto para preservar las propiedades auto-regresivas.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Implementaciones como GPT utilizan una máscara triangular superior de -<span class="math inline">\(\infty\)</span> y 1s en el resto. Luego esta máscara se multiplica antes de aplicar la Softmax.</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</div></div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/causal.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="img/clase-11/causal.png" class="quarto-figure quarto-figure-center" style="height:110.0%"></a></p>
+</figure>
+</div>
+</section>
+<section id="decoder-cross-attention" class="slide level2 smaller">
+<h2>Decoder: Cross Attention</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="img/clase-11/cross.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="img/clase-11/cross.png" class="quarto-figure quarto-figure-center" style="height:110.0%"></a></p>
+</figure>
+</div>
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Opcionalmente podría utilizar una Máscara en caso de querer evitar el Look Ahead.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Cross Attention</strong></p>
+</div>
+<div class="callout-content">
+<p>Este mecanismo permite generar relaciones/atenciones entre dos secuencias de datos distintos. En este caso se relaciona una secuencia <em>“query”</em> con elementos <em>“key”</em> y <em>“values”</em> de otra secuencia. Además <code>limita</code> la generación del Decoder.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Dimensiones de Q, K y V</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(Q = X_{decoder} \cdot W_q = (F,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,512)\)</span></li>
+<li><span class="math inline">\(K = X_{encoder} \cdot W_k = (6,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,512)\)</span></li>
+<li><span class="math inline">\(V = X_{encoder} \cdot W_v = (6,512) \cdot (512,\overbrace{8,64}^{512}) = (6,8,512)\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="math display">\[Attention(Q_{decoder},K_{encoder},V_{encoder}) = Softmax\left(\frac{Q_{decoder} \cdot K_{encoder}^T + Mask}{\sqrt{d_k}}\right) V_{encoder}\]</span></p>
+</section>
+<section id="prediction-head" class="slide level2 smaller">
+<h2>Prediction Head</h2>
 <div class="columns">
 <div class="column">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-10/cross_attention.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="img/clase-10/cross_attention.jpg" class="quarto-figure quarto-figure-center" style="width:90.0%"></a></p>
+<p><a href="img/clase-11/pred_head.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="img/clase-11/pred_head.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
 </div><div class="column">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Arquitectura</strong></p>
+</div>
+<div class="callout-content">
+<p>Corresponde a una capa Feed Forward que proyecta desde <span class="math inline">\(d_{model}\)</span> hasta <span class="math inline">\(vocab\_size\)</span> seguida de una Softmax.</p>
+</div>
+</div>
+</div>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Detalles</strong></p>
+<p><strong>¿Por qué es necesaria?</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>Corresponde a la atención que relaciona información proveniente tanto del Encoder como del Decoder. Muy similar al concepto original de Atención.</li>
-</ul>
+<p>Por que la salida del Decoder tiene dimensiones <span class="math inline">\((N, L, d_{model})\)</span>. Es decir, tenemos <span class="math inline">\(N\)</span> secuencias de largo <span class="math inline">\(L\)</span>, donde cada token está representado como un embedding de <span class="math inline">\(d_{model}\)</span> dimensiones, lo cuál no es interpretable por humanos.</p>
+<p>Esta capa tiene el objetivo de estimar la probabilidad de que ocurra el siguiente token, de este modo predecir de manera autoregresiva.</p>
+<p>Luego la salida del transformer tendrá dimensiones <span class="math inline">\((N, L, vocab\_size)\)</span>, pero la secuencia queda <strong><em>desplazada</em></strong>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Implementaciones como GPT agregan weight sharing o weighting tying entre la capa de Embedding y la capa final de proyección.</strong></p>
+</div>
+<div class="callout-content">
+
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="y-estamos-por-hoy" class="title-slide slide level1 center">
-<h1>Y… estamos por hoy</h1>
+<section id="se-acabó" class="title-slide slide level1 center">
+<h1>🥳 Se acabó</h1>
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
