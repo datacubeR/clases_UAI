@@ -302,7 +302,7 @@ p,  &amp; \text{si y = 1} \\
 <p>El término Red Neuronal es un término marketero, lo único que hace es mostrar de manera gráfica lo que nosotros acabamos de definir.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-1/log_reg.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-1/log_reg.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+<p><a href="img/clase-1/log_reg.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="img/clase-1/log_reg.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -394,8 +394,7 @@ p,  &amp; \text{si y = 1} \\
 <p><strong>Maximum Likelihood Estimation</strong></p>
 </div>
 <div class="callout-content">
-<p>Permite calcular los parámetros <span class="math inline">\(\theta\)</span> que maximizan la probabilidad de observar los datos (que los datos se ajusten a la distribución esperada por el modelo).</p>
-<p><span class="math display">\[\mathcal{L}(\theta) = \prod_{i=1}^m P(y^{(i)}|X^{(i)}) = \prod_{i=1}^m p^{y^{(i)}} (1-p)^{1-y^{(i)}}\]</span></p>
+<p>Permite estimar los parámetros <span class="math inline">\(\theta\)</span> que maximizan la probabilidad de observar los datos disponibles. De esta forma, la likelihood puede utilizarse como una medida de qué tan bien el modelo se ajusta a los datos. <span class="math display">\[\mathcal{L}(\theta) = \prod_{i=1}^m P(y^{(i)}|X^{(i)}) = \prod_{i=1}^m p^{y^{(i)}} (1-p)^{1-y^{(i)}}\]</span></p>
 </div>
 </div>
 </div>
@@ -412,7 +411,7 @@ p,  &amp; \text{si y = 1} \\
 <div class="callout-content">
 <ul>
 <li>La Productoria no es amigable.</li>
-<li>Es más común minimizar que maximizar.</li>
+<li>Es más común minimizar que maximizar. Además esto se puede interpretar como <strong>minimizar el error</strong>.</li>
 <li>Aplicamos Logaritmo a la función de verosimilitud y cambiamos el signo.</li>
 </ul>
 <p><span class="math display">\[\mathcal{l}(\theta) = -\log(\mathcal{L}(\theta)) = -\sum_{i=1}^m \left(y^{(i)} \log(p^{(i)}) + (1-y^{(i)}) \log(1-p^{(i)})\right)\]</span></p>
@@ -467,7 +466,6 @@ p,  &amp; \text{si y = 1} \\
 <ul>
 <li><p>La Función de Pérdida mide cuánta información se pierde al estimar los parámetros <span class="math inline">\(\theta\)</span>. En otras palabras, mide el error de estimación de nuestro modelo. Por lo tanto, una <strong>Loss Function</strong> más baja implica un mejor modelo.</p></li>
 <li><p>Si minimizamos nuestra función de pérdida, entonces estamos maximizando la probabilidad de observar los datos. Por lo tanto, minimizamos el error de estimación del modelo.</p></li>
-<li><p>A veces está ecuación aparece como la pérdida promedio (es decir, está multiplicada por <span class="math inline">\(\frac{1}{m}\)</span>).</p></li>
 </ul>
 </div>
 </div>
@@ -479,7 +477,7 @@ p,  &amp; \text{si y = 1} \\
 <div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>🤘 La parámetros óptimos del problema están dados por:</strong></p>
+<p><strong>🤘 Debemos encontrar qué parámetros <span class="math inline">\(\theta\)</span> son los que minimizan el error del modelo. Para ello basta con resolver el siguiente problema de optimización:</strong></p>
 </div>
 <div class="callout-content">
 <p><span class="math display">\[\underset{\theta}{argmin} = L(\theta)\]</span></p>
@@ -558,7 +556,7 @@ p,  &amp; \text{si y = 1} \\
   \frac{\partial L*}{\partial b} &amp;= \frac{\partial L}{\partial c} \cdot \frac{\partial c}{\partial b}  + \frac{\partial L}{\partial d} \cdot \frac{\partial d}{\partial b}= \frac{y^T}{b} - \frac{(1-y)^T}{1-b} \\
 \frac{\partial L*}{\partial a} &amp;= \frac{\partial L}{\partial b} \cdot \frac{\partial b}{\partial a} = \left[\frac{y^T}{b} - \frac{(1-y)^T}{1-b}\right] \cdot \sigma(a)' \\
 \frac{\partial L*}{\partial \theta} &amp;= \frac{\partial L}{\partial a} \cdot \frac{\partial a}{\partial \theta} = \left[\frac{y^T}{b} - \frac{(1-y)^T}{1-b}\right] \cdot \sigma(a)' \cdot X\\
-\frac{\partial L*}{\partial \theta} &amp;=\left[\frac{y^T (1-b) + b (1-y)^T}{b(1-b)}\right] \cdot \sigma(a)' \cdot X\\
+\frac{\partial L*}{\partial \theta} &amp;=\left[\frac{y^T (1-b) - b (1-y)^T}{b(1-b)}\right] \cdot \sigma(a)' \cdot X\\
 \frac{\partial L*}{\partial \theta} &amp;=\left[\frac{y^T - b}{b(1-b)}\right] \cdot \sigma(a)' \cdot X\\
 \end{align*}
 \]</span></p>
@@ -609,9 +607,9 @@ p,  &amp; \text{si y = 1} \\
 <div class="callout-content">
 <ul>
 <li><p>Aplicando este procedimiento es posible definir cualquier <strong><em>update rule</em></strong> de aprendizaje supervisado. Tan sólo se requiere:</p></li>
-<li><p>Una Hipótesis: En el caso de la Regresión Logística es <span class="math inline">\(h_{\theta}(X) = \sigma(X \theta)\)</span>.</p></li>
-<li><p>Una Loss Function: En el caso de la regresión Logística es <span class="math inline">\(L(\theta) = -\left[y^T \log(h_{\theta}) + (1-y)^T \log(1-h_\theta)\right]\)</span></p></li>
-<li><p>Encontrar los gradientes de la Loss Function.</p></li>
+<li><p><strong>Una Hipótesis</strong>: En el caso de la Regresión Logística es <span class="math inline">\(h_{\theta}(X) = p = \sigma(X \theta)\)</span>.</p></li>
+<li><p><strong>Una Loss Function</strong>: En el caso de la regresión Logística es <span class="math inline">\(L(\theta) = -\left[y^T \log(h_{\theta}) + (1-y)^T \log(1-h_\theta)\right]\)</span></p></li>
+<li><p><strong>Encontrar los gradientes de la Loss Function</strong>.</p></li>
 </ul>
 </div>
 </div>
@@ -623,8 +621,8 @@ p,  &amp; \text{si y = 1} \\
 </div>
 <div class="callout-content">
 <ul>
-<li>Llamaremos al proceso de encontrar los parámetros óptimos del modelo <strong><em>“Entrenamiento”</em></strong>. Es decir, el proceso de encontrar los parámetros <span class="math inline">\(\theta\)</span> que minimizan la Loss Function <span class="math inline">\(L(\theta)\)</span>.</li>
-<li>Un modelo que ya está entrenado, puede ser utilizado para hacer predicciones en nuevos datos. <strong><em>Es fin último de un modelo de Machine Learning es utilizarse en producción, no sólo presentar métricas.</em></strong></li>
+<li><p>Llamaremos <strong><em>entrenamiento</em></strong> al proceso de encontrar los parámetros óptimos del modelo. Es decir, aquellos valores de <span class="math inline">\(\theta\)</span> que permiten minimizar la Loss Function <span class="math inline">\(L(\theta)\)</span>.</p></li>
+<li><p>Una vez entrenado, el modelo puede utilizarse para realizar predicciones sobre nuevos datos. <strong><em>El objetivo final de un modelo de Machine Learning es su utilización en un escenario real o en producción, y no únicamente la obtención de buenas métricas durante su evaluación.</em></strong></p></li>
 </ul>
 </div>
 </div>
