@@ -108,7 +108,7 @@ donde $\sigma(x) = \frac{1}{1 + e^{-x}}$ es la función sigmoide.
 ## Redes Neuronales
 El término Red Neuronal es un término marketero, lo único que hace es mostrar de manera gráfica lo que nosotros acabamos de definir.
 
-![](img/clase-1/log_reg.png){.lightbox fig-align="center" width="40%"}
+![](img/clase-1/log_reg.png){.lightbox fig-align="center" width="50%"}
 
 :::
 :::
@@ -163,15 +163,14 @@ $$P(y|X) = p^{y} (1-p)^{1-y}$$
 
 :::{.callout-note appearance="default" style="font-size: 110%;"}
 ## Maximum Likelihood Estimation
-Permite calcular los parámetros $\theta$ que maximizan la probabilidad de observar los datos (que los datos se ajusten a la distribución esperada por el modelo).
-
+Permite estimar los parámetros $\theta$ que maximizan la probabilidad de observar los datos disponibles. De esta forma, la likelihood puede utilizarse como una medida de qué tan bien el modelo se ajusta a los datos.
 $$\mathcal{L}(\theta) = \prod_{i=1}^m P(y^{(i)}|X^{(i)}) = \prod_{i=1}^m p^{y^{(i)}} (1-p)^{1-y^{(i)}}$$
 :::
 
 :::{.callout-important appearance="default" style="font-size: 110%;"}
 ## Negative Log Likelihood
 * La Productoria no es amigable. 
-* Es más común minimizar que maximizar.
+* Es más común minimizar que maximizar. Además esto se puede interpretar como **minimizar el error**. 
 * Aplicamos Logaritmo a la función de verosimilitud y cambiamos el signo. 
 
 
@@ -205,14 +204,13 @@ donde $\bar{p} = \sigma(X\theta)$ es el vector de probabilidades estimadas por e
 
 * Si minimizamos nuestra función de pérdida, entonces estamos maximizando la probabilidad de observar los datos. Por lo tanto, minimizamos el error de estimación del modelo.
 
-* A veces está ecuación aparece como la pérdida promedio (es decir, está multiplicada por $\frac{1}{m}$).
 :::
 
 ## Regresión Logística: Método de Optimización 
 
 ::::{style="font-size: 80%;"}
 :::{.callout-warning appearance="default" icon=false}
-## 🤘 La parámetros óptimos del problema están dados por: 
+## 🤘 Debemos encontrar qué parámetros $\theta$ son los que minimizan el error del modelo. Para ello basta con resolver el siguiente problema de optimización:
 
 $$\underset{\theta}{argmin} = L(\theta)$$
 
@@ -268,7 +266,7 @@ $$
   \frac{\partial L*}{\partial b} &= \frac{\partial L}{\partial c} \cdot \frac{\partial c}{\partial b}  + \frac{\partial L}{\partial d} \cdot \frac{\partial d}{\partial b}= \frac{y^T}{b} - \frac{(1-y)^T}{1-b} \\
 \frac{\partial L*}{\partial a} &= \frac{\partial L}{\partial b} \cdot \frac{\partial b}{\partial a} = \left[\frac{y^T}{b} - \frac{(1-y)^T}{1-b}\right] \cdot \sigma(a)' \\
 \frac{\partial L*}{\partial \theta} &= \frac{\partial L}{\partial a} \cdot \frac{\partial a}{\partial \theta} = \left[\frac{y^T}{b} - \frac{(1-y)^T}{1-b}\right] \cdot \sigma(a)' \cdot X\\
-\frac{\partial L*}{\partial \theta} &=\left[\frac{y^T (1-b) + b (1-y)^T}{b(1-b)}\right] \cdot \sigma(a)' \cdot X\\
+\frac{\partial L*}{\partial \theta} &=\left[\frac{y^T (1-b) - b (1-y)^T}{b(1-b)}\right] \cdot \sigma(a)' \cdot X\\
 \frac{\partial L*}{\partial \theta} &=\left[\frac{y^T - b}{b(1-b)}\right] \cdot \sigma(a)' \cdot X\\
 \end{align*}
 $$
@@ -316,15 +314,16 @@ $$\theta_{n+1 \times 1} = \theta_{n+1 \times 1} - \frac{\alpha}{m} \cdot X^T_{(n
 
 * Aplicando este procedimiento es posible definir cualquier ***update rule*** de aprendizaje supervisado. Tan sólo se requiere:
 
-* Una Hipótesis: En el caso de la Regresión Logística es $h_{\theta}(X) = \sigma(X \theta)$.
-* Una Loss Function: En el caso de la regresión Logística es $L(\theta) = -\left[y^T \log(h_{\theta}) + (1-y)^T \log(1-h_\theta)\right]$
-* Encontrar los gradientes de la Loss Function.
+* **Una Hipótesis**: En el caso de la Regresión Logística es $h_{\theta}(X) = p = \sigma(X \theta)$.
+* **Una Loss Function**: En el caso de la regresión Logística es $L(\theta) = -\left[y^T \log(h_{\theta}) + (1-y)^T \log(1-h_\theta)\right]$
+* **Encontrar los gradientes de la Loss Function**.
 :::
 
 :::{.callout-tip appearance="default" icon=false}
 ## 😱Entrenamiento
-* Llamaremos al proceso de encontrar los parámetros óptimos del modelo ***"Entrenamiento"***. Es decir, el proceso de encontrar los parámetros $\theta$ que minimizan la Loss Function $L(\theta)$.
-* Un modelo que ya está entrenado, puede ser utilizado para hacer predicciones en nuevos datos. ***Es fin último de un modelo de Machine Learning es utilizarse en producción, no sólo presentar métricas.***
+* Llamaremos ***entrenamiento*** al proceso de encontrar los parámetros óptimos del modelo. Es decir, aquellos valores de $\theta$ que permiten minimizar la Loss Function $L(\theta)$.
+
+* Una vez entrenado, el modelo puede utilizarse para realizar predicciones sobre nuevos datos. ***El objetivo final de un modelo de Machine Learning es su utilización en un escenario real o en producción, y no únicamente la obtención de buenas métricas durante su evaluación.***
 
 :::
 

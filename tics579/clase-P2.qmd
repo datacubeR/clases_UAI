@@ -175,10 +175,10 @@ Podemos pensar el Jacobiano como el **"vector de Gradientes"** stackeados hacia 
 
 Supongamos:
 
-$$f(x) = A \cdot \bar{x}$$
+$$f(\bar{x}) = A \cdot \bar{x}$$
 
 :::{.callout-caution appearance="default" style="font-size: 120%;"}
-* Si $\bar{x} \in \mathbb{R}^n$ y $A \in \mathbb{R}^{m \times n}$, entonces $f(x) \in \mathbb{R}^m$. Es decir, $f$ es una tranformación que lleva al vector $\bar{x}$ de $\mathbb{R}^n$ a un vector de $\mathbb{R}^m$.
+* Si $\bar{x} \in \mathbb{R}^n$ y $A \in \mathbb{R}^{m \times n}$, entonces $f(\bar{x}) \in \mathbb{R}^m$. Es decir, $f$ es una tranformación que lleva al vector $\bar{x}$ de $\mathbb{R}^n$ a un vector de $\mathbb{R}^m$.
 * Entenderemos una Transformación Lineal como una función que toma un vector de entrada (cada componente $x_j$ es lineal) y lo transforma en otro vector de salida, manteniendo la estructura lineal .
 :::
 
