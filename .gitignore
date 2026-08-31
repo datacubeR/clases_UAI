@@ -12,3 +12,5 @@ tics579/notebooks/Tarea-2.ipynb
 tics579/notebooks/CATS_DOGS
 tics579/notebooks/CATS_DOGS.zip
 *.zip
+
+**/*.quarto_ipynb
