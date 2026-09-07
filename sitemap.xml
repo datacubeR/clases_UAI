@@ -86,7 +86,7 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579.html</loc>
-    <lastmod>2025-11-26T23:46:47.297Z</lastmod>
+    <lastmod>2026-09-07T04:10:38.521Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411.html</loc>
@@ -133,52 +133,56 @@
     <lastmod>2025-10-29T21:09:03.010Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Texto.html</loc>
-    <lastmod>2025-11-12T22:05:48.060Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/CNN-pytorch.html</loc>
-    <lastmod>2025-08-05T16:18:37.050Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/transformers.html</loc>
-    <lastmod>2025-08-05T16:18:37.158Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/control-5.html</loc>
-    <lastmod>2025-08-05T16:18:37.052Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/reg_log.html</loc>
-    <lastmod>2025-09-03T22:47:09.772Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Intro_Pytorch.html</loc>
-    <lastmod>2025-09-24T20:41:04.122Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Emb_grad.html</loc>
-    <lastmod>2025-10-27T20:43:48.575Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/Intro_pytorch_2.html</loc>
-    <lastmod>2025-08-05T16:18:37.051Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/pretrained-models.html</loc>
-    <lastmod>2025-08-05T16:18:37.158Z</lastmod>
-  </url>
-  <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/Intro_pytorch.html</loc>
-    <lastmod>2025-08-22T17:35:58.731Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/RNNs.html</loc>
+    <lastmod>2025-11-12T21:30:37.799Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Training_Tricks.html</loc>
     <lastmod>2025-10-22T20:54:26.501Z</lastmod>
   </url>
   <url>
-    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/RNNs.html</loc>
-    <lastmod>2025-11-12T21:30:37.799Z</lastmod>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/Intro_pytorch.html</loc>
+    <lastmod>2025-08-22T17:35:58.731Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/pretrained-models.html</loc>
+    <lastmod>2025-08-05T16:18:37.158Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/Intro_pytorch_2.html</loc>
+    <lastmod>2025-08-05T16:18:37.051Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Emb_grad.html</loc>
+    <lastmod>2025-10-27T20:43:48.575Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Intro_Pytorch.html</loc>
+    <lastmod>2025-09-24T20:41:04.122Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/reg_log.html</loc>
+    <lastmod>2025-09-03T22:47:09.772Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/control-5.html</loc>
+    <lastmod>2025-08-05T16:18:37.052Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/transformers.html</loc>
+    <lastmod>2025-08-05T16:18:37.158Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/legacy/CNN-pytorch.html</loc>
+    <lastmod>2025-08-05T16:18:37.050Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Texto.html</loc>
+    <lastmod>2025-11-12T22:05:48.060Z</lastmod>
+  </url>
+  <url>
+    <loc>https://datacubeR.github.io/clases_UAI/tics579/notebooks/Pytorch_Basics.html</loc>
+    <lastmod>2026-09-07T04:08:30.589Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-2.html</loc>
@@ -190,11 +194,11 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-4.html</loc>
-    <lastmod>2026-08-31T12:22:38.939Z</lastmod>
+    <lastmod>2026-09-07T03:58:58.469Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-3.html</loc>
-    <lastmod>2025-09-24T21:19:57.475Z</lastmod>
+    <lastmod>2026-08-31T19:31:33.921Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579/clase-1.html</loc>
@@ -218,7 +222,7 @@
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics579-labs.html</loc>
-    <lastmod>2025-11-12T22:32:41.262Z</lastmod>
+    <lastmod>2026-09-07T04:09:51.074Z</lastmod>
   </url>
   <url>
     <loc>https://datacubeR.github.io/clases_UAI/tics411/clase-11.html</loc>

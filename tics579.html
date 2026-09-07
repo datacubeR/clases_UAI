@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,10 +10,16 @@
 
 <title>Diapositivas – Clases UAI</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -40,10 +46,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-320d2e070db0ee22f5999717ad239b03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f7cd4851227e77a541b48a5ce4da7256.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
   </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -115,7 +121,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -142,7 +148,8 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./logo.jpg" alt="" class="navbar-logo">
+    <img src="./logo.jpg" alt="" class="navbar-logo light-content">
+    <img src="./logo.jpg" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Clases UAI</span>
@@ -282,7 +289,7 @@ Presentación del Curso
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="c2xpZGVz" data-listing-date-sort="1754539200000" data-listing-file-modified-sort="1786048993661" data-listing-reading-time-sort="15" data-listing-word-count-sort="2810">
+<div class="g-col-1" data-index="1" data-categories="c2xpZGVz" data-listing-date-sort="1754542800000" data-listing-file-modified-sort="1786048993661" data-listing-reading-time-sort="15" data-listing-word-count-sort="2810">
 <a href="./tics579/clase-P1.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -298,7 +305,7 @@ Clase P1
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="2" data-categories="c2xpZGVz" data-listing-date-sort="1755144000000" data-listing-file-modified-sort="1786049990328" data-listing-reading-time-sort="10" data-listing-word-count-sort="1853">
+<div class="g-col-1" data-index="2" data-categories="c2xpZGVz" data-listing-date-sort="1755147600000" data-listing-file-modified-sort="1786049990328" data-listing-reading-time-sort="10" data-listing-word-count-sort="1853">
 <a href="./tics579/clase-P2.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -314,7 +321,7 @@ Cálculo Tensorial
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="3" data-categories="c2xpZGVz" data-listing-date-sort="1755748800000" data-listing-file-modified-sort="1786452903768" data-listing-reading-time-sort="7" data-listing-word-count-sort="1347">
+<div class="g-col-1" data-index="3" data-categories="c2xpZGVz" data-listing-date-sort="1755752400000" data-listing-file-modified-sort="1786452903768" data-listing-reading-time-sort="7" data-listing-word-count-sort="1347">
 <a href="./tics579/clase-1.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -330,7 +337,7 @@ Clase 1: Introducción a los Shallow Models
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="4" data-categories="c2xpZGVz" data-listing-date-sort="1755748800000" data-listing-file-modified-sort="1756937562854" data-listing-reading-time-sort="7" data-listing-word-count-sort="1360">
+<div class="g-col-1" data-index="4" data-categories="c2xpZGVz" data-listing-date-sort="1755752400000" data-listing-file-modified-sort="1756937562854" data-listing-reading-time-sort="7" data-listing-word-count-sort="1360">
 <a href="./tics579/clase-2.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -346,7 +353,7 @@ Clase 2: Introducción a las Redes Neuronales
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="5" data-categories="c2xpZGVz" data-listing-date-sort="1756353600000" data-listing-file-modified-sort="1758748797475" data-listing-reading-time-sort="13" data-listing-word-count-sort="2588">
+<div class="g-col-1" data-index="5" data-categories="c2xpZGVz" data-listing-date-sort="1756357200000" data-listing-file-modified-sort="1788204693921" data-listing-reading-time-sort="14" data-listing-word-count-sort="2782">
 <a href="./tics579/clase-3.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -362,7 +369,7 @@ Clase 3: Feed Forward Networks
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="6" data-categories="c2xpZGVz" data-listing-date-sort="1757559600000" data-listing-file-modified-sort="1788178958939" data-listing-reading-time-sort="19" data-listing-word-count-sort="3724">
+<div class="g-col-1" data-index="6" data-categories="c2xpZGVz" data-listing-date-sort="1757563200000" data-listing-file-modified-sort="1788753538469" data-listing-reading-time-sort="18" data-listing-word-count-sort="3446">
 <a href="./tics579/clase-4.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -378,7 +385,7 @@ Clase 4: Model Training
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="7" data-categories="c2xpZGVz" data-listing-date-sort="1761102000000" data-listing-file-modified-sort="1761598234074" data-listing-reading-time-sort="18" data-listing-word-count-sort="3473">
+<div class="g-col-1" data-index="7" data-categories="c2xpZGVz" data-listing-date-sort="1761105600000" data-listing-file-modified-sort="1761598234074" data-listing-reading-time-sort="18" data-listing-word-count-sort="3473">
 <a href="./tics579/clase-5.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -394,7 +401,7 @@ Clase 5: Training Tips &amp; Tricks
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="8" data-categories="c2xpZGVz" data-listing-date-sort="1761793200000" data-listing-file-modified-sort="1762255545860" data-listing-reading-time-sort="24" data-listing-word-count-sort="4634">
+<div class="g-col-1" data-index="8" data-categories="c2xpZGVz" data-listing-date-sort="1761796800000" data-listing-file-modified-sort="1762255545860" data-listing-reading-time-sort="24" data-listing-word-count-sort="4634">
 <a href="./tics579/clase-6.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -410,7 +417,7 @@ Clase 6: Redes Convolucionales
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="9" data-categories="c2xpZGVz" data-listing-date-sort="1761793200000" data-listing-file-modified-sort="1763586078950" data-listing-reading-time-sort="8" data-listing-word-count-sort="1512">
+<div class="g-col-1" data-index="9" data-categories="c2xpZGVz" data-listing-date-sort="1761796800000" data-listing-file-modified-sort="1763586078950" data-listing-reading-time-sort="8" data-listing-word-count-sort="1512">
 <a href="./tics579/clase-7.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -426,7 +433,7 @@ Clase 7: Transfer Learning y Image Augmentation
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="10" data-categories="c2xpZGVz" data-listing-date-sort="1763002800000" data-listing-file-modified-sort="1763581288546" data-listing-reading-time-sort="13" data-listing-word-count-sort="2589">
+<div class="g-col-1" data-index="10" data-categories="c2xpZGVz" data-listing-date-sort="1763006400000" data-listing-file-modified-sort="1763581288546" data-listing-reading-time-sort="13" data-listing-word-count-sort="2589">
 <a href="./tics579/clase-8.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -442,7 +449,7 @@ Clase 8: Redes Recurrentes
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="11" data-categories="c2xpZGVz" data-listing-date-sort="1763002800000" data-listing-file-modified-sort="1763588750388" data-listing-reading-time-sort="14" data-listing-word-count-sort="2672">
+<div class="g-col-1" data-index="11" data-categories="c2xpZGVz" data-listing-date-sort="1763006400000" data-listing-file-modified-sort="1763588750388" data-listing-reading-time-sort="14" data-listing-word-count-sort="2672">
 <a href="./tics579/clase-9.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -458,7 +465,7 @@ Clase 9: Manipulacion de Datos de Texto
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="12" data-categories="c2xpZGVz" data-listing-date-sort="1764212400000" data-listing-file-modified-sort="1764200714316" data-listing-reading-time-sort="15" data-listing-word-count-sort="2976">
+<div class="g-col-1" data-index="12" data-categories="c2xpZGVz" data-listing-date-sort="1764216000000" data-listing-file-modified-sort="1764200714316" data-listing-reading-time-sort="15" data-listing-word-count-sort="2976">
 <a href="./tics579/clase-10.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -528,13 +535,14 @@ Clase 10: Transformers
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

@@ -6,11 +6,11 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Alfonso Tobar-Arancibia">
   <title>Clases UAI – TICS-411 Minería de Datos</title>
@@ -20,10 +20,16 @@
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -98,7 +104,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-673c2e7d040da7fd4b9d655d29f657a0.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-8f256d708726d40fbff7d707db68e007.css">
   <link rel="stylesheet" href="../logo.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -205,7 +211,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Alfonso Tobar-Arancibia 
+Alfonso Tobar-Arancibia
 </div>
         <p class="quarto-title-affiliation">
             <a href="mailto:alfonso.tobar.a@edu.uai.cl" class="email">alfonso.tobar.a@edu.uai.cl</a>
@@ -894,12 +900,12 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="implementación-en-scikit-learn" class="slide level2">
 <h2>Implementación en Scikit-Learn</h2>
-<div class="sourceCode" id="cb1" data-code-line-numbers="|1|3|5-6|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>ac <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span><span class="dv">2</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>,linkage<span class="op">=</span><span class="st">"ward"</span>)</span>
-<span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a><span class="co">## Se entrena y se genera la predicción</span></span>
-<span id="cb1-6"><a></a>ac.fit_predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-code-line-numbers="|1|3|5-6|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
+<span id="cb1-2"><a aria-label="2"></a></span>
+<span id="cb1-3"><a aria-label="3"></a>ac <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span><span class="dv">2</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>,linkage<span class="op">=</span><span class="st">"ward"</span>)</span>
+<span id="cb1-4"><a aria-label="4"></a></span>
+<span id="cb1-5"><a aria-label="5"></a><span class="co">## Se entrena y se genera la predicción</span></span>
+<span id="cb1-6"><a aria-label="6"></a>ac.fit_predict(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="columns" style="font-size: 70%;">
 <ul>
 <li><p><strong>n_clusters</strong>: Define el número de clusters a crear, por defecto 2.</p></li>
@@ -935,18 +941,18 @@ Alfonso Tobar-Arancibia
 </section>
 <section id="otras-implementaciones-dendograma" class="slide level2">
 <h2>Otras implementaciones (Dendograma)</h2>
-<div class="sourceCode" id="cb2" data-code-line-numbers="|1|3-4|5-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a><span class="co"># Genera los cálculos necesarios para construir el Histograma.</span></span>
-<span id="cb2-4"><a></a>Z <span class="op">=</span> linkage(X, method<span class="op">=</span><span class="st">'single'</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>) </span>
-<span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a><span class="co"># Graficar el Dendograma</span></span>
-<span id="cb2-7"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>)) <span class="co"># Define el tamaño del Gráfico</span></span>
-<span id="cb2-8"><a></a>plt.title(<span class="st">'Dendograma Clustering Jerárquico'</span>) <span class="co"># Define un título para el dendograma</span></span>
-<span id="cb2-9"><a></a>plt.xlabel(<span class="st">'Iris Samples'</span>)</span>
-<span id="cb2-10"><a></a>plt.ylabel(<span class="st">'Distance'</span>)</span>
-<span id="cb2-11"><a></a>dendrogram(Z, leaf_rotation<span class="op">=</span><span class="fl">90.</span>, leaf_font_size<span class="op">=</span><span class="fl">8.</span>)</span>
-<span id="cb2-12"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-code-line-numbers="|1|3-4|5-12|"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
+<span id="cb2-2"><a aria-label="2"></a></span>
+<span id="cb2-3"><a aria-label="3"></a><span class="co"># Genera los cálculos necesarios para construir el Histograma.</span></span>
+<span id="cb2-4"><a aria-label="4"></a>Z <span class="op">=</span> linkage(X, method<span class="op">=</span><span class="st">'single'</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>) </span>
+<span id="cb2-5"><a aria-label="5"></a></span>
+<span id="cb2-6"><a aria-label="6"></a><span class="co"># Graficar el Dendograma</span></span>
+<span id="cb2-7"><a aria-label="7"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>)) <span class="co"># Define el tamaño del Gráfico</span></span>
+<span id="cb2-8"><a aria-label="8"></a>plt.title(<span class="st">'Dendograma Clustering Jerárquico'</span>) <span class="co"># Define un título para el dendograma</span></span>
+<span id="cb2-9"><a aria-label="9"></a>plt.xlabel(<span class="st">'Iris Samples'</span>)</span>
+<span id="cb2-10"><a aria-label="10"></a>plt.ylabel(<span class="st">'Distance'</span>)</span>
+<span id="cb2-11"><a aria-label="11"></a>dendrogram(Z, leaf_rotation<span class="op">=</span><span class="fl">90.</span>, leaf_font_size<span class="op">=</span><span class="fl">8.</span>)</span>
+<span id="cb2-12"><a aria-label="12"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="columns" style="font-size: 70%;">
 <blockquote>
 <p>Principalmente este código permite graficar el Dendograma completo.</p>
@@ -1210,7 +1216,7 @@ Se define como la proporción de variables que tienen distinto valor con respect
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1284,13 +1290,14 @@ Se define como la proporción de variables que tienen distinto valor con respect
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

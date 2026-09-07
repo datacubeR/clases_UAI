@@ -2,17 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>legacy – Clases UAI</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -36,10 +42,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-320d2e070db0ee22f5999717ad239b03.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f7cd4851227e77a541b48a5ce4da7256.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -72,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -85,7 +91,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -112,7 +118,8 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../logo.jpg" alt="" class="navbar-logo">
+    <img src="../logo.jpg" alt="" class="navbar-logo light-content">
+    <img src="../logo.jpg" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Clases UAI</span>
@@ -196,7 +203,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Importante
+<span class="screen-reader-only">Important</span>Importante
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -216,7 +223,7 @@ Importante
 <p><a href="img/clase-1/neuron_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="img/clase-1/neuron_2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></a></p>
 </figure>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -367,7 +374,7 @@ Tip
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Consideremos un problema de clasificación multiclase de <span class="math inline">\(k\)</span> clases tal que:
+<span class="screen-reader-only">Tip</span>Consideremos un problema de clasificación multiclase de <span class="math inline">\(k\)</span> clases tal que:
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -864,7 +871,7 @@ Tip
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Ojo con las dimensiones
+<span class="screen-reader-only">Caution</span>Ojo con las dimensiones
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -953,7 +960,7 @@ Tip
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Ojo con las dimensiones
+<span class="screen-reader-only">Caution</span>Ojo con las dimensiones
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1092,7 +1099,7 @@ Caution
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-¿Cómo se resuelve este tipo de problemas?
+<span class="screen-reader-only">Warning</span>¿Cómo se resuelve este tipo de problemas?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1203,7 +1210,7 @@ Caution
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Ojo con las dimensiones.
+<span class="screen-reader-only">Warning</span>Ojo con las dimensiones.
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1301,7 +1308,7 @@ Important
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Funciones Clásicas
+<span class="screen-reader-only">Note</span>Funciones Clásicas
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1320,7 +1327,7 @@ Funciones Clásicas
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Funciones más modernas
+<span class="screen-reader-only">Tip</span>Funciones más modernas
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1388,7 +1395,7 @@ Caution
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Gradiente de <span class="math inline">\(W_1\)</span>
+<span class="screen-reader-only">Tip</span>Gradiente de <span class="math inline">\(W_1\)</span>
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1405,7 +1412,7 @@ Gradiente de <span class="math inline">\(W_1\)</span>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Gradiente de <span class="math inline">\(W_2\)</span>
+<span class="screen-reader-only">Note</span>Gradiente de <span class="math inline">\(W_2\)</span>
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1452,7 +1459,7 @@ Important
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Inputs
+<span class="screen-reader-only">Warning</span>Inputs
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1466,7 +1473,7 @@ Inputs
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Intermediate Outputs
+<span class="screen-reader-only">Tip</span>Intermediate Outputs
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1480,7 +1487,7 @@ Intermediate Outputs
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Output (Head)
+<span class="screen-reader-only">Important</span>Output (Head)
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1494,7 +1501,7 @@ Output (Head)
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Parámetros
+<span class="screen-reader-only">None</span>Parámetros
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1527,7 +1534,7 @@ Caution
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Red Neuronal
+<span class="screen-reader-only">Note</span>Red Neuronal
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1580,7 +1587,7 @@ Warning
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<strong>Gradiente Entrante (Incoming Backward Gradient)</strong>
+<span class="screen-reader-only">Important</span><strong>Gradiente Entrante (Incoming Backward Gradient)</strong>
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1748,13 +1755,14 @@ Important
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

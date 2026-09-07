@@ -6,11 +6,11 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Alfonso Tobar-Arancibia">
   <title>Clases UAI – TICS-579-Deep Learning</title>
@@ -20,10 +20,16 @@
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -98,7 +104,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-673c2e7d040da7fd4b9d655d29f657a0.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-8f256d708726d40fbff7d707db68e007.css">
   <link rel="stylesheet" href="../logo.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -205,7 +211,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Alfonso Tobar-Arancibia 
+Alfonso Tobar-Arancibia
 </div>
         <p class="quarto-title-affiliation">
             <a href="mailto:alfonso.tobar.a@edu.uai.cl" class="email">alfonso.tobar.a@edu.uai.cl</a>
@@ -268,8 +274,8 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-7/alexnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="img/clase-7/alexnet.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
 </figure>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> torchvision</span>
-<span id="cb1-2"><a></a>torchvision.models.alexnet(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> torchvision</span>
+<span id="cb1-2"><a aria-label="2"></a>torchvision.models.alexnet(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -294,10 +300,10 @@ Alfonso Tobar-Arancibia
 </figure>
 </div>
 </div><div class="column">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> torchvision</span>
-<span id="cb2-2"><a></a>torchvision.models.vgg16(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span>
-<span id="cb2-3"><a></a><span class="co">## Versión con Batchnorm</span></span>
-<span id="cb2-4"><a></a>torchvision.models.vgg16_bn(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="im">import</span> torchvision</span>
+<span id="cb2-2"><a aria-label="2"></a>torchvision.models.vgg16(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span>
+<span id="cb2-3"><a aria-label="3"></a><span class="co">## Versión con Batchnorm</span></span>
+<span id="cb2-4"><a aria-label="4"></a>torchvision.models.vgg16_bn(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -317,8 +323,8 @@ Alfonso Tobar-Arancibia
 <blockquote>
 <p>Introduce las <em>“Pointwise Convolutions”</em> (Convoluciones de 1x1) que permiten reducir la complejidad de canales (mediante una combinación lineal) manteniendo las dimensiones de la imagen. Además introduce los Inception Modules, que combinan resultados de Kernels de distinto tamaño. Fue la Arquitectura ganadora de ILSVRC 2014.</p>
 </blockquote>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> torchvision</span>
-<span id="cb3-2"><a></a>torchvision.models.googlenet(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="im">import</span> torchvision</span>
+<span id="cb3-2"><a aria-label="2"></a>torchvision.models.googlenet(weights <span class="op">=</span> <span class="st">"IMAGENET1K_V1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><a href="img/clase-7/googlenet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/clase-7/googlenet.png" class="quarto-figure quarto-figure-center"></a></p>
@@ -361,11 +367,11 @@ Alfonso Tobar-Arancibia
 </div>
 </div>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> timm</span>
-<span id="cb4-2"><a></a>model <span class="op">=</span> timm.create_model(<span class="st">"resnet50"</span>, pretrained <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb4-3"><a></a></span>
-<span id="cb4-4"><a></a><span class="co">## Listar todas las versiones de Resnet disponibles</span></span>
-<span id="cb4-5"><a></a>timm.list_models(<span class="st">"resnet*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="im">import</span> timm</span>
+<span id="cb4-2"><a aria-label="2"></a>model <span class="op">=</span> timm.create_model(<span class="st">"resnet50"</span>, pretrained <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb4-3"><a aria-label="3"></a></span>
+<span id="cb4-4"><a aria-label="4"></a><span class="co">## Listar todas las versiones de Resnet disponibles</span></span>
+<span id="cb4-5"><a aria-label="5"></a>timm.list_models(<span class="st">"resnet*"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><br></p>
 <h4 id="conexiones-residuales">Conexiones Residuales</h4>
 <div class="quarto-figure quarto-figure-center">
@@ -385,11 +391,11 @@ Alfonso Tobar-Arancibia
 <p><a href="img/clase-7/efficientnet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="img/clase-7/efficientnet.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
 </figure>
 </div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">import</span> timm</span>
-<span id="cb5-2"><a></a>model <span class="op">=</span> timm.create_model(<span class="st">"efficientnet_b0"</span>, pretrained <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb5-3"><a></a></span>
-<span id="cb5-4"><a></a><span class="co">## Listar todas las versiones de Resnet disponibles</span></span>
-<span id="cb5-5"><a></a>timm.list_models(<span class="st">"efficientnet*"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="im">import</span> timm</span>
+<span id="cb5-2"><a aria-label="2"></a>model <span class="op">=</span> timm.create_model(<span class="st">"efficientnet_b0"</span>, pretrained <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb5-3"><a aria-label="3"></a></span>
+<span id="cb5-4"><a aria-label="4"></a><span class="co">## Listar todas las versiones de Resnet disponibles</span></span>
+<span id="cb5-5"><a aria-label="5"></a>timm.list_models(<span class="st">"efficientnet*"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="pre-training" class="slide level2 smaller">
 <h2>Pre-training</h2>
@@ -497,11 +503,11 @@ Es un dataset que contiene aproximadamente 14 millones de imágenes anotadas man
 Permite cargar imágenes de un Path en específico. Dentro de esa carpeta <code>ImageFolder</code> considerará cada carpeta como una clase y los elementos (imágenes) dentro de dicha clase como instancia de la clase en cuestión.
 </dd>
 </dl>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="im">from</span> torchvision.dataset <span class="im">import</span> ImageFolder</span>
-<span id="cb6-2"><a></a></span>
-<span id="cb6-3"><a></a>train_data <span class="op">=</span> ImageFolder(<span class="st">"path/to/train/images"</span>, transform <span class="op">=</span> <span class="va">None</span>)</span>
-<span id="cb6-4"><a></a>validation_data <span class="op">=</span> ImageFolder(<span class="st">"path/to/validation/images"</span>, transform <span class="op">=</span> <span class="va">None</span>)</span>
-<span id="cb6-5"><a></a>test_data <span class="op">=</span> ImageFolder(<span class="st">"path/to/test/images"</span>, transform <span class="op">=</span> <span class="va">None</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="im">from</span> torchvision.dataset <span class="im">import</span> ImageFolder</span>
+<span id="cb6-2"><a aria-label="2"></a></span>
+<span id="cb6-3"><a aria-label="3"></a>train_data <span class="op">=</span> ImageFolder(<span class="st">"path/to/train/images"</span>, transform <span class="op">=</span> <span class="va">None</span>)</span>
+<span id="cb6-4"><a aria-label="4"></a>validation_data <span class="op">=</span> ImageFolder(<span class="st">"path/to/validation/images"</span>, transform <span class="op">=</span> <span class="va">None</span>)</span>
+<span id="cb6-5"><a aria-label="5"></a>test_data <span class="op">=</span> ImageFolder(<span class="st">"path/to/test/images"</span>, transform <span class="op">=</span> <span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -567,8 +573,8 @@ Permite cargar imágenes de un Path en específico. Dentro de esa carpeta <code>
 </section>
 <section id="transformaciones-básicas" class="slide level2 smaller">
 <h2>Transformaciones Básicas</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">import</span> albumentations <span class="im">as</span> A</span>
-<span id="cb7-2"><a></a><span class="im">from</span> albumentations.pytorch.transforms <span class="im">import</span> ToTensorV2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="im">import</span> albumentations <span class="im">as</span> A</span>
+<span id="cb7-2"><a aria-label="2"></a><span class="im">from</span> albumentations.pytorch.transforms <span class="im">import</span> ToTensorV2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-caution callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -856,7 +862,7 @@ Genera rotaciones aleatorias entre un ángulo mínimo y máximo.
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -930,13 +936,14 @@ Genera rotaciones aleatorias entre un ángulo mínimo y máximo.
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

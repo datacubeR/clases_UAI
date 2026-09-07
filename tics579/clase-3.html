@@ -6,11 +6,11 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Alfonso Tobar-Arancibia">
   <title>Clases UAI – TICS-579-Deep Learning</title>
@@ -20,10 +20,16 @@
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -32,7 +38,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-673c2e7d040da7fd4b9d655d29f657a0.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-8f256d708726d40fbff7d707db68e007.css">
   <link rel="stylesheet" href="../logo.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -139,7 +145,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Alfonso Tobar-Arancibia 
+Alfonso Tobar-Arancibia
 </div>
         <p class="quarto-title-affiliation">
             <a href="mailto:alfonso.tobar.a@edu.uai.cl" class="email">alfonso.tobar.a@edu.uai.cl</a>
@@ -373,7 +379,7 @@ Alfonso Tobar-Arancibia
 <dl>
 <dt>Activation Functions</dt>
 <dd>
-Corresponden a las funciones que agregarán características no lineales a cada activación, impidiendo la composición de transformaciones Affine.
+<p>Corresponden a las funciones que agregarán características no lineales a cada activación, impidiendo la composición de transformaciones Affine.</p>
 </dd>
 </dl>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
@@ -939,7 +945,7 @@ g(z)&amp;= 0.5 \cdot z \cdot \left(1 + Tanh\left(\sqrt{2/\pi}\right) \cdot \left
 <div class="columns">
 <div class="column" style="font-size: 90%;">
 <h4 id="update-rule">Update Rule</h4>
-<p><span class="math display">\[\theta_{t+1} = \theta_t - \alpha v_{t + 1}\]</span> <span class="math display">\[v_{t+1} = \beta v_{t} + (1-\beta) \nabla_\theta L(\theta_{t+1})\]</span></p>
+<p><span class="math display">\[\theta_{t+1} = \theta_t - \alpha v_{t}\]</span> <span class="math display">\[v_{t+1} = \beta v_{t} + (1-\beta) \nabla_\theta L(\theta_{t+1})\]</span></p>
 <p>donde <span class="math inline">\(0&lt;\beta&lt;1\)</span>, pero normalmente <span class="math inline">\(\beta=0.9\)</span>.</p>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
@@ -970,14 +976,10 @@ v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\thet
 <h2>SGD with Nesterov Momentum</h2>
 <div class="columns">
 <div class="column">
-<p><span class="math display">\[\theta_{t+1} = \theta_t - \alpha u_{t + 1}\]</span> <span class="math display">\[v_{t + 1} = \beta v_t + (1-\beta) \nabla_\theta f(\theta_{t+1} + \beta v_t)\]</span></p>
+<p><span class="math display">\[\theta_{t+1} = \theta_t - \alpha v_{t}\]</span> <span class="math display">\[v_{t + 1} = \beta v_t + (1-\beta) \nabla_\theta L(\theta_{t+1} + \beta v_t)\]</span></p>
 <p>donde <span class="math inline">\(0&lt;\beta&lt;1\)</span>, pero normalmente <span class="math inline">\(\beta=0.9\)</span>.</p>
 </div><div class="column">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="img/clase-3/nesterov_update.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-3/nesterov_update.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
-</figure>
-</div>
+<p><img data-src="img/clase-3/nesterov_update.png">{.o echo ightbox fig-align=“center” width=“50%”}</p>
 </div></div>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -994,7 +996,7 @@ v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\thet
 <h2>Efecto del Momentum en el Update Rule</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="img/clase-3/momentum_effect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="img/clase-3/momentum_effect.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="img/clase-3/momentum_effect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="img/clase-3/momentum_effect.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -1023,7 +1025,7 @@ v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\thet
 </div>
 </div>
 </div>
-<p><span class="math display">\[r_{t+1} = r_t + \nabla_\theta f(\theta_t)^2\]</span> <span class="math display">\[\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{r_{t+1}}}\nabla_\theta f(\theta_t)\]</span></p>
+<p><span class="math display">\[r_{t+1} = r_t + \nabla_\theta L(\theta_t)^2\]</span> <span class="math display">\[\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{r_{t+1}}}\nabla_\theta L(\theta_t)\]</span></p>
 <div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1077,7 +1079,7 @@ v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\thet
 </div>
 </div>
 </div>
-<p><span class="math display">\[s_{t+1} = \beta r_t + (1-\beta) \nabla_\theta f(\theta_t)^2\]</span> <span class="math display">\[\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{s_{t+1}}}\nabla_\theta f(\theta_t)\]</span></p>
+<p><span class="math display">\[s_{t+1} = \beta r_t + (1-\beta) \nabla_\theta L(\theta_t)^2\]</span> <span class="math display">\[\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{s_{t+1}}}\nabla_\theta L(\theta_t)\]</span></p>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1118,7 +1120,7 @@ v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\thet
 </div>
 <div class="columns">
 <div class="column">
-<p><span class="math display">\[v_{t+1} = \beta_1 v_t + (1-\beta_1) \nabla_\theta f(\theta_t)\]</span> <span class="math display">\[s_{t+1} = \beta_2 s_t + (1-\beta_2) \nabla_\theta f(\theta_t)^2\]</span> <span class="math display">\[\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{s'_{t+1}}} v'_{t+1}\]</span></p>
+<p><span class="math display">\[v_{t+1} = \beta_1 v_t + (1-\beta_1) \nabla_\theta L(\theta_t)\]</span> <span class="math display">\[s_{t+1} = \beta_2 s_t + (1-\beta_2) \nabla_\theta L(\theta_t)^2\]</span> <span class="math display">\[\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{s'_{t+1}}} v'_{t+1}\]</span></p>
 </div><div class="column">
 <h5 id="correcciones-iniciales">Correcciones Iniciales</h5>
 <p><span class="math display">\[v'_{t+1} = \frac{v_{t+1}}{1-\beta_1^{t+1}}\]</span> <span class="math display">\[s'_{t+1} = \frac{s_{t+1}}{1-\beta_2^{t+1}}\]</span></p>
@@ -1154,7 +1156,7 @@ v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\thet
 <div class="footer">
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 </p><p><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
-<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a>
+</a><p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;"><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"><img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"></a></p>
 <p></p>
 </div>
 
@@ -1352,7 +1354,7 @@ v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\thet
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1426,13 +1428,14 @@ v_{t+1}&amp;=(1-\beta)\nabla_\theta L(\theta_{t}) + \beta (1-\beta) \nabla_\thet
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
