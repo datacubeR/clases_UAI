@@ -26,19 +26,36 @@ format:
 ## Entrenamiento de la Red {.smaller}
 
 
-> A diferencia de un Modelo de Machine Learning, las Redes Neuronales se entrenan de manera progresiva (se espera una mejora en cada Epoch). Si nuestra Arquitectura es apropiada nosotros deberíamos esperar que el `Loss` de nuestra ***red siempre disminuya***. ¿Por qué?
+> A diferencia de un Modelo de Machine Learning, las Redes Neuronales se entrenan de ***manera progresiva*** (se espera una mejora en cada Epoch). Si nuestra Arquitectura es apropiada nosotros deberíamos esperar que el `Loss` de nuestra ***red siempre disminuya***. ¿Por qué?
 
 :::{.callout-tip .fragment icon=false appearance="default"}
 ## 💡 Dado que el entrenamiento es progresivo, el modelo puede retomar su entrenamiento desde un set de pesos dados.
 :::
 
+
+::: {.columns}
+
+::: {.column}
+
+![](img/clase-4/validation_curve.png){.lightbox fig-align="center"}
+
+
+:::
+
+::: {.column}
 ::: {.callout-warning .fragment icon=false appearance="default"}
 ## **¿Siempre buscamos la Red que tenga el mejor Loss de Entrenamiento?** ***¿Cuál es la diferencia entre el `Loss` y el `Rendimento del Modelo`?***
 :::
 
+
 ::: {.callout-important .fragment icon=false appearance="default"}
 ## Al igual que en los modelos de Machine Learning debemos evitar a toda costa el Overfitting. ¿Qué es el overfitting?
 :::
+
+:::
+
+:::
+
 
 ## Entrenamiento de la Red {.smaller}
 
@@ -111,13 +128,53 @@ A diferencia de un modelo de Machine Learning el proceso de validación del mode
 :::
 ::: 
 
-## Model Validation: K-Fold {.smaller}
+## Pytorch: Model Evaluation {.smaller}
 
-![](img/clase-4/k-fold.png){.lightbox fig-align="center" width="60%"}
-
-::: {.callout-important}
-Corresponde al proceso de Holdout pero repetido $K$ veces. ***No es tan utilizado en Deep Learning debido a los altos costos computacionales***.
+:::{style="font-size: 75%;"}
+> Nos referimos a la evaluación del modelo como la medición de la performance esperada por nuestro modelo. La Evaluación del Modelo se realiza en torno a una métrica definida a priori por el modelador. La métrica a utilizar está íntimamente ligada al problema a resolver.
 :::
+
+::: {.columns}
+::: {.column}
+
+::: {.callout-note appearance="default" icon="false"}
+
+#### Clasificación
+
+* $Accuracy = \frac{1}{m} \sum_{i = 1}^m 1\{y_i = \hat{y_i}\}$
+* $Precision = \frac{TP}{TP + FP}$
+* $Recall = \frac{TP}{TP + FN}$
+* $F1-Score = 2 \cdot \frac{Precision \cdot Recall}{Precision + Recall}$
+:::
+:::
+
+
+::: {.column}
+
+::: {.callout-important appearance="default" icon="false"}
+#### Regresión
+* $RMSE = \frac{1}{m} \sum_{i=1}^m (y_i-\hat{y_i})^2$
+* $MAE = \frac{1}{m} \sum_{i=1}^m |y_i - \hat{y_i}|$
+* $MAPE = 100 \cdot \frac{1}{m} \sum_{i=1}^m \frac{|y_i-\hat{y_i}|}{max(\epsilon,y_i)}$
+* $SMAPE = \frac{2}{m} \sum_{i=1}^2 \frac{|y_i - \hat{y_i}  |}{max(|y_i + \hat{y_i}|,\epsilon)}$
+:::
+:::
+::: 
+
+
+::: {.callout-warning icon=false appearance="default"}
+## 🤓
+Las métricas presentadas son las básicas para clasificación y regresión. Existen otras más específicas según el campo:
+
+* IoU en segmentación semántica, MAP@k en recomendación, BLEU o ROUGE en NLP, etc.
+* Una lista extensa puede consultarse en [Torchmetrics](https://lightning.ai/docs/torchmetrics/stable/all-metrics.html)
+.
+:::
+
+::: {.callout-warning icon=false appearance="default"}
+## 🤔 Medir la performance de un modelo de Deep Learning se complica al usar Mini-Batch. ¿Por qué?
+:::
+
 
 # ¿Qué es Pytorch?
 
@@ -143,47 +200,234 @@ import torch.nn.functional as F
 ## 👀 Una versión funcional es capaz de replicar la operación de un módulo pero no tiene la capacidad de almacenar los parámetros aprendidos.
 :::
 
+## Pytorch: Basics {.smaller}
 
-## Pytorch: Modelo {.smaller}
+Es posible realizar todas las operaciones básicas de manipulación de tensores con Pytorch. Algunos ejemplos: 
 
-::::{.columns}
-:::{.column}
-::: {.callout-caution style="font-size: 90%;" icon=false appearance="default"} 
-## Una capa en Pytorch
-* Son elementos importados desde `torch.nn`.
-* Estos módulos deben ser instanciados para luego ser utilizados.
-* Cada capa tiene guarda sus parámetros como `atributos`: 
-  * `.weight.data` y `.bias.data` (para los pesos y bias respectivos).
-  * **Ojo**: Pytorch utiliza los parámetros de manera transpuesta a como lo aprendimos en clases.
+::: {.columns}
+
+::: {.column}
+
+### Vectores
+```{.python}
+a = torch.tensor([1, 2, 3])
+b = torch.tensor([4, 5, 6])
+```
+
+```{.python}
+## Producto Interno
+a.dot(b)
+a.reshape(1, -1) @ b.reshape(-1, 1)
+```
+```{.python}
+## Producto Externo
+torch.outer(a, b)
+a.reshape(-1, 1) @ b.reshape(1, -1)
+```
+```{.python}
+## Producto Hadamard
+a * b
+```
 
 :::
 
-```{.python style="font-size: 120%;"}
-## Ejemplo de un capa de parámetros en Pytorch
-## Proyecta desde 4 dimensiones a 12 dimensiones
-fc1 = nn.Linear(in_features = 4, out_features=12)
+::: {.column}
 
-## Forward Pass:
-## Calcula las activaciones de la capa
-fc1(X)
-
+### Matrices
+```{.python}
+A = torch.randn(4, 3)
+B = torch.randn(3, 2)
+C = torch.randn(4, 3)
 ```
 
-:::{.callout-note style="font-size: 90%;" icon=false appearance="default"}
-## Output: Activaciones de la capa
+```{.python}
+## Producto Matricial
+A @ B
+```
+
+```{.python}
+## Suma
+A + C
+```
+
+```{.python}
+## Transpuesta
+A.T
+```
 :::
+
+:::
+
+### Tensores
+
+```{.python}
+## Tensores
+AT = torch.randint(1, 10, (2, 3, 4))
+BT = torch.randint(1, 10, (2, 4, 2))
+
 ```
-tensor([[ 0.2620, -0.5313,  0.3907,  ..., -0.0451, -1.2113, -2.9476],
-        [-1.2096, -0.2586, -0.1372,  ...,  0.1342, -1.1130, -1.4764],
-        [-1.7676, -0.3754, -0.3786,  ...,  0.2964, -1.2234, -1.6176],
-        ...,
-        [-2.1432, -0.3500, -0.5168,  ...,  0.3048, -1.1075, -1.1932],
-        [-2.6030,  0.0033, -0.6494,  ...,  0.8202, -1.6117, -1.0077],
-        [ 0.1126, -0.4532,  0.3573,  ...,  0.0660, -1.0688, -2.4856]],
-       grad_fn=<AddmmBackward0>)
+
+```{.python}
+## Multiplicación Tensorial
+AT @ BT
+AT.bmm(BT)
+```
+
+```{.python}
+AT.transpose(0,2).shape
+AT.permute(1,2,0).shape
+```
+
+## Pytorch: Autograd {.smaller}
+
+Adicionalmente, PyTorch cuenta con un motor de diferenciación automática llamado `Autograd`, que permite calcular derivadas automáticamente mediante un grafo computacional utilizando operaciones con tensores.
+
+
+
+::: {.callout-important style="font-size: 90%;" icon=false appearance="default"} 
+## 👀 Ojo: Las derivadas que nosotros ocupamos sólo tienen sentido porque son derivadas escalares (como por ejemplo el Loss).
+:::
+
+#### Red de Ejemplo
+
+
+::: {.columns}
+
+::: {.column width="40%"}
+
+![](img/clase-4/NN_example.png){.lightbox fig-align="center"}
+
+::: {style="font-size: 80%;"} 
+* Red de dos capas.
+* 5 registros con 4 features iniciales.
+* Proyectan a 8 dimensiones y luego a 3 clases de salida. 
+* Por simplicidad no usamos Biases.
+* Relu como Función de Activación.
+:::
+
+
+:::
+
+::: {.column width="60%"}
+
+```{.python}
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+X = torch.randint(0, 10, (5, 4), dtype=torch.float32).requires_grad_()
+y = torch.randint(0, 3, (5,), dtype=torch.long)
+W1 = torch.randint(0, 10, (4, 8), dtype=torch.float32).requires_grad_()
+Z1 = torch.relu(X @ W1)
+W2 = torch.randint(0, 10, (8, 3), dtype=torch.float32).requires_grad_()
+Z2 = Z1 @ W2
+loss = F.cross_entropy(Z2, y)
+
+loss.backward() # Permite el cálculo de Gradientes
+
+print("Gradiente de W1: ", W1.grad, sep="===============================\n")
+print("Gradiente de W2: ", W2.grad, sep="===============================\n")
 ```
 :::
-:::{.column}
+
+:::
+
+
+
+## Pytorch: Autograd {.smaller}
+
+
+::: {.callout-caution appearance="default" icon=true}
+## Precaución 
+
+Autograd por defecto acumula los gradientes. Por lo tanto, antes de cada Forward Pass se deben reiniciar los gradientes a cero.
+:::
+
+```{.python}
+##  Ejecutar esta celda varias veces.
+#  Luego descomentar la línea `W2.grad.zero_()` y volver a ejecutar la celda varias veces.
+#  ¿Qué sucede?
+# W2.grad.zero_()
+Z1 = torch.relu(X @ W1)
+Z2 = Z1 @ W2
+## Sólo necesario para calcular Gradientes Intermedios que no son Nodos Hoja.
+Z2.retain_grad()
+loss = F.cross_entropy(Z2, y)
+
+loss.backward()
+
+print("Segundo backward:")
+print("Gradiente de W2: ", W2.grad, sep="===============================\n")
+```
+
+#### ¿Cómo saber que Autograd calcula los Gradientes de manera correcta?
+
+Por ejemplo el Gradiente respecto a los Logits para un problema de Clasificación Multiclase es:
+
+
+::: {.columns}
+
+::: {.column width="40%"}
+$$\frac{\partial L}{\partial Z_2} = \frac{1}{m}(Softmax(Z_2) - Y)$$
+:::
+
+::: {.column width="60%"}
+
+```{.python}
+## De manera manual
+(torch.softmax(Z2, dim=1) - F.one_hot(y, num_classes=3)) / X.shape[0]
+```
+
+```{.python}
+## Con Autograd
+Z2.grad
+```
+
+:::
+
+:::
+
+## Pytorch: nn.Module {.smaller}
+
+Pytorch posee una interfaz aún más potente que permite crear redes neuronales más complejas con mucho menos código y de manera más ***declarativa***.
+
+
+::: {.columns}
+
+::: {.column}
+
+```{.python}
+class NeuralNet(nn.Module):
+    def __init__(
+        self,
+    ):
+        super().__init__()
+        self.fc1 = nn.Linear(4, 8, bias=False)
+        self.relu = nn.ReLU(inplace=True)
+        self.fc2 = nn.Linear(8, 3, bias=False)
+
+## Descomentar para obtener resultados del ejemplo anterior
+        # self.fc1.weight.data = W1.T
+        # self.fc2.weight.data = W2.T
+
+    def forward(self, x):
+        x = self.fc1(x)
+        x = self.relu(x)
+        x = self.fc2(x)
+        return x
+
+
+model = NeuralNet()
+logits = model(X)
+## Pytorch llama `criterion` 
+# a la fórmula de cálculo del Loss Function.
+criterion = nn.CrossEntropyLoss()
+loss = criterion(logits, y)
+```
+:::
+
+::: {.column}
 
 ::: {.callout-tip style="font-size: 90%;" icon=false appearance="default"} 
 ## Un clase en Pytorch permite crear redes más complejas y poseen 2 métodos principales:
@@ -199,137 +443,130 @@ tensor([[ 0.2620, -0.5313,  0.3907,  ..., -0.0451, -1.2113, -2.9476],
 
 :::
 
-```{.python style="font-size: 110%;"}
-class MLP(nn.Module):
-  def __init__(self, in_features, out_features):
-    super().__init__()
-    
-    ## Defincición de capas
-    self.fc1 = nn.Linear(in_features, out_features)
+::: {.callout-caution style="font-size: 90%;" icon=false appearance="default"} 
+## Una capa en Pytorch
+* Son elementos importados desde `torch.nn`.
+* Estos módulos deben ser instanciados para luego ser utilizados.
+* Cada capa tiene guarda sus parámetros como `atributos`: 
+  * `.weight.data` y `.bias.data` (para los pesos y bias respectivos).
+  * **Ojo**: Pytorch utiliza los parámetros de manera transpuesta a como lo aprendimos en clases.
 
-  def forward(self,x):
-    x = self.fc1(x)
-    return x
-
-model = MLP(in_features=4, out_features = 12)
-model(X)
-```
 :::
 
-::::
+
+:::
+
+:::
 
 ## Pytorch: Crear modelos más complejos {.smaller}
 
-::::{.columns}
 
-:::{.column width="60%"}
+::: {.columns}
 
-```{.python style="font-size: 120%;"}
-class MLP2(nn.Module):
-  def __init__(self, in_features, out_features):
-    super().__init__()
-    self.fc1 = nn.Linear(in_features, out_features)
-    self.relu = nn.ReLU(inplace = True)
-    self.fc2 = nn.Linear(out_features, 1)
+::: {.column}
+#### Base Model
+```{.python}
+class MLP(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(4, 8, bias=False)
+        self.relu = nn.ReLU(inplace=True)
+        self.fc2 = nn.Linear(8, 12, bias=False)
 
-  def forward(self,x):
-    x = self.fc1(x)
-    x = self.relu(x)
-    x = self.fc2(x)
-    return x
-
-class SuperMLP(nn.Module):
-  def __init__(self):
-    super().__init__()
-    self.mlp1 = MLP(in_features=4, out_features=12)
-    self.mlp2 = MLP2(in_features=12, out_features=8)
-  def forward(self, x):
-    x = self.mlp1(x)
-    x = self.mlp2(x)
-    return x
-
-super_model = SuperMLP()
-logits = super_model(X)
-logits.shape
+    def forward(self, x):
+        x = self.fc1(x)
+        x = self.relu(x)
+        x = self.fc2(x)
+        return x
 ```
+
+
 
 :::
 
-:::{.column width="40%"}
-::: {.callout-caution style="font-size: 90%;" icon=false appearance="default"} 
-## Es posible combinar distintos `nn.Module` en un sólo modelo.
+::: {.column}
+
+#### Prediction Heads
+
+```{.python}
+
+class PredictionBinary(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(12, 1, bias=False)
+
+    def forward(self, x):
+        x = self.fc1(x)
+        return x
+```
+
+```{.python}
+class PredictionMC(nn.Module):
+    def __init__(self, n_classes=3):
+        super().__init__()
+        self.fc1 = nn.Linear(12, n_classes, bias=False)
+
+    def forward(self, x):
+        x = self.fc1(x)
+        return x
+```
+
+
+
 :::
 
-![](img/clase-4/super_mlp.png){.lightbox fig-align="center" width="90%"}
-
-```{.python style="font-size: 90%;"}
-super_model
-```
-```
-SuperMLP(
-  (mlp1): MLP(
-    (fc1): Linear(in_features=4, out_features=12, bias=True)
-  )
-  (mlp2): MLP2(
-    (fc1): Linear(in_features=12, out_features=8, bias=True)
-    (relu): ReLU()
-    (fc2): Linear(in_features=8, out_features=1, bias=True)
-  )
-)
-```
-:::
-::::
-
-## Pytorch: Visualización del Modelo {.smaller}
-
-::::{.columns}
-
-:::{.column width="55%"}
-![](img/clase-4/super_mlp.png){.lightbox fig-align="center" width="90%"}
 :::
 
-:::{.column width="45%"}
+
+::: {.columns}
+
+::: {.column}
+
+```{.python}
+class BinaryModel(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.mlp = MLP()
+        self.prediction = PredictionBinary()
+
+    def forward(self, x):
+        x = self.mlp(x)
+        x = self.prediction(x)
+        return x
+
+X = torch.randint(0, 10, (5, 4), dtype=torch.float32)
+model_binary = BinaryModel()
+model_binary(X)
+```
 
 
-```{.python style="font-size: 90%;"}
-super_model
-```
-```
-SuperMLP(
-  (mlp1): MLP(
-    (fc1): Linear(in_features=4, out_features=12, bias=True)
-  )
-  (mlp2): MLP2(
-    (fc1): Linear(in_features=12, out_features=8, bias=True)
-    (relu): ReLU()
-    (fc2): Linear(in_features=8, out_features=1, bias=True)
-  )
-)
-```
-
-```{.python style="font-size: 90%;"}
-from torchinfo import summary
-summary(super_model)
-```
-```
-=================================================================
-Layer (type:depth-idx)                   Param #
-=================================================================
-SuperMLP                                 --
-├─MLP: 1-1                               --
-│    └─Linear: 2-1                       60
-├─MLP2: 1-2                              --
-│    └─Linear: 2-2                       104
-│    └─ReLU: 2-3                         --
-│    └─Linear: 2-4                       9
-=================================================================
-Total params: 173
-Trainable params: 173
-Non-trainable params: 0
-=================================================================
-```
 :::
-::::
+
+::: {.column}
+
+```{.python}
+class MCModel(nn.Module):
+    def __init__(self, n_classes=3):
+        super().__init__()
+        self.mlp = MLP()
+        self.prediction = PredictionMC(n_classes=n_classes)
+
+    def forward(self, x):
+        x = self.mlp(x)
+        x = self.prediction(x)
+        return x
+
+X = torch.randint(0, 10, (5, 4), dtype=torch.float32)
+model_MC = MCModel(n_classes=4)
+model_MC(X)
+```
+
+
+:::
+
+:::
+
+
 
 ## Pytorch: Optimizador y Loss Function {.smaller}
 
@@ -338,7 +575,7 @@ Non-trainable params: 0
 * El `Loss Function` a utilizar le llamaremos `criterion`.
 :::
 ```{.python style="font-size: 120%;"}
-criterion = nn.BCEWithLogitsLoss()
+criterion = nn.CrossEntropyLoss()
 ```
 
 :::{.callout-caution icon=false appearance="default"}
@@ -350,213 +587,6 @@ criterion = nn.BCEWithLogitsLoss()
 ```{.python style="font-size: 120%;"}
 optimizer = torch.optim.Adam(super_model.parameters(), lr = 3e-4)
 ```
-
-
-## Pytorch: Training Loop {.smaller}
-
-
-::::{.columns}
-:::{.column}
-```{.python code-line-numbers="|4|5|8|9|11|14|17|" style="font-size: 120%;"}
-loss_history = []
-for e in range(epochs):
-  # Definición del modo del Modelo
-  super_model.train()
-  optimizer.zero_grad()
-
-  # Forward Pass
-  logits = super_model(X)
-  loss = criterion(logits, y)
-  ## Calcula los gradientes (Backward Pass)
-  loss.backward()
-
-  # Actualización de los Pesos
-  optimizer.step()
-
-  # Log del Modelo
-  loss_history.append(loss.item())
-```
-:::
-:::{.column}
-![](img/clase-4/training_loop.png){.lightbox fig-align="center"} 
-
-:::
-::::
-
-
-:::{.callout-note style="font-size: 90%;" icon=false appearance="default"}
-## Elementos clave del Training Loop
-* Pytorch requiere fijar el Modo de la Red. Para entrenar se utiliza `model.train()`.
-  * Pytorch tiene la costumbre de Acumular Gradientes. Por lo tanto, antes de cada Loop, se deben reiniciar los gradientes a cero utilizando `optimizer.zero_grad()`.
-* El Forward Pass lo llamaremos con `logits = super_model(X)`. Esto permite calcular los Logits y las variables intermedias necesarias para el Backward Pass.
-* El error/loss de la red lo calculamos con `loss = criterion(logits, y)`.
-* El cálculo de gradientes lo llamaremos `loss.backward()`. Esto calcula los gradientes y los acumula en cada parámetro del modelo.
-* El optimizador lo llamaremos `optimizer`. Y llamaremos al proceso de actualizar pesos como `optimizer.step()`.
-:::
-
-## Pytorch: Validation Loop {.smaller}
-
-::::{.columns}
-:::{.column}
-
-```{.python code-line-numbers="2,20-28" style="font-size: 120%;"}
-loss_history = []
-val_loss_history = []
-for e in range(epochs):
-  # Definición del modo del Modelo
-  super_model.train()
-  optimizer.zero_grad()
-
-  # Forward Pass
-  logits = super_model(X)
-  loss = criterion(logits, y)
-  ## Calcula los gradientes (Backward Pass)
-  loss.backward()
-
-  # Actualización de los Pesos
-  optimizer.step()
-
-  # Log de Entrenamiento
-  loss_history.append(loss.item())
-
-  # Validation Loop
-  super_model.eval()
-
-  # Evita cálculo de gradientes
-  with torch.no_grad():
-    val_logits = super_model(X_val)
-    val_loss = criterion(val_logits, y_val)
-    # Log de Validación
-    val_loss_history.append(val_loss.item())
-```
-
-:::
-:::{.column}
-![](img/clase-4/validation_loop.png){.lightbox fig-align="center"} 
-
-:::{.callout-note style="font-size: 80%;" icon=false appearance="default"}
-## Elementos clave del Validation Loop
-* Se debe fijar el modo del modelo a evaluación con `model.eval()`. No es necesario calcular gradientes en Validación ya que no hay actualización de parámetros.
-  * `with torch.no_grad():` desactiva el cálculo de gradientes.
-* El Forward Pass lo llamaremos con `val_logits = super_model(X_val)`. Esto permite calcular los Logits para poder calcular el loss de Validación.
-* El error/loss de la red lo calculamos como `val_loss = criterion(val_logits, y_val)`.
-:::
-
-:::
-::::
-
-## Pytorch: Model Evaluation {.smaller}
-
-:::{style="font-size: 75%;"}
-> Nos referimos a la evaluación del modelo como la medición de la performance esperada por nuestro modelo. La Evaluación del Modelo se realiza en torno a una métrica definida a priori por el modelador. La métrica a utilizar está íntimamente ligada al problema a resolver.
-:::
-
-::: {.columns}
-::: {.column}
-#### Clasificación
-
-* $Accuracy = \frac{1}{m} \sum_{i = 1}^m 1\{y_i = \hat{y_i}\}$
-* $Precision = \frac{TP}{TP + FP}$
-* $Recall = \frac{TP}{TP + FN}$
-* $F1-Score = 2 \cdot \frac{Precision \cdot Recall}{Precision + Recall}$
-:::
-
-
-::: {.column}
-#### Regresión
-* $RMSE = \frac{1}{m} \sum_{i=1}^m (y_i-\hat{y_i})^2$
-* $MAE = \frac{1}{m} \sum_{i=1}^m |y_i - \hat{y_i}|$
-* $MAPE = 100 \cdot \frac{1}{m} \sum_{i=1}^m \frac{|y_i-\hat{y_i}|}{max(\epsilon,y_i)}$
-* $SMAPE = \frac{2}{m} \sum_{i=1}^2 \frac{|y_i - \hat{y_i}  |}{max(|y_i + \hat{y_i}|,\epsilon)}$
-:::
-::: 
-
-
-::: {.callout-warning icon=false appearance="default"}
-## 🤓
-Las métricas presentadas son las básicas para clasificación y regresión. Existen otras más específicas según el campo:
-
-* IoU en segmentación semántica,
-* MAP@k en recomendación,
-* BLEU o ROUGE en NLP, etc.
-* Una lista extensa puede consultarse en [Torchmetrics](https://lightning.ai/docs/torchmetrics/stable/all-metrics.html)
-.
-:::
-
-## Pytorch: Training-Validation Loop + Evaluación {.smaller}
-
-::::{.columns}
-:::{.column}
-
-```{.python code-line-numbers="4-5,15-17,25-27" style="font-size: 120%;"}
-loss_history, val_loss_history = [], []
-train_metric_history, val_metric_history = [], []
-for e in range():
-  train_metric = BinaryAccuracy()
-  val_metric = BinaryAccuracy()
-
-  ## Training Loop
-  super_model.train()
-  optimizer.zero_grad()
-  logits = super_model(X)
-  loss = criterion(logits, y)
-  loss.backward()
-  optimizer.step()
-  loss_history.append(loss.item())
-  acc = train_metric(logits, y)
-  train_metric_history.append(acc)
-  tr_acc = train_metric.compute()
-
-  # Validation Loop
-  super_model.eval()
-  with torch.no_grad():
-    val_logits = super_model(X_val)
-    val_loss = criterion(val_logits, y_val)
-    val_loss_history.append(val_loss.item())
-    acc = train_metric(val_logits, y_val)
-    val_metric_history.append(acc)
-    val_acc = test_metric.compute()
-
-```
-
-:::
-:::{.column}
-![](img/clase-4/val_loop_metrics.png){.lightbox fig-align="center"} 
-
-:::{.callout-caution style="font-size: 80%;" icon=false appearance="default"}
-## Elementos clave de este loop
-* Adicional al cálculo de Loss se calcula alguna métrica de interés para el problema.
-* Se pueden loguear cuantas métricas se deseen.
-:::
-
-:::
-::::
-
-## Monitoreo de un Modelo: Validation Curve {.smaller}
-
-
-::: {.columns}
-::: {.column width="60%"}
-![](img/clase-4/validation_curve.png){.lightbox fig-align="center"}
-:::
-::: {.column width="40%"}
-::: {.callout-important}
-Es importante ser capaz de identificar el momento exacto en el cual el momento comienza su overfitting. Para ello se utiliza el **"Checkpointing"**. 
-:::
-
-::: {.callout-note appearance="default"}
-## Checkpoint
-
-* Corresponde a un snapshot del modelo a un cierto punto. En la **práctica** se almacenan los parámetros del **mejor modelo** y del **último Epoch**.
-:::
-
-::: {.callout-tip appearance="default"}
-## EarlyStopping
-
-* Teoricamente, una vez que la red Neuronal alcanza el punto de Overfitting ya no tiene sentido seguir el entrenamiento. Por lo tanto es posible detener el entrenamiento bajo una cierta condición.
-:::
-:::
-::: 
 
 ## Entrenamiento Eficiente: GPU {.smaller}
 
@@ -595,19 +625,21 @@ Corresponde a una clase que hereda de `torch.utils.data.Dataset,` la cual define
 from torch.utils.data import Dataset
 
 class ExampleDataset(Dataset):
-  def __init__(self, x,y):
-    ## Convertimos a numpy arrays
-    self.X = x.to_numpy()
+  def __init__(self, X, y):
+    ## Definimos variables internas de la clase
+    self.X = X.to_numpy()
     self.y = y.values
 
   def __len__(self):
+    ## Define la cantidad de muestras del dataset.
     return len(self.X)
 
   def __getitem__(self, idx):
     return dict(
         ## Tranformarmos cada índice en Tensor de Floats.
         x=torch.from_numpy(self.X)[idx].float(),
-        y=torch.from_numpy(self.y)[idx].float()
+## Dependiendo del problema se pueden requerir otros data types 
+        y=torch.from_numpy(self.y)[idx].long()
         )
 
 train_data = ExampleDataset(X_train, y_train)
@@ -655,59 +687,64 @@ val_loader=DataLoader(val_data, batch_size=32, num_workers=10, pin_memory=True, 
 :::
 
 :::{.callout-tip icon=false appearance="default"}
-## Para pasar el modelo a la GPU se utiliza `super_model.to(device)`.
+## Para pasar el modelo a la GPU se utiliza `model.to(device)`.
 :::
 
 :::{.callout-note icon=false appearance="default"}
 ## Para pasar los datos a la GPU se utiliza `X.to(device)` o `y.to(device)`.
 :::
 
-## Pytorch: Training-Validation Loop + Dataloader {.smaller}
- 
+## Pytorch: Training-Validation Loop + Evaluación {.smaller}
+
 ::::{.columns}
 :::{.column}
-```{.python code-line-numbers="|1-2|3|4|5-6|8|9|10|11-17|15|19-21|19|23|24-25|26-30|30|32-34|32|36-37|" style="font-size: 95%;"}
-  epoch_loss=dict(train=[], val=[])
-  epoch_metric=dict(train=[], val=[])
-  super_model.to(device)
-  for e in range(epochs):
-    train_metric, val_metric = BinaryAccuracy(), BinaryAccuracy()
-    batch_loss=dict(train=[], val=[])
 
+```{.python code-line-numbers="|1-2|3-4|5|6-8|9|10-18|10|11|12|13|14|16,18|15|17|20-22|24-25|26|27|28|29|30-31|33-35|37-38|" style="font-size: 90%;"}
+epoch_loss = dict(train=[], val=[])
+epoch_metric = dict(train=[], val=[])
+model = Model()
+model.to(device)
+for e in range(epochs):
+    train_metric = MulticlassAccuracy().to(device)
+    val_metric = MulticlassAccuracy().to(device)
+    batch_loss = dict(train=[], val=[])
     model.train()
     for batch in train_loader:
-      X, y = batch["x"].to(device), batch["y"].to(device)
-      optimizer.zero_grad()
-      logits = super_model(X)
-      loss = criterion(logits, y)
-      loss.backward()
-      acc = train_metric(logits, y)
-      optimizer.step()
-      batch_loss["train"].append(loss.item())
+        X, y = batch["X"].to(device), batch["y"].to(device)
+        optimizer.zero_grad()
+        logits = model(X)
+        loss = criterion(logits, y)
+        loss.backward()
+        acc = train_metric(logits, y)
+        optimizer.step()
+        batch_loss["train"].append(loss.item())
 
     tr_acc = train_metric.compute()
     train_epoch_loss = np.mean(batch_loss["train"])
-    epoch_metric["train"].append(tr_acc)
+    epoch_metric["train"].append(tr_acc.item())
 
     model.eval()
     with torch.no_grad():
-      for batch in val_loader:
-        X, y = batch["x"].to(device), batch["y"].to(device)
-        logits = super_model(X)
-        loss = criterion(logits, y)
-        batch_loss["val"].append(loss.item())
-        acc = val_metric(logits, y)
+        for batch in val_loader:
+            X, y = batch["X"].to(device), batch["y"].to(device)
+            logits = model(X)
+            loss = criterion(logits, y)
+            batch_loss["val"].append(loss.item())
+            acc = val_metric(logits, y)
 
-      val_acc = val_metric.compute()
-      val_epoch_loss = np.mean(batch_loss["val"])
-      epoch_metric["val"].append(val_acc)
+        val_acc = val_metric.compute()
+        val_epoch_loss = np.mean(batch_loss["val"])
+        epoch_metric["val"].append(val_acc.item())
 
     epoch_loss["train"].append(train_epoch_loss)
     epoch_loss["val"].append(val_epoch_loss)
-
 ```
+
 :::
 :::{.column}
+![](img/clase-4/val_loop_metrics.png){.lightbox fig-align="center"} 
+
+
 :::{.callout-note style="font-size: 80%;" icon=false appearance="default"}
 ## 👀 Detalles clave de este loop
 
@@ -717,17 +754,9 @@ val_loader=DataLoader(val_data, batch_size=32, num_workers=10, pin_memory=True, 
 * Normalmente se loguean el Loss y una o más métricas por Epoch para construir las curvas de validación.
 :::
 
-:::{.callout-warning style="font-size: 80%;" appearance="default"}
-## Detach
-En ocasiones no es posible convertir un tensor a un valor numérico (float, int, etc) si es que el tensor requiere gradientes. En estos casos es necesario "desconectar" el tensor del grafo de cómputo utilizando `.detach()` y luego conviertiendolo a Numpy.
-:::
-
-```{.python}
-data.detach().numpy()
-```
-
 :::
 ::::
+
 
 ## Categorical Variables: One Hot Encoding {.smaller}
 
@@ -955,4 +984,13 @@ $$
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Tics-579 Deep Learning</span> por Alfonso Tobar-Arancibia está licenciado bajo <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
 
 <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+:::
+
+
+## Apéndice: K-Fold Cross Validation {.smaller}
+
+![](img/clase-4/k-fold.png){.lightbox fig-align="center" width="60%"}
+
+::: {.callout-important}
+Corresponde al proceso de Holdout pero repetido $K$ veces. ***No es tan utilizado en Deep Learning debido a los altos costos computacionales***.
 :::
