@@ -962,17 +962,6 @@ Corresponde a otro tipo de Arquitectura Recurrente, similar a la LSTM, pero con 
 </div>
 </div>
 </div><div class="column">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Update Gate</strong></p>
-</div>
-<div class="callout-content">
-<p>Controla qué porcentaje del “hidden state” previo se lleva al siguiente paso.</p>
-<p><span class="math display">\[z_t = \sigma(W_{iz} x_t + b_{iz} + W_{hz}h_{t-1} + b_{hz})\]</span></p>
-</div>
-</div>
-</div>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -992,6 +981,17 @@ Corresponde a otro tipo de Arquitectura Recurrente, similar a la LSTM, pero con 
 <div class="callout-content">
 <p>Representa la potencial actualización del “Hidden State”.</p>
 <p><span class="math display">\[n_t = tanh(W_{in} x_t + b_{in} + r_t \odot (W_{hn} h_{t-1} + b_{hn}))\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Update Gate</strong></p>
+</div>
+<div class="callout-content">
+<p>Controla qué porcentaje del “hidden state” previo se lleva al siguiente paso.</p>
+<p><span class="math display">\[z_t = \sigma(W_{iz} x_t + b_{iz} + W_{hz}h_{t-1} + b_{hz})\]</span></p>
 </div>
 </div>
 </div>
