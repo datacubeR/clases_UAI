@@ -195,7 +195,7 @@ Shape: (1,2,2)
 ::: {.column width="30%"}
 ::: {.callout-note appearance="default" icon="false"}
 ## ☝️ Nomenclatura en Pytorch
-* El output $y_t$ tiene al mismo valor que $h_t$. Se utiliza nomenclatura distinta para diferenciar de una salida directa a un valor que será utilizado como input en el siguiente time step.
+* El output $y_t$ tiene al mismo valor que $h_{t+1}$. Se utiliza nomenclatura distinta para diferenciar de una salida directa a un valor que será utilizado como input en el siguiente time step.
 * $h_0$ corresponde al hidden state inicial y tiene por defecto un vector de ceros.
 * $W_{ih}$ y $b_{ih}$ son los parámetros que proyectan la entrada $x_t$ al hidden size. Mientras que $W_{hh}$ y $b_{hh}$ son los parámetros que proyectan el hidden state previo $h_{t-1}$ al hidden state actual.
 :::
@@ -228,7 +228,7 @@ $$Gradiente = f(Input \times W_2^{N_{Unroll}})$$
 * En cambio, si los valores de $W_2$ son muy grandes (mayores que 1), el gradiente tiende a explotar (exploding gradient).
 
 ::: {.callout-caution}
-$W_2^{N_unroll} aparece en la ecuación al momento de comenzar a derivar de manera recursiva. 
+$W_2^{N_{Unroll}}$ aparece en la ecuación al momento de comenzar a derivar de manera recursiva. 
 :::
 ::: {.callout-important}
 Las `Vanilla RNNs` se utilizan muy poco en la práctica; sin embargo, tienen una relevancia histórica significativa, ya que sentaron las bases para el desarrollo de arquitecturas más avanzadas, como las LSTMs y los Transformers.
@@ -276,6 +276,7 @@ Las `Vanilla RNNs` se utilizan muy poco en la práctica; sin embargo, tienen una
 ## ✨✨ ***Part of Speech Tagging***: Entrego una Secuencia de Largo L y obtengo una Secuencia de Largo L con Clases Asociadas.
 :::
 ```{.python}
+x = torch.tensor([[[2.0], [7.0], [6.0]]])
 class POSTaggingRNN(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super().__init__()
@@ -283,30 +284,28 @@ class POSTaggingRNN(nn.Module):
             input_size=input_size,
             hidden_size=hidden_size,
             num_layers=1,
-            batch_first=True,
-        )
+            batch_first=True)
         self.fc = nn.Linear(hidden_size, output_size)
 
     def forward(self, x):
         rnn_out, hn = self.rnn(x)
-        print("Tamaño del Output de RNN: ", hn.shape)
+        print("Tamaño del Output de RNN: ", rnn_out.shape)
         logits = self.fc(rnn_out)
         return logits
 
-
-model = POSTaggingRNN(input_size=1,
-                    hidden_size=4,
-                    output_size=3)
-output = model(x1)
+model = POSTaggingRNN(input_size=1, hidden_size=4, output_size=3)
+print("Shape del Input: ", x.shape)
+output = model(x)
 print("Shape del Output Final: ", output.shape)
-output
+torch.softmax(output, dim=-1).detach()
 ```
 ```
-Tamaño del Output de RNN:  torch.Size([1, 1, 4])
+Shape del Input:  torch.Size([1, 3, 1])
+Tamaño del Output de RNN:  torch.Size([1, 3, 4])
 Shape del Output Final:  torch.Size([1, 3, 3])
-tensor([[[-0.6526,  0.2722,  0.2755],
-         [-1.1120,  0.7727,  0.4798],
-         [-1.0416,  0.7447,  0.4793]]])
+tensor([[[0.1653, 0.4167, 0.4181],
+         [0.0800, 0.5269, 0.3931],
+         [0.0866, 0.5169, 0.3965]]])
 ```
 :::
 
@@ -315,6 +314,7 @@ tensor([[[-0.6526,  0.2722,  0.2755],
 ## ✨✨ ***Sentiment Analysis***: Entrego una Secuencia de Largo L y obtengo una Clase Final (Positiva, Negativa, Neutra).
 :::
 ```{.python}
+x = torch.tensor([[[2.0], [7.0], [6.0]]])
 class SentimentAnalysisRNN(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super().__init__()
@@ -332,15 +332,14 @@ class SentimentAnalysisRNN(nn.Module):
         logits = self.fc(hn)
         return logits
 
-
-model = SentimentAnalysisRNN(input_size=1, 
-                            hidden_size=4,
-                            output_size=3)
-output = torch.softmax(model(x1), dim=-1)
+model = SentimentAnalysisRNN(input_size=1, hidden_size=4, output_size=3)
+print("Shape del Input: ", x.shape)
+output = model(x)
 print("Shape del Output Final: ", output.shape)
-output
+torch.softmax(output, dim=-1).detach()
 ```
 ```
+Shape del Input:  torch.Size([1, 3, 1])
 Tamaño del Hidden State del RNN:  torch.Size([1, 1, 4])
 Shape del Output Final:  torch.Size([1, 1, 3])
 tensor([[[0.0866, 0.5169, 0.3965]]])
@@ -509,13 +508,6 @@ $$h_t = (1-z_t) \odot n_t + z_t \odot h_{t-1}$$
 :::
 :::
 ::: {.column}
-::: {.callout-tip appearance="default" icon="false"}
-## Update Gate
-
-Controla qué porcentaje del "hidden state" previo se lleva al siguiente paso.
-
-$$z_t = \sigma(W_{iz} x_t + b_{iz} + W_{hz}h_{t-1} + b_{hz})$$
-:::
 
 ::: {.callout-important appearance="default" icon="false"}
 ## Reset Gate
@@ -533,6 +525,13 @@ Representa la potencial actualización del "Hidden State".
 $$n_t = tanh(W_{in} x_t + b_{in} + r_t \odot (W_{hn} h_{t-1} + b_{hn}))$$
 :::
 
+::: {.callout-tip appearance="default" icon="false"}
+## Update Gate
+
+Controla qué porcentaje del "hidden state" previo se lleva al siguiente paso.
+
+$$z_t = \sigma(W_{iz} x_t + b_{iz} + W_{hz}h_{t-1} + b_{hz})$$
+:::
 :::
 ::: 
 
